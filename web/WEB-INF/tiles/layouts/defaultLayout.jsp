@@ -1,0 +1,149 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+
+<html>
+    <head>
+        
+        <link rel="icon" type="image/png" href='<c:url value="/resources/imagenes/udeaIco.png" />' />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Banco Único de Hojas de Vida</title>
+        <!-- Bootstrap General CSS -->
+        <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/bootstrap.min.css"/>'>
+        <!-- Fuentes de Iconos -->
+        <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/font-awesome.min.css" />'>
+        <!-- CSS Personalizadas -->
+        <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/dataTables.bootstrap.min.css" />' >
+        <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/estilosPersonalizados.css" />'>
+        <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/style.css"/>'>
+        <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/jquery.datetimepicker.min.css"/>'> 
+        <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/jquery-ui.min.css"/>'>
+        <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/select2.min.css"/>'>
+        
+        <!-- jQuery -->
+        <script type="text/javascript" src='<c:url value="/resources/js/jquery-3.2.1.min.js" />'></script> 
+        <script type="text/javascript" src='<c:url value="/resources/js/jquery-ui.min.js"/>'></script>
+        <script type="text/javascript" src='<c:url value="/resources/js/jspdf.min.js" />'></script>
+        <script type="text/javascript" src='<c:url value="/resources/js/html2canvas.min.js" />'></script>
+        <script type="text/javascript" src='<c:url value="/resources/js/jquery.dataTables.min.js" />'></script>
+        <script type="text/javascript" src='<c:url value="/resources/js/dataTables.bootstrap.min.js" />'></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script type="text/javascript" src='<c:url value="/resources/js/bootstrap.min.js" />'></script>
+        <!-- Metis Menu Plugin JavaScript -->
+        <script type="text/javascript" src='<c:url value="/resources/js/metisMenu.min.js" />'></script>
+        <script type="text/javascript" src='<c:url value="/resources/js/select2.min.js" />'></script>
+        <script type="text/javascript" src='<c:url value="/resources/js/funciones.js" />'></script>
+
+        <!-- Morris Charts JavaScript -->
+        <script type="text/javascript" src='<c:url value="/resources/js/raphael.min.js" />'></script>
+        <script type="text/javascript" src='<c:url value="/resources/js/morris.min.js" />'></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script type="text/javascript" src='<c:url value="/resources/js/sb-admin-2.js" />'></script>
+        
+        <script type="text/javascript" src='<c:url value="/resources/js/jquery.form-validator.min.js" />'></script>
+        <script type="text/javascript" src='<c:url value="/resources/js/knockout-3.4.2.js" />'></script>
+        
+    </head>
+    <body>
+        <div id="contenedorPpal">
+            <header id="header">
+            <div id="contenedorA">
+                <!-- inicio Menu Navegación-->
+                <div id='cssmenu'>
+                    <ul>
+                        <li>
+                            <span class="imagenMenu">
+                                <img src='<c:url value="/resources/imagenes/logoUdeaLateral2.png" />'>
+                            </span> 
+                        </li>
+
+                        <!-- Inicio Link Home -->
+                        <li>
+                            <a href='${pageContext.request.contextPath}/index'>
+                                <i class="fa fa-home fa-1x"></i>
+                                Inicio
+                            </a>
+                        </li>
+                        <!-- Lin Link Home -->
+
+                        <!-- Inicio Link Administrar/SubItems -->
+                        <li class='active'>
+                            <a href='#'><i class="fa fa-dashboard fa-1x"></i>
+                                Configurar
+                            </a>
+                            <ul>
+                                <li><a href='${pageContext.request.contextPath}/administracion/perfiles'>Perfiles</a></li>
+                                <li><a href='${pageContext.request.contextPath}/administracion/usuarios'>Usuarios</a></li>
+                                <li><a href='${pageContext.request.contextPath}/administracion/personas'>Personas</a></li>
+                            </ul>
+                        </li>
+                        <!-- Fin Link Administrar/SubItems -->              
+                        <!-- Inicio Link Solicitudes/SubItems -->
+                         <li class='active'>
+                            <a href='#'><i class="fa fa-user fa-1x"></i>
+                                Hoja de vida
+                            </a>
+                            <ul>
+                                <li><a href='${pageContext.request.contextPath}/hojasVida/crear'>Crear</a></li>
+                                <li><a href='${pageContext.request.contextPath}/hojasVida/index'>Consultar</a></li>
+                            </ul>
+                        </li>
+                        <!-- Fin Link Solicitudes/SubItems -->
+                        <li class='active'>
+                            <a href='#'><i class="fa fa-users fa-1x" aria-hidden="true"></i>
+                                Convocatorias
+                            </a>
+                            <ul>
+                              <li><a href='${pageContext.request.contextPath}/convocatorias/crear'>Crear</a></li>
+                              <li><a href='${pageContext.request.contextPath}/convocatorias/index'>Consultar</a></li>
+                            </ul>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+            <div id="contenedorB">
+                <div id='cssmenu'>
+                    <ul>  
+                        <!-- Menu perfil-->
+                        <li class='active'><a href='#'>${pageContext.request.userPrincipal.getPrincipal().username}</a></li>
+                        <li class='active'>
+                            <a href='#'><i class="fa fa-user fa-1x"></i>   <i class="fa fa-chevron-down" aria-hidden="true"></i>                             
+                            </a>
+                            <ul>
+                                <li><a href='${pageContext.request.contextPath}/login/cambiarClave'>Cambiar contraseña</a></li>
+                                <li><a href='${pageContext.request.contextPath}/usuarios/editar'>Actualizaci&oacute;n de datos</a></li>
+                                <li class="divider"></li>
+                                <li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
+                                </li>                                
+                            </ul>
+                        </li> 
+                                                                    
+                    </ul>
+                </div>
+            </div>  
+            </header>
+            <section id="site-content">
+                <br>
+                <br>
+                <br>                
+                <tiles:insertAttribute name="body" />
+            </section>
+            <footer id="footer">
+                <tiles:insertAttribute name="footer" />
+            </footer>
+        </div>
+        <script type="text/javascript">
+            function abrirOpcion(opcion) {
+                window.location.href = '${pageContext.request.contextPath}' + opcion;
+            }
+        </script>    
+    </body>
+</html>
