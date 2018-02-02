@@ -2,11 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
 
-<!-- INICIO FORMULARIO-->
 <div id="contenido">
     <div class="container"> 
-
-        <!-- FILA 1 FROMULARIO-->
+        <div id="alert_placeholder_convocatoria"></div>
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header">
@@ -22,34 +20,46 @@
                                 <td><input type="text" id="innom" class="form-control input-sm" placeholder="Buscar Nombre de convo"></td>
                             </tr>
                             <tr> 
-                                <th></th>
-                                <th>Tipo de convocatoria</th>
-                                <th>Fecha de finalizacion</th>
+                                <th>Tipo</th>
                                 <th>Nombre</th>
+                                <th>Fecha de cierre</th>
                                 <th>Documento</th>
-                                <th>Postulado</th>
+                                <th>Aplicar</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach var="convocatoria" items="${convocatorias}">   
                                 <tr>
-                                    <td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#md_postular" id="btnpostu" >Postularme</button></td>
                                     <td>${convocatoria.getNombreTipoConvocatoria()}</td>
-                                    <td>${convocatoria.getFechaFinFormateada()}</td>
                                     <td>${convocatoria.getNombre()}</td>               
+                                    <td>${convocatoria.getFechaFinFormateada()}</td>
                                     <td><a href="#" target="_black" title="Ver documento"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></td>
                                     <td>
-                                        <p id="postulado">
-                                        <c:if test = "${convocatoria.isPostulado()}">    
-                                            Si
-                                        </c:if>
-                                        <c:if test = "${!convocatoria.isPostulado()}">    
-                                            No
-                                        </c:if>
-                                        </p>
+                                        <div class="input-group">
+                                            <c:if test = "${convocatoria.isPostulado()}">
+                                                <div id="radioBtnDisabled" class="btn-group">
+                                                    <a class="btn btn-primary btn-sm active" data-toggle="postulado${convocatoria.getId()}" data-title="Y">SI</a>
+                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="postulado${convocatoria.getId()}" data-title="N">NO</a>
+                                                </div>
+                                            </c:if>
+                                            <c:if test = "${!convocatoria.isPostulado()}">
+                                                <div id="radioBtn" class="btn-group">
+                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="postulado${convocatoria.getId()}" data-title="Y" href="javascript:mostrarVentanaPostulacion(${convocatoria.getId()})">SI</a>
+                                                    <a class="btn btn-primary btn-sm active" data-toggle="postulado${convocatoria.getId()}" data-title="N">NO</a>
+                                                </div>                                                
+                                            </c:if>
+                                        </div>
                                     </td>
-                                    <td style='white-space: nowrap'><button type="button" class="btn btn-success btn-sm" style="margin-right: 10px;" data-toggle="modal" data-target="#md_ver">Ver</button><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_edicion" style="margin-right: 5px;" ><i class="fa fa-pencil" aria-hidden="true"></i></button><button type='button'  id='btnborrar' class='btn btn-danger btn-sm'><span id='btnbo' class='glyphicon glyphicon-remove'></span></button></td>
+                                    <td style='white-space: nowrap'>
+                                        <button type="button" class="btn btn-success btn-sm" style="margin-right: 10px;" onclick="mostrarConvocatoria(${convocatoria.getId()})">Ver</button>
+                                        <button type="button" class="btn btn-success btn-sm"  onclick="window.location.href = '${pageContext.request.contextPath}/convocatorias/editar/${convocatoria.getId()}'" style="margin-right: 5px;" >
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </button>
+                                            <button type='button'  id='btnborrar' class='btn btn-danger btn-sm' onclick="confirmarEliminacionConvocatoria(${convocatoria.getId()})">
+                                            <span id='btnbo' class='glyphicon glyphicon-remove'></span>
+                                        </button>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -58,32 +68,42 @@
             </div>
         </div>
     </div>
-    <!-- FIN FILA 1 FROMULARIO-->
-    <!-- FILA 2 FROMULARIO-->
-    <!--  CONTENIDOS MODALES -->
-    <!--  MODAL informacion de la convocatorias -->
-    <div id="md_ver" class="modal fade" role="dialog">
+    <div id="modalConvocatoria" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header" >
+                <div class="modal-header mhsuccess" >
+                    <input type="hidden" id="idConvocatoria" />
                     <button class="close" data-dismiss="modal">&times;</button>
                     <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Información de la convocatoria<small> FNSP</small></h4>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="con_fecha_registro">
+                    <center><legend>Vigencia</legend></center>
+                    <div class="row">   
+                        <div class="col-md-6"> 
+                            <div class="form-group">    
+                                <label>Fecha de inicio</label>
+                                <input id="fechaInicio" name="fechaInicio" disabled style="border: 0; text-align: center;margin-left: 0px; font-style: italic;font-weight: normal; width: 140px;" value="21/11/2017">
+                            </div>        
+                        </div>
+                        <div class="col-md-6"> 
+                            <div class="form-group">    
+                                <label>Fecha de vigencia(cierre)</label>
+                                <input id="fechaVigencia" name="fechaVigencia" disabled style="border: 0; text-align: center;margin-left: 0px; font-style: italic;font-weight: normal; width: 140px;" value="21/11/2017"">
+                            </div>  
+                        </div>
+                    </div>
                     <div class="row">
-                        <input type="hidden" id="con_persona_registra">
                         <div class="col-md-6">
                             <div class="form-group">    
                                 <label>Tipo de convocatoria</label>
-                                <input type="text" name="" style="border: 0; text-align: right;margin-left: 20px;" readonly id="con_tipo_convocatoria" value="docencia">
+                                <input id="tipoConvocatoria" type="text" name="tipoConvocatoria" style="border: 0;font-style: italic; margin-left: 20px;" readonly value="docencia">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">    
                                 <label>&Aacute;rea de saber</label>
-                                <input type="text" name="" style="border: 0; text-align: right;margin-left: 20px;" readonly id="con_area" value="Tecnologia">
+                                <input id="area" type="text" name="area" style="border: 0;font-style: italic; margin-left: 20px;" readonly value="Tecnologia">
                             </div>
                         </div>
                     </div>
@@ -91,36 +111,21 @@
                         <div class="col-md-6">
                             <div class="form-group">    
                                 <label>Nombre de la convocatoria</label>
-                                <input type="text" name="" style="border: 0; text-align: right;margin-left: 20px;" readonly id="con_nombre" value="portal 80">
+                                <input id="nombre" type="text" name="nombre" style="border: 0;font-style: italic; margin-left: 20px;" readonly value="portal 80">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">    
                                 <label>Fecha de publicaci&oacute;n de resultado</label>
-                                <input type="text" name="" style="border: 0; text-align: right;margin-left: 20px;" readonly id="con_fecha_resultados" value="20/04/201753">
+                                <input type="text" id="fechaPublicacion" name="fechaPublicacion" style="border: 0;font-style: italic; margin-left: 20px;" readonly value="20/04/201753">
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row">   
-                        <div class="col-md-6"> 
-                            <div class="form-group">    
-                                <label>Fecha de inicio</label>
-                                <input type="text" name="" id="con_fecha_inicio" style="border: 0; text-align: right;margin-left: 20px;" readonly value="10/10/2017">
-                            </div>        
-                        </div>
-                        <div class="col-md-6"> 
-                            <div class="form-group">    
-                                <label>Fecha de vigencia(cierre)</label>
-                                <input type="text"  name="" id="con_fecha_fin" style="border: 0; text-align: right;margin-left: 20px;" readonly value="20/12/2017">
-                            </div>  
-                        </div>
-                    </div>  
+                    </div>                        
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">    
                                 <label>Descripci&oacute;n de la convocatoria</label>
-                                <textarea style="border: 0;width: 95%;" id="con_descripcion" readonly>
+                                <textarea disabled style="border: 1;border-style:dotted;border-color:#aeb6bf;margin-left: 1px;width: 98%;" id="descripcion" readonly>
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo           consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                 </textarea>   
                             </div>
@@ -129,23 +134,19 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                     <div class="row">
                         <div class="col-md-12">
                             <label for="">Documento de convocatoria</label>
-                            <button target="_black" title="Ver documemnto" style="margin-left: 30px;" class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"> </i></button>
+                            <button id="verDocumentoConvocatoria" target="_black" title="Ver documento" style="margin-left: 30px;" class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"> </i></button>
                         </div>
-                    </div>   
+                    </div><hr>
+                    <center><legend>Informaci&oacute;n de adenda</legend></center>   
                     <div class="form-group">    
-                        <table class="table table-hover tableestilo">
+                        <table class="table table-hover tableestilo" id="adendas">
                             <thead> 
                                 <tr>
+                                    <th>Tipo de Adenda</th>
                                     <th>Adenda</th>
-                                    <th>Documento</th>
                                 </tr>
                             </thead>
-                            <tr>
-                                <td></td>
-                                <td> <a href="#" target="_black" title="Ver documemnto" style="margin-left: 30px;" class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"> </i></a></td>
-                            </tr>
                         </table>
-
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -154,148 +155,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
             </div>
         </div>
     </div>
-    <!--fin modal de informacion de convocatoria-->
-    <!--modal edicion de informacion de convocatoria -->
-    <div id="md_edicion" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header" >
-                    <button class="close" data-dismiss="modal">&times;</button>
-                    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Editar la Información de la convocatoria<small> FNSP</small></h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <input type="hidden" id="con_persona_registra">
-                        <div class="col-md-6">
-                            <div class="form-group">    
-                                <label>Tipo de convocatoria</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de convocatoria">
-                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                <input type="text" name="" style="border: 0; text-align: right;margin-left: 20px;"  id="con_tipo_convocatoria" value="docencia">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">    
-                                <label>&Aacute;rea de saber</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el &aacute;rea de convocatoria">
-                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                <input type="text" name="" style="border: 0; text-align: right;margin-left: 20px;"  id="con_area" value="Tecnologia">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">    
-                                <label>Nombre de la convocatoria</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de la convocatoria">
-                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                <input type="text" name="" style="border: 0; text-align: right;margin-left: 20px;"  id="con_nombre" value="portal 80">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">    
-                                <label>Fecha de publicaci&oacute;n de resultado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de resultado de publicaci&oacute;n">
-                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                <input type="text" name="" style="border: 0; text-align: right;margin-left: 20px;"  id="con_fecha_resultados" value="20/04/201753">
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="row">   
-                        <div class="col-md-6"> 
-                            <div class="form-group">    
-                                <label>Fecha de inicio</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de inicio">
-                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                <input type="text" name="" id="con_fecha_inicio" style="border: 0; text-align: right;margin-left: 20px;"  value="10/10/2017">
-                            </div>        
-                        </div>
-                        <div class="col-md-6"> 
-                            <div class="form-group">    
-                                <label>Fecha de vigencia(cierre)</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de finalizaci&oacute;n">
-                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                <input type="text"  name="" id="con_fecha_fin" style="border: 0; text-align: right;margin-left: 20px;"  value="20/12/2017">
-                            </div>  
-                        </div>
-                    </div>  
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">    
-                                <label>Descripci&oacute;n de la convocatoria</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe describir el perfil requerido con el cargo y la experiencia requerida">
-                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                <textarea style="border: 0;width: 95%;" id="con_descripcion" >
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo           consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                </textarea>   
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label for="">Documento de convocatoria</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe adjuntar un documento de la convocatoria">
-                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                            <button target="_black" title="Ver documento" style="margin-left: 30px;" class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"> </i></button>
-                        </div>
-                    </div>   
-                    <div class="form-group">
-                        <label>Agregar adendas</label>
-                        <button style="margin-top: 20px;"  type="button" class="btn btn-success" data-toggle="modal" data-target="#md_adenda"><span class="glyphicon glyphicon-plus" style="margin-right: 5px;"></span></button>  
-                        <div id="md_adenda" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header" >
-                                        <button class="close" data-dismiss="modal">&times;</button>
-                                        <h4><i class="fa fa-address-book-o" aria-hidden="true"></i>Agregar adenda</h4>
-                                    </div>
-                                    <div class="modal-body">    
-                                        <div class="form-group">    
-                                            <label>Adenda</label>
-                                            <input type="text" name="doca_nombre" id="doca_nombre" class="form-control">
-                                        </div>
-                                        <div class="form-group">    
-                                            <label>Documento</label>
-                                            <input type="file" name="doca_documentos" id="doca_documentos" class="form-control">
-                                        </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button"  class="btn btn-success" id="addadendas">Agregar</button>
-                                        <button type="button" class="btn btn-default" id="quitarmodal">Cerrar</button>
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                        </div>  
-                        <table class="table table-hover tableestilo" id="tbadendas">
-                            <thead> 
-                                <tr>
-                                    <th>Adenda</th>
-                                    <th>Documento</th>
-                                    <th width="5">Opciones</th>
-                                </tr>
-                            </thead>
-                            <tr>
-                                <td></td>
-                                <td> <a href="#" target="_black" title="Ver documemnto" style="margin-left: 30px;" class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"> </i></a></td>
-                                <td style='white-space: nowrap'><button class='btn btn-success btn-xs' type='button'><i class='fa fa-pencil' aria-hidden='true'></i></button><button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;'><span class='glyphicon glyphicon-remove'></span></button></td> 
-                            </tr>
-                        </table>
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-success">Guardar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-
-
-        </div>
-
-    </div>
-    <!--fin modal de informacion de convocatoria-->
-    <!--fin de modal de edicion-->
-    <!-- Modal de postulacion-->
-
-    <div id="md_postular" class="modal fade" role="dialog">
+    <div id="modalPostular" class="modal fade" role="dialog">
         <div class="modal-dialog modal-sm">
             <!-- Modal content-->
             <div class="modal-content">
@@ -313,14 +173,232 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" id="addpostula">Aceptar</button>
+                    <button type="button" class="btn btn-success" onclick="postularAConvocatoria()">Aceptar</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!--fin modal de postulacion-->
+    <div id="modalEliminacionConvocatoria" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" >
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i>Eliminar Convocatoria</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">    
+                                <label>¿Desea eliminar la convocatoria?</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="eliminarConvocatoria()">Aceptar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>    
 </div>
 
 <!-- jQuery -->
-<script src='<c:url value="/resources/js/inicio.js" />' type="text/javascript"></script>
+<script>
+    var adendas = null;
+        
+    $(document).ready(function () {
+        var table = $('#tbconvo').DataTable({
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"}
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        });
+        
+        adendas = $('#adendas').DataTable({
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"}
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        });
+        
+        $('#intip').on('keyup', function () {
+            table
+                .columns(0)
+                .search(this.value)
+                .draw();
+        });
+
+        $('#infechfin').on('keyup', function () {
+            table
+                .columns(1)
+                .search(this.value)
+                .draw();
+        });
+        $('#innom').on('keyup', function () {
+            table
+                .columns(2)
+                .search(this.value)
+                .draw();
+        });
+        
+        $('#radioBtn a').on('click', function(){
+            var sel = $(this).data('title');
+            var tog = $(this).data('toggle');
+            $('#' + tog).prop('value', sel);
+            $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+            $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+        });
+    });
+    
+    function postular(object) {
+        var sel = object.data('title');
+        var tog = object.data('toggle');
+        $('#' + tog).prop('value', sel);
+
+        $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+        $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+    }
+
+    function mostrarVentanaPostulacion(idConvocatoria) {
+         $('#idConvocatoria').val(idConvocatoria);
+         $('#modalPostular').modal('show');
+    }
+    
+    function postularAConvocatoria() {
+        $.ajax({
+        type: "GET",
+        url: "${pageContext.request.contextPath}/convocatorias/postular/" + $('#idConvocatoria').val(),
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            if (response !== "") {
+                var resultado = JSON.parse(response);
+                if(resultado.resultado) {
+                   window.location.href = '${pageContext.request.contextPath}/convocatorias/index';
+                } else {
+                   bootstrap_alert_convocatoria.warning('No se pudo postular a la convocatoria'); 
+                } 
+                $('#modalPostular').modal('hide');
+            }
+        }});      
+    }
+    
+    function mostrarConvocatoria(idConvocatoria) {
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/convocatorias/" + idConvocatoria,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response !== "") {
+                    var convocatoria = JSON.parse(response);
+                    $('#idConvocatoria').val(convocatoria.id);
+                    $('#fechaInicio').val(convocatoria.fechaInicioFormateada);
+                    $('#fechaVigencia').val(convocatoria.fechaFinFormateada);
+                    $('#tipoConvocatoria').html(convocatoria.nombreTipoConvocatoria);
+                    $('#area').html(convocatoria.nombreArea);
+                    $('#nombre').html(convocatoria.nombre);
+                    $('#fechaPublicacion').html(convocatoria.fechaPublicacionResultadosFormateada);
+                    $('#descripcion').val(convocatoria.descripcion);
+                    adendas.clear().draw();
+                    for (var i = 0; i < convocatoria.adendas.length; i++) {
+                        adendas.row.add(
+                                [
+                                    convocatoria.adendas[i].nombreTipoAdenda,
+                                    convocatoria.adendas[i].descripcion
+                                ]
+                                ).draw();
+                    }
+                    $('#tieneDocumento').val(convocatoria.tieneDocumento);
+                    if (!convocatoria.tieneDocumento) {
+                        $('#verDocumentoConvocatoria').attr("title", 'La convocatoria no tiene documento');
+                    } else {
+                        $('#verDocumentoConvocatoria').attr("title", 'Ver documento');
+                    }
+                    $('#modalConvocatoria').modal('show');
+                }
+            }});
+    }
+
+    function verDocumento() {
+        if ($('#tieneDocumento').val() === "true") {
+            window.location.href = "${pageContext.request.contextPath}/convocatorias/documento/" + $('#idConvocatoria').val();
+        }
+    }
+    
+    function confirmarEliminacionConvocatoria(idConvocatoria) {
+        $('#idConvocatoria').val(idConvocatoria);
+        $('#modalPostular').modal('show');
+    }
+
+    function eliminarConvocatoria() {
+        $.ajax({
+        type: "GET",
+        url: "${pageContext.request.contextPath}/convocatorias/eliminar/" + $('#idConvocatoria').val(),
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            if (response !== "") {
+                var resultado = JSON.parse(response);
+                if(resultado.resultado) {
+                   window.location.href = '${pageContext.request.contextPath}/convocatorias/index';
+                } else {
+                   bootstrap_alert_convocatoria.warning('No se pudo eliminar la convocatoria'); 
+                } 
+                $('#modalEliminacionConvocatoria').modal('hide');
+            }
+        }});
+   }
+   
+    bootstrap_alert_convocatoria = function () { };
+    bootstrap_alert_convocatoria.warning = function (message) {
+        $('#alert_placeholder_convocatoria').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_convocatoria.success = function (message) {
+        $('#alert_placeholder_convocatoria').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_convocatoria.removeWarning = function () {
+        $('#alert_placeholder_convocatoria').html('');
+    };
+</script>

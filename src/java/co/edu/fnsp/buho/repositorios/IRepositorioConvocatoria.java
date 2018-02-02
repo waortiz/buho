@@ -23,9 +23,11 @@ public interface IRepositorioConvocatoria {
 
     void eliminarConvocatoria(int idConvocatoria);
 
-    List<Convocatoria> obtenerConvocatorias();
+    List<Convocatoria> obtenerConvocatorias(long idUsuario);
 
     Documento obtenerDocumentoConvocatoria(int idConvocatoria);
 
     Documento obtenerDocumentoAdenda(int idAdenda);
+
+    void postularConvocatoria(long idPersona, int idConvocatoria);
 }

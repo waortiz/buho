@@ -125,7 +125,6 @@
                                 </td>
                                 <td style="width: 20%">
                                     <span data-bind="text: documento" ></span>
-                                    <input type="hidden" class="form-control" data-bind="value: documento, attr: { 'name': 'adendas[' + $index() + '].documento'  }">
                                 </td>
                                 <td style='white-space: nowrap'>
                                     <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarAdenda"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -294,9 +293,9 @@
                 xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
             },
             success: function (response) {
-                if (response == "") {
+                if (response === "") {
                     $('#confirmacionAlmacenamientoConvocatoria').modal('show');
-                    if(parteInt($('#id').val()) > 0) {
+                    if(parseInt($('#id').val()) === 0) {
                         $('#tipoConvocatoria').val('');
                         $('#fechaInicio').val('');
                         $('#fechaFin').val('');
@@ -335,7 +334,7 @@
             var nombreTipoAdenda = $('#tipoAdenda option:selected').text();
             var descripcionAdenda = $('#descripcionAdenda').val();
             var fechaAdenda = $('#fechaAdenda').val();
-            if ($('#consecutivo').val() == "") {
+            if ($('#consecutivo').val() === "") {
                 self.adendas.push({
                     consecutivo: ko.observable(self.adendas().length + 1),
                     tipoAdenda: ko.observable(tipoAdenda),
@@ -348,7 +347,7 @@
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
                 for (i = 0; i < self.adendas().length; i++) {
-                    if (self.adendas()[i].consecutivo() == consecutivo) {
+                    if (self.adendas()[i].consecutivo() === consecutivo) {
                         indice = i;
                         break;
                     }
@@ -377,6 +376,6 @@
         };
     };
 
-var adendaModel = new AdendaModel([]);
+    var adendaModel = new AdendaModel([]);
     ko.applyBindings(adendaModel);
 </script>

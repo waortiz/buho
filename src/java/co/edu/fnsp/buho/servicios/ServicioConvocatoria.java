@@ -61,8 +61,8 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
     }
 
     @Override
-    public List<Convocatoria> obtenerConvocatorias() {
-        return repositorioConvocatoria.obtenerConvocatorias();
+    public List<Convocatoria> obtenerConvocatorias(long idUsuario) {
+        return repositorioConvocatoria.obtenerConvocatorias(idUsuario);
     }
 
     @Override
@@ -86,5 +86,10 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
     @Override
     public Documento obtenerDocumentoAdenda(int idAdenda) {
         return repositorioConvocatoria.obtenerDocumentoAdenda(idAdenda);
+    }
+
+    @Override
+    public void postularConvocatoria(long idPersona, int idConvocatoria) {
+        repositorioConvocatoria.postularConvocatoria(idPersona, idConvocatoria);
     }
 }

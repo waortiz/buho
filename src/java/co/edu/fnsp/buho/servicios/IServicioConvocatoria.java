@@ -21,11 +21,13 @@ public interface IServicioConvocatoria {
 
     void eliminarConvocatoria(int idConvocatoria);
 
-    List<Convocatoria> obtenerConvocatorias();
+    List<Convocatoria> obtenerConvocatorias(long idUsuario);
 
     void actualizarConvocatoria(Convocatoria convocatoria);
 
     Documento obtenerDocumentoConvocatoria(int idConvocatoria);
 
     Documento obtenerDocumentoAdenda(int idAdenda);
+
+    void postularConvocatoria(long idPersona, int idConvocatoria);
 }

@@ -6,10 +6,12 @@
 package co.edu.fnsp.buho.utilidades;
 
 
+import co.edu.fnsp.buho.entidades.Adenda;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -54,4 +56,32 @@ public class Util {
         return (long) decimalFormat.parse(numero);
     }
 
+    public static int obtenerEntero(String numero) throws ParseException {
+        return Integer.parseInt(numero);
+    }
+        
+    public static String obtenerAdendasJSON(List<Adenda> adendas) {
+        String jscriptArray = "";
+
+        if (adendas.size() > 0) {
+            jscriptArray = "[";
+
+            for (int i = 0; i < adendas.size(); i++) {
+                Adenda adenda = adendas.get(i);
+                jscriptArray = jscriptArray
+                        + "{id: ko.observable(" + adenda.getId() + "),"
+                        + "descripcion:ko.observable('" + adenda.getDescripcion() + "'),"
+                        + "nombreTipoAdenda:ko.observable('" + adenda.getNombreTipoAdenda()+ "'),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < adendas.size() - 1) {
+                    jscriptArray = jscriptArray + ",";
+                }
+            }
+
+            jscriptArray = jscriptArray + "]";
+        }
+
+        return jscriptArray;
+    }    
 }

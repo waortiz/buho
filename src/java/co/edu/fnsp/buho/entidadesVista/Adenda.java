@@ -6,6 +6,7 @@
 package co.edu.fnsp.buho.entidadesVista;
 
 import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -13,22 +14,37 @@ import org.springframework.web.multipart.MultipartFile;
  * @author William
  */
 public class Adenda {
-    private int tipoAdenda;
+    private String tipoAdenda;
     private String descripcion;
-    private Date fecha;
+    private String fecha;
     private MultipartFile documento;
     
+
+    /**
+     * @return the documento
+     */
+    public MultipartFile getDocumento() {
+        return documento;
+    }
+
+    /**
+     * @param documento the documento to set
+     */
+    public void setDocumento(MultipartFile documento) {
+        this.documento = documento;
+    }
+
     /**
      * @return the tipoAdenda
      */
-    public int getTipoAdenda() {
+    public String getTipoAdenda() {
         return tipoAdenda;
     }
 
     /**
      * @param tipoAdenda the tipoAdenda to set
      */
-    public void setTipoAdenda(int tipoAdenda) {
+    public void setTipoAdenda(String tipoAdenda) {
         this.tipoAdenda = tipoAdenda;
     }
 
@@ -49,28 +65,14 @@ public class Adenda {
     /**
      * @return the fecha
      */
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
     /**
      * @param fecha the fecha to set
      */
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
-    }
-
-    /**
-     * @return the documento
-     */
-    public MultipartFile getDocumento() {
-        return documento;
-    }
-
-    /**
-     * @param documento the documento to set
-     */
-    public void setDocumento(MultipartFile documento) {
-        this.documento = documento;
     }
 }
