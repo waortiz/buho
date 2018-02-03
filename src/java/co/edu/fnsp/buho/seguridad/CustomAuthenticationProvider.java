@@ -25,7 +25,7 @@ import org.springframework.security.core.GrantedAuthority;
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-      @Autowired
+    @Autowired
     private ServicioSeguridad servicioSeguridad;
 
     /**
@@ -38,7 +38,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
-
         Usuario usuario = servicioSeguridad.obtenerUsuario(username);
         if (usuario == null) {
             throw new BadCredentialsException("Usuario no existe");
