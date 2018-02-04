@@ -23,7 +23,7 @@ public interface IServicioConvocatoria {
 
     List<Convocatoria> obtenerConvocatorias(long idUsuario);
 
-    void actualizarConvocatoria(Convocatoria convocatoria);
+    void actualizarConvocatoria(long idUsuario, Convocatoria convocatoria);
 
     Documento obtenerDocumentoConvocatoria(int idConvocatoria);
 

@@ -5,7 +5,6 @@
  */
 package co.edu.fnsp.buho.utilidades;
 
-
 import co.edu.fnsp.buho.entidades.Adenda;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -39,7 +38,7 @@ public class Util {
 
         return "";
     }
-    
+
     public static Date obtenerFecha(String fecha) throws ParseException {
         return simpleDateFormat.parse(fecha);
     }
@@ -59,7 +58,7 @@ public class Util {
     public static int obtenerEntero(String numero) throws ParseException {
         return Integer.parseInt(numero);
     }
-        
+
     public static String obtenerAdendasJSON(List<Adenda> adendas) {
         String jscriptArray = "";
 
@@ -68,10 +67,18 @@ public class Util {
 
             for (int i = 0; i < adendas.size(); i++) {
                 Adenda adenda = adendas.get(i);
+                String nombreDocumento = "";
+                if (adenda.getDocumento() != null) {
+                    nombreDocumento = adenda.getDocumento().getNombre();
+                }
                 jscriptArray = jscriptArray
                         + "{id: ko.observable(" + adenda.getId() + "),"
                         + "descripcion:ko.observable('" + adenda.getDescripcion() + "'),"
-                        + "nombreTipoAdenda:ko.observable('" + adenda.getNombreTipoAdenda()+ "'),"
+                        + "tipoAdenda:ko.observable('" + adenda.getTipoAdenda() + "'),"
+                        + "nombreTipoAdenda:ko.observable('" + adenda.getNombreTipoAdenda() + "'),"
+                        + "documento:ko.observable('" + nombreDocumento + "'),"
+                        + "tieneDocumento:ko.observable(" + adenda.isTieneDocumento() + "),"
+                        + "fecha:ko.observable('" + Util.obtenerFechaFormateada(adenda.getFecha()) + "'),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < adendas.size() - 1) {
@@ -83,5 +90,5 @@ public class Util {
         }
 
         return jscriptArray;
-    }    
+    }
 }

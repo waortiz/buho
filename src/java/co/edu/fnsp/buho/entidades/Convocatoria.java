@@ -8,6 +8,7 @@ package co.edu.fnsp.buho.entidades;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -16,17 +17,20 @@ import java.util.List;
 public class Convocatoria {
 
     private int id;
-    private int tipoConvocatoria;
+    private String tipoConvocatoria;
     private String nombreTipoConvocatoria;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaInicio;
     private String fechaInicioFormateada;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaFin;
     private String fechaFinFormateada;
-    private int area;
+    private String area;
     private String nombreArea;
     private String nombre;
     private String descripcion;
     private Documento documento;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaPublicacionResultados;
     private String fechaPublicacionResultadosFormateada;
     private boolean tieneDocumento;
@@ -36,14 +40,14 @@ public class Convocatoria {
     /**
      * @return the tipoConvocatoria
      */
-    public int getTipoConvocatoria() {
+    public String getTipoConvocatoria() {
         return tipoConvocatoria;
     }
 
     /**
      * @param tipoConvocatoria the tipoConvocatoria to set
      */
-    public void setTipoConvocatoria(int tipoConvocatoria) {
+    public void setTipoConvocatoria(String tipoConvocatoria) {
         this.tipoConvocatoria = tipoConvocatoria;
     }
 
@@ -78,14 +82,14 @@ public class Convocatoria {
     /**
      * @return the area
      */
-    public int getArea() {
+    public String getArea() {
         return area;
     }
 
     /**
      * @param area the area to set
      */
-    public void setArea(int area) {
+    public void setArea(String area) {
         this.area = area;
     }
 

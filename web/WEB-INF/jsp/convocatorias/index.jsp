@@ -34,7 +34,14 @@
                                     <td>${convocatoria.getNombreTipoConvocatoria()}</td>
                                     <td>${convocatoria.getNombre()}</td>               
                                     <td>${convocatoria.getFechaFinFormateada()}</td>
-                                    <td><a href="#" target="_black" title="Ver documento"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></td>
+                                    <td>
+                                        <c:if test = "${convocatoria.isTieneDocumento()}">
+                                            <a href="#" title="Ver documento" onclick="verDocumento(${convocatoria.getId()})"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                                        </c:if>
+                                        <c:if test = "${!convocatoria.isTieneDocumento()}">
+                                            <a href="#" title="No tiene documento"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                                        </c:if>
+                                    </td>
                                     <td>
                                         <div class="input-group">
                                             <c:if test = "${convocatoria.isPostulado()}">
@@ -74,6 +81,7 @@
             <div class="modal-content">
                 <div class="modal-header mhsuccess" >
                     <input type="hidden" id="idConvocatoria" />
+                    <input type="hidden" id="tieneDocumento">
                     <button class="close" data-dismiss="modal">&times;</button>
                     <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Información de la convocatoria<small> FNSP</small></h4>
                 </div>
@@ -134,7 +142,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                     <div class="row">
                         <div class="col-md-12">
                             <label for="">Documento de convocatoria</label>
-                            <button id="verDocumentoConvocatoria" target="_black" title="Ver documento" style="margin-left: 30px;" class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"> </i></button>
+                            <button id="verDocumentoConvocatoria" onclick="verDocumentoConvocatoria();" title="Ver documento" style="margin-left: 30px;" class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"> </i></button>
                         </div>
                     </div><hr>
                     <center><legend>Informaci&oacute;n de adenda</legend></center>   
@@ -144,6 +152,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                                 <tr>
                                     <th>Tipo de Adenda</th>
                                     <th>Adenda</th>
+                                    <th>Documento</th>
                                 </tr>
                             </thead>
                         </table>
@@ -342,13 +351,21 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                     $('#fechaPublicacion').html(convocatoria.fechaPublicacionResultadosFormateada);
                     $('#descripcion').val(convocatoria.descripcion);
                     adendas.clear().draw();
+                    self.items = ko.observableArray([{comment:'first comment', amount:0}]);
                     for (var i = 0; i < convocatoria.adendas.length; i++) {
-                        adendas.row.add(
-                                [
-                                    convocatoria.adendas[i].nombreTipoAdenda,
-                                    convocatoria.adendas[i].descripcion
-                                ]
-                                ).draw();
+                        var row = "";
+                        if(convocatoria.adendas[i].tieneDocumento) {
+                          row = $('<tr><td>' + convocatoria.adendas[i].nombreTipoAdenda + 
+                                '</td><td>' + convocatoria.adendas[i].descripcion + 
+                                '</td><td><a href="#" onclick="verDocumentoAdenda(' + convocatoria.adendas[i].id + ')" title="Ver documemnto" style="margin-left: 30px;" \n\
+                                    class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" \n\
+                                    aria-hidden="true"></i></a><td></tr>');
+                        } else {
+                          row = $('<tr><td>' + convocatoria.adendas[i].nombreTipoAdenda + 
+                                '</td><td>' + convocatoria.adendas[i].descripcion + 
+                                '</td><td>&nbsp;<td></tr>');
+                        }
+                        adendas.row.add(row).draw();
                     }
                     $('#tieneDocumento').val(convocatoria.tieneDocumento);
                     if (!convocatoria.tieneDocumento) {
@@ -361,12 +378,20 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
             }});
     }
 
-    function verDocumento() {
+    function verDocumentoConvocatoria() {
         if ($('#tieneDocumento').val() === "true") {
-            window.location.href = "${pageContext.request.contextPath}/convocatorias/documento/" + $('#idConvocatoria').val();
+           window.location.href = "${pageContext.request.contextPath}/convocatorias/documento/" + $('#idConvocatoria').val();
         }
     }
-    
+
+    function verDocumento(idConvocatoria) {
+        window.location.href = "${pageContext.request.contextPath}/convocatorias/documento/" + idConvocatoria;
+    }
+
+    function verDocumentoAdenda(idAdenda) {
+        window.location.href = "${pageContext.request.contextPath}/convocatorias/adenda/documento/" + idAdenda;
+    }
+
     function confirmarEliminacionConvocatoria(idConvocatoria) {
         $('#idConvocatoria').val(idConvocatoria);
         $('#modalPostular').modal('show');

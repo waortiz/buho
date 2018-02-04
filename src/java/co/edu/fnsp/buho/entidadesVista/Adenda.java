@@ -5,8 +5,6 @@
  */
 package co.edu.fnsp.buho.entidadesVista;
 
-import java.util.Date;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -14,10 +12,25 @@ import org.springframework.web.multipart.MultipartFile;
  * @author William
  */
 public class Adenda {
+    private int id;
     private String tipoAdenda;
     private String descripcion;
     private String fecha;
     private MultipartFile documento;
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
     
 
     /**

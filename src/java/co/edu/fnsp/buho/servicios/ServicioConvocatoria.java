@@ -66,11 +66,11 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
     }
 
     @Override
-    public void actualizarConvocatoria(Convocatoria convocatoria) {
+    public void actualizarConvocatoria(long idUsuario, Convocatoria convocatoria) {
         TransactionDefinition txDef = new DefaultTransactionDefinition();
         TransactionStatus txStatus = transactionManager.getTransaction(txDef);
         try {
-            repositorioConvocatoria.actualizarConvocatoria(convocatoria);
+            repositorioConvocatoria.actualizarConvocatoria(idUsuario, convocatoria);
             transactionManager.commit(txStatus);
         } catch (TransactionException exc) {
             transactionManager.rollback(txStatus);

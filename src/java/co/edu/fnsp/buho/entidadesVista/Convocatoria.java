@@ -17,30 +17,45 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class Convocatoria {
 
-    private int tipoConvocatoria;
+    private int id;
+    private String tipoConvocatoria;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaInicio;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaFin;
-    private int area;
+    private String area;
     private String nombre;
     private String descripcion;
     private MultipartFile documento;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaPublicacionResultados;
     private List<Adenda> adendas = new ArrayList<>();
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
     
     /**
      * @return the tipoConvocatoria
      */
-    public int getTipoConvocatoria() {
+    public String getTipoConvocatoria() {
         return tipoConvocatoria;
     }
 
     /**
      * @param tipoConvocatoria the tipoConvocatoria to set
      */
-    public void setTipoConvocatoria(int tipoConvocatoria) {
+    public void setTipoConvocatoria(String tipoConvocatoria) {
         this.tipoConvocatoria = tipoConvocatoria;
     }
 
@@ -75,14 +90,14 @@ public class Convocatoria {
     /**
      * @return the area
      */
-    public int getArea() {
+    public String getArea() {
         return area;
     }
 
     /**
      * @param area the area to set
      */
-    public void setArea(int area) {
+    public void setArea(String area) {
         this.area = area;
     }
 

@@ -85,6 +85,7 @@ public class ConvocatoriaController {
     String crearConvocatoria(@ModelAttribute co.edu.fnsp.buho.entidadesVista.Convocatoria convocatoria, Model model) throws ParseException, IOException {
         try {
             Convocatoria convocatoriaIngresar = new Convocatoria();
+            convocatoriaIngresar.setId(convocatoria.getId());
             convocatoriaIngresar.setArea(convocatoria.getArea());
             convocatoriaIngresar.setDescripcion(convocatoria.getDescripcion());
             convocatoriaIngresar.setFechaFin(convocatoria.getFechaFin());
@@ -103,6 +104,7 @@ public class ConvocatoriaController {
             }
             for (co.edu.fnsp.buho.entidadesVista.Adenda adenda : convocatoria.getAdendas()) {
                 Adenda nuevaAdenda = new Adenda();
+                nuevaAdenda.setId(adenda.getId());
                 nuevaAdenda.setDescripcion(adenda.getDescripcion());
                 nuevaAdenda.setFecha(Util.obtenerFecha(adenda.getFecha()));
                 nuevaAdenda.setTipoAdenda(Util.obtenerEntero(adenda.getTipoAdenda()));
@@ -112,12 +114,16 @@ public class ConvocatoriaController {
                     documento.setContenido(adenda.getDocumento().getBytes());
                     documento.setNombre(adenda.getDocumento().getOriginalFilename());
                     documento.setTipoContenido(adenda.getDocumento().getContentType());
-                    convocatoriaIngresar.setDocumento(documento);
+                    nuevaAdenda.setDocumento(documento);
                 }
                 convocatoriaIngresar.getAdendas().add(nuevaAdenda);
             }
-
-            servicioConvocatoria.ingresarConvocatoria(((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario(), convocatoriaIngresar);
+            long idUsuario = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario();
+            if (convocatoriaIngresar.getId() == 0) {
+                servicioConvocatoria.ingresarConvocatoria(idUsuario, convocatoriaIngresar);
+            } else {
+                servicioConvocatoria.actualizarConvocatoria(idUsuario, convocatoriaIngresar);
+            }
 
             return "";
         } catch (IOException exc) {
@@ -130,7 +136,7 @@ public class ConvocatoriaController {
     public String mostrarEdicionConvocatoria(@PathVariable int idConvocatoria, Model model) {
 
         Convocatoria convocatoria = servicioConvocatoria.obtenerConvocatoria(idConvocatoria);
-        
+
         List<Maestro> tiposConvocatoria = servicioMaestro.obtenerTiposConvocatoria();
         model.addAttribute("tiposConvocatoria", tiposConvocatoria);
 
@@ -144,10 +150,10 @@ public class ConvocatoriaController {
         if (convocatoria.getAdendas().size() > 0) {
             model.addAttribute("adendasJSON", Util.obtenerAdendasJSON(convocatoria.getAdendas()));
         }
-        
+
         return "convocatorias/crear";
     }
-    
+
     @RequestMapping(value = "/{idConvocatoria}", method = RequestMethod.GET)
     public @ResponseBody
     String obtenerConvocatoria(@PathVariable int idConvocatoria, Model model) {
@@ -158,33 +164,50 @@ public class ConvocatoriaController {
     }
 
     @RequestMapping(value = "/eliminar/{idConvocatoria}", method = RequestMethod.GET)
-    public @ResponseBody String eliminarConvocatoria(@PathVariable int idConvocatoria, Model model) {
+    public @ResponseBody
+    String eliminarConvocatoria(@PathVariable int idConvocatoria, Model model) {
         try {
             servicioConvocatoria.eliminarConvocatoria(idConvocatoria);
         } catch (Exception exc) {
             logger.error(exc);
             return "{\"resultado\":false}";
         }
-        
+
         return "{\"resultado\":true}";
     }
 
-        @RequestMapping(value = "/postular/{idConvocatoria}", method = RequestMethod.GET)
-    public @ResponseBody String postularAConvocatoria(@PathVariable int idConvocatoria, Model model) {
+    @RequestMapping(value = "/postular/{idConvocatoria}", method = RequestMethod.GET)
+    public @ResponseBody
+    String postularAConvocatoria(@PathVariable int idConvocatoria, Model model) {
         try {
-            servicioConvocatoria.postularConvocatoria(((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario(), 
+            servicioConvocatoria.postularConvocatoria(((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario(),
                     idConvocatoria);
         } catch (Exception exc) {
             logger.error(exc);
             return "{\"resultado\":false}";
         }
-        
+
         return "{\"resultado\":true}";
     }
-    
+
     @RequestMapping(value = "/documento/{idConvocatoria}", method = RequestMethod.GET)
     public void obtenerDocumentoConvocatoria(@PathVariable("idConvocatoria") int idConvocatoria, HttpServletResponse response) throws IOException {
         Documento documento = servicioConvocatoria.obtenerDocumentoConvocatoria(idConvocatoria);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+
+    @RequestMapping(value = "/adenda/documento/{idAdenda}", method = RequestMethod.GET)
+    public void obtenerDocumentoAdendaConvocatoria(@PathVariable("idAdenda") int idAdenda, HttpServletResponse response) throws IOException {
+        Documento documento = servicioConvocatoria.obtenerDocumentoAdenda(idAdenda);
         if (documento != null) {
             response.reset();
             response.resetBuffer();

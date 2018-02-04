@@ -9,10 +9,13 @@ import co.edu.fnsp.buho.entidades.Convocatoria;
 import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.Adenda;
 import co.edu.fnsp.buho.utilidades.Util;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -41,9 +44,10 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     private SimpleJdbcCall ingresarAdenda;
     private SimpleJdbcCall eliminarAdenda;
     private SimpleJdbcCall actualizarAdenda;
-    private SimpleJdbcCall obtenerAdenda;
     private SimpleJdbcCall obtenerAdendas;
     private SimpleJdbcCall obtenerDocumentoAdenda;
+    private SimpleJdbcCall ingresarDocumentoAdenda;
+    private SimpleJdbcCall actualizarDocumentoAdenda;
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -64,8 +68,9 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         this.eliminarAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarAdenda");
         this.actualizarAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarAdenda");
         this.obtenerAdendas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerAdendas").returningResultSet("adendas", BeanPropertyRowMapper.newInstance(Adenda.class));
-        this.obtenerAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerAdenda");
         this.obtenerDocumentoAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoAdenda");
+        this.ingresarDocumentoAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoAdenda");
+        this.actualizarDocumentoAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoAdenda");
     }
 
     @Override
@@ -73,11 +78,19 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
         parametros.addValue("varNombre", convocatoria.getNombre());
         parametros.addValue("varDescripcion", convocatoria.getDescripcion());
-        parametros.addValue("varTipoConvocatoria", convocatoria.getTipoConvocatoria());
+        try {
+            parametros.addValue("varTipoConvocatoria", Util.obtenerEntero(convocatoria.getTipoConvocatoria()));
+        } catch (ParseException ex) {
+            Logger.getLogger(RepositorioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
         parametros.addValue("varFechaFin", convocatoria.getFechaFin());
         parametros.addValue("varFechaInicio", convocatoria.getFechaInicio());
         parametros.addValue("varFechaResultados", convocatoria.getFechaPublicacionResultados());
-        parametros.addValue("varArea", convocatoria.getArea());
+        try {
+            parametros.addValue("varArea", Util.obtenerEntero(convocatoria.getArea()));
+        } catch (ParseException ex) {
+            Logger.getLogger(RepositorioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
         parametros.addValue("varPersonaRegistra", idUsuario);
         Map resultado = ingresarConvocatoria.execute(parametros);
         int idConvocatoria = (int) resultado.get("varIdConvocatoria");
@@ -93,12 +106,12 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             int idAdenda = (int) resultadoAdenda.get("varIdAdenda");
             Documento documento = adenda.getDocumento();
             if (documento != null) {
-                MapSqlParameterSource parametrosIngresoDocumentoConvocatoria = new MapSqlParameterSource();
-                parametrosIngresoDocumentoConvocatoria.addValue("varIdAdenda", idAdenda);
-                parametrosIngresoDocumentoConvocatoria.addValue("varNombre", documento.getNombre());
-                parametrosIngresoDocumentoConvocatoria.addValue("varTipoContenido", documento.getTipoContenido());
-                parametrosIngresoDocumentoConvocatoria.addValue("varContenido", documento.getContenido());
-                ingresarDocumentoConvocatoria.execute(parametrosIngresoDocumentoConvocatoria);
+                MapSqlParameterSource parametrosIngresoDocumentoAdenda = new MapSqlParameterSource();
+                parametrosIngresoDocumentoAdenda.addValue("varIdAdenda", idAdenda);
+                parametrosIngresoDocumentoAdenda.addValue("varNombre", documento.getNombre());
+                parametrosIngresoDocumentoAdenda.addValue("varTipoContenido", documento.getTipoContenido());
+                parametrosIngresoDocumentoAdenda.addValue("varContenido", documento.getContenido());
+                ingresarDocumentoAdenda.execute(parametrosIngresoDocumentoAdenda);
             }
         }
 
@@ -114,9 +127,9 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     }
 
     @Override
-    public void actualizarConvocatoria(Convocatoria convocatoria) {
+    public void actualizarConvocatoria(long idUsuario, Convocatoria convocatoria) {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
-        parametros.addValue("varId", convocatoria.getId());
+        parametros.addValue("varidConvocatoria", convocatoria.getId());
         parametros.addValue("varNombre", convocatoria.getNombre());
         parametros.addValue("varDescripcion", convocatoria.getDescripcion());
         parametros.addValue("varTipoConvocatoria", convocatoria.getTipoConvocatoria());
@@ -136,7 +149,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             actualizarDocumentoConvocatoria.execute(parametrosActualizacionDocumentoConvocatoria);
         }
         
-        ActualizarAdenda(convocatoria.getId(), convocatoria.getAdendas());
+        ActualizarAdenda(convocatoria.getId(), idUsuario, convocatoria.getAdendas());
     }
 
     @Override
@@ -147,7 +160,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
 
         Map resultado = obtenerConvocatoria.execute(parametros);
         convocatoria.setId(idConvocatoria);
-        convocatoria.setArea((int) resultado.get("varArea"));
+        convocatoria.setArea(((Integer) resultado.get("varArea")).toString());
         convocatoria.setNombreArea((String) resultado.get("varNombreArea"));
         convocatoria.setDescripcion((String) resultado.get("varDescripcion"));
         convocatoria.setFechaFin((Date) resultado.get("varFechaFin"));
@@ -157,7 +170,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         convocatoria.setFechaPublicacionResultados((Date) resultado.get("varFechaResultados"));
         convocatoria.setFechaPublicacionResultadosFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaPublicacionResultados()));
         convocatoria.setNombre((String) resultado.get("varNombre"));
-        convocatoria.setTipoConvocatoria((int) resultado.get("varTipoConvocatoria"));
+        convocatoria.setTipoConvocatoria(((Integer) resultado.get("varTipoConvocatoria")).toString());
         convocatoria.setNombreTipoConvocatoria((String) resultado.get("varNombreTipoConvocatoria"));
         convocatoria.setTieneDocumento(((Boolean) resultado.get("varTieneDocumento")));
 
@@ -224,15 +237,15 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         return convocatorias;
     }
 
-    private void ActualizarAdenda(int idConvocatoria, List<Adenda> adendas) {
+    private void ActualizarAdenda(int idConvocatoria, long idUsuario, List<Adenda> adendas) {
         MapSqlParameterSource parametrosConsultaAdenda = new MapSqlParameterSource();
         parametrosConsultaAdenda.addValue("varIdConvocatoria", idConvocatoria);
-        Map resultadoAdenda = obtenerAdenda.execute(parametrosConsultaAdenda);
-        ArrayList<Adenda> entidadesInternacionalesActuales = (ArrayList<Adenda>) resultadoAdenda.get("entidadesInternacionalesProyecto");
+        Map resultadoAdendas = obtenerAdendas.execute(parametrosConsultaAdenda);
+        ArrayList<Adenda> adendasActuales = (ArrayList<Adenda>) resultadoAdendas.get("adendas");
 
         MapSqlParameterSource parametrosEliminacionAdenda = new MapSqlParameterSource();
         MapSqlParameterSource parametrosActualizacionAdenda = new MapSqlParameterSource();
-        for (Adenda adendaActual : entidadesInternacionalesActuales) {
+        for (Adenda adendaActual : adendasActuales) {
             Adenda adendaModificado = null;
             for (Adenda adenda : adendas) {
                 if (adenda.getId() == adendaActual.getId()) {
@@ -251,12 +264,12 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
                 actualizarAdenda.execute(parametrosActualizacionAdenda);
                 Documento documento = adendaModificado.getDocumento();
                 if (documento != null) {
-                    MapSqlParameterSource parametrosIngresoDocumentoConvocatoria = new MapSqlParameterSource();
-                    parametrosIngresoDocumentoConvocatoria.addValue("varIdAdenda", adendaModificado.getId());
-                    parametrosIngresoDocumentoConvocatoria.addValue("varNombre", documento.getNombre());
-                    parametrosIngresoDocumentoConvocatoria.addValue("varTipoContenido", documento.getTipoContenido());
-                    parametrosIngresoDocumentoConvocatoria.addValue("varContenido", documento.getContenido());
-                    actualizarDocumentoConvocatoria.execute(parametrosIngresoDocumentoConvocatoria);
+                    MapSqlParameterSource parametrosActualizarDocumentoAdenda = new MapSqlParameterSource();
+                    parametrosActualizarDocumentoAdenda.addValue("varIdAdenda", adendaModificado.getId());
+                    parametrosActualizarDocumentoAdenda.addValue("varNombre", documento.getNombre());
+                    parametrosActualizarDocumentoAdenda.addValue("varTipoContenido", documento.getTipoContenido());
+                    parametrosActualizarDocumentoAdenda.addValue("varContenido", documento.getContenido());
+                    actualizarDocumentoAdenda.execute(parametrosActualizarDocumentoAdenda);
                 }                
             }
         }
@@ -265,6 +278,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         parametrosIngresoAdenda.addValue("varIdConvocatoria", idConvocatoria);
         for (Adenda adenda : adendas) {
             if (adenda.getId() == 0) {
+                parametrosIngresoAdenda.addValue("varPersonaRegistra", idUsuario);
                 parametrosIngresoAdenda.addValue("varDescripcion", adenda.getDescripcion());
                 parametrosIngresoAdenda.addValue("varTipoAdenda", adenda.getTipoAdenda());
                 parametrosIngresoAdenda.addValue("varFecha", adenda.getFecha());
@@ -272,12 +286,12 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
                 int idAdenda = (int) resultadoIngresoAdenda.get("varIdAdenda");
                 Documento documento = adenda.getDocumento();
                 if (documento != null) {
-                    MapSqlParameterSource parametrosIngresoDocumentoConvocatoria = new MapSqlParameterSource();
-                    parametrosIngresoDocumentoConvocatoria.addValue("varIdAdenda", idAdenda);
-                    parametrosIngresoDocumentoConvocatoria.addValue("varNombre", documento.getNombre());
-                    parametrosIngresoDocumentoConvocatoria.addValue("varTipoContenido", documento.getTipoContenido());
-                    parametrosIngresoDocumentoConvocatoria.addValue("varContenido", documento.getContenido());
-                    ingresarDocumentoConvocatoria.execute(parametrosIngresoDocumentoConvocatoria);
+                    MapSqlParameterSource parametrosIngresoDocumentoAdenda = new MapSqlParameterSource();
+                    parametrosIngresoDocumentoAdenda.addValue("varIdAdenda", idAdenda);
+                    parametrosIngresoDocumentoAdenda.addValue("varNombre", documento.getNombre());
+                    parametrosIngresoDocumentoAdenda.addValue("varTipoContenido", documento.getTipoContenido());
+                    parametrosIngresoDocumentoAdenda.addValue("varContenido", documento.getContenido());
+                    ingresarDocumentoAdenda.execute(parametrosIngresoDocumentoAdenda);
                 }
             }
         }

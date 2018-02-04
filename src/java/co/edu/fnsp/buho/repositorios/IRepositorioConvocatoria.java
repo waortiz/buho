@@ -17,7 +17,7 @@ public interface IRepositorioConvocatoria {
 
     void ingresarConvocatoria(long idUsuario, Convocatoria convocatoria);
 
-    void actualizarConvocatoria(Convocatoria convocatoria);
+    void actualizarConvocatoria(long idUsuario, Convocatoria convocatoria);
 
     Convocatoria obtenerConvocatoria(int idConvocatoria);
 

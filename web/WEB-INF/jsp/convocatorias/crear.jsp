@@ -14,10 +14,8 @@
                         <label for="tipoConvocatoria">Tipo de convocatoria</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de convocatoria">
                             <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
                         <form:select style="width: 100%;" path="tipoConvocatoria" class="js-select-basic-single js-states form-control" data-validation="required" data-validation-error-msg="Debe seleccionar el tipo de convocatoria">
-                            <option></option>
-                            <c:forEach var="tipoConvocatoria" items="${tiposConvocatoria}">
-                                <option value="${tipoConvocatoria.getId()}">${tipoConvocatoria.getNombre()}</option>
-                            </c:forEach>
+                            <form:option value=""></form:option>
+                            <form:options items="${tiposConvocatoria}" itemLabel="nombre" itemValue="id"/>
                         </form:select>
                     </div>
                 </div>
@@ -37,7 +35,7 @@
                         <label for="fechaFin">Fecha de finalizaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de finalizaci&oacute;n" data-validation="required" data-validation-error-msg="Debe ingresar la fecha de finalización">
                             <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                         <div class='input-group date'>
-                            <form:input class="form-control fecha" path="fechaFin" />
+                            <form:input class="form-control fecha" path="fechaFin" data-validation="required" data-validation-error-msg="Debe ingresar la fecha de finalización"/>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
@@ -50,10 +48,8 @@
                         <label for="area">&Aacute;rea de convocatoria</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el &aacute;rea de convocatoria">
                             <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
                         <form:select style="width: 100%;" path="area" class="js-select-basic-single js-states form-control">
-                            <option></option>
-                            <c:forEach var="area" items="${areasConvocatoria}">
-                                <option value="${area.getId()}">${area.getNombre()}</option>
-                            </c:forEach>
+                            <form:option value=""></form:option>
+                            <form:options items="${areasConvocatoria}" itemLabel="nombre" itemValue="id"/>
                         </form:select>
                     </div>
                 </div>
@@ -78,7 +74,10 @@
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="documento">Documento de soporte</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe adjuntar un documento de la convocatoria">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                           <i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                           <c:if test = "${convocatoria.getId() > 0}">
+                              <a id="verDocumentoConvocatoria" href="#" onclick="verDocumentoConvocatoria()" title="Ver documento" style="margin-left: 20px;" class="btn btn-success btn-sm"><i class="fa fa-file-pdf-o" aria-hidden="true"> </i></a>
+                           </c:if>
                         <input type="file" class="form-control" name="documento" id="documento" >
                     </div>
                 </div>
@@ -98,7 +97,7 @@
             <div class="row">   
                 <div class="col-md-12"> 
                     <label>Agregar adendas</label> 
-                    <button style="margin-bottom: 20px;"  type="button" class="btn btn-success" data-toggle="modal" data-target="#md_adenda"><span class="glyphicon glyphicon-plus"></span></button>     
+                    <button style="margin-bottom: 20px;"  type="button" class="btn btn-success" onclick="nuevaAdenda()"><span class="glyphicon glyphicon-plus"></span></button>     
                     <table class="table table-hover tableestilo" id="tbadendas"> 
                         <thead>
                             <tr>    
@@ -124,12 +123,13 @@
                                     <input type="hidden" class="form-control" data-bind="value: fecha, attr: { 'name': 'adendas[' + $index() + '].fecha'  }">
                                 </td>
                                 <td style="width: 20%">
-                                    <span data-bind="text: documento" ></span>
+                                    <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoAdenda, visible: tieneDocumento" style='margin-left: 30px;' class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
                                 </td>
                                 <td style='white-space: nowrap'>
                                     <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarAdenda"><i class='fa fa-pencil' aria-hidden='true'></i></button>
                                     <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarAdenda"><span class='glyphicon glyphicon-remove'></span></button>
                                     <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'adendas[' + $index() + '].consecutivo'  }" />
+                                    <input type="hidden" data-bind="value: id, attr: { 'name': 'adendas[' + $index() + '].id'  }" />
                                 </td>
                             </tr>
                         </tbody>                                         
@@ -167,8 +167,9 @@
                                 </div>
                                 <div class="form-group">    
                                     <label>Documento de adenda</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el documento de adenda">
-                                        <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>       
-                                    <input type="file" name="documentoAdenda" id="documentoAdenda" class="form-control">
+                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                    <div id="documentosAdenda">
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -183,11 +184,16 @@
             <input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <form:hidden path="id" />
         </form:form>
-        <div class="modal fade" id="confirmacionAlmacenamientoConvocatoria" tabindex="-1" role="dialog" aria-labelledby="confirmacionAlmacenamientoProyectoLabel" aria-hidden="true">
+        <div class="modal fade" id="confirmacionAlmacenamientoConvocatoria" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <c:if test = "${convocatoria.getId() == 0}">
+                            <button type="button" class="close" data-dismiss="modal" onclick="window.location.href = '${pageContext.request.contextPath}/convocatorias/crear'">&times;</button>
+                        </c:if>
+                        <c:if test = "${convocatoria.getId() > 0}">
+                            <button type="button" class="close" data-dismiss="modal" onclick="window.location.href = '${pageContext.request.contextPath}/convocatorias/editar/${convocatoria.getId()}'">&times;</button>
+                        </c:if>
                         <h4 class="modal-title">
                             <c:if test = "${convocatoria.getId() == 0}">
                                 Registro Convocatoria
@@ -198,15 +204,20 @@
                         </h4>   
                     </div>
                     <div class="modal-body">
-                            <c:if test = "${convocatoria.getId() == 0}">
-                                La convocatoria se ha registrado exitosamente
-                            </c:if>
-                            <c:if test = "${convocatoria.getId() > 0}">
-                                La convocatoria se ha actualizado exitosamente
-                            </c:if>
+                        <c:if test = "${convocatoria.getId() == 0}">
+                            La convocatoria se ha registrado exitosamente
+                        </c:if>
+                        <c:if test = "${convocatoria.getId() > 0}">
+                            La convocatoria se ha actualizado exitosamente
+                        </c:if>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+                        <c:if test = "${convocatoria.getId() == 0}">
+                            <button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location.href = '${pageContext.request.contextPath}/convocatorias/crear'">Cerrar</button>
+                        </c:if>
+                        <c:if test = "${convocatoria.getId() > 0}">
+                            <button type="button" class="btn btn-success" onclick="window.location.href = '${pageContext.request.contextPath}/convocatorias/editar/${convocatoria.getId()}'">Cerrar</button>
+                        </c:if>                        
                     </div>
                 </div>
             </div>
@@ -295,17 +306,6 @@
             success: function (response) {
                 if (response === "") {
                     $('#confirmacionAlmacenamientoConvocatoria').modal('show');
-                    if(parseInt($('#id').val()) === 0) {
-                        $('#tipoConvocatoria').val('');
-                        $('#fechaInicio').val('');
-                        $('#fechaFin').val('');
-                        $('#area').val('');
-                        $('#nombre').val('');
-                        $('#descripcion').val('');
-                        $('#documento').val('');
-                        $('#fechaPublicacionResultados').val('');
-                        adendaModel.adendas.removeAll();
-                    }
                 } else {
                     bootstrap_alert_convocatoria.warning(response);
                 }
@@ -334,15 +334,19 @@
             var nombreTipoAdenda = $('#tipoAdenda option:selected').text();
             var descripcionAdenda = $('#descripcionAdenda').val();
             var fechaAdenda = $('#fechaAdenda').val();
+            var fileInput = null;
             if ($('#consecutivo').val() === "") {
                 self.adendas.push({
-                    consecutivo: ko.observable(self.adendas().length + 1),
+                    id: ko.observable(0),
+                    consecutivo: ko.observable(self.adendas().length ),
                     tipoAdenda: ko.observable(tipoAdenda),
                     nombreTipoAdenda: ko.observable(nombreTipoAdenda),
                     descripcion: ko.observable(descripcionAdenda),
                     documento: ko.observable(''),
-                    fecha: ko.observable(fechaAdenda)
+                    fecha: ko.observable(fechaAdenda),
+                    tieneDocumento: ko.observable(false)
                 });
+                $('input:file[name="adendas[' + self.adendas().length + '].documento"]').hide();
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -357,9 +361,10 @@
                 self.adendas()[indice].descripcion(descripcionAdenda);
                 self.adendas()[indice].documento('');
                 self.adendas()[indice].fecha(fechaAdenda);
+                $('input:file[name="adendas[' + indice + '].documento"]').hide();
             }
             $('#md_adenda').modal('hide');
-            $('#tipoAdenda').val("");
+            $('#tipoAdenda').val("").trigger('change');
             $('#fechaAdenda').val("");
             $('#descripcionAdenda').val("");
         };
@@ -367,15 +372,62 @@
         self.eliminarAdenda = function (adenda) {
             self.adendas.remove(adenda);
         };
+        
         self.editarAdenda = function (adenda) {
-            $('#tipoAdenda').val(adenda.tipoAdenda());
+            ocultarDocumentoAdendas();
+            $('#tipoAdenda').val(adenda.tipoAdenda()).trigger('change');;
             $('#fechaAdenda').val(adenda.fecha());
             $('#descripcionAdenda').val(adenda.descripcion());
             $('#consecutivo').val(adenda.consecutivo());
+            $('input:file[name="adendas[' + adenda.consecutivo() + '].documento"]').show();
             $('#md_adenda').modal('show');
+        };
+        
+        self.verDocumentoAdenda = function (adenda) {
+            if (adenda.tieneDocumento()) {
+                window.location.href = "${pageContext.request.contextPath}/convocatorias/adenda/documento/" + adenda.id();
+            }
         };
     };
 
-    var adendaModel = new AdendaModel([]);
+    function verDocumentoConvocatoria() {
+       window.location.href = "${pageContext.request.contextPath}/convocatorias/documento/" + $('#id').val();
+    }
+
+    function nuevaAdenda() {
+        $('#tipoAdenda').val("").trigger('change');;
+        $('#fechaAdenda').val("");
+        $('#descripcionAdenda').val("");
+        ocultarDocumentoAdendas();
+        var fileInput = $('input:file[name="adendas[' + adendaModel.adendas().length + '].documento"]');
+        if(!fileInput.attr( 'id' )) {            
+            fileInput = $('<input type="file" class="form-control" id="adendas[' + (adendaModel.adendas().length) + '].documento" name="adendas[' + (self.adendas().length) + '].documento" />');
+            $('#documentosAdenda').append(fileInput);
+        } else {
+           fileInput.show(); 
+        }    
+        $('#md_adenda').modal('show');
+    }
+
+    function ocultarDocumentoAdendas() {
+        for(var i = 0; i < adendaModel.adendas().length; i++) {
+            $('input:file[name="adendas[' + i + '].documento"]').hide();
+        }
+        var fileInput = $('input:file[name="adendas[' + adendaModel.adendas().length + '].documento"]');
+        if(fileInput.attr( 'id' )) {            
+           fileInput.hide();  
+        }
+    }
+
+    var adendas = [];
+    <c:if test = "${adendasJSON != null}">
+    adendas = ${adendasJSON};
+    for (var i = 0; i < adendas.length; i++) {
+        var fileInput = $('<input type="file" class="form-control" id="adendas[' + i + '].documento" name="adendas[' + i + '].documento" />');
+        $('#documentosAdenda').append(fileInput);
+        $('input:file[name="adendas[' + i + '].documento"]').hide();
+    }
+    </c:if>
+    var adendaModel = new AdendaModel(adendas);
     ko.applyBindings(adendaModel);
 </script>
