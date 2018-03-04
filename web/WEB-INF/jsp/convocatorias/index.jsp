@@ -15,9 +15,9 @@
                         <thead>
                             <tr>
                                 <td></td>
-                                <td><input type="text" id="intip" class="form-control input-sm" placeholder="Buscar tipo de convocatoria" "></td>
-                                <td><input type="text" id="infechfin" class="form-control input-sm fecha" placeholder="Buscar fecha de finalizacion" "></td>
-                                <td><input type="text" id="innom" class="form-control input-sm" placeholder="Buscar Nombre de convo"></td>
+                                <td><input type="text" id="intip" class="form-control input-sm" placeholder="Buscar tipo de convocatoria"></td>
+                                <td><input type="text" id="infechfin" class="form-control input-sm fecha" placeholder="Buscar fecha de finalización"></td>
+                                <td><input type="text" id="innom" class="form-control input-sm" placeholder="Buscar nombre de convocatoria"></td>
                             </tr>
                             <tr> 
                                 <th>Tipo</th>
@@ -45,15 +45,15 @@
                                     <td>
                                         <div class="input-group">
                                             <c:if test = "${convocatoria.isPostulado()}">
-                                                <div id="radioBtnDisabled" class="btn-group">
-                                                    <a class="btn btn-primary btn-sm active" data-toggle="postulado${convocatoria.getId()}" data-title="Y">SI</a>
-                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="postulado${convocatoria.getId()}" data-title="N">NO</a>
+                                                <div id="radioBtn" class="btn-group">
+                                                    <a class="btn btn-primary btn-sm active" data-toggle="postulado${convocatoria.getId()}" data-title="Y" href="javascript:postularConvocatoria(${convocatoria.getId()})">SI</a>
+                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="postulado${convocatoria.getId()}" data-title="N" href="javascript:retirarPostulacionConvocatoria(${convocatoria.getId()})">NO</a>
                                                 </div>
                                             </c:if>
                                             <c:if test = "${!convocatoria.isPostulado()}">
                                                 <div id="radioBtn" class="btn-group">
-                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="postulado${convocatoria.getId()}" data-title="Y" href="javascript:mostrarVentanaPostulacion(${convocatoria.getId()})">SI</a>
-                                                    <a class="btn btn-primary btn-sm active" data-toggle="postulado${convocatoria.getId()}" data-title="N">NO</a>
+                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="postulado${convocatoria.getId()}" data-title="Y" href="javascript:postularConvocatoria(${convocatoria.getId()})">SI</a>
+                                                    <a class="btn btn-primary btn-sm active" data-toggle="postulado${convocatoria.getId()}" data-title="N" href="javascript:retirarPostulacionConvocatoria(${convocatoria.getId()})">NO</a>
                                                 </div>                                                
                                             </c:if>
                                         </div>
@@ -75,6 +75,38 @@
             </div>
         </div>
     </div>
+    <div  id="md_postular" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header mhsuccess">
+                    <button class="close" data-dismiss="modal"><label style="color:white !important;">&times;</label></button>
+                   <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Confirmacion</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="">Su hoja de vida fue postulada para la convocatoria, recuerde actualizarla y cargar todos los documentos de soporte</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div  id="md_retirar_postulacion" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header mhsuccess">
+                    <button class="close" data-dismiss="modal"><label style="color:white !important;">&times;</label></button>
+                   <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Confirmacion</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="">Su hoja de vida fue retirada de la convocatoria</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>    
     <div id="modalConvocatoria" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
@@ -144,7 +176,31 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                             <label for="">Documento de convocatoria</label>
                             <button id="verDocumentoConvocatoria" onclick="verDocumentoConvocatoria();" title="Ver documento" style="margin-left: 30px;" class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"> </i></button>
                         </div>
-                    </div><hr>
+                    </div>
+                    <hr>
+                    <center><legend>Criterios Habilitantes</legend></center>   
+                    <div class="form-group">    
+                        <table class="table table-hover tableestilo" id="criteriosHabilitantes">
+                            <thead> 
+                                <tr>
+                                    <th>Criterio</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <hr>
+                    <center><legend>Criterios evaluaci&oacute;n</legend></center>   
+                    <div class="form-group">    
+                        <table class="table table-hover tableestilo" id="adendas">
+                            <thead> 
+                                <tr>
+                                    <th>Criterio</th>
+                                    <th>Peso</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <hr>
                     <center><legend>Informaci&oacute;n de adenda</legend></center>   
                     <div class="form-group">    
                         <table class="table table-hover tableestilo" id="adendas">
@@ -160,30 +216,6 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="modalPostular" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header" >
-                    <button class="close" data-dismiss="modal">&times;</button>
-                    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Postulate</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">    
-                                <label>¿Desea confirmar la postulaci&oacute;n de su hoja de vida a la convocatoria?</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" onclick="postularAConvocatoria()">Aceptar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -308,31 +340,43 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
         $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
         $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
     }
-
-    function mostrarVentanaPostulacion(idConvocatoria) {
-         $('#idConvocatoria').val(idConvocatoria);
-         $('#modalPostular').modal('show');
-    }
-    
-    function postularAConvocatoria() {
+  
+    function postularConvocatoria(idConvocatoria) {
         $.ajax({
         type: "GET",
-        url: "${pageContext.request.contextPath}/convocatorias/postular/" + $('#idConvocatoria').val(),
+        url: "${pageContext.request.contextPath}/convocatorias/postular/" + idConvocatoria,
         processData: false,
         contentType: false,
         success: function (response) {
             if (response !== "") {
                 var resultado = JSON.parse(response);
                 if(resultado.resultado) {
-                   window.location.href = '${pageContext.request.contextPath}/convocatorias/index';
+                   $('#md_postular').modal('show');
                 } else {
                    bootstrap_alert_convocatoria.warning('No se pudo postular a la convocatoria'); 
                 } 
-                $('#modalPostular').modal('hide');
             }
         }});      
     }
-    
+
+    function retirarPostulacionConvocatoria(idConvocatoria) {
+        $.ajax({
+        type: "GET",
+        url: "${pageContext.request.contextPath}/convocatorias/retirarPostulacion/" + idConvocatoria,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            if (response !== "") {
+                var resultado = JSON.parse(response);
+                if(resultado.resultado) {
+                   $('#md_retirar_postulacion').modal('show');
+                } else {
+                   bootstrap_alert_convocatoria.warning('No se pudo retirar la postulación de la convocatoria'); 
+                } 
+            }
+        }});      
+    }
+
     function mostrarConvocatoria(idConvocatoria) {
         $.ajax({
             type: "GET",
@@ -351,13 +395,14 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                     $('#fechaPublicacion').html(convocatoria.fechaPublicacionResultadosFormateada);
                     $('#descripcion').val(convocatoria.descripcion);
                     adendas.clear().draw();
-                    self.items = ko.observableArray([{comment:'first comment', amount:0}]);
+                    criteriosHabilitantes.clear().draw();
+                    criteriosEvaluacion.clear().draw();
                     for (var i = 0; i < convocatoria.adendas.length; i++) {
                         var row = "";
                         if(convocatoria.adendas[i].tieneDocumento) {
                           row = $('<tr><td>' + convocatoria.adendas[i].nombreTipoAdenda + 
                                 '</td><td>' + convocatoria.adendas[i].descripcion + 
-                                '</td><td><a href="#" onclick="verDocumentoAdenda(' + convocatoria.adendas[i].id + ')" title="Ver documemnto" style="margin-left: 30px;" \n\
+                                '</td><td><a href="#" onclick="verDocumentoAdenda(' + convocatoria.adendas[i].id + ')" title="Ver documento" style="margin-left: 30px;" \n\
                                     class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" \n\
                                     aria-hidden="true"></i></a><td></tr>');
                         } else {
@@ -366,6 +411,16 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                                 '</td><td>&nbsp;<td></tr>');
                         }
                         adendas.row.add(row).draw();
+                    }
+                    for (var i = 0; i < convocatoria.criteriosHabilitantes.length; i++) {
+                        var row = $('<tr><td>' + convocatoria.criteriosHabilitantes[i].nombreCriterio + 
+                        '</td><td>' + convocatoria.criteriosHabilitantes[i].peso +         
+                        '</td></tr>');
+                        criteriosHabilitantes.row.add(row).draw();
+                    }
+                    for (var i = 0; i < convocatoria.criteriosEvaluacion.length; i++) {
+                        var row = $('<tr><td>' + convocatoria.criteriosEvaluacion[i].nombreCriterio + '</td></tr>');
+                        criteriosEvaluacion.row.add(row).draw();
                     }
                     $('#tieneDocumento').val(convocatoria.tieneDocumento);
                     if (!convocatoria.tieneDocumento) {

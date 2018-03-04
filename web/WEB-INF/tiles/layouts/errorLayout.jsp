@@ -9,10 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Banco Único de Hojas de Vida</title>
         <link rel="icon" href='<c:url value="/resources/imagenes/udeaIco.png" />' type="image/png" />
-        <link rel="icon" href='<c:url value="/resources/imagenes/udeaIco.png" />' type="image/png" />
         <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/bootstrap.min.css"/>'>
-        <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/estilos.css" />'>
-        <script src='<c:url value="/resources/js/jquery-3.2.1.js" />'></script>
         <style>
             .container-fluid{
                 height:100%;

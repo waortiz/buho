@@ -5,6 +5,7 @@
  */
 package co.edu.fnsp.buho.repositorios;
 
+import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.Persona;
 
 /**
@@ -12,5 +13,8 @@ import co.edu.fnsp.buho.entidades.Persona;
  * @author William
  */
 public interface IRepositorioHojaVida {
-    void ingresarPersona(Persona persona);
+    
+    void actualizarHojaVida(long idUsuario, HojaVida hojaVida);
+
+    void ingresarHojaVida(long idUsuario, HojaVida hojaVida);
 }

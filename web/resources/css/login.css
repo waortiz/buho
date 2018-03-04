@@ -43,7 +43,6 @@ body {
     height: auto;
     background-image: url(../imagenes/bgUdea.jpg);
     background-size: cover;
-    -webkit-filter: blur(10px);
     z-index: 0;
 }
 

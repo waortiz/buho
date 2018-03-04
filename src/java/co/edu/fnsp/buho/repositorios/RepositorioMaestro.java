@@ -48,64 +48,43 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     private SimpleJdbcCall obtenerTiposInstitucion;
     private SimpleJdbcCall obtenerTiposTelefono;
     private SimpleJdbcCall obtenerTiposVinculacionUdeA;
+    private SimpleJdbcCall obtenerSedes;
+    private SimpleJdbcCall obtenerProgramas;
+    private SimpleJdbcCall obtenerCriteriosHabilitantes;
+    private SimpleJdbcCall obtenerCriteriosEvaluacion;
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.setResultsMapCaseInsensitive(true);
 
-        this.obtenerTiposIdentificacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposIdentificacion").
-                returningResultSet("tiposIdentificacion", BeanPropertyRowMapper.newInstance(Maestro.class));
-
-        this.obtenerActividadesEconomicas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerActividadesEconomicas").
-                returningResultSet("actividadesEconomicas", BeanPropertyRowMapper.newInstance(Maestro.class));
-
-        this.obtenerAreasSaber = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerAreasSaber").
-                returningResultSet("areasSaber", BeanPropertyRowMapper.newInstance(Maestro.class));
-
-        this.obtenerAreas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerAreas").
-                returningResultSet("areas", BeanPropertyRowMapper.newInstance(Maestro.class));
-
-        this.obtenerCargos = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCargos").
-                returningResultSet("cargos", BeanPropertyRowMapper.newInstance(Maestro.class));
-
-        this.obtenerDedicaciones = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDedicaciones").
-                returningResultSet("dedicaciones", BeanPropertyRowMapper.newInstance(Maestro.class));
-
+        this.obtenerTiposIdentificacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposIdentificacion").returningResultSet("tiposIdentificacion", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerActividadesEconomicas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerActividadesEconomicas").returningResultSet("actividadesEconomicas", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerAreasSaber = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerAreasSaber").returningResultSet("areasSaber", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerAreas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerAreas").returningResultSet("areas", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerCargos = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCargos").returningResultSet("cargos", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerDedicaciones = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDedicaciones").returningResultSet("dedicaciones", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerDepartamentos = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDepartamentos").returningResultSet("departamentos", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerDiscapacidades = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDiscapacidades").returningResultSet("discapacidades", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerGruposEtnicos = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerGruposEtnicos").returningResultSet("gruposEtnicos", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerIdiomas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerIdiomas").returningResultSet("idiomas", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerInstitucionesEducativas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerInstitucionesEducativas").returningResultSet("institucionesEducativas", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerMunicipios = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerMunicipios").returningResultSet("municipios", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerNivelesFormacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerNivelesFormacion").returningResultSet("nivelesFormacion", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerPaises = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerPaises").returningResultSet("paises", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerTiposAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposAdenda").returningResultSet("tiposAdenda", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerTiposCapacitacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposCapacitacion").returningResultSet("tiposCapacitacion", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerTiposContrato = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposContrato").returningResultSet("tiposContrato", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerTiposConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposConvocatoria").returningResultSet("tiposConvocatoria", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerTiposDocumento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposDocumento").returningResultSet("tiposDocumento", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerTiposExperiencia = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposExperiencia").returningResultSet("tiposExperiencia", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerTiposInstitucion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposInstitucion").returningResultSet("tiposInstitucion", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerTiposTelefono = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposTelefono").returningResultSet("tiposTelefono", BeanPropertyRowMapper.newInstance(Maestro.class));
-
         this.obtenerTiposVinculacionUdeA = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposVinculacionUdeA").returningResultSet("tiposVinculacionUdeA", BeanPropertyRowMapper.newInstance(Maestro.class));
-
+        this.obtenerSedes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerSedes").returningResultSet("sedes", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerProgramas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerProgramas").returningResultSet("programas", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerCriteriosHabilitantes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCriteriosHabilitantes").returningResultSet("criteriosHabilitantes", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerCriteriosEvaluacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCriteriosEvaluacion").returningResultSet("criteriosEvaluacion", BeanPropertyRowMapper.newInstance(Maestro.class));
     }
 
     @Override
@@ -294,6 +273,40 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("tiposVinculacionUdeA");
 
         return coleccion;
+    }
+
+    @Override
+    public List<Maestro> obtenerSedes() {
+        Map resultado = obtenerSedes.execute(new HashMap<>());
+        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("sedes");
+
+        return coleccion;
+    }
+
+    @Override
+    public List<Maestro> obtenerProgramas(int idSede) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdSede", idSede);
+        Map resultado = obtenerProgramas.execute(parametros);
+        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("programas");
+
+        return coleccion;
+    }
+
+    @Override
+    public List<Maestro> obtenerCriteriosHabilitantes() {
+       Map resultado = obtenerCriteriosHabilitantes.execute(new HashMap<>());
+       List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("criteriosHabilitantes");
+
+       return coleccion;
+    }
+
+    @Override
+    public List<Maestro> obtenerCriteriosEvaluacion() {
+       Map resultado = obtenerCriteriosEvaluacion.execute(new HashMap<>());
+       List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("criteriosEvaluacion");
+
+       return coleccion;
     }
 
 }

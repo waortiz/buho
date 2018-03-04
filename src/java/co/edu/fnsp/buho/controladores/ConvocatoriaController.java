@@ -75,6 +75,15 @@ public class ConvocatoriaController {
         List<Maestro> tiposAdenda = servicioMaestro.obtenerTiposAdenda();
         model.addAttribute("tiposAdenda", tiposAdenda);
 
+        List<Maestro> criteriosHabilitantes = servicioMaestro.obtenerCriteriosHabilitantes();
+        model.addAttribute("criteriosHabilitantes", criteriosHabilitantes);
+
+        List<Maestro> criteriosEvaluacion = servicioMaestro.obtenerCriteriosEvaluacion();
+        model.addAttribute("criteriosEvaluacion", criteriosEvaluacion);
+
+        List<Maestro> sedes = servicioMaestro.obtenerSedes();
+        model.addAttribute("sedes", sedes);
+
         model.addAttribute("convocatoria", new Convocatoria());
 
         return "convocatorias/crear";
@@ -93,7 +102,9 @@ public class ConvocatoriaController {
             convocatoriaIngresar.setNombre(convocatoria.getNombre());
             convocatoriaIngresar.setFechaPublicacionResultados(convocatoria.getFechaPublicacionResultados());
             convocatoriaIngresar.setTipoConvocatoria(convocatoria.getTipoConvocatoria());
-
+            convocatoriaIngresar.setIdProgramaCurso(convocatoria.getIdProgramaCurso());
+            convocatoriaIngresar.setNombreCurso(convocatoria.getNombreCurso());
+            convocatoriaIngresar.setTotalHorasSemestreCurso(convocatoria.getTotalHorasSemestreCurso());
             Documento documento = null;
             if (convocatoria.getDocumento() != null && convocatoria.getDocumento().getBytes().length > 0) {
                 documento = new Documento();
@@ -118,6 +129,8 @@ public class ConvocatoriaController {
                 }
                 convocatoriaIngresar.getAdendas().add(nuevaAdenda);
             }
+            convocatoriaIngresar.setCriteriosEvaluacion(convocatoria.getCriteriosEvaluacion());
+            convocatoriaIngresar.setCriteriosHabilitantes(convocatoria.getCriteriosHabilitantes());
             long idUsuario = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario();
             if (convocatoriaIngresar.getId() == 0) {
                 servicioConvocatoria.ingresarConvocatoria(idUsuario, convocatoriaIngresar);
@@ -146,9 +159,18 @@ public class ConvocatoriaController {
         List<Maestro> tiposAdenda = servicioMaestro.obtenerTiposAdenda();
         model.addAttribute("tiposAdenda", tiposAdenda);
 
+        List<Maestro> sedes = servicioMaestro.obtenerSedes();
+        model.addAttribute("sedes", sedes);
+
         model.addAttribute("convocatoria", convocatoria);
         if (convocatoria.getAdendas().size() > 0) {
             model.addAttribute("adendasJSON", Util.obtenerAdendasJSON(convocatoria.getAdendas()));
+        }
+        if (convocatoria.getAdendas().size() > 0) {
+            model.addAttribute("criteriosEvaluacionJSON", Util.obtenerCriteriosEvaluacionJSON(convocatoria.getCriteriosEvaluacion()));
+        }
+        if (convocatoria.getAdendas().size() > 0) {
+            model.addAttribute("criteriosHabilitantesJSON", Util.obtenerCriteriosHabilitantesJSON(convocatoria.getCriteriosHabilitantes()));
         }
 
         return "convocatorias/crear";
@@ -178,9 +200,23 @@ public class ConvocatoriaController {
 
     @RequestMapping(value = "/postular/{idConvocatoria}", method = RequestMethod.GET)
     public @ResponseBody
-    String postularAConvocatoria(@PathVariable int idConvocatoria, Model model) {
+    String postularConvocatoria(@PathVariable int idConvocatoria, Model model) {
         try {
             servicioConvocatoria.postularConvocatoria(((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario(),
+                    idConvocatoria);
+        } catch (Exception exc) {
+            logger.error(exc);
+            return "{\"resultado\":false}";
+        }
+
+        return "{\"resultado\":true}";
+    }
+
+    @RequestMapping(value = "/retirarPostulacion/{idConvocatoria}", method = RequestMethod.GET)
+    public @ResponseBody
+    String retirarConvocatoria(@PathVariable int idConvocatoria, Model model) {
+        try {
+            servicioConvocatoria.retirarPostulacion(((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario(),
                     idConvocatoria);
         } catch (Exception exc) {
             logger.error(exc);
@@ -218,5 +254,14 @@ public class ConvocatoriaController {
             response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
             FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
         }
+    }
+
+    @RequestMapping(value = "/programasSede/{idSede}", method = RequestMethod.GET)
+    public @ResponseBody
+    String obtenerSedes(@ModelAttribute(value = "idSede") int idSede, Model model) {
+        List<Maestro> sedes = servicioMaestro.obtenerProgramas(idSede);
+        Gson gson = new Gson();
+
+        return gson.toJson(sedes);
     }
 }

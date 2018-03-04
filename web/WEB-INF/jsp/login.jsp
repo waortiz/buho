@@ -17,7 +17,7 @@
                 <div>
                     Ingreso<br>
                     <span>
-                        Banco de Hojas de Vida
+                        Banco de hojas de vida
                     </span>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
             <div class="cta">
-                <a href="#" class="clave">Perdió su contraseña / Forgot your password?</a>
+                <a href="#" class="clave">Recuperar contraseña</a>
             </div>
         </div>
         <div id="divFormRegistro" class="form form-registro">
@@ -61,7 +61,7 @@
                 <input type="submit" value="Registrar"/>
             </form:form>
             <div class="cta">
-                <a href="#" class="login">Iniciar Sesión / Login</a>
+                <a href="#" class="login">Iniciar Sesión</a>
             </div>                    
         </div>
         <div id="divFormClave" class="form form-clave">
@@ -83,7 +83,7 @@
                 <input type="submit" value="Recuperar clave"/>
             </form:form>
             <div class="cta">
-                <a href="#" class="login">Iniciar Sesión / Login</a>
+                <a href="#" class="login">Iniciar Sesión</a>
             </div>                
         </div>            
     </div>

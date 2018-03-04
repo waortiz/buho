@@ -39,7 +39,6 @@
         <!-- Metis Menu Plugin JavaScript -->
         <script type="text/javascript" src='<c:url value="/resources/js/metisMenu.min.js" />'></script>
         <script type="text/javascript" src='<c:url value="/resources/js/select2.min.js" />'></script>
-        <script type="text/javascript" src='<c:url value="/resources/js/funciones.js" />'></script>
 
         <!-- Morris Charts JavaScript -->
         <script type="text/javascript" src='<c:url value="/resources/js/raphael.min.js" />'></script>
@@ -53,10 +52,8 @@
         
     </head>
     <body>
-        <div id="contenedorPpal">
+        <div id="contenedorA">
             <header id="header">
-            <div id="contenedorA">
-                <!-- inicio Menu Navegación-->
                 <div id='cssmenu'>
                     <ul>
                         <li>
@@ -64,17 +61,12 @@
                                 <img src='<c:url value="/resources/imagenes/logoUdeaLateral2.png" />'>
                             </span> 
                         </li>
-
-                        <!-- Inicio Link Home -->
                         <li>
                             <a href='${pageContext.request.contextPath}/index'>
                                 <i class="fa fa-home fa-1x"></i>
                                 Inicio
                             </a>
                         </li>
-                        <!-- Lin Link Home -->
-
-                        <!-- Inicio Link Administrar/SubItems -->
                         <li class='active'>
                             <a href='#'><i class="fa fa-dashboard fa-1x"></i>
                                 Configurar
@@ -82,21 +74,8 @@
                             <ul>
                                 <li><a href='${pageContext.request.contextPath}/administracion/perfiles'>Perfiles</a></li>
                                 <li><a href='${pageContext.request.contextPath}/administracion/usuarios'>Usuarios</a></li>
-                                <li><a href='${pageContext.request.contextPath}/administracion/personas'>Personas</a></li>
                             </ul>
                         </li>
-                        <!-- Fin Link Administrar/SubItems -->              
-                        <!-- Inicio Link Solicitudes/SubItems -->
-                         <li class='active'>
-                            <a href='#'><i class="fa fa-user fa-1x"></i>
-                                Hoja de vida
-                            </a>
-                            <ul>
-                                <li><a href='${pageContext.request.contextPath}/hojasVida/crear'>Crear</a></li>
-                                <li><a href='${pageContext.request.contextPath}/hojasVida/index'>Consultar</a></li>
-                            </ul>
-                        </li>
-                        <!-- Fin Link Solicitudes/SubItems -->
                         <li class='active'>
                             <a href='#'><i class="fa fa-users fa-1x" aria-hidden="true"></i>
                                 Convocatorias
@@ -106,6 +85,15 @@
                               <li><a href='${pageContext.request.contextPath}/convocatorias/index'>Consultar</a></li>
                             </ul>
                         </li>                        
+                         <li class='active'>
+                            <a href='#'><i class="fa fa-user fa-1x"></i>
+                                Hoja de vida
+                            </a>
+                            <ul>
+                                <li><a href='${pageContext.request.contextPath}/hojasVida/crear'>Crear</a></li>
+                                <li><a href='${pageContext.request.contextPath}/hojasVida/index'>Consultar</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -145,5 +133,6 @@
                 window.location.href = '${pageContext.request.contextPath}' + opcion;
             }
         </script>    
+        <script type="text/javascript" src='<c:url value="/resources/js/funciones.js" />'></script>
     </body>
 </html>

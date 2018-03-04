@@ -30,4 +30,6 @@ public interface IRepositorioConvocatoria {
     Documento obtenerDocumentoAdenda(int idAdenda);
 
     void postularConvocatoria(long idPersona, int idConvocatoria);
+
+    void retirarPostulacion(long idPersona, int idConvocatoria);
 }

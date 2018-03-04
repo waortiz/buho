@@ -36,4 +36,8 @@ public interface IRepositorioMaestro {
     List<Maestro> obtenerTiposInstitucion();
     List<Maestro> obtenerTiposTelefono();
     List<Maestro> obtenerTiposVinculacionUdeA();
+    List<Maestro> obtenerSedes();
+    List<Maestro> obtenerProgramas(int idSede);
+    List<Maestro> obtenerCriteriosHabilitantes();
+    List<Maestro> obtenerCriteriosEvaluacion();
 }

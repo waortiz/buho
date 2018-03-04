@@ -136,4 +136,24 @@ public class ServicioMaestro implements IServicioMaestro {
     public List<Maestro> obtenerTiposVinculacionUdeA() {
         return repositorioMaestro.obtenerTiposVinculacionUdeA();
     }
+
+    @Override
+    public List<Maestro> obtenerSedes() {
+        return repositorioMaestro.obtenerSedes();
+    }
+
+    @Override
+    public List<Maestro> obtenerProgramas(int idSede) {
+        return repositorioMaestro.obtenerProgramas(idSede);
+    }
+
+    @Override
+    public List<Maestro> obtenerCriteriosHabilitantes() {
+        return repositorioMaestro.obtenerCriteriosHabilitantes();
+    }
+
+    @Override
+    public List<Maestro> obtenerCriteriosEvaluacion() {
+        return repositorioMaestro.obtenerCriteriosEvaluacion();
+    }
 }

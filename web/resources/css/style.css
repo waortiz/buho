@@ -48,11 +48,6 @@ body{
   background-color: #fff;
 }
 
-#radioBtnDisabled .notActive{
-  color: #3276b1;
-  background-color: #fff;
-}
-
 #cssmenu,
 #cssmenu ul,
 #cssmenu ul li,
@@ -535,8 +530,23 @@ table
   border-bottom: 1px dotted #d9d9d9;
   padding: 2px;
 }
-#tbperfil tr th,#tbusuario tr th,#tbpersona tr th,#tbconvocatoria tr th,#tbidiomas tr th,#tbasacademico tr th,#tbexperiencia tr th,#tbtel tr th,
-#tbemail tr th,#tbidiomas tr th, #tbexpdocsal tr th, #tbexpdoc tr th, #tbexplabsal tr th, #tbexplab tr th, #tbexpinv tr th, #tbexpext tr th
+.tableestilo2 tr th
+{
+  background-color: #e6e6e6;
+  color: #214a32;
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 1px!important;
+}
+.tableestilo2 tr td
+{
+    font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  border-bottom: 1px dotted #d9d9d9;
+  padding: 2px;
+}
+#tbperfil tr th,#tbusuario tr th,#tbpersona tr th,#tbconvocatoria tr th,#tbasacademico tr th,#tbexperiencia tr th,#tbtel tr th,
+#tbemail tr th,#tbcuentabanca tr th,#tbexpdocsal tr th, #tbexpdoc tr th, #tbexplabsal tr th, #tbexpinv tr th, #tbexpext tr th,#tbdocad tr th,#tbcur tr th
 {
   background-color: #e6e6e6;
   color: #214a32;
@@ -545,8 +555,8 @@ table
   border-bottom: 1px solid #e6e6e6;
 
 }
-#tbperfil tr td,#tbusuario tr td,#tbpersona tr td,#tbconvocatoria tr td,#tbidiomas tr td,#tbasacademico tr td,#tbexperiencia tr td,#tbtel tr td,
-#tbemail tr td,#tbexpdocsal tr td, #tbexpdoc tr td, #tbexplabsal tr td, #tbexplab tr td, #tbexpinv tr td, #tbexpext tr td,select
+#tbperfil tr td,#tbusuario tr td,#tbpersona tr td,#tbconvocatoria tr td,#tbidiomas tr td,#tbasacademico tr td,#tbexperiencia tr td,
+#tbexpdocsal tr td, #tbexpdoc tr td, #tbexplabsal tr td, #tbexpinv tr td, #tbexpext tr td,select
 {
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
@@ -581,6 +591,7 @@ table
 #radioBtn .notActive{
     color: #3276b1;
     background-color: #fff;
+	border: 1px dotted #bfbfbf;						   
 }
 .btn-xl {
   padding: 10px 16px;
@@ -600,6 +611,14 @@ table
      border-top-left-radius: 5px;
      border-top-right-radius: 5px;
 }
+#tbconvo tr td
+{
+  text-align: left;
+}
+#tbadendas tr td
+{
+  text-align: left;
+}			  
 .pagination > li > a, .pagination > li > span{background-color:#0A351C}
 
 .pagination > li.active > a, .pagination > li.active > span{background-color:#0A351C}

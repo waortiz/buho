@@ -5,12 +5,15 @@
  */
 package co.edu.fnsp.buho.servicios;
 
-import co.edu.fnsp.buho.entidades.Persona;
+import co.edu.fnsp.buho.entidades.HojaVida;
 
 /**
  *
  * @author William
  */
 public interface IServicioHojaVida {
-    void ingresarPersona(Persona persona);
+        
+    public void ingresarHojaVida(long idUsuario, HojaVida hojaVidaIngresar);
+
+    public void actualizarHojaVida(long idUsuario, HojaVida hojaVidaIngresar);
 }

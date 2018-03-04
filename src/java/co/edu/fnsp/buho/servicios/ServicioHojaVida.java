@@ -5,8 +5,10 @@
  */
 package co.edu.fnsp.buho.servicios;
 
+import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.Persona;
 import co.edu.fnsp.buho.repositorios.IRepositorioHojaVida;
+import co.edu.fnsp.buho.repositorios.IRepositorioPersona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +22,14 @@ public class ServicioHojaVida implements IServicioHojaVida {
     
     @Autowired
     private IRepositorioHojaVida repositorioHojaVida;
-        
+
     @Override
-    public void ingresarPersona(Persona persona) {
-        repositorioHojaVida.ingresarPersona(persona);
+    public void ingresarHojaVida(long idUsuario, HojaVida hojaVida) {
+        repositorioHojaVida.ingresarHojaVida(idUsuario, hojaVida);
+    }
+
+    @Override
+    public void actualizarHojaVida(long idUsuario, HojaVida hojaVida) {
+        repositorioHojaVida.actualizarHojaVida(idUsuario, hojaVida);
     }
 }

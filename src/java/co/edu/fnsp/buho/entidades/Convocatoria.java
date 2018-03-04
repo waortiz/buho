@@ -35,7 +35,17 @@ public class Convocatoria {
     private String fechaPublicacionResultadosFormateada;
     private boolean tieneDocumento;
     private boolean postulado;
+    private String sedeCurso;
+    private String idSedeCurso;
+    private String idProgramaCurso;
+    private String programaCurso;
+    private String nombreCurso;
+    private String totalHorasSemestreCurso;
+    
     private List<Adenda> adendas = new ArrayList<>();
+    private List<CriterioEvaluacion> criteriosEvaluacion = new ArrayList<>();
+    private List<CriterioHabilitante> criteriosHabilitantes = new ArrayList<>();
+
     
     /**
      * @return the tipoConvocatoria
@@ -274,4 +284,117 @@ public class Convocatoria {
     public void setPostulado(boolean postulado) {
         this.postulado = postulado;
     }
+
+    /**
+     * @return the sedeCurso
+     */
+    public String getSedeCurso() {
+        return sedeCurso;
+    }
+
+    /**
+     * @param sedeCurso the sedeCurso to set
+     */
+    public void setSedeCurso(String sedeCurso) {
+        this.sedeCurso = sedeCurso;
+    }
+
+    /**
+     * @return the idSedeCurso
+     */
+    public String getIdSedeCurso() {
+        return idSedeCurso;
+    }
+
+    /**
+     * @param idSedeCurso the idSedeCurso to set
+     */
+    public void setIdSedeCurso(String idSedeCurso) {
+        this.idSedeCurso = idSedeCurso;
+    }
+
+    /**
+     * @return the idProgramaCurso
+     */
+    public String getIdProgramaCurso() {
+        return idProgramaCurso;
+    }
+
+    /**
+     * @param idProgramaCurso the idProgramaCurso to set
+     */
+    public void setIdProgramaCurso(String idProgramaCurso) {
+        this.idProgramaCurso = idProgramaCurso;
+    }
+
+    /**
+     * @return the programaCurso
+     */
+    public String getProgramaCurso() {
+        return programaCurso;
+    }
+
+    /**
+     * @param programaCurso the programaCurso to set
+     */
+    public void setProgramaCurso(String programaCurso) {
+        this.programaCurso = programaCurso;
+    }
+
+    /**
+     * @return the nombreCurso
+     */
+    public String getNombreCurso() {
+        return nombreCurso;
+    }
+
+    /**
+     * @param nombreCurso the nombreCurso to set
+     */
+    public void setNombreCurso(String nombreCurso) {
+        this.nombreCurso = nombreCurso;
+    }
+
+    /**
+     * @return the totalHorasSemestreCurso
+     */
+    public String getTotalHorasSemestreCurso() {
+        return totalHorasSemestreCurso;
+    }
+
+    /**
+     * @param totalHorasSemestreCurso the totalHorasSemestreCurso to set
+     */
+    public void setTotalHorasSemestreCurso(String totalHorasSemestreCurso) {
+        this.totalHorasSemestreCurso = totalHorasSemestreCurso;
+    }
+    
+        /**
+     * @return the criteriosEvaluacion
+     */
+    public List<CriterioEvaluacion> getCriteriosEvaluacion() {
+        return criteriosEvaluacion;
+    }
+
+    /**
+     * @param criteriosEvaluacion the criteriosEvaluacion to set
+     */
+    public void setCriteriosEvaluacion(List<CriterioEvaluacion> criteriosEvaluacion) {
+        this.criteriosEvaluacion = criteriosEvaluacion;
+    }
+
+    /**
+     * @return the criteriosHabilitantes
+     */
+    public List<CriterioHabilitante> getCriteriosHabilitantes() {
+        return criteriosHabilitantes;
+    }
+
+    /**
+     * @param criteriosHabilitantes the criteriosHabilitantes to set
+     */
+    public void setCriteriosHabilitantes(List<CriterioHabilitante> criteriosHabilitantes) {
+        this.criteriosHabilitantes = criteriosHabilitantes;
+    }
+
 }

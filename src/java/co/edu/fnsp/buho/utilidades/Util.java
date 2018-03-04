@@ -6,6 +6,8 @@
 package co.edu.fnsp.buho.utilidades;
 
 import co.edu.fnsp.buho.entidades.Adenda;
+import co.edu.fnsp.buho.entidades.CriterioEvaluacion;
+import co.edu.fnsp.buho.entidades.CriterioHabilitante;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -82,6 +84,58 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < adendas.size() - 1) {
+                    jscriptArray = jscriptArray + ",";
+                }
+            }
+
+            jscriptArray = jscriptArray + "]";
+        }
+
+        return jscriptArray;
+    }
+
+    public static String obtenerCriteriosEvaluacionJSON(List<CriterioEvaluacion> criteriosEvaluacion) {
+        String jscriptArray = "";
+
+        if (criteriosEvaluacion.size() > 0) {
+            jscriptArray = "[";
+
+            for (int i = 0; i < criteriosEvaluacion.size(); i++) {
+                CriterioEvaluacion criterioEvaluacion = criteriosEvaluacion.get(i);
+                jscriptArray = jscriptArray
+                        + "{id: ko.observable(" + criterioEvaluacion.getId() + "),"
+                        + "nombre:ko.observable('" + criterioEvaluacion.getNombre()+ "'),"
+                        + "nombreSubcriterio():ko.observable('" + criterioEvaluacion.getNombreSubcriterio()+ "'),"
+                        + "peso:ko.observable('" + criterioEvaluacion.getPeso()+ "'),"
+                        + "idSubcriterio:ko.observable('" + criterioEvaluacion.getIdSubcriterio() + "'),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < criteriosEvaluacion.size() - 1) {
+                    jscriptArray = jscriptArray + ",";
+                }
+            }
+
+            jscriptArray = jscriptArray + "]";
+        }
+
+        return jscriptArray;
+    }
+
+    public static String obtenerCriteriosHabilitantesJSON(List<CriterioHabilitante> criteriosHabilitantes) {
+        String jscriptArray = "";
+
+        if (criteriosHabilitantes.size() > 0) {
+            jscriptArray = "[";
+
+            for (int i = 0; i < criteriosHabilitantes.size(); i++) {
+                CriterioHabilitante criterioHabilitante = criteriosHabilitantes.get(i);
+                jscriptArray = jscriptArray
+                        + "{id: ko.observable(" + criterioHabilitante.getId() + "),"
+                        + "nombre:ko.observable('" + criterioHabilitante.getNombre()+ "'),"
+                        + "valor:ko.observable('" + criterioHabilitante.getValor()+ "'),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < criteriosHabilitantes.size() - 1) {
                     jscriptArray = jscriptArray + ",";
                 }
             }

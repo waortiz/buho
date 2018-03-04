@@ -92,4 +92,9 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
     public void postularConvocatoria(long idPersona, int idConvocatoria) {
         repositorioConvocatoria.postularConvocatoria(idPersona, idConvocatoria);
     }
+
+    @Override
+    public void retirarPostulacion(long idPersona, int idConvocatoria) {
+        repositorioConvocatoria.retirarPostulacion(idPersona, idConvocatoria);
+    }
 }

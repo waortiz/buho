@@ -10,7 +10,7 @@
         <http pattern="/login/crear" security="none" xmlns="http://www.springframework.org/schema/security"/>  
         <http pattern="/logout" security="none" xmlns="http://www.springframework.org/schema/security"/>
         <http auto-config='true' use-expressions="true" xmlns="http://www.springframework.org/schema/security">
-            <intercept-url pattern="/index" access="isAuthenticated()" />	
+            <intercept-url pattern="/" access="isAuthenticated()" />	
             <intercept-url pattern="/login/cambiarClave" access="isAuthenticated()" />
             <intercept-url pattern="/usuarios/editar" access="isAuthenticated()" />
             <intercept-url pattern="/index" access="isAuthenticated()" />	
