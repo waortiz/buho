@@ -49,9 +49,10 @@
         
         <script type="text/javascript" src='<c:url value="/resources/js/jquery.form-validator.min.js" />'></script>
         <script type="text/javascript" src='<c:url value="/resources/js/knockout-3.4.2.js" />'></script>
+        <script type="text/javascript" src='<c:url value="/resources/js/funciones.js" />'></script>
         
     </head>
-    <body>
+    <body class="sidenav-toggled">
         <div id="contenedorA">
             <header id="header">
                 <div id='cssmenu'>
@@ -117,22 +118,16 @@
                     </ul>
                 </div>
             </div>  
-            </header>
-            <section id="site-content">
-                <br>
-                <br>
-                <br>                
-                <tiles:insertAttribute name="body" />
-            </section>
-            <footer id="footer">
-                <tiles:insertAttribute name="footer" />
-            </footer>
+            <br>
+            <br>                
+            <tiles:insertAttribute name="body" />
+
+            <tiles:insertAttribute name="footer" />
         </div>
         <script type="text/javascript">
             function abrirOpcion(opcion) {
                 window.location.href = '${pageContext.request.contextPath}' + opcion;
             }
         </script>    
-        <script type="text/javascript" src='<c:url value="/resources/js/funciones.js" />'></script>
     </body>
 </html>

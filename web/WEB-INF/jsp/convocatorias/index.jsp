@@ -115,7 +115,7 @@
                     <input type="hidden" id="idConvocatoria" />
                     <input type="hidden" id="tieneDocumento">
                     <button class="close" data-dismiss="modal">&times;</button>
-                    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Información de la convocatoria<small> FNSP</small></h4>
+                    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Información de la convocatoria</h4>
                 </div>
                 <div class="modal-body">
                     <center><legend>Vigencia</legend></center>
@@ -224,7 +224,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
         <div class="modal-dialog modal-sm">
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header" >
+                <div class="modal-header mhsuccess" >
                     <button class="close" data-dismiss="modal">&times;</button>
                     <h4><i class="fa fa-address-book-o" aria-hidden="true"></i>Eliminar Convocatoria</h4>
                 </div>
@@ -249,7 +249,9 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
 <!-- jQuery -->
 <script>
     var adendas = null;
-        
+    var criteriosHabilitantes = null;
+    var criteriosEvaluacion = null;
+    
     $(document).ready(function () {
         var table = $('#tbconvo').DataTable({
             "language": {
@@ -302,6 +304,58 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
         });
+
+        criteriosHabilitantes = $('#criteriosHabilitantes').DataTable({
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"}
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        });
+        
+        criteriosEvaluacion = $('#criteriosEvaluacion').DataTable({
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"}
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        });        
         
         $('#intip').on('keyup', function () {
             table
@@ -449,7 +503,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
 
     function confirmarEliminacionConvocatoria(idConvocatoria) {
         $('#idConvocatoria').val(idConvocatoria);
-        $('#modalPostular').modal('show');
+        $('#modalEliminacionConvocatoria').modal('show');
     }
 
     function eliminarConvocatoria() {

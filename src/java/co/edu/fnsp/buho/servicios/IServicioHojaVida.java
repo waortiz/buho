@@ -5,7 +5,9 @@
  */
 package co.edu.fnsp.buho.servicios;
 
+import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.HojaVida;
+import java.util.List;
 
 /**
  *
@@ -13,7 +15,13 @@ import co.edu.fnsp.buho.entidades.HojaVida;
  */
 public interface IServicioHojaVida {
         
-    public void ingresarHojaVida(long idUsuario, HojaVida hojaVidaIngresar);
+    void ingresarHojaVida(long idUsuario, HojaVida hojaVidaIngresar);
 
-    public void actualizarHojaVida(long idUsuario, HojaVida hojaVidaIngresar);
+    void actualizarHojaVida(long idUsuario, HojaVida hojaVidaIngresar);
+
+    Documento obtenerDocumentoSoporte(int idPersona, int idTipoDocumento);
+
+    List<HojaVida> obtenerHojasVida();
+
+    void eliminarHojaVida(long idPersona);
 }

@@ -9,9 +9,7 @@ import co.edu.fnsp.buho.entidades.CorreoElectronico;
 import co.edu.fnsp.buho.entidades.CuentaBancaria;
 import co.edu.fnsp.buho.entidades.Telefono;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -24,19 +22,22 @@ public class HojaVida {
     private String nombreTipoIdentificacion;
     private String numeroIdentificacion;
     private MultipartFile copiaDocumentoIdentificacion;
+    private boolean copiaDocumentoIdentificacionValidado;
+    private boolean tieneCopiaDocumentoIdentificacion;
     private String nombres;
     private String apellidos;
     private String sexo;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date fechaExpedicion;
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date fechaNacimiento;    
+    private String fechaExpedicion;
+    private String fechaNacimiento;    
     private String lugarNacimiento;
     private String nombreLugarNacimiento;
     private String nacionalidad;
     private String nombreNacionalidad;
     private String libretaMilitar;
     private String distritoClase;
+    private MultipartFile copiaLibretaMilitar;
+    private boolean tieneCopiaLibretaMilitar;
+    private boolean copiaLibretaMilitarValidado;
     private String ciudadResidencia;
     private String nombreCiudadResidencia;
     private String direccion;
@@ -45,6 +46,8 @@ public class HojaVida {
     private String nombreDiscapacidad;
     private String discapacidad;
     private MultipartFile documentoRUT;
+    private boolean documentoRUTValidado;
+    private boolean tieneDocumentoRUT;
     private String disponeRUT;
     private String nombreActividadEconomica;
     private String actividadEconomica;
@@ -52,6 +55,7 @@ public class HojaVida {
     private String egresadoUDEA;
     private String empleadoUDEA;
     private String lugarExpedicion;
+    private String nombreLugarExpedicion;
     private String tipoVinculacion;
     private List<Telefono> telefonos = new ArrayList<>();
     private List<CuentaBancaria> cuentasBancarias = new ArrayList<>();
@@ -158,28 +162,28 @@ public class HojaVida {
     /**
      * @return the fechaExpedicion
      */
-    public Date getFechaExpedicion() {
+    public String getFechaExpedicion() {
         return fechaExpedicion;
     }
 
     /**
      * @param fechaExpedicion the fechaExpedicion to set
      */
-    public void setFechaExpedicion(Date fechaExpedicion) {
+    public void setFechaExpedicion(String fechaExpedicion) {
         this.fechaExpedicion = fechaExpedicion;
     }
 
     /**
      * @return the fechaNacimiento
      */
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
     /**
      * @param fechaNacimiento the fechaNacimiento to set
      */
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -545,6 +549,111 @@ public class HojaVida {
      */
     public void setIdPersona(int idPersona) {
         this.idPersona = idPersona;
+    }
+
+    /**
+     * @return the nombreLugarExpedicion
+     */
+    public String getNombreLugarExpedicion() {
+        return nombreLugarExpedicion;
+    }
+
+    /**
+     * @param nombreLugarExpedicion the nombreLugarExpedicion to set
+     */
+    public void setNombreLugarExpedicion(String nombreLugarExpedicion) {
+        this.nombreLugarExpedicion = nombreLugarExpedicion;
+    }
+
+    /**
+     * @return the copiaDocumentoIdentificacionValidado
+     */
+    public boolean isCopiaDocumentoIdentificacionValidado() {
+        return copiaDocumentoIdentificacionValidado;
+    }
+
+    /**
+     * @param copiaDocumentoIdentificacionValidado the copiaDocumentoIdentificacionValidado to set
+     */
+    public void setCopiaDocumentoIdentificacionValidado(boolean copiaDocumentoIdentificacionValidado) {
+        this.copiaDocumentoIdentificacionValidado = copiaDocumentoIdentificacionValidado;
+    }
+
+    /**
+     * @return the documentoRUTValidado
+     */
+    public boolean isDocumentoRUTValidado() {
+        return documentoRUTValidado;
+    }
+
+    /**
+     * @param documentoRUTValidado the documentoRUTValidado to set
+     */
+    public void setDocumentoRUTValidado(boolean documentoRUTValidado) {
+        this.documentoRUTValidado = documentoRUTValidado;
+    }
+
+    /**
+     * @return the tieneDocumentoRUT
+     */
+    public boolean isTieneDocumentoRUT() {
+        return tieneDocumentoRUT;
+    }
+
+    /**
+     * @param tieneDocumentoRUT the tieneDocumentoRUT to set
+     */
+    public void setTieneDocumentoRUT(boolean tieneDocumentoRUT) {
+        this.tieneDocumentoRUT = tieneDocumentoRUT;
+    }
+
+    /**
+     * @return the tieneCopiaDocumentoIdentificacion
+     */
+    public boolean isTieneCopiaDocumentoIdentificacion() {
+        return tieneCopiaDocumentoIdentificacion;
+    }
+
+    /**
+     * @param tieneCopiaDocumentoIdentificacion the tieneCopiaDocumentoIdentificacion to set
+     */
+    public void setTieneCopiaDocumentoIdentificacion(boolean tieneCopiaDocumentoIdentificacion) {
+        this.tieneCopiaDocumentoIdentificacion = tieneCopiaDocumentoIdentificacion;
+    }
+
+    /**
+     * @return the copiaLibretaMilitar
+     */
+    public MultipartFile getCopiaLibretaMilitar() {
+        return copiaLibretaMilitar;
+    }
+
+    /**
+     * @param copiaLibretaMilitar the copiaLibretaMilitar to set
+     */
+    public void setCopiaLibretaMilitar(MultipartFile copiaLibretaMilitar) {
+        this.copiaLibretaMilitar = copiaLibretaMilitar;
+    }
+
+    /**
+     * @return the tieneCopiaLibretaMilitar
+     */
+    public boolean isTieneCopiaLibretaMilitar() {
+        return tieneCopiaLibretaMilitar;
+    }
+
+    /**
+     * @param tieneCopiaLibretaMilitar the tieneCopiaLibretaMilitar to set
+     */
+    public void setTieneCopiaLibretaMilitar(boolean tieneCopiaLibretaMilitar) {
+        this.tieneCopiaLibretaMilitar = tieneCopiaLibretaMilitar;
+    }
+
+    /**
+     * @return the copiaLibretaMilitarValidado
+     */
+    public boolean isCopiaLibretaMilitarValidado() {
+        return copiaLibretaMilitarValidado;
     }
     
 }

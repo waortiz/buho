@@ -5,11 +5,14 @@
  */
 package co.edu.fnsp.buho.repositorios;
 
+import co.edu.fnsp.buho.entidades.Convocatoria;
 import co.edu.fnsp.buho.entidades.CorreoElectronico;
 import co.edu.fnsp.buho.entidades.CuentaBancaria;
 import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.Telefono;
+import co.edu.fnsp.buho.entidades.TipoDocumento;
+import co.edu.fnsp.buho.utilidades.Util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,11 +33,13 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
 
     private SimpleJdbcCall ingresarPersona;
     private SimpleJdbcCall actualizarPersona;
-    private SimpleJdbcCall ingresarCopiaDocumentoIdentificacion;
-    private SimpleJdbcCall actualizarCopiaDocumentoIdentificacion;
-    private SimpleJdbcCall ingresarDocumentoRUT;
-    private SimpleJdbcCall actualizarDocumentoRUT;
-        
+    private SimpleJdbcCall ingresarDocumentoSoporte;
+    private SimpleJdbcCall obtenerDocumentoSoporte;
+    private SimpleJdbcCall actualizarDocumentoSoporte;
+
+    private SimpleJdbcCall obtenerHojasVida;
+    private SimpleJdbcCall eliminarHojaVida;
+    
     private SimpleJdbcCall ingresarTelefono;
     private SimpleJdbcCall eliminarTelefono;
     private SimpleJdbcCall actualizarTelefono;
@@ -57,11 +62,13 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
 
         this.ingresarPersona = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarPersona");
         this.actualizarPersona = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarPersona");
-        this.ingresarCopiaDocumentoIdentificacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarCopiaDocumentoIdentificacion");
-        this.actualizarCopiaDocumentoIdentificacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarCopiaDocumentoIdentificacion");
-        this.ingresarDocumentoRUT = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoRUT");
-        this.actualizarDocumentoRUT = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoRUT");
-        
+        this.ingresarDocumentoSoporte = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoSoporte");
+        this.obtenerDocumentoSoporte = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoSoporte");
+        this.actualizarDocumentoSoporte = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoSoporte");
+
+        this.obtenerHojasVida = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerHojasVida").returningResultSet("hojasVida", BeanPropertyRowMapper.newInstance(HojaVida.class));
+        this.eliminarHojaVida = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarHojaVida");
+
         this.ingresarTelefono = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarTelefono");
         this.eliminarTelefono = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarTelefono");
         this.actualizarTelefono = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarTelefono");
@@ -105,30 +112,32 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         parametros.addValue("varTipoVinculacion", hojaVida.getTipoVinculacion());
 
         actualizarPersona.execute(parametros);
-        
+
         actualizarTelefonos(hojaVida.getIdPersona(), hojaVida.getTelefonos());
         actualizarCuentasBancarias(hojaVida.getIdPersona(), hojaVida.getCuentasBancarias());
         actualizarCorreosElectronicos(hojaVida.getIdPersona(), hojaVida.getCorreosElectronicos());
-        
+
         Documento copiaDocumentoIdentificacion = hojaVida.getCopiaDocumentoIdentificacion();
         if (copiaDocumentoIdentificacion != null) {
             MapSqlParameterSource parametrosActualizacionCopiaDocumentoIdentificacion = new MapSqlParameterSource();
             parametrosActualizacionCopiaDocumentoIdentificacion.addValue("varIdPersona", hojaVida.getIdPersona());
+            parametrosActualizacionCopiaDocumentoIdentificacion.addValue("varTipoDocumento", TipoDocumento.COPIA_CEDULA.getId());
             parametrosActualizacionCopiaDocumentoIdentificacion.addValue("varNombre", copiaDocumentoIdentificacion.getNombre());
             parametrosActualizacionCopiaDocumentoIdentificacion.addValue("varTipoContenido", copiaDocumentoIdentificacion.getTipoContenido());
             parametrosActualizacionCopiaDocumentoIdentificacion.addValue("varContenido", copiaDocumentoIdentificacion.getContenido());
-            actualizarCopiaDocumentoIdentificacion.execute(parametrosActualizacionCopiaDocumentoIdentificacion);
+            actualizarDocumentoSoporte.execute(parametrosActualizacionCopiaDocumentoIdentificacion);
         }
 
         Documento documentoRUT = hojaVida.getDocumentoRUT();
         if (documentoRUT != null) {
             MapSqlParameterSource parametrosActualizacionDocumentoRUT = new MapSqlParameterSource();
             parametrosActualizacionDocumentoRUT.addValue("varIdPersona", hojaVida.getIdPersona());
+            parametrosActualizacionDocumentoRUT.addValue("varTipoDocumento", TipoDocumento.RUT.getId());
             parametrosActualizacionDocumentoRUT.addValue("varNombre", documentoRUT.getNombre());
             parametrosActualizacionDocumentoRUT.addValue("varTipoContenido", documentoRUT.getTipoContenido());
             parametrosActualizacionDocumentoRUT.addValue("varContenido", documentoRUT.getContenido());
-            actualizarDocumentoRUT.execute(parametrosActualizacionDocumentoRUT);
-        }         
+            actualizarDocumentoSoporte.execute(parametrosActualizacionDocumentoRUT);
+        }
     }
 
     @Override
@@ -152,10 +161,17 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         parametros.addValue("varGrupoEtnico", hojaVida.getGrupoEtnico());
         parametros.addValue("varDiscapacidad", hojaVida.getDiscapacidad());
         parametros.addValue("varDisponeRut", hojaVida.isDisponeRUT());
-        parametros.addValue("varActividadEconomica", hojaVida.getActividadEconomica());
+        if (hojaVida.getActividadEconomica().length() > 0) {
+            parametros.addValue("varActividadEconomica", hojaVida.getActividadEconomica());
+        } else {
+            parametros.addValue("varActividadEconomica", null);
+        }
         parametros.addValue("varDisponibilidadViajar", hojaVida.isDisponibilidadViajar());
-        parametros.addValue("varTipoVinculacion", hojaVida.getTipoVinculacion());
-
+        if (hojaVida.getTipoVinculacion().length() > 0) {
+            parametros.addValue("varTipoVinculacion", hojaVida.getTipoVinculacion());
+        } else {
+            parametros.addValue("varTipoVinculacion", null);
+        }
         Map resultado = ingresarPersona.execute(parametros);
         long idPersona = (long) resultado.get("varIdPersona");
 
@@ -187,21 +203,42 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         if (copiaDocumentoIdentificacion != null) {
             MapSqlParameterSource parametrosIngresoCopiaDocumentoIdentificacion = new MapSqlParameterSource();
             parametrosIngresoCopiaDocumentoIdentificacion.addValue("varIdPersona", idPersona);
+            parametrosIngresoCopiaDocumentoIdentificacion.addValue("varTipoDocumento", TipoDocumento.COPIA_CEDULA.getId());
             parametrosIngresoCopiaDocumentoIdentificacion.addValue("varNombre", copiaDocumentoIdentificacion.getNombre());
             parametrosIngresoCopiaDocumentoIdentificacion.addValue("varTipoContenido", copiaDocumentoIdentificacion.getTipoContenido());
             parametrosIngresoCopiaDocumentoIdentificacion.addValue("varContenido", copiaDocumentoIdentificacion.getContenido());
-            ingresarCopiaDocumentoIdentificacion.execute(parametrosIngresoCopiaDocumentoIdentificacion);
-        }        
+            ingresarDocumentoSoporte.execute(parametrosIngresoCopiaDocumentoIdentificacion);
+        }
 
         Documento documentoRUT = hojaVida.getDocumentoRUT();
         if (documentoRUT != null) {
             MapSqlParameterSource parametrosIngresoDocumentoRUT = new MapSqlParameterSource();
             parametrosIngresoDocumentoRUT.addValue("varIdPersona", idPersona);
+            parametrosIngresoDocumentoRUT.addValue("varTipoDocumento", TipoDocumento.RUT.getId());
             parametrosIngresoDocumentoRUT.addValue("varNombre", documentoRUT.getNombre());
             parametrosIngresoDocumentoRUT.addValue("varTipoContenido", documentoRUT.getTipoContenido());
             parametrosIngresoDocumentoRUT.addValue("varContenido", documentoRUT.getContenido());
-            ingresarDocumentoRUT.execute(parametrosIngresoDocumentoRUT);
-        }        
+            ingresarDocumentoSoporte.execute(parametrosIngresoDocumentoRUT);
+        }
+    }
+
+    @Override
+    public Documento obtenerDocumentoSoporte(long idPersona, int idTipoDocumento) {
+        Documento documento = null;
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdPersona", idPersona);
+        parametros.addValue("varIdTipoDocumento", idTipoDocumento);
+
+        Map resultado = obtenerDocumentoSoporte.execute(parametros);
+
+        if (resultado.get("varNombre") != null) {
+            documento = new Documento();
+            documento.setNombre((String) resultado.get("varNombre"));
+            documento.setTipoContenido((String) resultado.get("varTipoContenido"));
+            documento.setContenido((byte[]) resultado.get("varContenido"));
+        }
+
+        return documento;
     }
 
     private void actualizarTelefonos(int idPersona, List<Telefono> telefonos) {
@@ -314,6 +351,24 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                 ingresarCorreoElectronico.execute(parametrosIngresoCorreoElectronico);
             }
         }
+    }
+
+    @Override
+    public List<HojaVida> obtenerHojaVida() {
+        Map resultadoCorreosElectronicos = obtenerHojasVida.execute(new MapSqlParameterSource());
+        ArrayList<HojaVida> hojasVida = (ArrayList<HojaVida>) resultadoCorreosElectronicos.get("hojasVida");
+        for (HojaVida hojaVida : hojasVida) {
+            hojaVida.setFechaNacimientoFormateada(Util.obtenerFechaFormateada(hojaVida.getFechaNacimiento()));
+        }
+
+        return hojasVida;
+    }
+
+    @Override
+    public void eliminarHojaVida(long idPersona) {
+        MapSqlParameterSource parametrosEliminacionHojaVida = new MapSqlParameterSource();
+        parametrosEliminacionHojaVida.addValue("varIdPersona", idPersona);
+        eliminarHojaVida.execute(parametrosEliminacionHojaVida);
     }
 
 }

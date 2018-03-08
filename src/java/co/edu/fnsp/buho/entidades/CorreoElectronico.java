@@ -12,7 +12,7 @@ package co.edu.fnsp.buho.entidades;
  */
 public class CorreoElectronico {
     private int id;
-    private int correoElectronico;
+    private String correoElectronico;
     
     /**
      * @return the id
@@ -31,14 +31,14 @@ public class CorreoElectronico {
     /**
      * @return the correoElectronico
      */
-    public int getCorreoElectronico() {
+    public String getCorreoElectronico() {
         return correoElectronico;
     }
 
     /**
      * @param correoElectronico the correoElectronico to set
      */
-    public void setCorreoElectronico(int correoElectronico) {
+    public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }
 }

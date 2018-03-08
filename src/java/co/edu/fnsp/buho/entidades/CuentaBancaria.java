@@ -12,7 +12,7 @@ package co.edu.fnsp.buho.entidades;
  */
 public class CuentaBancaria {
     private int id;
-    private int tipo;
+    private String tipo;
     private String nombreTipo;
     private String numero;
     private String entidad;
@@ -34,14 +34,14 @@ public class CuentaBancaria {
     /**
      * @return the tipo
      */
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
     /**
      * @param tipo the tipo to set
      */
-    public void setTipo(int tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 

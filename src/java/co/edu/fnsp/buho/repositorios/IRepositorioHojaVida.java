@@ -5,8 +5,9 @@
  */
 package co.edu.fnsp.buho.repositorios;
 
+import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.HojaVida;
-import co.edu.fnsp.buho.entidades.Persona;
+import java.util.List;
 
 /**
  *
@@ -17,4 +18,10 @@ public interface IRepositorioHojaVida {
     void actualizarHojaVida(long idUsuario, HojaVida hojaVida);
 
     void ingresarHojaVida(long idUsuario, HojaVida hojaVida);
+    
+    Documento obtenerDocumentoSoporte(long idPersona, int idTipoDocumento);
+
+    List<HojaVida> obtenerHojaVida();
+
+    void eliminarHojaVida(long idPersona);
 }

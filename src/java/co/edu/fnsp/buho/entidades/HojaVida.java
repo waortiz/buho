@@ -20,17 +20,24 @@ public class HojaVida {
     private String nombreTipoIdentificacion;
     private String numeroIdentificacion;
     private Documento copiaDocumentoIdentificacion;
+    private boolean copiaDocumentoIdentificacionValidado;
+    private boolean tieneCopiaDocumentoIdentificacion;
     private String nombres;
     private String apellidos;
     private String sexo;
+    private String nombreSexo;
     private Date fechaExpedicion;
     private Date fechaNacimiento;
+    private String fechaNacimientoFormateada;
     private String lugarNacimiento;
     private String nombreLugarNacimiento;
     private String nacionalidad;
     private String nombreNacionalidad;
     private String libretaMilitar;
     private String distritoClase;
+    private Documento copiaLibretaMilitar;
+    private boolean tieneCopiaLibretaMilitar;
+    private boolean copiaLibretaMilitarValidado;
     private String ciudadResidencia;
     private String nombreCiudadResidencia;
     private String direccion;
@@ -39,13 +46,16 @@ public class HojaVida {
     private String nombreDiscapacidad;
     private String discapacidad;
     private Documento documentoRUT;
+    private boolean documentoRUTValidado;
     private boolean disponeRUT;
+    private boolean tieneDocumentoRUT;
     private String nombreActividadEconomica;
     private String actividadEconomica;
     private boolean disponibilidadViajar;
     private boolean egresadoUDEA;
     private boolean empleadoUDEA;
     private String lugarExpedicion;
+    private String nombreLugarExpedicion;
     private String tipoVinculacion;
     private List<Telefono> telefonos = new ArrayList<>();
     private List<CuentaBancaria> cuentasBancarias = new ArrayList<>();
@@ -56,6 +66,20 @@ public class HojaVida {
      */
     public String getTipoIdentificacion() {
         return tipoIdentificacion;
+    }
+
+    /**
+     * @return the nombreSexo
+     */
+    public String getNombreSexo() {
+        return nombreSexo;
+    }
+
+    /**
+     * @param nombreSexo the nombreSexo to set
+     */
+    public void setNombreSexo(String nombreSexo) {
+        this.nombreSexo = nombreSexo;
     }
 
     /**
@@ -540,6 +564,143 @@ public class HojaVida {
      */
     public void setIdPersona(int idPersona) {
         this.idPersona = idPersona;
+    }
+
+    /**
+     * @return the nombreLugarExpedicion
+     */
+    public String getNombreLugarExpedicion() {
+        return nombreLugarExpedicion;
+    }
+
+    /**
+     * @param nombreLugarExpedicion the nombreLugarExpedicion to set
+     */
+    public void setNombreLugarExpedicion(String nombreLugarExpedicion) {
+        this.nombreLugarExpedicion = nombreLugarExpedicion;
+    }
+
+    /**
+     * @return the copiaDocumentoIdentificacionValidado
+     */
+    public boolean isCopiaDocumentoIdentificacionValidado() {
+        return copiaDocumentoIdentificacionValidado;
+    }
+
+    /**
+     * @param copiaDocumentoIdentificacionValidado the
+     * copiaDocumentoIdentificacionValidado to set
+     */
+    public void setCopiaDocumentoIdentificacionValidado(boolean copiaDocumentoIdentificacionValidado) {
+        this.copiaDocumentoIdentificacionValidado = copiaDocumentoIdentificacionValidado;
+    }
+
+    /**
+     * @return the documentoRUTValidado
+     */
+    public boolean isDocumentoRUTValidado() {
+        return documentoRUTValidado;
+    }
+
+    /**
+     * @param documentoRUTValidado the documentoRUTValidado to set
+     */
+    public void setDocumentoRUTValidado(boolean documentoRUTValidado) {
+        this.documentoRUTValidado = documentoRUTValidado;
+    }
+
+    /**
+     * @return the tieneDocumentoRUT
+     */
+    public boolean isTieneDocumentoRUT() {
+        return tieneDocumentoRUT;
+    }
+
+    /**
+     * @param tieneDocumentoRUT the tieneDocumentoRUT to set
+     */
+    public void setTieneDocumentoRUT(boolean tieneDocumentoRUT) {
+        this.tieneDocumentoRUT = tieneDocumentoRUT;
+    }
+
+    /**
+     * @return the tieneCopiaDocumentoIdentificacion
+     */
+    public boolean isTieneCopiaDocumentoIdentificacion() {
+        return tieneCopiaDocumentoIdentificacion;
+    }
+
+    /**
+     * @param tieneCopiaDocumentoIdentificacion the
+     * tieneCopiaDocumentoIdentificacion to set
+     */
+    public void setTieneCopiaDocumentoIdentificacion(boolean tieneCopiaDocumentoIdentificacion) {
+        this.tieneCopiaDocumentoIdentificacion = tieneCopiaDocumentoIdentificacion;
+    }
+
+    /**
+     * @return the copiaLibretaMilitar
+     */
+    public Documento getCopiaLibretaMilitar() {
+        return copiaLibretaMilitar;
+    }
+
+    /**
+     * @param copiaLibretaMilitar the copiaLibretaMilitar to set
+     */
+    public void setCopiaLibretaMilitar(Documento copiaLibretaMilitar) {
+        this.copiaLibretaMilitar = copiaLibretaMilitar;
+    }
+
+    /**
+     * @return the tieneCopiaLibretaMilitar
+     */
+    public boolean isTieneCopiaLibretaMilitar() {
+        return tieneCopiaLibretaMilitar;
+    }
+
+    /**
+     * @param tieneCopiaLibretaMilitar the tieneCopiaLibretaMilitar to set
+     */
+    public void setTieneCopiaLibretaMilitar(boolean tieneCopiaLibretaMilitar) {
+        this.tieneCopiaLibretaMilitar = tieneCopiaLibretaMilitar;
+    }
+
+    /**
+     * @return the copiaLibretaMilitarValidado
+     */
+    public boolean isCopiaLibretaMilitarValidado() {
+        return copiaLibretaMilitarValidado;
+    }
+
+    /**
+     * @param copiaLibretaMilitarValidado the copiaLibretaMilitarValidado to set
+     */
+    public void setCopiaLibretaMilitarValidado(boolean copiaLibretaMilitarValidado) {
+        this.copiaLibretaMilitarValidado = copiaLibretaMilitarValidado;
+    }
+
+    public String getTelefono() {
+        String telefono = "";
+        if (this.telefonos.size() > 0) {
+            telefono = this.telefonos.get(0).getNumero();
+        }
+
+        return telefono;
+    }
+
+    /**
+     * @return the fechaNacimientoFormateada
+     */
+    public String getFechaNacimientoFormateada() {
+        return fechaNacimientoFormateada;
+    }
+
+    /**
+     * @param fechaNacimientoFormateada the fechaNacimientoFormateada to set
+     */
+    public void setFechaNacimientoFormateada(String fechaNacimientoFormateada) {
+        this.fechaNacimientoFormateada = fechaNacimientoFormateada;
     }
 
 }

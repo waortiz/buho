@@ -1,6 +1,15 @@
-$(document).ready(function() {
-	 $('[data-toggle="tooltip"]').tooltip();   
-  $(".js-select-basic-single").select2({placeholder: "Seleccione"});
+$(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+    $(".js-select-basic-single").select2({placeholder: "Seleccione"});
+    $(".js-select-basic-single2").select2({placeholder: "Seleccione", tags: true});
+    $('#radioBtn a').on('click', function () {
+        var sel = $(this).data('title');
+        var tog = $(this).data('toggle');
+        $('#' + tog).prop('value', sel);
+
+        $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+        $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+    });
 });
 
 $('.fecha').datepicker({
@@ -11,18 +20,7 @@ $('.fecha2').datepicker({
     dateFormat: "dd/mm/yy",
     changeMonth: true,
     changeYear: true
-});       
-
-$('[data-toggle="tooltip"]').tooltip();   
-
-$('#radioBtn a').on('click', function(){
-  var sel = $(this).data('title');
-  var tog = $(this).data('toggle');
-  $('#'+tog).prop('value', sel);
-
-  $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
-  $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
-});   
+});
 
 $.datepicker.regional['es'] = {
     closeText: 'Cerrar',
@@ -41,6 +39,7 @@ $.datepicker.regional['es'] = {
     showMonthAfterYear: false,
     yearSuffix: ''
 };
+
 $.datepicker.setDefaults($.datepicker.regional['es']);
 
 function ordenarOpciones(options) {
@@ -62,3 +61,12 @@ function ordenarOpciones(options) {
 $('.numbersOnly').keyup(function () {
     this.value = this.value.replace(/[^0-9\.]/g, '');
 });
+
+function validarCorreoElectronico(correoElectronico) {
+    var expression = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+    if (expression.test(correoElectronico)) {
+        return true;
+    } else {
+        return false;
+    }
+}

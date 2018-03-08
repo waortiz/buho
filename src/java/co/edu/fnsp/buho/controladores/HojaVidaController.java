@@ -8,20 +8,25 @@ package co.edu.fnsp.buho.controladores;
 import co.edu.fnsp.buho.entidades.DetalleUsuario;
 import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.Maestro;
+import co.edu.fnsp.buho.entidades.TipoDocumento;
 import co.edu.fnsp.buho.entidadesVista.HojaVida;
 import co.edu.fnsp.buho.servicios.IServicioHojaVida;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
+import co.edu.fnsp.buho.utilidades.Util;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,6 +48,8 @@ public class HojaVidaController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(Model model) {
+        List<co.edu.fnsp.buho.entidades.HojaVida> hojasVida = servicioHojaVida.obtenerHojasVida();
+        model.addAttribute("hojasVida", hojasVida);
 
         return "hojasVida/index";
     }
@@ -55,6 +62,7 @@ public class HojaVidaController {
         List<Maestro> discapacidades = servicioMaestro.obtenerDiscapacidades();
         List<Maestro> actividadesEconomicas = servicioMaestro.obtenerActividadesEconomicas();
         List<Maestro> tiposVinculacion = servicioMaestro.obtenerTiposVinculacionUdeA();
+        List<Maestro> tiposTelefono = servicioMaestro.obtenerTiposTelefono();
         
         model.addAttribute("paises", paises);
         model.addAttribute("tiposIdentificacion", tiposIdentificacion);
@@ -62,6 +70,7 @@ public class HojaVidaController {
         model.addAttribute("discapacidades", discapacidades);
         model.addAttribute("actividadesEconomicas", actividadesEconomicas);
         model.addAttribute("tiposVinculacion", tiposVinculacion);
+        model.addAttribute("tiposTelefono", tiposTelefono);
         
         model.addAttribute("hojaVida", new HojaVida());
 
@@ -77,14 +86,28 @@ public class HojaVidaController {
             hojaVidaIngresar.setActividadEconomica(hojaVida.getActividadEconomica());
             hojaVidaIngresar.setApellidos(hojaVida.getApellidos());
             hojaVidaIngresar.setCiudadResidencia(hojaVida.getCiudadResidencia());
+            hojaVidaIngresar.setCorreosElectronicos(hojaVida.getCorreosElectronicos());
+            hojaVidaIngresar.setCuentasBancarias(hojaVida.getCuentasBancarias());
             hojaVidaIngresar.setDireccion(hojaVida.getDireccion());
             hojaVidaIngresar.setDiscapacidad(hojaVida.getDiscapacidad());
             hojaVidaIngresar.setDisponeRUT(Boolean.getBoolean(hojaVida.getDisponeRUT()));
             hojaVidaIngresar.setDisponibilidadViajar(Boolean.getBoolean(hojaVida.getDisponibilidadViajar()));
             hojaVidaIngresar.setDistritoClase(hojaVida.getDistritoClase());
             hojaVidaIngresar.setEgresadoUDEA(Boolean.getBoolean(hojaVida.getEgresadoUDEA()));
-            hojaVidaIngresar.setFechaExpedicion(hojaVida.getFechaExpedicion());
-            hojaVidaIngresar.setFechaNacimiento(hojaVida.getFechaNacimiento());
+            hojaVidaIngresar.setFechaExpedicion(Util.obtenerFecha(hojaVida.getFechaExpedicion()));
+            hojaVidaIngresar.setFechaNacimiento(Util.obtenerFecha(hojaVida.getFechaNacimiento()));
+            hojaVidaIngresar.setGrupoEtnico(hojaVida.getGrupoEtnico());
+            hojaVidaIngresar.setLibretaMilitar(hojaVida.getLibretaMilitar());
+            hojaVidaIngresar.setLugarExpedicion(hojaVida.getLugarExpedicion());
+            hojaVidaIngresar.setLugarNacimiento(hojaVida.getLugarNacimiento());
+            hojaVidaIngresar.setNacionalidad(hojaVida.getNacionalidad());
+            hojaVidaIngresar.setNombres(hojaVida.getNombres());
+            hojaVidaIngresar.setNumeroIdentificacion(hojaVida.getNumeroIdentificacion());
+            hojaVidaIngresar.setSexo(hojaVida.getSexo());
+            hojaVidaIngresar.setTelefonos(hojaVida.getTelefonos());
+            hojaVidaIngresar.setTipoIdentificacion(hojaVida.getTipoIdentificacion());
+            hojaVidaIngresar.setTipoVinculacion(hojaVida.getTipoVinculacion());
+
             Documento documento = null;
             if (hojaVida.getCopiaDocumentoIdentificacion()!= null && hojaVida.getCopiaDocumentoIdentificacion().getBytes().length > 0) {
                 documento = new Documento();
@@ -133,5 +156,48 @@ public class HojaVidaController {
         Gson gson = new Gson();
 
         return gson.toJson(ciudades);
+    }
+    
+    @RequestMapping(value = "/copiaCedula/{idPersona}", method = RequestMethod.GET)
+    public void obtenerCopiaCedula(@PathVariable("idPersona") int idPersona, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerDocumentoSoporte(idPersona, TipoDocumento.COPIA_CEDULA.getId());
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+    
+        @RequestMapping(value = "/copiaRUT/{idPersona}", method = RequestMethod.GET)
+    public void obtenerCopiaRut(@PathVariable("idPersona") int idPersona, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerDocumentoSoporte(idPersona, TipoDocumento.RUT.getId());
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+    
+    @RequestMapping(value = "/eliminar/{idPersona}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarHojaVida(@PathVariable long idPersona, Model model) {
+        try {
+            servicioHojaVida.eliminarHojaVida(idPersona);
+        } catch (Exception exc) {
+            logger.error(exc);
+            return "{\"resultado\":false}";
+        }
+
+        return "{\"resultado\":true}";
     }
 }
