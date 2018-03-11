@@ -6,8 +6,11 @@
 package co.edu.fnsp.buho.utilidades;
 
 import co.edu.fnsp.buho.entidades.Adenda;
+import co.edu.fnsp.buho.entidades.CorreoElectronico;
 import co.edu.fnsp.buho.entidades.CriterioEvaluacion;
 import co.edu.fnsp.buho.entidades.CriterioHabilitante;
+import co.edu.fnsp.buho.entidades.CuentaBancaria;
+import co.edu.fnsp.buho.entidades.Telefono;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -61,14 +64,14 @@ public class Util {
         return Integer.parseInt(numero);
     }
 
-    public static String obtenerAdendasJSON(List<Adenda> adendas) {
+    public static String obtenerAdendasJSON(List<Adenda> correosElectronicos) {
         String jscriptArray = "";
 
-        if (adendas.size() > 0) {
+        if (correosElectronicos.size() > 0) {
             jscriptArray = "[";
 
-            for (int i = 0; i < adendas.size(); i++) {
-                Adenda adenda = adendas.get(i);
+            for (int i = 0; i < correosElectronicos.size(); i++) {
+                Adenda adenda = correosElectronicos.get(i);
                 String nombreDocumento = "";
                 if (adenda.getDocumento() != null) {
                     nombreDocumento = adenda.getDocumento().getNombre();
@@ -83,7 +86,7 @@ public class Util {
                         + "fecha:ko.observable('" + Util.obtenerFechaFormateada(adenda.getFecha()) + "'),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
-                if (i < adendas.size() - 1) {
+                if (i < correosElectronicos.size() - 1) {
                     jscriptArray = jscriptArray + ",";
                 }
             }
@@ -104,9 +107,9 @@ public class Util {
                 CriterioEvaluacion criterioEvaluacion = criteriosEvaluacion.get(i);
                 jscriptArray = jscriptArray
                         + "{id: ko.observable(" + criterioEvaluacion.getId() + "),"
-                        + "nombre:ko.observable('" + criterioEvaluacion.getNombre()+ "'),"
-                        + "nombreSubcriterio():ko.observable('" + criterioEvaluacion.getNombreSubcriterio()+ "'),"
-                        + "peso:ko.observable('" + criterioEvaluacion.getPeso()+ "'),"
+                        + "nombre:ko.observable('" + criterioEvaluacion.getNombre() + "'),"
+                        + "nombreSubcriterio():ko.observable('" + criterioEvaluacion.getNombreSubcriterio() + "'),"
+                        + "peso:ko.observable('" + criterioEvaluacion.getPeso() + "'),"
                         + "idSubcriterio:ko.observable('" + criterioEvaluacion.getIdSubcriterio() + "'),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
@@ -131,11 +134,88 @@ public class Util {
                 CriterioHabilitante criterioHabilitante = criteriosHabilitantes.get(i);
                 jscriptArray = jscriptArray
                         + "{id: ko.observable(" + criterioHabilitante.getId() + "),"
-                        + "nombre:ko.observable('" + criterioHabilitante.getNombre()+ "'),"
-                        + "valor:ko.observable('" + criterioHabilitante.getValor()+ "'),"
+                        + "nombre:ko.observable('" + criterioHabilitante.getNombre() + "'),"
+                        + "valor:ko.observable('" + criterioHabilitante.getValor() + "'),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < criteriosHabilitantes.size() - 1) {
+                    jscriptArray = jscriptArray + ",";
+                }
+            }
+
+            jscriptArray = jscriptArray + "]";
+        }
+
+        return jscriptArray;
+    }
+
+    public static Object obtenerTelefonosJSON(List<Telefono> telefonos) {
+        String jscriptArray = "";
+
+        if (telefonos.size() > 0) {
+            jscriptArray = "[";
+
+            for (int i = 0; i < telefonos.size(); i++) {
+                Telefono telefono = telefonos.get(i);
+                jscriptArray = jscriptArray
+                        + "{id: ko.observable(" + telefono.getId() + "),"
+                        + "tipo:ko.observable(" + telefono.getTipo() + "),"
+                        + "nombreTipo:ko.observable('" + telefono.getNombreTipo() + "'),"
+                        + "numero:ko.observable('" + telefono.getNumero()+ "'),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < telefonos.size() - 1) {
+                    jscriptArray = jscriptArray + ",";
+                }
+            }
+
+            jscriptArray = jscriptArray + "]";
+        }
+
+        return jscriptArray;
+    }
+
+    public static Object obtenerCuentasBancariasJSON(List<CuentaBancaria> cuentasBancarias) {
+        String jscriptArray = "";
+
+        if (cuentasBancarias.size() > 0) {
+            jscriptArray = "[";
+
+            for (int i = 0; i < cuentasBancarias.size(); i++) {
+                CuentaBancaria cuentaBancaria = cuentasBancarias.get(i);
+                jscriptArray = jscriptArray
+                        + "{id: ko.observable(" + cuentaBancaria.getId() + "),"
+                        + "entidad:ko.observable('" + cuentaBancaria.getEntidad() + "'),"
+                        + "tipo:ko.observable('" + cuentaBancaria.getTipo() + "'),"
+                        + "nombreTipo:ko.observable('" + cuentaBancaria.getNombreTipo() + "'),"
+                        + "numero:ko.observable('" + cuentaBancaria.getNumero() + "'),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < cuentasBancarias.size() - 1) {
+                    jscriptArray = jscriptArray + ",";
+                }
+            }
+
+            jscriptArray = jscriptArray + "]";
+        }
+
+        return jscriptArray;
+    }
+
+    public static Object obtenerCorreosElectronicosJSON(List<CorreoElectronico> correosElectronicos) {
+        String jscriptArray = "";
+
+        if (correosElectronicos.size() > 0) {
+            jscriptArray = "[";
+
+            for (int i = 0; i < correosElectronicos.size(); i++) {
+                CorreoElectronico correoElectronico = correosElectronicos.get(i);
+                jscriptArray = jscriptArray
+                        + "{id: ko.observable(" + correoElectronico.getId() + "),"
+                        + "correoElectronico:ko.observable('" + correoElectronico.getCorreoElectronico() + "'),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < correosElectronicos.size() - 1) {
                     jscriptArray = jscriptArray + ",";
                 }
             }

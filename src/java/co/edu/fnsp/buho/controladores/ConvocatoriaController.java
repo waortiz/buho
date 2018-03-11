@@ -166,10 +166,10 @@ public class ConvocatoriaController {
         if (convocatoria.getAdendas().size() > 0) {
             model.addAttribute("adendasJSON", Util.obtenerAdendasJSON(convocatoria.getAdendas()));
         }
-        if (convocatoria.getAdendas().size() > 0) {
+        if (convocatoria.getCriteriosEvaluacion().size() > 0) {
             model.addAttribute("criteriosEvaluacionJSON", Util.obtenerCriteriosEvaluacionJSON(convocatoria.getCriteriosEvaluacion()));
         }
-        if (convocatoria.getAdendas().size() > 0) {
+        if (convocatoria.getCriteriosHabilitantes().size() > 0) {
             model.addAttribute("criteriosHabilitantesJSON", Util.obtenerCriteriosHabilitantesJSON(convocatoria.getCriteriosHabilitantes()));
         }
 

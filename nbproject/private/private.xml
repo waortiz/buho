@@ -5,9 +5,12 @@
         <group>
             <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/entidades/HojaVida.java</file>
             <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/repositorios/RepositorioHojaVida.java</file>
-            <file>file:/D:/Desarrollo/Java/buho/web/WEB-INF/jsp/hojasVida/index.jsp</file>
+            <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/repositorios/RepositorioConvocatoria.java</file>
             <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/controladores/HojaVidaController.java</file>
             <file>file:/D:/Desarrollo/Java/buho/web/WEB-INF/jsp/hojasVida/crear.jsp</file>
+            <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/entidades/TipoDocumento.java</file>
+            <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/controladores/ConvocatoriaController.java</file>
+            <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/servicios/ServicioHojaVida.java</file>
         </group>
     </open-files>
 </project-private>

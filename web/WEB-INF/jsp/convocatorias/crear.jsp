@@ -187,14 +187,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="documento">Documento de soporte</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe adjuntar un documento de la convocatoria">
-                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                <c:if test = "${convocatoria.getId() > 0}">
-                                <a id="verDocumentoConvocatoria" href="#" onclick="verDocumentoConvocatoria()" title="Ver documento" style="margin-left: 20px;" class="btn btn-success btn-sm"><i class="fa fa-file-pdf-o" aria-hidden="true"> </i></a>
-                            </c:if>
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                            <div class="form-inline">
                             <input type="file" class="form-control" name="documento" id="documento" >
+                            <c:if test = "${convocatoria.getId() > 0}">
+                            <button class="btn btn-success btn-xs" type="button" onclick="verDocumentoConvocatoria()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
+                            </c:if>
+                            </div>
                         </div>
                     </div>
                 </div>

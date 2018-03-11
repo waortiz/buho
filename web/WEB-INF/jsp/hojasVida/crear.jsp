@@ -116,6 +116,9 @@
                             <c:if test = "${hojaVida.isCopiaDocumentoIdentificacionValidado()}">
                                 <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
                             </c:if>                              
+                            <c:if test = "${hojaVida.isTieneCopiaDocumentoIdentificacion()}">
+                                <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
+                            </c:if>                              
                         </div>
                     </div>
                 </div>
@@ -174,8 +177,14 @@
                             <label for="sexo">Sexo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger el sexo que perteneces">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
                             <div id="radioBtn" class="btn-group" style="margin-left: 40px;">
-                                <a class="btn btn-primary btn-sm notActive" data-toggle="sexo" data-title="1">M</a>
-                                <a class="btn btn-primary btn-sm notActive" data-toggle="sexo" data-title="2">F</a>
+                                <c:if test = "${hojaVida.getSexo() == 1}">
+                                    <a class="btn btn-primary btn-sm active" data-toggle="sexo" data-title="1">M</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="sexo" data-title="2">F</a>
+                                </c:if>
+                                <c:if test = "${hojaVida.getSexo() == 2}">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="sexo" data-title="1">M</a>
+                                    <a class="btn btn-primary btn-sm active" data-toggle="sexo" data-title="2">F</a>
+                                </c:if>
                             </div>
                             <form:hidden path="sexo" />
                         </div>
@@ -245,6 +254,9 @@
                             <c:if test = "${hojaVida.isCopiaLibretaMilitarValidado()}">
                                 <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
                             </c:if>                            
+                            <c:if test = "${hojaVida.isTieneCopiaLibretaMilitar()}">
+                                <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
+                            </c:if>                              
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -458,8 +470,14 @@
                             <label for="disponeRUT">Tiene RUT</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger tienes RUT">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
                             <div id="radioBtn" class="btn-group" style="margin-left: 40px;">
-                                <a class="btn btn-primary btn-sm notActive" data-toggle="disponeRUT"  data-title="true"  id="btnrutsi">Si</a>
-                                <a class="btn btn-primary btn-sm notActive" data-toggle="disponeRUT"  data-title="false" id="btnrutno">No</a>
+                                <c:if test = "${hojaVida.isDisponeRUT()}">
+                                    <a class="btn btn-primary btn-sm active" data-toggle="disponeRUT"  data-title="true"  id="btnrutsi">Si</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="disponeRUT"  data-title="false" id="btnrutno">No</a>
+                                </c:if>    
+                                <c:if test = "${!hojaVida.isDisponeRUT()}">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="disponeRUT"  data-title="true"  id="btnrutsi">Si</a>
+                                    <a class="btn btn-primary btn-sm active" data-toggle="disponeRUT"  data-title="false" id="btnrutno">No</a>
+                                </c:if>    
                             </div>
                             <form:hidden path="disponeRUT" />
                         </div>
@@ -485,6 +503,9 @@
                             <c:if test = "${hojaVida.isDocumentoRUTValidado()}">
                                 <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
                             </c:if>
+                            <c:if test = "${hojaVida.isTieneDocumentoRUT()}">
+                                <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
+                            </c:if>                              
                         </div>
                     </div>
                 </div>
@@ -496,8 +517,14 @@
                             <label for="disponibilidadViajar">¿Tiene disponibilidad para trabajar por fuera de Medellín?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger que estas en disponible para trabajar por fuera de medellin">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
                             <div id="radioBtn" class="btn-group" style="margin-left: 40px;">
-                                <a class="btn btn-primary btn-sm notActive" data-toggle="disponibilidadViajar" data-title="true">Si</a>
-                                <a class="btn btn-primary btn-sm notActive" data-toggle="disponibilidadViajar" data-title="false">No</a>
+                                <c:if test = "${hojaVida.isDisponibilidadViajar()}">
+                                    <a class="btn btn-primary btn-sm active" data-toggle="disponibilidadViajar" data-title="true">Si</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="disponibilidadViajar" data-title="false">No</a>
+                                </c:if>
+                                <c:if test = "${!hojaVida.isDisponibilidadViajar()}">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="disponibilidadViajar" data-title="true">Si</a>
+                                    <a class="btn btn-primary btn-sm active" data-toggle="disponibilidadViajar" data-title="false">No</a>
+                                </c:if>
                             </div>
                             <form:hidden path="disponibilidadViajar" />
                         </div>
@@ -507,8 +534,14 @@
                             <label for="">¿Egresado de la Universidad de Antioquia?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger que usted es egresado de la universidad de Antioquia">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
                             <div id="radioBtn" class="btn-group" style="margin-left: 40px;">
-                                <a class="btn btn-primary btn-sm notActive" data-toggle="egresadoUDEA" data-title="true">Si</a>
-                                <a class="btn btn-primary btn-sm notActive" data-toggle="egresadoUDEA" data-title="false">No</a>
+                                <c:if test = "${hojaVida.isEgresadoUDEA()}">
+                                    <a class="btn btn-primary btn-sm active" data-toggle="egresadoUDEA" data-title="true">Si</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="egresadoUDEA" data-title="false">No</a>
+                                </c:if>
+                                <c:if test = "${!hojaVida.isEgresadoUDEA()}">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="egresadoUDEA" data-title="true">Si</a>
+                                    <a class="btn btn-primary btn-sm active" data-toggle="egresadoUDEA" data-title="false">No</a>
+                                </c:if>
                             </div>
                             <form:hidden path="egresadoUDEA" />
                         </div>
@@ -520,8 +553,14 @@
                             <label for="">¿Usted es empleado de la Universidad de Antioquia?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger que usted es egresado de la universidad de Antioquia">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
                             <div id="radioBtn" class="btn-group" style="margin-left: 40px;">
-                                <a class="btn btn-primary btn-sm notActive" data-toggle="empleadoUDEA"  data-title="true"  id="btnempleadosi">Si</a>
-                                <a class="btn btn-primary btn-sm notActive" data-toggle="empleadoUDEA"  data-title="false" id="btnempleadono">No</a>
+                                <c:if test = "${hojaVida.isEmpleadoUDEA()}">
+                                    <a class="btn btn-primary btn-sm active" data-toggle="empleadoUDEA"  data-title="true"  id="btnempleadosi">Si</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="empleadoUDEA"  data-title="false" id="btnempleadono">No</a>
+                                </c:if>
+                                <c:if test = "${!hojaVida.isEmpleadoUDEA()}">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="empleadoUDEA"  data-title="true"  id="btnempleadosi">Si</a>
+                                    <a class="btn btn-primary btn-sm active" data-toggle="empleadoUDEA"  data-title="false" id="btnempleadono">No</a>
+                                </c:if>
                             </div>
                             <form:hidden path="empleadoUDEA" />
                         </div>
@@ -1833,7 +1872,7 @@
         <div class="modal fade" id="confirmacionAlmacenamientoHojaVida" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header mhsuccess">
                         <c:if test = "${hojaVida.getIdPersona() == 0}">
                             <button type="button" class="close" data-dismiss="modal" onclick="window.location.href = '${pageContext.request.contextPath}/hojasVida/crear'">&times;</button>
                         </c:if>
@@ -1851,10 +1890,10 @@
                     </div>
                     <div class="modal-body">
                         <c:if test = "${hojaVida.getIdPersona() == 0}">
-                            La hoja_vida se ha registrado exitosamente
+                            La hoja vida se ha registrado exitosamente
                         </c:if>
                         <c:if test = "${hojaVida.getIdPersona() > 0}">
-                            La hoja_vida se ha actualizado exitosamente
+                            La hoja vida se ha actualizado exitosamente
                         </c:if>
                     </div>
                     <div class="modal-footer">
@@ -2036,10 +2075,16 @@
         $('#btnrutsi').click(function () {
             $('#actividadEconomica').prop('disabled', false);
         });
+        if($('#disponeRUT').val() === "false") {
+           $('#actividadEconomica').prop('disabled', true);
+        }
         $('#btnrutno').click(function () {
             $('#actividadEconomica').val("").trigger("change.select2");
             $('#actividadEconomica').prop('disabled', 'disabled');
         });
+        if($('#empleadoUDEA').val() === "false") {
+           $('#tipoVinculacion').prop('disabled', true);
+        }
         $('#btnempleadosi').click(function () {
             $("#tipoVinculacion").prop('disabled', false);
         });
@@ -2575,10 +2620,10 @@
                         break;
                     }
                 }
-                self.cuentasBancarias()[indice].tipoCuentaBancaria(tipoCuentaBancaria);
-                self.cuentasBancarias()[indice].nombreTipoCuentaBancaria(nombreTipoCuentaBancaria);
-                self.cuentasBancarias()[indice].numeroCuentaBancaria(numeroCuentaBancaria);
-                self.cuentasBancarias()[indice].entidadCuentaBancaria(entidadCuentaBancaria);
+                self.cuentasBancarias()[indice].tipo(tipoCuentaBancaria);
+                self.cuentasBancarias()[indice].nombreTipo(nombreTipoCuentaBancaria);
+                self.cuentasBancarias()[indice].numero(numeroCuentaBancaria);
+                self.cuentasBancarias()[indice].entidad(entidadCuentaBancaria);
             }
             $('#md_cuenta_bancaria').modal('hide');
             $('#tipoCuentaBancaria').val("").trigger('change');

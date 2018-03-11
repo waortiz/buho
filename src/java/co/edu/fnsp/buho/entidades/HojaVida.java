@@ -8,6 +8,7 @@ package co.edu.fnsp.buho.entidades;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class HojaVida {
 
-    private int idPersona;
+    private long idPersona;
     private String tipoIdentificacion;
     private String nombreTipoIdentificacion;
     private String numeroIdentificacion;
@@ -26,7 +27,9 @@ public class HojaVida {
     private String apellidos;
     private String sexo;
     private String nombreSexo;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaExpedicion;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaNacimiento;
     private String fechaNacimientoFormateada;
     private String lugarNacimiento;
@@ -57,6 +60,7 @@ public class HojaVida {
     private String lugarExpedicion;
     private String nombreLugarExpedicion;
     private String tipoVinculacion;
+    private String nombreTipoVinculacion;
     private List<Telefono> telefonos = new ArrayList<>();
     private List<CuentaBancaria> cuentasBancarias = new ArrayList<>();
     private List<CorreoElectronico> correosElectronicos = new ArrayList<>();
@@ -555,14 +559,14 @@ public class HojaVida {
     /**
      * @return the idPersona
      */
-    public int getIdPersona() {
+    public long getIdPersona() {
         return idPersona;
     }
 
     /**
      * @param idPersona the idPersona to set
      */
-    public void setIdPersona(int idPersona) {
+    public void setIdPersona(long idPersona) {
         this.idPersona = idPersona;
     }
 
@@ -701,6 +705,20 @@ public class HojaVida {
      */
     public void setFechaNacimientoFormateada(String fechaNacimientoFormateada) {
         this.fechaNacimientoFormateada = fechaNacimientoFormateada;
+    }
+
+    /**
+     * @return the nombreTipoVinculacion
+     */
+    public String getNombreTipoVinculacion() {
+        return nombreTipoVinculacion;
+    }
+
+    /**
+     * @param nombreTipoVinculacion the nombreTipoVinculacion to set
+     */
+    public void setNombreTipoVinculacion(String nombreTipoVinculacion) {
+        this.nombreTipoVinculacion = nombreTipoVinculacion;
     }
 
 }

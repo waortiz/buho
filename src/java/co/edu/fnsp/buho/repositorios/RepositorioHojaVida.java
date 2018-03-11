@@ -5,7 +5,6 @@
  */
 package co.edu.fnsp.buho.repositorios;
 
-import co.edu.fnsp.buho.entidades.Convocatoria;
 import co.edu.fnsp.buho.entidades.CorreoElectronico;
 import co.edu.fnsp.buho.entidades.CuentaBancaria;
 import co.edu.fnsp.buho.entidades.Documento;
@@ -14,6 +13,7 @@ import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.TipoDocumento;
 import co.edu.fnsp.buho.utilidades.Util;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
@@ -36,10 +36,12 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     private SimpleJdbcCall ingresarDocumentoSoporte;
     private SimpleJdbcCall obtenerDocumentoSoporte;
     private SimpleJdbcCall actualizarDocumentoSoporte;
-
+    private SimpleJdbcCall validarExistenciaPersona;
+    private SimpleJdbcCall obtenerNumeroIdentificacionPersona;
     private SimpleJdbcCall obtenerHojasVida;
+    private SimpleJdbcCall obtenerPersona;
     private SimpleJdbcCall eliminarHojaVida;
-    
+
     private SimpleJdbcCall ingresarTelefono;
     private SimpleJdbcCall eliminarTelefono;
     private SimpleJdbcCall actualizarTelefono;
@@ -65,7 +67,9 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         this.ingresarDocumentoSoporte = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoSoporte");
         this.obtenerDocumentoSoporte = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoSoporte");
         this.actualizarDocumentoSoporte = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoSoporte");
-
+        this.validarExistenciaPersona = new SimpleJdbcCall(jdbcTemplate).withProcedureName("validarExistenciaPersona");
+        this.obtenerNumeroIdentificacionPersona = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerNumeroIdentificacionPersona");
+        this.obtenerPersona = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerPersona");
         this.obtenerHojasVida = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerHojasVida").returningResultSet("hojasVida", BeanPropertyRowMapper.newInstance(HojaVida.class));
         this.eliminarHojaVida = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarHojaVida");
 
@@ -87,62 +91,9 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     }
 
     @Override
-    public void actualizarHojaVida(long idUsuario, HojaVida hojaVida) {
-        MapSqlParameterSource parametros = new MapSqlParameterSource();
-        parametros.addValue("varNumeroId", hojaVida.getNumeroIdentificacion());
-        parametros.addValue("varTipoId", hojaVida.getTipoIdentificacion());
-        parametros.addValue("varLugarExpedicion", hojaVida.getLugarExpedicion());
-        parametros.addValue("varFechaExpedicion", hojaVida.getFechaExpedicion());
-        parametros.addValue("varLibretaMilitar", hojaVida.getLibretaMilitar());
-        parametros.addValue("varDistritoClase", hojaVida.getDistritoClase());
-        parametros.addValue("varNombres", hojaVida.getNombres());
-        parametros.addValue("varApellidos", hojaVida.getApellidos());
-        parametros.addValue("varFechaNacimiento", hojaVida.getFechaNacimiento());
-        parametros.addValue("varLugarNacimiento", hojaVida.getLugarNacimiento());
-        parametros.addValue("varNacionalidad", hojaVida.getNacionalidad());
-        parametros.addValue("varSexo", hojaVida.getSexo());
-        parametros.addValue("varCiudadResidencia", hojaVida.getCiudadResidencia());
-        parametros.addValue("varDireccion", hojaVida.getDireccion());
-        parametros.addValue("varEgresadoUdea", hojaVida.isEgresadoUDEA());
-        parametros.addValue("varGrupoEtnico", hojaVida.getGrupoEtnico());
-        parametros.addValue("varDiscapacidad", hojaVida.getDiscapacidad());
-        parametros.addValue("varDisponeRut", hojaVida.isDisponeRUT());
-        parametros.addValue("varActividadEconomica", hojaVida.getActividadEconomica());
-        parametros.addValue("varDisponibilidadViajar", hojaVida.isDisponibilidadViajar());
-        parametros.addValue("varTipoVinculacion", hojaVida.getTipoVinculacion());
-
-        actualizarPersona.execute(parametros);
-
-        actualizarTelefonos(hojaVida.getIdPersona(), hojaVida.getTelefonos());
-        actualizarCuentasBancarias(hojaVida.getIdPersona(), hojaVida.getCuentasBancarias());
-        actualizarCorreosElectronicos(hojaVida.getIdPersona(), hojaVida.getCorreosElectronicos());
-
-        Documento copiaDocumentoIdentificacion = hojaVida.getCopiaDocumentoIdentificacion();
-        if (copiaDocumentoIdentificacion != null) {
-            MapSqlParameterSource parametrosActualizacionCopiaDocumentoIdentificacion = new MapSqlParameterSource();
-            parametrosActualizacionCopiaDocumentoIdentificacion.addValue("varIdPersona", hojaVida.getIdPersona());
-            parametrosActualizacionCopiaDocumentoIdentificacion.addValue("varTipoDocumento", TipoDocumento.COPIA_CEDULA.getId());
-            parametrosActualizacionCopiaDocumentoIdentificacion.addValue("varNombre", copiaDocumentoIdentificacion.getNombre());
-            parametrosActualizacionCopiaDocumentoIdentificacion.addValue("varTipoContenido", copiaDocumentoIdentificacion.getTipoContenido());
-            parametrosActualizacionCopiaDocumentoIdentificacion.addValue("varContenido", copiaDocumentoIdentificacion.getContenido());
-            actualizarDocumentoSoporte.execute(parametrosActualizacionCopiaDocumentoIdentificacion);
-        }
-
-        Documento documentoRUT = hojaVida.getDocumentoRUT();
-        if (documentoRUT != null) {
-            MapSqlParameterSource parametrosActualizacionDocumentoRUT = new MapSqlParameterSource();
-            parametrosActualizacionDocumentoRUT.addValue("varIdPersona", hojaVida.getIdPersona());
-            parametrosActualizacionDocumentoRUT.addValue("varTipoDocumento", TipoDocumento.RUT.getId());
-            parametrosActualizacionDocumentoRUT.addValue("varNombre", documentoRUT.getNombre());
-            parametrosActualizacionDocumentoRUT.addValue("varTipoContenido", documentoRUT.getTipoContenido());
-            parametrosActualizacionDocumentoRUT.addValue("varContenido", documentoRUT.getContenido());
-            actualizarDocumentoSoporte.execute(parametrosActualizacionDocumentoRUT);
-        }
-    }
-
-    @Override
     public void ingresarHojaVida(long idUsuario, HojaVida hojaVida) {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
+        
         parametros.addValue("varNumeroId", hojaVida.getNumeroIdentificacion());
         parametros.addValue("varTipoId", hojaVida.getTipoIdentificacion());
         parametros.addValue("varLugarExpedicion", hojaVida.getLugarExpedicion());
@@ -157,7 +108,8 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         parametros.addValue("varSexo", hojaVida.getSexo());
         parametros.addValue("varCiudadResidencia", hojaVida.getCiudadResidencia());
         parametros.addValue("varDireccion", hojaVida.getDireccion());
-        parametros.addValue("varEgresadoUdea", hojaVida.isEgresadoUDEA());
+        parametros.addValue("varEgresadoUDEA", hojaVida.isEgresadoUDEA());
+        parametros.addValue("varEmpleadoUDEA", hojaVida.isEmpleadoUDEA());
         parametros.addValue("varGrupoEtnico", hojaVida.getGrupoEtnico());
         parametros.addValue("varDiscapacidad", hojaVida.getDiscapacidad());
         parametros.addValue("varDisponeRut", hojaVida.isDisponeRUT());
@@ -223,6 +175,71 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     }
 
     @Override
+    public void actualizarHojaVida(long idUsuario, HojaVida hojaVida) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdPersona", hojaVida.getIdPersona());
+        parametros.addValue("varNumeroId", hojaVida.getNumeroIdentificacion());
+        parametros.addValue("varTipoId", hojaVida.getTipoIdentificacion());
+        parametros.addValue("varLugarExpedicion", hojaVida.getLugarExpedicion());
+        parametros.addValue("varFechaExpedicion", hojaVida.getFechaExpedicion());
+        parametros.addValue("varLibretaMilitar", hojaVida.getLibretaMilitar());
+        parametros.addValue("varDistritoClase", hojaVida.getDistritoClase());
+        parametros.addValue("varNombres", hojaVida.getNombres());
+        parametros.addValue("varApellidos", hojaVida.getApellidos());
+        parametros.addValue("varFechaNacimiento", hojaVida.getFechaNacimiento());
+        parametros.addValue("varLugarNacimiento", hojaVida.getLugarNacimiento());
+        parametros.addValue("varNacionalidad", hojaVida.getNacionalidad());
+        parametros.addValue("varSexo", hojaVida.getSexo());
+        parametros.addValue("varCiudadResidencia", hojaVida.getCiudadResidencia());
+        parametros.addValue("varDireccion", hojaVida.getDireccion());
+        parametros.addValue("varEgresadoUDEA", hojaVida.isEgresadoUDEA());
+        parametros.addValue("varEmpleadoUDEA", hojaVida.isEmpleadoUDEA());
+        parametros.addValue("varGrupoEtnico", hojaVida.getGrupoEtnico());
+        parametros.addValue("varDiscapacidad", hojaVida.getDiscapacidad());
+        parametros.addValue("varDisponeRut", hojaVida.isDisponeRUT());
+        parametros.addValue("varDisponibilidadViajar", hojaVida.isDisponibilidadViajar());
+        if (hojaVida.getActividadEconomica() != null && hojaVida.getActividadEconomica().length() > 0) {
+            parametros.addValue("varActividadEconomica", hojaVida.getActividadEconomica());
+        } else {
+            parametros.addValue("varActividadEconomica", null);
+        }
+        parametros.addValue("varDisponibilidadViajar", hojaVida.isDisponibilidadViajar());
+        if (hojaVida.getTipoVinculacion() != null && hojaVida.getTipoVinculacion().length() > 0) {
+            parametros.addValue("varTipoVinculacion", hojaVida.getTipoVinculacion());
+        } else {
+            parametros.addValue("varTipoVinculacion", null);
+        }
+
+        actualizarPersona.execute(parametros);
+
+        actualizarTelefonos(hojaVida.getIdPersona(), hojaVida.getTelefonos());
+        actualizarCuentasBancarias(hojaVida.getIdPersona(), hojaVida.getCuentasBancarias());
+        actualizarCorreosElectronicos(hojaVida.getIdPersona(), hojaVida.getCorreosElectronicos());
+
+        Documento copiaDocumentoIdentificacion = hojaVida.getCopiaDocumentoIdentificacion();
+        if (copiaDocumentoIdentificacion != null) {
+            MapSqlParameterSource parametrosActualizacionCopiaDocumentoIdentificacion = new MapSqlParameterSource();
+            parametrosActualizacionCopiaDocumentoIdentificacion.addValue("varIdPersona", hojaVida.getIdPersona());
+            parametrosActualizacionCopiaDocumentoIdentificacion.addValue("varTipoDocumento", TipoDocumento.COPIA_CEDULA.getId());
+            parametrosActualizacionCopiaDocumentoIdentificacion.addValue("varNombre", copiaDocumentoIdentificacion.getNombre());
+            parametrosActualizacionCopiaDocumentoIdentificacion.addValue("varTipoContenido", copiaDocumentoIdentificacion.getTipoContenido());
+            parametrosActualizacionCopiaDocumentoIdentificacion.addValue("varContenido", copiaDocumentoIdentificacion.getContenido());
+            actualizarDocumentoSoporte.execute(parametrosActualizacionCopiaDocumentoIdentificacion);
+        }
+
+        Documento documentoRUT = hojaVida.getDocumentoRUT();
+        if (documentoRUT != null) {
+            MapSqlParameterSource parametrosActualizacionDocumentoRUT = new MapSqlParameterSource();
+            parametrosActualizacionDocumentoRUT.addValue("varIdPersona", hojaVida.getIdPersona());
+            parametrosActualizacionDocumentoRUT.addValue("varTipoDocumento", TipoDocumento.RUT.getId());
+            parametrosActualizacionDocumentoRUT.addValue("varNombre", documentoRUT.getNombre());
+            parametrosActualizacionDocumentoRUT.addValue("varTipoContenido", documentoRUT.getTipoContenido());
+            parametrosActualizacionDocumentoRUT.addValue("varContenido", documentoRUT.getContenido());
+            actualizarDocumentoSoporte.execute(parametrosActualizacionDocumentoRUT);
+        }
+    }
+    
+    @Override
     public Documento obtenerDocumentoSoporte(long idPersona, int idTipoDocumento) {
         Documento documento = null;
         MapSqlParameterSource parametros = new MapSqlParameterSource();
@@ -241,7 +258,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         return documento;
     }
 
-    private void actualizarTelefonos(int idPersona, List<Telefono> telefonos) {
+    private void actualizarTelefonos(long idPersona, List<Telefono> telefonos) {
         MapSqlParameterSource parametrosConsultaTelefono = new MapSqlParameterSource();
         parametrosConsultaTelefono.addValue("varIdPersona", idPersona);
         Map resultadoTelefonos = obtenerTelefonos.execute(parametrosConsultaTelefono);
@@ -279,7 +296,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         }
     }
 
-    private void actualizarCuentasBancarias(int idPersona, List<CuentaBancaria> cuentasBancarias) {
+    private void actualizarCuentasBancarias(long idPersona, List<CuentaBancaria> cuentasBancarias) {
         MapSqlParameterSource parametrosConsultaCuentaBancaria = new MapSqlParameterSource();
         parametrosConsultaCuentaBancaria.addValue("varIdPersona", idPersona);
         Map resultadoCuentasBancarias = obtenerCuentasBancarias.execute(parametrosConsultaCuentaBancaria);
@@ -302,6 +319,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                 parametrosActualizacionCuentaBancaria.addValue("varId", cuentaBancariaModificado.getId());
                 parametrosActualizacionCuentaBancaria.addValue("varNumero", cuentaBancariaModificado.getNumero());
                 parametrosActualizacionCuentaBancaria.addValue("varTipo", cuentaBancariaModificado.getTipo());
+                parametrosActualizacionCuentaBancaria.addValue("varEntidad", cuentaBancariaModificado.getEntidad());
                 actualizarCuentaBancaria.execute(parametrosActualizacionCuentaBancaria);
             }
         }
@@ -312,12 +330,13 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
             if (cuentaBancaria.getId() == 0) {
                 parametrosIngresoCuentaBancaria.addValue("varNumero", cuentaBancaria.getNumero());
                 parametrosIngresoCuentaBancaria.addValue("varTipo", cuentaBancaria.getTipo());
+                parametrosIngresoCuentaBancaria.addValue("varEntidad", cuentaBancaria.getEntidad());
                 ingresarCuentaBancaria.execute(parametrosIngresoCuentaBancaria);
             }
         }
     }
 
-    private void actualizarCorreosElectronicos(int idPersona, List<CorreoElectronico> correosElectronicos) {
+    private void actualizarCorreosElectronicos(long idPersona, List<CorreoElectronico> correosElectronicos) {
         MapSqlParameterSource parametrosConsultaCorreoElectronico = new MapSqlParameterSource();
         parametrosConsultaCorreoElectronico.addValue("varIdPersona", idPersona);
         Map resultadoCorreosElectronicos = obtenerCorreosElectronicos.execute(parametrosConsultaCorreoElectronico);
@@ -369,6 +388,100 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         MapSqlParameterSource parametrosEliminacionHojaVida = new MapSqlParameterSource();
         parametrosEliminacionHojaVida.addValue("varIdPersona", idPersona);
         eliminarHojaVida.execute(parametrosEliminacionHojaVida);
+    }
+
+    @Override
+    public boolean existePersona(String numeroIdentificacion) {
+        boolean existe;
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varNumeroIdentificacion", numeroIdentificacion);
+
+        Map resultado = validarExistenciaPersona.execute(parametros);
+        existe = ((boolean) resultado.get("varExiste"));
+
+        return existe;
+    }
+
+    @Override
+    public String obtenerNumeroIdentificacionPersona(long idPersona) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdPersona", idPersona);
+
+        Map resultado = obtenerNumeroIdentificacionPersona.execute(parametros);
+        return (String) resultado.get("varNumeroId");
+    }
+
+    @Override
+    public HojaVida obtenerHojaVida(long idPersona) {
+        HojaVida hojaVida = new HojaVida();
+
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdPersona", idPersona);
+
+        Map resultado = obtenerPersona.execute(parametros);
+        hojaVida.setIdPersona(idPersona);
+        hojaVida.setNumeroIdentificacion((String) resultado.get("varNumeroId"));
+        hojaVida.setTipoIdentificacion((String) resultado.get("varTipoId"));
+        hojaVida.setLugarExpedicion((String) resultado.get("varLugarExpedicion"));
+        hojaVida.setNombreLugarExpedicion((String) resultado.get("varNombreLugarExpedicion"));
+        hojaVida.setFechaExpedicion((Date) resultado.get("varFechaExpedicion"));
+        hojaVida.setLibretaMilitar((String) resultado.get("varLibretaMilitar"));
+        hojaVida.setDistritoClase((String) resultado.get("varDistritoClase"));
+        hojaVida.setNombres((String) resultado.get("varNombres"));
+        hojaVida.setApellidos((String) resultado.get("varApellidos"));
+        hojaVida.setFechaNacimiento((Date) resultado.get("varFechaNacimiento"));
+        hojaVida.setLugarNacimiento((String) resultado.get("varLugarNacimiento"));
+        hojaVida.setNombreLugarNacimiento((String) resultado.get("varNombreLugarNacimiento"));
+        hojaVida.setNacionalidad(((Integer) resultado.get("varNacionalidad")).toString());
+        hojaVida.setNombreNacionalidad((String) resultado.get("varNombreNacionalidad"));
+        hojaVida.setSexo(((Integer) resultado.get("varSexo")).toString());
+        hojaVida.setNombreSexo(((String) resultado.get("varNombreSexo")));
+        hojaVida.setCiudadResidencia((String) resultado.get("varCiudadResidencia"));
+        hojaVida.setNombreCiudadResidencia((String) resultado.get("varNombreCiudadResidencia"));
+        hojaVida.setDireccion((String) resultado.get("varDireccion"));
+        if (resultado.get("varEgresadoUdea") != null) {
+            hojaVida.setEgresadoUDEA((Boolean) resultado.get("varEgresadoUdea"));
+        }
+        if (resultado.get("varEmpleadoUdea") != null) {
+            hojaVida.setEmpleadoUDEA((Boolean) resultado.get("varEmpleadoUdea"));
+        }
+        if (resultado.get("varGrupoEtnico") != null) {
+            hojaVida.setGrupoEtnico(((Integer) resultado.get("varGrupoEtnico")).toString());
+            hojaVida.setNombreGrupoEtnico((String) resultado.get("varNombreGrupoEtnico"));
+        }
+        if (resultado.get("varDiscapacidad") != null) {
+            hojaVida.setDiscapacidad(((Integer) resultado.get("varDiscapacidad")).toString());
+            hojaVida.setNombreDiscapacidad((String) resultado.get("varNombreDiscapacidad"));
+        }
+        if (resultado.get("varDisponeRut") != null) {
+            hojaVida.setDisponeRUT((Boolean) resultado.get("varDisponeRut"));
+        }
+        if (resultado.get("varActividadEconomica") != null) {
+            hojaVida.setActividadEconomica(((Integer) resultado.get("varActividadEconomica")).toString());
+            hojaVida.setNombreActividadEconomica((String) resultado.get("varNombreActividadEconomica"));
+        }
+        if (resultado.get("varDisponibilidadViajar") != null) {
+            hojaVida.setDisponibilidadViajar((Boolean) resultado.get("varDisponibilidadViajar"));
+        }
+        if(resultado.get("varTipoVinculacion")!=null) {
+            hojaVida.setTipoVinculacion(((Integer) resultado.get("varTipoVinculacion")).toString());
+            hojaVida.setNombreTipoVinculacion((String) resultado.get("varNombreTipoVinculacion"));
+        }
+
+        Map resultadoTelefonos = obtenerTelefonos.execute(parametros);
+        List<Telefono> adendas = (List<Telefono>) resultadoTelefonos.get("telefonos");
+
+        Map resultadoCorreosElectronicos = obtenerCorreosElectronicos.execute(parametros);
+        List<CorreoElectronico> correosElectronicos = (List<CorreoElectronico>) resultadoCorreosElectronicos.get("correosElectronicos");
+
+        Map resultadoCuentasBancarias = obtenerCuentasBancarias.execute(parametros);
+        List<CuentaBancaria> cuentasBancarias = (List<CuentaBancaria>) resultadoCuentasBancarias.get("cuentasBancarias");
+
+        hojaVida.setTelefonos(adendas);
+        hojaVida.setCorreosElectronicos(correosElectronicos);
+        hojaVida.setCuentasBancarias(cuentasBancarias);
+        
+        return hojaVida;
     }
 
 }

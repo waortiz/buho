@@ -24,4 +24,10 @@ public interface IRepositorioHojaVida {
     List<HojaVida> obtenerHojaVida();
 
     void eliminarHojaVida(long idPersona);
+
+    boolean existePersona(String numeroIdentificacion);
+
+    String obtenerNumeroIdentificacionPersona(long idPersona);
+
+    HojaVida obtenerHojaVida(long idPersona);
 }

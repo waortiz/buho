@@ -57,7 +57,7 @@ public class ServicioHojaVida implements IServicioHojaVida {
     }
 
     @Override
-    public Documento obtenerDocumentoSoporte(int idPersona, int idTipoDocumento) {
+    public Documento obtenerDocumentoSoporte(long idPersona, int idTipoDocumento) {
         return repositorioHojaVida.obtenerDocumentoSoporte(idPersona, idTipoDocumento);
     }
 
@@ -77,5 +77,20 @@ public class ServicioHojaVida implements IServicioHojaVida {
             transactionManager.rollback(txStatus);
             throw exc;
         }
+    }
+    
+    @Override
+    public boolean existePersona(String numeroIdentificacion){
+         return repositorioHojaVida.existePersona(numeroIdentificacion);
+    }
+
+    @Override
+    public String obtenerNumeroIdentificacionPersona(long idPersona) {
+        return repositorioHojaVida.obtenerNumeroIdentificacionPersona(idPersona);
+    }
+
+    @Override
+    public HojaVida obtenerHojaVida(long idPersona) {
+        return repositorioHojaVida.obtenerHojaVida(idPersona);
     }
 }
