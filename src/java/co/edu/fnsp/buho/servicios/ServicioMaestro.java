@@ -156,4 +156,14 @@ public class ServicioMaestro implements IServicioMaestro {
     public List<Maestro> obtenerCriteriosEvaluacion() {
         return repositorioMaestro.obtenerCriteriosEvaluacion();
     }
+
+    @Override
+    public List<Maestro> obtenerNivelesIdioma() {
+        return repositorioMaestro.obtenerNivelesIdioma();
+    }
+
+    @Override
+    public List<Maestro> obtenerTiposCertificacionIdioma() {
+        return repositorioMaestro.obtenerTiposCertificacionIdioma();
+    }
 }

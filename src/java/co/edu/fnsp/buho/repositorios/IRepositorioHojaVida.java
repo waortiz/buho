@@ -19,9 +19,7 @@ public interface IRepositorioHojaVida {
 
     void ingresarHojaVida(long idUsuario, HojaVida hojaVida);
     
-    Documento obtenerDocumentoSoporte(long idPersona, int idTipoDocumento);
-
-    List<HojaVida> obtenerHojaVida();
+    List<HojaVida> obtenerHojasVida();
 
     void eliminarHojaVida(long idPersona);
 
@@ -30,4 +28,16 @@ public interface IRepositorioHojaVida {
     String obtenerNumeroIdentificacionPersona(long idPersona);
 
     HojaVida obtenerHojaVida(long idPersona);
+
+    Documento obtenerDocumentoSoporte(long idPersona, int idTipoDocumento);
+    
+    Documento obtenerDocumentoSoporte(long idDocumentoSoporte);
+    
+    Documento obtenerCertificadoEducacionBasica(int idEducacionBasica);
+
+    Documento obtenerCertificadoIdioma(int idIdioma);
+    
+    Documento obtenerCertificadoEducacionSuperior(int idEducacionSuperior);
+    
+    Documento obtenerCertificadoHomologadoEducacionSuperior(int idEducacionSuperior);
 }

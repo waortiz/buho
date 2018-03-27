@@ -18,7 +18,7 @@
                     <span class="nav-link-text">Perfil</span>
                 </a>
             </li>
-            <li class="nav-item" id="btnacademico" data-toggle="tooltip" data-placement="right" title="" data-original-title="Aspectos Acádemicos">
+            <li class="nav-item" id="btnacademico" data-toggle="tooltip" data-placement="right" title="" data-original-title="Aspectos Acádemicos" style="margin-right: 5px !important;">
                 <a class="nav-link" >
                     <i  class="fa fa-mortar-board" style="font-size:36px;"></i>
                     <span class="nav-link-text">Aspectos Acádemicos</span>
@@ -106,19 +106,21 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form group form-inline">
+                        <div class="form group">
                             <label for="">Copia c&eacute;dula</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe cargar la copia de cedula">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                            <input type="file" name="copiaDocumentoIdentificacion" id="copiaDocumentoIdentificacion" class="form-control" style="width: 90%">
-                            <c:if test = "${!hojaVida.isCopiaDocumentoIdentificacionValidado()}">
-                                <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='glyphicon glyphicon-remove'></span></button>
-                            </c:if>    
-                            <c:if test = "${hojaVida.isCopiaDocumentoIdentificacionValidado()}">
-                                <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
-                            </c:if>                              
-                            <c:if test = "${hojaVida.isTieneCopiaDocumentoIdentificacion()}">
-                                <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
-                            </c:if>                              
+                            <div class="form-inline">
+                                <input type="file" name="copiaDocumentoIdentificacion" id="copiaDocumentoIdentificacion" class="form-control" style="width: 80%">
+                                <c:if test = "${!hojaVida.isCopiaDocumentoIdentificacionValidado()}">
+                                    <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='glyphicon glyphicon-remove'></span></button>
+                                    </c:if>    
+                                    <c:if test = "${hojaVida.isCopiaDocumentoIdentificacionValidado()}">
+                                    <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
+                                    </c:if>                              
+                                    <c:if test = "${hojaVida.isTieneCopiaDocumentoIdentificacion()}">
+                                    <button class="btn btn-success btn-xs" type="button" onclick="verCopiaCedula()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
+                                    </c:if>                              
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -246,17 +248,17 @@
                 <div class="row">
                     <div class="col-md-7">
                         <div class="form-group form-inline">
-                            <label>Copia Libreta militar</label>
-                            <input type="file" name="documentoLibretaMilitar" id="documentoLibretaMilitar" class="form-control" style="width: 90%">
+                            <label>Copia libreta militar</label>
+                            <input type="file" name="copiaLibretaMilitar" id="copiaLibretaMilitar" class="form-control" style="width: 80%">
                             <c:if test = "${!hojaVida.isCopiaLibretaMilitarValidado()}">
                                 <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='glyphicon glyphicon-remove'></span></button>
-                            </c:if>    
-                            <c:if test = "${hojaVida.isCopiaLibretaMilitarValidado()}">
+                                </c:if>    
+                                <c:if test = "${hojaVida.isCopiaLibretaMilitarValidado()}">
                                 <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
-                            </c:if>                            
-                            <c:if test = "${hojaVida.isTieneCopiaLibretaMilitar()}">
-                                <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
-                            </c:if>                              
+                                </c:if>                            
+                                <c:if test = "${hojaVida.isTieneCopiaLibretaMilitar()}">
+                                <button class="btn btn-success btn-xs" type="button" onclick="verCopiaLibretaMilitar()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
+                                </c:if>                              
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -496,16 +498,16 @@
                         <div class="form-group form-inline">
                             <label for="">Documento de soporte RUT</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe cargar el documento de RUT">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <input type="file" name="documentoRUT" id="documentoRUT" class="form-control" style="width: 90%">
+                            <input type="file" name="documentoRUT" id="documentoRUT" class="form-control" style="width: 80%">
                             <c:if test = "${!hojaVida.isDocumentoRUTValidado()}">
                                 <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='glyphicon glyphicon-remove'></span></button>
-                            </c:if>    
-                            <c:if test = "${hojaVida.isDocumentoRUTValidado()}">
+                                </c:if>    
+                                <c:if test = "${hojaVida.isDocumentoRUTValidado()}">
                                 <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
-                            </c:if>
-                            <c:if test = "${hojaVida.isTieneDocumentoRUT()}">
-                                <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
-                            </c:if>                              
+                                </c:if>
+                                <c:if test = "${hojaVida.isTieneDocumentoRUT()}">
+                                <button class="btn btn-success btn-xs" type="button" onclick="verCopiaRUT()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
+                                </c:if>                              
                         </div>
                     </div>
                 </div>
@@ -585,9 +587,11 @@
                         <div class="table-responsive">
                             <table class="table table-hover tableestilo" id="tbtel">
                                 <thead>
-                                <th>Tipo</th>
-                                <th>N&uacute;mero</th>
-                                <th></th>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>N&uacute;mero</th>
+                                        <th></th>
+                                    </tr>
                                 </thead>
                                 <tbody data-bind="foreach: { data: telefonos }">
                                     <tr class="table-row">
@@ -599,7 +603,7 @@
                                             <span data-bind="text: numero" ></span>
                                             <input type="hidden" class="form-control" data-bind="value: numero, attr: { 'name': 'telefonos[' + $index() + '].numero'  }">
                                         </td>
-                                        <td style='white-space: nowrap'>
+                                        <td style='white-space: nowrap' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarTelefono"><span class='glyphicon glyphicon-edit'></span></button>
                                             <button class='btn btn-danger btn-xs' type='button' data-bind="click: $root.eliminarTelefono"><span class='glyphicon glyphicon-remove'></span></button>
                                             <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'telefonos[' + $index() + '].consecutivo'  }" />
@@ -619,8 +623,10 @@
                         <div class="table-responsive">
                             <table class="table table-hover tableestilo" id="tbemail">
                                 <thead>
-                                <th>Email</th>
-                                <th></th>                                         
+                                    <tr>
+                                        <th>Email</th>
+                                        <th></th>                                         
+                                    </tr>        
                                 </thead>
                                 <tbody data-bind="foreach: { data: correosElectronicos }">
                                     <tr class="table-row">
@@ -628,7 +634,7 @@
                                             <span data-bind="text: correoElectronico" ></span>
                                             <input type="hidden" class="form-control" data-bind="value: correoElectronico, attr: { 'name': 'correosElectronicos[' + $index() + '].correoElectronico'  }">
                                         </td>
-                                        <td style='white-space: nowrap'>
+                                        <td style='white-space: nowrap' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCorreoElectronico"><span class='glyphicon glyphicon-edit'></span></button>
                                             <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarCorreoElectronico"><span class='glyphicon glyphicon-remove'></span></button>
                                             <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'correosElectronicos[' + $index() + '].consecutivo'  }" />
@@ -647,10 +653,12 @@
                         <div class="table-responsive">
                             <table class="table table-hover tableestilo" id="tbcuentabanca">
                                 <thead>
-                                <th>Tipo</th>
-                                <th>N&uacute;mero</th>
-                                <th>Entidad</th>
-                                <th></th>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>N&uacute;mero</th>
+                                        <th>Entidad</th>
+                                        <th></th>
+                                    </tr>
                                 </thead>
                                 <tbody data-bind="foreach: { data: cuentasBancarias }">
                                     <tr class="table-row">
@@ -666,7 +674,7 @@
                                             <span data-bind="text: entidad" ></span>
                                             <input type="hidden" class="form-control" data-bind="value: entidad, attr: { 'name': 'cuentasBancarias[' + $index() + '].entidad'  }">
                                         </td>
-                                        <td style='white-space: nowrap'>
+                                        <td style='white-space: nowrap' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCuentaBancaria"><span class='glyphicon glyphicon-edit'></span></button>
                                             <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarCuentaBancaria"><span class='glyphicon glyphicon-remove'></span></button>
                                             <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'cuentasBancarias[' + $index() + '].consecutivo'  }" />
@@ -808,41 +816,65 @@
                         <div class="form-group">
                             <label for="pe_perfil">Perfil laboral y profesional</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el perfil laboral y profesional ">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                            <textarea class="form-control" name="pe_perfil"></textarea>
+                                <form:textarea class="form-control" path="perfil" />
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <label>Agregar documentos de soporte(Foto,certificados bancarios, EPS, ARL, AFP...)</label>
-                        <button type="button" class="btn btn-success btn-sm" data-target="#md_docadj" data-toggle="modal" >
+                        <button type="button" class="btn btn-success btn-sm" onclick="nuevoDocumentoSoporte()">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                         <div class="table-responsive">
                             <table class="table table-hover tableestilo" id="tbdocad">
                                 <thead>
-                                <th>Tipo de documento</th>
-                                <th>Documento de soporte</th>
-                                <th></th>
+                                    <tr>
+                                        <th>Tipo de documento</th>
+                                        <th align="center">Documento de soporte</th>
+                                        <th></th>
+                                    </tr>        
                                 </thead>
+                                <tbody data-bind="foreach: { data: documentosSoporte }">
+                                    <tr class="table-row">
+                                        <td style="width: 40%">
+                                            <span data-bind="text: nombreTipoDocumento" ></span>
+                                            <input type="hidden" class="form-control" data-bind="value: tipoDocumento, attr: { 'name': 'documentosSoporte[' + $index() + '].tipoDocumento'  }">
+                                        </td>
+                                        <td style="width: 50%" align="center">
+                                            <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoSoporte, visible: tieneDocumento" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                        </td>
+                                        <td style='white-space: nowrap' align="center">
+                                            <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarDocumentoSoporte"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                            <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarDocumentoSoporte"><span class='glyphicon glyphicon-remove'></span></button>
+                                            <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'documentosSoporte[' + $index() + '].consecutivo'  }" />
+                                            <input type="hidden" data-bind="value: id, attr: { 'name': 'documentosSoporte[' + $index() + '].id'  }" />
+                                        </td>
+                                    </tr>
+                                </tbody>                                           
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="md_docadj" role="dialog">
+                <div class="modal fade" id="md_documento_soporte" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header mhsuccess">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <button type="button" class="close" onclick="cerrarVentanaDocumentoSoporte()">&times;</button>
                                 <h4 class="modal-title">Documentos adjuntos</h4>
                             </div>
                             <div class="modal-body" style="font-size: 16px;">
+                                <div id="alert_documento_soporte"></div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Tipo de documento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de documento">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <select name="docp_tipo_doc" id="docp_tipo_doc" class="js-select-basic-single js-states form-control" style="width: 100%;">
+                                            <select name="tipoDocumento" id="tipoDocumento" class="js-select-basic-single js-states form-control" style="width: 100%;">
+                                                <option></option>
+                                                <c:forEach var="tipoDocumento" items="${tiposDocumento}">
+                                                    <option value="${tipoDocumento.getId()}">${tipoDocumento.getNombre()}</option>
+                                                </c:forEach>                                                
                                             </select>
                                         </div>
                                     </div>
@@ -852,14 +884,14 @@
                                         <div class="form-group">
                                             <label for="">Documento de soporte</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar un archivo de soporte ">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input type="file" class="form-control" name="docp_documento" id="docp_documento">
+                                            <div id="documentosSoporte"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-success"  id="adddocadj">Agregar</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-success" data-bind="click: adicionarDocumentoSoporte">Agregar</button>
+                                <button type="button" class="btn btn-success" onclick="cerrarVentanaDocumentoSoporte();">Cancelar</button>
                             </div>
                         </div>
                     </div>
@@ -872,58 +904,167 @@
                     </div>
                 </div>
                 <label>Agregar estudios educaci&oacute;n b&aacute;sica&nbsp;</label>
-                <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" data-target="#md_aspestedbasica" data-toggle="modal" >
+                <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevaEducacionBasica();" >
                     <span class="glyphicon glyphicon-plus"></span>   
                 </button>
                 <div class="table-responsive">
-                    <table class="table table-hover tableestilo" id="tbestedbas">
+                    <table class="table table-hover tableestilo">
                         <thead>
                             <tr>
                                 <th>Nivel de estudio</th>
                                 <th>Instituci&oacute;n</th>
                                 <th>T&iacute;tulo</th>
                                 <th>A&ntilde;o de t&iacute;tulo</th>
-                                <th>Certificado</th>
-                                <th>Opciones</th>
+                                <th class="cer" align="center">Certificado</th>
+                                <th class="opc" align="center">Opciones</th>
                             </tr> 
                         </thead>
+                        <tbody data-bind="foreach: { data: educacionesBasicas }">
+                            <tr class="table-row">
+                                <td style="width: 20%">
+                                    <span data-bind="text: nombreNivel" ></span>
+                                    <input type="hidden" class="form-control" data-bind="value: nivel, attr: { 'name': 'educacionesBasicas[' + $index() + '].nivel'  }">
+                                </td>
+                                <td style="width: 20%">
+                                    <span data-bind="text: nombreInstitucion" ></span>
+                                    <input type="hidden" class="form-control" data-bind="value: institucion, attr: { 'name': 'educacionesBasicas[' + $index() + '].institucion'  }">
+                                </td>
+                                <td style="width: 20%">
+                                    <span data-bind="text: titulo" ></span>
+                                    <input type="hidden" class="form-control" data-bind="value: titulo, attr: { 'name': 'educacionesBasicas[' + $index() + '].titulo'  }">
+                                </td>
+                                <td style="width: 20%">
+                                    <span data-bind="text: anyoFinalizacion" ></span>
+                                    <input type="hidden" class="form-control" data-bind="value: anyoFinalizacion, attr: { 'name': 'educacionesBasicas[' + $index() + '].anyoFinalizacion'  }">
+                                </td>
+                                <td style="width: 10%" align="center">
+                                    <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionBasica, visible: tieneCertificado" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                </td>
+                                <td style='white-space: nowrap; width: 10%' align="center">
+                                    <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarEducacionBasica"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                    <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarEducacionBasica"><span class='glyphicon glyphicon-remove'></span></button>
+                                    <input type="hidden" data-bind="value: anyoInicio, attr: { 'name': 'educacionesBasicas[' + $index() + '].anyoInicio'  }" />
+                                    <input type="hidden" data-bind="value: graduado, attr: { 'name': 'educacionesBasicas[' + $index() + '].graduado'  }" />
+                                    <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'educacionesBasicas[' + $index() + '].consecutivo'  }" />
+                                    <input type="hidden" data-bind="value: id, attr: { 'name': 'educacionesBasicas[' + $index() + '].id'  }" />
+                                </td>
+                            </tr>
+                        </tbody>                           
                     </table>
                 </div>
                 <label>Agregar estudios educaci&oacute;n superior</label>
-                <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" data-target="#md_aspesttecnicos" data-toggle="modal" >
+                <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevaEducacionSuperior();" >
                     <span class="glyphicon glyphicon-plus"></span>   
                 </button>
 
                 <div class="table-responsive">
-                    <table class="table table-hover tableestilo" id="tbestecnico">
+                    <table class="table table-hover tableestilo">
                         <thead>
                             <tr>
                                 <th>Nivel de estudio</th>
                                 <th>Instituci&oacute;n</th>
                                 <th>Programa cursado</th>
                                 <th>Fecha de titulo</th>
-                                <th>Certificado</th>
-                                <th>Opciones</th>
+                                <th class="cer" align="center">Certificado Homologado</th>
+                                <th class="cer" align="center">Certificado</th>
+                                <th class="opc" align="center">Opciones</th>
                             </tr> 
                         </thead>
+                        <tbody data-bind="foreach: { data: educacionesSuperiores }">
+                            <tr class="table-row">
+                                <td style="width: 20%">
+                                    <span data-bind="text: nombreNivel" ></span>
+                                    <input type="hidden" class="form-control" data-bind="value: nivel, attr: { 'name': 'educacionesSuperiores[' + $index() + '].nivel'  }">
+                                </td>
+                                <td style="width: 20%">
+                                    <span data-bind="text: nombreInstitucion" ></span>
+                                    <input type="hidden" class="form-control" data-bind="value: institucion, attr: { 'name': 'educacionesSuperiores[' + $index() + '].institucion'  }">
+                                </td>
+                                <td style="width: 20%">
+                                    <span data-bind="text: programa" ></span>
+                                    <input type="hidden" class="form-control" data-bind="value: programa, attr: { 'name': 'educacionesSuperiores[' + $index() + '].programa'  }">
+                                    <input type="hidden" class="form-control" data-bind="value: titulo, attr: { 'name': 'educacionesSuperiores[' + $index() + '].titulo'  }">
+                                </td>
+                                <td style="width: 20%">
+                                    <span data-bind="text: fechaTitulo" ></span>
+                                    <input type="hidden" class="form-control" data-bind="value: anyoFinalizacion, attr: { 'name': 'educacionesSuperiores[' + $index() + '].anyoFinalizacion'  }">
+                                    <input type="hidden" class="form-control" data-bind="value: fechaTitulo, attr: { 'name': 'educacionesSuperiores[' + $index() + '].fechaTitulo'  }">
+                                </td>
+                                <td style="width: 10%" align="center">
+                                    <a href='#' title='Ver certificado homologado' data-bind="click: $root.verCertificadoHomologadoEducacionSuperior, visible: tieneCertificadoHomologado" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                </td>
+                                <td style="width: 10%" align="center">
+                                    <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionSuperior, visible: tieneCertificado" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                </td>
+                                <td style='white-space: nowrap; width: 10%' align="center">
+                                    <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarEducacionSuperior"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                    <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarEducacionSuperior"><span class='glyphicon glyphicon-remove'></span></button>
+                                    <input type="hidden" data-bind="value: anyoInicio, attr: { 'name': 'educacionesSuperiores[' + $index() + '].anyoInicio'  }" />
+                                    <input type="hidden" data-bind="value: graduado, attr: { 'name': 'educacionesSuperiores[' + $index() + '].graduado'  }" />
+                                    <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'educacionesSuperiores[' + $index() + '].consecutivo'  }" />
+                                    <input type="hidden" data-bind="value: id, attr: { 'name': 'educacionesSuperiores[' + $index() + '].id'  }" />
+                                    <input type="hidden" data-bind="value: areaSaber, attr: { 'name': 'educacionesSuperiores[' + $index() + '].areaSaber'  }" />
+                                    <input type="hidden" data-bind="value: tituloExterior, attr: { 'name': 'educacionesSuperiores[' + $index() + '].tituloExterior'  }" />
+                                    <input type="hidden" data-bind="value: paisTituloExterior, attr: { 'name': 'educacionesSuperiores[' + $index() + '].paisTituloExterior'  }" />
+                                </td>
+                            </tr>
+                        </tbody>                           
                     </table>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <label>Agregar estudios idiomas</label>
-                        <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" data-target="#md_idioma" data-toggle="modal" >
+                        <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoIdioma();" >
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>                  
-
-                        <table class="table table-hover tableestilo" id="tbidiomas">
+                        <table class="table table-hover tableestilo">
                             <thead>
-                            <th>Idioma</th>
-                            <th>Lectura</th>
-                            <th>Escritura</th>
-                            <th>Habla</th>
-                            <th>Certificado</th>
-                            <th>Opciones</th>
+                                <tr>
+                                    <th>Idioma</th>
+                                    <th>Lectura</th>
+                                    <th>Escucha</th>
+                                    <th>Escritura</th>
+                                    <th>Conversación</th>
+                                    <th class="cer" align="center">Certificado</th>
+                                    <th class="opc" align="center">Opciones</th>
+                                </tr>        
                             </thead>
+                            <tbody data-bind="foreach: { data: idiomas }">
+                                <tr class="table-row">
+                                    <td style="width: 15%">
+                                        <span data-bind="text: nombreIdioma" ></span>
+                                        <input type="hidden" class="form-control" data-bind="value: idioma, attr: { 'name': 'idiomas[' + $index() + '].idioma'  }">
+                                    </td>
+                                    <td style="width: 15%">
+                                        <span data-bind="text: nombreNivelLectura" ></span>
+                                        <input type="hidden" class="form-control" data-bind="value: nivelLectura, attr: { 'name': 'idiomas[' + $index() + '].nivelLectura'  }">
+                                    </td>
+                                    <td style="width: 15%">
+                                        <span data-bind="text: nombreNivelEscucha" ></span>
+                                        <input type="hidden" class="form-control" data-bind="value: nivelEscucha, attr: { 'name': 'idiomas[' + $index() + '].nivelEscucha'  }">
+                                    </td>
+                                    <td style="width: 15%">
+                                        <span data-bind="text: nombreNivelEscritura" ></span>
+                                        <input type="hidden" class="form-control" data-bind="value: nivelEscritura, attr: { 'name': 'idiomas[' + $index() + '].nivelEscritura'  }">
+                                    </td>
+                                    <td style="width: 15%">
+                                        <span data-bind="text: nombreNivelConversacion" ></span>
+                                        <input type="hidden" class="form-control" data-bind="value: nivelConversacion, attr: { 'name': 'idiomas[' + $index() + '].nivelConversacion'  }">
+                                    </td>
+                                    <td style="width: 15%" align="center">
+                                        <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoIdioma, visible: tieneCertificado" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                    </td>
+                                    <td style='white-space: nowrap' align="center">
+                                        <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarIdioma"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                        <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarIdioma"><span class='glyphicon glyphicon-remove'></span></button>
+                                        <input type="hidden" data-bind="value: tipoCertificacion, attr: { 'name': 'idiomas[' + $index() + '].tipoCertificacion'  }" />
+                                        <input type="hidden" data-bind="value: otraCertificacion, attr: { 'name': 'idiomas[' + $index() + '].otraCertificacion'  }" />
+                                        <input type="hidden" data-bind="value: puntajeCertificacion, attr: { 'name': 'idiomas[' + $index() + '].puntajeCertificacion'  }" />
+                                        <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'idiomas[' + $index() + '].consecutivo'  }" />
+                                        <input type="hidden" data-bind="value: id, attr: { 'name': 'idiomas[' + $index() + '].id'  }" />
+                                    </td>
+                                </tr>
+                            </tbody>                                   
                         </table>
                     </div>
                     <!--  MODAL IDIOMA -->
@@ -932,16 +1073,21 @@
                             <!-- Modal content-->
                             <div class="modal-content">
                                 <div class="modal-header mhsuccess ">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Idiomas</h4>
+                                    <button type="button" class="close" onclick="cerrarVentanaIdioma();">&times;</button>
+                                        <h4 class="modal-title">Idiomas</h4>
                                 </div>
                                 <div class="modal-body">
+                                    <div id="alert_idioma"></div>
                                     <div class="row" >
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="id_idioma">Idioma</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar su idioma">
+                                                <label for="idioma">Idioma</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar su idioma">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
-                                                <select style="width: 100%;" name="id_idioma" id="id_idioma" class="js-select-basic-single js-states form-control">
+                                                <select style="width: 100%;" name="idioma" id="idioma" class="js-select-basic-single js-states form-control">
+                                                    <option></option>
+                                                    <c:forEach var="idioma" items="${idiomas}">
+                                                        <option value="${idioma.getId()}">${idioma.getNombre()}</option>
+                                                    </c:forEach>     
                                                 </select>
                                             </div>
                                         </div>                  
@@ -949,17 +1095,25 @@
                                     <div class="row" >
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="id_escucha">Nivel de escucha</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el nivel de escritura">
+                                                <label for="nivelEscuchaIdioma">Nivel de escucha</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el nivel de escritura">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
-                                                <select style="width: 100%;" name="id_escucha" id="id_escucha" class="js-select-basic-single js-states form-control">
+                                                <select style="width: 100%;" name="nivelEscuchaIdioma" id="nivelEscuchaIdioma" class="js-select-basic-single js-states form-control">
+                                                    <option></option>
+                                                    <c:forEach var="nivel" items="${nivelesIdioma}">
+                                                        <option value="${nivel.getId()}">${nivel.getNombre()}</option>
+                                                    </c:forEach> 
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="id_habla">Nivel de habla</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el nivel de habla">
+                                                <label for="nivelConversacionIdioma">Nivel de conversación</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el nivel de habla">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a> <br> 
-                                                <select style="width: 100%;" name="id_habla" id="id_habla" class="js-select-basic-single js-states form-control">
+                                                <select style="width: 100%;" name="nivelConversacionIdioma" id="nivelConversacionIdioma" class="js-select-basic-single js-states form-control">
+                                                    <option></option>
+                                                    <c:forEach var="nivel" items="${nivelesIdioma}">
+                                                        <option value="${nivel.getId()}">${nivel.getNombre()}</option>
+                                                    </c:forEach> 
                                                 </select>
                                             </div>
                                         </div>
@@ -967,222 +1121,366 @@
                                     <div class="row" >
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="id_lectura">Nivel de lectura</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cial es el nivel de lectura">
+                                                <label for="nivelLecturaIdioma">Nivel de lectura</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cial es el nivel de lectura">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
-                                                <select style="width: 100%;" name="id_lectura" id="id_lectura" class="js-select-basic-single js-states form-control">
+                                                <select style="width: 100%;" name="nivelLecturaIdioma" id="nivelLecturaIdioma" class="js-select-basic-single js-states form-control">
+                                                    <option></option>
+                                                    <c:forEach var="nivel" items="${nivelesIdioma}">
+                                                        <option value="${nivel.getId()}">${nivel.getNombre()}</option>
+                                                    </c:forEach> 
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="id_escritura">Nivel de escritura</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el nivel de escritura">
+                                                <label for="nivelEscrituraIdioma">Nivel de escritura</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el nivel de escritura">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
-                                                <select style="width: 100%;" name="id_escritura" id="id_escritura" class="js-select-basic-single js-states form-control">
+                                                <select style="width: 100%;" name="nivelEscrituraIdioma" id="nivelEscrituraIdioma" class="js-select-basic-single js-states form-control">
+                                                    <option></option>
+                                                    <c:forEach var="nivel" items="${nivelesIdioma}">
+                                                        <option value="${nivel.getId()}">${nivel.getNombre()}</option>
+                                                    </c:forEach> 
                                                 </select>
                                             </div>
                                         </div>
-
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Tipo de certificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de adenda">
+                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
+                                                <select style="width: 100%;" name="tipoCertificacionIdioma" id="tipoCertificacionIdioma" class="js-select-basic-single js-states form-control">
+                                                    <option></option>
+                                                    <c:forEach var="tipoCertificacion" items="${tiposCertificacion}">
+                                                        <option value="${tipoCertificacion.getId()}">${tipoCertificacion.getNombre()}</option>
+                                                    </c:forEach> 
+                                                </select>
+                                            </div>  
+                                        </div>
+                                        <div class="col-md-6" id="divOtroCertificacionIdioma" style="display: none;">
+                                            <div class="form-group">
+                                                <label for="">Cual?</label>
+                                                <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar cuando eliga el tipo otro cual?">
+                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                                <input type="text" name="otraCertificacionIdioma" id="otraCertificacionIdioma" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="">Puntaje</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el puntaje de estudio idioma">
+                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                                <input type="text" name="puntajeCertificacionIdioma" id="puntajeCertificacionIdioma" class="form-control">
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <div class="form-group">
-                                                <label for="cid_certificado">Certificado</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado que pertenece">
-                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <input type="file" class="form-control" name="cid_certificado" id="cid_certificado">
+                                            <div class="form-group form-inline">
+                                                <label for="certificadoIdioma">Certificado</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado que pertenece">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                                <div id="certificadosIdioma"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <input type="hidden" name="id_persona">
-                                    <button type="button" class="btn btn-success"  id="addidioma">Agregar</button>
-                                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-success" data-bind="click: adicionarIdioma">Agregar</button>
+                                    <button type="button" class="btn btn-success" onclick="cerrarVentanaIdioma();">Cancelar</button>
                                 </div>
                             </div>              
                         </div>
                     </div>
                 </div>
                 <!--MODAL ASPECTOS academicos modal estudio educacion basica-->
-                <div class="modal fade" id="md_aspestedbasica" role="dialog">
+                <div class="modal fade" id="md_educacion_basica" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header mhsuccess">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <button type="button" class="close" onclick="cerrarVentanaEducacionBasica();">&times;</button>
                                 <h4 class="modal-title">Estudios Educaci&oacute;n B&aacute;sica</h4>
                             </div>
                             <div class="modal-body">
+                                <div id="alert_educacion_basica"></div>
                                 <div class="row">
-
                                     <div class="col-md-4">
                                         <label for="">Nivel de estudio</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el nivel de estudio">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                        <select name="eb_nivel" id="eb_nivel" style="width: 100%;" class="js-select-basic-single js-states form-control">
+                                        <select name="nivelEstudioEducacionBasica" id="nivelEstudioEducacionBasica" style="width: 100%;" class="js-select-basic-single js-states form-control">
                                             <option value=""></option>
-                                            <option value="Primaria">Primaria</option>
-                                            <option value="Bachiller">Bachiller</option>
+                                            <c:forEach var="nivelEstudio" items="${nivelesEstudio}">
+                                                <option value="${nivelEstudio.getId()}">${nivelEstudio.getNombre()}</option>
+                                            </c:forEach>                                             
                                         </select>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="form-group">
-                                            <label for="eb_institucion">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la institucion que estudio">
+                                            <label for="institucionEducacionBasica">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la institucion que estudio">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <input name="eb_institucion" id="eb_institucion" class="form-control">
+                                            <select style="width: 100%;" name="institucionEducacionBasica" id="institucionEducacionBasica" class="js-select-basic-single js-states form-control">
+                                                <option></option>
+                                                <c:forEach var="institucionEducativa" items="${institucionesEducativas}">
+                                                    <option value="${institucionEducativa.getId()}">${institucionEducativa.getNombre()}</option>
+                                                </c:forEach>                                             
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-7">
-                                        <label for="eb_institucion">T&iacute;tulo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del t&iacute;tulo">
+                                    <div class="col-md-5">
+                                        <label for="tituloEducacionBasica">T&iacute;tulo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del t&iacute;tulo">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                        <input type="text" name="eb_nombre_titulo" id="eb_nombre_titulo" class="form-control">
+                                        <input type="text" name="tituloEducacionBasica" id="tituloEducacionBasica" class="form-control">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="graduadoEducacionBasica">Graduado?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar que si estan graduado?">
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                        <div id="radioBtn" class="btn-group">
+                                            <a class="btn btn-primary btn-sm notActive" data-toggle="graduadoEducacionBasica"  data-title="true"  id="btnGraduadoSiEducacionBasica">Si</a>
+                                            <a class="btn btn-primary btn-sm notActive" data-toggle="graduadoEducacionBasica"  data-title="false" id="btnGraduadoNoEducacionBasica">No</a>
+                                        </div>
+                                        <input type="hidden" name="graduadoEducacionBasica" id="graduadoEducacionBasica" value="false">
                                     </div>
                                     <div class="col-md-2" style="width: 180px;">
                                         <div class="form-group">
-                                            <label for="eb_anio_inicio">A&ntilde;o de inicio </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de inicio">
+                                            <label for="anyoInicioEducacionBasica">A&ntilde;o de inicio </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de inicio">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input type='text' class="form-control input-sm" name="eb_year_inicio" id="eb_year_inicio"  maxlength="4" />
-
+                                            <select name="anyoInicioEducacionBasica" id="anyoInicioEducacionBasica" class="form-control"></select>
                                         </div>
                                     </div>
                                     <div class="col-md-2" style="width: 180px;">
                                         <div class="form-group">
-                                            <label for="eb_anio_fin">A&ntilde;o de finalizaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de finalización">
+                                            <label for="anyoFinalizacionEducacionBasica">A&ntilde;o de finalizaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de finalización">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input type='text' class="form-control input-sm" name="eb_year_fin" id="eb_year_fin" maxlength="4" />
-
+                                            <select name="anyoFinalizacionEducacionBasica" id="anyoFinalizacionEducacionBasica" class="form-control"></select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="eb_certificado">Certificado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado del estudio">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <input type="file" class="form-control" name="ceb_certificado" id="ceb_certificado">
+                                        <div class="form-group form-inline">
+                                            <label for="certificadoEducacionBasica">Certificado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado del estudio">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> <br>
+                                            <div id="certificadosEducacionBasica"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <input type="hidden" name="id_persona">
-                                    <button type="button" class="btn btn-success" id="addestedbas">Agregar</button>
-                                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-success" data-bind="click: adicionarEducacionBasica">Agregar</button>
+                                    <button type="button" class="btn btn-success" onclick="cerrarVentanaEducacionBasica();">Cancelar</button>
                                 </div>
                             </div>              
                         </div>
                     </div>
                 </div>
                 <!--MODAL ASPECTOS academicos modal estudio tspectos academicos-->
-                <div class="modal fade" id="md_aspesttecnicos" role="dialog">
+                <div class="modal fade" id="md_educacion_superior" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header mhsuccess">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <button type="button" class="close" onclick="cerrarVentanaEducacionSuperior();">&times;</button>
                                 <h4 class="modal-title">Estudios Educaci&oacute;n Superior</h4>
                             </div>
                             <div class="modal-body">
+                                <div id="alert_educacion_superior"></div>
                                 <div class="row">
-
-                                    <div class="col-md-6">
-                                        <label for="">Nivel de estudio</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el nivel de estudio">
-                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                        <select name="est_nivel" id="est_nivel" style="width: 100%;" class="js-select-basic-single js-states form-control">
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="est_area_saber">&Aacute;rea de estudio</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el area del estudio">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <select style="width: 100%;" name="est_area_saber" id="est_area_saber" class="js-select-basic-single js-states form-control">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="est_institucion_educativa">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institucion que estudio">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <select style="width: 100%;" name="est_institucion_educativa" id="est_institucion_educativa" class="js-select-basic-single js-states form-control">
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="est_programa_cursado">Programa cursado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa cursado">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <input type="text" class="form-control" name="est_programa_cursado" id="est_programa_cursado">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="est_estudiando">¿Estudia actualmente?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger estas en estudio">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
+                                            <label>Titulo extranjero?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger estas en estudio">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> <br>
                                             <div id="radioBtn" class="btn-group" style="margin-left: 40px;">
-                                                <a class="btn btn-primary btn-sm notActive" data-toggle="est_estudiando"  data-title="true"  id="btnestudsi">Si</a>
-                                                <a class="btn btn-primary btn-sm notActive" data-toggle="est_estudiando"  data-title="false" id="btnestudno">No</a>
+                                                <a class="btn btn-primary btn-sm notActive" data-toggle="tituloExteriorEducacionSuperior"  data-title="true"  id="btnTituloExtranjeroSiEducacionSuperior">Si</a>
+                                                <a class="btn btn-primary btn-sm notActive" data-toggle="tituloExteriorEducacionSuperior"  data-title="false" id="btnTituloExtranjeroNoEducacionSuperior">No</a>
                                             </div>
-                                            <input type="hidden" name="est_estudiando" id="est_estudiando">
-
+                                            <input type="hidden" name="tituloExteriorEducacionSuperior" id="tituloExteriorEducacionSuperior">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="est_anio_inicio">A&ntilde;o de inicio </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de inicio">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input type='text' class="form-control input-sm" name="est_year_inicio" id="est_year_inicio" maxlength="4"/>
-
+                                    <div class="col-md-3">
+                                        <div class="form-group" id="paistit" style="display: none;">
+                                            <label for="">Pa&iacute;s de titulaci&oacute;n</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el pa&iacute; de titulaci&oacute;n">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> <br>
+                                            <select name="paisTituloExteriorEducacionSuperior" id="paisTituloExteriorEducacionSuperior" class="js-select-basic-single js-states form-control" style="width: 100%;">
+                                                <option></option>
+                                                 <c:forEach var="pais" items="${paises}">
+                                                    <option value="${pais.getId()}">${pais.getNombre()}</option>
+                                                </c:forEach>    
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="est_anio_fin">A&ntilde;o de finalizaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de finalización">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input type='text' class="form-control input-sm" name="est_year_fin" id="est_year_fin" maxlength="4"/>
-
+                                    <div class="col-md-6">
+                                        <div class="form-group form-inline" id="certhomo" style="display: none;">
+                                            <label>Certificado de homologaci&oacute;n del t&iacute;tulo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado de homologaci&oacute;n">
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                            <div id="certificadosHomologadosEducacionSuperior"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="est_titulo_obtenido">T&iacute;tulo obtenido</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de títutlo obtenido">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <input type="text" class="form-control" name="est_titulo_obtenido" id="est_titulo_obtenido">
+                                            <label for="">Nivel de estudio</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el nivel de estudio">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                            <select name="nivelEstudioEducacionSuperior" id="nivelEstudioEducacionSuperior" style="width: 100%;" class="js-select-basic-single js-states form-control">
+                                                <option value=""></option>
+                                                <c:forEach var="nivelEstudio" items="${nivelesEstudio}">
+                                                    <option value="${nivelEstudio.getId()}">${nivelEstudio.getNombre()}</option>
+                                                </c:forEach>                                                 
+                                            </select> 
+                                        </div>
+                                    </div>               
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Programa</label>
+                                            <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoPrograma();"><span class="glyphicon glyphicon-plus"></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="md_programa" role="dialog">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header mhsuccess">
+                                                <button type="button" class="close" onclick="cerrarVentanaPrograma();">&times;</button>
+                                                <h4 class="modal-title">Programa</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="institucionEducativaPrograma">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institucion que estudio">
+                                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                            <select style="width: 100%;" name="institucionEducativaPrograma" id="institucionEducativaPrograma" class="js-select-basic-single js-states form-control">
+                                                                <option value=""></option>
+                                                                <c:forEach var="institucionEducativa" items="${institucionesEducativas}">
+                                                                    <option value="${institucionEducativa.getId()}">${institucionEducativa.getNombre()}</option>
+                                                                </c:forEach>                                                                  
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="programaCursado">Programa cursado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa cursado">
+                                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                            <input type="text" class="form-control" name="programaCursado" id="programaCursado" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-7">
+                                                        <div class="form-group">
+                                                            <label for="tituloPrograma">T&iacute;tulo obtenido</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de título obtenido">
+                                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                            <input type="text" class="form-control" name="tituloPrograma" id="tituloPrograma">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div class="form-group">
+                                                            <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcloe básico de conocimiento">
+                                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                            <select style="width: 100%;" name="areaSaberPrograma" id="areaSaberPrograma" class="js-select-basic-single js-states form-control">
+                                                                <option></option>
+                                                                <c:forEach var="areaSaber" items="${areasSaber}">
+                                                                    <option value="${areaSaber.getId()}">${areaSaber.getNombre()}</option>
+                                                                </c:forEach>                                                                   
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success" id="addprograma">Agregar</button>
+                                                <button type="button" class="btn btn-success" onclick="cerrarVentanaPrograma();">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="formprograma" style="display: none;">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Instituci&oacute;n</label><br>
+                                                <textarea type="text" style="border:0;font-style: italic;width: 100%;"  readonly id="nombreInstitucionEducacionSuperior"></textarea>
+                                                <input type="hidden" id="institucionEducacionSuperior">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="programaCursadoEducacionSuperior">Programa</label><br>
+                                                <input type="text" style="border:0;font-style: italic;margin-left: 20px;" readonly id="programaCursadoEducacionSuperior">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><br>
+                                                <input type="text" style="border:0;font-style: italic;margin-left: 20px; width: 330px;" size="2" readonly id="nombreAreaSaberEducacionSuperior">
+                                                <input type="hidden" id="areaSaberEducacionSuperior">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="tituloEducacionSuperior">T&iacute;tulo obtenido</label><br>
+                                                <input type="text" style="border:0;font-style: italic;width: 300px;" readonly id="tituloEducacionSuperior">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="graduadoEducacionSuperior">¿Graduado?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger estas en estudio">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> <br>
+                                            <div id="radioBtn" class="btn-group" style="margin-left: 40px;">
+                                                <a class="btn btn-primary btn-sm notActive" data-toggle="graduadoEducacionSuperior"  data-title="true"  id="btnGraduadoSiEducacionSuperior">Si</a>
+                                                <a class="btn btn-primary btn-sm notActive" data-toggle="graduadoEducacionSuperior"  data-title="false" id="btnGraduadoNoEducacionSuperior">No</a>
+                                            </div>
+                                            <input type="hidden" name="graduadoEducacionSuperior" id="graduadoEducacionSuperior">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="anyoInicioEducacionSuperior">A&ntilde;o de inicio </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de inicio">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                            <select name="anyoInicioEducacionSuperior" id="anyoInicioEducacionSuperior" class="form-control"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="anyoFinalizacionEducacionSuperior">A&ntilde;o de finalizaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de finalización">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                            <select name="anyoFinalizacionEducacionSuperior" id="anyoFinalizacionEducacionSuperior" class="form-control"></select>
+
+
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group" >
-                                            <label for="est_fecha_titulo">Fecha de titulaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de titulo obtenido">
+                                            <label for="fechaTituloEducacionSuperior">Fecha de titulaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de titulo obtenido">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-
-                                            <input type='text' class="form-control fecha input-sm" name="est_fecha_titulo" id="est_fecha_titulo" style="display: inline;width: 80%;margin-right: -5px;"/>
-                                            <span class="input-group-addon" style="display: inline;"><span class="glyphicon glyphicon-calendar" ></span>
-                                            </span>
+                                            <input type='text' class="form-control fecha2 input-sm" name="fechaTituloEducacionSuperior" id="fechaTituloEducacionSuperior" style="display: inline;width: 80%;margin-right: -5px;"/>
+                                            <span class="input-group-addon" style="display: inline;"><span class="glyphicon glyphicon-calendar" ></span></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="ep_certificado">Certificado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado del estudio">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <input type="file" class="form-control" name="es_certificado" id="es_certificado">
+                                        <div class="form-group form-inline">
+                                            <label for="certificado">Certificado de acta de grado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado del estudio">
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>  
+                                            <div id="certificadosEducacionSuperior"></div>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="modal-footer">
-                                    <input type="hidden" name="id_persona">
-                                    <button type="button" class="btn btn-success" id="addesttecnicos">Agregar</button>
-                                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-success" data-bind="click: adicionarEducacionSuperior">Aceptar</button>
+                                    <button type="button" class="btn btn-success" onclick="cerrarVentanaEducacionSuperior();">Cancelar</button>
                                 </div>
                             </div>              
                         </div>
                     </div>
                 </div><!--fin modal aspectos academicos modal estudios aspectos academicos-->
-            </div> 
+            </div>            
             <div id="formeducontinua" style="display: none;">
                 <div class="row">   
                     <div class="col-md-1" style="margin-bottom: 20px;">
@@ -1921,76 +2219,6 @@
         scrollToTopOnError: false // Set this property to true on longer forms
     });
     $(document).ready(function () {
-        $('#tbdistin').DataTable({
-            "paging": false,
-            "bFilter": false,
-            "info": false,
-            "language": {
-                "sEmptyTable": "Ningún dato disponible en esta tabla"
-            },
-            "columnDefs": [
-                {
-                    "targets": [0],
-                    "visible": false,
-                    "searchable": false
-                }]
-        });
-        var tbexplab = $('#tbexplab').DataTable({
-            "paging": false,
-            "bFilter": false,
-            "info": false,
-            "language": {
-                "sEmptyTable": "Ningún dato disponible en esta tabla"
-            }
-        });
-        var tbexpdoc = $('#tbexpdoc').DataTable({
-            "paging": false,
-            "bFilter": false,
-            "info": false,
-            "language": {
-                "sEmptyTable": "Ningún dato disponible en esta tabla"
-            }
-        });
-        var tbearticulo = $('#tbearticulo').DataTable({
-            "paging": false,
-            "bFilter": false,
-            "info": false,
-            "language": {
-                "sEmptyTable": "Ningún dato disponible en esta tabla"
-            }
-        });
-        var tbcapaci = $('#tbcapaci').DataTable({
-            "paging": false,
-            "bFilter": false,
-            "info": false,
-            "language": {
-                "sEmptyTable": "Ningún dato disponible en esta tabla"
-            }
-        });
-        var tbestedbas = $('#tbestedbas').DataTable({
-            "paging": false,
-            "bFilter": false,
-            "info": false,
-            "language": {
-                "sEmptyTable": "Ningún dato disponible en esta tabla"
-            }
-        });
-        var tbestecnico = $('#tbestecnico').DataTable({
-            "paging": false,
-            "bFilter": false,
-            "info": false,
-            "language": {
-                "sEmptyTable": "Ningún dato disponible en esta tabla"
-            }
-        });
-        var tbidiomas = $('#tbidiomas').DataTable({
-            "paging": false,
-            "bFilter": false,
-            "info": false,
-            "language": {
-                "sEmptyTable": "Ningún dato disponible en esta tabla"
-            }
-        });
         $('#btnpersonal').click(function () {
             $('#formpersonal').css("display", "block");
             $('#formperfilsopor').css("display", "none");
@@ -2054,36 +2282,18 @@
             $('#forminves').css("display", "none");
             $('#formexperiencia').css("display", "none");
         });
-
-        $('#addidioma').click(function () {
-            var idioma = $('#id_idioma').val();
-            var escucha = $('#id_escucha').val();
-            var habla = $('#id_habla').val();
-            var escritura = $('#id_escritura').val();
-            var lectura = $('#id_lectura').val();
-            var certifidioma = $('#cid_certificado').val();
-            tbidiomas.row.add([idioma, lectura, escritura, habla, "<a href='#' target='_black' title='Ver documemnto' style='margin-left: 30px;' class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>", "<button class='btn btn-success btn-xs' type='button'><i class='fa fa-pencil' aria-hidden='true'></i></button><button class='btn btn-danger btn-xs' type='button' id='btnborrar'><span class='glyphicon glyphicon-remove'></span></button>"]).draw(false);
-
-            $('#md_idioma').modal('hide');
-            $('#id_idioma').val("").trigger("change.select2");
-            $('#id_escucha').val("").trigger("change.select2");
-            $('#id_habla').val("").trigger("change.select2");
-            $('#id_escritura').val("").trigger("change.select2");
-            $('#id_lectura').val("").trigger("change.select2");
-            $('#cid_certificado').val("");
-        });
         $('#btnrutsi').click(function () {
             $('#actividadEconomica').prop('disabled', false);
         });
-        if($('#disponeRUT').val() === "false") {
-           $('#actividadEconomica').prop('disabled', true);
+        if ($('#disponeRUT').val() === "false") {
+            $('#actividadEconomica').prop('disabled', true);
         }
         $('#btnrutno').click(function () {
             $('#actividadEconomica').val("").trigger("change.select2");
             $('#actividadEconomica').prop('disabled', 'disabled');
         });
-        if($('#empleadoUDEA').val() === "false") {
-           $('#tipoVinculacion').prop('disabled', true);
+        if ($('#empleadoUDEA').val() === "false") {
+            $('#tipoVinculacion').prop('disabled', true);
         }
         $('#btnempleadosi').click(function () {
             $("#tipoVinculacion").prop('disabled', false);
@@ -2092,149 +2302,68 @@
             $("#tipoVinculacion").prop('disabled', 'disabled');
             $('#tipoVinculacion').val("").trigger("change.select2");
         });
-
-        $('#addestedbas').click(function ()
-        {
-            var nivel = $('#eb_nivel').val();
-            var inst = $('#eb_institucion').val();
-            var tit = $('#eb_nombre_titulo').val();
-            var anofin = $('#eb_year_fin').val();
-
-            var cert = $('#eb_certificado').val();
-            tbestedbas.row.add(
-                    [nivel, inst, tit, anofin, "<a href='#' target='_black' title='Ver documemnto' style='margin-left: 30px;' class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>", "<button class='btn btn-success btn-xs' type='button'><i class='fa fa-pencil' aria-hidden='true'></i></button><button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;'><span class='glyphicon glyphicon-remove'></span></button>"]
-                    ).draw(false);
-
-            $('#eb_nivel').val("").trigger('change.select2');
-            $('#eb_institucion').val("");
-            $('#eb_year_inicio').val("");
-            $('#eb_year_fin').val("");
-
-            $('#md_aspestedbasica').modal('hide');
+        $('#tipoCertificacionIdioma').change(function(){
+            var valor = $(this).val();
+            if(valor === "8") {
+              $('#divOtroCertificacionIdioma').css("display","block");
+            } else {
+              $('#divOtroCertificacionIdioma').css("display","none");
+            }
+        });     
+        $('#btnGraduadoSiEducacionBasica').click(function(){
+          $('#anyoInicioEducacionBasica').prop('disabled',false);
         });
-        $('#addesttecnicos').click(function () {
-            var nivel = $('#est_nivel').val();
-            var area = $('#est_area_saber').val();
-            var inst = $('#est_institucion_educativa').val();
-            var programa = $('#est_programa_cursado').val();
-            var fectit = $('#est_fecha_titulo').val();
-            var certificado = $('#es_certificado').val();
-
-            tbestecnico.row.add(
-                    [nivel, inst, programa, fectit, "<a href='#' target='_black' title='Ver documento' style='margin-left: 30px;' class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>", "<button class='btn btn-success btn-xs' type='button'><i class='fa fa-pencil' aria-hidden='true'></i></button><button class='btn btn-danger btn-xs' type='button' id='btnborrar'><span class='glyphicon glyphicon-remove'></span></button>"]).draw(false);
-
-            $('#md_aspesttecnicos').modal('hide');
-            $('#est_nivel').val("").trigger("change.select2");
-            $('#est_area_saber').val().trigger("change.select2");
-            $('#est_institucion_educativa').val().trigger("change.select2");
-            $('#est_year_inicio').val("");
-            $('#est_year_fin').val("");
-            $('#est_programa_cursado').val(" ");
-            $('#est_titulo_obtenido').val("");
-            $('#est_fecha_titulo').val(" ");
-            $('#es_certificado').val("");
+        $('#btnGraduadoNoEducacionBasica').click(function(){
+          $('#anyoFinalizacionEducacionBasica').prop('disabled','disabled');
+          $('#anyoFinalizacionEducacionBasica').val("");
         });
-        $('#btnestudsi').click(function () {
-            $('#est_year_fin').prop('disabled', false);
+        $('#btnTituloExtranjeroSiEducacionSuperior').click(function(){
+          $('#paistit').css("display","block");
+          $('#certhomo').css('display','block');
         });
-        $('#btnestudno').click(function () {
-            $('#est_year_fin').prop('disabled', 'disabled');
+        $('#btnTituloExtranjeroNoEducacionSuperior').click(function(){
+          $('#paistit').css("display","none");
+          $('#certhomo').css('display','none');
+        });  
+        $('#btnGraduadoSiEducacionSuperior').click(function () {
+          $('#anyoFinalizacionEducacionSuperior').prop('disabled', false);
         });
-        $('#addcur').click(function () {
-            var inst = $('#ped_institucion').val();
-            var nivel = $('#edc_nivel_form').val();
-            var nomcur = $('#edc_nombre_curso').val();
-            var modalidad = $('#edc_modalidad').val();
-            var nhoras = $('#edc_num_horas').val();
-            var certcur = $('#edc_certificado').val();
-
-            fila = "<tr><td>" + nomcur + "</td><td>" + nivel + "</td><td>" + modalidad + "</td><td>" + nhoras + "</td><td style='white-space: nowrap'><button class='btn btn-success btn-xs' type='button'><i class='fa fa-pencil' aria-hidden='true'></i></button><button class='btn btn-danger btn-xs' type='button' id='btnborrar'><span class='glyphicon glyphicon-remove'></span></button></td></tr>";
-            $('#tbcur').append(fila);
-            $('#md_curso').modal('hide');
-            $('#ped_institucion').val("");
-            $('#ped_dedicacion').val("");
-            $('#edc_nombre_curso').val("");
-            $('#edc_nivel_form').val("").trigger("change.select2");
-            $('#edc_modalidad').val("").trigger("change.select2");
-            $('#edc_num_horas').val("");
-            $('#edc_certificado').val("");
+        $('#btnGraduadoNoEducacionSuperior').click(function () {
+          $('#anyoFinalizacionEducacionSuperior').prop('disabled', 'disabled');
         });
-        $('#adddocadj').click(function () {
-            var tipodoc = $('#docp_tipo_doc').val();
+        $('#addprograma').click(function(){
+          var institucion = $('#institucionEducativaPrograma').val();
+          var nombreInstitucion = $('#institucionEducativaPrograma option:selected').text().toUpperCase();
+          var programaCursado = $('#programaCursado').val();
+          var areaSaberPrograma = $('#areaSaberPrograma').val();
+          var nombreAreaSaberPrograma = $('#areaSaberPrograma option:selected').text().toUpperCase();
+          var tituloPrograma = $('#tituloPrograma').val();
 
-            fila = "<tr><td>" + tipodoc + "</td><td><a href='#' target='_black' title='Ver documento' style='margin-left: 30px;' class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a></td><td><button class='btn btn-danger btn-xs' type='button' id='btnborrar'><span class='glyphicon glyphicon-remove'></span></button></td></tr>";
-            $('#tbdocad').append(fila);
-            $('#md_docadj').modal('hide');
-            $('#docp_tipo_doc').val("").trigger("change.select2");
+          $('#formprograma').css("display","block");
+          
+          $('#institucionEducacionSuperior').val(institucion);
+          $('#nombreInstitucionEducacionSuperior').val(nombreInstitucion);
+          $('#programaCursadoEducacionSuperior').val(programaCursado);
+          $('#areaSaberEducacionSuperior').val(areaSaberPrograma);
+          $('#nombreAreaSaberEducacionSuperior').val(nombreAreaSaberPrograma);
+          $('#tituloEducacionSuperior').val(tituloPrograma);
+          
+          $('#areaSaberPrograma').val("").trigger("change.select2");
+          $('#institucionEducativaPrograma').val("").trigger("change.select2");
+          $('#programaCursado').val("");
+          $('#tituloPrograma').val("");
+          
+          $('#md_programa').modal('hide');
         });
-        $('#addcapacitacion').click(function () {
-            var edid = $('#ec_id').val();
-            var tipcap = $('#es_tipo_capacitacion').val();
-            var inscap = $('#ec_institucion').val();
-            var nomcap = $('#ec_nombre_capacitacion').val();
-            var numhorcap = $('#ec_numero_horas').val();
-            var aniocap = $('#ec_year').val();
-            var certcap = $('#cec_certificado').val();
-
-            tbcapaci.row.add([tipcap, nomcap, inscap, numhorcap, "<a href='#' target='_black' title='Ver documemnto' style='margin-left: 30px;' class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>", "<button class='btn btn-success btn-xs' type='button'><i class='fa fa-pencil' aria-hidden='true'></i></button><button class='btn btn-danger btn-xs' type='button' id='btnborrar'><span class='glyphicon glyphicon-remove'></span></button>"]).draw(false);
-            $('#es_tipo_capacitacion').val("").trigger("change.select2");
-            $('#ec_institucion').val("").trigger("change.select2");
-            $('#ec_nombre_capacitacion').val("");
-            $('#ec_year').val("");
-            $('#md_capacitacion').modal('hide');
-        });
-        $('#addexpdoc').click(function () {
-
-            var inst = $('#ped_institucion').val();
-            var ded = $('#ped_dedicacion').val();
-
-            tbexpdoc.row.add([inst, ded, "<button class='btn btn-success btn-xs'style='margin-right:10px' type='button'><i class='fa fa-pencil' aria-hidden='true'></i></button><button class='btn btn-danger btn-xs' type='button' id='btnborrar'><span class='glyphicon glyphicon-remove'></span></button>"]).draw(false);
-
-            $('#md_expdoc').modal('hide');
-            $('#ped_institucion').val("").trigger("change.select2");
-            $('#ped_dedicacion').val("").trigger("change.select2");
-        });
+       
         $('#btnfnspdocsi').click(function () {
 
             $('#ped_institucion').val('Universidad de Antioquia').trigger('change.select2');
             $('#ped_institucion').prop('disabled', 'disabled');
         });
         $('#btnfnspdocno').click(function () {
-
             $('#ped_institucion').val("").trigger('change.select2');
             $('#ped_institucion').prop('disabled', false);
-
-        });
-        $('#addexplab').click(function () {
-
-            var tipoexpe = $('#ep_tipoexperiencia').val();
-            var area = $('#ep_area_exp').val();
-            var tipocon = $('#ep_tipo_contrato').val();
-            var nomemp = $('#ep_nombre_empresa').val();
-            var dedic = $('#ep_dedicacion').val();
-            var cargo = $('#ep_cargo').val();
-            var carequi = $('#ep_cargo_equivalente').val();
-            var fecharet = $('#ep_fecharetiro').val();
-            var certifi = $('#ep_certificado').val();
-            var trafnsp = $('#ep_exp_fnsp').val();
-
-            tbexplab.row.add([area, nomemp, cargo, "<a href='#' target='_black' title='Ver documemnto' style='margin-left: 30px;' class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>", "<button class='btn btn-success btn-xs'style='margin-right:10px' type='button'><i class='fa fa-pencil' aria-hidden='true'></i></button><button class='btn btn-danger btn-xs' type='button' id='btnborrar'><span class='glyphicon glyphicon-remove'></span></button>"]).draw(false);
-
-            $('#md_explab').modal('hide');
-
-            $('#ep_tipoexperiencia').val("");
-            $('#ep_tipo_exp').val("");
-            $('#ep_area_exp').val("").trigger("change.select2");
-            $('#ep_tipo_contrato').val("").trigger("change.select2");
-            $('#ep_tipo_empresa').val("").trigger("change.select2");
-            $('#ep_nombre_empresa').val("");
-            $('#ep_actividad_economica').val("").trigger("change.select2");
-            $('#ep_dedicacion').val("").trigger("change.select2");
-            $('#ep_cargo').val("");
-            $('#ep_cargo_equivalente').val("").trigger("change.select2");
-            $('#ep_fecharetiro').val("");
-            $('#ep_certificado').val("");
-
         });
         $('#btntrasi').click(function () {
             $('#ep_fecharetiro').prop('disabled', 'disabled');
@@ -2250,41 +2379,6 @@
             $('#ep_nombre_empresa').val("");
             $('#ep_nombre_empresa').prop('disabled', false);
         });
-        $('#addart').click(function () {
-
-            var artnom = $('#art_nombre').val();
-            var tipoau = $('#art_tipo_autor').val();
-            var artnomrev = $('#art_nom_revista').val();
-            var artyear = $('#art_year').val();
-            var arturl = $('#art_url').val();
-
-            $('#md_articulo').modal('hide');
-            $('#art_nombre').val("");
-            $('#art_tipo_autor').val("").trigger("change.select2");
-            $('#art_nom_revista').val("");
-            $('#art_year').val("");
-            $('#art_url').val("");
-
-        });
-
-        $('#adddistinpubli').click(function () {
-            var fecha = $('#fechaactual').val();
-
-            var instit = $('#dist_institucion_otorga').val();
-            var descrip = $('#dist_descripcion').val();
-            var certif = $('#pdc_certiifcado').val();
-
-            $('#md_distincion').modal('hide');
-        });
-
-        $('#addpubli').click(function () {
-            var fechaac = $('#fechaactual2').val();
-            var personpubli = $('#publi_persona').val();
-            var url = $('#publi_cvlac_url').val();
-
-            $('#md_publicacion').modal('hide');
-        });
-
         $('#radrural').change(function ()
         {
             var valor = $(this).val();
@@ -2307,34 +2401,13 @@
         $('#pin_scopus').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
-        $('#cb_numero_cuenta').keyup(function () {
-            this.value = (this.value + '').replace(/[^0-9]/g, '');
-        });
-        $('#est_year_inicio').keyup(function () {
-            this.value = (this.value + '').replace(/[^0-9]/g, '');
-        });
-        $('#est_year_fin').keyup(function () {
-            this.value = (this.value + '').replace(/[^0-9]/g, '');
-        });
-        $('#eb_year_inicio').keyup(function () {
-            this.value = (this.value + '').replace(/[^0-9]/g, '');
-        });
-        $('#eb_year_fin').keyup(function () {
-            this.value = (this.value + '').replace(/[^0-9]/g, '');
-        });
-        $('#art_year').keyup(function () {
+        $('#numeroCuentaBancaria').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
         $('#edc_num_horas').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
         $('#ec_numero_horas').keyup(function () {
-            this.value = (this.value + '').replace(/[^0-9]/g, '');
-        });
-        $('#ec_year').keyup(function () {
-            this.value = (this.value + '').replace(/[^0-9]/g, '');
-        });
-        $('#edc_year').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
         $('#pe_numero_id').keyup(function () {
@@ -2346,7 +2419,6 @@
         $('#tel_numero').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
-
         $('#numdir').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
@@ -2356,7 +2428,6 @@
         $('#num3dir').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
-
         $('#dircalle').change(function () {
             var valor = $(this).val();
             $("#rescalle").val(valor);
@@ -2439,10 +2510,11 @@
 
             $("#vistaprevia").val(rescalle + " " + resnumdir + resletdir + " " + resdisur + " # " + resnum2dir + reslet2dir + resdirest + "-" + resnum3dir + " " + valor);
         });
-
-        for (i = new Date().getFullYear(); i > 1800; i--)
-        {
-            $('#art_year').append($('<option/>').val(i).html(i));
+        for (i = new Date().getFullYear(); i > 1800; i--) {
+            $('#anyoInicioEducacionBasica').append($('<option/>').val(i).html(i));
+            $('#anyoFinalizacionEducacionBasica').append($('<option/>').val(i).html(i));
+            $('#anyoInicioEducacionSuperior').append($('<option/>').val(i).html(i));
+            $('#anyoFinalizacionEducacionSuperior').append($('<option/>').val(i).html(i));
         }
         $('#adddireccion').click(function () {
             if ($('#radrural').is(':checked')) {
@@ -2533,11 +2605,15 @@
             }});
     }
 
-    var HojaVidaModel = function (correosElectronicos, cuentasBancarias, telefonos) {
+    var HojaVidaModel = function (correosElectronicos, cuentasBancarias, telefonos, documentosSoporte, idiomas, educacionesBasicas, educacionesSuperiores) {
         self = this;
         self.correosElectronicos = ko.observableArray(correosElectronicos);
         self.cuentasBancarias = ko.observableArray(cuentasBancarias);
         self.telefonos = ko.observableArray(telefonos);
+        self.documentosSoporte = ko.observableArray(documentosSoporte);
+        self.idiomas = ko.observableArray(idiomas);
+        self.educacionesBasicas = ko.observableArray(educacionesBasicas);
+        self.educacionesSuperiores = ko.observableArray(educacionesSuperiores);
 
         self.adicionarCorreoElectronico = function () {
             var correoElectronico = $('#correoElectronico').val();
@@ -2545,10 +2621,10 @@
                 bootstrap_alert_correo_electronico.warning('Debe ingresar el correo electrónico');
                 return false;
             }
-            if(!validarCorreoElectronico(correoElectronico)) {
+            if (!validarCorreoElectronico(correoElectronico)) {
                 bootstrap_alert_correo_electronico.warning('Debe ingresar un correo electrónico válido');
                 return false;
-            }    
+            }
             if ($('#consecutivo').val() === "") {
                 self.correosElectronicos.push({
                     id: ko.observable(0),
@@ -2567,10 +2643,6 @@
                 self.correosElectronicos()[indice].correoElectronico(correoElectronico);
             }
             $('#md_correo_electronico').modal('hide');
-            $('#tipoCorreoElectronico').val("").trigger('change');
-            $('#nombreTipoCorreoElectronico').val("");
-            $('#numeroCorreoElectronico').val("");
-            $('#consecutivo').val("");
         };
 
         self.eliminarCorreoElectronico = function (correoElectronico) {
@@ -2580,6 +2652,7 @@
         self.editarCorreoElectronico = function (correoElectronico) {
             $('#correoElectronico').val(correoElectronico.correoElectronico());
             $('#consecutivo').val(correoElectronico.consecutivo());
+            bootstrap_alert_correo_electronico.removeWarning();
             $('#md_correo_electronico').modal('show');
         };
 
@@ -2588,7 +2661,7 @@
             var nombreTipoCuentaBancaria = $('#tipoCuentaBancaria option:selected').text();
             var numeroCuentaBancaria = $('#numeroCuentaBancaria').val();
             var entidadCuentaBancaria = $('#entidadCuentaBancaria').val();
-            
+
             if (tipoCuentaBancaria === "") {
                 bootstrap_alert_cuenta_bancaria.warning('Debe ingresar el tipo de cuenta bancaria');
                 return false;
@@ -2596,12 +2669,12 @@
             if (numeroCuentaBancaria === "") {
                 bootstrap_alert_cuenta_bancaria.warning('Debe ingresar el número de cuenta bancaria');
                 return false;
-            }            
+            }
             if (entidadCuentaBancaria === "") {
                 bootstrap_alert_cuenta_bancaria.warning('Debe ingresar la entidad cuenta bancaria');
                 return false;
-            }            
-            
+            }
+
             if ($('#consecutivo').val() === "") {
                 self.cuentasBancarias.push({
                     id: ko.observable(0),
@@ -2626,10 +2699,6 @@
                 self.cuentasBancarias()[indice].entidad(entidadCuentaBancaria);
             }
             $('#md_cuenta_bancaria').modal('hide');
-            $('#tipoCuentaBancaria').val("").trigger('change');
-            $('#nombreTipoCuentaBancaria').val("");
-            $('#numeroCuentaBancaria').val("");
-            $('#consecutivo').val("");
         };
 
         self.eliminarCuentaBancaria = function (cuentaBancaria) {
@@ -2642,6 +2711,7 @@
             $('#numeroCuentaBancaria').val(cuentaBancaria.numero());
             $('#entidadCuentaBancaria').val(cuentaBancaria.entidad());
             $('#consecutivo').val(cuentaBancaria.consecutivo());
+            bootstrap_alert_cuenta_bancaria.removeWarning();
             $('#md_cuenta_bancaria').modal('show');
         };
 
@@ -2649,7 +2719,7 @@
             var tipoTelefono = $('#tipoTelefono').val();
             var nombreTipoTelefono = $('#tipoTelefono option:selected').text();
             var numeroTelefono = $('#numeroTelefono').val();
-            
+
             if (tipoTelefono === "") {
                 bootstrap_alert_telefono.warning('Debe ingresar el tipo de teléfono');
                 return false;
@@ -2658,7 +2728,7 @@
                 bootstrap_alert_telefono.warning('Debe ingresar el número de teléfono');
                 return false;
             }
-            
+
             if ($('#consecutivo').val() === "") {
                 self.telefonos.push({
                     id: ko.observable(0),
@@ -2681,10 +2751,6 @@
                 self.telefonos()[indice].numero(numeroTelefono);
             }
             $('#md_telefono').modal('hide');
-            $('#tipoTelefono').val("").trigger('change');
-            $('#nombreTipoTelefono').val("");
-            $('#numeroTelefono').val("");
-            $('#consecutivo').val("");
         };
 
         self.eliminarTelefono = function (telefono) {
@@ -2696,13 +2762,539 @@
             $('#nombreTipoTelefono').val(telefono.nombreTipo());
             $('#numeroTelefono').val(telefono.numero());
             $('#consecutivo').val(telefono.consecutivo());
+            bootstrap_alert_telefono.removeWarning();
             $('#md_telefono').modal('show');
         };
+
+        self.adicionarDocumentoSoporte = function () {
+            var tipoDocumento = $('#tipoDocumento').val();
+            var nombreTipoDocumento = $('#tipoDocumento option:selected').text();
+
+            if (tipoDocumento === "") {
+                bootstrap_alert_documento_soporte.warning('Debe ingresar el tipo de documento');
+                return false;
+            }
+            if ($('#consecutivo').val() === "") {
+                if ($('input:file[name="documentosSoporte[' + self.documentosSoporte().length + '].documento"]').val() === "") {
+                    bootstrap_alert_documento_soporte.warning('Debe ingresar el documento');
+                    return false;
+                }
+                self.documentosSoporte.push({
+                    id: ko.observable(0),
+                    consecutivo: ko.observable(self.documentosSoporte().length),
+                    tipoDocumento: ko.observable(tipoDocumento),
+                    nombreTipoDocumento: ko.observable(nombreTipoDocumento),
+                    documento: ko.observable(''),
+                    tieneDocumento: ko.observable(false)
+                });
+                $('input:file[name="documentosSoporte[' + self.documentosSoporte().length + '].documento"]').hide();
+            } else {
+                var consecutivo = parseInt($('#consecutivo').val(), 10);
+                var indice = 0;
+                for (i = 0; i < self.documentosSoporte().length; i++) {
+                    if (self.documentosSoporte()[i].consecutivo() === consecutivo) {
+                        indice = i;
+                        break;
+                    }
+                }
+                if (self.documentosSoporte()[indice].id === 0 && 
+                    $('input:file[name="documentosSoporte[' + indice + '].documento"]').val() === "") {
+                    bootstrap_alert_documento_soporte.warning('Debe ingresar el documento');
+                    return false;
+                }
+
+                self.documentosSoporte()[indice].tipoDocumento(tipoDocumento);
+                self.documentosSoporte()[indice].nombreTipoDocumento(nombreTipoDocumento);
+                self.documentosSoporte()[indice].documento('');
+                if ($('input:file[name="documentosSoporte[' + indice + '].documento"]').val() !== "") {
+                    self.documentosSoporte()[indice].tieneDocumento(false);
+                }
+                $('input:file[name="documentosSoporte[' + indice + '].documento"]').hide();
+            }
+            $('#md_documento_soporte').modal('hide');
+        };
+
+        self.eliminarDocumentoSoporte = function (documentoSoporte) {
+            $('input:file[name="documentosSoporte[' + documentoSoporte.consecutivo() + '].documento"]').remove();
+            self.documentosSoporte.remove(documentoSoporte);
+        };
+
+        self.editarDocumentoSoporte = function (documentoSoporte) {
+            ocultarDocumentosSoporte();
+            $('#tipoDocumento').val(documentoSoporte.tipoDocumento()).trigger('change');
+            $('#consecutivo').val(documentoSoporte.consecutivo());
+            $('input:file[name="documentosSoporte[' + documentoSoporte.consecutivo() + '].documento"]').show();
+            bootstrap_alert_documento_soporte.removeWarning();
+            $('#md_documento_soporte').modal('show');
+        };
+
+        self.verDocumentoDocumentoSoporte = function (documentoSoporte) {
+            window.location.href = "${pageContext.request.contextPath}/hojasVida/documentoSoporte/" + documentoSoporte.id();
+        };
+
+        self.adicionarIdioma = function () {
+            var idioma = $('#idioma').val();
+            var nombreIdioma = $('#idioma option:selected').text();
+            var nivelConversacion = $('#nivelConversacionIdioma').val();
+            var nombreNivelConversacion = $('#nivelConversacionIdioma option:selected').text();
+            var nivelEscritura = $('#nivelEscrituraIdioma').val();
+            var nombreNivelEscritura = $('#nivelEscrituraIdioma option:selected').text();
+            var nivelEscucha = $('#nivelEscuchaIdioma').val();
+            var nombreNivelEscucha = $('#nivelEscuchaIdioma option:selected').text();
+            var nivelLectura = $('#nivelLecturaIdioma').val();
+            var nombreNivelLectura = $('#nivelLecturaIdioma option:selected').text();
+            var otraCertificacion = $('#otraCertificacionIdioma').val();
+            var tipoCertificacion = $('#tipoCertificacionIdioma').val();
+            var nombreTipoCertificacion = $('#tipoCertificacionIdioma option:selected').text();
+            var puntajeCertificacion = $('#puntajeCertificacionIdioma').val();
+
+            if (idioma === "") {
+                bootstrap_alert_idioma.warning('Debe seleccionar el idioma');
+                return false;
+            }
+            if (nivelEscucha === "") {
+                bootstrap_alert_idioma.warning('Debe seleccionar el nivel de escucha');
+                return false;
+            }
+            if (nivelConversacion === "") {
+                bootstrap_alert_idioma.warning('Debe seleccionar el nivel de conversación');
+                return false;
+            }
+            if (nivelLectura === "") {
+                bootstrap_alert_idioma.warning('Debe seleccionar el nivel de lectura');
+                return false;
+            }
+            if (nivelEscritura === "") {
+                bootstrap_alert_idioma.warning('Debe seleccionar el nivel de escritura');
+                return false;
+            }
+            if (tipoCertificacion === "8" && otraCertificacion === "") {
+                bootstrap_alert_idioma.warning('Debe ingresar la certificación');
+                return false;
+            }
+            if (puntajeCertificacion === "") {
+                bootstrap_alert_idioma.warning('Debe ingresar el puntaje de certificación');
+                return false;
+            }
+            if ($('#consecutivo').val() === "") {
+                if ($('input:file[name="idiomas[' + self.idiomas().length + '].certificado"]').val() === "") {
+                    bootstrap_alert_idioma.warning('Debe ingresar el certificado');
+                    return false;
+                }
+                self.idiomas.push({
+                    id: ko.observable(0),
+                    consecutivo: ko.observable(self.idiomas().length),
+                    idioma: ko.observable(idioma),
+                    nombreIdioma: ko.observable(nombreIdioma),
+                    nivelConversacion: ko.observable(nivelConversacion),
+                    nombreNivelConversacion: ko.observable(nombreNivelConversacion),
+                    nivelEscritura: ko.observable(nivelEscritura),
+                    nombreNivelEscritura: ko.observable(nombreNivelEscritura),
+                    nivelEscucha: ko.observable(nivelEscucha),
+                    nombreNivelEscucha: ko.observable(nombreNivelEscucha),
+                    nivelLectura: ko.observable(nivelLectura),
+                    nombreNivelLectura: ko.observable(nombreNivelLectura),
+                    otraCertificacion: ko.observable(otraCertificacion),
+                    tipoCertificacion: ko.observable(tipoCertificacion),
+                    nombreTipoCertificacion: ko.observable(nombreTipoCertificacion),
+                    puntajeCertificacion: ko.observable(puntajeCertificacion),
+                    certificado: ko.observable(''),
+                    tieneCertificado: ko.observable(false)
+                });
+                $('input:file[name="idiomas[' + self.idiomas().length + '].certificado"]').hide();
+            } else {
+                var consecutivo = parseInt($('#consecutivo').val(), 10);
+                var indice = 0;
+                for (i = 0; i < self.idiomas().length; i++) {
+                    if (self.idiomas()[i].consecutivo() === consecutivo) {
+                        indice = i;
+                        break;
+                    }
+                }
+                if (self.idiomas()[indice].id === 0 && 
+                    $('input:file[name="idiomas[' + indice + '].certificado"]').val() === "") {
+                    bootstrap_alert_idioma.warning('Debe ingresar el certificado');
+                    return false;
+                }
+
+                self.idiomas()[indice].idioma(idioma);
+                self.idiomas()[indice].nombreIdioma(nombreIdioma);
+                self.idiomas()[indice].nivelConversacion(nivelConversacion);
+                self.idiomas()[indice].nombreNivelConversacion(nombreNivelConversacion);
+                self.idiomas()[indice].nivelEscritura(nivelEscritura);
+                self.idiomas()[indice].nombreNivelEscritura(nombreNivelEscritura);
+                self.idiomas()[indice].nivelEscucha(nivelEscucha);
+                self.idiomas()[indice].nombreNivelEscucha(nombreNivelEscucha);
+                self.idiomas()[indice].nivelLectura(nivelLectura);
+                self.idiomas()[indice].nombreNivelLectura(nombreNivelLectura);
+                self.idiomas()[indice].otraCertificacion(otraCertificacion);
+                self.idiomas()[indice].tipoCertificacion(tipoCertificacion);
+                self.idiomas()[indice].nombreTipoCertificacion(nombreTipoCertificacion);
+                self.idiomas()[indice].puntajeCertificacion(puntajeCertificacion);
+                self.idiomas()[indice].certificado('');
+                $('input:file[name="idiomas[' + indice + '].certificado"]').hide();
+            }
+            $('#md_idioma').modal('hide');
+        };
+
+        self.eliminarIdioma = function (idioma) {
+            $('input:file[name="idiomas[' + idioma.consecutivo() + '].certificado"]').remove();
+            self.idiomas.remove(idioma);
+        };
+
+        self.editarIdioma = function (idioma) {
+            ocultarCertificadosIdioma();
+            $('#idioma').val(idioma.idioma()).trigger('change');
+            $('#nivelConversacionIdioma').val(idioma.nivelConversacion()).trigger('change');
+            $('#nivelEscrituraIdioma').val(idioma.nivelEscritura()).trigger('change');
+            $('#nivelEscuchaIdioma').val(idioma.nivelEscucha()).trigger('change');
+            $('#nivelLecturaIdioma').val(idioma.nivelLectura()).trigger('change');
+            $('#otraCertificacionIdioma').val(idioma.otraCertificacion());
+            $('#tipoCertificacionIdioma').val(idioma.tipoCertificacion()).trigger('change');
+            if($('#tipoCertificacionIdioma').val() === "8") {
+              $('#divOtroCertificacionIdioma').css("display","block");
+            } else {
+              $('#divOtroCertificacionIdioma').css("display","none");
+            }            
+            $('#puntajeCertificacionIdioma').val(idioma.puntajeCertificacion());
+            $('#consecutivo').val(idioma.consecutivo());
+            $('input:file[name="idiomas[' + idioma.consecutivo() + '].certificado"]').show();
+            bootstrap_alert_idioma.removeWarning();
+            $('#md_idioma').modal('show');
+        };
+
+        self.verCertificadoIdioma = function (idioma) {
+            window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoIdioma/" + idioma.id();
+        };
+        
+        self.adicionarEducacionBasica = function () {
+            var nivelEstudioEducacionBasica = $('#nivelEstudioEducacionBasica').val();
+            var nombreNivelEducacionBasica = $('#nivelEstudioEducacionBasica option:selected').text();
+            var institucionEducacionBasica = $('#institucionEducacionBasica').val();
+            var nombreInstitucionEducacionBasica = $('#institucionEducacionBasica option:selected').text();
+            var anyoInicioEducacionBasica = $('#anyoInicioEducacionBasica').val();
+            var anyoFinalizacionEducacionBasica = $('#anyoFinalizacionEducacionBasica').val();
+            var tituloEducacionBasica = $('#tituloEducacionBasica').val();
+            var graduadoEducacionBasica = $('#graduadoEducacionBasica').val();
+        
+            if (nivelEstudioEducacionBasica === "") {
+                bootstrap_alert_educacion_basica.warning('Debe seleccionar el nivel de estudio');
+                return false;
+            }
+            if (institucionEducacionBasica === "") {
+                bootstrap_alert_educacion_basica.warning('Debe seleccionar la institución');
+                return false;
+            }
+            if (anyoInicioEducacionBasica === "") {
+                bootstrap_alert_educacion_basica.warning('Debe ingresar el año de inicio');
+                return false;
+            }
+            if (graduadoEducacionBasica === "true" && anyoFinalizacionEducacionBasica === "") {
+                bootstrap_alert_educacion_basica.warning('Debe ingresar el año de finalización');
+                return false;
+            }
+            if (tituloEducacionBasica === "") {
+                bootstrap_alert_educacion_basica.warning('Debe ingresar el título');
+                return false;
+            }
+            if ($('#consecutivo').val() === "") {
+                if ($('input:file[name="educacionesBasicas[' + self.idiomas().length + '].certificado"]').val() === "") {
+                    bootstrap_alert_educacion_basica.warning('Debe ingresar el certificado');
+                    return false;
+                }
+                self.educacionesBasicas.push({
+                    id: ko.observable(0),
+                    consecutivo: ko.observable(self.educacionesBasicas().length),
+                    institucion: ko.observable(institucionEducacionBasica),
+                    nombreInstitucion: ko.observable(nombreInstitucionEducacionBasica),
+                    nivel: ko.observable(nivelEstudioEducacionBasica),
+                    nombreNivel: ko.observable(nombreNivelEducacionBasica),
+                    anyoInicio: ko.observable(anyoInicioEducacionBasica),
+                    anyoFinalizacion: ko.observable(anyoFinalizacionEducacionBasica),
+                    titulo: ko.observable(tituloEducacionBasica),
+                    graduado: ko.observable(graduadoEducacionBasica),
+                    certificado: ko.observable(''),
+                    tieneCertificado: ko.observable(false)
+                });
+                $('input:file[name="educacionesBasicas[' + self.educacionesBasicas().length + '].certificado"]').hide();
+            } else {
+                var consecutivo = parseInt($('#consecutivo').val(), 10);
+                var indice = 0;
+                for (i = 0; i < self.educacionesBasicas().length; i++) {
+                    if (self.educacionesBasicas()[i].consecutivo() === consecutivo) {
+                        indice = i;
+                        break;
+                    }
+                }
+                if (self.educacionesBasicas()[indice].id === 0 && 
+                    $('input:file[name="educacionesBasicas[' + indice + '].certificado"]').val() === "") {
+                    bootstrap_alert_educacion_basica.warning('Debe ingresar el certificado');
+                    return false;
+                }
+
+                self.educacionesBasicas()[indice].institucion(institucionEducacionBasica);
+                self.educacionesBasicas()[indice].nombreInstitucion(nombreInstitucionEducacionBasica);
+                self.educacionesBasicas()[indice].nivel(nivelEstudioEducacionBasica);
+                self.educacionesBasicas()[indice].nombreNivel(nombreNivelEducacionBasica);
+                self.educacionesBasicas()[indice].anyoInicio(anyoInicioEducacionBasica);
+                self.educacionesBasicas()[indice].anyoFinalizacion(anyoFinalizacionEducacionBasica);
+                self.educacionesBasicas()[indice].titulo(tituloEducacionBasica);
+                self.educacionesBasicas()[indice].graduado(graduadoEducacionBasica);
+                self.educacionesBasicas()[indice].certificado('');
+                $('input:file[name="educacionesBasicas[' + indice + '].certificado"]').hide();
+            }
+            $('#md_educacion_basica').modal('hide');
+        };
+
+        self.eliminarEducacionBasica = function (educacionBasica) {
+            $('input:file[name="educacionesBasicas[' + educacionBasica.consecutivo() + '].certificado"]').remove();
+            self.educacionesBasicas.remove(educacionBasica);
+        };
+
+        self.editarEducacionBasica = function (educacionBasica) {
+            ocultarCertificadosEducacionBasica();
+            
+            $('#nivelEstudioEducacionBasica').val(educacionBasica.nivel()).trigger('change');
+            $('#institucionEducacionBasica').val(educacionBasica.institucion()).trigger('change');
+            $('#anyoInicioEducacionBasica').val(educacionBasica.anyoInicio());
+            $('#anyoFinalizacionEducacionBasica').val(educacionBasica.anyoFinalizacion()).trigger('change');
+            $('#tituloEducacionBasica').val(educacionBasica.titulo());
+            $('#graduadoEducacionBasica').val(educacionBasica.graduado());            
+            if(educacionBasica.graduado()) {
+              $('#btnGraduadoSiEducacionBasica').removeClass('notActive').addClass('active');  
+              $('#btnGraduadoNoEducacionBasica').removeClass('active').addClass('notActive');
+              $('#anyoInicioEducacionBasica').prop('disabled',false);
+            } else {
+              $('#btnGraduadoNoEducacionBasica').removeClass('notActive').addClass('active');  
+              $('#btnGraduadoSiEducacionBasica').removeClass('active').addClass('notActive');  
+              $('#anyoFinalizacionEducacionBasica').prop('disabled','disabled');
+            }
+            if($('#tipoCertificacionEducacionBasica').val() === "8") {
+              $('#divOtroCertificacionIdioma').css("display","block");
+            } else {
+              $('#divOtroCertificacionIdioma').css("display","none");
+            }            
+            $('#consecutivo').val(educacionBasica.consecutivo());
+            $('input:file[name="educacionesBasicas[' + educacionBasica.consecutivo() + '].certificado"]').show();
+            bootstrap_alert_educacion_basica.removeWarning();
+            $('#md_educacion_basica').modal('show');
+        };
+
+        self.verCertificadoEducacionBasica = function (educacionBasica) {
+            window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoEducacionBasica/" + educacionBasica.id();
+        };        
+
+        self.adicionarEducacionSuperior = function () {
+            var nivelEstudioEducacionSuperior = $('#nivelEstudioEducacionSuperior').val();
+            var nombreNivelEducacionSuperior = $('#nivelEstudioEducacionSuperior option:selected').text();
+            var tituloExteriorEducacionSuperior = $('#tituloExteriorEducacionSuperior').val();
+            var paisTituloExteriorEducacionSuperior = $('#paisTituloExteriorEducacionSuperior').val();
+            var nombrePaisEducacionSuperior = $('#nombrePaisEstudioEducacionSuperior option:selected').text();
+            var programaCursadoEducacionSuperior = $('#programaCursadoEducacionSuperior').val();
+            var institucionEducacionSuperior = $('#institucionEducacionSuperior').val();
+            var nombreInstitucionEducacionSuperior = $('#nombreInstitucionEducacionSuperior').val();
+            var areaSaberEducacionSuperior = $('#areaSaberEducacionSuperior').val();
+            var nombreAreaSaberEducacionSuperior = $('#nombreAreaSaberEducacionSuperior').val();
+            var anyoInicioEducacionSuperior = $('#anyoInicioEducacionSuperior').val();
+            var anyoFinalizacionEducacionSuperior = $('#anyoFinalizacionEducacionSuperior').val();
+            var tituloEducacionSuperior = $('#tituloEducacionSuperior').val();
+            var graduadoEducacionSuperior = $('#graduadoEducacionSuperior').val();
+            var fechaTituloEducacionSuperior = $('#fechaTituloEducacionSuperior').val();
+        
+            if (nivelEstudioEducacionSuperior === "") {
+                bootstrap_alert_educacion_superior.warning('Debe seleccionar el nivel de estudio');
+                return false;
+            }
+            if(tituloExteriorEducacionSuperior === "true") {
+                if(paisTituloExteriorEducacionSuperior === "") {
+                    bootstrap_alert_educacion_superior.warning('Debe seleccionar el país');
+                    return false;
+                }
+                if ($('#consecutivo').val() === "") {    
+                    if ($('input:file[name="educacionesSuperiores[' + self.idiomas().length + '].certificadoHomologado"]').val() === "") {
+                        bootstrap_alert_educacion_superior.warning('Debe ingresar el certificado homologado del título');
+                        return false;
+                    }
+                } else {
+                    if($('input:file[name="educacionesSuperiores[' + indice + '].certificadoHomologado"]').val() === "") {
+                        bootstrap_alert_educacion_superior.warning('Debe ingresar el certificado homologado del título');
+                        return false;
+                    }
+                }
+            }
+            if (programaCursadoEducacionSuperior === "") {
+                bootstrap_alert_educacion_superior.warning('Debe ingresar el programa');
+                return false;
+            }
+            if (institucionEducacionSuperior === "") {
+                bootstrap_alert_educacion_superior.warning('Debe seleccionar la institución');
+                return false;
+            }
+            if (areaSaberEducacionSuperior === "") {
+                bootstrap_alert_educacion_superior.warning('Debe seleccionar el área de saber');
+                return false;
+            }
+            if (anyoInicioEducacionSuperior === "") {
+                bootstrap_alert_educacion_superior.warning('Debe ingresar el año de inicio');
+                return false;
+            }
+            if (graduadoEducacionSuperior === "true" && anyoFinalizacionEducacionSuperior === "") {
+                bootstrap_alert_educacion_superior.warning('Debe ingresar el año de finalización');
+                return false;
+            }
+            if (tituloEducacionSuperior === "") {
+                bootstrap_alert_educacion_superior.warning('Debe ingresar el título');
+                return false;
+            }
+            if (fechaTituloEducacionSuperior === "") {
+                bootstrap_alert_educacion_superior.warning('Debe ingresar la fecha del título');
+                return false;
+            }
+            if ($('#consecutivo').val() === "") {
+                if ($('input:file[name="educacionesSuperiores[' + self.idiomas().length + '].certificado"]').val() === "") {
+                    bootstrap_alert_educacion_superior.warning('Debe ingresar el certificado');
+                    return false;
+                }
+                self.educacionesSuperiores.push({
+                    id: ko.observable(0),
+                    consecutivo: ko.observable(self.educacionesSuperiores().length),
+                    tituloExterior: ko.observable(tituloExteriorEducacionSuperior),
+                    paisTituloExterior: ko.observable(paisTituloExteriorEducacionSuperior),
+                    nombrePais: ko.observable(nombrePaisEducacionSuperior),
+                    institucion: ko.observable(institucionEducacionSuperior),
+                    nombreInstitucion: ko.observable(nombreInstitucionEducacionSuperior),
+                    programa: ko.observable(programaCursadoEducacionSuperior),
+                    areaSaber: ko.observable(areaSaberEducacionSuperior),
+                    nombreAreaSaber: ko.observable(nombreAreaSaberEducacionSuperior),
+                    nivel: ko.observable(nivelEstudioEducacionSuperior),
+                    nombreNivel: ko.observable(nombreNivelEducacionSuperior),
+                    anyoInicio: ko.observable(anyoInicioEducacionSuperior),
+                    anyoFinalizacion: ko.observable(anyoFinalizacionEducacionSuperior),
+                    titulo: ko.observable(tituloEducacionSuperior),
+                    graduado: ko.observable(graduadoEducacionSuperior),
+                    fechaTitulo: ko.observable(fechaTituloEducacionSuperior),
+                    certificadoHomologado: ko.observable(''),
+                    tieneCertificadoHomologado: ko.observable(false),
+                    certificado: ko.observable(''),
+                    tieneCertificado: ko.observable(false)
+                });
+                $('input:file[name="educacionesSuperiores[' + self.educacionesSuperiores().length + '].certificado"]').hide();
+                $('input:file[name="educacionesSuperiores[' + self.educacionesSuperiores().length + '].certificadoHomologado"]').hide();
+            } else {
+                var consecutivo = parseInt($('#consecutivo').val(), 10);
+                var indice = 0;
+                for (i = 0; i < self.educacionesSuperiores().length; i++) {
+                    if (self.educacionesSuperiores()[i].consecutivo() === consecutivo) {
+                        indice = i;
+                        break;
+                    }
+                }
+                
+                if (self.educacionesSuperiores()[indice].id === 0 && 
+                    $('input:file[name="educacionesSuperiores[' + indice + '].certificado"]').val() === "") {
+                    bootstrap_alert_educacion_superior.warning('Debe ingresar el certificado');
+                    return false;
+                }
+
+                self.educacionesSuperiores()[indice].institucion(institucionEducacionSuperior);
+                self.educacionesSuperiores()[indice].tituloExterior(tituloExteriorEducacionSuperior);
+                self.educacionesSuperiores()[indice].paisTituloExterior(paisTituloExteriorEducacionSuperior);
+                self.educacionesSuperiores()[indice].nombreInstitucion(nombreInstitucionEducacionSuperior);
+                self.educacionesSuperiores()[indice].nivel(nivelEstudioEducacionSuperior);
+                self.educacionesSuperiores()[indice].nombreNivel(nombreNivelEducacionSuperior);
+                self.educacionesSuperiores()[indice].programa(programaCursadoEducacionSuperior);
+                self.educacionesSuperiores()[indice].areaSaber(areaSaberEducacionSuperior);
+                self.educacionesSuperiores()[indice].nombreAreaSaber(nombreAreaSaberEducacionSuperior);
+                self.educacionesSuperiores()[indice].anyoInicio(anyoInicioEducacionSuperior);
+                self.educacionesSuperiores()[indice].anyoFinalizacion(anyoFinalizacionEducacionSuperior);
+                self.educacionesSuperiores()[indice].titulo(tituloEducacionSuperior);
+                self.educacionesSuperiores()[indice].graduado(graduadoEducacionSuperior);
+                self.educacionesSuperiores()[indice].fechaTitulo(fechaTituloEducacionSuperior);
+                self.educacionesSuperiores()[indice].certificado('');
+                self.educacionesSuperiores()[indice].certificadoHomologado('');
+                $('input:file[name="educacionesSuperiores[' + indice + '].certificado"]').hide();
+                $('input:file[name="educacionesSuperiores[' + indice + '].certificadoHomologado"]').hide();
+            }
+            $('#md_educacion_superior').modal('hide');
+        };
+
+        self.eliminarEducacionSuperior = function (educacionSuperior) {
+            $('input:file[name="educacionesSuperiores[' + educacionSuperior.consecutivo() + '].certificado"]').remove();
+            $('input:file[name="educacionesSuperiores[' + educacionSuperior.consecutivo() + '].certificadoHomologado"]').remove();
+            self.educacionesSuperiores.remove(educacionSuperior);
+        };
+
+        self.editarEducacionSuperior = function (educacionSuperior) {
+            ocultarCertificadosEducacionSuperior();
+
+            $('#nivelEstudioEducacionSuperior').val(educacionSuperior.nivel()).trigger('change');
+            $('#tituloExteriorEducacionSuperior').val(educacionSuperior.tituloExterior());
+            $('#paisTituloExteriorEducacionSuperior').val(educacionSuperior.paisTituloExterior()).trigger('change');
+            
+            if(educacionSuperior.tituloExterior()) {
+                $('#paistit').css("display","block");
+                $('#certhomo').css('display','block');
+            } else {
+                $('#paistit').css("display","none");
+                $('#certhomo').css('display','none');
+            }
+            
+            $('#institucionEducativaPrograma').val(educacionSuperior.institucion()).trigger('change');
+            $('#programaCursado').val(educacionSuperior.programa());
+            $('#areaSaberPrograma').val(educacionSuperior.areaSaber()).trigger('change');
+            $('#tituloPrograma').val(educacionSuperior.titulo());
+            
+            $('#formprograma').css("display","block");
+            
+            $('#institucionEducacionSuperior').val(educacionSuperior.institucion());
+            $('#nombreInstitucionEducacionSuperior').val(educacionSuperior.nombreInstitucion());
+            $('#programaCursadoEducacionSuperior').val(educacionSuperior.programa());
+            $('#areaSaberEducacionSuperior').val(educacionSuperior.areaSaber());
+            $('#nombreAreaSaberEducacionSuperior').val(educacionSuperior.nombreAreaSaber());
+            $('#tituloEducacionSuperior').val(educacionSuperior.titulo());
+    
+            $('#anyoInicioEducacionSuperior').val(educacionSuperior.anyoInicio());
+            $('#anyoFinalizacionEducacionSuperior').val(educacionSuperior.anyoFinalizacion()).trigger('change');
+            $('#graduadoEducacionSuperior').val(educacionSuperior.graduado());            
+            $('#fechaTituloEducacionSuperior').val(educacionSuperior.fechaTitulo());
+            if(educacionSuperior.graduado()) {
+              $('#btnGraduadoSiEducacionSuperior').removeClass('notActive').addClass('active');  
+              $('#btnGraduadoNoEducacionSuperior').removeClass('active').addClass('notActive');
+              $('#anyoInicioEducacionSuperior').prop('disabled',false);
+            } else {
+              $('#btnGraduadoNoEducacionSuperior').removeClass('notActive').addClass('active');  
+              $('#btnGraduadoSiEducacionSuperior').removeClass('active').addClass('notActive');  
+              $('#anyoFinalizacionEducacionSuperior').prop('disabled','disabled');
+            }
+            if(educacionSuperior.tituloExterior()) {
+              $('#btnTituloExtranjeroSiEducacionSuperior').removeClass('notActive').addClass('active');  
+              $('#btnTituloExtranjeroNoEducacionSuperior').removeClass('active').addClass('notActive');
+              $('#paisTituloExteriorEducacionSuperior').css("display","block");
+            } else {
+              $('#btnTituloExtranjeroNoEducacionSuperior').removeClass('notActive').addClass('active');  
+              $('#btnTituloExtranjeroSiEducacionSuperior').removeClass('active').addClass('notActive');  
+              $('#paisTituloExteriorEducacionSuperior').css("display","none");
+            }
+            $('#consecutivo').val(educacionSuperior.consecutivo());
+            $('input:file[name="educacionesSuperiores[' + educacionSuperior.consecutivo() + '].certificado"]').show();
+            $('input:file[name="educacionesSuperiores[' + educacionSuperior.consecutivo() + '].certificadoHomologado"]').show();
+            bootstrap_alert_educacion_superior.removeWarning();
+            $('#md_educacion_superior').modal('show');
+        };
+
+        self.verCertificadoHomologadoEducacionSuperior = function (educacionSuperior) {
+            window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoHomologadoEducacionSuperior/" + educacionSuperior.id();
+        };        
+
+        self.verCertificadoEducacionSuperior = function (educacionSuperior) {
+            window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoEducacionSuperior/" + educacionSuperior.id();
+        };        
     };
 
     function nuevoCorreoElectronico() {
         $('#correoElectronico').val("");
         $('#consecutivo').val("");
+        bootstrap_alert_correo_electronico.removeWarning();
         $('#md_correo_electronico').modal('show');
     }
 
@@ -2710,6 +3302,7 @@
         $('#tipoTelefono').val("").trigger("change.select2");
         $('#numeroTelefono').val("");
         $('#consecutivo').val("");
+        bootstrap_alert_telefono.removeWarning();
         $('#md_telefono').modal('show');
     }
 
@@ -2718,20 +3311,217 @@
         $('#numeroCuentaBancaria').val("");
         $('#entidadCuentaBancaria').val("");
         $('#consecutivo').val("");
+        bootstrap_alert_cuenta_bancaria.removeWarning();
         $('#md_cuenta_bancaria').modal('show');
     }
 
+    function nuevoDocumentoSoporte() {
+        $('#tipoDocumento').val("").trigger('change');
+        $('#consecutivo').val("");
+        ocultarDocumentosSoporte();
+        var fileInput = $('input:file[name="documentosSoporte[' + hojaVidaModel.documentosSoporte().length + '].documento"]');
+        if (!fileInput.attr('id')) {
+            fileInput = $('<input type="file" class="form-control" id="documentosSoporte[' + (hojaVidaModel.documentosSoporte().length) + '].documento" name="documentosSoporte[' + (self.documentosSoporte().length) + '].documento" />');
+            $('#documentosSoporte').append(fileInput);
+        } else {
+            fileInput.show();
+        }
+        bootstrap_alert_documento_soporte.removeWarning();
+        $('#md_documento_soporte').modal('show');
+    }
+
+    function nuevoIdioma() {
+        $('#idioma').val("").trigger('change');
+        $('#nivelConversacionIdioma').val("").trigger('change');
+        $('#nivelEscrituraIdioma').val("").trigger('change');
+        $('#nivelEscuchaIdioma').val("").trigger('change');
+        $('#nivelLecturaIdioma').val("").trigger('change');
+        $('#otraCertificacionIdioma').val("");
+        $('#tipoCertificacionIdioma').val("").trigger('change');
+        $('#puntajeCertificacionIdioma').val("");
+        $('#consecutivo').val("");
+        ocultarCertificadosIdioma();
+        var fileInput = $('input:file[name="idiomas[' + hojaVidaModel.idiomas().length + '].certificado"]');
+        if (!fileInput.attr('id')) {
+            fileInput = $('<input type="file" class="form-control" id="idiomas[' + (hojaVidaModel.idiomas().length) + '].certificado" name="idiomas[' + (self.idiomas().length) + '].certificado" />');
+            $('#certificadosIdioma').append(fileInput);
+        } else {
+            fileInput.show();
+        }
+        bootstrap_alert_idioma.removeWarning();
+        $('#md_idioma').modal('show');
+    }
+        
+    function nuevaEducacionBasica() {
+        $('#nivelEstudioEducacionBasica').val("").trigger('change');
+        $('#institucionEducacionBasica').val("").trigger('change');
+        $('#anyoInicioEducacionBasica').val("").trigger('change');
+        $('#anyoFinalizacionEducacionBasica').val("").trigger('change');
+        $('#tituloEducacionBasica').val("");
+        $('#graduadoEducacionBasica').val("false");
+        $('#btnGraduadoSiEducacionBasica').removeClass('active').addClass('notActive');  
+        $('#btnGraduadoNoEducacionBasica').removeClass('active').addClass('notActive');  
+        $('#consecutivo').val("");
+        ocultarCertificadosEducacionBasica();
+        var fileInput = $('input:file[name="educacionesBasicas[' + hojaVidaModel.educacionesBasicas().length + '].certificado"]');
+        if (!fileInput.attr('id')) {
+            fileInput = $('<input type="file" class="form-control" id="educacionesBasicas[' + (hojaVidaModel.educacionesBasicas().length) + '].certificado" name="educacionesBasicas[' + (self.educacionesBasicas().length) + '].certificado" />');
+            $('#certificadosEducacionBasica').append(fileInput);
+        } else {
+            fileInput.show();
+        }
+        bootstrap_alert_educacion_basica.removeWarning();
+        $('#md_educacion_basica').modal('show');
+    }
+    
+    function nuevaEducacionSuperior() {
+        $('#nivelEstudioEducacionSuperior').val("").trigger('change');
+        $('#tituloExteriorEducacionSuperior').val('false');
+        $('#paisEducacionSuperior').val("").trigger('change');
+        $('#institucionEducacionSuperior').val("");
+        $('#nombreInstitucionEducacionSuperior').val("");
+        $('#programaCursadoEducacionSuperior').val('');
+        $('#areaSaberEducacionSuperior').val('');
+        $('#nombreAreaSaberEducacionSuperior').val('');
+        $('#anyoInicioEducacionSuperior').val("").trigger('change');
+        $('#anyoFinalizacionEducacionSuperior').val("").trigger('change');
+        $('#tituloEducacionSuperior').val("");
+        $('#graduadoEducacionSuperior').val("false");
+        $('#fechaTituloEducacionSuperior').val("");
+        
+        $('#areaSaberPrograma').val("").trigger("change.select2");
+        $('#institucionEducativaPrograma').val("").trigger("change.select2");
+        $('#programaCursado').val("");
+        $('#tituloPrograma').val("");        
+        
+        $('#btnTituloExtranjeroSiEducacionSuperior').removeClass('active').addClass('notActive');  
+        $('#btnTituloExtranjeroNoEducacionSuperior').removeClass('active').addClass('notActive');  
+        $('#paisTituloExteriorEducacionSuperior').css("display","none");
+         
+        $('#btnGraduadoSiEducacionSuperior').removeClass('active').addClass('notActive');  
+        $('#btnGraduadoNoEducacionSuperior').removeClass('active').addClass('notActive');  
+        $('#anyoFinalizacionEducacionSuperior').prop('disabled','disabled');
+        
+        $('#consecutivo').val("");
+        ocultarCertificadosEducacionSuperior();
+        var fileInput = $('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificado"]');
+        if (!fileInput.attr('id')) {
+            fileInput = $('<input type="file" class="form-control" id="educacionesSuperiores[' + (hojaVidaModel.educacionesSuperiores().length) + '].certificado" name="educacionesSuperiores[' + (self.educacionesSuperiores().length) + '].certificado" />');
+            $('#certificadosEducacionSuperior').append(fileInput);
+        } else {
+            fileInput.show();
+        }
+        fileInput = $('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificadoHomologado"]');
+        if (!fileInput.attr('id')) {
+            fileInput = $('<input type="file" class="form-control" id="educacionesSuperiores[' + (hojaVidaModel.educacionesSuperiores().length) + '].certificadoHomologado" name="educacionesSuperiores[' + (self.educacionesSuperiores().length) + '].certificadoHomologado" />');
+            $('#certificadosHomologadosEducacionSuperior').append(fileInput);
+        } else {
+            fileInput.show();
+        }
+        bootstrap_alert_educacion_superior.removeWarning();
+        $('#md_educacion_superior').modal('show');
+    }    
+
+    function nuevoPrograma() {
+        $('#areaSaberPrograma').val("").trigger("change.select2");
+        $('#institucionEducativaPrograma').val("").trigger("change.select2");
+        $('#programaCursado').val("").trigger("change.select2");
+        $('#tituloPrograma').val("");
+
+        $('#md_programa').modal('show');
+    }
+
+    function cerrarVentanaDocumentoSoporte() {
+        if ($('input:file[name="documentosSoporte[' + self.documentosSoporte().length + '].documento"]')) {
+            $('input:file[name="documentosSoporte[' + self.documentosSoporte().length + '].documento"]').remove();
+        }
+        $('#md_documento_soporte').modal('hide');
+    }
+    
+    function cerrarVentanaIdioma() {
+        if ($('input:file[name="idiomas[' + self.idiomas().length + '].certificado"]')) {
+            $('input:file[name="idiomas[' + self.idiomas().length + '].certificado"]').remove();
+        }
+        $('#md_idioma').modal('hide');
+    }
+        
+    function cerrarVentanaEducacionBasica() {
+        if ($('input:file[name="educacionesBasicas[' + self.educacionesBasicas().length + '].certificado"]')) {
+            $('input:file[name="educacionesBasicas[' + self.educacionesBasicas().length + '].certificado"]').remove();
+        }
+        $('#md_educacion_basica').modal('hide');
+    }
+
+    function cerrarVentanaEducacionSuperior() {
+        if ($('input:file[name="educacionesSuperiores[' + self.educacionesSuperiores().length + '].certificado"]')) {
+            $('input:file[name="educacionesSuperiores[' + self.educacionesSuperiores().length + '].certificado"]').remove();
+        }
+        if ($('input:file[name="educacionesSuperiores[' + self.educacionesSuperiores().length + '].certificadoHomologado"]')) {
+            $('input:file[name="educacionesSuperiores[' + self.educacionesSuperiores().length + '].certificadoHomologado"]').remove();
+        }
+        $('#md_educacion_superior').modal('hide');
+    }
+    
+    function cerrarVentanaPrograma() {
+        $('#md_programa').modal('hide');
+    }
+    
+    function ocultarDocumentosSoporte() {
+        for (var i = 0; i < hojaVidaModel.documentosSoporte().length; i++) {
+            $('input:file[name="documentosSoporte[' + i + '].documento"]').hide();
+        }
+        var fileInput = $('input:file[name="documentosSoporte[' + hojaVidaModel.documentosSoporte().length + '].documento"]');
+        if (fileInput.attr('id')) {
+            fileInput.hide();
+        }
+    }
+
+    function ocultarCertificadosIdioma() {
+        for (var i = 0; i < hojaVidaModel.idiomas().length; i++) {
+            $('input:file[name="idiomas[' + i + '].certificado"]').hide();
+        }
+        var fileInput = $('input:file[name="idiomas[' + hojaVidaModel.idiomas().length + '].certificado"]');
+        if (fileInput.attr('id')) {
+            fileInput.hide();
+        }
+    }
+    
+    function ocultarCertificadosEducacionBasica() {
+        for (var i = 0; i < hojaVidaModel.educacionesBasicas().length; i++) {
+            $('input:file[name="educacionesBasicas[' + i + '].certificado"]').hide();
+        }
+        var fileInput = $('input:file[name="educacionesBasicas[' + hojaVidaModel.educacionesBasicas().length + '].certificado"]');
+        if (fileInput.attr('id')) {
+            fileInput.hide();
+        }
+    }
+    
+    function ocultarCertificadosEducacionSuperior() {
+        for (var i = 0; i < hojaVidaModel.educacionesSuperiores().length; i++) {
+            $('input:file[name="educacionesSuperiores[' + i + '].certificado"]').hide();
+            $('input:file[name="educacionesSuperiores[' + i + '].certificadoHomologado"]').hide();
+        }
+        var fileInput = $('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificado"]');
+        if (fileInput.attr('id')) {
+            fileInput.hide();
+        }
+        fileInput = $('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificadoHomologado"]');
+        if (fileInput.attr('id')) {
+            fileInput.hide();
+        }
+    }
+    
     $('#hojaVida').submit(function (evt) {
         evt.preventDefault();
-        if($('#disponeRUT').val() === 'true' && $('#actividadEconomica').val() === "") {
-          bootstrap_alert_hoja_vida.warning("Debe ingresar la actividad económica");
-          return;
+        if ($('#disponeRUT').val() === 'true' && $('#actividadEconomica').val() === "") {
+            bootstrap_alert_hoja_vida.warning("Debe ingresar la actividad económica");
+            return;
         }
-        if($('#empleadoUDEA').val() === "true" && $('#tipoVinculacion').val() === '') {
-          bootstrap_alert_hoja_vida.warning("Debe ingresar el tipo de vinculación con la U de A");
-          return;
-        }    
-        
+        if ($('#empleadoUDEA').val() === "true" && $('#tipoVinculacion').val() === '') {
+            bootstrap_alert_hoja_vida.warning("Debe ingresar el tipo de vinculación con la U de A");
+            return;
+        }
+
         var formData = new FormData(this);
         $.ajax({
             type: "POST",
@@ -2753,6 +3543,18 @@
                 bootstrap_alert_hoja_vida.warning("Error al almacenar la hoja de vida.");
             }});
     });
+
+    function verCopiaCedula() {
+        window.location.href = "${pageContext.request.contextPath}/hojasVida/copiaCedula/" + $('#idPersona').val();
+    }
+
+    function verCopiaRUT() {
+        window.location.href = "${pageContext.request.contextPath}/hojasVida/copiaRUT/" + $('#idPersona').val();
+    }
+
+    function verCopiaLibretaMilitar() {
+        window.location.href = "${pageContext.request.contextPath}/hojasVida/copiaLibretaMilitar/" + $('#idPersona').val();
+    }
 
     bootstrap_alert_hoja_vida = function () { };
     bootstrap_alert_hoja_vida.warning = function (message) {
@@ -2789,9 +3591,46 @@
         $('#alert_correo_electronico').html('');
     };
 
+    bootstrap_alert_documento_soporte = function () { };
+    bootstrap_alert_documento_soporte.warning = function (message) {
+        $('#alert_documento_soporte').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_documento_soporte.removeWarning = function () {
+        $('#alert_documento_soporte').html('');
+    };
+
+    bootstrap_alert_idioma = function () { };
+    bootstrap_alert_idioma.warning = function (message) {
+        $('#alert_idioma').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_idioma.removeWarning = function () {
+        $('#alert_idioma').html('');
+    };
+
+    bootstrap_alert_educacion_basica = function () { };
+    bootstrap_alert_educacion_basica.warning = function (message) {
+        $('#alert_educacion_basica').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_educacion_basica.removeWarning = function () {
+        $('#alert_educacion_basica').html('');
+    };
+
+    bootstrap_alert_educacion_superior = function () { };
+    bootstrap_alert_educacion_superior.warning = function (message) {
+        $('#alert_educacion_superior').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_educacion_superior.removeWarning = function () {
+        $('#alert_educacion_superior').html('');
+    };
+    
     var correosElectronicos = [];
     var cuentasBancarias = [];
     var telefonos = [];
+    var documentosSoporte = [];
+    var idiomas = [];
+    var educacionesBasicas = [];
+    var educacionesSuperiores = [];
+    
     <c:if test = "${correosElectronicosJSON != null}">
     correosElectronicos = ${correosElectronicosJSON};
     </c:if>
@@ -2801,6 +3640,43 @@
     <c:if test = "${telefonosJSON != null}">
     telefonos = ${telefonosJSON};
     </c:if>
-    var hojaVidaModel = new HojaVidaModel(correosElectronicos, cuentasBancarias, telefonos);
+    <c:if test = "${documentosSoporteJSON != null}">
+    documentosSoporte = ${documentosSoporteJSON};
+    for (var i = 0; i < documentosSoporte.length; i++) {
+        var fileInput = $('<input type="file" class="form-control" id="documentosSoporte[' + i + '].documento" name="documentosSoporte[' + i + '].documento" />');
+        $('#documentosSoporte').append(fileInput);
+        $('input:file[name="documentosSoporte[' + i + '].documento"]').hide();
+    }
+    </c:if>
+    <c:if test = "${idiomasJSON != null}">
+    idiomas = ${idiomasJSON};
+    for (var i = 0; i < idiomas.length; i++) {
+        var fileInput = $('<input type="file" class="form-control" id="idiomas[' + i + '].certificado" name="idiomas[' + i + '].certificado" />');
+        $('#certificadosIdioma').append(fileInput);
+        $('input:file[name="idiomas[' + i + '].certificado"]').hide();
+    }
+    </c:if>
+    <c:if test = "${educacionesBasicasJSON != null}">
+    educacionesBasicas = ${educacionesBasicasJSON};
+    for (var i = 0; i < educacionesBasicas.length; i++) {
+        var fileInput = $('<input type="file" class="form-control" id="educacionesBasicas[' + i + '].certificado" name="educacionesBasicas[' + i + '].certificado" />');
+        $('#certificadosEducacionBasica').append(fileInput);
+        $('input:file[name="educacionesBasicas[' + i + '].certificado"]').hide();
+    }
+    </c:if>
+    <c:if test = "${educacionesSuperioresJSON != null}">
+    educacionesSuperiores = ${educacionesSuperioresJSON};
+    for (var i = 0; i < educacionesSuperiores.length; i++) {
+        var fileInput = $('<input type="file" class="form-control" id="educacionesSuperiores[' + i + '].certificadoHomologado" name="educacionesSuperiores[' + i + '].certificadoHomologado" />');
+        $('#certificadosHomologadosEducacionSuperior').append(fileInput);
+        $('input:file[name="educacionesSuperiores[' + i + '].certificadoHomologado"]').hide();
+
+        fileInput = $('<input type="file" class="form-control" id="educacionesSuperiores[' + i + '].certificado" name="educacionesSuperiores[' + i + '].certificado" />');
+        $('#certificadosEducacionSuperior').append(fileInput);
+        $('input:file[name="educacionesSuperiores[' + i + '].certificado"]').hide();
+
+    }
+    </c:if>        
+    var hojaVidaModel = new HojaVidaModel(correosElectronicos, cuentasBancarias, telefonos, documentosSoporte, idiomas, educacionesBasicas, educacionesSuperiores);
     ko.applyBindings(hojaVidaModel);
 </script>

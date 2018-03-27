@@ -7,9 +7,13 @@ package co.edu.fnsp.buho.controladores;
 
 import co.edu.fnsp.buho.entidades.DetalleUsuario;
 import co.edu.fnsp.buho.entidades.Documento;
+import co.edu.fnsp.buho.entidades.DocumentoSoporte;
+import co.edu.fnsp.buho.entidades.EducacionBasica;
+import co.edu.fnsp.buho.entidades.EducacionSuperior;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.TipoDocumento;
 import co.edu.fnsp.buho.entidadesVista.HojaVida;
+import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.servicios.IServicioHojaVida;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
 import co.edu.fnsp.buho.utilidades.Util;
@@ -64,7 +68,14 @@ public class HojaVidaController {
         List<Maestro> actividadesEconomicas = servicioMaestro.obtenerActividadesEconomicas();
         List<Maestro> tiposVinculacion = servicioMaestro.obtenerTiposVinculacionUdeA();
         List<Maestro> tiposTelefono = servicioMaestro.obtenerTiposTelefono();
-
+        List<Maestro> tiposDocumento = servicioMaestro.obtenerTiposDocumento();
+        List<Maestro> nivelesIdioma = servicioMaestro.obtenerNivelesIdioma();
+        List<Maestro> idiomas = servicioMaestro.obtenerIdiomas();
+        List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
+        List<Maestro> nivelesEstudio = servicioMaestro.obtenerNivelesFormacion();
+        List<Maestro> institucionesEducativas = servicioMaestro.obtenerInstitucionesEducativas();
+        List<Maestro> areasSaber = servicioMaestro.obtenerAreasSaber();
+        
         model.addAttribute("paises", paises);
         model.addAttribute("tiposIdentificacion", tiposIdentificacion);
         model.addAttribute("gruposEtnico", gruposEtnico);
@@ -72,7 +83,14 @@ public class HojaVidaController {
         model.addAttribute("actividadesEconomicas", actividadesEconomicas);
         model.addAttribute("tiposVinculacion", tiposVinculacion);
         model.addAttribute("tiposTelefono", tiposTelefono);
-
+        model.addAttribute("tiposDocumento", tiposDocumento);
+        model.addAttribute("nivelesIdioma", nivelesIdioma);
+        model.addAttribute("idiomas", idiomas);
+        model.addAttribute("tiposCertificacion", tiposCertificacion);
+        model.addAttribute("nivelesEstudio", nivelesEstudio);
+        model.addAttribute("institucionesEducativas", institucionesEducativas);
+        model.addAttribute("areasSaber", areasSaber);
+        
         model.addAttribute("hojaVida", new HojaVida());
 
         return "hojasVida/crear";
@@ -91,11 +109,11 @@ public class HojaVidaController {
             hojaVidaIngresar.setCuentasBancarias(hojaVida.getCuentasBancarias());
             hojaVidaIngresar.setDireccion(hojaVida.getDireccion());
             hojaVidaIngresar.setDiscapacidad(hojaVida.getDiscapacidad());
-            hojaVidaIngresar.setDisponeRUT(Boolean.parseBoolean(hojaVida.getDisponeRUT()));
-            hojaVidaIngresar.setEmpleadoUDEA(Boolean.parseBoolean(hojaVida.getEmpleadoUDEA()));
-            hojaVidaIngresar.setDisponibilidadViajar(Boolean.parseBoolean(hojaVida.getDisponibilidadViajar()));
+            hojaVidaIngresar.setDisponeRUT(hojaVida.isDisponeRUT());
+            hojaVidaIngresar.setEmpleadoUDEA(hojaVida.isEmpleadoUDEA());
+            hojaVidaIngresar.setDisponibilidadViajar(hojaVida.isDisponibilidadViajar());
             hojaVidaIngresar.setDistritoClase(hojaVida.getDistritoClase());
-            hojaVidaIngresar.setEgresadoUDEA(Boolean.parseBoolean(hojaVida.getEgresadoUDEA()));
+            hojaVidaIngresar.setEgresadoUDEA(hojaVida.isEgresadoUDEA());
             hojaVidaIngresar.setFechaExpedicion(Util.obtenerFecha(hojaVida.getFechaExpedicion()));
             hojaVidaIngresar.setFechaNacimiento(Util.obtenerFecha(hojaVida.getFechaNacimiento()));
             hojaVidaIngresar.setGrupoEtnico(hojaVida.getGrupoEtnico());
@@ -109,6 +127,7 @@ public class HojaVidaController {
             hojaVidaIngresar.setTelefonos(hojaVida.getTelefonos());
             hojaVidaIngresar.setTipoIdentificacion(hojaVida.getTipoIdentificacion());
             hojaVidaIngresar.setTipoVinculacion(hojaVida.getTipoVinculacion());
+            hojaVidaIngresar.setPerfil(hojaVida.getPerfil());
 
             Documento documento = null;
             if (hojaVida.getCopiaDocumentoIdentificacion() != null && hojaVida.getCopiaDocumentoIdentificacion().getBytes().length > 0) {
@@ -125,9 +144,108 @@ public class HojaVidaController {
                 documento.setTipoContenido(hojaVida.getDocumentoRUT().getContentType());
                 hojaVidaIngresar.setDocumentoRUT(documento);
             }
+            if (hojaVida.getCopiaLibretaMilitar() != null && hojaVida.getCopiaLibretaMilitar().getBytes().length > 0) {
+                documento = new Documento();
+                documento.setContenido(hojaVida.getCopiaLibretaMilitar().getBytes());
+                documento.setNombre(hojaVida.getCopiaLibretaMilitar().getOriginalFilename());
+                documento.setTipoContenido(hojaVida.getCopiaLibretaMilitar().getContentType());
+                hojaVidaIngresar.setCopiaLibretaMilitar(documento);
+            }
+            for (co.edu.fnsp.buho.entidadesVista.DocumentoSoporte documentoSoporte : hojaVida.getDocumentosSoporte()) {
+                DocumentoSoporte nuevoDocumentoSoporte = new DocumentoSoporte();
+                nuevoDocumentoSoporte.setId(documentoSoporte.getId());
+                nuevoDocumentoSoporte.setTipoDocumento(Util.obtenerEntero(documentoSoporte.getTipoDocumento()));
+                if (documentoSoporte.getDocumento() != null && documentoSoporte.getDocumento().getBytes().length > 0) {
+                    documento = new Documento();
+                    documento.setContenido(documentoSoporte.getDocumento().getBytes());
+                    documento.setNombre(documentoSoporte.getDocumento().getOriginalFilename());
+                    documento.setTipoContenido(documentoSoporte.getDocumento().getContentType());
+                    nuevoDocumentoSoporte.setDocumento(documento);
+                }
+                hojaVidaIngresar.getDocumentosSoporte().add(nuevoDocumentoSoporte);
+            }
             hojaVidaIngresar.setTelefonos(hojaVida.getTelefonos());
             hojaVidaIngresar.setCuentasBancarias(hojaVida.getCuentasBancarias());
             hojaVidaIngresar.setCorreosElectronicos(hojaVida.getCorreosElectronicos());
+            
+            for (co.edu.fnsp.buho.entidadesVista.Idioma idioma : hojaVida.getIdiomas()) {
+                Idioma nuevoIdioma = new Idioma();
+                nuevoIdioma.setId(idioma.getId());
+                nuevoIdioma.setIdioma(Util.obtenerEntero(idioma.getIdioma()));
+                nuevoIdioma.setNivelConversacion(idioma.getNivelConversacion());
+                nuevoIdioma.setNivelLectura(idioma.getNivelLectura());
+                nuevoIdioma.setNivelEscritura(idioma.getNivelEscritura());
+                nuevoIdioma.setNivelEscucha(idioma.getNivelEscucha());
+                nuevoIdioma.setOtraCertificacion(idioma.getOtraCertificacion());
+                nuevoIdioma.setTipoCertificacion(idioma.getTipoCertificacion());
+                nuevoIdioma.setPuntajeCertificacion(Util.obtenerNumeroDoble(idioma.getPuntajeCertificacion()));
+                
+                if (idioma.getCertificado()!= null && idioma.getCertificado().getBytes().length > 0) {
+                    documento = new Documento();
+                    documento.setContenido(idioma.getCertificado().getBytes());
+                    documento.setNombre(idioma.getCertificado().getOriginalFilename());
+                    documento.setTipoContenido(idioma.getCertificado().getContentType());
+                    nuevoIdioma.setCertificado(documento);
+                }
+                hojaVidaIngresar.getIdiomas().add(nuevoIdioma);
+            }
+            
+            for (co.edu.fnsp.buho.entidadesVista.EducacionBasica educacionBasica : hojaVida.getEducacionesBasicas()) {
+                EducacionBasica nuevaEducacionBasica = new EducacionBasica();
+                nuevaEducacionBasica.setId(educacionBasica.getId());
+                nuevaEducacionBasica.setInstitucion(Util.obtenerEntero(educacionBasica.getInstitucion()));
+                if(!"".equals(educacionBasica.getAnyoFinalizacion())) {
+                    nuevaEducacionBasica.setAnyoFinalizacion(Util.obtenerEntero(educacionBasica.getAnyoFinalizacion()));
+                }
+                nuevaEducacionBasica.setAnyoInicio(Util.obtenerEntero(educacionBasica.getAnyoInicio()));
+                nuevaEducacionBasica.setNivel(Util.obtenerEntero(educacionBasica.getNivel()));
+                nuevaEducacionBasica.setGraduado(educacionBasica.isGraduado());
+                nuevaEducacionBasica.setTitulo(educacionBasica.getTitulo());
+                if (educacionBasica.getCertificado()!= null && educacionBasica.getCertificado().getBytes().length > 0) {
+                    documento = new Documento();
+                    documento.setContenido(educacionBasica.getCertificado().getBytes());
+                    documento.setNombre(educacionBasica.getCertificado().getOriginalFilename());
+                    documento.setTipoContenido(educacionBasica.getCertificado().getContentType());
+                    nuevaEducacionBasica.setCertificado(documento);
+                }
+                hojaVidaIngresar.getEducacionesBasicas().add(nuevaEducacionBasica);
+            }            
+      
+            for (co.edu.fnsp.buho.entidadesVista.EducacionSuperior educacionSuperior : hojaVida.getEducacionesSuperiores()) {
+                EducacionSuperior nuevaEducacionSuperior = new EducacionSuperior();
+                nuevaEducacionSuperior.setId(educacionSuperior.getId());
+                nuevaEducacionSuperior.setTituloExterior(educacionSuperior.isTituloExterior());
+                if(educacionSuperior.isTituloExterior()) {
+                    nuevaEducacionSuperior.setPaisTituloExterior(Util.obtenerEntero(educacionSuperior.getPaisTituloExterior()));
+                    if (educacionSuperior.getCertificadoHomologado()!= null && educacionSuperior.getCertificadoHomologado().getBytes().length > 0) {
+                        documento = new Documento();
+                        documento.setContenido(educacionSuperior.getCertificadoHomologado().getBytes());
+                        documento.setNombre(educacionSuperior.getCertificadoHomologado().getOriginalFilename());
+                        documento.setTipoContenido(educacionSuperior.getCertificadoHomologado().getContentType());
+                        nuevaEducacionSuperior.setCertificadoHomologado(documento);
+                    }
+                }
+                nuevaEducacionSuperior.setInstitucion(Util.obtenerEntero(educacionSuperior.getInstitucion()));
+                nuevaEducacionSuperior.setTitulo(educacionSuperior.getTitulo());
+                nuevaEducacionSuperior.setPrograma(educacionSuperior.getPrograma());
+                nuevaEducacionSuperior.setAreaSaber(Util.obtenerEntero(educacionSuperior.getAreaSaber()));
+                nuevaEducacionSuperior.setFechaTitulo(Util.obtenerFecha(educacionSuperior.getFechaTitulo()));
+                if(!"".equals(educacionSuperior.getAnyoFinalizacion())) {
+                    nuevaEducacionSuperior.setAnyoFinalizacion(Util.obtenerEntero(educacionSuperior.getAnyoFinalizacion()));
+                }
+                nuevaEducacionSuperior.setAnyoInicio(Util.obtenerEntero(educacionSuperior.getAnyoInicio()));
+                nuevaEducacionSuperior.setNivel(Util.obtenerEntero(educacionSuperior.getNivel()));
+                nuevaEducacionSuperior.setGraduado(educacionSuperior.isGraduado());
+                if (educacionSuperior.getCertificado()!= null && educacionSuperior.getCertificado().getBytes().length > 0) {
+                    documento = new Documento();
+                    documento.setContenido(educacionSuperior.getCertificado().getBytes());
+                    documento.setNombre(educacionSuperior.getCertificado().getOriginalFilename());
+                    documento.setTipoContenido(educacionSuperior.getCertificado().getContentType());
+                    nuevaEducacionSuperior.setCertificado(documento);
+                }
+                hojaVidaIngresar.getEducacionesSuperiores().add(nuevaEducacionSuperior);
+            }              
+            
             long idUsuario = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario();
             if (hojaVidaIngresar.getIdPersona() == 0) {
                 if (!servicioHojaVida.existePersona(hojaVidaIngresar.getNumeroIdentificacion())) {
@@ -161,7 +279,14 @@ public class HojaVidaController {
         List<Maestro> actividadesEconomicas = servicioMaestro.obtenerActividadesEconomicas();
         List<Maestro> tiposVinculacion = servicioMaestro.obtenerTiposVinculacionUdeA();
         List<Maestro> tiposTelefono = servicioMaestro.obtenerTiposTelefono();
-
+        List<Maestro> tiposDocumento = servicioMaestro.obtenerTiposDocumento();
+        List<Maestro> nivelesIdioma = servicioMaestro.obtenerNivelesIdioma();
+        List<Maestro> idiomas = servicioMaestro.obtenerIdiomas();
+        List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
+        List<Maestro> nivelesEstudio = servicioMaestro.obtenerNivelesFormacion();
+        List<Maestro> institucionesEducativas = servicioMaestro.obtenerInstitucionesEducativas();
+        List<Maestro> areasSaber = servicioMaestro.obtenerAreasSaber();
+        
         model.addAttribute("paises", paises);
         model.addAttribute("tiposIdentificacion", tiposIdentificacion);
         model.addAttribute("gruposEtnico", gruposEtnico);
@@ -169,7 +294,14 @@ public class HojaVidaController {
         model.addAttribute("actividadesEconomicas", actividadesEconomicas);
         model.addAttribute("tiposVinculacion", tiposVinculacion);
         model.addAttribute("tiposTelefono", tiposTelefono);
-
+        model.addAttribute("tiposDocumento", tiposDocumento);
+        model.addAttribute("nivelesIdioma", nivelesIdioma);
+        model.addAttribute("idiomas", idiomas);
+        model.addAttribute("tiposCertificacion", tiposCertificacion);
+        model.addAttribute("nivelesEstudio", nivelesEstudio);
+        model.addAttribute("institucionesEducativas", institucionesEducativas);
+        model.addAttribute("areasSaber", areasSaber);
+        
         co.edu.fnsp.buho.entidades.HojaVida hojaVida = servicioHojaVida.obtenerHojaVida(idPersona);
 
         if (hojaVida.getTelefonos().size() > 0) {
@@ -181,7 +313,19 @@ public class HojaVidaController {
         if (hojaVida.getCorreosElectronicos().size() > 0) {
             model.addAttribute("correosElectronicosJSON", Util.obtenerCorreosElectronicosJSON(hojaVida.getCorreosElectronicos()));
         }
-
+        if (hojaVida.getDocumentosSoporte().size() > 0) {
+            model.addAttribute("documentosSoporteJSON", Util.obtenerDocumentosSoporteJSON(hojaVida.getDocumentosSoporte()));
+        }
+        if (hojaVida.getIdiomas().size() > 0) {
+            model.addAttribute("idiomasJSON", Util.obtenerIdiomasJSON(hojaVida.getIdiomas()));
+        }
+        if (hojaVida.getEducacionesBasicas().size() > 0) {
+            model.addAttribute("educacionesBasicasJSON", Util.obtenerEducacionesBasicasJSON(hojaVida.getEducacionesBasicas()));
+        }
+        if (hojaVida.getEducacionesSuperiores().size() > 0) {
+            model.addAttribute("educacionesSuperioresJSON", Util.obtenerEducacionesSuperioresJSON(hojaVida.getEducacionesSuperiores()));
+        }
+        
         model.addAttribute("hojaVida", hojaVida);
 
         return "hojasVida/crear";
@@ -206,7 +350,7 @@ public class HojaVidaController {
     }
 
     @RequestMapping(value = "/copiaCedula/{idPersona}", method = RequestMethod.GET)
-    public void obtenerCopiaCedula(@PathVariable("idPersona") int idPersona, HttpServletResponse response) throws IOException {
+    public void obtenerCopiaCedula(@PathVariable("idPersona") long idPersona, HttpServletResponse response) throws IOException {
         Documento documento = servicioHojaVida.obtenerDocumentoSoporte(idPersona, TipoDocumento.COPIA_CEDULA.getId());
         if (documento != null) {
             response.reset();
@@ -221,7 +365,7 @@ public class HojaVidaController {
     }
 
     @RequestMapping(value = "/copiaRUT/{idPersona}", method = RequestMethod.GET)
-    public void obtenerCopiaRut(@PathVariable("idPersona") int idPersona, HttpServletResponse response) throws IOException {
+    public void obtenerCopiaRut(@PathVariable("idPersona") long idPersona, HttpServletResponse response) throws IOException {
         Documento documento = servicioHojaVida.obtenerDocumentoSoporte(idPersona, TipoDocumento.RUT.getId());
         if (documento != null) {
             response.reset();
@@ -236,7 +380,7 @@ public class HojaVidaController {
     }
 
     @RequestMapping(value = "/copiaLibretaMilitar/{idPersona}", method = RequestMethod.GET)
-    public void obtenerCopiaLibretaMilitar(@PathVariable("idPersona") int idPersona, HttpServletResponse response) throws IOException {
+    public void obtenerCopiaLibretaMilitar(@PathVariable("idPersona") long idPersona, HttpServletResponse response) throws IOException {
         Documento documento = servicioHojaVida.obtenerDocumentoSoporte(idPersona, TipoDocumento.LIBRETA_MILITAR.getId());
         if (documento != null) {
             response.reset();
@@ -250,6 +394,81 @@ public class HojaVidaController {
         }
     }
 
+    @RequestMapping(value = "/documentoSoporte/{idDocumentoSoporte}", method = RequestMethod.GET)
+    public void obtenerDocumentoSoporte(@PathVariable("idDocumentoSoporte") long idDocumentoSoporte, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerDocumentoSoporte(idDocumentoSoporte);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+
+    @RequestMapping(value = "/certificadoIdioma/{idIdioma}", method = RequestMethod.GET)
+    public void obtenerCertificadoIdioma(@PathVariable("idIdioma") int idIdioma, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerCertificadoIdioma(idIdioma);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+
+    @RequestMapping(value = "/certificadoEducacionBasica/{idEducacionBasica}", method = RequestMethod.GET)
+    public void obtenerCertificadoEducacionBasica(@PathVariable("idEducacionBasica") int idEducacionBasica, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerCertificadoEducacionBasica(idEducacionBasica);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+    
+    @RequestMapping(value = "/certificadoEducacionSuperior/{idEducacionSuperior}", method = RequestMethod.GET)
+    public void obtenerCertificadoEducacionSuperior(@PathVariable("idEducacionSuperior") int idEducacionSuperior, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerCertificadoEducacionSuperior(idEducacionSuperior);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+    
+    @RequestMapping(value = "/certificadoHomologadoEducacionSuperior/{idEducacionSuperior}", method = RequestMethod.GET)
+    public void obtenerCertificadoHomologadoEducacionSuperior(@PathVariable("idEducacionSuperior") int idEducacionSuperior, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerCertificadoHomologadoEducacionSuperior(idEducacionSuperior);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+    
     @RequestMapping(value = "/eliminar/{idPersona}", method = RequestMethod.GET)
     public @ResponseBody
     String eliminarHojaVida(@PathVariable long idPersona, Model model) {

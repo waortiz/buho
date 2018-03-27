@@ -62,8 +62,13 @@ public class ServicioHojaVida implements IServicioHojaVida {
     }
 
     @Override
+    public Documento obtenerDocumentoSoporte(long idDocumentoSoporte) {
+        return repositorioHojaVida.obtenerDocumentoSoporte(idDocumentoSoporte);
+    }
+    
+    @Override
     public List<HojaVida> obtenerHojasVida() {
-        return repositorioHojaVida.obtenerHojaVida();
+        return repositorioHojaVida.obtenerHojasVida();
     }
 
     @Override
@@ -92,5 +97,25 @@ public class ServicioHojaVida implements IServicioHojaVida {
     @Override
     public HojaVida obtenerHojaVida(long idPersona) {
         return repositorioHojaVida.obtenerHojaVida(idPersona);
+    }
+
+    @Override
+    public Documento obtenerCertificadoIdioma(int idIdioma) {
+        return repositorioHojaVida.obtenerCertificadoIdioma(idIdioma);
+    }
+
+    @Override
+    public Documento obtenerCertificadoEducacionBasica(int idEducacionBasica) {
+        return repositorioHojaVida.obtenerCertificadoEducacionBasica(idEducacionBasica);
+    }
+
+    @Override
+    public Documento obtenerCertificadoEducacionSuperior(int idEducacionSuperior) {
+        return repositorioHojaVida.obtenerCertificadoEducacionSuperior(idEducacionSuperior);
+    }
+
+    @Override
+    public Documento obtenerCertificadoHomologadoEducacionSuperior(int idEducacionSuperior) {
+        return repositorioHojaVida.obtenerCertificadoHomologadoEducacionSuperior(idEducacionSuperior);
     }
 }

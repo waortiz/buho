@@ -38,18 +38,20 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     private SimpleJdbcCall obtenerInstitucionesEducativas;
     private SimpleJdbcCall obtenerMunicipios;
     private SimpleJdbcCall obtenerNivelesFormacion;
+    private SimpleJdbcCall obtenerNivelesIdioma;
     private SimpleJdbcCall obtenerPaises;
     private SimpleJdbcCall obtenerTiposAdenda;
     private SimpleJdbcCall obtenerTiposCapacitacion;
     private SimpleJdbcCall obtenerTiposContrato;
     private SimpleJdbcCall obtenerTiposConvocatoria;
+    private SimpleJdbcCall obtenerTiposCertificacionIdioma;
     private SimpleJdbcCall obtenerTiposDocumento;
     private SimpleJdbcCall obtenerTiposExperiencia;
     private SimpleJdbcCall obtenerTiposInstitucion;
     private SimpleJdbcCall obtenerTiposTelefono;
     private SimpleJdbcCall obtenerTiposVinculacionUdeA;
     private SimpleJdbcCall obtenerSedes;
-    private SimpleJdbcCall obtenerProgramas;
+    private SimpleJdbcCall obtenerProgramasSede;
     private SimpleJdbcCall obtenerCriteriosHabilitantes;
     private SimpleJdbcCall obtenerCriteriosEvaluacion;
 
@@ -76,13 +78,15 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         this.obtenerTiposCapacitacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposCapacitacion").returningResultSet("tiposCapacitacion", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerTiposContrato = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposContrato").returningResultSet("tiposContrato", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerTiposConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposConvocatoria").returningResultSet("tiposConvocatoria", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerTiposCertificacionIdioma= new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposCertificacionIdioma").returningResultSet("tiposCertificacionIdioma", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerNivelesIdioma = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerNivelesIdioma").returningResultSet("nivelesIdioma", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerTiposDocumento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposDocumento").returningResultSet("tiposDocumento", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerTiposExperiencia = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposExperiencia").returningResultSet("tiposExperiencia", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerTiposInstitucion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposInstitucion").returningResultSet("tiposInstitucion", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerTiposTelefono = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposTelefono").returningResultSet("tiposTelefono", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerTiposVinculacionUdeA = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposVinculacionUdeA").returningResultSet("tiposVinculacionUdeA", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerSedes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerSedes").returningResultSet("sedes", BeanPropertyRowMapper.newInstance(Maestro.class));
-        this.obtenerProgramas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerProgramas").returningResultSet("programas", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerProgramasSede = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerProgramasSede").returningResultSet("programas", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerCriteriosHabilitantes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCriteriosHabilitantes").returningResultSet("criteriosHabilitantes", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerCriteriosEvaluacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCriteriosEvaluacion").returningResultSet("criteriosEvaluacion", BeanPropertyRowMapper.newInstance(Maestro.class));
     }
@@ -196,6 +200,14 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     }
 
     @Override
+    public List<Maestro> obtenerNivelesIdioma() {
+        Map resultado = obtenerNivelesIdioma.execute(new HashMap<>());
+        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("nivelesIdioma");
+
+        return coleccion;
+    }
+    
+    @Override
     public List<Maestro> obtenerPaises() {
         Map resultado = obtenerPaises.execute(new HashMap<>());
         List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("paises");
@@ -287,12 +299,12 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     public List<Maestro> obtenerProgramas(int idSede) {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
         parametros.addValue("varIdSede", idSede);
-        Map resultado = obtenerProgramas.execute(parametros);
+        Map resultado = obtenerProgramasSede.execute(parametros);
         List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("programas");
 
         return coleccion;
     }
-
+    
     @Override
     public List<Maestro> obtenerCriteriosHabilitantes() {
        Map resultado = obtenerCriteriosHabilitantes.execute(new HashMap<>());
@@ -305,6 +317,14 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     public List<Maestro> obtenerCriteriosEvaluacion() {
        Map resultado = obtenerCriteriosEvaluacion.execute(new HashMap<>());
        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("criteriosEvaluacion");
+
+       return coleccion;
+    }
+
+    @Override
+    public List<Maestro> obtenerTiposCertificacionIdioma() {
+        Map resultado = obtenerTiposCertificacionIdioma.execute(new HashMap<>());
+       List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("tiposCertificacionIdioma");
 
        return coleccion;
     }

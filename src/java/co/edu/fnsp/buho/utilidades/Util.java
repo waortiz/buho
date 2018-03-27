@@ -10,7 +10,11 @@ import co.edu.fnsp.buho.entidades.CorreoElectronico;
 import co.edu.fnsp.buho.entidades.CriterioEvaluacion;
 import co.edu.fnsp.buho.entidades.CriterioHabilitante;
 import co.edu.fnsp.buho.entidades.CuentaBancaria;
+import co.edu.fnsp.buho.entidades.DocumentoSoporte;
+import co.edu.fnsp.buho.entidades.EducacionBasica;
+import co.edu.fnsp.buho.entidades.EducacionSuperior;
 import co.edu.fnsp.buho.entidades.Telefono;
+import co.edu.fnsp.buho.entidades.Idioma;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -62,6 +66,10 @@ public class Util {
 
     public static int obtenerEntero(String numero) throws ParseException {
         return Integer.parseInt(numero);
+    }
+
+    public static double obtenerNumeroDoble(String numero) throws ParseException {
+        return Double.parseDouble(numero);
     }
 
     public static String obtenerAdendasJSON(List<Adenda> correosElectronicos) {
@@ -161,7 +169,7 @@ public class Util {
                         + "{id: ko.observable(" + telefono.getId() + "),"
                         + "tipo:ko.observable(" + telefono.getTipo() + "),"
                         + "nombreTipo:ko.observable('" + telefono.getNombreTipo() + "'),"
-                        + "numero:ko.observable('" + telefono.getNumero()+ "'),"
+                        + "numero:ko.observable('" + telefono.getNumero() + "'),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < telefonos.size() - 1) {
@@ -225,4 +233,154 @@ public class Util {
 
         return jscriptArray;
     }
+
+    public static String obtenerDocumentosSoporteJSON(List<DocumentoSoporte> documentosSoporte) {
+        String jscriptArray = "";
+
+        if (documentosSoporte.size() > 0) {
+            jscriptArray = "[";
+
+            for (int i = 0; i < documentosSoporte.size(); i++) {
+                DocumentoSoporte documentoSoporte = documentosSoporte.get(i);
+                jscriptArray = jscriptArray
+                        + "{id: ko.observable(" + documentoSoporte.getId() + "),"
+                        + "tipoDocumento:ko.observable('" + documentoSoporte.getTipoDocumento() + "'),"
+                        + "nombreTipoDocumento:ko.observable('" + documentoSoporte.getNombreTipoDocumento() + "'),"
+                        + "documento:ko.observable(''),"
+                        + "tieneDocumento:ko.observable(true),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < documentosSoporte.size() - 1) {
+                    jscriptArray = jscriptArray + ",";
+                }
+            }
+
+            jscriptArray = jscriptArray + "]";
+        }
+
+        return jscriptArray;
+    }
+
+    public static Object obtenerIdiomasJSON(List<Idioma> idiomas) {
+        String jscriptArray = "";
+
+        if (idiomas.size() > 0) {
+            jscriptArray = "[";
+
+            for (int i = 0; i < idiomas.size(); i++) {
+                Idioma idioma = idiomas.get(i);
+                jscriptArray = jscriptArray
+                        + "{id: ko.observable(" + idioma.getId() + "),"
+                        + "idioma:ko.observable(" + idioma.getIdioma() + "),"
+                        + "nombreIdioma:ko.observable('" + idioma.getNombreIdioma() + "'),"
+                        + "nivelConversacion:ko.observable('" + idioma.getNivelConversacion() + "'),"
+                        + "nombreNivelConversacion:ko.observable('" + idioma.getNombreNivelConversacion() + "'),"
+                        + "nivelEscritura:ko.observable('" + idioma.getNivelEscritura() + "'),"
+                        + "nombreNivelEscritura:ko.observable('" + idioma.getNombreNivelEscritura() + "'),"
+                        + "nivelEscucha:ko.observable('" + idioma.getNivelEscucha() + "'),"
+                        + "nombreNivelEscucha:ko.observable('" + idioma.getNombreNivelEscucha() + "'),"
+                        + "nivelLectura:ko.observable('" + idioma.getNivelLectura() + "'),"
+                        + "nombreNivelLectura:ko.observable('" + idioma.getNombreNivelLectura() + "'),"
+                        + "otraCertificacion:ko.observable('" + idioma.getOtraCertificacion() + "'),"
+                        + "tipoCertificacion:ko.observable('" + idioma.getTipoCertificacion() + "'),"
+                        + "nombreTipoCertificacion:ko.observable('" + idioma.getNombreTipoCertificacion() + "'),"
+                        + "puntajeCertificacion:ko.observable(" + idioma.getPuntajeCertificacion() + "),"
+                        + "certificado:ko.observable(''),"
+                        + "tieneCertificado:ko.observable(true),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < idiomas.size() - 1) {
+                    jscriptArray = jscriptArray + ",";
+                }
+            }
+
+            jscriptArray = jscriptArray + "]";
+        }
+
+        return jscriptArray;
+    }
+
+    public static Object obtenerEducacionesBasicasJSON(List<EducacionBasica> educacionesBasicas) {
+        String jscriptArray = "";
+
+        if (educacionesBasicas.size() > 0) {
+            jscriptArray = "[";
+
+            for (int i = 0; i < educacionesBasicas.size(); i++) {
+                EducacionBasica educacionBasica = educacionesBasicas.get(i);
+                jscriptArray = jscriptArray
+                        + "{id: ko.observable(" + educacionBasica.getId() + "),"
+                        + "institucion:ko.observable(" + educacionBasica.getInstitucion() + "),"
+                        + "nombreInstitucion:ko.observable('" + educacionBasica.getNombreInstitucion() + "'),"
+                        + "nivel:ko.observable(" + educacionBasica.getNivel() + "),"
+                        + "nombreNivel:ko.observable('" + educacionBasica.getNombreNivel() + "'),"
+                        + "titulo:ko.observable('" + educacionBasica.getTitulo() + "'),"
+                        + "anyoInicio:ko.observable(" + educacionBasica.getAnyoInicio() + "),"
+                        + "graduado:ko.observable(" + educacionBasica.isGraduado() + "),"
+                        + "anyoFinalizacion:ko.observable(" + educacionBasica.getAnyoFinalizacion() + "),"
+                        + "certificado:ko.observable(''),"
+                        + "tieneCertificado:ko.observable(true),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < educacionesBasicas.size() - 1) {
+                    jscriptArray = jscriptArray + ",";
+                }
+            }
+
+            jscriptArray = jscriptArray + "]";
+        }
+
+        return jscriptArray;
+    }
+
+    public static Object obtenerEducacionesSuperioresJSON(List<EducacionSuperior> educacionesSuperiores) {
+        String jscriptArray = "";
+
+        if (educacionesSuperiores.size() > 0) {
+            jscriptArray = "[";
+
+            for (int i = 0; i < educacionesSuperiores.size(); i++) {
+                EducacionSuperior educacionSuperior = educacionesSuperiores.get(i);
+                boolean tieneCertificadoHomologado = false;
+                String paisTitulo = "";
+                String nombrePaisTitulo = "";
+                if(educacionSuperior.isTituloExterior()) {
+                    tieneCertificadoHomologado = true;
+                    paisTitulo = educacionSuperior.getPaisTituloExterior().toString();
+                    nombrePaisTitulo = educacionSuperior.getNombrePaisTituloExterior();
+                }
+                jscriptArray = jscriptArray
+                        + "{id: ko.observable(" + educacionSuperior.getId() + "),"
+                        + "institucion:ko.observable(" + educacionSuperior.getInstitucion() + "),"
+                        + "nombreInstitucion:ko.observable('" + educacionSuperior.getNombreInstitucion() + "'),"
+                        + "tituloExterior:ko.observable(" + educacionSuperior.isTituloExterior()+ "),"
+                        + "paisTituloExterior:ko.observable(" + paisTitulo + "),"
+                        + "nombrePaisTitulo:ko.observable('" + nombrePaisTitulo + "'),"
+                        + "areaSaber:ko.observable(" + educacionSuperior.getAreaSaber()+ "),"
+                        + "nombreAreaSaber:ko.observable('" + educacionSuperior.getNombreAreaSaber() + "'),"
+                        + "programa:ko.observable('" + educacionSuperior.getPrograma()+ "'),"
+                        + "nivel:ko.observable(" + educacionSuperior.getNivel() + "),"
+                        + "nombreNivel:ko.observable('" + educacionSuperior.getNombreNivel() + "'),"
+                        + "titulo:ko.observable('" + educacionSuperior.getTitulo() + "'),"
+                        + "fechaTitulo:ko.observable('" + Util.obtenerFechaFormateada(educacionSuperior.getFechaTitulo()) + "'),"
+                        + "anyoInicio:ko.observable(" + educacionSuperior.getAnyoInicio() + "),"
+                        + "graduado:ko.observable(" + educacionSuperior.isGraduado() + "),"
+                        + "anyoFinalizacion:ko.observable(" + educacionSuperior.getAnyoFinalizacion() + "),"
+                        + "certificadoHomologado:ko.observable(''),"
+                        + "tieneCertificadoHomologado:ko.observable(" + tieneCertificadoHomologado + "),"
+                        + "certificado:ko.observable(''),"
+                        + "tieneCertificado:ko.observable(true),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < educacionesSuperiores.size() - 1) {
+                    jscriptArray = jscriptArray + ",";
+                }
+            }
+
+            jscriptArray = jscriptArray + "]";
+        }
+
+        return jscriptArray;
+    }
+
 }

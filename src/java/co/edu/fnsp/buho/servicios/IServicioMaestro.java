@@ -27,6 +27,7 @@ public interface IServicioMaestro {
     List<Maestro> obtenerInstitucionesEducativas();
     List<Maestro> obtenerMunicipios(String codigoDepartamento);
     List<Maestro> obtenerNivelesFormacion();
+    List<Maestro> obtenerNivelesIdioma();
     List<Maestro> obtenerPaises();
     List<Maestro> obtenerSedes();
     List<Maestro> obtenerProgramas(int idSede);
@@ -41,4 +42,5 @@ public interface IServicioMaestro {
     List<Maestro> obtenerTiposVinculacionUdeA();
     List<Maestro> obtenerCriteriosHabilitantes();
     List<Maestro> obtenerCriteriosEvaluacion();
+    List<Maestro> obtenerTiposCertificacionIdioma() ;
 }

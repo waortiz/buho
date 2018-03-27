@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author William
  */
 public class HojaVida {
+
     private int idPersona;
     private String tipoIdentificacion;
     private String nombreTipoIdentificacion;
@@ -48,19 +49,24 @@ public class HojaVida {
     private MultipartFile documentoRUT;
     private boolean documentoRUTValidado;
     private boolean tieneDocumentoRUT;
-    private String disponeRUT;
+    private boolean disponeRUT;
     private String nombreActividadEconomica;
     private String actividadEconomica;
-    private String disponibilidadViajar;
-    private String egresadoUDEA;
-    private String empleadoUDEA;
+    private boolean disponibilidadViajar;
+    private boolean egresadoUDEA;
+    private boolean empleadoUDEA;
     private String lugarExpedicion;
     private String nombreLugarExpedicion;
     private String tipoVinculacion;
+    private String perfil;
     private List<Telefono> telefonos = new ArrayList<>();
     private List<CuentaBancaria> cuentasBancarias = new ArrayList<>();
     private List<CorreoElectronico> correosElectronicos = new ArrayList<>();
-    
+    private List<DocumentoSoporte> documentosSoporte = new ArrayList<>();
+    private List<Idioma> idiomas = new ArrayList<>();
+    private List<EducacionBasica> educacionesBasicas = new ArrayList<>();
+    private List<EducacionSuperior> educacionesSuperiores = new ArrayList<>();
+
     /**
      * @return the tipoIdentificacion
      */
@@ -386,14 +392,14 @@ public class HojaVida {
     /**
      * @return the disponeRUT
      */
-    public String getDisponeRUT() {
+    public boolean isDisponeRUT() {
         return disponeRUT;
     }
 
     /**
      * @param disponeRUT the disponeRUT to set
      */
-    public void setDisponeRUT(String disponeRUT) {
+    public void setDisponeRUT(boolean disponeRUT) {
         this.disponeRUT = disponeRUT;
     }
 
@@ -428,42 +434,42 @@ public class HojaVida {
     /**
      * @return the disponibilidadViajar
      */
-    public String getDisponibilidadViajar() {
+    public boolean isDisponibilidadViajar() {
         return disponibilidadViajar;
     }
 
     /**
      * @param disponibilidadViajar the disponibilidadViajar to set
      */
-    public void setDisponibilidadViajar(String disponibilidadViajar) {
+    public void setDisponibilidadViajar(boolean disponibilidadViajar) {
         this.disponibilidadViajar = disponibilidadViajar;
     }
 
     /**
      * @return the egresadoUDEA
      */
-    public String getEgresadoUDEA() {
+    public boolean isEgresadoUDEA() {
         return egresadoUDEA;
     }
 
     /**
      * @param egresadoUDEA the egresadoUDEA to set
      */
-    public void setEgresadoUDEA(String egresadoUDEA) {
+    public void setEgresadoUDEA(boolean egresadoUDEA) {
         this.egresadoUDEA = egresadoUDEA;
     }
 
     /**
      * @return the empleadoUDEA
      */
-    public String getEmpleadoUDEA() {
+    public boolean isEmpleadoUDEA() {
         return empleadoUDEA;
     }
 
     /**
      * @param empleadoUDEA the empleadoUDEA to set
      */
-    public void setEmpleadoUDEA(String empleadoUDEA) {
+    public void setEmpleadoUDEA(boolean empleadoUDEA) {
         this.empleadoUDEA = empleadoUDEA;
     }
 
@@ -655,5 +661,74 @@ public class HojaVida {
     public boolean isCopiaLibretaMilitarValidado() {
         return copiaLibretaMilitarValidado;
     }
-    
+
+    /**
+     * @return the perfil
+     */
+    public String getPerfil() {
+        return perfil;
+    }
+
+    /**
+     * @param perfil the perfil to set
+     */
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
+    }
+
+    /**
+     * @return the idiomas
+     */
+    public List<Idioma> getIdiomas() {
+        return idiomas;
+    }
+
+    /**
+     * @param idiomas the idiomas to set
+     */
+    public void setIdiomas(List<Idioma> idiomas) {
+        this.idiomas = idiomas;
+    }
+
+    /**
+     * @return the documentosSoporte
+     */
+    public List<DocumentoSoporte> getDocumentosSoporte() {
+        return documentosSoporte;
+    }
+
+    /**
+     * @param documentosSoporte the documentosSoporte to set
+     */
+    public void setDocumentosSoporte(List<DocumentoSoporte> documentosSoporte) {
+        this.documentosSoporte = documentosSoporte;
+    }    
+
+    /**
+     * @return the educacionesBasicas
+     */
+    public List<EducacionBasica> getEducacionesBasicas() {
+        return educacionesBasicas;
+    }
+
+    /**
+     * @param educacionesBasicas the educacionesBasicas to set
+     */
+    public void setEducacionesBasicas(List<EducacionBasica> educacionesBasicas) {
+        this.educacionesBasicas = educacionesBasicas;
+    }
+
+    /**
+     * @return the educacionesSuperiores
+     */
+    public List<EducacionSuperior> getEducacionesSuperiores() {
+        return educacionesSuperiores;
+    }
+
+    /**
+     * @param educacionesSuperiores the educacionesSuperiores to set
+     */
+    public void setEducacionesSuperiores(List<EducacionSuperior> educacionesSuperiores) {
+        this.educacionesSuperiores = educacionesSuperiores;
+    }
 }

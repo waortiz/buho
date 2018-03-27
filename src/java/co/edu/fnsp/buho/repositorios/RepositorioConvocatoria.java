@@ -51,10 +51,12 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     private SimpleJdbcCall obtenerDocumentoAdenda;
     private SimpleJdbcCall ingresarDocumentoAdenda;
     private SimpleJdbcCall actualizarDocumentoAdenda;
+    
     private SimpleJdbcCall ingresarCriterioEvaluacion;
     private SimpleJdbcCall actualizarCriterioEvaluacion;
     private SimpleJdbcCall eliminarCriterioEvaluacion;
     private SimpleJdbcCall obtenerCriteriosEvaluacion;
+    
     private SimpleJdbcCall ingresarCriterioHabilitante;
     private SimpleJdbcCall eliminarCriterioHabilitante;
     private SimpleJdbcCall obtenerCriteriosHabilitantes;
@@ -217,9 +219,9 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             actualizarDocumentoConvocatoria.execute(parametrosActualizacionDocumentoConvocatoria);
         }
 
-        ActualizarAdenda(convocatoria.getId(), idUsuario, convocatoria.getAdendas());
-        ActualizarCriterioEvaluacion(convocatoria.getId(), convocatoria.getCriteriosEvaluacion());
-        ActualizarCriterioHabilitante(convocatoria.getId(), convocatoria.getCriteriosHabilitantes());
+        actualizarAdenda(convocatoria.getId(), idUsuario, convocatoria.getAdendas());
+        actualizarCriterioEvaluacion(convocatoria.getId(), convocatoria.getCriteriosEvaluacion());
+        actualizarCriterioHabilitante(convocatoria.getId(), convocatoria.getCriteriosHabilitantes());
     }
 
     @Override
@@ -325,7 +327,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         return convocatorias;
     }
 
-    private void ActualizarAdenda(int idConvocatoria, long idUsuario, List<Adenda> adendas) {
+    private void actualizarAdenda(int idConvocatoria, long idUsuario, List<Adenda> adendas) {
         MapSqlParameterSource parametrosConsultaAdenda = new MapSqlParameterSource();
         parametrosConsultaAdenda.addValue("varIdConvocatoria", idConvocatoria);
         Map resultadoAdendas = obtenerAdendas.execute(parametrosConsultaAdenda);
@@ -401,7 +403,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         retirarPostulacionConvocatoria.execute(parametrosRetirarPostulacionConvocatoria);
     }
 
-    private void ActualizarCriterioEvaluacion(int idConvocatoria, List<CriterioEvaluacion> criteriosEvaluacion) {
+    private void actualizarCriterioEvaluacion(int idConvocatoria, List<CriterioEvaluacion> criteriosEvaluacion) {
         MapSqlParameterSource parametrosConsultaCriterioEvaluacion = new MapSqlParameterSource();
         parametrosConsultaCriterioEvaluacion.addValue("varIdConvocatoria", idConvocatoria);
         Map resultadoCriterioEvaluacions = obtenerCriteriosEvaluacion.execute(parametrosConsultaCriterioEvaluacion);
@@ -446,7 +448,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         }
     }
 
-    private void ActualizarCriterioHabilitante(int idConvocatoria, List<CriterioHabilitante> criteriosHabilitantes) {
+    private void actualizarCriterioHabilitante(int idConvocatoria, List<CriterioHabilitante> criteriosHabilitantes) {
         MapSqlParameterSource parametrosConsultaCriteriosHabilitantes = new MapSqlParameterSource();
         parametrosConsultaCriteriosHabilitantes.addValue("varIdConvocatoria", idConvocatoria);
         Map resultadoCriteriosHabilitantes = obtenerCriteriosHabilitantes.execute(parametrosConsultaCriteriosHabilitantes);

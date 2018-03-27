@@ -26,9 +26,11 @@ public interface IRepositorioMaestro {
     List<Maestro> obtenerInstitucionesEducativas();
     List<Maestro> obtenerMunicipios(String codigoDepartamento);
     List<Maestro> obtenerNivelesFormacion();
+    List<Maestro> obtenerNivelesIdioma();
     List<Maestro> obtenerPaises();
     List<Maestro> obtenerTiposAdenda();
     List<Maestro> obtenerTiposCapacitacion();
+    List<Maestro> obtenerTiposCertificacionIdioma();
     List<Maestro> obtenerTiposContrato();
     List<Maestro> obtenerTiposConvocatoria();
     List<Maestro> obtenerTiposDocumento();

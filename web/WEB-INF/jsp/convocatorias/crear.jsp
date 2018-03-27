@@ -1115,7 +1115,7 @@
                             <!-- Modal content-->
                             <div class="modal-content">
                                 <div class="modal-header mhsuccess">
-                                    <button class="close" data-dismiss="modal">&times;</button>
+                                    <button class="close" onclick="cerrarVentanaAndenda();">&times;</button>
                                     <h4><i class="fa fa-address-book-o" aria-hidden="true"></i>Agregar adenda</h4>
                                 </div>
                                 <div class="modal-body">  
@@ -1149,7 +1149,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button"  class="btn btn-success" data-bind="click: adicionarAdenda">Agregar</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-default" onclick="cerrarVentanaAndenda();">Cerrar</button>
                                 </div>
                             </div>
                         </div>
@@ -1388,7 +1388,6 @@
             var nombreTipoAdenda = $('#tipoAdenda option:selected').text();
             var descripcionAdenda = $('#descripcionAdenda').val();
             var fechaAdenda = $('#fechaAdenda').val();
-            var fileInput = null;
             if ($('#consecutivo').val() === "") {
                 self.adendas.push({
                     id: ko.observable(0),
@@ -1424,6 +1423,7 @@
         };
 
         self.eliminarAdenda = function (adenda) {
+            $('input:file[name="adendas[' + adenda.consecutivo() + '].documento"]').remove();
             self.adendas.remove(adenda);
         };
 
@@ -1475,6 +1475,13 @@
         }
         $('#md_adenda').modal('show');
     }
+
+    function cerrarVentanaAndenda() {
+        if($('input:file[name="adendas[' + self.documentosSoporte().length + '].documento"]')) {
+           $('input:file[name="adendas[' + self.documentosSoporte().length + '].documento"]').remove(); 
+        }
+        $('#md_adenda').modal('hide');
+    } 
 
     function ocultarDocumentoAdendas() {
         for (var i = 0; i < convocatoriaModel.adendas().length; i++) {

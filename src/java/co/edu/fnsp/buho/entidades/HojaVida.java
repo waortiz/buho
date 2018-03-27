@@ -61,10 +61,15 @@ public class HojaVida {
     private String nombreLugarExpedicion;
     private String tipoVinculacion;
     private String nombreTipoVinculacion;
+    private String perfil;
     private List<Telefono> telefonos = new ArrayList<>();
     private List<CuentaBancaria> cuentasBancarias = new ArrayList<>();
     private List<CorreoElectronico> correosElectronicos = new ArrayList<>();
-
+    private List<DocumentoSoporte> documentosSoporte = new ArrayList<>();
+    private List<Idioma> idiomas = new ArrayList<>();
+    private List<EducacionBasica> educacionesBasicas = new ArrayList<>();
+    private List<EducacionSuperior> educacionesSuperiores = new ArrayList<>();
+    
     /**
      * @return the tipoIdentificacion
      */
@@ -686,8 +691,8 @@ public class HojaVida {
 
     public String getTelefono() {
         String telefono = "";
-        if (this.telefonos.size() > 0) {
-            telefono = this.telefonos.get(0).getNumero();
+        if (this.getTelefonos().size() > 0) {
+            telefono = this.getTelefonos().get(0).getNumero();
         }
 
         return telefono;
@@ -719,6 +724,76 @@ public class HojaVida {
      */
     public void setNombreTipoVinculacion(String nombreTipoVinculacion) {
         this.nombreTipoVinculacion = nombreTipoVinculacion;
+    }
+
+    /**
+     * @return the perfil
+     */
+    public String getPerfil() {
+        return perfil;
+    }
+
+    /**
+     * @param perfil the perfil to set
+     */
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
+    }
+
+    /**
+     * @return the documentosSoporte
+     */
+    public List<DocumentoSoporte> getDocumentosSoporte() {
+        return documentosSoporte;
+    }
+
+    /**
+     * @param documentosSoporte the documentosSoporte to set
+     */
+    public void setDocumentosSoporte(List<DocumentoSoporte> documentosSoporte) {
+        this.documentosSoporte = documentosSoporte;
+    }
+
+    /**
+     * @return the idiomas
+     */
+    public List<Idioma> getIdiomas() {
+        return idiomas;
+    }
+
+    /**
+     * @param idiomas the idiomas to set
+     */
+    public void setIdiomas(List<Idioma> idiomas) {
+        this.idiomas = idiomas;
+    }
+
+    /**
+     * @return the educacionesBasicas
+     */
+    public List<EducacionBasica> getEducacionesBasicas() {
+        return educacionesBasicas;
+    }
+
+    /**
+     * @param educacionesBasicas the educacionesBasicas to set
+     */
+    public void setEducacionesBasicas(List<EducacionBasica> educacionesBasicas) {
+        this.educacionesBasicas = educacionesBasicas;
+    }
+
+    /**
+     * @return the educacionesSuperiores
+     */
+    public List<EducacionSuperior> getEducacionesSuperiores() {
+        return educacionesSuperiores;
+    }
+
+    /**
+     * @param educacionesSuperiores the educacionesSuperiores to set
+     */
+    public void setEducacionesSuperiores(List<EducacionSuperior> educacionesSuperiores) {
+        this.educacionesSuperiores = educacionesSuperiores;
     }
 
 }

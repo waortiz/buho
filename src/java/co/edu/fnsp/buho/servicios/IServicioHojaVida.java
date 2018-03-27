@@ -20,6 +20,8 @@ public interface IServicioHojaVida {
     void actualizarHojaVida(long idUsuario, HojaVida hojaVidaIngresar);
 
     Documento obtenerDocumentoSoporte(long idPersona, int idTipoDocumento);
+    
+    Documento obtenerDocumentoSoporte(long idDocumentoSoporte);
 
     List<HojaVida> obtenerHojasVida();
 
@@ -30,4 +32,12 @@ public interface IServicioHojaVida {
     String obtenerNumeroIdentificacionPersona(long idPersona);
 
     HojaVida obtenerHojaVida(long idPersona);
+
+    Documento obtenerCertificadoIdioma(int idIdioma);
+
+    Documento obtenerCertificadoEducacionBasica(int idEducacionBasica);
+
+    public Documento obtenerCertificadoEducacionSuperior(int idEducacionSuperior);
+
+    public Documento obtenerCertificadoHomologadoEducacionSuperior(int idEducacionSuperior);
 }
