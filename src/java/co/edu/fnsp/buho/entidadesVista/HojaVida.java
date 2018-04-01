@@ -66,7 +66,10 @@ public class HojaVida {
     private List<Idioma> idiomas = new ArrayList<>();
     private List<EducacionBasica> educacionesBasicas = new ArrayList<>();
     private List<EducacionSuperior> educacionesSuperiores = new ArrayList<>();
-
+    private List<EducacionContinua> educacionesContinuas = new ArrayList<>();
+    private List<Distincion> distinciones = new ArrayList<>();
+    private List<ExperienciaLaboral> experienciasLaborales = new ArrayList<>();
+    
     /**
      * @return the tipoIdentificacion
      */
@@ -730,5 +733,47 @@ public class HojaVida {
      */
     public void setEducacionesSuperiores(List<EducacionSuperior> educacionesSuperiores) {
         this.educacionesSuperiores = educacionesSuperiores;
+    }
+
+    /**
+     * @return the educacionesContinuas
+     */
+    public List<EducacionContinua> getEducacionesContinuas() {
+        return educacionesContinuas;
+    }
+
+    /**
+     * @param educacionesContinuas the educacionesContinuas to set
+     */
+    public void setEducacionesContinuas(List<EducacionContinua> educacionesContinuas) {
+        this.educacionesContinuas = educacionesContinuas;
+    }
+
+    /**
+     * @return the distinciones
+     */
+    public List<Distincion> getDistinciones() {
+        return distinciones;
+    }
+
+    /**
+     * @param distinciones the distinciones to set
+     */
+    public void setDistinciones(List<Distincion> distinciones) {
+        this.distinciones = distinciones;
+    }
+
+    /**
+     * @return the experienciasLaborales
+     */
+    public List<ExperienciaLaboral> getExperienciasLaborales() {
+        return experienciasLaborales;
+    }
+
+    /**
+     * @param experienciasLaborales the experienciasLaborales to set
+     */
+    public void setExperienciasLaborales(List<ExperienciaLaboral> experienciasLaborales) {
+        this.experienciasLaborales = experienciasLaborales;
     }
 }

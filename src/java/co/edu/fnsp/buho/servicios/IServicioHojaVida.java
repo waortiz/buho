@@ -37,7 +37,13 @@ public interface IServicioHojaVida {
 
     Documento obtenerCertificadoEducacionBasica(int idEducacionBasica);
 
-    public Documento obtenerCertificadoEducacionSuperior(int idEducacionSuperior);
+    Documento obtenerCertificadoEducacionSuperior(int idEducacionSuperior);
 
-    public Documento obtenerCertificadoHomologadoEducacionSuperior(int idEducacionSuperior);
+    Documento obtenerCertificadoHomologadoEducacionSuperior(int idEducacionSuperior);
+
+    Documento obtenerCertificadoEducacionContinua(int idEducacionContinua);
+    
+    Documento obtenerCertificadoDistincion(int idDistincion);
+    
+    Documento obtenerCertificadoExperienciaLaboral(int idExperienciaLaboral);
 }

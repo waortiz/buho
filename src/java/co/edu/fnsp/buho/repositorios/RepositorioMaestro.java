@@ -54,6 +54,8 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     private SimpleJdbcCall obtenerProgramasSede;
     private SimpleJdbcCall obtenerCriteriosHabilitantes;
     private SimpleJdbcCall obtenerCriteriosEvaluacion;
+    private SimpleJdbcCall obtenerTiposEmpresa;
+    private SimpleJdbcCall obtenerNaturalezasCargo;
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -89,6 +91,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         this.obtenerProgramasSede = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerProgramasSede").returningResultSet("programas", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerCriteriosHabilitantes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCriteriosHabilitantes").returningResultSet("criteriosHabilitantes", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerCriteriosEvaluacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCriteriosEvaluacion").returningResultSet("criteriosEvaluacion", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerNaturalezasCargo = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerNaturalezasCargo").returningResultSet("naturalezasCargo", BeanPropertyRowMapper.newInstance(Maestro.class));
     }
 
     @Override
@@ -325,6 +328,14 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     public List<Maestro> obtenerTiposCertificacionIdioma() {
         Map resultado = obtenerTiposCertificacionIdioma.execute(new HashMap<>());
        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("tiposCertificacionIdioma");
+
+       return coleccion;
+    }
+
+    @Override
+    public List<Maestro> obtenerNaturalezasCargo() {
+        Map resultado = obtenerNaturalezasCargo.execute(new HashMap<>());
+       List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("naturalezasCargo");
 
        return coleccion;
     }

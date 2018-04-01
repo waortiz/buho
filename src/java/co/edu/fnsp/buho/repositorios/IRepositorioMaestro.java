@@ -42,4 +42,5 @@ public interface IRepositorioMaestro {
     List<Maestro> obtenerProgramas(int idSede);
     List<Maestro> obtenerCriteriosHabilitantes();
     List<Maestro> obtenerCriteriosEvaluacion();
+    List<Maestro> obtenerNaturalezasCargo();
 }

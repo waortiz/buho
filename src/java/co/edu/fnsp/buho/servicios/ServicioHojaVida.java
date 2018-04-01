@@ -118,4 +118,19 @@ public class ServicioHojaVida implements IServicioHojaVida {
     public Documento obtenerCertificadoHomologadoEducacionSuperior(int idEducacionSuperior) {
         return repositorioHojaVida.obtenerCertificadoHomologadoEducacionSuperior(idEducacionSuperior);
     }
+
+    @Override
+    public Documento obtenerCertificadoEducacionContinua(int idEducacionContinua) {
+       return repositorioHojaVida.obtenerCertificadoEducacionContinua(idEducacionContinua);
+    }
+
+    @Override
+    public Documento obtenerCertificadoDistincion(int idDistincion) {
+        return repositorioHojaVida.obtenerCertificadoDistincion(idDistincion);
+    }
+
+    @Override
+    public Documento obtenerCertificadoExperienciaLaboral(int idExperienciaLaboral) {
+        return repositorioHojaVida.obtenerCertificadoExperienciaLaboral(idExperienciaLaboral);
+    }
 }

@@ -15,7 +15,6 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author William
  */
 public class HojaVida {
-
     private long idPersona;
     private String tipoIdentificacion;
     private String nombreTipoIdentificacion;
@@ -62,6 +61,7 @@ public class HojaVida {
     private String tipoVinculacion;
     private String nombreTipoVinculacion;
     private String perfil;
+    private String telefono;
     private List<Telefono> telefonos = new ArrayList<>();
     private List<CuentaBancaria> cuentasBancarias = new ArrayList<>();
     private List<CorreoElectronico> correosElectronicos = new ArrayList<>();
@@ -69,6 +69,9 @@ public class HojaVida {
     private List<Idioma> idiomas = new ArrayList<>();
     private List<EducacionBasica> educacionesBasicas = new ArrayList<>();
     private List<EducacionSuperior> educacionesSuperiores = new ArrayList<>();
+    private List<EducacionContinua> educacionesContinuas = new ArrayList<>();
+    private List<Distincion> distinciones = new ArrayList<>();
+    private List<ExperienciaLaboral> experienciasLaborales = new ArrayList<>();
     
     /**
      * @return the tipoIdentificacion
@@ -689,15 +692,6 @@ public class HojaVida {
         this.copiaLibretaMilitarValidado = copiaLibretaMilitarValidado;
     }
 
-    public String getTelefono() {
-        String telefono = "";
-        if (this.getTelefonos().size() > 0) {
-            telefono = this.getTelefonos().get(0).getNumero();
-        }
-
-        return telefono;
-    }
-
     /**
      * @return the fechaNacimientoFormateada
      */
@@ -796,4 +790,59 @@ public class HojaVida {
         this.educacionesSuperiores = educacionesSuperiores;
     }
 
+    /**
+     * @return the educacionesContinuas
+     */
+    public List<EducacionContinua> getEducacionesContinuas() {
+        return educacionesContinuas;
+    }
+
+    /**
+     * @param educacionesContinuas the educacionesContinuas to set
+     */
+    public void setEducacionesContinuas(List<EducacionContinua> educacionesContinuas) {
+        this.educacionesContinuas = educacionesContinuas;
+    }
+
+    /**
+     * @return the distinciones
+     */
+    public List<Distincion> getDistinciones() {
+        return distinciones;
+    }
+
+    /**
+     * @param distinciones the distinciones to set
+     */
+    public void setDistinciones(List<Distincion> distinciones) {
+        this.distinciones = distinciones;
+    }
+
+    /**
+     * @return the experienciasLaborales
+     */
+    public List<ExperienciaLaboral> getExperienciasLaborales() {
+        return experienciasLaborales;
+    }
+
+    /**
+     * @param experienciasLaborales the experienciasLaborales to set
+     */
+    public void setExperienciasLaborales(List<ExperienciaLaboral> experienciasLaborales) {
+        this.experienciasLaborales = experienciasLaborales;
+    }
+        
+    /**
+     * @return the telefono
+     */
+    public String getTelefono() {
+        return telefono;
+    }
+
+    /**
+     * @param telefono the telefono to set
+     */
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 }

@@ -10,9 +10,12 @@ import co.edu.fnsp.buho.entidades.CorreoElectronico;
 import co.edu.fnsp.buho.entidades.CriterioEvaluacion;
 import co.edu.fnsp.buho.entidades.CriterioHabilitante;
 import co.edu.fnsp.buho.entidades.CuentaBancaria;
+import co.edu.fnsp.buho.entidades.Distincion;
 import co.edu.fnsp.buho.entidades.DocumentoSoporte;
 import co.edu.fnsp.buho.entidades.EducacionBasica;
+import co.edu.fnsp.buho.entidades.EducacionContinua;
 import co.edu.fnsp.buho.entidades.EducacionSuperior;
+import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.Idioma;
 import java.text.DecimalFormat;
@@ -49,7 +52,11 @@ public class Util {
     }
 
     public static Date obtenerFecha(String fecha) throws ParseException {
-        return simpleDateFormat.parse(fecha);
+         if (fecha != null && !"".equalsIgnoreCase(fecha)) {
+            return simpleDateFormat.parse(fecha);
+         }
+         
+         return null;
     }
 
     public static String obtenerNumeroFormatoMoneda(Long valor) {
@@ -344,7 +351,7 @@ public class Util {
                 boolean tieneCertificadoHomologado = false;
                 String paisTitulo = "";
                 String nombrePaisTitulo = "";
-                if(educacionSuperior.isTituloExterior()) {
+                if (educacionSuperior.isTituloExterior()) {
                     tieneCertificadoHomologado = true;
                     paisTitulo = educacionSuperior.getPaisTituloExterior().toString();
                     nombrePaisTitulo = educacionSuperior.getNombrePaisTituloExterior();
@@ -353,12 +360,12 @@ public class Util {
                         + "{id: ko.observable(" + educacionSuperior.getId() + "),"
                         + "institucion:ko.observable(" + educacionSuperior.getInstitucion() + "),"
                         + "nombreInstitucion:ko.observable('" + educacionSuperior.getNombreInstitucion() + "'),"
-                        + "tituloExterior:ko.observable(" + educacionSuperior.isTituloExterior()+ "),"
+                        + "tituloExterior:ko.observable(" + educacionSuperior.isTituloExterior() + "),"
                         + "paisTituloExterior:ko.observable(" + paisTitulo + "),"
                         + "nombrePaisTitulo:ko.observable('" + nombrePaisTitulo + "'),"
-                        + "areaSaber:ko.observable(" + educacionSuperior.getAreaSaber()+ "),"
+                        + "areaSaber:ko.observable(" + educacionSuperior.getAreaSaber() + "),"
                         + "nombreAreaSaber:ko.observable('" + educacionSuperior.getNombreAreaSaber() + "'),"
-                        + "programa:ko.observable('" + educacionSuperior.getPrograma()+ "'),"
+                        + "programa:ko.observable('" + educacionSuperior.getPrograma() + "'),"
                         + "nivel:ko.observable(" + educacionSuperior.getNivel() + "),"
                         + "nombreNivel:ko.observable('" + educacionSuperior.getNombreNivel() + "'),"
                         + "titulo:ko.observable('" + educacionSuperior.getTitulo() + "'),"
@@ -373,6 +380,111 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < educacionesSuperiores.size() - 1) {
+                    jscriptArray = jscriptArray + ",";
+                }
+            }
+
+            jscriptArray = jscriptArray + "]";
+        }
+
+        return jscriptArray;
+    }
+
+    public static String obtenerEducacionesContinuasJSON(List<EducacionContinua> educacionesContinuas) {
+        String jscriptArray = "";
+
+        if (educacionesContinuas.size() > 0) {
+            jscriptArray = "[";
+
+            for (int i = 0; i < educacionesContinuas.size(); i++) {
+                EducacionContinua educacionContinua = educacionesContinuas.get(i);
+                jscriptArray = jscriptArray
+                        + "{id: ko.observable(" + educacionContinua.getId() + "),"
+                        + "institucion:ko.observable(" + educacionContinua.getInstitucion() + "),"
+                        + "nombreInstitucion:ko.observable('" + educacionContinua.getNombreInstitucion() + "'),"
+                        + "tipoCapacitacion:ko.observable(" + educacionContinua.getTipoCapacitacion() + "),"
+                        + "nombreTipoCapacitacion:ko.observable('" + educacionContinua.getNombreTipoCapacitacion() + "'),"
+                        + "nombreCapacitacion:ko.observable('" + educacionContinua.getNombreCapacitacion() + "'),"
+                        + "areaSaber:ko.observable(" + educacionContinua.getAreaSaber() + "),"
+                        + "nombreAreaSaber:ko.observable('" + educacionContinua.getNombreAreaSaber() + "'),"
+                        + "anyo:ko.observable(" + educacionContinua.getAnyo() + "),"
+                        + "numeroHoras:ko.observable(" + educacionContinua.getNumeroHoras() + "),"
+                        + "certificado:ko.observable(''),"
+                        + "tieneCertificado:ko.observable(true),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < educacionesContinuas.size() - 1) {
+                    jscriptArray = jscriptArray + ",";
+                }
+            }
+
+            jscriptArray = jscriptArray + "]";
+        }
+
+        return jscriptArray;
+    }
+
+    public static String obtenerDistincionesJSON(List<Distincion> distinciones) {
+        String jscriptArray = "";
+
+        if (distinciones.size() > 0) {
+            jscriptArray = "[";
+
+            for (int i = 0; i < distinciones.size(); i++) {
+                Distincion distincion = distinciones.get(i);
+                jscriptArray = jscriptArray
+                        + "{id: ko.observable(" + distincion.getId() + "),"
+                        + "descripcion:ko.observable('" + distincion.getDescripcion() + "'),"
+                        + "institucionOtorga:ko.observable('" + distincion.getInstitucionOtorga() + "'),"
+                        + "fechaDistincion:ko.observable('" + Util.obtenerFechaFormateada(distincion.getFechaDistincion()) + "'),"
+                        + "certificado:ko.observable(''),"
+                        + "tieneCertificado:ko.observable(true),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < distinciones.size() - 1) {
+                    jscriptArray = jscriptArray + ",";
+                }
+            }
+
+            jscriptArray = jscriptArray + "]";
+        }
+
+        return jscriptArray;
+    }
+
+    public static String obtenerExperienciasLaboralesJSON(List<ExperienciaLaboral> experienciasLaborales) {
+        String jscriptArray = "";
+
+        if (experienciasLaborales.size() > 0) {
+            jscriptArray = "[";
+
+            for (int i = 0; i < experienciasLaborales.size(); i++) {
+                ExperienciaLaboral experienciaLaboral = experienciasLaborales.get(i);
+                jscriptArray = jscriptArray
+                        + "{id: ko.observable(" + experienciaLaboral.getId() + "),"
+                        + "cargo:ko.observable('" + experienciaLaboral.getCargo() + "'),"
+                        + "fnsp:ko.observable(" + experienciaLaboral.isFnsp() + "),"
+                        + "trabajoActual:ko.observable(" + experienciaLaboral.isTrabajoActual() + "),"
+                        + "fechaIngreso:ko.observable('" + Util.obtenerFechaFormateada(experienciaLaboral.getFechaIngreso()) + "'),"
+                        + "fechaRetiro:ko.observable('" + Util.obtenerFechaFormateada(experienciaLaboral.getFechaRetiro()) + "'),"
+                        + "actividadEconomica:ko.observable(" + experienciaLaboral.getActividadEconomica() + "),"
+                        + "nombreActividadEconomica:ko.observable('" + experienciaLaboral.getNombreActividadEconomica() + "'),"
+                        + "tipoContrato:ko.observable(" + experienciaLaboral.getTipoContrato() + "),"
+                        + "nombreTipoContrato:ko.observable('" + experienciaLaboral.getNombreTipoContrato() + "'),"
+                        + "tipoEmpresa:ko.observable(" + experienciaLaboral.getTipoEmpresa() + "),"
+                        + "nombreTipoEmpresa:ko.observable('" + experienciaLaboral.getNombreTipoEmpresa() + "'),"
+                        + "areaSaber:ko.observable(" + experienciaLaboral.getAreaSaber() + "),"
+                        + "nombreAreaSaber:ko.observable('" + experienciaLaboral.getNombreAreaSaber() + "'),"
+                        + "naturalezaCargo:ko.observable(" + experienciaLaboral.getNaturalezaCargo() + "),"
+                        + "nombreNaturalezaCargo:ko.observable('" + experienciaLaboral.getNombreNaturalezaCargo() + "'),"
+                        + "nombreEmpresa:ko.observable('" + experienciaLaboral.getNombreEmpresa() + "'),"
+                        + "tipoExperiencia:ko.observable(" + experienciaLaboral.getTipoExperiencia() + "),"
+                        + "nombreTipoExperiencia:ko.observable('" + experienciaLaboral.getNombreTipoExperiencia() + "'),"
+                        + "certificado:ko.observable(''),"
+                        + "tieneCertificado:ko.observable(true),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < experienciasLaborales.size() - 1) {
                     jscriptArray = jscriptArray + ",";
                 }
             }

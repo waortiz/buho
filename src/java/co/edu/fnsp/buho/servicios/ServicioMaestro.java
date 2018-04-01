@@ -166,4 +166,9 @@ public class ServicioMaestro implements IServicioMaestro {
     public List<Maestro> obtenerTiposCertificacionIdioma() {
         return repositorioMaestro.obtenerTiposCertificacionIdioma();
     }
+
+    @Override
+    public List<Maestro> obtenerNaturalezasCargo() {
+        return repositorioMaestro.obtenerNaturalezasCargo();
+    }
 }

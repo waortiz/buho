@@ -43,4 +43,5 @@ public interface IServicioMaestro {
     List<Maestro> obtenerCriteriosHabilitantes();
     List<Maestro> obtenerCriteriosEvaluacion();
     List<Maestro> obtenerTiposCertificacionIdioma() ;
+    List<Maestro> obtenerNaturalezasCargo();
 }
