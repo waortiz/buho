@@ -171,4 +171,9 @@ public class ServicioMaestro implements IServicioMaestro {
     public List<Maestro> obtenerNaturalezasCargo() {
         return repositorioMaestro.obtenerNaturalezasCargo();
     }
+
+    @Override
+    public List<Maestro> obtenerModalidadesCurso() {
+        return repositorioMaestro.obtenerModalidadesCurso();
+    }
 }

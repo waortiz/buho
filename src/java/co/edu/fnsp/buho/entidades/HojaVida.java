@@ -72,6 +72,7 @@ public class HojaVida {
     private List<EducacionContinua> educacionesContinuas = new ArrayList<>();
     private List<Distincion> distinciones = new ArrayList<>();
     private List<ExperienciaLaboral> experienciasLaborales = new ArrayList<>();
+    private List<ExperienciaDocencia> experienciasDocencia = new ArrayList<>();
     
     /**
      * @return the tipoIdentificacion
@@ -844,5 +845,19 @@ public class HojaVida {
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    /**
+     * @return the experienciasDocencia
+     */
+    public List<ExperienciaDocencia> getExperienciasDocencia() {
+        return experienciasDocencia;
+    }
+
+    /**
+     * @param experienciasDocencia the experienciasDocencia to set
+     */
+    public void setExperienciasDocencia(List<ExperienciaDocencia> experienciasDocencia) {
+        this.experienciasDocencia = experienciasDocencia;
     }
 }

@@ -46,4 +46,6 @@ public interface IRepositorioHojaVida {
     Documento obtenerCertificadoDistincion(int idDistincion);
     
     Documento obtenerCertificadoExperienciaLaboral(int idExperienciaLaboral);
+    
+    Documento obtenerCertificadoCursoExperienciaDocencia(int idCursoExperienciaDocencia);
 }

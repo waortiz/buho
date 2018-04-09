@@ -10,11 +10,13 @@ import co.edu.fnsp.buho.entidades.CorreoElectronico;
 import co.edu.fnsp.buho.entidades.CriterioEvaluacion;
 import co.edu.fnsp.buho.entidades.CriterioHabilitante;
 import co.edu.fnsp.buho.entidades.CuentaBancaria;
+import co.edu.fnsp.buho.entidades.CursoExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.Distincion;
 import co.edu.fnsp.buho.entidades.DocumentoSoporte;
 import co.edu.fnsp.buho.entidades.EducacionBasica;
 import co.edu.fnsp.buho.entidades.EducacionContinua;
 import co.edu.fnsp.buho.entidades.EducacionSuperior;
+import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.Idioma;
@@ -80,10 +82,10 @@ public class Util {
     }
 
     public static String obtenerAdendasJSON(List<Adenda> correosElectronicos) {
-        String jscriptArray = "";
+        String json = "";
 
         if (correosElectronicos.size() > 0) {
-            jscriptArray = "[";
+            json = "[";
 
             for (int i = 0; i < correosElectronicos.size(); i++) {
                 Adenda adenda = correosElectronicos.get(i);
@@ -91,7 +93,7 @@ public class Util {
                 if (adenda.getDocumento() != null) {
                     nombreDocumento = adenda.getDocumento().getNombre();
                 }
-                jscriptArray = jscriptArray
+                json = json
                         + "{id: ko.observable(" + adenda.getId() + "),"
                         + "descripcion:ko.observable('" + adenda.getDescripcion() + "'),"
                         + "tipoAdenda:ko.observable('" + adenda.getTipoAdenda() + "'),"
@@ -102,25 +104,25 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < correosElectronicos.size() - 1) {
-                    jscriptArray = jscriptArray + ",";
+                    json = json + ",";
                 }
             }
 
-            jscriptArray = jscriptArray + "]";
+            json = json + "]";
         }
 
-        return jscriptArray;
+        return json;
     }
 
     public static String obtenerCriteriosEvaluacionJSON(List<CriterioEvaluacion> criteriosEvaluacion) {
-        String jscriptArray = "";
+        String json = "";
 
         if (criteriosEvaluacion.size() > 0) {
-            jscriptArray = "[";
+            json = "[";
 
             for (int i = 0; i < criteriosEvaluacion.size(); i++) {
                 CriterioEvaluacion criterioEvaluacion = criteriosEvaluacion.get(i);
-                jscriptArray = jscriptArray
+                json = json
                         + "{id: ko.observable(" + criterioEvaluacion.getId() + "),"
                         + "nombre:ko.observable('" + criterioEvaluacion.getNombre() + "'),"
                         + "nombreSubcriterio():ko.observable('" + criterioEvaluacion.getNombreSubcriterio() + "'),"
@@ -129,50 +131,50 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < criteriosEvaluacion.size() - 1) {
-                    jscriptArray = jscriptArray + ",";
+                    json = json + ",";
                 }
             }
 
-            jscriptArray = jscriptArray + "]";
+            json = json + "]";
         }
 
-        return jscriptArray;
+        return json;
     }
 
     public static String obtenerCriteriosHabilitantesJSON(List<CriterioHabilitante> criteriosHabilitantes) {
-        String jscriptArray = "";
+        String json = "";
 
         if (criteriosHabilitantes.size() > 0) {
-            jscriptArray = "[";
+            json = "[";
 
             for (int i = 0; i < criteriosHabilitantes.size(); i++) {
                 CriterioHabilitante criterioHabilitante = criteriosHabilitantes.get(i);
-                jscriptArray = jscriptArray
+                json = json
                         + "{id: ko.observable(" + criterioHabilitante.getId() + "),"
                         + "nombre:ko.observable('" + criterioHabilitante.getNombre() + "'),"
                         + "valor:ko.observable('" + criterioHabilitante.getValor() + "'),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < criteriosHabilitantes.size() - 1) {
-                    jscriptArray = jscriptArray + ",";
+                    json = json + ",";
                 }
             }
 
-            jscriptArray = jscriptArray + "]";
+            json = json + "]";
         }
 
-        return jscriptArray;
+        return json;
     }
 
     public static Object obtenerTelefonosJSON(List<Telefono> telefonos) {
-        String jscriptArray = "";
+        String json = "";
 
         if (telefonos.size() > 0) {
-            jscriptArray = "[";
+            json = "[";
 
             for (int i = 0; i < telefonos.size(); i++) {
                 Telefono telefono = telefonos.get(i);
-                jscriptArray = jscriptArray
+                json = json
                         + "{id: ko.observable(" + telefono.getId() + "),"
                         + "tipo:ko.observable(" + telefono.getTipo() + "),"
                         + "nombreTipo:ko.observable('" + telefono.getNombreTipo() + "'),"
@@ -180,25 +182,25 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < telefonos.size() - 1) {
-                    jscriptArray = jscriptArray + ",";
+                    json = json + ",";
                 }
             }
 
-            jscriptArray = jscriptArray + "]";
+            json = json + "]";
         }
 
-        return jscriptArray;
+        return json;
     }
 
     public static Object obtenerCuentasBancariasJSON(List<CuentaBancaria> cuentasBancarias) {
-        String jscriptArray = "";
+        String json = "";
 
         if (cuentasBancarias.size() > 0) {
-            jscriptArray = "[";
+            json = "[";
 
             for (int i = 0; i < cuentasBancarias.size(); i++) {
                 CuentaBancaria cuentaBancaria = cuentasBancarias.get(i);
-                jscriptArray = jscriptArray
+                json = json
                         + "{id: ko.observable(" + cuentaBancaria.getId() + "),"
                         + "entidad:ko.observable('" + cuentaBancaria.getEntidad() + "'),"
                         + "tipo:ko.observable('" + cuentaBancaria.getTipo() + "'),"
@@ -207,49 +209,49 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < cuentasBancarias.size() - 1) {
-                    jscriptArray = jscriptArray + ",";
+                    json = json + ",";
                 }
             }
 
-            jscriptArray = jscriptArray + "]";
+            json = json + "]";
         }
 
-        return jscriptArray;
+        return json;
     }
 
     public static Object obtenerCorreosElectronicosJSON(List<CorreoElectronico> correosElectronicos) {
-        String jscriptArray = "";
+        String json = "";
 
         if (correosElectronicos.size() > 0) {
-            jscriptArray = "[";
+            json = "[";
 
             for (int i = 0; i < correosElectronicos.size(); i++) {
                 CorreoElectronico correoElectronico = correosElectronicos.get(i);
-                jscriptArray = jscriptArray
+                json = json
                         + "{id: ko.observable(" + correoElectronico.getId() + "),"
                         + "correoElectronico:ko.observable('" + correoElectronico.getCorreoElectronico() + "'),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < correosElectronicos.size() - 1) {
-                    jscriptArray = jscriptArray + ",";
+                    json = json + ",";
                 }
             }
 
-            jscriptArray = jscriptArray + "]";
+            json = json + "]";
         }
 
-        return jscriptArray;
+        return json;
     }
 
     public static String obtenerDocumentosSoporteJSON(List<DocumentoSoporte> documentosSoporte) {
-        String jscriptArray = "";
+        String json = "";
 
         if (documentosSoporte.size() > 0) {
-            jscriptArray = "[";
+            json = "[";
 
             for (int i = 0; i < documentosSoporte.size(); i++) {
                 DocumentoSoporte documentoSoporte = documentosSoporte.get(i);
-                jscriptArray = jscriptArray
+                json = json
                         + "{id: ko.observable(" + documentoSoporte.getId() + "),"
                         + "tipoDocumento:ko.observable('" + documentoSoporte.getTipoDocumento() + "'),"
                         + "nombreTipoDocumento:ko.observable('" + documentoSoporte.getNombreTipoDocumento() + "'),"
@@ -258,25 +260,25 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < documentosSoporte.size() - 1) {
-                    jscriptArray = jscriptArray + ",";
+                    json = json + ",";
                 }
             }
 
-            jscriptArray = jscriptArray + "]";
+            json = json + "]";
         }
 
-        return jscriptArray;
+        return json;
     }
 
     public static Object obtenerIdiomasJSON(List<Idioma> idiomas) {
-        String jscriptArray = "";
+        String json = "";
 
         if (idiomas.size() > 0) {
-            jscriptArray = "[";
+            json = "[";
 
             for (int i = 0; i < idiomas.size(); i++) {
                 Idioma idioma = idiomas.get(i);
-                jscriptArray = jscriptArray
+                json = json
                         + "{id: ko.observable(" + idioma.getId() + "),"
                         + "idioma:ko.observable(" + idioma.getIdioma() + "),"
                         + "nombreIdioma:ko.observable('" + idioma.getNombreIdioma() + "'),"
@@ -297,25 +299,25 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < idiomas.size() - 1) {
-                    jscriptArray = jscriptArray + ",";
+                    json = json + ",";
                 }
             }
 
-            jscriptArray = jscriptArray + "]";
+            json = json + "]";
         }
 
-        return jscriptArray;
+        return json;
     }
 
     public static Object obtenerEducacionesBasicasJSON(List<EducacionBasica> educacionesBasicas) {
-        String jscriptArray = "";
+        String json = "";
 
         if (educacionesBasicas.size() > 0) {
-            jscriptArray = "[";
+            json = "[";
 
             for (int i = 0; i < educacionesBasicas.size(); i++) {
                 EducacionBasica educacionBasica = educacionesBasicas.get(i);
-                jscriptArray = jscriptArray
+                json = json
                         + "{id: ko.observable(" + educacionBasica.getId() + "),"
                         + "institucion:ko.observable(" + educacionBasica.getInstitucion() + "),"
                         + "nombreInstitucion:ko.observable('" + educacionBasica.getNombreInstitucion() + "'),"
@@ -330,21 +332,21 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < educacionesBasicas.size() - 1) {
-                    jscriptArray = jscriptArray + ",";
+                    json = json + ",";
                 }
             }
 
-            jscriptArray = jscriptArray + "]";
+            json = json + "]";
         }
 
-        return jscriptArray;
+        return json;
     }
 
     public static Object obtenerEducacionesSuperioresJSON(List<EducacionSuperior> educacionesSuperiores) {
-        String jscriptArray = "";
+        String json = "";
 
         if (educacionesSuperiores.size() > 0) {
-            jscriptArray = "[";
+            json = "[";
 
             for (int i = 0; i < educacionesSuperiores.size(); i++) {
                 EducacionSuperior educacionSuperior = educacionesSuperiores.get(i);
@@ -356,7 +358,7 @@ public class Util {
                     paisTitulo = educacionSuperior.getPaisTituloExterior().toString();
                     nombrePaisTitulo = educacionSuperior.getNombrePaisTituloExterior();
                 }
-                jscriptArray = jscriptArray
+                json = json
                         + "{id: ko.observable(" + educacionSuperior.getId() + "),"
                         + "institucion:ko.observable(" + educacionSuperior.getInstitucion() + "),"
                         + "nombreInstitucion:ko.observable('" + educacionSuperior.getNombreInstitucion() + "'),"
@@ -380,25 +382,25 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < educacionesSuperiores.size() - 1) {
-                    jscriptArray = jscriptArray + ",";
+                    json = json + ",";
                 }
             }
 
-            jscriptArray = jscriptArray + "]";
+            json = json + "]";
         }
 
-        return jscriptArray;
+        return json;
     }
 
     public static String obtenerEducacionesContinuasJSON(List<EducacionContinua> educacionesContinuas) {
-        String jscriptArray = "";
+        String json = "";
 
         if (educacionesContinuas.size() > 0) {
-            jscriptArray = "[";
+            json = "[";
 
             for (int i = 0; i < educacionesContinuas.size(); i++) {
                 EducacionContinua educacionContinua = educacionesContinuas.get(i);
-                jscriptArray = jscriptArray
+                json = json
                         + "{id: ko.observable(" + educacionContinua.getId() + "),"
                         + "institucion:ko.observable(" + educacionContinua.getInstitucion() + "),"
                         + "nombreInstitucion:ko.observable('" + educacionContinua.getNombreInstitucion() + "'),"
@@ -414,25 +416,25 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < educacionesContinuas.size() - 1) {
-                    jscriptArray = jscriptArray + ",";
+                    json = json + ",";
                 }
             }
 
-            jscriptArray = jscriptArray + "]";
+            json = json + "]";
         }
 
-        return jscriptArray;
+        return json;
     }
 
     public static String obtenerDistincionesJSON(List<Distincion> distinciones) {
-        String jscriptArray = "";
+        String json = "";
 
         if (distinciones.size() > 0) {
-            jscriptArray = "[";
+            json = "[";
 
             for (int i = 0; i < distinciones.size(); i++) {
                 Distincion distincion = distinciones.get(i);
-                jscriptArray = jscriptArray
+                json = json
                         + "{id: ko.observable(" + distincion.getId() + "),"
                         + "descripcion:ko.observable('" + distincion.getDescripcion() + "'),"
                         + "institucionOtorga:ko.observable('" + distincion.getInstitucionOtorga() + "'),"
@@ -442,25 +444,25 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < distinciones.size() - 1) {
-                    jscriptArray = jscriptArray + ",";
+                    json = json + ",";
                 }
             }
 
-            jscriptArray = jscriptArray + "]";
+            json = json + "]";
         }
 
-        return jscriptArray;
+        return json;
     }
 
     public static String obtenerExperienciasLaboralesJSON(List<ExperienciaLaboral> experienciasLaborales) {
-        String jscriptArray = "";
+        String json = "";
 
         if (experienciasLaborales.size() > 0) {
-            jscriptArray = "[";
+            json = "[";
 
             for (int i = 0; i < experienciasLaborales.size(); i++) {
                 ExperienciaLaboral experienciaLaboral = experienciasLaborales.get(i);
-                jscriptArray = jscriptArray
+                json = json
                         + "{id: ko.observable(" + experienciaLaboral.getId() + "),"
                         + "cargo:ko.observable('" + experienciaLaboral.getCargo() + "'),"
                         + "fnsp:ko.observable(" + experienciaLaboral.isFnsp() + "),"
@@ -485,14 +487,64 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < experienciasLaborales.size() - 1) {
-                    jscriptArray = jscriptArray + ",";
+                    json = json + ",";
                 }
             }
 
-            jscriptArray = jscriptArray + "]";
+            json = json + "]";
         }
 
-        return jscriptArray;
+        return json;
+    }
+
+    public static Object obtenerExperienciasDocenciaJSON(List<ExperienciaDocencia> experienciasDocencia) {
+        String json = "";
+
+        if (experienciasDocencia.size() > 0) {
+            json = "[";
+
+            for (int i = 0; i < experienciasDocencia.size(); i++) {
+                ExperienciaDocencia experienciaDocencia = experienciasDocencia.get(i);
+                String jsonCursos = "";
+                for (int j = 0; j < experienciaDocencia.getCursosExperienciaDocencia().size(); j++) {
+                    CursoExperienciaDocencia cursoExperienciaDocencia = experienciaDocencia.getCursosExperienciaDocencia().get(i);
+                    jsonCursos = jsonCursos
+                        + "{id: ko.observable(" + cursoExperienciaDocencia.getId() + "),"
+                        + "nombreCurso:ko.observable('" + cursoExperienciaDocencia.getNombreCurso()+ "'),"
+                        + "areaSaber:ko.observable(" + cursoExperienciaDocencia.getAreaSaber()+ "),"
+                        + "nombreAreaSaber:ko.observable('" + cursoExperienciaDocencia.getNombreAreaSaber()+ "'),"
+                        + "modalidad:ko.observable(" + cursoExperienciaDocencia.getModalidad()+ "),"
+                        + "nombreModalidad:ko.observable('" + cursoExperienciaDocencia.getNombreModalidad()+ "'),"
+                        + "nivelEstudio:ko.observable(" + cursoExperienciaDocencia.getNivelEstudio()+ "),"
+                        + "nombreNivelEstudio:ko.observable('" + cursoExperienciaDocencia.getNombreNivelEstudio()+ "'),"
+                        + "anyo:ko.observable(" + cursoExperienciaDocencia.getAnyo()+ "),"
+                        + "numeroHoras:ko.observable(" + cursoExperienciaDocencia.getNumeroHoras()+ "),"
+                        + "certificado:ko.observable(''),"
+                        + "tieneCertificado:ko.observable(true),"
+                        + "consecutivo:ko.observable(" + j + ")"
+                        + "}";
+                    if (i < experienciaDocencia.getCursosExperienciaDocencia().size() - 1) {
+                        jsonCursos = jsonCursos + ",";
+                    }    
+                }
+                json = json
+                        + "{id: ko.observable(" + experienciaDocencia.getId() + "),"
+                        + "fnsp:ko.observable(" + experienciaDocencia.isFnsp() + "),"
+                        + "trabajoActual:ko.observable(" + experienciaDocencia.isTrabajoActual() + "),"
+                        + "institucion:ko.observable(" + experienciaDocencia.getInstitucion() + "),"
+                        + "nombreInstitucion:ko.observable('" + experienciaDocencia.getNombreInstitucion() + "'),"
+                        + "cursosExperienciaDocencia: ko.observableArray([" + jsonCursos  + "]),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < experienciasDocencia.size() - 1) {
+                    json = json + ",";
+                }
+            }
+
+            json = json + "]";
+        }
+
+        return json;
     }
 
 }

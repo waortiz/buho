@@ -133,4 +133,9 @@ public class ServicioHojaVida implements IServicioHojaVida {
     public Documento obtenerCertificadoExperienciaLaboral(int idExperienciaLaboral) {
         return repositorioHojaVida.obtenerCertificadoExperienciaLaboral(idExperienciaLaboral);
     }
+
+    @Override
+    public Documento obtenerCertificadoCursoExperienciaDocencia(int idCursoExperienciaDocencia) {
+        return repositorioHojaVida.obtenerCertificadoCursoExperienciaDocencia(idCursoExperienciaDocencia);
+    }
 }
