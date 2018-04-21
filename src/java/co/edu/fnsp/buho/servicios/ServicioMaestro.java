@@ -33,8 +33,8 @@ public class ServicioMaestro implements IServicioMaestro {
     }
 
     @Override
-    public List<Maestro> obtenerAreasSaber() {
-        return repositorioMaestro.obtenerAreasSaber();
+    public List<Maestro> obtenerNucleosBasicosConocimiento() {
+        return repositorioMaestro.obtenerNucleosBasicosConocimiento();
     }
 
     @Override
@@ -175,5 +175,30 @@ public class ServicioMaestro implements IServicioMaestro {
     @Override
     public List<Maestro> obtenerModalidadesCurso() {
         return repositorioMaestro.obtenerModalidadesCurso();
+    }
+
+    @Override
+    public List<Maestro> obtenerTiposInvestigador() {
+        return repositorioMaestro.obtenerTiposInvestigador();
+    }
+
+    @Override
+    public List<Maestro> obtenerTiposAutorArticulo() {
+        return repositorioMaestro.obtenerTiposAutorArticulo();
+    }
+
+    @Override
+    public List<Maestro> obtenerTiposPatente() {
+       return repositorioMaestro.obtenerTiposPatente();
+    }
+
+    @Override
+    public List<Maestro> obtenerTiposProductoConocimiento() {
+        return repositorioMaestro.obtenerTiposProductoConocimiento();
+    }
+
+    @Override
+    public List<Maestro> obtenerClasesPatente() {
+        return repositorioMaestro.obtenerClasesPatente();
     }
 }

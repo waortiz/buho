@@ -22,8 +22,8 @@ public class EducacionSuperior {
     private String nombreInstitucion;
     private boolean tituloExterior;
     private String programa;
-    private String areaSaber;
-    private String nombreAreaSaber;
+    private String nucleoBasicoConocimiento;
+    private String nombreNucleoBasicoConocimiento;
     private String anyoInicio;
     private String anyoFinalizacion;
     private String titulo;
@@ -173,31 +173,31 @@ public class EducacionSuperior {
     }
 
     /**
-     * @return the areaSaber
+     * @return the nucleoBasicoConocimiento
      */
-    public String getAreaSaber() {
-        return areaSaber;
+    public String getNucleoBasicoConocimiento() {
+        return nucleoBasicoConocimiento;
     }
 
     /**
-     * @param areaSaber the areaSaber to set
+     * @param nucleoBasicoConocimiento the nucleoBasicoConocimiento to set
      */
-    public void setAreaSaber(String areaSaber) {
-        this.areaSaber = areaSaber;
+    public void setNucleoBasicoConocimiento(String nucleoBasicoConocimiento) {
+        this.nucleoBasicoConocimiento = nucleoBasicoConocimiento;
     }
 
     /**
-     * @return the nombreAreaSaber
+     * @return the nombreNucleoBasicoConocimiento
      */
-    public String getNombreAreaSaber() {
-        return nombreAreaSaber;
+    public String getNombreNucleoBasicoConocimiento() {
+        return nombreNucleoBasicoConocimiento;
     }
 
     /**
-     * @param nombreAreaSaber the nombreAreaSaber to set
+     * @param nombreNucleoBasicoConocimiento the nombreNucleoBasicoConocimiento to set
      */
-    public void setNombreAreaSaber(String nombreAreaSaber) {
-        this.nombreAreaSaber = nombreAreaSaber;
+    public void setNombreNucleoBasicoConocimiento(String nombreNucleoBasicoConocimiento) {
+        this.nombreNucleoBasicoConocimiento = nombreNucleoBasicoConocimiento;
     }
 
     /**

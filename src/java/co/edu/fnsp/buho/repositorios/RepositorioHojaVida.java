@@ -5,6 +5,7 @@
  */
 package co.edu.fnsp.buho.repositorios;
 
+import co.edu.fnsp.buho.entidades.Articulo;
 import co.edu.fnsp.buho.entidades.DocumentoSoporte;
 import co.edu.fnsp.buho.entidades.CorreoElectronico;
 import co.edu.fnsp.buho.entidades.CuentaBancaria;
@@ -20,6 +21,8 @@ import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.TipoDocumento;
 import co.edu.fnsp.buho.entidades.Idioma;
+import co.edu.fnsp.buho.entidades.Patente;
+import co.edu.fnsp.buho.entidades.ProductoConocimento;
 import co.edu.fnsp.buho.utilidades.Util;
 import java.util.ArrayList;
 import java.util.Date;
@@ -135,6 +138,31 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     private SimpleJdbcCall actualizarCertificadoCursoExperienciaDocencia;
     private SimpleJdbcCall obtenerCertificadoCursoExperienciaDocencia;
 
+    private SimpleJdbcCall ingresarInvestigador;
+    private SimpleJdbcCall obtenerInvestigador;
+    private SimpleJdbcCall actualizarInvestigador;
+
+    private SimpleJdbcCall ingresarArticulo;
+    private SimpleJdbcCall eliminarArticulo;
+    private SimpleJdbcCall actualizarArticulo;
+    private SimpleJdbcCall obtenerArticulos;
+
+    private SimpleJdbcCall ingresarPatente;
+    private SimpleJdbcCall obtenerPatentes;
+    private SimpleJdbcCall actualizarPatente;
+    private SimpleJdbcCall eliminarPatente;
+    private SimpleJdbcCall ingresarDocumentoPatente;
+    private SimpleJdbcCall actualizarDocumentoPatente;
+    private SimpleJdbcCall obtenerDocumentoPatente;
+
+    private SimpleJdbcCall ingresarProductoConocimento;
+    private SimpleJdbcCall obtenerProductosConocimento;
+    private SimpleJdbcCall actualizarProductoConocimento;
+    private SimpleJdbcCall eliminarProductoConocimento;
+    private SimpleJdbcCall ingresarDocumentoProductoConocimento;
+    private SimpleJdbcCall actualizarDocumentoProductoConocimento;
+    private SimpleJdbcCall obtenerDocumentoProductoConocimento;
+
     @Autowired
     public void setDataSource(DataSource dataSource) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -234,6 +262,31 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         this.obtenerCertificadoCursoExperienciaDocencia = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCertificadoCursoExperienciaDocencia");
         this.ingresarCertificadoCursoExperienciaDocencia = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarCertificadoCursoExperienciaDocencia");
         this.actualizarCertificadoCursoExperienciaDocencia = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarCertificadoCursoExperienciaDocencia");
+
+        this.ingresarInvestigador = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarInvestigador");
+        this.actualizarInvestigador = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarInvestigador");
+        this.obtenerInvestigador = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerInvestigador");
+
+        this.ingresarArticulo = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarArticulo");
+        this.eliminarArticulo = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarArticulo");
+        this.actualizarArticulo = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarArticulo");
+        this.obtenerArticulos = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerArticulos").returningResultSet("articulos", BeanPropertyRowMapper.newInstance(Articulo.class));
+
+        this.ingresarPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarPatente");
+        this.eliminarPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarPatente");
+        this.actualizarPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarPatente");
+        this.obtenerPatentes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerPatentes").returningResultSet("patentes", BeanPropertyRowMapper.newInstance(Patente.class));
+        this.obtenerDocumentoPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoPatente");
+        this.ingresarDocumentoPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoPatente");
+        this.actualizarDocumentoPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoPatente");
+
+        this.ingresarProductoConocimento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarProductoConocimento");
+        this.eliminarProductoConocimento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarProductoConocimento");
+        this.actualizarProductoConocimento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarProductoConocimento");
+        this.obtenerProductosConocimento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerProductosConocimento").returningResultSet("productosConocimento", BeanPropertyRowMapper.newInstance(ProductoConocimento.class));
+        this.obtenerDocumentoProductoConocimento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoProductoConocimento");
+        this.ingresarDocumentoProductoConocimento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoProductoConocimento");
+        this.actualizarDocumentoProductoConocimento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoProductoConocimento");
     }
 
     @Override
@@ -273,6 +326,8 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         }
         Map resultado = ingresarPersona.execute(parametros);
         long idPersona = (long) resultado.get("varIdPersona");
+
+        ingresarInvestigador(idPersona, hojaVida);
 
         MapSqlParameterSource parametrosIngresoTelefono = new MapSqlParameterSource();
         parametrosIngresoTelefono.addValue("varIdPersona", idPersona);
@@ -402,7 +457,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                     parametrosIngresoEducacionSuperior.addValue("varPaisTituloExterior", educacionSuperior.getPaisTituloExterior());
                 }
                 parametrosIngresoEducacionSuperior.addValue("varFechaTitulo", educacionSuperior.getFechaTitulo());
-                parametrosIngresoEducacionSuperior.addValue("varAreaSaber", educacionSuperior.getAreaSaber());
+                parametrosIngresoEducacionSuperior.addValue("varNucleoBasicoConocimiento", educacionSuperior.getNucleoBasicoConocimiento());
                 parametrosIngresoEducacionSuperior.addValue("varInstitucion", educacionSuperior.getInstitucion());
                 parametrosIngresoEducacionSuperior.addValue("varAnyoFinalizacion", educacionSuperior.getAnyoFinalizacion());
                 parametrosIngresoEducacionSuperior.addValue("varAnyoInicio", educacionSuperior.getAnyoInicio());
@@ -438,7 +493,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
             if (educacionContinua.getId() == 0) {
                 parametrosIngresoEducacionContinua.addValue("varTipoCapacitacion", educacionContinua.getTipoCapacitacion());
                 parametrosIngresoEducacionContinua.addValue("varNombreCapacitacion", educacionContinua.getNombreCapacitacion());
-                parametrosIngresoEducacionContinua.addValue("varAreaSaber", educacionContinua.getAreaSaber());
+                parametrosIngresoEducacionContinua.addValue("varNucleoBasicoConocimiento", educacionContinua.getNucleoBasicoConocimiento());
                 parametrosIngresoEducacionContinua.addValue("varInstitucion", educacionContinua.getInstitucion());
                 parametrosIngresoEducacionContinua.addValue("varAnyo", educacionContinua.getAnyo());
                 parametrosIngresoEducacionContinua.addValue("varNumeroHoras", educacionContinua.getNumeroHoras());
@@ -479,7 +534,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         parametrosIngresoExperienciaLaboral.addValue("varIdPersona", idPersona);
         for (ExperienciaLaboral experienciaLaboral : hojaVida.getExperienciasLaborales()) {
             parametrosIngresoExperienciaLaboral.addValue("varActividadeconomica", experienciaLaboral.getActividadEconomica());
-            parametrosIngresoExperienciaLaboral.addValue("varAreaSaber", experienciaLaboral.getAreaSaber());
+            parametrosIngresoExperienciaLaboral.addValue("varNucleoBasicoConocimiento", experienciaLaboral.getNucleoBasicoConocimiento());
             parametrosIngresoExperienciaLaboral.addValue("varCargo", experienciaLaboral.getCargo());
             parametrosIngresoExperienciaLaboral.addValue("varFechaIngreso", experienciaLaboral.getFechaIngreso());
             parametrosIngresoExperienciaLaboral.addValue("varFechaRetiro", experienciaLaboral.getFechaRetiro());
@@ -515,7 +570,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                 MapSqlParameterSource parametrosIngresoCursoExperienciaDocencia = new MapSqlParameterSource();
                 parametrosIngresoCursoExperienciaDocencia.addValue("varIdExperienciaDocencia", idExperienciaDocencia);
                 parametrosIngresoCursoExperienciaDocencia.addValue("varAnyo", cursoExperienciaDocencia.getAnyo());
-                parametrosIngresoCursoExperienciaDocencia.addValue("varAreaSaber", cursoExperienciaDocencia.getAreaSaber());
+                parametrosIngresoCursoExperienciaDocencia.addValue("varNucleoBasicoConocimiento", cursoExperienciaDocencia.getNucleoBasicoConocimiento());
                 parametrosIngresoCursoExperienciaDocencia.addValue("varModalidad", cursoExperienciaDocencia.getModalidad());
                 parametrosIngresoCursoExperienciaDocencia.addValue("varNivelEstudio", cursoExperienciaDocencia.getNivelEstudio());
                 parametrosIngresoCursoExperienciaDocencia.addValue("varNumeroHoras", cursoExperienciaDocencia.getNumeroHoras());
@@ -531,6 +586,58 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                     parametrosIngresoCertificadoCursoExperienciaDocencia.addValue("varContenido", documento.getContenido());
                     ingresarCertificadoCursoExperienciaDocencia.execute(parametrosIngresoCertificadoCursoExperienciaDocencia);
                 }
+            }
+        }
+
+        MapSqlParameterSource parametrosIngresoArticulo = new MapSqlParameterSource();
+        parametrosIngresoArticulo.addValue("varIdPersona", idPersona);
+        for (Articulo articulo : hojaVida.getArticulos()) {
+            parametrosIngresoArticulo.addValue("varAnyo", articulo.getAnyo());
+            parametrosIngresoArticulo.addValue("varNombreRevista", articulo.getNombreRevista());
+            parametrosIngresoArticulo.addValue("varNombre", articulo.getNombre());
+            parametrosIngresoArticulo.addValue("varTipoAutor", articulo.getTipoAutor());
+            parametrosIngresoArticulo.addValue("varUrl", articulo.getUrl());
+            parametrosIngresoArticulo.addValue("varNucleoBasicoConocimiento", articulo.getNucleoBasicoConocimiento());
+            ingresarArticulo.execute(parametrosIngresoArticulo);
+        }
+
+        MapSqlParameterSource parametrosIngresoPatente = new MapSqlParameterSource();
+        parametrosIngresoPatente.addValue("varIdPersona", idPersona);
+        for (Patente patente : hojaVida.getPatentes()) {
+            parametrosIngresoPatente.addValue("varDescripcion", patente.getDescripcion());
+            parametrosIngresoPatente.addValue("varClase", patente.getClase());
+            parametrosIngresoPatente.addValue("varFecha", patente.getFecha());
+            parametrosIngresoPatente.addValue("varTipo", patente.getTipo());
+            Map resultadoIngresoPatente = ingresarPatente.execute(parametrosIngresoPatente);
+            int idPatente = (int) resultadoIngresoPatente.get("varId");
+            Documento documento = patente.getDocumento();
+            if (documento != null) {
+                MapSqlParameterSource parametrosIngresoDocumentoPatente = new MapSqlParameterSource();
+                parametrosIngresoDocumentoPatente.addValue("varIdPatente", idPatente);
+                parametrosIngresoDocumentoPatente.addValue("varNombre", documento.getNombre());
+                parametrosIngresoDocumentoPatente.addValue("varTipoContenido", documento.getTipoContenido());
+                parametrosIngresoDocumentoPatente.addValue("varContenido", documento.getContenido());
+                ingresarDocumentoPatente.execute(parametrosIngresoDocumentoPatente);
+            }
+        }
+
+        MapSqlParameterSource parametrosIngresoProductoConocimento = new MapSqlParameterSource();
+        parametrosIngresoProductoConocimento.addValue("varIdPersona", idPersona);
+        for (ProductoConocimento productoConocimento : hojaVida.getProductosConocimento()) {
+            parametrosIngresoPatente.addValue("varDescripcion", productoConocimento.getDescripcion());
+            parametrosIngresoProductoConocimento.addValue("varNucleoBasicoConocimento", productoConocimento.getNucleoBasicoConocimento());
+            parametrosIngresoProductoConocimento.addValue("varUrl", productoConocimento.getUrl());
+            parametrosIngresoProductoConocimento.addValue("varTipo", productoConocimento.getTipo());
+            Map resultadoIngresoProductoConocimento = ingresarProductoConocimento.execute(parametrosIngresoProductoConocimento);
+            int idProductoConocimento = (int) resultadoIngresoProductoConocimento.get("varId");
+            Documento documento = productoConocimento.getDocumento();
+            if (documento != null) {
+                MapSqlParameterSource parametrosIngresoDocumentoProductoConocimento = new MapSqlParameterSource();
+                parametrosIngresoDocumentoProductoConocimento.addValue("varIdProductoConocimento", idProductoConocimento);
+                parametrosIngresoDocumentoProductoConocimento.addValue("varNombre", documento.getNombre());
+                parametrosIngresoDocumentoProductoConocimento.addValue("varTipoContenido", documento.getTipoContenido());
+                parametrosIngresoDocumentoProductoConocimento.addValue("varContenido", documento.getContenido());
+                ingresarDocumentoProductoConocimento.execute(parametrosIngresoDocumentoProductoConocimento);
             }
         }
     }
@@ -578,13 +685,17 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         actualizarCuentasBancarias(hojaVida.getIdPersona(), hojaVida.getCuentasBancarias());
         actualizarCorreosElectronicos(hojaVida.getIdPersona(), hojaVida.getCorreosElectronicos());
         actualizarDocumentosSoporte(hojaVida.getIdPersona(), hojaVida.getDocumentosSoporte());
-        actualizarIdioma(hojaVida.getIdPersona(), hojaVida.getIdiomas());
-        actualizarEducacionBasica(hojaVida.getIdPersona(), hojaVida.getEducacionesBasicas());
-        actualizarEducacionSuperior(hojaVida.getIdPersona(), hojaVida.getEducacionesSuperiores());
-        actualizarEducacionContinua(hojaVida.getIdPersona(), hojaVida.getEducacionesContinuas());
-        actualizarDistincion(hojaVida.getIdPersona(), hojaVida.getDistinciones());
-        actualizarExperienciaLaboral(hojaVida.getIdPersona(), hojaVida.getExperienciasLaborales());
-        actualizarExperienciaDocencia(hojaVida.getIdPersona(), hojaVida.getExperienciasDocencia());
+        actualizarIdiomas(hojaVida.getIdPersona(), hojaVida.getIdiomas());
+        actualizarEducacionesBasicas(hojaVida.getIdPersona(), hojaVida.getEducacionesBasicas());
+        actualizarEducacionesSuperiores(hojaVida.getIdPersona(), hojaVida.getEducacionesSuperiores());
+        actualizarEducacionesContinuas(hojaVida.getIdPersona(), hojaVida.getEducacionesContinuas());
+        actualizarDistinciones(hojaVida.getIdPersona(), hojaVida.getDistinciones());
+        actualizarExperienciasLaborales(hojaVida.getIdPersona(), hojaVida.getExperienciasLaborales());
+        actualizarExperienciasDocencia(hojaVida.getIdPersona(), hojaVida.getExperienciasDocencia());
+        actualizarInvestigador(hojaVida);
+        actualizarArticulos(hojaVida.getIdPersona(), hojaVida.getArticulos());
+        actualizarPatentes(hojaVida.getIdPersona(), hojaVida.getPatentes());
+        actualizarProductosConocimento(hojaVida.getIdPersona(), hojaVida.getProductosConocimento());
 
         Documento copiaDocumentoIdentificacion = hojaVida.getCopiaDocumentoIdentificacion();
         if (copiaDocumentoIdentificacion != null) {
@@ -763,6 +874,19 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
             hojaVida.setTieneDocumentoRUT((Boolean) resultado.get("varTieneDocumentoRUT"));
         }
 
+        Map resultadoInvestigador = obtenerInvestigador.execute(parametros);
+        if (resultadoInvestigador.get("varInvestigadorReconocidoColciencias") != null) {
+            hojaVida.setInvestigadorReconocidoColciencias((Boolean) resultadoInvestigador.get("varInvestigadorReconocidoColciencias"));
+        }
+        if (resultadoInvestigador.get("varTipoInvestigador") != null) {
+            hojaVida.setTipoInvestigador((Integer) resultadoInvestigador.get("varTipoInvestigador"));
+        }
+        hojaVida.setNombreTipoInvestigador((String) resultadoInvestigador.get("varNombreTipoInvestigador"));
+        hojaVida.setUrlCVLAC((String) resultadoInvestigador.get("varUrlCVLAC"));
+        hojaVida.setCodigoORCID((String) resultadoInvestigador.get("varCodigoORCID"));
+        hojaVida.setIdentificadorScopus((String) resultadoInvestigador.get("varIdentificadorScopus"));
+        hojaVida.setResearcherId((String) resultadoInvestigador.get("varResearcherId"));
+
         Map resultadoTelefonos = obtenerTelefonos.execute(parametros);
         List<Telefono> telefonos = (List<Telefono>) resultadoTelefonos.get("telefonos");
 
@@ -803,6 +927,15 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
             experienciaDocencia.setCursosExperienciaDocencia(cursoExperienciaDocencia);
         }
 
+        Map resultadoArticulos = obtenerArticulos.execute(parametros);
+        List<Articulo> articulos = (List<Articulo>) resultadoArticulos.get("articulos");
+
+        Map resultadoPatentes = obtenerPatentes.execute(parametros);
+        List<Patente> patentes = (List<Patente>) resultadoPatentes.get("patentes");
+
+        Map resultadoProductosConocimento = obtenerProductosConocimento.execute(parametros);
+        List<ProductoConocimento> productosConocimento = (List<ProductoConocimento>) resultadoProductosConocimento.get("productosConocimento");
+
         hojaVida.setTelefonos(telefonos);
         hojaVida.setCorreosElectronicos(correosElectronicos);
         hojaVida.setCuentasBancarias(cuentasBancarias);
@@ -814,6 +947,9 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         hojaVida.setDistinciones(distinciones);
         hojaVida.setExperienciasLaborales(experienciasLaborales);
         hojaVida.setExperienciasDocencia(experienciasDocencia);
+        hojaVida.setArticulos(articulos);
+        hojaVida.setPatentes(patentes);
+        hojaVida.setProductosConocimento(productosConocimento);
 
         return hojaVida;
     }
@@ -951,6 +1087,42 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         parametros.addValue("varidCursoExperienciaDocencia", idCursoExperienciaDocencia);
 
         Map resultado = obtenerCertificadoCursoExperienciaDocencia.execute(parametros);
+
+        if (resultado.get("varNombre") != null) {
+            documento = new Documento();
+            documento.setNombre((String) resultado.get("varNombre"));
+            documento.setTipoContenido((String) resultado.get("varTipoContenido"));
+            documento.setContenido((byte[]) resultado.get("varContenido"));
+        }
+
+        return documento;
+    }
+
+    @Override
+    public Documento obtenerDocumentoProductoConocimento(int idProductoConocimento) {
+        Documento documento = null;
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varidProductoConocimento", idProductoConocimento);
+
+        Map resultado = obtenerDocumentoProductoConocimento.execute(parametros);
+
+        if (resultado.get("varNombre") != null) {
+            documento = new Documento();
+            documento.setNombre((String) resultado.get("varNombre"));
+            documento.setTipoContenido((String) resultado.get("varTipoContenido"));
+            documento.setContenido((byte[]) resultado.get("varContenido"));
+        }
+
+        return documento;
+    }
+
+    @Override
+    public Documento obtenerDocumentoPatente(int idPatente) {
+        Documento documento = null;
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varidPatente", idPatente);
+
+        Map resultado = obtenerDocumentoPatente.execute(parametros);
 
         if (resultado.get("varNombre") != null) {
             documento = new Documento();
@@ -1125,7 +1297,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         }
     }
 
-    private void actualizarIdioma(long idPersona, List<Idioma> idiomas) {
+    private void actualizarIdiomas(long idPersona, List<Idioma> idiomas) {
         MapSqlParameterSource parametrosConsultaIdioma = new MapSqlParameterSource();
         parametrosConsultaIdioma.addValue("varIdPersona", idPersona);
         Map resultadoIdiomas = obtenerIdiomas.execute(parametrosConsultaIdioma);
@@ -1194,7 +1366,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         }
     }
 
-    private void actualizarEducacionBasica(long idPersona, List<EducacionBasica> educacionesBasicas) {
+    private void actualizarEducacionesBasicas(long idPersona, List<EducacionBasica> educacionesBasicas) {
         MapSqlParameterSource parametrosConsultaEducacionBasica = new MapSqlParameterSource();
         parametrosConsultaEducacionBasica.addValue("varIdPersona", idPersona);
         Map resultadoEducacionBasicas = obtenerEducacionesBasicas.execute(parametrosConsultaEducacionBasica);
@@ -1259,7 +1431,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         }
     }
 
-    private void actualizarEducacionSuperior(long idPersona, List<EducacionSuperior> educacionesSuperiores) {
+    private void actualizarEducacionesSuperiores(long idPersona, List<EducacionSuperior> educacionesSuperiores) {
         MapSqlParameterSource parametrosConsultaEducacionSuperior = new MapSqlParameterSource();
         parametrosConsultaEducacionSuperior.addValue("varIdPersona", idPersona);
         Map resultadoEducacionSuperiores = obtenerEducacionesSuperiores.execute(parametrosConsultaEducacionSuperior);
@@ -1285,7 +1457,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                 parametrosActualizacionEducacionSuperior.addValue("varPaisTituloExterior", educacionSuperiorModificada.getPaisTituloExterior());
                 parametrosActualizacionEducacionSuperior.addValue("varPrograma", educacionSuperiorModificada.getPrograma());
                 parametrosActualizacionEducacionSuperior.addValue("varFechaTitulo", educacionSuperiorModificada.getFechaTitulo());
-                parametrosActualizacionEducacionSuperior.addValue("varAreaSaber", educacionSuperiorModificada.getAreaSaber());
+                parametrosActualizacionEducacionSuperior.addValue("varNucleoBasicoConocimiento", educacionSuperiorModificada.getNucleoBasicoConocimiento());
                 parametrosActualizacionEducacionSuperior.addValue("varInstitucion", educacionSuperiorModificada.getInstitucion());
                 parametrosActualizacionEducacionSuperior.addValue("varAnyoFinalizacion", educacionSuperiorModificada.getAnyoFinalizacion());
                 parametrosActualizacionEducacionSuperior.addValue("varAnyoInicio", educacionSuperiorModificada.getAnyoInicio());
@@ -1329,7 +1501,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                 parametrosIngresoEducacionSuperior.addValue("varPaisTituloExterior", educacionSuperior.getPaisTituloExterior());
                 parametrosIngresoEducacionSuperior.addValue("varPrograma", educacionSuperior.getPrograma());
                 parametrosIngresoEducacionSuperior.addValue("varFechaTitulo", educacionSuperior.getFechaTitulo());
-                parametrosIngresoEducacionSuperior.addValue("varAreaSaber", educacionSuperior.getAreaSaber());
+                parametrosIngresoEducacionSuperior.addValue("varNucleoBasicoConocimiento", educacionSuperior.getNucleoBasicoConocimiento());
                 parametrosIngresoEducacionSuperior.addValue("varInstitucion", educacionSuperior.getInstitucion());
                 parametrosIngresoEducacionSuperior.addValue("varAnyoFinalizacion", educacionSuperior.getAnyoFinalizacion());
                 parametrosIngresoEducacionSuperior.addValue("varAnyoInicio", educacionSuperior.getAnyoInicio());
@@ -1360,7 +1532,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         }
     }
 
-    private void actualizarEducacionContinua(long idPersona, List<EducacionContinua> educacionesContinuas) {
+    private void actualizarEducacionesContinuas(long idPersona, List<EducacionContinua> educacionesContinuas) {
         MapSqlParameterSource parametrosConsultaEducacionContinua = new MapSqlParameterSource();
         parametrosConsultaEducacionContinua.addValue("varIdPersona", idPersona);
         Map resultadoEducacionContinuas = obtenerEducacionesContinuas.execute(parametrosConsultaEducacionContinua);
@@ -1383,7 +1555,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                 parametrosActualizacionEducacionContinua.addValue("varId", educacionContinuaModificada.getId());
                 parametrosActualizacionEducacionContinua.addValue("varTipoCapacitacion", educacionContinuaModificada.getTipoCapacitacion());
                 parametrosActualizacionEducacionContinua.addValue("varNombreCapacitacion", educacionContinuaModificada.getNombreCapacitacion());
-                parametrosActualizacionEducacionContinua.addValue("varAreaSaber", educacionContinuaModificada.getAreaSaber());
+                parametrosActualizacionEducacionContinua.addValue("varNucleoBasicoConocimiento", educacionContinuaModificada.getNucleoBasicoConocimiento());
                 parametrosActualizacionEducacionContinua.addValue("varInstitucion", educacionContinuaModificada.getInstitucion());
                 parametrosActualizacionEducacionContinua.addValue("varAnyo", educacionContinuaModificada.getAnyo());
                 parametrosActualizacionEducacionContinua.addValue("varNumeroHoras", educacionContinuaModificada.getNumeroHoras());
@@ -1406,7 +1578,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
             if (educacionContinua.getId() == 0) {
                 parametrosIngresoEducacionContinua.addValue("varTipoCapacitacion", educacionContinua.getTipoCapacitacion());
                 parametrosIngresoEducacionContinua.addValue("varNombreCapacitacion", educacionContinua.getNombreCapacitacion());
-                parametrosIngresoEducacionContinua.addValue("varAreaSaber", educacionContinua.getAreaSaber());
+                parametrosIngresoEducacionContinua.addValue("varNucleoBasicoConocimiento", educacionContinua.getNucleoBasicoConocimiento());
                 parametrosIngresoEducacionContinua.addValue("varInstitucion", educacionContinua.getInstitucion());
                 parametrosIngresoEducacionContinua.addValue("varAnyo", educacionContinua.getAnyo());
                 parametrosIngresoEducacionContinua.addValue("varNumeroHoras", educacionContinua.getNumeroHoras());
@@ -1425,7 +1597,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         }
     }
 
-    private void actualizarDistincion(long idPersona, List<Distincion> distinciones) {
+    private void actualizarDistinciones(long idPersona, List<Distincion> distinciones) {
         MapSqlParameterSource parametrosConsultaDistincion = new MapSqlParameterSource();
         parametrosConsultaDistincion.addValue("varIdPersona", idPersona);
         Map resultadoDistincions = obtenerDistinciones.execute(parametrosConsultaDistincion);
@@ -1484,7 +1656,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         }
     }
 
-    private void actualizarExperienciaLaboral(long idPersona, List<ExperienciaLaboral> experienciasLaborales) {
+    private void actualizarExperienciasLaborales(long idPersona, List<ExperienciaLaboral> experienciasLaborales) {
         MapSqlParameterSource parametrosConsultaExperienciaLaboral = new MapSqlParameterSource();
         parametrosConsultaExperienciaLaboral.addValue("varIdPersona", idPersona);
         Map resultadoExperienciaLaborals = obtenerExperienciasLaborales.execute(parametrosConsultaExperienciaLaboral);
@@ -1506,7 +1678,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
             } else {
                 parametrosActualizacionExperienciaLaboral.addValue("varId", experienciaLaboralModificada.getId());
                 parametrosActualizacionExperienciaLaboral.addValue("varActividadeconomica", experienciaLaboralModificada.getActividadEconomica());
-                parametrosActualizacionExperienciaLaboral.addValue("varAreaSaber", experienciaLaboralModificada.getAreaSaber());
+                parametrosActualizacionExperienciaLaboral.addValue("varNucleoBasicoConocimiento", experienciaLaboralModificada.getNucleoBasicoConocimiento());
                 parametrosActualizacionExperienciaLaboral.addValue("varCargo", experienciaLaboralModificada.getCargo());
                 parametrosActualizacionExperienciaLaboral.addValue("varFechaIngreso", experienciaLaboralModificada.getFechaIngreso());
                 parametrosActualizacionExperienciaLaboral.addValue("varFechaRetiro", experienciaLaboralModificada.getFechaRetiro());
@@ -1535,7 +1707,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         for (ExperienciaLaboral experienciaLaboral : experienciasLaborales) {
             if (experienciaLaboral.getId() == 0) {
                 parametrosIngresoExperienciaLaboral.addValue("varActividadeconomica", experienciaLaboral.getActividadEconomica());
-                parametrosIngresoExperienciaLaboral.addValue("varAreaSaber", experienciaLaboral.getAreaSaber());
+                parametrosIngresoExperienciaLaboral.addValue("varNucleoBasicoConocimiento", experienciaLaboral.getNucleoBasicoConocimiento());
                 parametrosIngresoExperienciaLaboral.addValue("varCargo", experienciaLaboral.getCargo());
                 parametrosIngresoExperienciaLaboral.addValue("varFechaIngreso", experienciaLaboral.getFechaIngreso());
                 parametrosIngresoExperienciaLaboral.addValue("varFechaRetiro", experienciaLaboral.getFechaRetiro());
@@ -1561,7 +1733,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         }
     }
 
-    private void actualizarExperienciaDocencia(long idPersona, List<ExperienciaDocencia> experienciasDocencia) {
+    private void actualizarExperienciasDocencia(long idPersona, List<ExperienciaDocencia> experienciasDocencia) {
         MapSqlParameterSource parametrosConsultaExperienciaDocencia = new MapSqlParameterSource();
         parametrosConsultaExperienciaDocencia.addValue("varIdPersona", idPersona);
         Map resultadoExperienciasDocencia = obtenerExperienciasDocencia.execute(parametrosConsultaExperienciaDocencia);
@@ -1603,7 +1775,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                     MapSqlParameterSource parametrosIngresoCursoExperienciaDocencia = new MapSqlParameterSource();
                     parametrosIngresoCursoExperienciaDocencia.addValue("varIdExperienciaDocencia", idExperienciaDocencia);
                     parametrosIngresoCursoExperienciaDocencia.addValue("varAnyo", cursoExperienciaDocencia.getAnyo());
-                    parametrosIngresoCursoExperienciaDocencia.addValue("varAreaSaber", cursoExperienciaDocencia.getAreaSaber());
+                    parametrosIngresoCursoExperienciaDocencia.addValue("varNucleoBasicoConocimiento", cursoExperienciaDocencia.getNucleoBasicoConocimiento());
                     parametrosIngresoCursoExperienciaDocencia.addValue("varModalidad", cursoExperienciaDocencia.getModalidad());
                     parametrosIngresoCursoExperienciaDocencia.addValue("varNivelEstudio", cursoExperienciaDocencia.getNivelEstudio());
                     parametrosIngresoCursoExperienciaDocencia.addValue("varNumeroHoras", cursoExperienciaDocencia.getNumeroHoras());
@@ -1646,7 +1818,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
             } else {
                 parametrosActualizacionCursoExperienciaDocencia.addValue("varId", cursoExperienciaDocenciaModificada.getId());
                 parametrosActualizacionCursoExperienciaDocencia.addValue("varAnyo", cursoExperienciaDocenciaModificada.getAnyo());
-                parametrosActualizacionCursoExperienciaDocencia.addValue("varAreaSaber", cursoExperienciaDocenciaModificada.getAreaSaber());
+                parametrosActualizacionCursoExperienciaDocencia.addValue("varNucleoBasicoConocimiento", cursoExperienciaDocenciaModificada.getNucleoBasicoConocimiento());
                 parametrosActualizacionCursoExperienciaDocencia.addValue("varModalidad", cursoExperienciaDocenciaModificada.getModalidad());
                 parametrosActualizacionCursoExperienciaDocencia.addValue("varNivelEstudio", cursoExperienciaDocenciaModificada.getNivelEstudio());
                 parametrosActualizacionCursoExperienciaDocencia.addValue("varNumeroHoras", cursoExperienciaDocenciaModificada.getNumeroHoras());
@@ -1670,7 +1842,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
             if (cursoExperienciaDocencia.getId() == 0) {
                 parametrosIngresoCursoExperienciaDocencia.addValue("varIdExperienciaDocencia", idExperienciaDocencia);
                 parametrosIngresoCursoExperienciaDocencia.addValue("varAnyo", cursoExperienciaDocencia.getAnyo());
-                parametrosIngresoCursoExperienciaDocencia.addValue("varAreaSaber", cursoExperienciaDocencia.getAreaSaber());
+                parametrosIngresoCursoExperienciaDocencia.addValue("varNucleoBasicoConocimiento", cursoExperienciaDocencia.getNucleoBasicoConocimiento());
                 parametrosIngresoCursoExperienciaDocencia.addValue("varModalidad", cursoExperienciaDocencia.getModalidad());
                 parametrosIngresoCursoExperienciaDocencia.addValue("varNivelEstudio", cursoExperienciaDocencia.getNivelEstudio());
                 parametrosIngresoCursoExperienciaDocencia.addValue("varNumeroHoras", cursoExperienciaDocencia.getNumeroHoras());
@@ -1690,4 +1862,195 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         }
     }
 
+    private void actualizarInvestigador(HojaVida hojaVida) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdPersona", hojaVida.getIdPersona());
+        parametros.addValue("varInvestigadorReconocidoColciencias", hojaVida.isInvestigadorReconocidoColciencias());
+        parametros.addValue("varTipoInvestigador", hojaVida.getTipoInvestigador());
+        parametros.addValue("varUrlCVLAC", hojaVida.getUrlCVLAC());
+        parametros.addValue("varCodigoORCID", hojaVida.getCodigoORCID());
+        parametros.addValue("varIdentificadorScopus", hojaVida.getIdentificadorScopus());
+        parametros.addValue("varResearcherId", hojaVida.getResearcherId());
+        actualizarInvestigador.execute(parametros);
+    }
+
+    private void ingresarInvestigador(long idPersona, HojaVida hojaVida) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdPersona", idPersona);
+        parametros.addValue("varInvestigadorReconocidoColciencias", hojaVida.isInvestigadorReconocidoColciencias());
+        parametros.addValue("varTipoInvestigador", hojaVida.getTipoInvestigador());
+        parametros.addValue("varUrlCVLAC", hojaVida.getUrlCVLAC());
+        parametros.addValue("varCodigoORCID", hojaVida.getCodigoORCID());
+        parametros.addValue("varIdentificadorScopus", hojaVida.getIdentificadorScopus());
+        parametros.addValue("varResearcherId", hojaVida.getResearcherId());
+        ingresarInvestigador.execute(parametros);
+    }
+
+    private void actualizarArticulos(long idPersona, List<Articulo> articulos) {
+        MapSqlParameterSource parametrosConsultaArticulo = new MapSqlParameterSource();
+        parametrosConsultaArticulo.addValue("varIdPersona", idPersona);
+        Map resultadoArticulos = obtenerArticulos.execute(parametrosConsultaArticulo);
+        ArrayList<Articulo> articulosActuales = (ArrayList<Articulo>) resultadoArticulos.get("articulos");
+
+        MapSqlParameterSource parametrosEliminacionArticulo = new MapSqlParameterSource();
+        MapSqlParameterSource parametrosActualizacionArticulo = new MapSqlParameterSource();
+        for (Articulo articuloActual : articulosActuales) {
+            Articulo articuloModificado = null;
+            for (Articulo articulo : articulos) {
+                if (articulo.getId() == articuloActual.getId()) {
+                    articuloModificado = articulo;
+                    break;
+                }
+            }
+            if (articuloModificado == null) {
+                parametrosEliminacionArticulo.addValue("varId", articuloActual.getId());
+                eliminarArticulo.execute(parametrosEliminacionArticulo);
+            } else {
+                parametrosActualizacionArticulo.addValue("varId", articuloModificado.getId());
+                parametrosActualizacionArticulo.addValue("varAnyo", articuloModificado.getAnyo());
+                parametrosActualizacionArticulo.addValue("varNombreRevista", articuloModificado.getNombreRevista());
+                parametrosActualizacionArticulo.addValue("varNombre", articuloModificado.getNombre());
+                parametrosActualizacionArticulo.addValue("varTipoAutor", articuloModificado.getTipoAutor());
+                parametrosActualizacionArticulo.addValue("varUrl", articuloModificado.getUrl());
+                parametrosActualizacionArticulo.addValue("varNucleoBasicoConocimiento", articuloModificado.getNucleoBasicoConocimiento());
+                actualizarArticulo.execute(parametrosActualizacionArticulo);
+            }
+        }
+
+        MapSqlParameterSource parametrosIngresoArticulo = new MapSqlParameterSource();
+        parametrosIngresoArticulo.addValue("varIdPersona", idPersona);
+        for (Articulo articulo : articulos) {
+            if (articulo.getId() == 0) {
+                parametrosIngresoArticulo.addValue("varAnyo", articulo.getAnyo());
+                parametrosIngresoArticulo.addValue("varNombreRevista", articulo.getNombreRevista());
+                parametrosIngresoArticulo.addValue("varNombre", articulo.getNombre());
+                parametrosIngresoArticulo.addValue("varTipoAutor", articulo.getTipoAutor());
+                parametrosIngresoArticulo.addValue("varUrl", articulo.getUrl());
+                parametrosIngresoArticulo.addValue("varNucleoBasicoConocimiento", articulo.getNucleoBasicoConocimiento());
+                ingresarArticulo.execute(parametrosIngresoArticulo);
+            }
+        }
+    }
+
+    private void actualizarPatentes(long idPersona, List<Patente> patentes) {
+        MapSqlParameterSource parametrosConsultaPatente = new MapSqlParameterSource();
+        parametrosConsultaPatente.addValue("varIdPersona", idPersona);
+        Map resultadoPatentes = obtenerPatentes.execute(parametrosConsultaPatente);
+        ArrayList<Patente> patentesActuales = (ArrayList<Patente>) resultadoPatentes.get("patentes");
+
+        MapSqlParameterSource parametrosEliminacionPatente = new MapSqlParameterSource();
+        MapSqlParameterSource parametrosActualizacionPatente = new MapSqlParameterSource();
+        for (Patente patenteActual : patentesActuales) {
+            Patente patenteModificado = null;
+            for (Patente patente : patentes) {
+                if (patente.getId() == patenteActual.getId()) {
+                    patenteModificado = patente;
+                    break;
+                }
+            }
+            if (patenteModificado == null) {
+                parametrosEliminacionPatente.addValue("varId", patenteActual.getId());
+                eliminarPatente.execute(parametrosEliminacionPatente);
+            } else {
+                parametrosActualizacionPatente.addValue("varId", patenteModificado.getId());
+                parametrosActualizacionPatente.addValue("varDescripcion", patenteModificado.getDescripcion());
+                parametrosActualizacionPatente.addValue("varClase", patenteModificado.getClase());
+                parametrosActualizacionPatente.addValue("varFecha", patenteModificado.getFecha());
+                parametrosActualizacionPatente.addValue("varTipo", patenteModificado.getTipo());
+                actualizarPatente.execute(parametrosActualizacionPatente);
+                Documento documento = patenteModificado.getDocumento();
+                if (documento != null) {
+                    MapSqlParameterSource parametrosActualizarCertificadoPatente = new MapSqlParameterSource();
+                    parametrosActualizarCertificadoPatente.addValue("varIdPatente", patenteModificado.getId());
+                    parametrosActualizarCertificadoPatente.addValue("varNombre", documento.getNombre());
+                    parametrosActualizarCertificadoPatente.addValue("varTipoContenido", documento.getTipoContenido());
+                    parametrosActualizarCertificadoPatente.addValue("varContenido", documento.getContenido());
+                    actualizarDocumentoPatente.execute(parametrosActualizarCertificadoPatente);
+                }
+            }
+        }
+
+        MapSqlParameterSource parametrosIngresoPatente = new MapSqlParameterSource();
+        parametrosIngresoPatente.addValue("varIdPersona", idPersona);
+        for (Patente patente : patentes) {
+            if (patente.getId() == 0) {
+                parametrosIngresoPatente.addValue("varDescripcion", patente.getDescripcion());
+                parametrosIngresoPatente.addValue("varClase", patente.getClase());
+                parametrosIngresoPatente.addValue("varFecha", patente.getFecha());
+                parametrosIngresoPatente.addValue("varTipo", patente.getTipo());
+                Map resultadoIngresoPatente = ingresarPatente.execute(parametrosIngresoPatente);
+                int idPatente = (int) resultadoIngresoPatente.get("varId");
+                Documento documento = patente.getDocumento();
+                if (documento != null) {
+                    MapSqlParameterSource parametrosIngresoDocumentoPatente = new MapSqlParameterSource();
+                    parametrosIngresoDocumentoPatente.addValue("varIdPatente", idPatente);
+                    parametrosIngresoDocumentoPatente.addValue("varNombre", documento.getNombre());
+                    parametrosIngresoDocumentoPatente.addValue("varTipoContenido", documento.getTipoContenido());
+                    parametrosIngresoDocumentoPatente.addValue("varContenido", documento.getContenido());
+                    ingresarDocumentoPatente.execute(parametrosIngresoDocumentoPatente);
+                }
+            }
+        }
+    }
+
+    private void actualizarProductosConocimento(long idPersona, List<ProductoConocimento> productosConocimento) {
+        MapSqlParameterSource parametrosConsultaProductoConocimento = new MapSqlParameterSource();
+        parametrosConsultaProductoConocimento.addValue("varIdPersona", idPersona);
+        Map resultadoProductosConocimento = obtenerProductosConocimento.execute(parametrosConsultaProductoConocimento);
+        ArrayList<ProductoConocimento> productosConocimentoActuales = (ArrayList<ProductoConocimento>) resultadoProductosConocimento.get("productosConocimento");
+
+        MapSqlParameterSource parametrosEliminacionProductoConocimento = new MapSqlParameterSource();
+        MapSqlParameterSource parametrosActualizacionProductoConocimento = new MapSqlParameterSource();
+        for (ProductoConocimento productoConocimentoActual : productosConocimentoActuales) {
+            ProductoConocimento productoConocimentoModificado = null;
+            for (ProductoConocimento productoConocimento : productosConocimento) {
+                if (productoConocimento.getId() == productoConocimentoActual.getId()) {
+                    productoConocimentoModificado = productoConocimento;
+                    break;
+                }
+            }
+            if (productoConocimentoModificado == null) {
+                parametrosEliminacionProductoConocimento.addValue("varId", productoConocimentoActual.getId());
+                eliminarProductoConocimento.execute(parametrosEliminacionProductoConocimento);
+            } else {
+                parametrosActualizacionProductoConocimento.addValue("varId", productoConocimentoModificado.getId());
+                parametrosActualizacionProductoConocimento.addValue("varDescripcion", productoConocimentoModificado.getDescripcion());
+                parametrosActualizacionProductoConocimento.addValue("varNucleoBasicoConocimento", productoConocimentoModificado.getNucleoBasicoConocimento());
+                parametrosActualizacionProductoConocimento.addValue("varUrl", productoConocimentoModificado.getUrl());
+                parametrosActualizacionProductoConocimento.addValue("varTipo", productoConocimentoModificado.getTipo());
+                actualizarProductoConocimento.execute(parametrosActualizacionProductoConocimento);
+                Documento documento = productoConocimentoModificado.getDocumento();
+                if (documento != null) {
+                    MapSqlParameterSource parametrosActualizarDocumentoProductoConocimento = new MapSqlParameterSource();
+                    parametrosActualizarDocumentoProductoConocimento.addValue("varIdProductoConocimento", productoConocimentoModificado.getId());
+                    parametrosActualizarDocumentoProductoConocimento.addValue("varNombre", documento.getNombre());
+                    parametrosActualizarDocumentoProductoConocimento.addValue("varTipoContenido", documento.getTipoContenido());
+                    parametrosActualizarDocumentoProductoConocimento.addValue("varContenido", documento.getContenido());
+                    actualizarDocumentoProductoConocimento.execute(parametrosActualizarDocumentoProductoConocimento);
+                }
+            }
+        }
+
+        MapSqlParameterSource parametrosIngresoProductoConocimento = new MapSqlParameterSource();
+        parametrosIngresoProductoConocimento.addValue("varIdPersona", idPersona);
+        for (ProductoConocimento productoConocimento : productosConocimento) {
+            if (productoConocimento.getId() == 0) {
+                parametrosIngresoProductoConocimento.addValue("varDescripcion", productoConocimento.getDescripcion());
+                parametrosIngresoProductoConocimento.addValue("varNucleoBasicoConocimento", productoConocimento.getNucleoBasicoConocimento());
+                parametrosIngresoProductoConocimento.addValue("varUrl", productoConocimento.getUrl());
+                parametrosIngresoProductoConocimento.addValue("varTipo", productoConocimento.getTipo());
+                Map resultadoIngresoProductoConocimento = ingresarProductoConocimento.execute(parametrosIngresoProductoConocimento);
+                int idProductoConocimento = (int) resultadoIngresoProductoConocimento.get("varId");
+                Documento documento = productoConocimento.getDocumento();
+                if (documento != null) {
+                    MapSqlParameterSource parametrosIngresoDocumentoProductoConocimento = new MapSqlParameterSource();
+                    parametrosIngresoDocumentoProductoConocimento.addValue("varIdProductoConocimento", idProductoConocimento);
+                    parametrosIngresoDocumentoProductoConocimento.addValue("varNombre", documento.getNombre());
+                    parametrosIngresoDocumentoProductoConocimento.addValue("varTipoContenido", documento.getTipoContenido());
+                    parametrosIngresoDocumentoProductoConocimento.addValue("varContenido", documento.getContenido());
+                    ingresarDocumentoProductoConocimento.execute(parametrosIngresoDocumentoProductoConocimento);
+                }
+            }
+        }
+    }
 }

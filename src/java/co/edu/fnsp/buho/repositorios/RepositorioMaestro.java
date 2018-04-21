@@ -27,7 +27,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
 
     private SimpleJdbcCall obtenerTiposIdentificacion;
     private SimpleJdbcCall obtenerActividadesEconomicas;
-    private SimpleJdbcCall obtenerAreasSaber;
+    private SimpleJdbcCall obtenerNucleosBasicosConocimiento;
     private SimpleJdbcCall obtenerAreas;
     private SimpleJdbcCall obtenerCargos;
     private SimpleJdbcCall obtenerDedicaciones;
@@ -56,6 +56,11 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     private SimpleJdbcCall obtenerCriteriosEvaluacion;
     private SimpleJdbcCall obtenerModalidadesCurso;
     private SimpleJdbcCall obtenerNaturalezasCargo;
+    private SimpleJdbcCall obtenerTiposInvestigador;
+    private SimpleJdbcCall obtenerTiposAutorArticulo;
+    private SimpleJdbcCall obtenerClasesPatente;
+    private SimpleJdbcCall obtenerTiposProductoConocimiento;
+    private SimpleJdbcCall obtenerTiposPatente;
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -64,7 +69,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
 
         this.obtenerTiposIdentificacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposIdentificacion").returningResultSet("tiposIdentificacion", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerActividadesEconomicas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerActividadesEconomicas").returningResultSet("actividadesEconomicas", BeanPropertyRowMapper.newInstance(Maestro.class));
-        this.obtenerAreasSaber = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerAreasSaber").returningResultSet("areasSaber", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerNucleosBasicosConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerNucleosBasicosConocimiento").returningResultSet("nucleosBasicoConocimiento", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerAreas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerAreas").returningResultSet("areas", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerCargos = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCargos").returningResultSet("cargos", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerDedicaciones = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDedicaciones").returningResultSet("dedicaciones", BeanPropertyRowMapper.newInstance(Maestro.class));
@@ -93,6 +98,11 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         this.obtenerCriteriosEvaluacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCriteriosEvaluacion").returningResultSet("criteriosEvaluacion", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerNaturalezasCargo = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerNaturalezasCargo").returningResultSet("naturalezasCargo", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerModalidadesCurso = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerModalidadesCurso").returningResultSet("modalidadesCurso", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerTiposInvestigador = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposInvestigador").returningResultSet("tiposInvestigador", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerTiposAutorArticulo = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposAutorArticulo").returningResultSet("tiposAutorArticulo", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerTiposPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposPatente").returningResultSet("tiposPatente", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerTiposProductoConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposProductoConocimiento").returningResultSet("tiposProductoConocimiento", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerClasesPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerClasesPatente").returningResultSet("clasesPatente", BeanPropertyRowMapper.newInstance(Maestro.class));
     }
 
     @Override
@@ -112,8 +122,8 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     }
 
     @Override
-    public List<Maestro> obtenerAreasSaber() {
-        Map resultado = obtenerAreasSaber.execute(new HashMap<>());
+    public List<Maestro> obtenerNucleosBasicosConocimiento() {
+        Map resultado = obtenerNucleosBasicosConocimiento.execute(new HashMap<>());
         List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("areasSaber");
 
         return coleccion;
@@ -345,6 +355,46 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     public List<Maestro> obtenerModalidadesCurso() {
         Map resultado = obtenerModalidadesCurso.execute(new HashMap<>());
         List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("modalidadesCurso");
+
+        return coleccion;
+    }
+
+    @Override
+    public List<Maestro> obtenerTiposInvestigador() {
+        Map resultado = obtenerTiposInvestigador.execute(new HashMap<>());
+        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("tiposInvestigador");
+
+        return coleccion;
+    }
+
+    @Override
+    public List<Maestro> obtenerTiposAutorArticulo() {
+        Map resultado = obtenerTiposAutorArticulo.execute(new HashMap<>());
+        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("tiposAutorArticulo");
+
+        return coleccion;
+    }
+
+    @Override
+    public List<Maestro> obtenerClasesPatente() {
+        Map resultado = obtenerClasesPatente.execute(new HashMap<>());
+        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("clasesPatente");
+
+        return coleccion;    
+    }
+
+    @Override
+    public List<Maestro> obtenerTiposProductoConocimiento() {
+        Map resultado = obtenerTiposProductoConocimiento.execute(new HashMap<>());
+        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("tiposProductoConocimiento");
+
+        return coleccion;
+    }
+
+    @Override
+    public List<Maestro> obtenerTiposPatente() {
+        Map resultado = obtenerTiposPatente.execute(new HashMap<>());
+        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("tiposPatente");
 
         return coleccion;
     }

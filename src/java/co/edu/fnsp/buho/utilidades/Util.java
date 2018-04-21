@@ -6,6 +6,7 @@
 package co.edu.fnsp.buho.utilidades;
 
 import co.edu.fnsp.buho.entidades.Adenda;
+import co.edu.fnsp.buho.entidades.Articulo;
 import co.edu.fnsp.buho.entidades.CorreoElectronico;
 import co.edu.fnsp.buho.entidades.CriterioEvaluacion;
 import co.edu.fnsp.buho.entidades.CriterioHabilitante;
@@ -20,6 +21,8 @@ import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.Idioma;
+import co.edu.fnsp.buho.entidades.Patente;
+import co.edu.fnsp.buho.entidades.ProductoConocimento;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -54,11 +57,11 @@ public class Util {
     }
 
     public static Date obtenerFecha(String fecha) throws ParseException {
-         if (fecha != null && !"".equalsIgnoreCase(fecha)) {
+        if (fecha != null && !"".equalsIgnoreCase(fecha)) {
             return simpleDateFormat.parse(fecha);
-         }
-         
-         return null;
+        }
+
+        return null;
     }
 
     public static String obtenerNumeroFormatoMoneda(Long valor) {
@@ -365,8 +368,8 @@ public class Util {
                         + "tituloExterior:ko.observable(" + educacionSuperior.isTituloExterior() + "),"
                         + "paisTituloExterior:ko.observable(" + paisTitulo + "),"
                         + "nombrePaisTitulo:ko.observable('" + nombrePaisTitulo + "'),"
-                        + "areaSaber:ko.observable(" + educacionSuperior.getAreaSaber() + "),"
-                        + "nombreAreaSaber:ko.observable('" + educacionSuperior.getNombreAreaSaber() + "'),"
+                        + "nucleoBasicoConocimiento:ko.observable(" + educacionSuperior.getNucleoBasicoConocimiento() + "),"
+                        + "nombreNucleoBasicoConocimiento:ko.observable('" + educacionSuperior.getNombreNucleoBasicoConocimiento() + "'),"
                         + "programa:ko.observable('" + educacionSuperior.getPrograma() + "'),"
                         + "nivel:ko.observable(" + educacionSuperior.getNivel() + "),"
                         + "nombreNivel:ko.observable('" + educacionSuperior.getNombreNivel() + "'),"
@@ -407,8 +410,8 @@ public class Util {
                         + "tipoCapacitacion:ko.observable(" + educacionContinua.getTipoCapacitacion() + "),"
                         + "nombreTipoCapacitacion:ko.observable('" + educacionContinua.getNombreTipoCapacitacion() + "'),"
                         + "nombreCapacitacion:ko.observable('" + educacionContinua.getNombreCapacitacion() + "'),"
-                        + "areaSaber:ko.observable(" + educacionContinua.getAreaSaber() + "),"
-                        + "nombreAreaSaber:ko.observable('" + educacionContinua.getNombreAreaSaber() + "'),"
+                        + "nucleoBasicoConocimiento:ko.observable(" + educacionContinua.getNucleoBasicoConocimiento() + "),"
+                        + "nombreNucleoBasicoConocimiento:ko.observable('" + educacionContinua.getNombreNucleoBasicoConocimiento() + "'),"
                         + "anyo:ko.observable(" + educacionContinua.getAnyo() + "),"
                         + "numeroHoras:ko.observable(" + educacionContinua.getNumeroHoras() + "),"
                         + "certificado:ko.observable(''),"
@@ -475,8 +478,8 @@ public class Util {
                         + "nombreTipoContrato:ko.observable('" + experienciaLaboral.getNombreTipoContrato() + "'),"
                         + "tipoEmpresa:ko.observable(" + experienciaLaboral.getTipoEmpresa() + "),"
                         + "nombreTipoEmpresa:ko.observable('" + experienciaLaboral.getNombreTipoEmpresa() + "'),"
-                        + "areaSaber:ko.observable(" + experienciaLaboral.getAreaSaber() + "),"
-                        + "nombreAreaSaber:ko.observable('" + experienciaLaboral.getNombreAreaSaber() + "'),"
+                        + "nucleoBasicoConocimiento:ko.observable(" + experienciaLaboral.getNucleoBasicoConocimiento() + "),"
+                        + "nombreNucleoBasicoConocimiento:ko.observable('" + experienciaLaboral.getNombreNucleoBasicoConocimiento() + "'),"
                         + "naturalezaCargo:ko.observable(" + experienciaLaboral.getNaturalezaCargo() + "),"
                         + "nombreNaturalezaCargo:ko.observable('" + experienciaLaboral.getNombreNaturalezaCargo() + "'),"
                         + "nombreEmpresa:ko.observable('" + experienciaLaboral.getNombreEmpresa() + "'),"
@@ -507,25 +510,25 @@ public class Util {
                 ExperienciaDocencia experienciaDocencia = experienciasDocencia.get(i);
                 String jsonCursos = "";
                 for (int j = 0; j < experienciaDocencia.getCursosExperienciaDocencia().size(); j++) {
-                    CursoExperienciaDocencia cursoExperienciaDocencia = experienciaDocencia.getCursosExperienciaDocencia().get(i);
+                    CursoExperienciaDocencia cursoExperienciaDocencia = experienciaDocencia.getCursosExperienciaDocencia().get(j);
                     jsonCursos = jsonCursos
-                        + "{id: ko.observable(" + cursoExperienciaDocencia.getId() + "),"
-                        + "nombreCurso:ko.observable('" + cursoExperienciaDocencia.getNombreCurso()+ "'),"
-                        + "areaSaber:ko.observable(" + cursoExperienciaDocencia.getAreaSaber()+ "),"
-                        + "nombreAreaSaber:ko.observable('" + cursoExperienciaDocencia.getNombreAreaSaber()+ "'),"
-                        + "modalidad:ko.observable(" + cursoExperienciaDocencia.getModalidad()+ "),"
-                        + "nombreModalidad:ko.observable('" + cursoExperienciaDocencia.getNombreModalidad()+ "'),"
-                        + "nivelEstudio:ko.observable(" + cursoExperienciaDocencia.getNivelEstudio()+ "),"
-                        + "nombreNivelEstudio:ko.observable('" + cursoExperienciaDocencia.getNombreNivelEstudio()+ "'),"
-                        + "anyo:ko.observable(" + cursoExperienciaDocencia.getAnyo()+ "),"
-                        + "numeroHoras:ko.observable(" + cursoExperienciaDocencia.getNumeroHoras()+ "),"
-                        + "certificado:ko.observable(''),"
-                        + "tieneCertificado:ko.observable(true),"
-                        + "consecutivo:ko.observable(" + j + ")"
-                        + "}";
-                    if (i < experienciaDocencia.getCursosExperienciaDocencia().size() - 1) {
+                            + "{id: ko.observable(" + cursoExperienciaDocencia.getId() + "),"
+                            + "nombreCurso:ko.observable('" + cursoExperienciaDocencia.getNombreCurso() + "'),"
+                            + "nucleoBasicoConocimiento:ko.observable(" + cursoExperienciaDocencia.getNucleoBasicoConocimiento() + "),"
+                            + "nombreNucleoBasicoConocimiento:ko.observable('" + cursoExperienciaDocencia.getNombreNucleoBasicoConocimiento() + "'),"
+                            + "modalidad:ko.observable(" + cursoExperienciaDocencia.getModalidad() + "),"
+                            + "nombreModalidad:ko.observable('" + cursoExperienciaDocencia.getNombreModalidad() + "'),"
+                            + "nivelEstudio:ko.observable(" + cursoExperienciaDocencia.getNivelEstudio() + "),"
+                            + "nombreNivelEstudio:ko.observable('" + cursoExperienciaDocencia.getNombreNivelEstudio() + "'),"
+                            + "anyo:ko.observable(" + cursoExperienciaDocencia.getAnyo() + "),"
+                            + "numeroHoras:ko.observable(" + cursoExperienciaDocencia.getNumeroHoras() + "),"
+                            + "certificado:ko.observable(''),"
+                            + "tieneCertificado:ko.observable(true),"
+                            + "consecutivo:ko.observable(" + j + ")"
+                            + "}";
+                    if (j < experienciaDocencia.getCursosExperienciaDocencia().size() - 1) {
                         jsonCursos = jsonCursos + ",";
-                    }    
+                    }
                 }
                 json = json
                         + "{id: ko.observable(" + experienciaDocencia.getId() + "),"
@@ -533,10 +536,99 @@ public class Util {
                         + "trabajoActual:ko.observable(" + experienciaDocencia.isTrabajoActual() + "),"
                         + "institucion:ko.observable(" + experienciaDocencia.getInstitucion() + "),"
                         + "nombreInstitucion:ko.observable('" + experienciaDocencia.getNombreInstitucion() + "'),"
-                        + "cursosExperienciaDocencia: ko.observableArray([" + jsonCursos  + "]),"
+                        + "cursosExperienciaDocencia: ko.observableArray([" + jsonCursos + "]),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < experienciasDocencia.size() - 1) {
+                    json = json + ",";
+                }
+            }
+
+            json = json + "]";
+        }
+
+        return json;
+    }
+
+    public static Object obtenerArticulosJSON(List<Articulo> articulos) {
+        String json = "";
+
+        if (articulos.size() > 0) {
+            json = "[";
+
+            for (int i = 0; i < articulos.size(); i++) {
+                Articulo articulo = articulos.get(i);
+                json = json
+                        + "{id: ko.observable(" + articulo.getId() + "),"
+                        + "nombreRevista:ko.observable('" + articulo.getNombreRevista() + "'),"
+                        + "nombre:ko.observable('" + articulo.getNombre() + "'),"
+                        + "anyo:ko.observable(" + articulo.getAnyo() + "),"
+                        + "tipoAutor:ko.observable(" + articulo.getTipoAutor() + "),"
+                        + "url:ko.observable('" + articulo.getUrl() + "'),"
+                        + "nucleoBasicoConocimiento:ko.observable(" + articulo.getNucleoBasicoConocimiento() + "),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < articulos.size() - 1) {
+                    json = json + ",";
+                }
+            }
+
+            json = json + "]";
+        }
+
+        return json;
+    }
+
+    public static String obtenerPatentesJSON(List<Patente> patentes) {
+        String json = "";
+
+        if (patentes.size() > 0) {
+            json = "[";
+
+            for (int i = 0; i < patentes.size(); i++) {
+                Patente patente = patentes.get(i);
+                json = json
+                        + "{id: ko.observable(" + patente.getId() + "),"
+                        + "descripcion:ko.observable('" + patente.getDescripcion() + "'),"
+                        + "nombreTipo:ko.observable('" + patente.getNombreTipo() + "'),"
+                        + "tipo:ko.observable(" + patente.getTipo() + "),"
+                        + "clase:ko.observable(" + patente.getClase() + "),"
+                        + "fecha:ko.observable('" + Util.obtenerFechaFormateada(patente.getFecha()) + "'),"
+                        + "documento:ko.observable(''),"
+                        + "tieneDocumento:ko.observable(true),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < patentes.size() - 1) {
+                    json = json + ",";
+                }
+            }
+
+            json = json + "]";
+        }
+
+        return json;
+    }
+
+    public static String obtenerProductosConocimentoJSON(List<ProductoConocimento> productosConocimento) {
+        String json = "";
+
+        if (productosConocimento.size() > 0) {
+            json = "[";
+
+            for (int i = 0; i < productosConocimento.size(); i++) {
+                ProductoConocimento productoConocimento = productosConocimento.get(i);
+                json = json
+                        + "{id: ko.observable(" + productoConocimento.getId() + "),"
+                        + "descripcion:ko.observable('" + productoConocimento.getDescripcion() + "'),"
+                        + "nombreTipo:ko.observable('" + productoConocimento.getNombreTipo() + "'),"
+                        + "tipo:ko.observable(" + productoConocimento.getTipo() + "),"
+                        + "url:ko.observable('" + productoConocimento.getUrl() + "'),"
+                        + "nucleoBasicoConocimento:ko.observable('" + productoConocimento.getNucleoBasicoConocimento() + "'),"
+                        + "documento:ko.observable(''),"
+                        + "tieneDocumento:ko.observable(true),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < productosConocimento.size() - 1) {
                     json = json + ",";
                 }
             }

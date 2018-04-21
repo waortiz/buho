@@ -15,7 +15,7 @@ import java.util.List;
 public interface IRepositorioMaestro {
     List<Maestro> obtenerTiposIdentificacion();
     List<Maestro> obtenerActividadesEconomicas();
-    List<Maestro> obtenerAreasSaber();
+    List<Maestro> obtenerNucleosBasicosConocimiento();
     List<Maestro> obtenerAreas();
     List<Maestro> obtenerCargos();
     List<Maestro> obtenerDedicaciones();
@@ -44,4 +44,9 @@ public interface IRepositorioMaestro {
     List<Maestro> obtenerCriteriosEvaluacion();
     List<Maestro> obtenerNaturalezasCargo();
     List<Maestro> obtenerModalidadesCurso();
+    List<Maestro> obtenerTiposInvestigador();
+    List<Maestro> obtenerTiposAutorArticulo();
+    List<Maestro> obtenerClasesPatente();
+    List<Maestro> obtenerTiposProductoConocimiento();
+    List<Maestro> obtenerTiposPatente();
 }

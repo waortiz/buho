@@ -48,4 +48,8 @@ public interface IServicioHojaVida {
     Documento obtenerCertificadoExperienciaLaboral(int idExperienciaLaboral);
 
     Documento obtenerCertificadoCursoExperienciaDocencia(int idCursoExperienciaDocencia);
+
+    public Documento obtenerDocumentoPatente(int idPatente);
+
+    public Documento obtenerDocumentoProductoConocimento(int idProductoConocimento);
 }

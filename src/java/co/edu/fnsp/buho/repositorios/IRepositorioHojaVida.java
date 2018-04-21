@@ -48,4 +48,8 @@ public interface IRepositorioHojaVida {
     Documento obtenerCertificadoExperienciaLaboral(int idExperienciaLaboral);
     
     Documento obtenerCertificadoCursoExperienciaDocencia(int idCursoExperienciaDocencia);
+
+    Documento obtenerDocumentoProductoConocimento(int idProductoConocimento);
+
+    Documento obtenerDocumentoPatente(int idPatente);
 }

@@ -1050,7 +1050,7 @@
                                         <th>Nivel de estudio</th>
                                         <th>Instituci&oacute;n</th>
                                         <th>Programa cursado</th>
-                                        <th>Fecha de titulo</th>
+                                        <th>Fecha de título</th>
                                         <th class="cer" align="center">Certificado Homologado</th>
                                         <th class="cer" align="center">Certificado</th>
                                         <th class="opc" align="center">Opciones</th>
@@ -1089,7 +1089,7 @@
                                             <input type="hidden" data-bind="value: graduado, attr: { 'name': 'educacionesSuperiores[' + $index() + '].graduado'  }" />
                                             <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'educacionesSuperiores[' + $index() + '].consecutivo'  }" />
                                             <input type="hidden" data-bind="value: id, attr: { 'name': 'educacionesSuperiores[' + $index() + '].id'  }" />
-                                            <input type="hidden" data-bind="value: areaSaber, attr: { 'name': 'educacionesSuperiores[' + $index() + '].areaSaber'  }" />
+                                            <input type="hidden" data-bind="value: nucleoBasicoConocimiento, attr: { 'name': 'educacionesSuperiores[' + $index() + '].nucleoBasicoConocimiento'  }" />
                                             <input type="hidden" data-bind="value: tituloExterior, attr: { 'name': 'educacionesSuperiores[' + $index() + '].tituloExterior'  }" />
                                             <input type="hidden" data-bind="value: paisTituloExterior, attr: { 'name': 'educacionesSuperiores[' + $index() + '].paisTituloExterior'  }" />
                                         </td>
@@ -1203,10 +1203,10 @@
                                                             <div class="form-group">
                                                                 <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcloe básico de conocimiento">
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                                <select style="width: 100%;" name="areaSaberPrograma" id="areaSaberPrograma" class="js-select-basic-single js-states form-control">
+                                                                <select style="width: 100%;" name="nucleoBasicoConocimientoPrograma" id="nucleoBasicoConocimientoPrograma" class="js-select-basic-single js-states form-control">
                                                                     <option></option>
-                                                                    <c:forEach var="areaSaber" items="${areasSaber}">
-                                                                        <option value="${areaSaber.getId()}">${areaSaber.getNombre()}</option>
+                                                                    <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
+                                                                        <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
                                                                     </c:forEach>                                                                   
                                                                 </select>
                                                             </div>
@@ -1238,8 +1238,8 @@
                                             <div class="col-md-5">
                                                 <div class="form-group">
                                                     <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><br>
-                                                    <input type="text" style="border:0;font-style: italic;margin-left: 20px; width: 330px;" size="2" readonly id="nombreAreaSaberEducacionSuperior">
-                                                    <input type="hidden" id="areaSaberEducacionSuperior">
+                                                    <input type="text" style="border:0;font-style: italic;margin-left: 20px; width: 330px;" size="2" readonly id="nombreNucleoBasicoConocimientoEducacionSuperior">
+                                                    <input type="hidden" id="nucleoBasicoConocimientoEducacionSuperior">
                                                 </div>
                                             </div>
                                         </div>
@@ -1280,7 +1280,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group" >
-                                                <label for="fechaTituloEducacionSuperior">Fecha de titulaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de titulo obtenido">
+                                                <label for="fechaTituloEducacionSuperior">Fecha de titulaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de título obtenido">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                                 <input type='text' class="form-control fecha input-sm" name="fechaTituloEducacionSuperior" id="fechaTituloEducacionSuperior" style="display: inline;width: 80%;margin-right: -5px;"/>
                                                 <span class="input-group-addon" style="display: inline;"><span class="glyphicon glyphicon-calendar" ></span></span>
@@ -1537,7 +1537,7 @@
                                             <input type="hidden" data-bind="value: anyo, attr: { 'name': 'educacionesContinuas[' + $index() + '].anyo'  }">
                                             <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'educacionesContinuas[' + $index() + '].consecutivo'  }" />
                                             <input type="hidden" data-bind="value: id, attr: { 'name': 'educacionesContinuas[' + $index() + '].id'  }" />
-                                            <input type="hidden" data-bind="value: areaSaber, attr: { 'name': 'educacionesContinuas[' + $index() + '].areaSaber'  }" />
+                                            <input type="hidden" data-bind="value: nucleoBasicoConocimiento, attr: { 'name': 'educacionesContinuas[' + $index() + '].nucleoBasicoConocimiento'  }" />
                                         </td>
                                     </tr>
                                 </tbody>                           
@@ -1582,12 +1582,12 @@
                                     </div>
                                     <div class="col-md-4" style="width: 260px;">
                                         <div class="form-group">
-                                            <label for="areaSaberEducacionContinua">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el area del estudio">
+                                            <label for="nucleoBasicoConocimientoEducacionContinua">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el area del estudio">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <select style="width: 100%;" name="areaSaberEducacionContinua" id="areaSaberEducacionContinua" class="js-select-basic-single js-states form-control">
+                                            <select style="width: 100%;" name="nucleoBasicoConocimientoEducacionContinua" id="nucleoBasicoConocimientoEducacionContinua" class="js-select-basic-single js-states form-control">
                                                 <option value=""></option>
-                                                <c:forEach var="areaSaber" items="${areasSaber}">
-                                                <option value="${areaSaber.getId()}">${areaSaber.getNombre()}</option>
+                                                <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
+                                                <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
                                                 </c:forEach>                                                 
                                             </select></div>
                                     </div>                                    
@@ -1656,7 +1656,7 @@
                         <tbody data-bind="foreach: { data: experienciasLaborales }">
                             <tr class="table-row">
                                 <td style="width: 30%">
-                                    <span data-bind="text: nombreAreaSaber" ></span>
+                                    <span data-bind="text: nombreNucleoBasicoConocimiento" ></span>
                                 </td>
                                 <td style="width: 30%">
                                     <span data-bind="text: nombreEmpresa" ></span>
@@ -1677,7 +1677,7 @@
                                     <input type="hidden" data-bind="value: fnsp, attr: { 'name': 'experienciasLaborales[' + $index() + '].fnsp'  }" />
                                     <input type="hidden" data-bind="value: fechaIngreso, attr: { 'name': 'experienciasLaborales[' + $index() + '].fechaIngreso'  }" />
                                     <input type="hidden" data-bind="value: fechaRetiro, attr: { 'name': 'experienciasLaborales[' + $index() + '].fechaRetiro'  }" />
-                                    <input type="hidden" data-bind="value: areaSaber, attr: { 'name': 'experienciasLaborales[' + $index() + '].areaSaber'  }" />
+                                    <input type="hidden" data-bind="value: nucleoBasicoConocimiento, attr: { 'name': 'experienciasLaborales[' + $index() + '].nucleoBasicoConocimiento'  }" />
                                     <input type="hidden" data-bind="value: tipoEmpresa, attr: { 'name': 'experienciasLaborales[' + $index() + '].tipoEmpresa'  }" />
                                     <input type="hidden" data-bind="value: naturalezaCargo, attr: { 'name': 'experienciasLaborales[' + $index() + '].naturalezaCargo'  }" />
                                     <input type="hidden" data-bind="value: actividadEconomica, attr: { 'name': 'experienciasLaborales[' + $index() + '].actividadEconomica'  }" />
@@ -1757,12 +1757,12 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="areaSaberExperienciaLaboral">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el N&uacute;cleo b&aacute;sico del conocimiento">
+                                            <label for="nucleoBasicoConocimientoExperienciaLaboral">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el N&uacute;cleo b&aacute;sico del conocimiento">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <select style="width: 100%;" name="areaSaberExperienciaLaboral" id="areaSaberExperienciaLaboral" class="js-select-basic-single js-states form-control">
+                                            <select style="width: 100%;" name="nucleoBasicoConocimientoExperienciaLaboral" id="nucleoBasicoConocimientoExperienciaLaboral" class="js-select-basic-single js-states form-control">
                                                 <option></option>
-                                                <c:forEach var="areaSaber" items="${areasSaber}">
-                                                <option value="${areaSaber.getId()}">${areaSaber.getNombre()}</option>
+                                                <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
+                                                <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
                                                 </c:forEach>  
                                             </select>
                                         </div>
@@ -1956,7 +1956,7 @@
                                                             <span data-bind="text: nombreCurso" ></span>
                                                         </td>
                                                         <td style="width: 20%">
-                                                            <span data-bind="text: nombreAreaSaber" ></span>
+                                                            <span data-bind="text: nombreNucleoBasicoConocimiento" ></span>
                                                         </td>
                                                         <td style="width: 20%">
                                                             <span data-bind="text: nombreNivelEstudio" ></span>
@@ -2010,10 +2010,10 @@
                                         <div class="form-group">
                                             <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcloe básico del conocimiento">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <select style="width: 100%;" name="areaSaberCursoExperienciaDocencia" id="areaSaberCursoExperienciaDocencia" class="js-select-basic-single js-states form-control">
+                                            <select style="width: 100%;" name="nucleoBasicoConocimientoCursoExperienciaDocencia" id="nucleoBasicoConocimientoCursoExperienciaDocencia" class="js-select-basic-single js-states form-control">
                                                 <option></option>
-                                                <c:forEach var="areaSaber" items="${areasSaber}">
-                                                <option value="${areaSaber.getId()}">${areaSaber.getNombre()}</option>
+                                                <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
+                                                <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
@@ -2077,7 +2077,7 @@
             <div id="forminves" style="display: none;">
                 <div class="row">   
                     <div class="col-md-1" style="margin-bottom: 20px;">
-                        <button type="button" id="btninvestigacion" class="btn btn-success">Investigaci&oacute;n/Innovaci&oacute;n</button>
+                        <button type="button" class="btn btn-success">Investigaci&oacute;n/Innovaci&oacute;n</button>
                     </div>
                 </div>
                 <div class="row">
@@ -2086,26 +2086,33 @@
                             <label>¿Es investigador reconocido por Colciencias?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el investigador reconocido colciencia">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
                             <div id="radioBtn" class="btn-group" style="margin-left: 50px;">
-                                <a class="btn btn-primary btn-sm notActive" data-toggle="pin_rec_colciencias"  data-title="true"  >Si</a>
-                                <a class="btn btn-primary btn-sm notActive" data-toggle="pin_rec_colciencias"  data-title="false" >No</a>
+                                <c:if test = "${hojaVida.isInvestigadorReconocidoColciencias()}">
+                                <a class="btn btn-primary btn-sm active" data-toggle="investigadorReconocidoColciencias" data-title="true" id="btnInvestigadorReconocidoColciencias">Si</a>
+                                <a class="btn btn-primary btn-sm notActive" data-toggle="investigadorReconocidoColciencias" data-title="false" id="btnInvestigadorReconocidoColciencias">No</a>
+                                </c:if>
+                                <c:if test = "${!hojaVida.isInvestigadorReconocidoColciencias()}">
+                                <a class="btn btn-primary btn-sm notActive" data-toggle="investigadorReconocidoColciencias" data-title="true" id="btnInvestigadorReconocidoColciencias">Si</a>
+                                <a class="btn btn-primary btn-sm active" data-toggle="investigadorReconocidoColciencias" data-title="false" id="btnInvestigadorReconocidoColciencias">No</a>
+                                </c:if>
                             </div>
-                            <input type="hidden" name="pin_rec_colciencias" id="pin_rec_colciencias">
-
+                            <form:hidden path="investigadorReconocidoColciencias" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">    
                             <label>Curr&iacute;culum vitae de latinoamerica y el caribe (CVLAC)</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el Curr&iacute;culum vitae de latinoamerica y el caribe (CVLAC) ">
-                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <input type="text" name="pin_cvlac_url" id="pin_cvlac_url" class="form-control">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                            <form:input path="urlCVLAC" class="form-control" />
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label>Tipo de investigador</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de investigador">
-                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                            <select style="width: 100%;" class="js-select-basic-single js-states form-control" name="pin_tipo_inc" id="pin_tipo_inc">
-                            </select>
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                            <form:select style="width: 100%;" path="tipoInvestigador" class="js-select-basic-single js-states form-control">
+                                <form:option value=""></form:option>
+                                <form:options items="${tiposInvestigador}" itemLabel="nombre" itemValue="id"/>                                    
+                            </form:select>
                         </div>
                     </div>
                 </div>
@@ -2113,22 +2120,22 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Código ORCID</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe ingresar el código del sistema Open Researcher and Contributor ID">
-                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <input type="text" name="pin_orcid" id="pin_orcid" maxlength="16" class="form-control">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                            <form:input path="codigoORCID" maxlength="16" class="form-control" />
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Identificador Scopus</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe ingresar el código de Identificación de autor Scopus">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <input type="text" name="pin_scopus" id="pin_scopus"  class="form-control">
+                            <form:input path="identificadorScopus" class="form-control" />
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Researcher Id</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe ingresar el numero de id Researcher">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <input type="text" name="pin_researcherid" id="pin_researcherid" class="form-control">
+                            <form:input path="researcherId" class="form-control" />
                         </div>
                     </div>
                 </div>
@@ -2138,10 +2145,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <legend>Articulos y publicaciones relevantes</legend><br>
-                        <label>Agregar articulo</label>
-                        <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" data-target="#md_articulo" data-toggle="modal" ><span class="glyphicon glyphicon-plus"></span></button>
-                        <br>
-
+                        <label>Agregar artículo</label>
+                        <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoArticulo();"><span class="glyphicon glyphicon-plus"></span></button>
+                        <br />
                         <div class="table-responsive">
                             <table class="table table-hover tableestilo" id="tbearticulo">
                                 <thead>
@@ -2152,6 +2158,31 @@
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
+                                <tbody data-bind="foreach: { data: articulos }">
+                                    <tr class="table-row">
+                                        <td style="width: 20%">
+                                            <span data-bind="text: nombre" ></span>
+                                        </td>
+                                        <td style="width: 20%">
+                                            <span data-bind="text: nombreRevista" ></span>
+                                        </td>
+                                        <td style="width: 50%">
+                                            <span data-bind="text: url" ></span>
+                                        </td>
+                                        <td style='white-space: nowrap; width: 10%' align="center">
+                                            <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarArticulo"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                            <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarArticulo"><span class='glyphicon glyphicon-remove'></span></button>
+                                            <input type="hidden" data-bind="value: nombre, attr: { 'name': 'articulos[' + $index() + '].nombre'  }" />
+                                            <input type="hidden" data-bind="value: nombreRevista, attr: { 'name': 'articulos[' + $index() + '].nombreRevista'  }" />
+                                            <input type="hidden" data-bind="value: tipoAutor, attr: { 'name': 'articulos[' + $index() + '].tipoAutor'  }" />
+                                            <input type="hidden" data-bind="value: url, attr: { 'name': 'articulos[' + $index() + '].url'  }" />
+                                            <input type="hidden" data-bind="value: anyo, attr: { 'name': 'articulos[' + $index() + '].anyo'  }" />
+                                            <input type="hidden" data-bind="value: nucleoBasicoConocimiento, attr: { 'name': 'articulos[' + $index() + '].nucleoBasicoConocimiento'  }" />
+                                            <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'articulos[' + $index() + '].consecutivo'  }" />
+                                            <input type="hidden" data-bind="value: id, attr: { 'name': 'articulos[' + $index() + '].id'  }" />
+                                        </td>
+                                    </tr>
+                                </tbody>                                     
                             </table>
                         </div>
                     </div>
@@ -2160,67 +2191,321 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header mhsuccess">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Articulo</h4>
+                                    <button type="button" class="close" onclick="cerrarVentanaArticulo();">&times;</button>
+                                    <h4 class="modal-title">Artículo</h4>
                                 </div>
                                 <div class="modal-body">
+                                    <div id="alert_articulo"></div>
                                     <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>T&iacute;tulo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el nombre del articulo que han hecho">
-                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <input type="text" name="art_nombre" id="art_nombre" class="form-control">
-
+                                                <label>Nombre</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el nombre del artículo que han hecho">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                                <input type="text" name="nombreArticulo" id="nombreArticulo" class="form-control">
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Tipo de autor</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de autor">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                                <select style="width: 100%;" class="js-select-basic-single js-states form-control" name="tipoAutorArticulo" id="tipoAutorArticulo">
+                                                    <option></option>
+                                                    <c:forEach var="tipoAutorArticulo" items="${tiposAutorArticulo}">
+                                                    <option value="${tipoAutorArticulo.getId()}">${tipoAutorArticulo.getNombre()}</option>
+                                                    </c:forEach>                                                    
+                                                </select>
+                                                </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Nombre de la revista</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el nombre del articulo que han hecho">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                                <input type="text" name="nombreRevistaArticulo" id="nombreRevistaArticulo" class="form-control">
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>A&ntilde;o</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el a&ntilde;o del articulo">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                                <select name="anyoArticulo" id="anyoArticulo" class="form-control"></select>
                                             </div> 
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Tipo de autor</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de autor">
-                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <select style="width: 100%;" class="js-select-basic-single js-states form-control" name="art_tipo_autor" id="art_tipo_autor">
-                                                    <option value=""></option>
-                                                    <option value="Principal">Principal</option>
-                                                    <option value="Co-autor">Co-autor</option>
+                                                <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de título obtenido">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                <select style="width: 100%;" name="nucleoBasicoConocimientoArticulo" id="nucleoBasicoConocimientoArticulo" class="js-select-basic-single js-states form-control">
+                                                    <option></option>
+                                                    <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
+                                                    <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
+                                                    </c:forEach>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <div class="form-group">
-                                                <label>Nombre de la revista</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el nombre del articulo que han hecho">
-                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <input type="text" name="art_nom_revista" id="art_nom_revista" class="form-control">
-
-                                            </div> 
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>A&ntilde;o</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el a&ntilde;o del articulo">
-                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <select name="art_year" id="art_year" class="form-control"></select>
-                                            </div> 
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
                                             <label>Dirección electrónica (URL)</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el URL del articulo ">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input type="text" name="art_url" id="art_url" class="form-control">
-                                            <input type="hidden" name="art_fec_update" id="fechaactual">
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                            <input type="text" name="urlArticulo" id="urlArticulo" class="form-control">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" id="addart">Agregar</button>
-                                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-success" data-bind="click: adicionarArticulo">Agregar</button>
+                                    <button type="button" class="btn btn-success" onclick="cerrarVentanaArticulo();">Cancelar</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- fin de modal articulo-->
                 </div>
-
+                <div class="row">
+                   <div class="col-md-12">
+                    <legend>Patentes</legend>
+                    <label>Agregar patente</label>
+                    <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevaPatente();" ><span class="glyphicon glyphicon-plus"></span></button>
+                    <br>
+                    <div class="table-responsive">
+                         <table class="table table-hover tableestilo" id="tbpatente">
+                             <thead>
+                                 <tr>
+                                     <th>Fecha</th>
+                                     <th>Tipo</th>
+                                     <th>Propiedad compartida</th>
+                                     <th>Descripci&oacute;n</th>
+                                     <th class="opc">Opciones</th>
+                                 </tr>
+                             </thead>
+                            <tbody data-bind="foreach: { data: patentes }">
+                                <tr class="table-row">
+                                    <td style="width: 30%">
+                                        <span data-bind="text: fecha" ></span>
+                                    </td>
+                                    <td style="width: 30%">
+                                        <span data-bind="text: nombreTipo" ></span>
+                                    </td>
+                                    <td style="width: 20%">
+                                        <span data-bind="text: propiedadCompartida" ></span>
+                                    </td>
+                                    <td style="width: 10%" align="center">
+                                        <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoPatente, visible: tieneDocumento" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                    </td>
+                                    <td style='white-space: nowrap; width: 10%' align="center">
+                                        <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarPatente"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                        <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarPatente"><span class='glyphicon glyphicon-remove'></span></button>
+                                        <input type="hidden" data-bind="value: fecha, attr: { 'name': 'patentes[' + $index() + '].fecha'  }" />
+                                        <input type="hidden" data-bind="value: tipo, attr: { 'name': 'patentes[' + $index() + '].tipo'  }" />
+                                        <input type="hidden" data-bind="value: nombreTipo, attr: { 'name': 'patentes[' + $index() + '].nombreTipo'  }" />
+                                        <input type="hidden" data-bind="value: propiedadCompartida, attr: { 'name': 'patentes[' + $index() + '].propiedadCompartida'  }" />
+                                        <input type="hidden" data-bind="value: clase, attr: { 'name': 'patentes[' + $index() + '].clase'  }" />
+                                        <input type="hidden" data-bind="value: descripcion, attr: { 'name': 'patentes[' + $index() + '].descripcion'  }" />
+                                        <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'patentes[' + $index() + '].consecutivo'  }" />
+                                        <input type="hidden" data-bind="value: id, attr: { 'name': 'patentes[' + $index() + '].id'  }" />
+                                    </td>
+                                </tr>
+                            </tbody>                                     
+                         </table>
+                     </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="md_patente" role="dialog">
+                       <div class="modal-dialog modal-lg">
+                           <div class="modal-content">
+                                <div class="modal-header mhsuccess">
+                                    <button type="button" class="close" onclick="cerrarVentanaPatente();">&times;</button>
+                                    <h4 class="modal-title">Patente</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="alert_patente"></div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Fecha</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de la patente">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                                <input type="text" name="fechaPatente" id="fechaPatente" class="form-control fecha">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Tipo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de patente">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                                <select style="width: 100%;" class="js-select-basic-single js-states form-control" name="tipoPatente" id="tipoPatente">
+                                                    <option value=""></option>
+                                                    <c:forEach var="tipoPatente" items="${tiposPatente}">
+                                                    <option value="${tipoPatente.getId()}">${tipoPatente.getNombre()}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Propiedad compartida?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del propietario del patente">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                                <div id="radioBtn" class="btn-group" style="margin-left: 40px;">
+                                                <a class="btn btn-primary btn-sm notActive" data-toggle="propiedadCompartidaPatente" data-title="true" id="btnPropiedadCompartidaPatenteSi">Si</a>
+                                                <a class="btn btn-primary btn-sm notActive" data-toggle="propiedadCompartidaPatente" data-title="false" id="btnPropiedadCompartidaPatenteNo">No</a>
+                                                </div>
+                                                <input type="hidden" name="propiedadCompartidaPatente" id="propiedadCompartidaPatente">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Clase</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la clase de patente">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                                <select style="width: 100%;" class="js-select-basic-single js-states form-control" name="clasePatente" id="clasePatente">
+                                                    <option value=""></option>
+                                                    <c:forEach var="clasePatente" items="${clasesPatente}">
+                                                    <option value="${clasePatente.getId()}">${clasePatente.getNombre()}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Descripci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la descripción de la patente">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                                <textarea class="form-control" name="descripcionPatente" id="descripcionPatente"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group form-inline">
+                                                <label>Documento del soporte</label>
+                                                <div id="documentosPatentes"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-bind="click: adicionarPatente">Agregar</button>
+                                    <button type="button" class="btn btn-success" onclick="cerrarVentanaPatente();">Cancelar</button>
+                                </div>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="row">
+                       <div class="col-md-12">
+                            <legend>Productos conocimiento</legend>
+                            <label>Agregar producto del conocimiento</label>
+                            <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoProductoConocimiento();" ><span class="glyphicon glyphicon-plus"></span></button>
+                            <br>
+                            <div class="table-responsive">
+                                <table class="table table-hover tableestilo" id="tbprodcono">
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo</th>
+                                            <th>Cita</th>
+                                            <th>Descripci&oacute;n</th>
+                                            <th class="cer">Documento</th>
+                                            <th class="opc">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: { data: productosConocimiento }">
+                                        <tr class="table-row">
+                                            <td style="width: 30%">
+                                                <span data-bind="text: nombreTipo" ></span>
+                                            </td>
+                                            <td style="width: 30%">
+                                                <span data-bind="text: url" ></span>
+                                            </td>
+                                            <td style="width: 20%">
+                                                <span data-bind="text: descripcion" ></span>
+                                            </td>
+                                            <td style="width: 10%" align="center">
+                                                <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoProductoConocimiento, visible: tieneDocumento" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                            </td>
+                                            <td style='white-space: nowrap; width: 10%' align="center">
+                                                <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarProductoConocimiento"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                                <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarProductoConocimiento"><span class='glyphicon glyphicon-remove'></span></button>
+                                                <input type="hidden" data-bind="value: tipo, attr: { 'name': 'productosConocimiento[' + $index() + '].tipo'  }" />
+                                                <input type="hidden" data-bind="value: nombreTipo, attr: { 'name': 'productosConocimiento[' + $index() + '].nombreTipo'  }" />
+                                                <input type="hidden" data-bind="value: nucleoBasicoConocimiento, attr: { 'name': 'productosConocimiento[' + $index() + '].nucleoBasicoConocimiento'  }" />
+                                                <input type="hidden" data-bind="value: url, attr: { 'name': 'productosConocimiento[' + $index() + '].url'  }" />
+                                                <input type="hidden" data-bind="value: descripcion, attr: { 'name': 'productosConocimiento[' + $index() + '].descripcion'  }" />
+                                                <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'productosConocimiento[' + $index() + '].consecutivo'  }" />
+                                                <input type="hidden" data-bind="value: id, attr: { 'name': 'productosConocimiento[' + $index() + '].id'  }" />
+                                            </td>
+                                        </tr>
+                                    </tbody>                                     
+                                </table>
+                            </div>
+                       </div>
+                   </div>
+                   <div class="modal fade" id="md_producto_conocimiento" role="dialog">
+                       <div class="modal-dialog modal-lg">
+                           <div class="modal-content">
+                                <div class="modal-header mhsuccess">
+                                    <button type="button" class="close" onclick="cerrarVentanaProductoConocimiento();">&times;</button>
+                                    <h4 class="modal-title">Producto del conocimiento</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="alert_producto_conocimiento"></div>
+                                    <div class="row">
+                                        <div class="col-md-2" style="width:160px;">
+                                            <div class="form-group">
+                                                <label>Tipo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo del producto del conocimiento">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                                <select style="width: 100%;" class="js-select-basic-single js-states form-control" name="tipoProductoConocimiento" id="tipoProductoConocimiento">
+                                                    <option></option>
+                                                    <c:forEach var="tipoProductoConocimiento" items="${tiposProductoConocimiento}">
+                                                    <option value="${tipoProductoConocimiento.getId()}">${tipoProductoConocimiento.getNombre()}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" style="width:270px !important;">
+                                            <div class="form-group">
+                                                <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de títutlo obtenido">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                <select style="width: 100%;" name="nucleoBasicoProductoConocimiento" id="nucleoBasicoProductoConocimiento" class="js-select-basic-single js-states form-control">
+                                                    <option></option>
+                                                    <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
+                                                    <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Direcci&oacute;n electr&oacute;nica URL</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la cita">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                                <input type="text" name="urlProductoConocimiento" id="urlProductoConocimiento" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Descripci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la descripción del producto del conocimiento">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                                <textarea class="form-control" name="descripcionProductoConocimiento" id="descripcionProductoConocimiento"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group form-inline">
+                                                <label>Documento del soporte</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el documento de soporte del producto del conocimiento">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                                <div id="documentosProductosConocimiento"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-bind="click: adicionarProductoConocimiento">Agregar</button>
+                                    <button type="button" class="btn btn-success" onclick="cerrarVentanaProductoConocimiento();">Cancelar</button>
+                                </div>
+                           </div>
+                       </div>
+                   </div>
+                </div>                        
             </div>
             <div id="formdistin" style="display: none;">
                 <div class="row">   
@@ -2398,7 +2683,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    var consecutivoExperienciaDocencia = 0;
     $('.fecha').datepicker({
         dateFormat: "dd/mm/yy",
         changeMonth: true,
@@ -2526,8 +2810,8 @@
           var institucion = $('#institucionEducativaPrograma').val();
           var nombreInstitucion = $('#institucionEducativaPrograma option:selected').text().toUpperCase();
           var programaCursado = $('#programaCursado').val();
-          var areaSaberPrograma = $('#areaSaberPrograma').val();
-          var nombreAreaSaberPrograma = $('#areaSaberPrograma option:selected').text().toUpperCase();
+          var nucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoPrograma').val();
+          var nombreNucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoPrograma option:selected').text().toUpperCase();
           var tituloPrograma = $('#tituloPrograma').val();
 
           $('#formprograma').css("display","block");
@@ -2535,11 +2819,11 @@
           $('#institucionEducacionSuperior').val(institucion);
           $('#nombreInstitucionEducacionSuperior').val(nombreInstitucion);
           $('#programaCursadoEducacionSuperior').val(programaCursado);
-          $('#areaSaberEducacionSuperior').val(areaSaberPrograma);
-          $('#nombreAreaSaberEducacionSuperior').val(nombreAreaSaberPrograma);
+          $('#nucleoBasicoConocimientoEducacionSuperior').val(nucleoBasicoConocimientoPrograma);
+          $('#nombreNucleoBasicoConocimientoEducacionSuperior').val(nombreNucleoBasicoConocimientoPrograma);
           $('#tituloEducacionSuperior').val(tituloPrograma);
           
-          $('#areaSaberPrograma').val("").trigger("change.select2");
+          $('#nucleoBasicoConocimientoPrograma').val("").trigger("change.select2");
           $('#institucionEducativaPrograma').val("").trigger("change.select2");
           $('#programaCursado').val("");
           $('#tituloPrograma').val("");
@@ -2626,7 +2910,6 @@
             var rescalle = $("#rescalle").val();
             $('#resnumdir').val(valor);
             $("#vistaprevia").val(rescalle + " " + valor);
-
         });
         $('#letdir').keyup(function () {
             var valor = $(this).val();
@@ -2704,6 +2987,7 @@
         $('#anyoFinalizacionEducacionSuperior').append($('<option/>').val('').html(''));
         $('#anyoEducacionContinua').append($('<option/>').val('').html(''));
         $('#anyoCursoExperienciaDocencia').append($('<option/>').val('').html(''));
+        $('#anyoArticulo').append($('<option/>').val('').html(''));
         for (i = new Date().getFullYear(); i > 1800; i--) {
             $('#anyoInicioEducacionBasica').append($('<option/>').val(i).html(i));
             $('#anyoFinalizacionEducacionBasica').append($('<option/>').val(i).html(i));
@@ -2711,6 +2995,7 @@
             $('#anyoFinalizacionEducacionSuperior').append($('<option/>').val(i).html(i));
             $('#anyoEducacionContinua').append($('<option/>').val(i).html(i));
             $('#anyoCursoExperienciaDocencia').append($('<option/>').val(i).html(i));
+            $('#anyoArticulo').append($('<option/>').val(i).html(i));
         }
         $('#adddireccion').click(function () {
             if ($('#radrural').is(':checked')) {
@@ -2724,25 +3009,6 @@
                 $('#direccion').val(direccion);
                 $('#md_direccion').modal('hide');
                 $('#radrural').prop('checked', false);
-            }
-        });
-        $('#ep_tipoexperiencia').change(function () {
-            var valor = $(this).val();
-            if (valor === "Proyectos de investigacion")
-            {
-                $('#forminves').css("display", "block");
-            } else
-            {
-                $('#forminves').css("display", "none");
-            }
-            if (valor === "Docencia")
-            {
-                $('#formdoc').css("display", "block");
-                $('#formempres').css("display", "none");
-            } else
-            {
-                $('#formdoc').css("display", "none");
-                $('#formempres').css("display", "block");
             }
         });
     });
@@ -2811,7 +3077,10 @@
                                   educacionesContinuas,
                                   distinciones,
                                   experienciasLaborales,
-                                  experienciasDocencia) {
+                                  experienciasDocencia,
+                                  articulos,
+                                  patentes,
+                                  productosConocimento) {
         self = this;
         self.correosElectronicos = ko.observableArray(correosElectronicos);
         self.cuentasBancarias = ko.observableArray(cuentasBancarias);
@@ -2824,15 +3093,19 @@
         self.distinciones = ko.observableArray(distinciones);
         self.experienciasLaborales = ko.observableArray(experienciasLaborales);
         self.experienciasDocencia = ko.observableArray(experienciasDocencia);
+        self.consecutivoExperienciaDocencia = ko.observable(0);
         self.cursosExperienciaDocencia = ko.computed(function() {
            var cursos = [];
-           if(self.experienciasDocencia().length > 0) {
-             for(i = 0; i < self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length; i++) {
-               cursos[i] = self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia()[i]; 
+           if(self.experienciasDocencia().length > 0 && self.experienciasDocencia().length > self.consecutivoExperienciaDocencia()) {
+             for(i = 0; i < self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length; i++) {
+               cursos[i] = self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[i]; 
              }
            }
            return cursos;
         });
+        self.articulos = ko.observableArray(articulos);
+        self.patentes = ko.observableArray(patentes);
+        self.productosConocimento = ko.observableArray(productosConocimento);
 
         self.adicionarCorreoElectronico = function () {
             var correoElectronico = $('#correoElectronico').val();
@@ -3043,7 +3316,7 @@
         };
 
         self.editarDocumentoSoporte = function (documentoSoporte) {
-            ocultarDocumentosSoporte();
+            ocultarDocumentosSoportes();
             $('#tipoDocumento').val(documentoSoporte.tipoDocumento()).trigger('change');
             $('#consecutivo').val(documentoSoporte.consecutivo());
             $('input:file[name="documentosSoporte[' + documentoSoporte.consecutivo() + '].documento"]').show();
@@ -3164,7 +3437,7 @@
         };
 
         self.editarIdioma = function (idioma) {
-            ocultarCertificadosIdioma();
+            ocultarCertificadosIdiomas();
             $('#idioma').val(idioma.idioma()).trigger('change');
             $('#nivelConversacionIdioma').val(idioma.nivelConversacion()).trigger('change');
             $('#nivelEscrituraIdioma').val(idioma.nivelEscritura()).trigger('change');
@@ -3271,7 +3544,7 @@
         };
 
         self.editarEducacionBasica = function (educacionBasica) {
-            ocultarCertificadosEducacionBasica();
+            ocultarCertificadosEducacionesBasicas();
             
             $('#nivelEstudioEducacionBasica').val(educacionBasica.nivel()).trigger('change');
             $('#institucionEducacionBasica').val(educacionBasica.institucion()).trigger('change');
@@ -3312,8 +3585,8 @@
             var programaCursadoEducacionSuperior = $('#programaCursadoEducacionSuperior').val();
             var institucionEducacionSuperior = $('#institucionEducacionSuperior').val();
             var nombreInstitucionEducacionSuperior = $('#nombreInstitucionEducacionSuperior').val();
-            var areaSaberEducacionSuperior = $('#areaSaberEducacionSuperior').val();
-            var nombreAreaSaberEducacionSuperior = $('#nombreAreaSaberEducacionSuperior').val();
+            var nucleoBasicoConocimientoEducacionSuperior = $('#nucleoBasicoConocimientoEducacionSuperior').val();
+            var nombreNucleoBasicoConocimientoEducacionSuperior = $('#nombreNucleoBasicoConocimientoEducacionSuperior').val();
             var anyoInicioEducacionSuperior = $('#anyoInicioEducacionSuperior').val();
             var anyoFinalizacionEducacionSuperior = $('#anyoFinalizacionEducacionSuperior').val();
             var tituloEducacionSuperior = $('#tituloEducacionSuperior').val();
@@ -3344,7 +3617,7 @@
                 bootstrap_alert_educacion_superior.warning('Debe seleccionar la institución');
                 return false;
             }
-            if (areaSaberEducacionSuperior === "") {
+            if (nucleoBasicoConocimientoEducacionSuperior === "") {
                 bootstrap_alert_educacion_superior.warning('Debe seleccionar el área de saber');
                 return false;
             }
@@ -3378,8 +3651,8 @@
                     institucion: ko.observable(institucionEducacionSuperior),
                     nombreInstitucion: ko.observable(nombreInstitucionEducacionSuperior),
                     programa: ko.observable(programaCursadoEducacionSuperior),
-                    areaSaber: ko.observable(areaSaberEducacionSuperior),
-                    nombreAreaSaber: ko.observable(nombreAreaSaberEducacionSuperior),
+                    nucleoBasicoConocimiento: ko.observable(nucleoBasicoConocimientoEducacionSuperior),
+                    nombreNucleoBasicoConocimiento: ko.observable(nombreNucleoBasicoConocimientoEducacionSuperior),
                     nivel: ko.observable(nivelEstudioEducacionSuperior),
                     nombreNivel: ko.observable(nombreNivelEducacionSuperior),
                     anyoInicio: ko.observable(anyoInicioEducacionSuperior),
@@ -3418,8 +3691,8 @@
                 self.educacionesSuperiores()[indice].nivel(nivelEstudioEducacionSuperior);
                 self.educacionesSuperiores()[indice].nombreNivel(nombreNivelEducacionSuperior);
                 self.educacionesSuperiores()[indice].programa(programaCursadoEducacionSuperior);
-                self.educacionesSuperiores()[indice].areaSaber(areaSaberEducacionSuperior);
-                self.educacionesSuperiores()[indice].nombreAreaSaber(nombreAreaSaberEducacionSuperior);
+                self.educacionesSuperiores()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoEducacionSuperior);
+                self.educacionesSuperiores()[indice].nombreNucleoBasicoConocimiento(nombreNucleoBasicoConocimientoEducacionSuperior);
                 self.educacionesSuperiores()[indice].anyoInicio(anyoInicioEducacionSuperior);
                 self.educacionesSuperiores()[indice].anyoFinalizacion(anyoFinalizacionEducacionSuperior);
                 self.educacionesSuperiores()[indice].titulo(tituloEducacionSuperior);
@@ -3445,7 +3718,7 @@
         };
 
         self.editarEducacionSuperior = function (educacionSuperior) {
-            ocultarCertificadosEducacionSuperior();
+            ocultarCertificadosEducacionesSuperiores();
 
             $('#nivelEstudioEducacionSuperior').val(educacionSuperior.nivel()).trigger('change');
             $('#tituloExteriorEducacionSuperior').val(educacionSuperior.tituloExterior());
@@ -3461,7 +3734,7 @@
             
             $('#institucionEducativaPrograma').val(educacionSuperior.institucion()).trigger('change');
             $('#programaCursado').val(educacionSuperior.programa());
-            $('#areaSaberPrograma').val(educacionSuperior.areaSaber()).trigger('change');
+            $('#nucleoBasicoConocimientoPrograma').val(educacionSuperior.nucleoBasicoConocimiento()).trigger('change');
             $('#tituloPrograma').val(educacionSuperior.titulo());
             
             $('#formprograma').css("display","block");
@@ -3469,8 +3742,8 @@
             $('#institucionEducacionSuperior').val(educacionSuperior.institucion());
             $('#nombreInstitucionEducacionSuperior').val(educacionSuperior.nombreInstitucion());
             $('#programaCursadoEducacionSuperior').val(educacionSuperior.programa());
-            $('#areaSaberEducacionSuperior').val(educacionSuperior.areaSaber());
-            $('#nombreAreaSaberEducacionSuperior').val(educacionSuperior.nombreAreaSaber());
+            $('#nucleoBasicoConocimientoEducacionSuperior').val(educacionSuperior.nucleoBasicoConocimiento());
+            $('#nombreNucleoBasicoConocimientoEducacionSuperior').val(educacionSuperior.nombreNucleoBasicoConocimiento());
             $('#tituloEducacionSuperior').val(educacionSuperior.titulo());
     
             $('#anyoInicioEducacionSuperior').val(educacionSuperior.anyoInicio());
@@ -3515,8 +3788,8 @@
             var nombreTipoCapacitacionEducacionContinua = $('#tipoCapacitacionEducacionContinua option:selected').text();
             var institucionEducacionContinua = $('#institucionEducacionContinua').val();
             var nombreInstitucionEducacionContinua = $('#institucionEducacionContinua option:selected').text();
-            var areaSaberEducacionContinua = $('#areaSaberEducacionContinua').val();
-            var nombreAreaSaberEducacionContinua = $('#areaSaberEducacionContinua option:selected').text();
+            var nucleoBasicoConocimientoEducacionContinua = $('#nucleoBasicoConocimientoEducacionContinua').val();
+            var nombreNucleoBasicoConocimientoEducacionContinua = $('#nucleoBasicoConocimientoEducacionContinua option:selected').text();
             var nombreCapacitacionEducacionContinua = $('#nombreCapacitacionEducacionContinua').val();
             var numeroHorasEducacionContinua = $('#numeroHorasEducacionContinua').val();
             var anyoEducacionContinua = $('#anyoEducacionContinua').val();
@@ -3529,7 +3802,7 @@
                 bootstrap_alert_educacion_continua.warning('Debe seleccionar la institución');
                 return false;
             }
-            if (areaSaberEducacionContinua === "") {
+            if (nucleoBasicoConocimientoEducacionContinua === "") {
                 bootstrap_alert_educacion_continua.warning('Debe seleccionar el área de saber');
                 return false;
             }
@@ -3558,8 +3831,8 @@
                     institucion: ko.observable(institucionEducacionContinua),
                     nombreInstitucion: ko.observable(nombreInstitucionEducacionContinua),
                     nombreCapacitacion: ko.observable(nombreCapacitacionEducacionContinua),
-                    areaSaber: ko.observable(areaSaberEducacionContinua),
-                    nombreAreaSaber: ko.observable(nombreAreaSaberEducacionContinua),
+                    nucleoBasicoConocimiento: ko.observable(nucleoBasicoConocimientoEducacionContinua),
+                    nombreNucleoBasicoConocimiento: ko.observable(nombreNucleoBasicoConocimientoEducacionContinua),
                     numeroHoras: ko.observable(numeroHorasEducacionContinua),
                     anyo: ko.observable(anyoEducacionContinua),
                     certificado: ko.observable(''),
@@ -3581,8 +3854,8 @@
                 self.educacionesContinuas()[indice].nombreInstitucion(nombreInstitucionEducacionContinua);
                 self.educacionesContinuas()[indice].nombreCapacitacion(nombreCapacitacionEducacionContinua);
                 self.educacionesContinuas()[indice].numeroHoras(numeroHorasEducacionContinua);
-                self.educacionesContinuas()[indice].areaSaber(areaSaberEducacionContinua);
-                self.educacionesContinuas()[indice].nombreAreaSaber(nombreAreaSaberEducacionContinua);
+                self.educacionesContinuas()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoEducacionContinua);
+                self.educacionesContinuas()[indice].nombreNucleoBasicoConocimiento(nombreNucleoBasicoConocimientoEducacionContinua);
                 self.educacionesContinuas()[indice].anyo(anyoEducacionContinua);
                 self.educacionesContinuas()[indice].certificado('');
                 $('input:file[name="educacionesContinuas[' + indice + '].certificado"]').hide();
@@ -3600,13 +3873,13 @@
         };
 
         self.editarEducacionContinua = function (educacionContinua) {
-            ocultarCertificadosEducacionContinua();
+            ocultarCertificadosEducacionesContinuas();
 
             $('#tipoCapacitacionEducacionContinua').val(educacionContinua.tipoCapacitacion()).trigger('change');
             $('#institucionEducacionContinua').val(educacionContinua.institucion()).trigger('change');
             $('#nombreCapacitacionEducacionContinua').val(educacionContinua.nombreCapacitacion());
             $('#numeroHorasEducacionContinua').val(educacionContinua.numeroHoras());
-            $('#areaSaberEducacionContinua').val(educacionContinua.areaSaber()).trigger('change');
+            $('#nucleoBasicoConocimientoEducacionContinua').val(educacionContinua.nucleoBasicoConocimiento()).trigger('change');
             $('#anyoEducacionContinua').val(educacionContinua.anyo()).trigger('change');
             $('#consecutivo').val(educacionContinua.consecutivo());
             $('input:file[name="educacionesContinuas[' + educacionContinua.consecutivo() + '].certificado"]').show();
@@ -3678,7 +3951,7 @@
         };
 
         self.editarDistincion = function (distincion) {
-            ocultarCertificadosDistincion();
+            ocultarCertificadosDistinciones();
 
             $('#fechaDistincion').val(distincion.fechaDistincion());
             $('#institucionOtorgaDistincion').val(distincion.institucionOtorga());
@@ -3700,8 +3973,8 @@
             var experienciaLaboralFNSP = $('#experienciaLaboralFNSP').val();
             var fechaIngresoExperienciaLaboral = $('#fechaIngresoExperienciaLaboral').val();
             var fechaRetiroExperienciaLaboral = $('#fechaRetiroExperienciaLaboral').val();
-            var areaSaberExperienciaLaboral = $('#areaSaberExperienciaLaboral').val();
-            var nombreAreaSaberExperienciaLaboral = $('#areaSaberExperienciaLaboral option:selected').text();
+            var nucleoBasicoConocimientoExperienciaLaboral = $('#nucleoBasicoConocimientoExperienciaLaboral').val();
+            var nombreNucleoBasicoConocimientoExperienciaLaboral = $('#nucleoBasicoConocimientoExperienciaLaboral option:selected').text();
             var tipoEmpresaExperienciaLaboral = $('#tipoEmpresaExperienciaLaboral').val();
             var nombreTipoEmpresaExperienciaLaboral = $('#tipoEmpresaExperienciaLaboral option:selected').text();
             var nombreEmpresaExperienciaLaboral = $('#nombreEmpresaExperienciaLaboral').val();
@@ -3724,7 +3997,7 @@
                 bootstrap_alert_experiencia_laboral.warning('Debe ingresar la la fecha de retiro');
                 return false;
             }
-            if (areaSaberExperienciaLaboral === "") {
+            if (nucleoBasicoConocimientoExperienciaLaboral === "") {
                 bootstrap_alert_experiencia_laboral.warning('Debe seleccionar el núcleo de conocimiento');
                 return false;
             }
@@ -3767,8 +4040,8 @@
                     fnsp: ko.observable(experienciaLaboralFNSP),
                     fechaIngreso: ko.observable(fechaIngresoExperienciaLaboral),
                     fechaRetiro: ko.observable(fechaRetiroExperienciaLaboral),
-                    areaSaber: ko.observable(areaSaberExperienciaLaboral),
-                    nombreAreaSaber: ko.observable(nombreAreaSaberExperienciaLaboral),
+                    nucleoBasicoConocimiento: ko.observable(nucleoBasicoConocimientoExperienciaLaboral),
+                    nombreNucleoBasicoConocimiento: ko.observable(nombreNucleoBasicoConocimientoExperienciaLaboral),
                     tipoEmpresa: ko.observable(tipoEmpresaExperienciaLaboral),
                     nombreTipoEmpresa: ko.observable(nombreTipoEmpresaExperienciaLaboral),
                     nombreEmpresa: ko.observable(nombreEmpresaExperienciaLaboral),
@@ -3798,8 +4071,8 @@
                 self.experienciasLaborales()[indice].fnsp(experienciaLaboralFNSP);
                 self.experienciasLaborales()[indice].fechaIngreso(fechaIngresoExperienciaLaboral);
                 self.experienciasLaborales()[indice].fechaRetiro(fechaRetiroExperienciaLaboral);
-                self.experienciasLaborales()[indice].areaSaber(areaSaberExperienciaLaboral);
-                self.experienciasLaborales()[indice].nombreAreaSaber(nombreAreaSaberExperienciaLaboral);
+                self.experienciasLaborales()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoExperienciaLaboral);
+                self.experienciasLaborales()[indice].nombreNucleoBasicoConocimiento(nombreNucleoBasicoConocimientoExperienciaLaboral);
                 self.experienciasLaborales()[indice].tipoEmpresa(tipoEmpresaExperienciaLaboral);
                 self.experienciasLaborales()[indice].nombreTipoEmpresa(nombreTipoEmpresaExperienciaLaboral);
                 self.experienciasLaborales()[indice].nombreEmpresa(nombreEmpresaExperienciaLaboral);
@@ -3851,7 +4124,7 @@
             }
             $('#fechaIngresoExperienciaLaboral').val(experienciaLaboral.fechaIngreso());
             $('#fechaRetiroExperienciaLaboral').val(experienciaLaboral.fechaRetiro());
-            $('#areaSaberExperienciaLaboral').val(experienciaLaboral.areaSaber()).trigger('change');
+            $('#nucleoBasicoConocimientoExperienciaLaboral').val(experienciaLaboral.nucleoBasicoConocimiento()).trigger('change');
             $('#tipoEmpresaExperienciaLaboral').val(experienciaLaboral.tipoEmpresa()).trigger('change');
             $('#nombreEmpresaExperienciaLaboral').val(experienciaLaboral.nombreEmpresa());
             $('#actividadEconomicaExperienciaLaboral').val(experienciaLaboral.actividadEconomica()).trigger('change');
@@ -3877,7 +4150,7 @@
                 bootstrap_alert_experiencia_docencia.warning('Debe seleccionar la institución');
                 return false;
             }
-            if (consecutivoExperienciaDocencia === self.experienciasDocencia().length) {
+            if (self.consecutivoExperienciaDocencia() === self.experienciasDocencia().length) {
                 self.experienciasDocencia.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.experienciasDocencia().length),
@@ -3889,7 +4162,7 @@
             } else {
                 var indice = 0;
                 for (i = 0; i < self.experienciasDocencia().length; i++) {
-                    if (self.experienciasDocencia()[i].consecutivo() === consecutivoExperienciaDocencia) {
+                    if (self.experienciasDocencia()[i].consecutivo() === self.consecutivoExperienciaDocencia()) {
                         indice = i;
                         break;
                     }
@@ -3904,28 +4177,27 @@
 
         self.eliminarExperienciaDocencia = function (experienciaDocencia) {
             for(i = 0; i < experienciaDocencia.cursosExperienciaDocencia().length; i++) {
-               $('input:text[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].id"]').remove();
-               $('input:text[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].consecutivo"]').remove();
-               $('input:text[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].areaSaber"]').remove();
-               $('input:text[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].nombreCurso"]').remove();
-               $('input:text[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].modalidad"]').remove();
-               $('input:text[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].nivelEstudio"]').remove();
-               $('input:text[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].numeroHoras"]').remove();
-               $('input:text[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].anyo"]').remove();
+               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].id"]').remove();
+               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].consecutivo"]').remove();
+               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].nucleoBasicoConocimiento"]').remove();
+               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].nombreCurso"]').remove();
+               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].modalidad"]').remove();
+               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].nivelEstudio"]').remove();
+               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].numeroHoras"]').remove();
+               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].anyo"]').remove();
                $('input:file[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].certificado"]').remove();
-               hojaVidaModel.experienciasDocencia()[i].consecutivo(i);
             }            
             self.experienciasDocencia.remove(experienciaDocencia);
             for(i = experienciaDocencia.consecutivo(); i < hojaVidaModel.experienciasDocencia().length; i++) {
                 for(j = 0; j < hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia().length; j++) {
-                   $('input:text[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].id"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].id'); 
-                   $('input:text[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].consecutivo"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].consecutivo'); 
-                   $('input:text[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].areaSaber"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].areaSaber'); 
-                   $('input:text[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].nombreCurso"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nombreCurso'); 
-                   $('input:text[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].modalidad"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].modalidad'); 
-                   $('input:text[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].nivelEstudio"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nivelEstudio'); 
-                   $('input:text[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].numeroHoras"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].numeroHoras'); 
-                   $('input:text[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].anyo"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].anyo'); 
+                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].id"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].id'); 
+                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].consecutivo"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].consecutivo'); 
+                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].nucleoBasicoConocimiento"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nucleoBasicoConocimiento'); 
+                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].nombreCurso"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nombreCurso'); 
+                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].modalidad"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].modalidad'); 
+                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].nivelEstudio"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nivelEstudio'); 
+                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].numeroHoras"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].numeroHoras'); 
+                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].anyo"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].anyo'); 
                    $('input:file[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].certificado"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].certificado'); 
                 }
                 hojaVidaModel.experienciasDocencia()[i].consecutivo(i);
@@ -3950,15 +4222,15 @@
               $('#btnExperienciaDocenciaFNSPSi').removeClass('active').addClass('notActive');  
             }
             $('#institucionExperienciaDocencia').val(experienciaDocencia.institucion()).trigger('change');
-            consecutivoExperienciaDocencia = experienciaDocencia.consecutivo();
+            self.consecutivoExperienciaDocencia(experienciaDocencia.consecutivo());
             bootstrap_alert_experiencia_docencia.removeWarning();
             $('#md_experiencia_docencia').modal('show');
         };
 
        self.adicionarCursoExperienciaDocencia = function () {
             var nombreCursoExperienciaDocencia = $('#nombreCursoExperienciaDocencia').val();
-            var areaSaberCursoExperienciaDocencia = $('#areaSaberCursoExperienciaDocencia').val();
-            var nombreAreaSaberCursoExperienciaDocencia = $('#areaSaberCursoExperienciaDocencia option:selected').text();
+            var nucleoBasicoConocimientoCursoExperienciaDocencia = $('#nucleoBasicoConocimientoCursoExperienciaDocencia').val();
+            var nombreNucleoBasicoConocimientoCursoExperienciaDocencia = $('#nucleoBasicoConocimientoCursoExperienciaDocencia option:selected').text();
             var modalidadCursoExperienciaDocencia = $('#modalidadCursoExperienciaDocencia').val();
             var nombreModalidadCursoExperienciaDocencia = $('#modalidadCursoExperienciaDocencia option:selected').text();
             var nivelEstudioCursoExperienciaDocencia = $('#nivelEstudioCursoExperienciaDocencia').val();
@@ -3969,7 +4241,7 @@
                 bootstrap_alert_curso_experiencia_docencia.warning('Debe ingresar el nombre del curso');
                 return false;
             }
-            if (areaSaberCursoExperienciaDocencia === "") {
+            if (nucleoBasicoConocimientoCursoExperienciaDocencia === "") {
                 bootstrap_alert_curso_experiencia_docencia.warning('Debe seleccionar el núcleo de conocimiento');
                 return false;
             }
@@ -3991,15 +4263,7 @@
             }
           
             if ($('#consecutivo').val() === "") {
-                var consecutivo = 0;
-                if(self.experienciasDocencia().length > 0) {
-                   consecutivo = self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length;  
-                }
-                if ($('input:file[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]').val() === "") {
-                    bootstrap_alert_curso_experiencia_docencia.warning('Debe ingresar el certificado');
-                    return false;
-                }
-                if(self.experienciasDocencia().length === 0) {
+                if(self.experienciasDocencia().length === self.consecutivoExperienciaDocencia()) {
                    self.experienciasDocencia.push({
                         id: ko.observable(0),
                         consecutivo: ko.observable(self.experienciasDocencia().length),
@@ -4010,40 +4274,45 @@
                         cursosExperienciaDocencia: ko.observableArray([])
                     });
                 }
-
-                id = $('<input type="hidden" name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].id />"');
-                consecutivo = $('<input type="hidden" name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].consecutivo" />');
-                areaSaber = $('<input type="hidden" name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].areaSaber" />');
-                nombreCurso = $('<input type="hidden" name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].nombreCurso" />');
-                modalidad = $('<input type="hidden" name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].modalidad" />');
-                nivelEstudio = $('<input type="hidden" name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].nivelEstudio" />');
-                numeroHoras = $('<input type="hidden" name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].numeroHoras" />');
-                anyo = $('<input type="hidden" name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].anyo" />');
+                var consecutivo = self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length;  
+                if ($('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]').val() === "") {
+                    bootstrap_alert_curso_experiencia_docencia.warning('Debe ingresar el certificado');
+                    return false;
+                }
+               
+                id = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].id" />');
+                consecutivo = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].consecutivo" />');
+                nucleoBasicoConocimiento = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].nucleoBasicoConocimiento" />');
+                nombreCurso = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].nombreCurso" />');
+                modalidad = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].modalidad" />');
+                nivelEstudio = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].nivelEstudio" />');
+                numeroHoras = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].numeroHoras" />');
+                anyo = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].anyo" />');
 
                 $('#certificadosCursosExperienciaDocencia').append(id);
                 $('#certificadosCursosExperienciaDocencia').append(consecutivo);
-                $('#certificadosCursosExperienciaDocencia').append(areaSaber);
+                $('#certificadosCursosExperienciaDocencia').append(nucleoBasicoConocimiento);
                 $('#certificadosCursosExperienciaDocencia').append(nombreCurso);
                 $('#certificadosCursosExperienciaDocencia').append(modalidad);
                 $('#certificadosCursosExperienciaDocencia').append(nivelEstudio);
                 $('#certificadosCursosExperienciaDocencia').append(numeroHoras);
                 $('#certificadosCursosExperienciaDocencia').append(anyo);
                 
-                $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].id"]').val(0);
-                $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].consecutivo"]').val(self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length);
-                $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].areaSaber"]').val(areaSaberCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].nombreCurso"]').val(nombreCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].modalidad"]').val(modalidadCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].nivelEstudio"]').val(nivelEstudioCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].numeroHoras"]').val(numeroHorasCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].anyo"]').val(anyoCursoExperienciaDocencia);
+                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].id"]').val(0);
+                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].consecutivo"]').val(self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length);
+                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].nucleoBasicoConocimiento"]').val(nucleoBasicoConocimientoCursoExperienciaDocencia);
+                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].nombreCurso"]').val(nombreCursoExperienciaDocencia);
+                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].modalidad"]').val(modalidadCursoExperienciaDocencia);
+                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].nivelEstudio"]').val(nivelEstudioCursoExperienciaDocencia);
+                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].numeroHoras"]').val(numeroHorasCursoExperienciaDocencia);
+                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].anyo"]').val(anyoCursoExperienciaDocencia);
                                 
-                self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia.push({
+                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia.push({
                     id: ko.observable(0),
-                    consecutivo: ko.observable(self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length),
+                    consecutivo: ko.observable(self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length),
                     nombreCurso: ko.observable(nombreCursoExperienciaDocencia),
-                    areaSaber: ko.observable(areaSaberCursoExperienciaDocencia),
-                    nombreAreaSaber: ko.observable(nombreAreaSaberCursoExperienciaDocencia),
+                    nucleoBasicoConocimiento: ko.observable(nucleoBasicoConocimientoCursoExperienciaDocencia),
+                    nombreNucleoBasicoConocimiento: ko.observable(nombreNucleoBasicoConocimientoCursoExperienciaDocencia),
                     modalidad: ko.observable(modalidadCursoExperienciaDocencia),
                     nombreModalidad: ko.observable(nombreModalidadCursoExperienciaDocencia),
                     nivelEstudio: ko.observable(nivelEstudioCursoExperienciaDocencia),
@@ -4053,7 +4322,7 @@
                     certificado: ko.observable(''),
                     tieneCertificado: ko.observable(false)
                 });
-                $('input:file[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length + '].certificado"]').hide();
+                $('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].certificado"]').hide();
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -4064,63 +4333,63 @@
                     }
                 }
                 
-                $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + indice + '].areaSaber"]').val(areaSaberCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + indice + '].nombreCurso"]').val(nombreCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + indice + '].modalidad"]').val(modalidadCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + indice + '].nivelEstudio"]').val(nivelEstudioCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + indice + '].numeroHoras"]').val(numeroHorasCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + indice + '].anyo"]').val(anyoCursoExperienciaDocencia);
+                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].nucleoBasicoConocimiento"]').val(nucleoBasicoConocimientoCursoExperienciaDocencia);
+                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].nombreCurso"]').val(nombreCursoExperienciaDocencia);
+                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].modalidad"]').val(modalidadCursoExperienciaDocencia);
+                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].nivelEstudio"]').val(nivelEstudioCursoExperienciaDocencia);
+                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].numeroHoras"]').val(numeroHorasCursoExperienciaDocencia);
+                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].anyo"]').val(anyoCursoExperienciaDocencia);
                 
-                self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia()[indice].nombreCurso(nombreCursoExperienciaDocencia);
-                self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia()[indice].areaSaber(areaSaberCursoExperienciaDocencia);
-                self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia()[indice].nombreAreaSaber(nombreAreaSaberCursoExperienciaDocencia);
-                self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia()[indice].modalidad(modalidadCursoExperienciaDocencia);
-                self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia()[indice].nombreModalidad(nombreModalidadCursoExperienciaDocencia);
-                self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia()[indice].nivelEstudio(nivelEstudioCursoExperienciaDocencia);
-                self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia()[indice].nombreNivelEstudio(nombreNivelEstudioCursoExperienciaDocencia);
-                self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia()[indice].numeroHoras(numeroHorasCursoExperienciaDocencia);
-                self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia()[indice].anyo(anyoCursoExperienciaDocencia);
-                self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia()[indice].certificado('');
-                $('input:file[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + indice + '].certificado"]').hide();
+                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nombreCurso(nombreCursoExperienciaDocencia);
+                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoCursoExperienciaDocencia);
+                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nombreNucleoBasicoConocimiento(nombreNucleoBasicoConocimientoCursoExperienciaDocencia);
+                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].modalidad(modalidadCursoExperienciaDocencia);
+                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nombreModalidad(nombreModalidadCursoExperienciaDocencia);
+                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nivelEstudio(nivelEstudioCursoExperienciaDocencia);
+                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nombreNivelEstudio(nombreNivelEstudioCursoExperienciaDocencia);
+                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].numeroHoras(numeroHorasCursoExperienciaDocencia);
+                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].anyo(anyoCursoExperienciaDocencia);
+                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].certificado('');
+                $('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].certificado"]').hide();
             }
             $('#md_curso_experiencia_docencia').modal('hide');
         };
 
         self.eliminarCursoExperienciaDocencia = function (cursoExperienciaDocencia) {
-            $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].id"]').remove();
-            $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].consecutivo"]').remove();
-            $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].areaSaber"]').remove();
-            $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].nombreCurso"]').remove();
-            $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].modalidad"]').remove();
-            $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].nivelEstudio"]').remove();
-            $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].numeroHoras"]').remove();
-            $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].anyo"]').remove();
-            $('input:file[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].certificado"]').remove();
-            self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia.remove(cursoExperienciaDocencia);
-            for(i = cursoExperienciaDocencia.consecutivoExperienciaDocencia(); i < hojaVidaModel.cursosExperienciaDocencia().length; i++) {
-               $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + (i + 1) + '].id"]').attr('name', 'experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + i + '].id'); 
-               $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + (i + 1) + '].consecutivo"]').attr('name', 'experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + i + '].consecutivo'); 
-               $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + (i + 1) + '].areaSaber"]').attr('name', 'experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + i + '].areaSaber'); 
-               $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + (i + 1) + '].nombreCurso"]').attr('name', 'experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + i + '].nombreCurso'); 
-               $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + (i + 1) + '].modalidad"]').attr('name', 'experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + i + '].modalidad'); 
-               $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + (i + 1) + '].nivelEstudio"]').attr('name', 'experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + i + '].nivelEstudio'); 
-               $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + (i + 1) + '].numeroHoras"]').attr('name', 'experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + i + '].numeroHoras'); 
-               $('input[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + (i + 1) + '].anyo"]').attr('name', 'experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + i + '].anyo'); 
-               $('input:file[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + (i + 1) + '].certificado"]').attr('name', 'experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + i + '].certificado'); 
-               self.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia()[i].consecutivo(i);
+            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].id"]').remove();
+            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].consecutivo"]').remove();
+            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].nucleoBasicoConocimiento"]').remove();
+            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].nombreCurso"]').remove();
+            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].modalidad"]').remove();
+            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].nivelEstudio"]').remove();
+            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].numeroHoras"]').remove();
+            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].anyo"]').remove();
+            $('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].certificado"]').remove();
+            self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia.remove(cursoExperienciaDocencia);
+            for(i = cursoExperienciaDocencia.consecutivo(); i < hojaVidaModel.cursosExperienciaDocencia().length; i++) {
+               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].id"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].id'); 
+               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].consecutivo"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].consecutivo'); 
+               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].nucleoBasicoConocimiento"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].nucleoBasicoConocimiento'); 
+               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].nombreCurso"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].nombreCurso'); 
+               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].modalidad"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].modalidad'); 
+               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].nivelEstudio"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].nivelEstudio'); 
+               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].numeroHoras"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].numeroHoras'); 
+               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].anyo"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].anyo'); 
+               $('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].certificado"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].certificado'); 
+               self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[i].consecutivo(i);
             }
         };
 
         self.editarCursoExperienciaDocencia = function (cursoExperienciaDocencia) {
             ocultarCertificadosCursoExperienciaDocencia();
-            $('#nombreCursoExperienciaDocencia').val('');
-            $('#areaSaberCursoExperienciaDocencia').val('').trigger('change');
-            $('#modalidadCursoExperienciaDocencia').val('').trigger('change');
-            $('#nivelEstudioCursoExperienciaDocencia').val('').trigger('change');
-            $('#numeroHorasCursoExperienciaDocencia').val('');
-            $('#anyoCursoExperienciaDocencia').val('');
+            $('#nombreCursoExperienciaDocencia').val(cursoExperienciaDocencia.nombreCurso());
+            $('#nucleoBasicoConocimientoCursoExperienciaDocencia').val(cursoExperienciaDocencia.nucleoBasicoConocimiento()).trigger('change');
+            $('#modalidadCursoExperienciaDocencia').val(cursoExperienciaDocencia.modalidad()).trigger('change');
+            $('#nivelEstudioCursoExperienciaDocencia').val(cursoExperienciaDocencia.nivelEstudio()).trigger('change');
+            $('#numeroHorasCursoExperienciaDocencia').val(cursoExperienciaDocencia.numeroHoras());
+            $('#anyoCursoExperienciaDocencia').val(cursoExperienciaDocencia.anyo());
             $('#consecutivo').val(cursoExperienciaDocencia.consecutivo());
-            $('input:file[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].certificado"]').show();
+            $('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].certificado"]').show();
             bootstrap_alert_curso_experiencia_docencia.removeWarning();
             $('#md_curso_experiencia_docencia').modal('show');
         };
@@ -4128,7 +4397,267 @@
         self.verCertificadoCursoExperienciaDocencia = function (cursoExperienciaDocencia) {
             window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoCursoExperienciaDocencia/" + cursoExperienciaDocencia.id();
         };        
-    };
+
+        self.adicionarArticulo = function () {
+            var nombreArticulo = $('#nombreArticulo').val();
+            var tipoAutorArticulo = $('#tipoAutorArticulo').val();
+            var nombreRevistaArticulo = $('#nombreRevistaArticulo').val();
+            var anyoArticulo = $('#anyoArticulo').val();
+            var nucleoBasicoConocimientoArticulo = $('#nucleoBasicoConocimientoArticulo').val();
+            var urlArticulo = $('#urlArticulo').val();
+
+            if (nombreArticulo === "") {
+                bootstrap_alert_articulo.warning('Debe ingresar el título del artículo');
+                return false;
+            }
+            if (tipoAutorArticulo === "") {
+                bootstrap_alert_articulo.warning('Debe seleccionar el tipo de autor del artículo');
+                return false;
+            }
+            if (nombreRevistaArticulo === "") {
+                bootstrap_alert_articulo.warning('Debe ingresar el nombre de la revista');
+                return false;
+            }
+            if (anyoArticulo === "") {
+                bootstrap_alert_articulo.warning('Debe seleccionar el año del artículo');
+                return false;
+            }
+            if (nucleoBasicoConocimientoArticulo === "") {
+                bootstrap_alert_articulo.warning('Debe seleccionar el núcleo básico del conocimiento');
+                return false;
+            }
+            if (urlArticulo === "") {
+                bootstrap_alert_articulo.warning('Debe ingresar la URL del artículo');
+                return false;
+            }
+            
+            if ($('#consecutivo').val() === "") {
+                self.articulos.push({
+                    id: ko.observable(0),
+                    consecutivo: ko.observable(self.articulos().length),
+                    nombre: ko.observable(nombreArticulo),
+                    tipoAutor: ko.observable(tipoAutorArticulo),
+                    nombreRevista: ko.observable(nombreRevistaArticulo),
+                    anyo: ko.observable(anyoArticulo),
+                    nucleoBasicoConocimiento: ko.observable(nucleoBasicoConocimientoArticulo),
+                    url: ko.observable(urlArticulo)
+                });
+            } else {
+                var consecutivo = parseInt($('#consecutivo').val(), 10);
+                var indice = 0;
+                for (i = 0; i < self.articulos().length; i++) {
+                    if (self.articulos()[i].consecutivo() === consecutivo) {
+                        indice = i;
+                        break;
+                    }
+                }
+                self.articulos()[indice].nombre(nombreArticulo);
+                self.articulos()[indice].tipoAutor(tipoAutorArticulo);
+                self.articulos()[indice].nombreRevista(nombreRevistaArticulo);
+                self.articulos()[indice].anyo(anyoArticulo);
+                self.articulos()[indice].url(urlArticulo);
+                self.articulos()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoArticulo);
+            }
+            $('#md_articulo').modal('hide');
+        };
+
+        self.eliminarArticulo = function (articulo) {
+            self.articulos.remove(articulo);
+        };
+
+        self.editarArticulo = function (articulo) {
+            $('#nombreArticulo').val(articulo.nombre());
+            $('#nombreRevistaArticulo').val(articulo.nombreRevista());
+            $('#tipoAutorArticulo').val(articulo.tipoAutor()).trigger('change');
+            $('#urlArticulo').val(articulo.url());
+            $('#anyoArticulo').val(articulo.anyo()).trigger('change');
+            $('#nucleoBasicoConocimientoArticulo').val(articulo.nucleoBasicoConocimiento()).trigger('change');
+            $('#consecutivo').val(articulo.consecutivo());
+            bootstrap_alert_articulo.removeWarning();
+            $('#md_articulo').modal('show');
+        };
+
+        self.adicionarPatente = function () {
+            var fechaPatente = $('#fechaPatente').val();
+            var tipoPatente = $('#tipoPatente').val();
+            var nombreTipoPatente = $('#tipoPatente option:selected').text();
+            var propiedadCompartidaPatente = $('#propiedadCompartidaPatente').val();
+            var clasePatente = $('#clasePatente').val();
+            var descripcionPatente = $('#descripcionPatente').val();
+        
+            if (fechaPatente === "") {
+                bootstrap_alert_patente.warning('Debe ingresar la fecha de la patente');
+                return false;
+            }
+            if (tipoPatente === "") {
+                bootstrap_alert_patente.warning('Debe seleccionar el tipo de pantente');
+                return false;
+            }
+            if (clasePatente === "") {
+                bootstrap_alert_patente.warning('Debe seleccionar la clase de patente');
+                return false;
+            }
+            if (descripcionPatente === "") {
+                bootstrap_alert_patente.warning('Debe ingresar la descripción de la patente);
+                return false;
+            }
+            if ($('#consecutivo').val() === "") {
+                if ($('input:file[name="patentes[' + self.patentes().length + '].documento"]').val() === "") {
+                    bootstrap_alert_patente.warning('Debe ingresar el documento');
+                    return false;
+                }
+                self.patentes.push({
+                    id: ko.observable(0),
+                    consecutivo: ko.observable(self.patentes().length),
+                    fecha: ko.observable(fechaPatente),
+                    nombreTipo: ko.observable(nombreTipoPatente),
+                    tipo: ko.observable(tipoPatente),
+                    propiedadCompartida: ko.observable(propiedadCompartidaPatente),
+                    clase: ko.observable(clasePatente),
+                    descripcion: ko.observable(descripcionPatente),
+                    documento: ko.observable(''),
+                    tieneDocumento: ko.observable(false)
+                });
+                $('input:file[name="patentes[' + self.patentes().length + '].documento"]').hide();
+            } else {
+                var consecutivo = parseInt($('#consecutivo').val(), 10);
+                var indice = 0;
+                for (i = 0; i < self.patentes().length; i++) {
+                    if (self.patentes()[i].consecutivo() === consecutivo) {
+                        indice = i;
+                        break;
+                    }
+                }
+                self.patentes()[indice].fecha(fechaPatente);
+                self.patentes()[indice].nombreTipo(nombreTipoPatente);
+                self.patentes()[indice].tipo(tipoPatente);
+                self.patentes()[indice].propiedadCompartida(propiedadCompartidaPatente);
+                self.patentes()[indice].clase(clasePatente);
+                self.patentes()[indice].descripcion(descripcionPatente);
+                self.patentes()[indice].documento('');
+                $('input:file[name="patentes[' + indice + '].documento"]').hide();
+            }
+            $('#md_patente').modal('hide');
+        };
+
+        self.eliminarPatente = function (patente) {
+            $('input:file[name="patentes[' + patente.consecutivo() + '].documento"]').remove();
+            self.patentes.remove(patente);
+            for(i = patente.consecutivo(); i < hojaVidaModel.patentes().length; i++) {
+               $('input:file[name="patentes[' + (i + 1) + '].documento"]').attr('name', 'patentes[' + i + '].documento'); 
+                hojaVidaModel.patentes()[i].consecutivo(i);
+            }
+        };
+
+        self.editarPatente = function (patente) {
+            ocultarDocumentosPatentes();
+            $('#fechaPatente').val(patente.fecha());
+            $('#tipoPatente').val(patente.tipo()).trigger('change');
+            $('#propiedadCompartidaPatente').val(patente.propiedadCompartida());
+            $('#clasePatente').val(patente.clase()).trigger('change');
+            $('#descripcionPatente').val(patente.descripcion());            
+            if(patente.propiedadCompartida()) {
+              $('#btnPropiedadCompartidaPatenteSi').removeClass('notActive').addClass('active');  
+              $('#btnPropiedadCompartidaPatenteNo').removeClass('active').addClass('notActive');
+            } else {
+              $('#btnPropiedadCompartidaPatenteNo').removeClass('notActive').addClass('active');  
+              $('#btnPropiedadCompartidaPatenteSi').removeClass('active').addClass('notActive');  
+            }
+            $('#consecutivo').val(patente.consecutivo());
+            $('input:file[name="patentes[' + patente.consecutivo() + '].documento"]').show();
+            bootstrap_alert_patente.removeWarning();
+            $('#md_patente').modal('show');
+        };
+
+        self.verDocumentoPatente = function (patente) {
+            window.location.href = "${pageContext.request.contextPath}/hojasVida/documentoPatente/" + patente.id();
+        };        
+
+        self.adicionarProductoConocimiento = function () {
+            var tipoProductoConocimiento = $('#tipoProductoConocimiento').val();
+            var nombreTipoProductoConocimiento = $('#tipoProductoConocimiento option:selected').text();
+            var nucleoBasicoProductoConocimiento = $('#nucleoBasicoProductoConocimiento').val();
+            var urlProductoConocimiento = $('#urlProductoConocimiento').val();
+            var descripcionProductoConocimiento = $('#descripcionProductoConocimiento').val();
+        
+            if (tipoProductoConocimiento === "") {
+                bootstrap_alert_producto_conocimiento.warning('Debe seleccionar el tipo de producto');
+                return false;
+            }
+            if (nucleoBasicoProductoConocimiento === "") {
+                bootstrap_alert_producto_conocimiento.warning('Debe seleccionar el núcleo básico de conocimiento');
+                return false;
+            }
+            if (urlProductoConocimiento === "") {
+                bootstrap_alert_producto_conocimiento.warning('Debe ingresar la URL');
+                return false;
+            }
+            if (descripcionProductoConocimiento === "") {
+                bootstrap_alert_producto_conocimiento.warning('Debe ingresar la descripción de la patente);
+                return false;
+            }
+            if ($('#consecutivo').val() === "") {
+                if ($('input:file[name="productosConocimiento[' + self.productosConocimiento().length + '].documento"]').val() === "") {
+                    bootstrap_alert_producto_conocimiento.warning('Debe ingresar el documento');
+                    return false;
+                }
+                self.productosConocimiento.push({
+                    id: ko.observable(0),
+                    consecutivo: ko.observable(self.productosConocimiento().length),
+                    nombreTipo: ko.observable(nombreTipoPatente),
+                    tipo: ko.observable(tipoPatente),
+                    nucleoBasicoConocimento: ko.observable(nucleoBasicoProductoConocimiento),
+                    url: ko.observable(urlProductoConocimiento),
+                    descripcion: ko.observable(descripcionProductoConocimiento),
+                    documento: ko.observable(''),
+                    tieneDocumento: ko.observable(false)
+                });
+                $('input:file[name="productosConocimiento[' + self.patentes().length + '].documento"]').hide();
+            } else {
+                var consecutivo = parseInt($('#consecutivo').val(), 10);
+                var indice = 0;
+                for (i = 0; i < self.productosConocimiento().length; i++) {
+                    if (self.productosConocimiento()[i].consecutivo() === consecutivo) {
+                        indice = i;
+                        break;
+                    }
+                }
+                self.productosConocimiento()[indice].nombreTipo(nombreTipoProductoConocimiento);
+                self.productosConocimiento()[indice].tipo(tipoProductoConocimiento);
+                self.productosConocimiento()[indice].nucleoBasicoConocimento(nucleoBasicoProductoConocimiento);
+                self.productosConocimiento()[indice].url(urlProductoConocimiento);
+                self.productosConocimiento()[indice].descripcion(descripcionProductoConocimiento);
+                self.productosConocimiento()[indice].documento('');
+                $('input:file[name="productosConocimiento[' + indice + '].documento"]').hide();
+            }
+            $('#md_producto_conocimiento').modal('hide');
+        };
+
+        self.eliminarProductoConocimiento = function (productoConocimiento) {
+            $('input:file[name="productosConocimiento[' + productosConocimiento.consecutivo() + '].documento"]').remove();
+            self.productosConocimiento.remove(productoConocimiento);
+            for(i = productosConocimiento.consecutivo(); i < hojaVidaModel.productosConocimiento().length; i++) {
+               $('input:file[name="productosConocimiento[' + (i + 1) + '].documento"]').attr('name', 'productosConocimiento[' + i + '].documento'); 
+                hojaVidaModel.productosConocimiento()[i].consecutivo(i);
+            }
+        };
+
+        self.editarProductoConocimiento = function (productoConocimiento) {
+            ocultarDocumentosProductosConocimiento();
+            $('#tipoProductoConocimiento').val(productoConocimiento.tipo()).trigger('change');
+            $('#nucleoBasicoProductoConocimiento').val(productoConocimiento.nucleoBasicoConocimento()).trigger('change');
+            $('#urlProductoConocimiento').val(productoConocimiento.url());
+            $('#descripcionProductoConocimiento').val(productoConocimiento.descripcion());    
+            $('#consecutivo').val(productoConocimiento.consecutivo());
+            $('input:file[name="productosConocimiento[' + productoConocimiento.consecutivo() + '].documento"]').show();
+            bootstrap_alert_producto_conocimiento.removeWarning();
+            $('#md_producto_conocimiento').modal('show');
+        };
+
+        self.verDocumentoProductoConocimiento = function (productoConocimiento) {
+            window.location.href = "${pageContext.request.contextPath}/hojasVida/documentoProductoConocimiento/" + productoConocimiento.id();
+        };        
+};
 
     function nuevoCorreoElectronico() {
         $('#correoElectronico').val("");
@@ -4157,7 +4686,7 @@
     function nuevoDocumentoSoporte() {
         $('#tipoDocumento').val("").trigger('change');
         $('#consecutivo').val("");
-        ocultarDocumentosSoporte();
+        ocultarDocumentosSoportes();
         var fileInput = $('input:file[name="documentosSoporte[' + hojaVidaModel.documentosSoporte().length + '].documento"]');
         if (!fileInput.attr('id')) {
             fileInput = $('<input type="file" class="form-control" name="documentosSoporte[' + (self.documentosSoporte().length) + '].documento" />');
@@ -4179,7 +4708,7 @@
         $('#tipoCertificacionIdioma').val("").trigger('change');
         $('#puntajeCertificacionIdioma').val("");
         $('#consecutivo').val("");
-        ocultarCertificadosIdioma();
+        ocultarCertificadosIdiomas();
         var fileInput = $('input:file[name="idiomas[' + hojaVidaModel.idiomas().length + '].certificado"]');
         if (!fileInput.attr('id')) {
             fileInput = $('<input type="file" class="form-control" name="idiomas[' + (self.idiomas().length) + '].certificado" />');
@@ -4201,7 +4730,7 @@
         $('#btnGraduadoSiEducacionBasica').removeClass('active').addClass('notActive');  
         $('#btnGraduadoNoEducacionBasica').removeClass('active').addClass('notActive');  
         $('#consecutivo').val("");
-        ocultarCertificadosEducacionBasica();
+        ocultarCertificadosEducacionesBasicas();
         var fileInput = $('input:file[name="educacionesBasicas[' + hojaVidaModel.educacionesBasicas().length + '].certificado"]');
         if (!fileInput.attr('id')) {
             fileInput = $('<input type="file" class="form-control" name="educacionesBasicas[' + (self.educacionesBasicas().length) + '].certificado" />');
@@ -4220,15 +4749,15 @@
         $('#institucionEducacionSuperior').val("");
         $('#nombreInstitucionEducacionSuperior').val("");
         $('#programaCursadoEducacionSuperior').val('');
-        $('#areaSaberEducacionSuperior').val('');
-        $('#nombreAreaSaberEducacionSuperior').val('');
+        $('#nucleoBasicoConocimientoEducacionSuperior').val('');
+        $('#nombreNucleoBasicoConocimientoEducacionSuperior').val('');
         $('#anyoInicioEducacionSuperior').val("").trigger('change');
         $('#anyoFinalizacionEducacionSuperior').val("").trigger('change');
         $('#tituloEducacionSuperior').val("");
         $('#graduadoEducacionSuperior').val("false");
         $('#fechaTituloEducacionSuperior').val("");
         
-        $('#areaSaberPrograma').val("").trigger("change.select2");
+        $('#nucleoBasicoConocimientoPrograma').val("").trigger("change.select2");
         $('#institucionEducativaPrograma').val("").trigger("change.select2");
         $('#programaCursado').val("");
         $('#tituloPrograma').val("");        
@@ -4242,7 +4771,7 @@
         $('#anyoFinalizacionEducacionSuperior').prop('disabled','disabled');
         
         $('#consecutivo').val("");
-        ocultarCertificadosEducacionSuperior();
+        ocultarCertificadosEducacionesSuperiores();
         var fileInput = $('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificado"]');
         if (!fileInput.attr('id')) {
             fileInput = $('<input type="file" class="form-control" name="educacionesSuperiores[' + (self.educacionesSuperiores().length) + '].certificado" />');
@@ -4262,7 +4791,7 @@
     }    
 
     function nuevoPrograma() {
-        $('#areaSaberPrograma').val("").trigger("change.select2");
+        $('#nucleoBasicoConocimientoPrograma').val("").trigger("change.select2");
         $('#institucionEducativaPrograma').val("").trigger("change.select2");
         $('#programaCursado').val("").trigger("change.select2");
         $('#tituloPrograma').val("");
@@ -4275,10 +4804,10 @@
         $('#institucionEducacionContinua').val("").trigger('change');
         $('#nombreCapacitacionEducacionContinua').val("");
         $('#numeroHorasEducacionContinua').val("");
-        $('#areaSaberEducacionContinua').val("").trigger('change');
+        $('#nucleoBasicoConocimientoEducacionContinua').val("").trigger('change');
         $('#anyoEducacionContinua').val("");
         $('#consecutivo').val("");
-        ocultarCertificadosEducacionContinua();
+        ocultarCertificadosEducacionesContinuas();
         var fileInput = $('input:file[name="educacionesContinuas[' + hojaVidaModel.educacionesContinuas().length + '].certificado"]');
         if (!fileInput.attr('id')) {
             fileInput = $('<input type="file" class="form-control" name="educacionesContinuas[' + (self.educacionesContinuas().length) + '].certificado" />');
@@ -4295,7 +4824,7 @@
         $('#institucionOtorgaDistincion').val("");
         $('#fechaDistincion').val("");
         $('#consecutivo').val("");
-        ocultarCertificadosDistincion();
+        ocultarCertificadosDistinciones();
         var fileInput = $('input:file[name="distinciones[' + hojaVidaModel.distinciones().length + '].certificado"]');
         if (!fileInput.attr('id')) {
             fileInput = $('<input type="file" class="form-control" name="distinciones[' + (self.distinciones().length) + '].certificado" />');
@@ -4315,26 +4844,26 @@
         $('#btnExperienciaDocenciaFNSPSi').removeClass('active').addClass('notActive');
         $('#btnExperienciaDocenciaFNSPNo').removeClass('active').addClass('notActive');
         $('#institucionExperienciaDocencia').val("").trigger('change');
-        consecutivoExperienciaDocencia = hojaVidaModel.experienciasDocencia().length;
+        hojaVidaModel.consecutivoExperienciaDocencia(hojaVidaModel.experienciasDocencia().length);
         bootstrap_alert_experiencia_docencia.removeWarning();
         $('#md_experiencia_docencia').modal('show');
     } 
 
     function nuevoCursoExperienciaDocencia() {
         $('#nombreCursoExperienciaDocencia').val("");
-        $('#areaSaberCursoExperienciaDocencia').val("").trigger('change');
+        $('#nucleoBasicoConocimientoCursoExperienciaDocencia').val("").trigger('change');
         $('#modalidadCursoExperienciaDocencia').val("").trigger('change');
         $('#nivelEstudioCursoExperienciaDocencia').val("").trigger('change');
         $('#numeroHorasCursoExperienciaDocencia').val("");
         $('#anyoCursoExperienciaDocencia').val("");
         ocultarCertificadosCursoExperienciaDocencia();
         var consecutivo = 0;
-        if(hojaVidaModel.experienciasDocencia().length > 0) {
-           consecutivo = hojaVidaModel.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length;
+        if(hojaVidaModel.experienciasDocencia().length > hojaVidaModel.consecutivoExperienciaDocencia()) {
+           consecutivo = hojaVidaModel.experienciasDocencia()[hojaVidaModel.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length;
         }
-        var fileInput = $('input:file[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]');
+        var fileInput = $('input:file[name="experienciasDocencia[' + hojaVidaModel.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]');
         if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" class="form-control" name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + consecutivo + '].certificado" />');
+            fileInput = $('<input type="file" class="form-control" name="experienciasDocencia[' + hojaVidaModel.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado" />');
             $('#certificadosCursosExperienciaDocencia').append(fileInput);
         } else {
             fileInput.show();
@@ -4343,6 +4872,59 @@
         bootstrap_alert_curso_experiencia_docencia.removeWarning();
         $('#md_curso_experiencia_docencia').modal('show');
     } 
+
+    function nuevoArticulo() {
+        $('#nombreArticulo').val("");
+        $('#nombreRevistaArticulo').val("");
+        $('#tipoAutorArticulo').val("").trigger('change');
+        $('#urlArticulo').val("");
+        $('#anyoArticulo').val("").trigger('change');
+        $('#nucleoBasicoConocimientoArticulo').val("").trigger('change');
+        $('#consecutivo').val("");
+        bootstrap_alert_articulo.removeWarning();
+        $('#md_articulo').modal('show');
+    } 
+
+    function nuevaPatente() {
+        $('#fechaPatente').val("");
+        $('#tipoPatente').val("").trigger('change');
+        $('#propiedadCompartidaPatente').val("false");
+        $('#clasePatente').val("").trigger('change');
+        $('#descripcionPatente').val("");            
+        $('#btnPropiedadCompartidaPatenteSi').removeClass('notActive').addClass('noActive');  
+        $('#btnPropiedadCompartidaPatenteNo').removeClass('active').addClass('notActive');
+        $('#consecutivo').val("");
+        
+        ocultarDocumentosPatentes();
+        var fileInput = $('input:file[name="patentes[' + hojaVidaModel.patentes().length + '].documento"]');
+        if (!fileInput.attr('id')) {
+            fileInput = $('<input type="file" class="form-control" name="patentes[' + (self.patentes().length) + '].documento" />');
+            $('#documentosPatentes').append(fileInput);
+        } else {
+            fileInput.show();
+        }
+        bootstrap_alert_patente.removeWarning();
+        $('#md_patente').modal('show');
+    }
+
+    function nuevoProductoConocimiento() {
+        $('#tipoProductoConocimiento').val("").trigger('change');
+        $('#nucleoBasicoProductoConocimiento').val("").trigger('change');
+        $('#urlProductoConocimiento').val("");
+        $('#descripcionProductoConocimiento').val("");            
+        $('#consecutivo').val("");
+        
+        ocultarDocumentosProductosConocimiento();
+        var fileInput = $('input:file[name="productosConocimiento[' + hojaVidaModel.productosConocimiento().length + '].documento"]');
+        if (!fileInput.attr('id')) {
+            fileInput = $('<input type="file" class="form-control" name="productosConocimiento[' + (self.productosConocimiento().length) + '].documento" />');
+            $('#documentosProductosConocimiento').append(fileInput);
+        } else {
+            fileInput.show();
+        }
+        bootstrap_alert_producto_conocimiento.removeWarning();
+        $('#md_producto_conocimiento').modal('show');
+    }
 
     function cerrarVentanaDocumentoSoporte() {
         if ($('input:file[name="documentosSoporte[' + hojaVidaModel.documentosSoporte().length + '].documento"]')) {
@@ -4401,24 +4983,43 @@
     }
     
     function cerrarVentanaExperienciaDocencia() {
-        if(consecutivoExperienciaDocencia === hojaVidaModel.experienciasDocencia().length && hojaVidaModel.experienciasDocencia().length > 0) {
-           hojaVidaModel.experienciasDocencia().remove(hojaVidaModel.experienciasDocencia()[consecutivoExperienciaDocencia]);
+        if(hojaVidaModel.experienciasDocencia().length > hojaVidaModel.consecutivoExperienciaDocencia() &&
+           hojaVidaModel.experienciasDocencia()[hojaVidaModel.consecutivoExperienciaDocencia()].id === 0) {
+           hojaVidaModel.experienciasDocencia().remove(hojaVidaModel.experienciasDocencia()[hojaVidaModel.consecutivoExperienciaDocencia()]);
         }
         $('#md_experiencia_docencia').modal('hide');
     }
 
     function cerrarVentanaCursoExperienciaDocencia() {
         var consecutivo = 0;
-        if(hojaVidaModel.experienciasDocencia().length > 0) {
-          consecutivo = hojaVidaModel.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length;
+        if(hojaVidaModel.experienciasDocencia().length > hojaVidaModel.consecutivoExperienciaDocencia()) {
+          consecutivo = hojaVidaModel.experienciasDocencia()[hojaVidaModel.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length;
         }
-        if ($('input:file[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]')) {
-           $('input:file[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]').remove();
+        if ($('input:file[name="experienciasDocencia[' + hojaVidaModel.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]')) {
+           $('input:file[name="experienciasDocencia[' + hojaVidaModel.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]').remove();
         }
         $('#md_curso_experiencia_docencia').modal('hide');
     }
 
-    function ocultarDocumentosSoporte() {
+    function cerrarVentanaArticulo() {
+        $('#md_articulo').modal('hide');
+    }
+    
+    function cerrarVentanaPatente() {
+        if ($('input:file[name="patentes[' + hojaVidaModel.patentes().length + '].documento"]')) {
+            $('input:file[name="patentes[' + hojaVidaModel.patentes().length + '].documento"]').remove();
+        }
+        $('#md_patente').modal('hide');
+    }
+    
+    function cerrarVentanaProductoConocimiento() {
+        if ($('input:file[name="productosConocimiento[' + hojaVidaModel.productosConocimiento().length + '].documento"]')) {
+            $('input:file[name="productosConocimiento[' + hojaVidaModel.productosConocimiento().length + '].documento"]').remove();
+        }
+        $('#md_producto_conocimiento').modal('hide');
+    }
+    
+    function ocultarDocumentosSoportes() {
         for (var i = 0; i < hojaVidaModel.documentosSoporte().length; i++) {
             $('input:file[name="documentosSoporte[' + i + '].documento"]').hide();
         }
@@ -4428,7 +5029,7 @@
         }
     }
 
-    function ocultarCertificadosIdioma() {
+    function ocultarCertificadosIdiomas() {
         for (var i = 0; i < hojaVidaModel.idiomas().length; i++) {
             $('input:file[name="idiomas[' + i + '].certificado"]').hide();
         }
@@ -4438,7 +5039,7 @@
         }
     }
     
-    function ocultarCertificadosEducacionBasica() {
+    function ocultarCertificadosEducacionesBasicas() {
         for (var i = 0; i < hojaVidaModel.educacionesBasicas().length; i++) {
             $('input:file[name="educacionesBasicas[' + i + '].certificado"]').hide();
         }
@@ -4448,7 +5049,7 @@
         }
     }
     
-    function ocultarCertificadosEducacionSuperior() {
+    function ocultarCertificadosEducacionesSuperiores() {
         for (var i = 0; i < hojaVidaModel.educacionesSuperiores().length; i++) {
             $('input:file[name="educacionesSuperiores[' + i + '].certificado"]').hide();
             $('input:file[name="educacionesSuperiores[' + i + '].certificadoHomologado"]').hide();
@@ -4463,7 +5064,7 @@
         }
     }
     
-    function ocultarCertificadosEducacionContinua() {
+    function ocultarCertificadosEducacionesContinuas() {
         for (var i = 0; i < hojaVidaModel.educacionesContinuas().length; i++) {
             $('input:file[name="educacionesContinuas[' + i + '].certificado"]').hide();
         }
@@ -4473,7 +5074,7 @@
         }
     }
 
-    function ocultarCertificadosDistincion() {
+    function ocultarCertificadosDistinciones() {
         for (var i = 0; i < hojaVidaModel.distinciones().length; i++) {
             $('input:file[name="distinciones[' + i + '].certificado"]').hide();
         }
@@ -4502,15 +5103,35 @@
             }
         }
         var consecutivo = 0;
-        if(hojaVidaModel.experienciasDocencia().length > 0) {
-          consecutivo = hojaVidaModel.experienciasDocencia()[consecutivoExperienciaDocencia].cursosExperienciaDocencia().length;
+        if(hojaVidaModel.experienciasDocencia().length > hojaVidaModel.consecutivoExperienciaDocencia()) {
+          consecutivo = hojaVidaModel.experienciasDocencia()[hojaVidaModel.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length;
         }
-        var fileInput = $('input:file[name="experienciasDocencia[' + consecutivoExperienciaDocencia + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]');
+        var fileInput = $('input:file[name="experienciasDocencia[' + hojaVidaModel.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]');
         if (fileInput.attr('id')) {
             fileInput.hide();
         }
     }
     
+    function ocultarDocumentosPatentes() {
+        for (var i = 0; i < hojaVidaModel.patentes().length; i++) {
+            $('input:file[name="patentes[' + i + '].documento"]').hide();
+        }
+        var fileInput = $('input:file[name="patentes[' + hojaVidaModel.patentes().length + '].documento"]');
+        if (fileInput.attr('id')) {
+            fileInput.hide();
+        }
+    }    
+
+    function ocultarDocumentosProductosConocimiento() {
+        for (var i = 0; i < hojaVidaModel.patentes().length; i++) {
+            $('input:file[name="documentosProductosConocimiento[' + i + '].documento"]').hide();
+        }
+        var fileInput = $('input:file[name="productosConocimiento[' + hojaVidaModel.productosConocimiento().length + '].documento"]');
+        if (fileInput.attr('id')) {
+            fileInput.hide();
+        }
+    }   
+
     $('#hojaVida').submit(function (evt) {
         evt.preventDefault();
         if ($('#disponeRUT').val() === 'true' && $('#actividadEconomica').val() === "") {
@@ -4572,7 +5193,7 @@
         window.location.href = "${pageContext.request.contextPath}/hojasVida/copiaLibretaMilitar/" + $('#idPersona').val();
     }
 
-    bootstrap_alert_hoja_vida = function () { };
+    bootstrap_alert_hoja_vida = {};
     bootstrap_alert_hoja_vida.warning = function (message) {
         $('#alert_hoja_vida').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
@@ -4583,7 +5204,7 @@
         $('#alert_hoja_vida').html('');
     };
 
-    bootstrap_alert_telefono = function () { };
+    bootstrap_alert_telefono = {};
     bootstrap_alert_telefono.warning = function (message) {
         $('#alert_telefono').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
@@ -4591,7 +5212,7 @@
         $('#alert_telefono').html('');
     };
 
-    bootstrap_alert_cuenta_bancaria = function () { };
+    bootstrap_alert_cuenta_bancaria = {};
     bootstrap_alert_cuenta_bancaria.warning = function (message) {
         $('#alert_cuenta_bancaria').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
@@ -4599,7 +5220,7 @@
         $('#alert_cuenta_bancaria').html('');
     };
 
-    bootstrap_alert_correo_electronico = function () { };
+    bootstrap_alert_correo_electronico = {};
     bootstrap_alert_correo_electronico.warning = function (message) {
         $('#alert_correo_electronico').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
@@ -4607,7 +5228,7 @@
         $('#alert_correo_electronico').html('');
     };
 
-    bootstrap_alert_documento_soporte = function () { };
+    bootstrap_alert_documento_soporte = {};
     bootstrap_alert_documento_soporte.warning = function (message) {
         $('#alert_documento_soporte').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
@@ -4615,7 +5236,7 @@
         $('#alert_documento_soporte').html('');
     };
 
-    bootstrap_alert_idioma = function () { };
+    bootstrap_alert_idioma = {};
     bootstrap_alert_idioma.warning = function (message) {
         $('#alert_idioma').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
@@ -4623,7 +5244,7 @@
         $('#alert_idioma').html('');
     };
 
-    bootstrap_alert_educacion_basica = function () { };
+    bootstrap_alert_educacion_basica = {};
     bootstrap_alert_educacion_basica.warning = function (message) {
         $('#alert_educacion_basica').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
@@ -4631,7 +5252,7 @@
         $('#alert_educacion_basica').html('');
     };
 
-    bootstrap_alert_educacion_superior = function () { };
+    bootstrap_alert_educacion_superior = {};
     bootstrap_alert_educacion_superior.warning = function (message) {
         $('#alert_educacion_superior').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
@@ -4639,7 +5260,7 @@
         $('#alert_educacion_superior').html('');
     };
 
-    bootstrap_alert_educacion_continua = function () { };
+    bootstrap_alert_educacion_continua = {};
     bootstrap_alert_educacion_continua.warning = function (message) {
         $('#alert_educacion_continua').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
@@ -4647,7 +5268,7 @@
         $('#alert_educacion_continua').html('');
     };
 
-    bootstrap_alert_distincion = function () { };
+    bootstrap_alert_distincion = {};
     bootstrap_alert_distincion.warning = function (message) {
         $('#alert_distincion').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
@@ -4655,7 +5276,7 @@
         $('#alert_distincion').html('');
     };
     
-    bootstrap_alert_experiencia_laboral = function () { };
+    bootstrap_alert_experiencia_laboral = {};
     bootstrap_alert_experiencia_laboral.warning = function (message) {
         $('#alert_experiencia_laboral').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
@@ -4663,7 +5284,7 @@
         $('#alert_experiencia_laboral').html('');
     };
 
-    bootstrap_alert_experiencia_docencia = function () { };
+    bootstrap_alert_experiencia_docencia = {};
     bootstrap_alert_experiencia_docencia.warning = function (message) {
         $('#alert_experiencia_docencia').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
@@ -4671,12 +5292,36 @@
         $('#alert_experiencia_docencia').html('');
     };
     
-    bootstrap_alert_curso_experiencia_docencia = function () { };
+    bootstrap_alert_curso_experiencia_docencia = {};
     bootstrap_alert_curso_experiencia_docencia.warning = function (message) {
         $('#alert_curso_experiencia_docencia').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
     bootstrap_alert_curso_experiencia_docencia.removeWarning = function () {
         $('#alert_curso_experiencia_docencia').html('');
+    };
+
+    bootstrap_alert_articulo = {};
+    bootstrap_alert_articulo.warning = function (message) {
+        $('#alert_articulo').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_articulo.removeWarning = function () {
+        $('#alert_articulo').html('');
+    };
+
+    bootstrap_alert_patente = {};
+    bootstrap_alert_patente.warning = function (message) {
+        $('#alert_patente').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_patente.removeWarning = function () {
+        $('#alert_patente').html('');
+    };
+
+    bootstrap_alert_producto_conocimiento = {};
+    bootstrap_alert_producto_conocimiento.warning = function (message) {
+        $('#alert_producto_conocimiento').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_producto_conocimiento.removeWarning = function () {
+        $('#alert_producto_conocimiento').html('');
     };
     
     var correosElectronicos = [];
@@ -4690,6 +5335,9 @@
     var distinciones = [];
     var experienciasLaborales = [];
     var experienciasDocencia = [];
+    var articulos = [];
+    var patentes = [];
+    var productosConocimento = [];
     
     <c:if test = "${correosElectronicosJSON != null}">
     correosElectronicos = ${correosElectronicosJSON};
@@ -4762,14 +5410,26 @@
     </c:if>
     <c:if test = "${experienciasDocenciaJSON != null}">
     experienciasDocencia = ${experienciasDocenciaJSON};
-    for (var i = 0; i < experienciasDocencia.length; i++) {
-        for (var j = 0; j < experienciasDocencia[i].cursosExperienciaDocencia.length; j++) {
-        fileInput = $('<input type="file" class="form-control" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].certificado" />');
-        $('#certificadosCursosExperienciaDocencia').append(fileInput);
-        $('input:file[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].certificado"]').hide();
-        }
+    </c:if>
+    <c:if test = "${articulosJSON != null}">
+    articulos = ${articulosJSON};
+    </c:if>        
+    <c:if test = "${patentesJSON != null}">
+    patentes = ${patentesJSON};
+    for (var i = 0; i < patentes.length; i++) {
+        fileInput = $('<input type="file" class="form-control" name="patentes[' + i + '].documento" />');
+        $('#documentosPatentes').append(fileInput);
+        $('input:file[name="patentes[' + i + '].documento"]').hide();
     }    
-    </c:if>           
+    </c:if>
+    <c:if test = "${productosConocimentoJSON != null}">
+    productosConocimento = ${productosConocimentoJSON};
+    for (var i = 0; i < productosConocimento.length; i++) {
+        fileInput = $('<input type="file" class="form-control" name="productosConocimento[' + i + '].documento" />');
+        $('#documentosProductosConocimento').append(fileInput);
+        $('input:file[name="productosConocimento[' + i + '].documento"]').hide();
+    }    
+    </c:if>
     var hojaVidaModel = new HojaVidaModel(correosElectronicos, 
         cuentasBancarias, 
         telefonos, 
@@ -4780,6 +5440,45 @@
         educacionesContinuas, 
         distinciones,
         experienciasLaborales,
-        experienciasDocencia);
+        experienciasDocencia,
+        articulos,
+        patentes,
+        productosConocimento);
     ko.applyBindings(hojaVidaModel);
+    
+    for (var i = 0; i < hojaVidaModel.experienciasDocencia().length; i++) {
+        for (var j = 0; j < hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia().length; j++) {
+            fileInput = $('<input type="file" class="form-control" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].certificado" />');
+            $('#certificadosCursosExperienciaDocencia').append(fileInput);
+            $('input:file[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].certificado"]').hide();
+
+            id = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].id" />');
+            consecutivo = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].consecutivo" />');
+            nucleoBasicoConocimiento = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nucleoBasicoConocimiento" />');
+            nombreCurso = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nombreCurso" />');
+            modalidad = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].modalidad" />');
+            nivelEstudio = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nivelEstudio" />');
+            numeroHoras = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].numeroHoras" />');
+            anyo = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].anyo" />');
+
+            $('#certificadosCursosExperienciaDocencia').append(id);
+            $('#certificadosCursosExperienciaDocencia').append(consecutivo);
+            $('#certificadosCursosExperienciaDocencia').append(nucleoBasicoConocimiento);
+            $('#certificadosCursosExperienciaDocencia').append(nombreCurso);
+            $('#certificadosCursosExperienciaDocencia').append(modalidad);
+            $('#certificadosCursosExperienciaDocencia').append(nivelEstudio);
+            $('#certificadosCursosExperienciaDocencia').append(numeroHoras);
+            $('#certificadosCursosExperienciaDocencia').append(anyo);
+
+            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].id"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].id());
+            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].consecutivo"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].consecutivo());
+            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nucleoBasicoConocimiento"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].nucleoBasicoConocimiento());
+            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nombreCurso"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].nombreCurso());
+            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].modalidad"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].modalidad());
+            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nivelEstudio"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].nivelEstudio());
+            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].numeroHoras"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].numeroHoras());
+            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].anyo"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].anyo());
+        }
+    }    
+    
 </script>
