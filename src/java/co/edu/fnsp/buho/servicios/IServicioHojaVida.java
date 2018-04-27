@@ -51,5 +51,5 @@ public interface IServicioHojaVida {
 
     public Documento obtenerDocumentoPatente(int idPatente);
 
-    public Documento obtenerDocumentoProductoConocimento(int idProductoConocimento);
+    public Documento obtenerDocumentoProductoConocimiento(int idProductoConocimiento);
 }

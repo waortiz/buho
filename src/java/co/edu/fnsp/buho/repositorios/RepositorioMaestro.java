@@ -28,7 +28,6 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     private SimpleJdbcCall obtenerTiposIdentificacion;
     private SimpleJdbcCall obtenerActividadesEconomicas;
     private SimpleJdbcCall obtenerNucleosBasicosConocimiento;
-    private SimpleJdbcCall obtenerAreas;
     private SimpleJdbcCall obtenerCargos;
     private SimpleJdbcCall obtenerDedicaciones;
     private SimpleJdbcCall obtenerDepartamentos;
@@ -59,7 +58,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     private SimpleJdbcCall obtenerTiposInvestigador;
     private SimpleJdbcCall obtenerTiposAutorArticulo;
     private SimpleJdbcCall obtenerClasesPatente;
-    private SimpleJdbcCall obtenerTiposProductoConocimiento;
+    private SimpleJdbcCall obtenerTiposProductosConocimiento;
     private SimpleJdbcCall obtenerTiposPatente;
 
     @Autowired
@@ -70,7 +69,6 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         this.obtenerTiposIdentificacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposIdentificacion").returningResultSet("tiposIdentificacion", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerActividadesEconomicas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerActividadesEconomicas").returningResultSet("actividadesEconomicas", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerNucleosBasicosConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerNucleosBasicosConocimiento").returningResultSet("nucleosBasicoConocimiento", BeanPropertyRowMapper.newInstance(Maestro.class));
-        this.obtenerAreas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerAreas").returningResultSet("areas", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerCargos = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCargos").returningResultSet("cargos", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerDedicaciones = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDedicaciones").returningResultSet("dedicaciones", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerDepartamentos = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDepartamentos").returningResultSet("departamentos", BeanPropertyRowMapper.newInstance(Maestro.class));
@@ -101,7 +99,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         this.obtenerTiposInvestigador = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposInvestigador").returningResultSet("tiposInvestigador", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerTiposAutorArticulo = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposAutorArticulo").returningResultSet("tiposAutorArticulo", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerTiposPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposPatente").returningResultSet("tiposPatente", BeanPropertyRowMapper.newInstance(Maestro.class));
-        this.obtenerTiposProductoConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposProductoConocimiento").returningResultSet("tiposProductoConocimiento", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerTiposProductosConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposProductosConocimiento").returningResultSet("tiposProductosConocimiento", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerClasesPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerClasesPatente").returningResultSet("clasesPatente", BeanPropertyRowMapper.newInstance(Maestro.class));
     }
 
@@ -125,14 +123,6 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     public List<Maestro> obtenerNucleosBasicosConocimiento() {
         Map resultado = obtenerNucleosBasicosConocimiento.execute(new HashMap<>());
         List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("areasSaber");
-
-        return coleccion;
-    }
-
-    @Override
-    public List<Maestro> obtenerAreas() {
-        Map resultado = obtenerAreas.execute(new HashMap<>());
-        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("areas");
 
         return coleccion;
     }
@@ -384,9 +374,9 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     }
 
     @Override
-    public List<Maestro> obtenerTiposProductoConocimiento() {
-        Map resultado = obtenerTiposProductoConocimiento.execute(new HashMap<>());
-        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("tiposProductoConocimiento");
+    public List<Maestro> obtenerTiposProductosConocimiento() {
+        Map resultado = obtenerTiposProductosConocimiento.execute(new HashMap<>());
+        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("tiposProductosConocimiento");
 
         return coleccion;
     }

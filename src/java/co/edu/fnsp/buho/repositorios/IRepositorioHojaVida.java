@@ -49,7 +49,7 @@ public interface IRepositorioHojaVida {
     
     Documento obtenerCertificadoCursoExperienciaDocencia(int idCursoExperienciaDocencia);
 
-    Documento obtenerDocumentoProductoConocimento(int idProductoConocimento);
+    Documento obtenerDocumentoProductoConocimiento(int idProductoConocimiento);
 
     Documento obtenerDocumentoPatente(int idPatente);
 }

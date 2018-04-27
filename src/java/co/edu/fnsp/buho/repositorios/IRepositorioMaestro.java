@@ -16,7 +16,6 @@ public interface IRepositorioMaestro {
     List<Maestro> obtenerTiposIdentificacion();
     List<Maestro> obtenerActividadesEconomicas();
     List<Maestro> obtenerNucleosBasicosConocimiento();
-    List<Maestro> obtenerAreas();
     List<Maestro> obtenerCargos();
     List<Maestro> obtenerDedicaciones();
     List<Maestro> obtenerDepartamentos(int idPais);
@@ -47,6 +46,6 @@ public interface IRepositorioMaestro {
     List<Maestro> obtenerTiposInvestigador();
     List<Maestro> obtenerTiposAutorArticulo();
     List<Maestro> obtenerClasesPatente();
-    List<Maestro> obtenerTiposProductoConocimiento();
+    List<Maestro> obtenerTiposProductosConocimiento();
     List<Maestro> obtenerTiposPatente();
 }

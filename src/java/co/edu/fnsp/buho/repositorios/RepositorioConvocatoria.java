@@ -8,8 +8,8 @@ package co.edu.fnsp.buho.repositorios;
 import co.edu.fnsp.buho.entidades.Convocatoria;
 import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.Adenda;
-import co.edu.fnsp.buho.entidades.CriterioEvaluacion;
-import co.edu.fnsp.buho.entidades.CriterioHabilitante;
+import co.edu.fnsp.buho.entidades.AnyosExperiencia;
+import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
 import co.edu.fnsp.buho.utilidades.Util;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -52,14 +52,15 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     private SimpleJdbcCall ingresarDocumentoAdenda;
     private SimpleJdbcCall actualizarDocumentoAdenda;
     
-    private SimpleJdbcCall ingresarCriterioEvaluacion;
-    private SimpleJdbcCall actualizarCriterioEvaluacion;
-    private SimpleJdbcCall eliminarCriterioEvaluacion;
-    private SimpleJdbcCall obtenerCriteriosEvaluacion;
+    private SimpleJdbcCall ingresarAnyosExperiencia;
+    private SimpleJdbcCall eliminarAnyosExperiencia;
+    private SimpleJdbcCall actualizarAnyosExperiencia;
+    private SimpleJdbcCall obtenerAnyosExperiencias;
     
-    private SimpleJdbcCall ingresarCriterioHabilitante;
-    private SimpleJdbcCall eliminarCriterioHabilitante;
-    private SimpleJdbcCall obtenerCriteriosHabilitantes;
+    private SimpleJdbcCall ingresarIdiomaConvocatoria;
+    private SimpleJdbcCall eliminarIdiomaConvocatoria;
+    private SimpleJdbcCall actualizarIdiomaConvocatoria;
+    private SimpleJdbcCall obtenerIdiomasConvocatoria;
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -85,14 +86,15 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         this.ingresarDocumentoAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoAdenda");
         this.actualizarDocumentoAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoAdenda");
 
-        this.ingresarCriterioEvaluacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarCriterioEvaluacionConvocatoria");
-        this.actualizarCriterioEvaluacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarCriterioEvaluacionConvocatoria");
-        this.eliminarCriterioEvaluacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarCriterioEvaluacionConvocatoria");
-        this.obtenerCriteriosEvaluacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCriteriosEvaluacionConvocatoria").returningResultSet("criteriosEvaluacion", BeanPropertyRowMapper.newInstance(CriterioEvaluacion.class));
+        this.ingresarAnyosExperiencia = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarAnyosExperiencia");
+        this.eliminarAnyosExperiencia = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarAnyosExperiencia");
+        this.actualizarAnyosExperiencia = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarAnyosExperiencia");
+        this.obtenerAnyosExperiencias = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerAnyosExperiencias").returningResultSet("anyosExperiencias", BeanPropertyRowMapper.newInstance(AnyosExperiencia.class));
 
-        this.ingresarCriterioHabilitante = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarCriterioHabilitanteConvocatoria");
-        this.eliminarCriterioHabilitante = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarCriterioHabilitanteConvocatoria");
-        this.obtenerCriteriosHabilitantes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCriteriosHabilitantesConvocatoria").returningResultSet("criteriosHabilitantes", BeanPropertyRowMapper.newInstance(CriterioHabilitante.class));
+        this.ingresarIdiomaConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarIdiomaConvocatoria");
+        this.eliminarIdiomaConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarIdiomaConvocatoria");
+        this.actualizarIdiomaConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarIdiomaConvocatoria");
+        this.obtenerIdiomasConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerIdiomasConvocatoria").returningResultSet("idiomasConvocatoria", BeanPropertyRowMapper.newInstance(IdiomaConvocatoria.class));
     }
 
     @Override
@@ -109,7 +111,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         parametros.addValue("varFechaInicio", convocatoria.getFechaInicio());
         parametros.addValue("varFechaResultados", convocatoria.getFechaPublicacionResultados());
         try {
-            parametros.addValue("varArea", Util.obtenerEntero(convocatoria.getArea()));
+            parametros.addValue("varNucleoBasicoConocimiento", Util.obtenerEntero(convocatoria.getNucleoBasicoConocimiento()));
         } catch (ParseException ex) {
             Logger.getLogger(RepositorioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -149,30 +151,25 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             }
         }
 
-        MapSqlParameterSource parametrosIngresoCriterioEvaluacion = new MapSqlParameterSource();
-        parametrosIngresoCriterioEvaluacion.addValue("varIdConvocatoria", idConvocatoria);
-        for (CriterioEvaluacion criterioEvaluacion : convocatoria.getCriteriosEvaluacion()) {
-            parametrosIngresoCriterioEvaluacion.addValue("varIdCriterioEvaluacion", criterioEvaluacion.getId());
-            if (criterioEvaluacion.getPeso().length() > 0) {
-                parametrosIngresoCriterioEvaluacion.addValue("varPeso", Double.parseDouble(criterioEvaluacion.getPeso()));
-            } else {
-                parametrosIngresoCriterioEvaluacion.addValue("varPeso", 0);
-            }
-            ingresarCriterioEvaluacion.execute(parametrosIngresoCriterioEvaluacion);
+        MapSqlParameterSource parametrosIngresoAnyosExperiencia = new MapSqlParameterSource();
+        parametrosIngresoAnyosExperiencia.addValue("varIdConvocatoria", idConvocatoria);
+        for (AnyosExperiencia anyosExperiencia : convocatoria.getAnyosExperiencias()) {
+            parametrosIngresoAnyosExperiencia.addValue("varNucleoBasicoConocimiento", anyosExperiencia.getNucleoBasicoConocimiento());
+            parametrosIngresoAnyosExperiencia.addValue("varAnyos", anyosExperiencia.getAnyos());
+            ingresarAnyosExperiencia.execute(parametrosIngresoAnyosExperiencia);
         }
 
-        MapSqlParameterSource parametrosIngresoCriterioHabilitante = new MapSqlParameterSource();
-        parametrosIngresoCriterioHabilitante.addValue("varIdConvocatoria", idConvocatoria);
-        for (CriterioHabilitante criterioHabilitante : convocatoria.getCriteriosHabilitantes()) {
-            parametrosIngresoCriterioHabilitante.addValue("varIdCriterioHabilitante", criterioHabilitante.getId());
-            if (criterioHabilitante.getValor().length() > 0) {
-                parametrosIngresoCriterioHabilitante.addValue("varValor", Integer.parseInt(criterioHabilitante.getValor()));
-            } else {
-                parametrosIngresoCriterioHabilitante.addValue("varvalor", 0);
-            }
-            ingresarCriterioHabilitante.execute(parametrosIngresoCriterioHabilitante);
+        MapSqlParameterSource parametrosIngresoIdioma = new MapSqlParameterSource();
+        parametrosIngresoIdioma.addValue("varIdConvocatoria", idConvocatoria);
+        for (IdiomaConvocatoria idioma : convocatoria.getIdiomas()) {
+            parametrosIngresoIdioma.addValue("varIdioma", idioma.getIdioma());
+            parametrosIngresoIdioma.addValue("varPersonaRegistra", idUsuario);
+            parametrosIngresoIdioma.addValue("varTipoCertificacion", idioma.getTipoCertificacion());
+            parametrosIngresoIdioma.addValue("varOtraCertificacion", idioma.getOtraCertificacion());
+            parametrosIngresoIdioma.addValue("varPuntajeMinimoCertificacion", idioma.getPuntajeMinimoCertificacion());
+            ingresarIdiomaConvocatoria.execute(parametrosIngresoIdioma);
         }
-
+        
         Documento documento = convocatoria.getDocumento();
         if (documento != null) {
             MapSqlParameterSource parametrosIngresoDocumentoConvocatoria = new MapSqlParameterSource();
@@ -194,7 +191,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         parametros.addValue("varFechaFin", convocatoria.getFechaFin());
         parametros.addValue("varFechaInicio", convocatoria.getFechaInicio());
         parametros.addValue("varFechaResultados", convocatoria.getFechaPublicacionResultados());
-        parametros.addValue("varArea", convocatoria.getArea());
+        parametros.addValue("varNucleoBasicoConocimiento", convocatoria.getNucleoBasicoConocimiento());
         parametros.addValue("varPrograma", convocatoria.getIdProgramaCurso());
         parametros.addValue("varCurso", convocatoria.getNombreCurso());
         if (convocatoria.getTotalHorasSemestreCurso() != null
@@ -220,8 +217,8 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         }
 
         actualizarAdenda(convocatoria.getId(), idUsuario, convocatoria.getAdendas());
-        actualizarCriterioEvaluacion(convocatoria.getId(), convocatoria.getCriteriosEvaluacion());
-        actualizarCriterioHabilitante(convocatoria.getId(), convocatoria.getCriteriosHabilitantes());
+        actualizarAnyosExperiencias(convocatoria.getId(), convocatoria.getAnyosExperiencias());
+        actualizarIdiomas(convocatoria.getId(), idUsuario, convocatoria.getIdiomas());
     }
 
     @Override
@@ -232,8 +229,8 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
 
         Map resultado = obtenerConvocatoria.execute(parametros);
         convocatoria.setId(idConvocatoria);
-        convocatoria.setArea(((Integer) resultado.get("varArea")).toString());
-        convocatoria.setNombreArea((String) resultado.get("varNombreArea"));
+        convocatoria.setNucleoBasicoConocimiento(((Integer) resultado.get("varNucleoBasicoConocimiento")).toString());
+        convocatoria.setNombreNucleoBasicoConocimiento((String) resultado.get("varNombreNucleoBasicoConocimiento"));
         convocatoria.setDescripcion((String) resultado.get("varDescripcion"));
         convocatoria.setFechaFin((Date) resultado.get("varFechaFin"));
         convocatoria.setFechaFinFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaFin()));
@@ -257,16 +254,15 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
 
         Map resultadoAdendas = obtenerAdendas.execute(parametros);
         List<Adenda> adendas = (List<Adenda>) resultadoAdendas.get("adendas");
-
-        Map resultadoCriteriosHabilitantes = obtenerCriteriosHabilitantes.execute(parametros);
-        List<CriterioHabilitante> criteriosHabilitantes = (List<CriterioHabilitante>) resultadoCriteriosHabilitantes.get("criteriosHabilitantes");
-
-        Map resultadoCriteriosEvaluacion = obtenerCriteriosEvaluacion.execute(parametros);
-        List<CriterioEvaluacion> criteriosEvaluacion = (List<CriterioEvaluacion>) resultadoCriteriosEvaluacion.get("criteriosEvaluacion");
-
         convocatoria.setAdendas(adendas);
-        convocatoria.setCriteriosHabilitantes(criteriosHabilitantes);
-        convocatoria.setCriteriosEvaluacion(criteriosEvaluacion);
+
+        Map resultadoAnyosExperiencias = obtenerAnyosExperiencias.execute(parametros);
+        List<AnyosExperiencia> anyosExperiencias = (List<AnyosExperiencia>) resultadoAnyosExperiencias.get("anyosExperiencias");
+        convocatoria.setAnyosExperiencias(anyosExperiencias);
+
+        Map resultadoIdiomas = obtenerIdiomasConvocatoria.execute(parametros);
+        List<IdiomaConvocatoria> idiomas = (List<IdiomaConvocatoria>) resultadoIdiomas.get("idiomasConvocatoria");
+        convocatoria.setIdiomas(idiomas);
 
         return convocatoria;
     }
@@ -403,93 +399,85 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         retirarPostulacionConvocatoria.execute(parametrosRetirarPostulacionConvocatoria);
     }
 
-    private void actualizarCriterioEvaluacion(int idConvocatoria, List<CriterioEvaluacion> criteriosEvaluacion) {
-        MapSqlParameterSource parametrosConsultaCriterioEvaluacion = new MapSqlParameterSource();
-        parametrosConsultaCriterioEvaluacion.addValue("varIdConvocatoria", idConvocatoria);
-        Map resultadoCriterioEvaluacions = obtenerCriteriosEvaluacion.execute(parametrosConsultaCriterioEvaluacion);
-        ArrayList<CriterioEvaluacion> criteriosEvaluacionActuales = (ArrayList<CriterioEvaluacion>) resultadoCriterioEvaluacions.get("criteriosEvaluacion");
+    private void actualizarAnyosExperiencias(int idConvocatoria, List<AnyosExperiencia> anyosExperiencias) {
+        MapSqlParameterSource parametrosConsultaAnyosExperiencias = new MapSqlParameterSource();
+        parametrosConsultaAnyosExperiencias.addValue("varIdConvocatoria", idConvocatoria);
+        Map resultadoAnyosExperiencias = obtenerAnyosExperiencias.execute(parametrosConsultaAnyosExperiencias);
+        ArrayList<AnyosExperiencia> anyosExperienciasActuales = (ArrayList<AnyosExperiencia>) resultadoAnyosExperiencias.get("anyosExperiencias");
 
-        MapSqlParameterSource parametrosActualizacionCriterioEvaluacion = new MapSqlParameterSource();
-        MapSqlParameterSource parametrosEliminacionCriterioEvaluacion = new MapSqlParameterSource();
-        for (CriterioEvaluacion criterioEvaluacionActual : criteriosEvaluacionActuales) {
-            CriterioEvaluacion criterioEvaluacionModificado = null;
-            for (CriterioEvaluacion criterioEvaluacion : criteriosEvaluacion) {
-                if (criterioEvaluacion.getId() == criterioEvaluacionActual.getId()) {
-                    criterioEvaluacionModificado = criterioEvaluacion;
+        MapSqlParameterSource parametrosEliminacionAnyosExperiencia = new MapSqlParameterSource();
+        MapSqlParameterSource parametrosActualizacionAnyosExperiencia = new MapSqlParameterSource();
+        for (AnyosExperiencia anyosExperienciaActual : anyosExperienciasActuales) {
+            AnyosExperiencia anyosExperienciaModificado = null;
+            for (AnyosExperiencia anyosExperiencia : anyosExperiencias) {
+                if (anyosExperiencia.getId() == anyosExperienciaActual.getId()) {
+                    anyosExperienciaModificado = anyosExperiencia;
                     break;
                 }
             }
-            if (criterioEvaluacionModificado == null) {
-                parametrosEliminacionCriterioEvaluacion.addValue("varIdCriterioEvaluacion", criterioEvaluacionActual.getId());
-                eliminarCriterioEvaluacion.execute(parametrosEliminacionCriterioEvaluacion);
+            if (anyosExperienciaModificado == null) {
+                parametrosEliminacionAnyosExperiencia.addValue("varId", anyosExperienciaActual.getId());
+                eliminarAnyosExperiencia.execute(parametrosEliminacionAnyosExperiencia);
             } else {
-                parametrosActualizacionCriterioEvaluacion.addValue("varIdCriterioEvaluacion", criterioEvaluacionModificado.getId());
-                if (criterioEvaluacionModificado.getPeso().length() > 0) {
-                    parametrosActualizacionCriterioEvaluacion.addValue("varPeso", Double.parseDouble(criterioEvaluacionModificado.getPeso()));
-                } else {
-                    parametrosActualizacionCriterioEvaluacion.addValue("varPeso", 0);
-                }
-                actualizarCriterioEvaluacion.execute(parametrosActualizacionCriterioEvaluacion);
+                parametrosActualizacionAnyosExperiencia.addValue("varId", anyosExperienciaModificado.getId());
+                parametrosActualizacionAnyosExperiencia.addValue("varNucleoBasicoConocimiento", anyosExperienciaModificado.getNucleoBasicoConocimiento());
+                parametrosActualizacionAnyosExperiencia.addValue("varAnyos", anyosExperienciaModificado.getAnyos());
+                actualizarAnyosExperiencia.execute(parametrosActualizacionAnyosExperiencia);
             }
         }
 
-        MapSqlParameterSource parametrosIngresoCriterioEvaluacion = new MapSqlParameterSource();
-        parametrosIngresoCriterioEvaluacion.addValue("varIdConvocatoria", idConvocatoria);
-        for (CriterioEvaluacion criterioEvaluacion : criteriosEvaluacion) {
-            if (criterioEvaluacion.getId() == 0) {
-                parametrosIngresoCriterioEvaluacion.addValue("varIdCriterioEvaluacion", criterioEvaluacion.getId());
-                if (criterioEvaluacion.getPeso().length() > 0) {
-                    parametrosIngresoCriterioEvaluacion.addValue("varPeso", Double.parseDouble(criterioEvaluacion.getPeso()));
-                } else {
-                    parametrosActualizacionCriterioEvaluacion.addValue("varPeso", 0);
-                }
-                ingresarCriterioEvaluacion.execute(parametrosIngresoCriterioEvaluacion);
+        MapSqlParameterSource parametrosIngresoAnyosExperiencia = new MapSqlParameterSource();
+        parametrosIngresoAnyosExperiencia.addValue("varIdConvocatoria", idConvocatoria);
+        for (AnyosExperiencia anyosExperiencia : anyosExperiencias) {
+            if (anyosExperiencia.getId() == 0) {
+                parametrosIngresoAnyosExperiencia.addValue("varNucleoBasicoConocimiento", anyosExperiencia.getNucleoBasicoConocimiento());
+                parametrosIngresoAnyosExperiencia.addValue("varAnyos", anyosExperiencia.getAnyos());
+                ingresarAnyosExperiencia.execute(parametrosIngresoAnyosExperiencia);
             }
         }
     }
+    
+    private void actualizarIdiomas(long idConvocatoria, long idUsuario, List<IdiomaConvocatoria> idiomas) {
+        MapSqlParameterSource parametrosConsultaIdioma = new MapSqlParameterSource();
+        parametrosConsultaIdioma.addValue("varIdConvocatoria", idConvocatoria);
+        Map resultadoIdiomas = obtenerIdiomasConvocatoria.execute(parametrosConsultaIdioma);
+        ArrayList<IdiomaConvocatoria> idiomasActuales = (ArrayList<IdiomaConvocatoria>) resultadoIdiomas.get("idiomasConvocatoria");
 
-    private void actualizarCriterioHabilitante(int idConvocatoria, List<CriterioHabilitante> criteriosHabilitantes) {
-        MapSqlParameterSource parametrosConsultaCriteriosHabilitantes = new MapSqlParameterSource();
-        parametrosConsultaCriteriosHabilitantes.addValue("varIdConvocatoria", idConvocatoria);
-        Map resultadoCriteriosHabilitantes = obtenerCriteriosHabilitantes.execute(parametrosConsultaCriteriosHabilitantes);
-        ArrayList<CriterioHabilitante> criteriosHabilitantesActuales = (ArrayList<CriterioHabilitante>) resultadoCriteriosHabilitantes.get("criteriosHabilitantes");
-
-        MapSqlParameterSource parametrosActualizacionCriterioHabilitante = new MapSqlParameterSource();
-        MapSqlParameterSource parametrosEliminacionCriterioHabilitante = new MapSqlParameterSource();
-        for (CriterioHabilitante criterioHabilitanteActual : criteriosHabilitantesActuales) {
-            CriterioHabilitante criterioHabilitanteModificado = null;
-            for (CriterioHabilitante criterioHabilitante : criteriosHabilitantes) {
-                if (criterioHabilitante.getId() == criterioHabilitanteActual.getId()) {
-                    criterioHabilitanteModificado = criterioHabilitante;
+        MapSqlParameterSource parametrosEliminacionIdioma = new MapSqlParameterSource();
+        MapSqlParameterSource parametrosActualizacionIdioma = new MapSqlParameterSource();
+        for (IdiomaConvocatoria idiomaActual : idiomasActuales) {
+            IdiomaConvocatoria idiomaModificado = null;
+            for (IdiomaConvocatoria idioma : idiomas) {
+                if (idioma.getId() == idiomaActual.getId()) {
+                    idiomaModificado = idioma;
                     break;
                 }
             }
-            if (criterioHabilitanteModificado == null) {
-                parametrosEliminacionCriterioHabilitante.addValue("varIdCriterioHabilitante", criterioHabilitanteActual.getId());
-                eliminarCriterioHabilitante.execute(parametrosEliminacionCriterioHabilitante);
+            if (idiomaModificado == null) {
+                parametrosEliminacionIdioma.addValue("varId", idiomaActual.getId());
+                eliminarIdiomaConvocatoria.execute(parametrosEliminacionIdioma);
             } else {
-                parametrosActualizacionCriterioHabilitante.addValue("varIdCriterioHabilitante", criterioHabilitanteModificado.getId());
-                if (criterioHabilitanteModificado.getValor().length() > 0) {
-                    parametrosActualizacionCriterioHabilitante.addValue("varValor", Integer.parseInt(criterioHabilitanteModificado.getValor()));
-                } else {
-                    parametrosActualizacionCriterioHabilitante.addValue("varvalor", 0);
-                }
-                actualizarCriterioEvaluacion.execute(parametrosActualizacionCriterioHabilitante);
+                parametrosActualizacionIdioma.addValue("varId", idiomaModificado.getId());
+                parametrosActualizacionIdioma.addValue("varIdioma", idiomaModificado.getIdioma());
+                parametrosActualizacionIdioma.addValue("varTipoCertificacion", idiomaModificado.getTipoCertificacion());
+                parametrosActualizacionIdioma.addValue("varOtraCertificacion", idiomaModificado.getOtraCertificacion());
+                parametrosActualizacionIdioma.addValue("varPuntajeMinimoCertificacion", idiomaModificado.getPuntajeMinimoCertificacion());
+                actualizarIdiomaConvocatoria.execute(parametrosActualizacionIdioma);
             }
         }
 
-        MapSqlParameterSource parametrosIngresoCriterioHabilitante = new MapSqlParameterSource();
-        parametrosIngresoCriterioHabilitante.addValue("varIdConvocatoria", idConvocatoria);
-        for (CriterioHabilitante criterioHabilitante : criteriosHabilitantes) {
-            if (criterioHabilitante.getId() == 0) {
-                parametrosIngresoCriterioHabilitante.addValue("varIdCriterioHabilitante", criterioHabilitante.getId());
-                if (criterioHabilitante.getValor().length() > 0) {
-                    parametrosIngresoCriterioHabilitante.addValue("varValor", Integer.parseInt(criterioHabilitante.getValor()));
-                } else {
-                    parametrosIngresoCriterioHabilitante.addValue("varvalor", 0);
-                }
-                ingresarCriterioHabilitante.execute(parametrosIngresoCriterioHabilitante);
+        MapSqlParameterSource parametrosIngresoIdioma = new MapSqlParameterSource();
+        parametrosIngresoIdioma.addValue("varIdConvocatoria", idConvocatoria);
+        for (IdiomaConvocatoria idioma : idiomas) {
+            if (idioma.getId() == 0) {
+                parametrosIngresoIdioma.addValue("varIdioma", idioma.getIdioma());
+                parametrosIngresoIdioma.addValue("varPersonaRegistra", idUsuario);
+                parametrosIngresoIdioma.addValue("varTipoCertificacion", idioma.getTipoCertificacion());
+                parametrosIngresoIdioma.addValue("varOtraCertificacion", idioma.getOtraCertificacion());
+                parametrosIngresoIdioma.addValue("varPuntajeMinimoCertificacion", idioma.getPuntajeMinimoCertificacion());
+                ingresarIdiomaConvocatoria.execute(parametrosIngresoIdioma);
             }
         }
     }
+    
 }

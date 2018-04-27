@@ -6,10 +6,9 @@
 package co.edu.fnsp.buho.utilidades;
 
 import co.edu.fnsp.buho.entidades.Adenda;
+import co.edu.fnsp.buho.entidades.AnyosExperiencia;
 import co.edu.fnsp.buho.entidades.Articulo;
 import co.edu.fnsp.buho.entidades.CorreoElectronico;
-import co.edu.fnsp.buho.entidades.CriterioEvaluacion;
-import co.edu.fnsp.buho.entidades.CriterioHabilitante;
 import co.edu.fnsp.buho.entidades.CuentaBancaria;
 import co.edu.fnsp.buho.entidades.CursoExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.Distincion;
@@ -22,7 +21,7 @@ import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.Patente;
-import co.edu.fnsp.buho.entidades.ProductoConocimento;
+import co.edu.fnsp.buho.entidades.ProductoConocimiento;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -107,58 +106,6 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < correosElectronicos.size() - 1) {
-                    json = json + ",";
-                }
-            }
-
-            json = json + "]";
-        }
-
-        return json;
-    }
-
-    public static String obtenerCriteriosEvaluacionJSON(List<CriterioEvaluacion> criteriosEvaluacion) {
-        String json = "";
-
-        if (criteriosEvaluacion.size() > 0) {
-            json = "[";
-
-            for (int i = 0; i < criteriosEvaluacion.size(); i++) {
-                CriterioEvaluacion criterioEvaluacion = criteriosEvaluacion.get(i);
-                json = json
-                        + "{id: ko.observable(" + criterioEvaluacion.getId() + "),"
-                        + "nombre:ko.observable('" + criterioEvaluacion.getNombre() + "'),"
-                        + "nombreSubcriterio():ko.observable('" + criterioEvaluacion.getNombreSubcriterio() + "'),"
-                        + "peso:ko.observable('" + criterioEvaluacion.getPeso() + "'),"
-                        + "idSubcriterio:ko.observable('" + criterioEvaluacion.getIdSubcriterio() + "'),"
-                        + "consecutivo:ko.observable(" + i + ")"
-                        + "}";
-                if (i < criteriosEvaluacion.size() - 1) {
-                    json = json + ",";
-                }
-            }
-
-            json = json + "]";
-        }
-
-        return json;
-    }
-
-    public static String obtenerCriteriosHabilitantesJSON(List<CriterioHabilitante> criteriosHabilitantes) {
-        String json = "";
-
-        if (criteriosHabilitantes.size() > 0) {
-            json = "[";
-
-            for (int i = 0; i < criteriosHabilitantes.size(); i++) {
-                CriterioHabilitante criterioHabilitante = criteriosHabilitantes.get(i);
-                json = json
-                        + "{id: ko.observable(" + criterioHabilitante.getId() + "),"
-                        + "nombre:ko.observable('" + criterioHabilitante.getNombre() + "'),"
-                        + "valor:ko.observable('" + criterioHabilitante.getValor() + "'),"
-                        + "consecutivo:ko.observable(" + i + ")"
-                        + "}";
-                if (i < criteriosHabilitantes.size() - 1) {
                     json = json + ",";
                 }
             }
@@ -609,26 +556,26 @@ public class Util {
         return json;
     }
 
-    public static String obtenerProductosConocimentoJSON(List<ProductoConocimento> productosConocimento) {
+    public static String obtenerProductosConocimientoJSON(List<ProductoConocimiento> productosConocimiento) {
         String json = "";
 
-        if (productosConocimento.size() > 0) {
+        if (productosConocimiento.size() > 0) {
             json = "[";
 
-            for (int i = 0; i < productosConocimento.size(); i++) {
-                ProductoConocimento productoConocimento = productosConocimento.get(i);
+            for (int i = 0; i < productosConocimiento.size(); i++) {
+                ProductoConocimiento productoConocimiento = productosConocimiento.get(i);
                 json = json
-                        + "{id: ko.observable(" + productoConocimento.getId() + "),"
-                        + "descripcion:ko.observable('" + productoConocimento.getDescripcion() + "'),"
-                        + "nombreTipo:ko.observable('" + productoConocimento.getNombreTipo() + "'),"
-                        + "tipo:ko.observable(" + productoConocimento.getTipo() + "),"
-                        + "url:ko.observable('" + productoConocimento.getUrl() + "'),"
-                        + "nucleoBasicoConocimento:ko.observable('" + productoConocimento.getNucleoBasicoConocimento() + "'),"
+                        + "{id: ko.observable(" + productoConocimiento.getId() + "),"
+                        + "descripcion:ko.observable('" + productoConocimiento.getDescripcion() + "'),"
+                        + "nombreTipo:ko.observable('" + productoConocimiento.getNombreTipo() + "'),"
+                        + "tipo:ko.observable(" + productoConocimiento.getTipo() + "),"
+                        + "url:ko.observable('" + productoConocimiento.getUrl() + "'),"
+                        + "nucleoBasicoConocimiento:ko.observable('" + productoConocimiento.getNucleoBasicoConocimiento() + "'),"
                         + "documento:ko.observable(''),"
                         + "tieneDocumento:ko.observable(true),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
-                if (i < productosConocimento.size() - 1) {
+                if (i < productosConocimiento.size() - 1) {
                     json = json + ",";
                 }
             }
@@ -639,4 +586,29 @@ public class Util {
         return json;
     }
 
+    public static String obtenerAnyosExperienciaJSON(List<AnyosExperiencia> anyosExperiencias) {
+        String json = "";
+
+        if (anyosExperiencias.size() > 0) {
+            json = "[";
+
+            for (int i = 0; i < anyosExperiencias.size(); i++) {
+                AnyosExperiencia anyosExperiencia = anyosExperiencias.get(i);
+                json = json
+                        + "{id: ko.observable(" + anyosExperiencia.getId() + "),"
+                        + "nucleoBasicoConocimiento:ko.observable(" + anyosExperiencia.getNucleoBasicoConocimiento() + "),"
+                        + "nombreNucleoBasicoConocimiento:ko.observable('" + anyosExperiencia.getNombreNucleoBasicoConocimiento() + "'),"
+                        + "anyos:ko.observable(" + anyosExperiencia.getAnyos() + "),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < anyosExperiencias.size() - 1) {
+                    json = json + ",";
+                }
+            }
+
+            json = json + "]";
+        }
+
+        return json;
+    }
 }

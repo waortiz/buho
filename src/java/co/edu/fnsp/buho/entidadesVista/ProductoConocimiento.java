@@ -3,20 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.fnsp.buho.entidades;
+package co.edu.fnsp.buho.entidadesVista;
+
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
  * @author William
  */
-public class ProductoConocimento {
+public class ProductoConocimiento {
     private int id;
     private String nombreTipo;
-    private int tipo;
-    private int nucleoBasicoConocimento;
+    private String tipo;
+    private String nucleoBasicoConocimento;
     private String url;
     private String descripcion;
-    private Documento documento;
+    private MultipartFile documento;
 
     /**
      * @return the id
@@ -49,28 +51,28 @@ public class ProductoConocimento {
     /**
      * @return the tipo
      */
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
     /**
      * @param tipo the tipo to set
      */
-    public void setTipo(int tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
     /**
      * @return the nucleoBasicoConocimento
      */
-    public int getNucleoBasicoConocimento() {
+    public String getNucleoBasicoConocimento() {
         return nucleoBasicoConocimento;
     }
 
     /**
      * @param nucleoBasicoConocimento the nucleoBasicoConocimento to set
      */
-    public void setNucleoBasicoConocimento(int nucleoBasicoConocimento) {
+    public void setNucleoBasicoConocimento(String nucleoBasicoConocimento) {
         this.nucleoBasicoConocimento = nucleoBasicoConocimento;
     }
 
@@ -105,14 +107,14 @@ public class ProductoConocimento {
     /**
      * @return the documento
      */
-    public Documento getDocumento() {
+    public MultipartFile getDocumento() {
         return documento;
     }
 
     /**
      * @param documento the documento to set
      */
-    public void setDocumento(Documento documento) {
+    public void setDocumento(MultipartFile documento) {
         this.documento = documento;
     }
     

@@ -145,7 +145,7 @@ public class ServicioHojaVida implements IServicioHojaVida {
     }
 
     @Override
-    public Documento obtenerDocumentoProductoConocimento(int idProductoConocimento) {
-        return repositorioHojaVida.obtenerDocumentoProductoConocimento(idProductoConocimento);
+    public Documento obtenerDocumentoProductoConocimiento(int idProductoConocimiento) {
+        return repositorioHojaVida.obtenerDocumentoProductoConocimiento(idProductoConocimiento);
     }
 }

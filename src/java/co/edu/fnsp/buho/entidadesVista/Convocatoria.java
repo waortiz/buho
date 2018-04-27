@@ -5,8 +5,8 @@
  */
 package co.edu.fnsp.buho.entidadesVista;
 
-import co.edu.fnsp.buho.entidades.CriterioHabilitante;
-import co.edu.fnsp.buho.entidades.CriterioEvaluacion;
+import co.edu.fnsp.buho.entidades.AnyosExperiencia;
+import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,9 +38,9 @@ public class Convocatoria {
     private String nombreCurso;
     private String totalHorasSemestreCurso;
     private List<Adenda> adendas = new ArrayList<>();
-    private List<CriterioEvaluacion> criteriosEvaluacion = new ArrayList<>();
-    private List<CriterioHabilitante> criteriosHabilitantes = new ArrayList<>();
-
+    private List<AnyosExperiencia> anyosExperiencias = new ArrayList<>();
+    private List<IdiomaConvocatoria> idiomas = new ArrayList<>();
+    
     /**
      * @return the id
      */
@@ -100,14 +100,14 @@ public class Convocatoria {
     /**
      * @return the area
      */
-    public String getArea() {
+    public String getNucleoBasicoConocimiento() {
         return area;
     }
 
     /**
      * @param area the area to set
      */
-    public void setArea(String area) {
+    public void setNucleoBasicoConocimiento(String area) {
         this.area = area;
     }
 
@@ -266,30 +266,30 @@ public class Convocatoria {
     }
 
     /**
-     * @return the criteriosEvaluacion
+     * @return the anyosExperiencias
      */
-    public List<CriterioEvaluacion> getCriteriosEvaluacion() {
-        return criteriosEvaluacion;
+    public List<AnyosExperiencia> getAnyosExperiencias() {
+        return anyosExperiencias;
     }
 
     /**
-     * @param criteriosEvaluacion the criteriosEvaluacion to set
+     * @param anyosExperiencias the anyosExperiencias to set
      */
-    public void setCriteriosEvaluacion(List<CriterioEvaluacion> criteriosEvaluacion) {
-        this.criteriosEvaluacion = criteriosEvaluacion;
+    public void setAnyosExperiencias(List<AnyosExperiencia> anyosExperiencias) {
+        this.anyosExperiencias = anyosExperiencias;
     }
 
     /**
-     * @return the criteriosHabilitantes
+     * @return the idiomas
      */
-    public List<CriterioHabilitante> getCriteriosHabilitantes() {
-        return criteriosHabilitantes;
+    public List<IdiomaConvocatoria> getIdiomas() {
+        return idiomas;
     }
 
     /**
-     * @param criteriosHabilitantes the criteriosHabilitantes to set
+     * @param idiomas the idiomas to set
      */
-    public void setCriteriosHabilitantes(List<CriterioHabilitante> criteriosHabilitantes) {
-        this.criteriosHabilitantes = criteriosHabilitantes;
+    public void setIdiomas(List<IdiomaConvocatoria> idiomas) {
+        this.idiomas = idiomas;
     }
 }

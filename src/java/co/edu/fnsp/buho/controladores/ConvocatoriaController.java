@@ -69,17 +69,11 @@ public class ConvocatoriaController {
         List<Maestro> tiposConvocatoria = servicioMaestro.obtenerTiposConvocatoria();
         model.addAttribute("tiposConvocatoria", tiposConvocatoria);
 
-        List<Maestro> areasConvocatoria = servicioMaestro.obtenerAreas();
-        model.addAttribute("areasConvocatoria", areasConvocatoria);
+        List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
+        model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
 
         List<Maestro> tiposAdenda = servicioMaestro.obtenerTiposAdenda();
         model.addAttribute("tiposAdenda", tiposAdenda);
-
-        List<Maestro> criteriosHabilitantes = servicioMaestro.obtenerCriteriosHabilitantes();
-        model.addAttribute("criteriosHabilitantes", criteriosHabilitantes);
-
-        List<Maestro> criteriosEvaluacion = servicioMaestro.obtenerCriteriosEvaluacion();
-        model.addAttribute("criteriosEvaluacion", criteriosEvaluacion);
 
         List<Maestro> sedes = servicioMaestro.obtenerSedes();
         model.addAttribute("sedes", sedes);
@@ -95,7 +89,7 @@ public class ConvocatoriaController {
         try {
             Convocatoria convocatoriaIngresar = new Convocatoria();
             convocatoriaIngresar.setId(convocatoria.getId());
-            convocatoriaIngresar.setArea(convocatoria.getArea());
+            convocatoriaIngresar.setNucleoBasicoConocimiento(convocatoria.getNucleoBasicoConocimiento());
             convocatoriaIngresar.setDescripcion(convocatoria.getDescripcion());
             convocatoriaIngresar.setFechaFin(convocatoria.getFechaFin());
             convocatoriaIngresar.setFechaInicio(convocatoria.getFechaInicio());
@@ -129,8 +123,8 @@ public class ConvocatoriaController {
                 }
                 convocatoriaIngresar.getAdendas().add(nuevaAdenda);
             }
-            convocatoriaIngresar.setCriteriosEvaluacion(convocatoria.getCriteriosEvaluacion());
-            convocatoriaIngresar.setCriteriosHabilitantes(convocatoria.getCriteriosHabilitantes());
+            convocatoriaIngresar.setAnyosExperiencias(convocatoria.getAnyosExperiencias());
+            convocatoriaIngresar.setIdiomas(convocatoria.getIdiomas());
             long idUsuario = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario();
             if (convocatoriaIngresar.getId() == 0) {
                 servicioConvocatoria.ingresarConvocatoria(idUsuario, convocatoriaIngresar);
@@ -153,8 +147,8 @@ public class ConvocatoriaController {
         List<Maestro> tiposConvocatoria = servicioMaestro.obtenerTiposConvocatoria();
         model.addAttribute("tiposConvocatoria", tiposConvocatoria);
 
-        List<Maestro> areasConvocatoria = servicioMaestro.obtenerAreas();
-        model.addAttribute("areasConvocatoria", areasConvocatoria);
+        List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
+        model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
 
         List<Maestro> tiposAdenda = servicioMaestro.obtenerTiposAdenda();
         model.addAttribute("tiposAdenda", tiposAdenda);
@@ -166,11 +160,8 @@ public class ConvocatoriaController {
         if (convocatoria.getAdendas().size() > 0) {
             model.addAttribute("adendasJSON", Util.obtenerAdendasJSON(convocatoria.getAdendas()));
         }
-        if (convocatoria.getCriteriosEvaluacion().size() > 0) {
-            model.addAttribute("criteriosEvaluacionJSON", Util.obtenerCriteriosEvaluacionJSON(convocatoria.getCriteriosEvaluacion()));
-        }
-        if (convocatoria.getCriteriosHabilitantes().size() > 0) {
-            model.addAttribute("criteriosHabilitantesJSON", Util.obtenerCriteriosHabilitantesJSON(convocatoria.getCriteriosHabilitantes()));
+        if (convocatoria.getAnyosExperiencias().size() > 0) {
+            model.addAttribute("anyosExperienciasJSON", Util.obtenerAnyosExperienciaJSON(convocatoria.getAnyosExperiencias()));
         }
 
         return "convocatorias/crear";

@@ -17,7 +17,6 @@ public interface IServicioMaestro {
     List<Maestro> obtenerTiposIdentificacion();
     List<Maestro> obtenerActividadesEconomicas();
     List<Maestro> obtenerNucleosBasicosConocimiento();
-    List<Maestro> obtenerAreas();
     List<Maestro> obtenerCargos();
     List<Maestro> obtenerDedicaciones();
     List<Maestro> obtenerDepartamentos(int idPais);
@@ -48,6 +47,6 @@ public interface IServicioMaestro {
     List<Maestro> obtenerTiposInvestigador();
     List<Maestro> obtenerTiposAutorArticulo();
     List<Maestro> obtenerTiposPatente();
-    List<Maestro> obtenerTiposProductoConocimiento();
+    List<Maestro> obtenerTiposProductosConocimiento();
     List<Maestro> obtenerClasesPatente();
 }

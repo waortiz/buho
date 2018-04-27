@@ -80,7 +80,7 @@ public class HojaVida {
     private List<ExperienciaDocencia> experienciasDocencia = new ArrayList<>();
     private List<Articulo> articulos = new ArrayList<>();
     private List<Patente> patentes = new ArrayList<>();
-    private List<ProductoConocimento> productosConocimento = new ArrayList<>();
+    private List<ProductoConocimiento> productosConocimento = new ArrayList<>();
     
     /**
      * @return the tipoIdentificacion
@@ -939,14 +939,14 @@ public class HojaVida {
     /**
      * @return the productosConocimento
      */
-    public List<ProductoConocimento> getProductosConocimento() {
+    public List<ProductoConocimiento> getProductosConocimento() {
         return productosConocimento;
     }
 
     /**
      * @param productosConocimento the productosConocimento to set
      */
-    public void setProductosConocimento(List<ProductoConocimento> productosConocimento) {
+    public void setProductosConocimento(List<ProductoConocimiento> productosConocimento) {
         this.productosConocimento = productosConocimento;
     }
 }

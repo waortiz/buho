@@ -19,7 +19,7 @@ public class ExperienciaLaboral {
     private boolean fnsp;
     private Date fechaIngreso;
     private Date fechaRetiro;
-    private int areaSaber;
+    private int nucleoBasicoConocimiento;
     private String nombreNucleoBasicoConocimiento;
     private int tipoEmpresa;
     private String nombreTipoEmpresa;
@@ -132,20 +132,6 @@ public class ExperienciaLaboral {
     }
 
     /**
-     * @return the areaSaber
-     */
-    public int getNucleoBasicoConocimiento() {
-        return areaSaber;
-    }
-
-    /**
-     * @param areaSaber the areaSaber to set
-     */
-    public void setNucleoBasicoConocimiento(int areaSaber) {
-        this.areaSaber = areaSaber;
-    }
-
-    /**
      * @return the nombreNucleoBasicoConocimiento
      */
     public String getNombreNucleoBasicoConocimiento() {
@@ -157,6 +143,20 @@ public class ExperienciaLaboral {
      */
     public void setNombreNucleoBasicoConocimiento(String nombreNucleoBasicoConocimiento) {
         this.nombreNucleoBasicoConocimiento = nombreNucleoBasicoConocimiento;
+    }
+
+    /**
+     * @return the nucleoBasicoConocimiento
+     */
+    public int getNucleoBasicoConocimiento() {
+        return nucleoBasicoConocimiento;
+    }
+
+    /**
+     * @param nucleoBasicoConocimiento the nucleoBasicoConocimiento to set
+     */
+    public void setNucleoBasicoConocimiento(int nucleoBasicoConocimiento) {
+        this.nucleoBasicoConocimiento = nucleoBasicoConocimiento;
     }
 
     /**

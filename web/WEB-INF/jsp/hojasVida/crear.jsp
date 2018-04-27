@@ -1454,8 +1454,8 @@
                                         <div class="col-md-6" id="divOtroCertificacionIdioma" style="display: none;">
                                             <div class="form-group">
                                                 <label for="">Cual?</label>
-                                                <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar cuando eliga el tipo otro cual?">
-                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                                <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el otro tipo de certificación">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                                                 <input type="text" name="otraCertificacionIdioma" id="otraCertificacionIdioma" class="form-control">
                                             </div>
                                         </div>
@@ -2453,7 +2453,7 @@
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                                 <select style="width: 100%;" class="js-select-basic-single js-states form-control" name="tipoProductoConocimiento" id="tipoProductoConocimiento">
                                                     <option></option>
-                                                    <c:forEach var="tipoProductoConocimiento" items="${tiposProductoConocimiento}">
+                                                    <c:forEach var="tipoProductoConocimiento" items="${tiposProductosConocimiento}">
                                                     <option value="${tipoProductoConocimiento.getId()}">${tipoProductoConocimiento.getNombre()}</option>
                                                     </c:forEach>
                                                 </select>
@@ -2683,6 +2683,10 @@
     </div>
 </div>
 <script type="text/javascript">
+    var ID_UNIVERSIDAD_ANTIOQUIA = '209';
+    var UNIVERSIDAD_ANTIOQUIA = 'Universidad de Antioquia';
+    var TIPO_CERTIFICACION_OTRO = "8";
+    
     $('.fecha').datepicker({
         dateFormat: "dd/mm/yy",
         changeMonth: true,
@@ -2779,7 +2783,7 @@
         });
         $('#tipoCertificacionIdioma').change(function(){
             var valor = $(this).val();
-            if(valor === "8") {
+            if(valor === TIPO_CERTIFICACION_OTRO) {
               $('#divOtroCertificacionIdioma').css("display","block");
             } else {
               $('#divOtroCertificacionIdioma').css("display","none");
@@ -2831,7 +2835,7 @@
           $('#md_programa').modal('hide');
         });
         $('#btnExperienciaDocenciaFNSPSi').click(function () {
-            $('#institucionExperienciaDocencia').val('209').trigger('change.select2');
+            $('#institucionExperienciaDocencia').val(ID_UNIVERSIDAD_ANTIOQUIA).trigger('change.select2');
             $('#institucionExperienciaDocencia').prop('disabled', 'disabled');
         });
         $('#btnExperienciaDocenciaFNSPNo').click(function () {
@@ -2845,7 +2849,7 @@
             $('#fechaRetiroExperienciaLaboral').prop('disabled', false);
         });
         $('#btnExperienciaLaboralFNSPSi').click(function () {
-            $('#nombreEmpresaExperienciaLaboral').val("Universidad de Antioquia");
+            $('#nombreEmpresaExperienciaLaboral').val(UNIVERSIDAD_ANTIOQUIA);
             $('#nombreEmpresaExperienciaLaboral').prop('disabled', 'disabled');
         });
         $('#btnExperienciaLaboralFNSPNo').click(function () {
@@ -3080,7 +3084,7 @@
                                   experienciasDocencia,
                                   articulos,
                                   patentes,
-                                  productosConocimento) {
+                                  productosConocimiento) {
         self = this;
         self.correosElectronicos = ko.observableArray(correosElectronicos);
         self.cuentasBancarias = ko.observableArray(cuentasBancarias);
@@ -3105,7 +3109,7 @@
         });
         self.articulos = ko.observableArray(articulos);
         self.patentes = ko.observableArray(patentes);
-        self.productosConocimento = ko.observableArray(productosConocimento);
+        self.productosConocimiento = ko.observableArray(productosConocimiento);
 
         self.adicionarCorreoElectronico = function () {
             var correoElectronico = $('#correoElectronico').val();
@@ -3364,7 +3368,11 @@
                 bootstrap_alert_idioma.warning('Debe seleccionar el nivel de escritura');
                 return false;
             }
-            if (tipoCertificacion === "8" && otraCertificacion === "") {
+            if (tipoCertificacion === "") {
+                bootstrap_alert_idioma.warning('Debe seleccionar el tipo de certificación');
+                return false;
+            }
+            if (tipoCertificacion === TIPO_CERTIFICACION_OTRO && otraCertificacion === "") {
                 bootstrap_alert_idioma.warning('Debe ingresar la certificación');
                 return false;
             }
@@ -3445,7 +3453,7 @@
             $('#nivelLecturaIdioma').val(idioma.nivelLectura()).trigger('change');
             $('#otraCertificacionIdioma').val(idioma.otraCertificacion());
             $('#tipoCertificacionIdioma').val(idioma.tipoCertificacion()).trigger('change');
-            if($('#tipoCertificacionIdioma').val() === "8") {
+            if($('#tipoCertificacionIdioma').val() === TIPO_CERTIFICACION_OTRO) {
               $('#divOtroCertificacionIdioma').css("display","block");
             } else {
               $('#divOtroCertificacionIdioma').css("display","none");
@@ -3561,7 +3569,7 @@
               $('#btnGraduadoSiEducacionBasica').removeClass('active').addClass('notActive');  
               $('#anyoFinalizacionEducacionBasica').prop('disabled','disabled');
             }
-            if($('#tipoCertificacionEducacionBasica').val() === "8") {
+            if($('#tipoCertificacionEducacionBasica').val() === TIPO_CERTIFICACION_OTRO) {
               $('#divOtroCertificacionIdioma').css("display","block");
             } else {
               $('#divOtroCertificacionIdioma').css("display","none");
@@ -4606,7 +4614,7 @@
                     consecutivo: ko.observable(self.productosConocimiento().length),
                     nombreTipo: ko.observable(nombreTipoPatente),
                     tipo: ko.observable(tipoPatente),
-                    nucleoBasicoConocimento: ko.observable(nucleoBasicoProductoConocimiento),
+                    nucleoBasicoConocimiento: ko.observable(nucleoBasicoProductoConocimiento),
                     url: ko.observable(urlProductoConocimiento),
                     descripcion: ko.observable(descripcionProductoConocimiento),
                     documento: ko.observable(''),
@@ -4624,7 +4632,7 @@
                 }
                 self.productosConocimiento()[indice].nombreTipo(nombreTipoProductoConocimiento);
                 self.productosConocimiento()[indice].tipo(tipoProductoConocimiento);
-                self.productosConocimiento()[indice].nucleoBasicoConocimento(nucleoBasicoProductoConocimiento);
+                self.productosConocimiento()[indice].nucleoBasicoConocimiento(nucleoBasicoProductoConocimiento);
                 self.productosConocimiento()[indice].url(urlProductoConocimiento);
                 self.productosConocimiento()[indice].descripcion(descripcionProductoConocimiento);
                 self.productosConocimiento()[indice].documento('');
@@ -4645,7 +4653,7 @@
         self.editarProductoConocimiento = function (productoConocimiento) {
             ocultarDocumentosProductosConocimiento();
             $('#tipoProductoConocimiento').val(productoConocimiento.tipo()).trigger('change');
-            $('#nucleoBasicoProductoConocimiento').val(productoConocimiento.nucleoBasicoConocimento()).trigger('change');
+            $('#nucleoBasicoProductoConocimiento').val(productoConocimiento.nucleoBasicoConocimiento()).trigger('change');
             $('#urlProductoConocimiento').val(productoConocimiento.url());
             $('#descripcionProductoConocimiento').val(productoConocimiento.descripcion());    
             $('#consecutivo').val(productoConocimiento.consecutivo());
@@ -5337,7 +5345,7 @@
     var experienciasDocencia = [];
     var articulos = [];
     var patentes = [];
-    var productosConocimento = [];
+    var productosConocimiento = [];
     
     <c:if test = "${correosElectronicosJSON != null}">
     correosElectronicos = ${correosElectronicosJSON};
@@ -5422,12 +5430,12 @@
         $('input:file[name="patentes[' + i + '].documento"]').hide();
     }    
     </c:if>
-    <c:if test = "${productosConocimentoJSON != null}">
-    productosConocimento = ${productosConocimentoJSON};
-    for (var i = 0; i < productosConocimento.length; i++) {
-        fileInput = $('<input type="file" class="form-control" name="productosConocimento[' + i + '].documento" />');
-        $('#documentosProductosConocimento').append(fileInput);
-        $('input:file[name="productosConocimento[' + i + '].documento"]').hide();
+    <c:if test = "${productosConocimientoJSON != null}">
+    productosConocimiento = ${productosConocimientoJSON};
+    for (var i = 0; i < productosConocimiento.length; i++) {
+        fileInput = $('<input type="file" class="form-control" name="productosConocimiento[' + i + '].documento" />');
+        $('#documentosProductosConocimiento').append(fileInput);
+        $('input:file[name="productosConocimiento[' + i + '].documento"]').hide();
     }    
     </c:if>
     var hojaVidaModel = new HojaVidaModel(correosElectronicos, 
@@ -5443,7 +5451,7 @@
         experienciasDocencia,
         articulos,
         patentes,
-        productosConocimento);
+        productosConocimiento);
     ko.applyBindings(hojaVidaModel);
     
     for (var i = 0; i < hojaVidaModel.experienciasDocencia().length; i++) {

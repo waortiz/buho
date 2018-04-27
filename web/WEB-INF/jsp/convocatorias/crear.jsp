@@ -4,19 +4,42 @@
 
 
 <div id="contenido">
-    <div class="container">
-        <ul class="list-inline">
-            <li><button id="btndatosgen" class="btn btn-success">Datos generales</button></li>
-            <li><button id="btncrithab" class="btn btn-success">Criterios habilitantes</button></li>
-            <li><button id="btncriteva" class="btn btn-success">Criterios evaluaci&oacute;n</button></li>
-            <li><button id="btnadendas" class="btn btn-success">Adendas</button></li>
+    <div class="contenido-nav2">
+        <ul class="navbar-nav navbar-sidenav">
+            <li class="nav-item" id="btndatosgen" data-toggle="tooltip" data-placement="right" title="" data-original-title="Datos generales">
+                <a class="nav-link" >
+                    <i  class="fa fa-address-book" style="font-size:36px;"></i>
+                    <span class="nav-link-text">Datos generales</span>
+                </a>
+            </li>
+            <li class="nav-item" id="btncrithab" data-toggle="tooltip" data-placement="right" title="" data-original-title="Criterios habilitantes">
+                <a class="nav-link" >
+                    <i  class="fa fa-address-book-o" style="font-size:36px;"></i>
+                    <span class="nav-link-text">Criterios habilitantes</span>
+                </a>
+            </li>
+            <li class="nav-item" id="btncriteva" data-toggle="tooltip" data-placement="right" title="" data-original-title="Criterios evaluaci&oacute;n" style="margin-right: 5px !important;">
+                <a class="nav-link" >
+                    <i class="fa fa-check-square-o" style="font-size:36px;"></i>
+                    <span class="nav-link-text">Criterios evaluaci&oacute;n</span>
+                </a>
+            </li>
+            <li class="nav-item" id="btnadendas" data-toggle="tooltip" data-placement="right" title="" data-original-title="Adendas">
+                <a class="nav-link" >          
+                    <i class="fa fa-pencil-square-o" style="font-size:36px;"></i>
+                    <span class="nav-link-text">Adendas </span>
+                </a>
+            </li>
+
         </ul>
+    </div>    
+    <div class="container">
         <div id="alert_placeholder_convocatoria"></div>
         <form:form method="POST" modelAttribute="convocatoria">
             <div id="formdatosgen">
                 <legend><h3>Convocatoria</h3></legend>
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="tipoConvocatoria">Tipo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de convocatoria">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
@@ -26,7 +49,7 @@
                                 </form:select>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="fechaInicio">Fecha de inicio</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de inicio">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
@@ -37,9 +60,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label for="fechaFin">Fecha de finalizaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de finalizaci&oacute;n" data-validation="required" data-validation-error-msg="Debe ingresar la fecha de finalización">
+                            <label for="fechaFin">Fecha de cierre</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de finalizaci&oacute;n" data-validation="required" data-validation-error-msg="Debe ingresar la fecha de finalización">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                             <div class='input-group date'>
                                 <form:input class="form-control fecha" path="fechaFin" data-validation="required" data-validation-error-msg="Debe ingresar la fecha de finalización"/>
@@ -61,17 +84,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <div class="form-group">
-                            <label for="area">&Aacute;rea</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el &aacute;rea de convocatoria">
+                            <label for="area">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el el núcleo básico del conocimiento">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
-                                <form:select style="width: 100%;" path="area" class="js-select-basic-single js-states form-control">
+                                <form:select style="width: 100%;" path="nucleoBasicoConocimiento" class="js-select-basic-single js-states form-control">
                                     <form:option value=""></form:option>
-                                    <form:options items="${areasConvocatoria}" itemLabel="nombre" itemValue="id"/>
+                                    <form:options items="${nucleosBasicosConocimiento}" itemLabel="nombre" itemValue="id"/>
                                 </form:select>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="nombre">Nombre</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de la convocatoria">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
@@ -179,123 +202,130 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button"  class="btn btn-success" id="addcurso">Agregar</button>
+                                    <button type="button" class="btn btn-success" id="addcurso">Agregar</button>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>                        
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="documento">Documento de soporte</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe adjuntar un documento de la convocatoria">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>
                             <div class="form-inline">
-                            <input type="file" class="form-control" name="documento" id="documento" >
-                            <c:if test = "${convocatoria.getId() > 0}">
-                            <button class="btn btn-success btn-xs" type="button" onclick="verDocumentoConvocatoria()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
-                            </c:if>
+                                <input type="file" class="form-control" name="documento" id="documento" >
+                                <c:if test = "${convocatoria.getId() > 0}">
+                                    <button class="btn btn-success btn-xs" type="button" onclick="verDocumentoConvocatoria()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
+                                </c:if>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="formcrithab" style="display: none;">
+            <div id="formcrithab" style="display: none;" >
                 <div class="row">   
-                    <legend>Criterios Habilitantes</legend>
-                    <div class="col-md-5"  style="margin-top: -15px;">
-                        <div class="form-group">
-                            <label>Agregar criterio habilitante</label>
-                            <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" data-target="#md_crithab" data-toggle="modal" ><span class="glyphicon glyphicon-plus"></span></button>
-                        </div>
-                        <div class="modal fade" role="dialog" id="md_crithab">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header mhsuccess">
-                                        <button class="close" data-dismiss="modal">&times;</button>
-                                        <h4>Criterio habilitante</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label>Nombre de criterio habilitante</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de criterio habilitante">
-                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                <input type="text" name="txtcrithab" id="txtcrithab" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button"  class="btn btn-success" id="addcrithab">Agregar</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <select name="criteriosHabilitantesPorAsignar" id="criteriosHabilitantesPorAsignar" class="form-control" multiple>
-                                <c:forEach var="criterioHabilitante" items="${criteriosHabilitantes}">
-                                    <option value="${criterioHabilitante.getId()}">${criterioHabilitante.getNombre()}</option>
-                                </c:forEach>                            
-                            </select>                            
-                        </div>
+                    <div class="col-md-1" style="margin-bottom: 20px;">
+                        <button type="button" class="btn btn-success">Criterios habilitantes</button>
                     </div>
-                    <div class="col-md-2" style="margin-top: 35px;">
-                        <center><button class="btn btn-success btn-xs" type="button" id="asignarCriterioHabilitante" ><i class="fa fa-arrow-right" aria-hidden="true"></i></button></center><br>
-                    </div>
-                    <div class="col-md-5" style="margin-top: 15px;">
+                </div>
+                <legend>Criterios Habilitantes</legend>
+                <div class="row">
+
+                </div>
+                <div class="row">  
+                    <div class="col-md-2" >
                         <div class="form-group">
+                            <label>Años experiencia</label>
                             <div class="table-responsive">
-                                <table class="table table-hover tableestilo2" id="tbcrihab">
+                                <table class="table table-hover tableestilo2">
                                     <thead>
                                         <tr>
-                                            <th>Criterio</th>
-                                            <th>Valor</th>
-                                            <th>Opcion</th>
-                                        </tr>
+                                            <th>M&iacute;nimo de a&ntilde;os</th>
                                     </thead>
-                                    <tbody data-bind="foreach: { data: criteriosHabilitantes }">
-                                        <tr class="table-row">
-                                            <td style="width: 60%">
-                                                <span data-bind="text: nombre" ></span>
-                                                <input type="hidden" class="form-control" data-bind="value: nombre, attr: { 'name': 'criteriosHabilitantes[' + $index() + '].nombre'  }">
-                                            </td>
-                                            <td style="width: 30%" align="center">
-                                                <input type="text" class="form-control input-sm numbersOnly" style="width:100px;" data-bind="value: nombre, attr: { 'name': 'criteriosHabilitantes[' + $index() + '].valor'  }">
-                                            </td>
-                                            <td style="width: 10%" align="center">
-                                                <input type="hidden" data-bind="value: id, attr: { 'name': 'criteriosHabilitantes[' + $index() + '].id'  }" />
-                                                <button class='btn btn-danger btn-xs' type='button' data-bind="click: $root.eliminarCriterioHabilitante"><span class='glyphicon glyphicon-remove'></span></button>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <center>
+                                                    <input type="text" name="minimoAnyosExperiencia" id="minimoAnyosExperiencia" class="form-control input-sm" style="width: 100px;text-align: center;">
+                                                </center>
                                             </td>
                                         </tr>
-                                    </tbody>      
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Agregar formaci&oacute;n requerida</label> 
-                            <button  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_form"><span class="glyphicon glyphicon-plus"></span></button><br>
-                            <table class="table table-hover tableestilo2" id="tbform">
+                    <div class="col-md-6" >
+                        <label>Agregar a&ntilde;os experiencia</label>
+                        <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoAnyosExperiencia()" ><span class="glyphicon glyphicon-plus"></span></button>
+                        <div class="table-responsive">
+                            <table class="table table-hover tableestilo2">
                                 <thead>
-                                <th>Programa</th>
+                                    <tr>
+                                        <th style="width:300px;">Nucleo básico de conocimiento</th>
+                                        <th>M&iacute;nimo de a&ntilde;os</th>
+                                        <th>Opción</th>
+                                    </tr>
                                 </thead>
+                                <tbody data-bind="foreach: { data: anyosExperiencias }">
+                                    <tr class="table-row">
+                                        <td style="width: 90%">
+                                            <span data-bind="text: nombreNucleoBasicoConocimiento" ></span>
+                                        </td>
+                                        <td style='white-space: nowrap; width: 10%' align="center">
+                                            <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarAnyosExperiencia"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                            <button class='btn btn-danger btn-xs' type='button' style='margin-left:10px;' data-bind="click: $root.eliminarAnyosExperiencia"><span class='glyphicon glyphicon-remove'></span></button>
+                                            <input type="hidden" data-bind="value: nucleoBasicoConocimiento, attr: { 'name': 'anyosExperiencias[' + $index() + '].nucleoBasicoConocimiento'  }" />
+                                            <input type="hidden" data-bind="value: anyos, attr: { 'name': 'anyosExperiencias[' + $index() + '].anyos'  }" />
+                                            <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'anyosExperiencias[' + $index() + '].consecutivo'  }" />
+                                            <input type="hidden" data-bind="value: id, attr: { 'name': 'anyosExperiencias[' + $index() + '].id'  }" />
+                                        </td>
+                                    </tr>
+                                </tbody>    
                             </table>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Agregar formaci&oacute;n complementaria requerida</label> 
-                            <button  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_formcomreq"><span class="glyphicon glyphicon-plus"></span></button><br>
-                            <table class="table table-hover tableestilo2" id="tbformcomreq">
-                                <thead>
-                                <th>Nombre de la capacitación o certificaci&oacute;n</th>
-                                </thead>
-                            </table>
+                    <div class="modal fade" role="dialog" id="md_anyos_experiencia">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header mhsuccess">
+                                    <button class="close" data-dismiss="modal">&times;</button>
+                                    <h4>A&ntilde;os experiencia</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="alert_anyos_experiencia"></div>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="form-group">
+                                                <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
+                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                    <select style="width: 100%;" name="nucleoBasicoConocimientoAnyosExperiencia" id="nucleoBasicoConocimientoAnyosExperiencia" class="js-select-basic-single js-states form-control">
+                                                        <option></option>
+                                                        <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
+                                                        <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group ">
+                                                <label>A&ntilde;os experiencia minima</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el valor de años experiencia minima">
+                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                <input  name="anyosExperiencia" id="anyosExperiencia" class="form-control" >
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-bind="click: adicionarAnyosExperiencia">Agregar</button>
+                                    <button type="button" class="btn btn-success" onclick="cerrarVentanaAnyosExperiencia();">Cancelar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -304,7 +334,113 @@
                             <button  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_formidiom"><span class="glyphicon glyphicon-plus"></span></button><br>
                             <table class="table table-hover tableestilo2" id="tbformidiom">
                                 <thead>
-                                <th>Idioma</th>
+                                    <th>Idioma</th>
+                                    <th>Opción</th>
+                                </thead>
+                                <tbody data-bind="foreach: { data: idiomas }">
+                                    <tr class="table-row">
+                                        <td style="width: 90%">
+                                            <span data-bind="text: nombreIdioma" ></span>
+                                        </td>
+                                        <td style='white-space: nowrap; width: 10%' align="center">
+                                            <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarIdioma"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                            <button class='btn btn-danger btn-xs' type='button' style='margin-left:10px;' data-bind="click: $root.eliminarIdioma"><span class='glyphicon glyphicon-remove'></span></button>
+                                            <input type="hidden" data-bind="value: idioma, attr: { 'name': 'idiomas[' + $index() + '].idioma'  }" />
+                                            <input type="hidden" data-bind="value: nombreIdioma, attr: { 'name': 'idiomas[' + $index() + '].nombreIdioma'  }" />
+                                            <input type="hidden" data-bind="value: tipoCertificacion, attr: { 'name': 'idiomas[' + $index() + '].tipoCertificacion'  }" />
+                                            <input type="hidden" data-bind="value: nombreTipoCertificacion, attr: { 'name': 'idiomas[' + $index() + '].nombreTipoCertificacion'  }" />
+                                            <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'idiomas[' + $index() + '].consecutivo'  }" />
+                                            <input type="hidden" data-bind="value: id, attr: { 'name': 'idiomas[' + $index() + '].id'  }" />
+                                        </td>
+                                    </tr>
+                                </tbody>    
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal fade" role="dialog" id="md_idiomas">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header mhsuccess">
+                                    <button class="close" data-dismiss="modal">&times;</button>
+                                    <h4>Idioma requerido</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="alert_idioma"></div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="idioma">Idioma</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar su idioma">
+                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
+                                                <select style="width: 100%;" name="idioma" id="idioma" class="js-select-basic-single js-states form-control">
+                                                    <option></option>
+                                                     <c:forEach var="idioma" items="${idiomas}">
+                                                     <option value="${idioma.getId()}">${idioma.getNombre()}</option>
+                                                     </c:forEach>   
+                                                </select>
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Tipo de certificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de adenda">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
+                                                <select style="width: 100%;" name="tipoCertificacionIdioma" id="tipoCertificacionIdioma" class="js-select-basic-single js-states form-control">
+                                                    <option></option>
+                                                    <c:forEach var="tipoCertificacion" items="${tiposCertificacion}">
+                                                    <option value="${tipoCertificacion.getId()}">${tipoCertificacion.getNombre()}</option>
+                                                    </c:forEach> 
+                                                </select>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6" id="divOtroCertificacionIdioma" style="display: none;">
+                                            <div class="form-group">
+                                                <label for="">Cual?</label>
+                                                <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el otro tipo de certificación">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                                <input type="text" name="otraCertificacionIdioma" id="otraCertificacionIdioma" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">Puntaje minimo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el puntaje minimo de estudio idioma">
+                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                                <input type="text" name="puntajeMinimoCertificacionIdioma" id="puntajeMinimoCertificacionIdioma" class="form-control" style="width: 70px;">
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-bind="click: adicionarIdioma">Agregar</button>
+                                    <button type="button" class="btn btn-success" onclick="cerrarVentanaIdioma();">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Agregar formaci&oacute;n requerida</label> 
+                            <button  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_form"><span class="glyphicon glyphicon-plus"></span></button><br>
+                            <table class="table table-hover tableestilo2" id="tbform">
+                                <thead>
+                                    <th>Programa</th>
+                                    <th>Nivel de formaci&oacute;n</th>
+                                    <th>Opciones</th>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Agregar formaci&oacute;n complementaria requerida</label> 
+                            <button  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_formcomreq"><span class="glyphicon glyphicon-plus"></span></button><br>
+                            <table class="table table-hover tableestilo2" id="tbformcomreq">
+                                <thead>
+                                <th>Nombre de la capacitación o certificaci&oacute;n</th>
+                                <th>Tipo</th>
+                                <th>Opciones</th>
                                 </thead>
                             </table>
                         </div>
@@ -325,13 +461,9 @@
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                                             <select name="freq_nivel_form" id="freq_nivel_form" style="width: 100%;" class="js-select-basic-single js-states form-control">
                                                 <option value=""></option>
-                                                <option value="T&eacute;cnico">T&eacute;cnico</option>
-                                                <option value="Tecnol&oacute;go">Tecnol&oacute;go</option>
-                                                <option value="Profesional">Profesional</option>
-                                                <option value="Especialista">Especialista</option>
-                                                <option value="Maestria">Maestr&iacute;a</option>
-                                                <option value="Doctorado">Doctorado</option>
-                                                <option value="Posdoctorado">Posdoctorado</option>
+                                               <c:forEach var="nivelEstudio" items="${nivelesEstudio}">
+                                                    <option value="${nivelEstudio.getId()}">${nivelEstudio.getNombre()}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
@@ -341,63 +473,9 @@
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
                                             <select style="width: 100%;" name="freq_nucleo" id="freq_nucleo" class="js-select-basic-single js-states form-control">
                                                 <option></option>
-                                                <option value='Administracion'>Administracion</option>
-                                                <option value='Agronomia'>Agronomia</option>
-                                                <option value='Antropologia, Artes Liberales'>Antropologia, Artes Liberales</option>
-                                                <option value='Arquitectura'>Arquitectura</option>
-                                                <option value='Artes Representativas'>Artes Representativas</option>
-                                                <option value='Ates Plasticas, Visuales Y Afines'>Artes Plasticas, Visuales Y Afines</option>
-                                                <option value='Bacteriologia'>Bacteriologia</option>
-                                                <option value='Bibliotecologia, Otros De Ciencias Sociales Y'>Bibliotecologia, Otros De Ciencias Sociales Y</option>
-                                                <option value='Biologia, Microbiologia Y Afines'>Biologia, Microbiologia Y Afines</option>
-                                                <option value='Ciencia Politica, Relaciones Internacionales'>Ciencia Politica, Relaciones Internacionales</option>
-                                                <option value='Comunicación Social, Periodismo Y Afines'>Comunicación Social, Periodismo Y Afines</option>
-                                                <option value='Contaduria Publica'>Contaduria Publica</option>
-                                                <option value='Deportes, Educacion Fisica Y Recreacion'>Deportes, Educacion Fisica Y Recreacion</option>
-                                                <option value='Derecho Y Afines'>Derecho Y Afines</option>
-                                                <option value='Disenio'>Disenio</option>
-                                                <option value='Economia'>Economia</option>
-                                                <option value='Educacion'>Educacion</option>
-                                                <option value='Enfermeria'>Enfermeria</option>
-                                                <option value='Filosofia, Teologia Y Afines'>Filosofia, Teologia Y Afines</option>
-                                                <option value='Fisica'>Fisica</option>
-                                                <option value='Formacion Relacionada Con El Campo Militar O '>Formacion Relacionada Con El Campo Militar O </option>
-                                                <option value='Geografia, Historia'>Geografia, Historia</option>
-                                                <option value='Geologia, Otros Programas De Ciencias Natural'>Geologia, Otros Programas De Ciencias Natural</option>
-                                                <option value='Ingenieria Admnistrativa Y Afines'>Ingenieria Admnistrativa Y Afines</option>
-                                                <option value='Ingenieria Agricola, Forestal Y Afines'>Ingenieria Agricola, Forestal Y Afines</option>
-                                                <option value='Ingenieria Agroindustrial, Alimentos Y Afines'>Ingenieria Agroindustrial, Alimentos Y Afines</option>
-                                                <option value='Ingenieria Agronomica, Pecuaria Y Afines'>Ingenieria Agronomica, Pecuaria Y Afines</option>
-                                                <option value='Ingenieria Ambiental, Sanitaria Y Afines'>Ingenieria Ambiental, Sanitaria Y Afines</option>
-                                                <option value='Ingenieria Biomedica Y Afines'>Ingenieria Biomedica Y Afines</option>
-                                                <option value='Ingenieria Civil Y Afines'>Ingenieria Civil Y Afines</option>
-                                                <option value='Ingenieria De Minas, Metalurgia Y Afines'>Ingenieria De Minas, Metalurgia Y Afines</option>
-                                                <option value='Ingenieria De Sistemas, Telematica Y Afines'>Ingenieria De Sistemas, Telematica Y Afines</option>
-                                                <option value='Ingenieria Electrica Y Afines'>Ingenieria Electrica Y Afines</option>
-                                                <option value='Ingenieria Electronica, Telecomunicaciones Y '>Ingenieria Electronica, Telecomunicaciones Y </option>
-                                                <option value='Ingenieria Industrial Y Afines'>Ingenieria Industrial Y Afines</option>
-                                                <option value='Ingenieria Mecanica Y Afines'>Ingenieria Mecanica Y Afines</option>
-                                                <option value='Ingenieria Quimica Y Afines'>Ingenieria Quimica Y Afines</option>
-                                                <option value='Instrumentacion Quirurgica'>Instrumentacion Quirurgica</option>
-                                                <option value='Lenguas Modernas, Literatura, Linguistica Y A'>Lenguas Modernas, Literatura, Linguistica Y A</option>
-                                                <option value='Matematicas, Estadistica Y Afines'>Matematicas, Estadistica Y Afines</option>
-                                                <option value='Medicina'>Medicina</option>
-                                                <option value='Medicina Veterinaria'>Medicina Veterinaria</option>
-                                                <option value='Musica'>Musica</option>
-                                                <option value='Nutricion Y Dietetica'>Nutricion Y Dietetica</option>
-                                                <option value='Odontologia'>Odontologia</option>
-                                                <option value='Optometria, Otros Programas De Ciencias De La'>Optometria, Otros Programas De Ciencias De La</option>
-                                                <option value='Otras Ingenierias'>Otras Ingenierias</option>
-                                                <option value='Otros Programas Asociados A Bellas Artes'>Otros Programas Asociados A Bellas Artes</option>
-                                                <option value='Psicologia'>Psicologia</option>
-                                                <option value='Publicidad Y Afines'>Publicidad Y Afines</option>
-                                                <option value='Quimica Y Afines'>Quimica Y Afines</option>
-                                                <option value='Salud Publica'>Salud Publica</option>
-                                                <option value='Sin Clasificar'>Sin Clasificar</option>
-                                                <option value='Sociologia, Trabajo Social Y Afines'>Sociologia, Trabajo Social Y Afines</option>
-                                                <option value='Terapias'>Terapias</option>
-                                                <option value='Zootecnia'>Zootecnia</option>
-                                                <option value='Sin registro'>Sin registro</option>
+                                                <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
+                                                <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
@@ -443,7 +521,6 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="modal fade" role="dialog" id="md_formcomreq">
@@ -461,14 +538,9 @@
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
                                             <select style="width: 100%;" name="con_tipo_capacitacion" id="con_tipo_capacitacion" class="js-select-basic-single js-states form-control">
                                                 <option value=""></option>
-                                                <option value="Diplomado">Diplomado</option>
-                                                <option value="Curso">Curso</option>
-                                                <option value="Seminario">Seminario</option>
-                                                <option value="Congresos">Congresos</option>
-                                                <option value="Foros">Foros</option>
-                                                <option value="Simposios">Simposios</option>
-                                                <option value="Jornadas">Jornadas</option>
-                                                <option value="Encuentros">Encuentros</option>
+                                                <c:forEach var="tipoCapacitacion" items="${tiposCapacitacion}">
+                                                <option value="${tipoCapacitacion.getId()}">${tipoCapacitacion.getNombre()}</option>
+                                                </c:forEach>    
                                             </select>
                                         </div>
                                     </div>
@@ -478,63 +550,9 @@
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
                                             <select style="width: 100%;" name="conformreq_nbc" id="conformreq_nbc" class="js-select-basic-single js-states form-control">
                                                 <option></option>
-                                                <option value='Administracion'>Administracion</option>
-                                                <option value='Agronomia'>Agronomia</option>
-                                                <option value='Antropologia, Artes Liberales'>Antropologia, Artes Liberales</option>
-                                                <option value='Arquitectura'>Arquitectura</option>
-                                                <option value='Artes Representativas'>Artes Representativas</option>
-                                                <option value='Ates Plasticas, Visuales Y Afines'>Artes Plasticas, Visuales Y Afines</option>
-                                                <option value='Bacteriologia'>Bacteriologia</option>
-                                                <option value='Bibliotecologia, Otros De Ciencias Sociales Y'>Bibliotecologia, Otros De Ciencias Sociales Y</option>
-                                                <option value='Biologia, Microbiologia Y Afines'>Biologia, Microbiologia Y Afines</option>
-                                                <option value='Ciencia Politica, Relaciones Internacionales'>Ciencia Politica, Relaciones Internacionales</option>
-                                                <option value='Comunicación Social, Periodismo Y Afines'>Comunicación Social, Periodismo Y Afines</option>
-                                                <option value='Contaduria Publica'>Contaduria Publica</option>
-                                                <option value='Deportes, Educacion Fisica Y Recreacion'>Deportes, Educacion Fisica Y Recreacion</option>
-                                                <option value='Derecho Y Afines'>Derecho Y Afines</option>
-                                                <option value='Disenio'>Disenio</option>
-                                                <option value='Economia'>Economia</option>
-                                                <option value='Educacion'>Educacion</option>
-                                                <option value='Enfermeria'>Enfermeria</option>
-                                                <option value='Filosofia, Teologia Y Afines'>Filosofia, Teologia Y Afines</option>
-                                                <option value='Fisica'>Fisica</option>
-                                                <option value='Formacion Relacionada Con El Campo Militar O '>Formacion Relacionada Con El Campo Militar O </option>
-                                                <option value='Geografia, Historia'>Geografia, Historia</option>
-                                                <option value='Geologia, Otros Programas De Ciencias Natural'>Geologia, Otros Programas De Ciencias Natural</option>
-                                                <option value='Ingenieria Admnistrativa Y Afines'>Ingenieria Admnistrativa Y Afines</option>
-                                                <option value='Ingenieria Agricola, Forestal Y Afines'>Ingenieria Agricola, Forestal Y Afines</option>
-                                                <option value='Ingenieria Agroindustrial, Alimentos Y Afines'>Ingenieria Agroindustrial, Alimentos Y Afines</option>
-                                                <option value='Ingenieria Agronomica, Pecuaria Y Afines'>Ingenieria Agronomica, Pecuaria Y Afines</option>
-                                                <option value='Ingenieria Ambiental, Sanitaria Y Afines'>Ingenieria Ambiental, Sanitaria Y Afines</option>
-                                                <option value='Ingenieria Biomedica Y Afines'>Ingenieria Biomedica Y Afines</option>
-                                                <option value='Ingenieria Civil Y Afines'>Ingenieria Civil Y Afines</option>
-                                                <option value='Ingenieria De Minas, Metalurgia Y Afines'>Ingenieria De Minas, Metalurgia Y Afines</option>
-                                                <option value='Ingenieria De Sistemas, Telematica Y Afines'>Ingenieria De Sistemas, Telematica Y Afines</option>
-                                                <option value='Ingenieria Electrica Y Afines'>Ingenieria Electrica Y Afines</option>
-                                                <option value='Ingenieria Electronica, Telecomunicaciones Y '>Ingenieria Electronica, Telecomunicaciones Y </option>
-                                                <option value='Ingenieria Industrial Y Afines'>Ingenieria Industrial Y Afines</option>
-                                                <option value='Ingenieria Mecanica Y Afines'>Ingenieria Mecanica Y Afines</option>
-                                                <option value='Ingenieria Quimica Y Afines'>Ingenieria Quimica Y Afines</option>
-                                                <option value='Instrumentacion Quirurgica'>Instrumentacion Quirurgica</option>
-                                                <option value='Lenguas Modernas, Literatura, Linguistica Y A'>Lenguas Modernas, Literatura, Linguistica Y A</option>
-                                                <option value='Matematicas, Estadistica Y Afines'>Matematicas, Estadistica Y Afines</option>
-                                                <option value='Medicina'>Medicina</option>
-                                                <option value='Medicina Veterinaria'>Medicina Veterinaria</option>
-                                                <option value='Musica'>Musica</option>
-                                                <option value='Nutricion Y Dietetica'>Nutricion Y Dietetica</option>
-                                                <option value='Odontologia'>Odontologia</option>
-                                                <option value='Optometria, Otros Programas De Ciencias De La'>Optometria, Otros Programas De Ciencias De La</option>
-                                                <option value='Otras Ingenierias'>Otras Ingenierias</option>
-                                                <option value='Otros Programas Asociados A Bellas Artes'>Otros Programas Asociados A Bellas Artes</option>
-                                                <option value='Psicologia'>Psicologia</option>
-                                                <option value='Publicidad Y Afines'>Publicidad Y Afines</option>
-                                                <option value='Quimica Y Afines'>Quimica Y Afines</option>
-                                                <option value='Salud Publica'>Salud Publica</option>
-                                                <option value='Sin Clasificar'>Sin Clasificar</option>
-                                                <option value='Sociologia, Trabajo Social Y Afines'>Sociologia, Trabajo Social Y Afines</option>
-                                                <option value='Terapias'>Terapias</option>
-                                                <option value='Zootecnia'>Zootecnia</option>
-                                                <option value='Sin registro'>Sin registro</option>
+                                                <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
+                                                <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
@@ -582,486 +600,155 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
+
                     </div>
                 </div>
-                <div class="modal fade" role="dialog" id="md_formidiom">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header mhsuccess">
-                                <button class="close" data-dismiss="modal">&times;</button>
-                                <h4>Idioma requerido</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="id_idioma">Idioma</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar su idioma">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
-                                            <select style="width: 100%;" name="con_idioma" id="con_idioma" class="js-select-basic-single js-states form-control">
-                                                <option></option>
-                                                <option value="Ingles">Ingl&eacute;s</option>
-                                                <option value="Portugues">Portugu&eacute;s</option>
-                                                <option value="Mandarin">Mandar&iacute;n</option>
-                                                <option value="Franc&eacute;s">Franc&eacute;s</option>
-                                                <option value="Italiano">Italiano</option>
-                                            </select>
-                                        </div>
-                                    </div>  
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Tipo de certificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de adenda">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
-                                            <select style="width: 100%;" name="con_tipo_cert" id="con_tipo_cert" class="js-select-basic-single js-states form-control">
-                                                <option></option>
-                                                <option value="TOEFL">TOEFL</option>
-                                                <option value="IELTS">IELTS</option>
-                                                <option value="Cambridge English Key">Cambridge English Key</option>
-                                                <option value="Cambridge English Preliminary">Cambridge English Preliminary</option>
-                                                <option value="Cambridge English Advanced">Cambridge English Advanced</option>
-                                                <option value="Cambridge English Proficiency">Cambridge English Proficiency</option>
-                                                <option value="Aptis">Aptis</option>
-                                                <option value="Otro">Otro</option>
-                                            </select>
-                                        </div>  
-                                    </div>
-                                </div>
-                                <div class="row">
-
-                                    <div class="col-md-6" id="formotro" style="display: none;">
-                                        <div class="form-group">
-                                            <label for="">Cual?</label>
-                                            <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar cuando eliga el tipo otro cual?">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                            <input type="text" name="txtotro" id="txtotro" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Puntaje minimo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el puntaje minimo de estudio idioma">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                            <input type="text" name="txtpuntaje" id="txtpuntaje" class="form-control" style="width: 70px;">
-                                        </div>
-                                    </div> 
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button"  class="btn btn-success" id="addconidiom">Agregar</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label>Agregar nuevo criterio</label>
+                            <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" data-target="#md_crithab" data-toggle="modal" ><span class="glyphicon glyphicon-plus"></span></button>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label>Configurar criterios nuevos</label>
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" role="dialog" id="md_estidioma">
-                    <div class="modal-dialog modal-sm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+                            <table class="table table-hover tableestilo2" id="tbcrihab">
+                                <thead>
+                                <th>Criterio</th>
+                                <th>Tipo</th>
+                                <th>Campo</th>
+                                <th>Opciones</th>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <center><button class="btn btn-success btn-xs" type="button" id="pasarder" ><i class="fa fa-arrow-right" aria-hidden="true"></i></button></center><br>
+                        <center><button class="btn btn-success btn-xs" type="button" id="pasarizq" ><i class="fa fa-arrow-left" aria-hidden="true"></i></button></center>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="table-responsive">
+                            <table class="table table-hover tableestilo2" id="tbconfig">
+                                <thead>
+                                <th>Criterio</th>
+                                <th></th>
+                                <th></th>
+                                <th>Valor</th>
+                                <th>Opciones</th>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" role="dialog" id="md_crithab">
+                    <div class="modal-dialog ">
                         <div class="modal-content">
                             <div class="modal-header mhsuccess">
                                 <button class="close" data-dismiss="modal">&times;</button>
-                                <h4>Estudios idioma</h4>
+                                <h4>Criterio</h4>
                             </div>
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="">Tipo de certificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de adenda">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
-                                            <select style="width: 100%;" name="con_tipo_cert" id="con_tipo_cert" class="js-select-basic-single js-states form-control">
-                                                <option></option>
-                                                <option value="TOEFL">TOEFL</option>
-                                                <option value="IELTS">IELTS</option>
-                                                <option value="Cambridge English Key">Cambridge English Key</option>
-                                                <option value="Cambridge English Preliminary">Cambridge English Preliminary</option>
-                                                <option value="Cambridge English Advanced">Cambridge English Advanced</option>
-                                                <option value="Cambridge English Proficiency">Cambridge English Proficiency</option>
-                                                <option value="Aptis">Aptis</option>
-                                                <option value="Otro">Otro</option>
-                                            </select>
-                                        </div>  
-                                    </div>
-                                </div>
-                                <div class="row" id="formotro" style="display: none;">
-                                    <div class="col-md-12" >
-                                        <div class="form-group">
-                                            <label for="">Cual?</label>
-                                            <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar cuando eliga el tipo otro cual?">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                            <input type="text" name="txtotro" id="txtotro" class="form-control">
+                                            <label>Nombre de criterio</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de criterio habilitante">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                            <input type="text" name="txtcritnew" id="txtcritnew" class="form-control">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="">Puntaje</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el puntaje de estudio idioma">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                            <input type="text" name="txtpuntaje" id="txtpuntaje" class="form-control">
+                                            <label>Tipo</label>
+                                            <select style="width: 100%;" id="tipcrit" name="tipcrit" class="js-select-basic-single js-states form-control">
+                                                <option value=""></option>
+                                                <option value="Numerico">Num&eacute;rico</option>
+                                                <option value="Categoria">Texto o categoria</option>
+                                            </select>
                                         </div>
                                     </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label>Campo de hoja de vida</label>
+                                            <select style="width: 80%;" id="camhoja" id="camhoja" class="js-select-basic-single js-states form-control">
+                                                <option value=""></option>
+                                                <option value="sexo">Sexo</option>
+                                                <option value="Libreta">Libreta</option>
+                                                <option value="Etnico">Etnico</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button"  class="btn btn-success" id="addestidiom">Agregar</button>
+                                <button type="button"  class="btn btn-success" id="addcrithab">Agregar</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div id="formcriteva" style="display: none;">
-                <div class="row">   
-                    <div class="col-md-12">
-                        <legend>Criterios evaluaci&oacute;n</legend>
-                        <div class="col-md-5"  style="margin-top: -15px;">
-                            <div class="form-group">
-                                <label>Agregar criterio evaluaci&oacute;n</label>
-                                <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" data-target="#md_crieva" data-toggle="modal" ><span class="glyphicon glyphicon-plus"></span></button>
+                <div class="modal fade" role="dialog" id="md_configcampo">
+                    <div class="modal-dialog ">
+                        <div class="modal-content">
+                            <div class="modal-header mhsuccess">
+                                <button class="close btnclose" data-dismiss="modal" >&times;</button>
+                                <h4>Configuraci&oacute;n</h4>
                             </div>
-                            <div class="form-group">
-                                <label>Agregar subcriterio evaluaci&oacute;n</label>
-                                <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" data-target="#md_subcrieva" data-toggle="modal" id="click2"><span class="glyphicon glyphicon-plus"></span></button>
-                            </div>
-                            <div class="modal fade" role="dialog" id="md_crieva">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header mhsuccess">
-                                            <button class="close" data-dismiss="modal">&times;</button>
-                                            <h4>Criterio evaluaci&oacute;n</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <label>Nombre de criterio evaluaci&oacute;n</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de criterio habilitante">
-                                                        <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                    <input type="text"  id="txtcrieva" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button"  class="btn btn-success" id="addcrieva">Agregar</button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Nombre de criterio</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de criterio habilitante">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                            <select style="width: 100%" class="js-select-basic-single js-states" id="txtcritnew3" name="txtcritnew3">
+                                                <option value=""></option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="modal fade" role="dialog" id="md_subcrieva">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header mhsuccess">
-                                            <button class="close" data-dismiss="modal">&times;</button>
-                                            <h4>Subcriterio evaluaci&oacute;n</h4>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Tipo</label>
+                                            <input type="text" name="tipcrit3" id="tipcrit3" class="form-control" disabled>
                                         </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Criterio evaluaci&oacute;n</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de criterio habilitante">
-                                                        <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                    <select style="width: 100%;" id="sel_criterio" class="form-control">
-                                                    </select>
-
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label>Subcriterio evaluaci&oacute;n</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de criterio habilitante">
-                                                        <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                    <input type="text" id="txtsubcriteva" class="form-control">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button"  class="btn btn-success" id="subaddcrieva">Agregar</button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label>Campo de hoja de vida</label>
+                                            <input type="text" name="camhoja3" id="camhoja3" class="form-control" disabled>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <select name=criteriosEvaluacionPorAsignar" id="criteriosEvaluacionPorAsignar" class="form-control" multiple>
-                                    <c:forEach var="criterioEvaluacion" items="${criteriosEvaluacion}">
-                                        <option value="${criterioEvaluacion.getId()}">${criterioEvaluacion.getNombre()}</option>
-                                    </c:forEach>   
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <center><button class="btn btn-success btn-xs" type="button" id="asignarCriterioEvaluacion" style="margin-top: 80px;"><i class="fa fa-arrow-right" aria-hidden="true"></i></button></center><br>
-                        </div>
-                        <div class="col-md-5" style="margin-top: 65px;">
-                            <div class="form-group">
-                                <div class="table-responsive">
-                                    <table class="table table-hover tableestilo2" id="tbcrieva">
-                                        <thead>
-                                            <tr>
-                                                <th>Criterio</th>
-                                                <th>Subcriterio</th>
-                                                <th>Peso</th>
-                                                <th>Opcion</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody data-bind="foreach: { data: criteriosEvaluacion }">
-                                            <tr class="table-row">
-                                                <td style="width: 60%">
-                                                    <span data-bind="text: nombre" ></span>
-                                                    <input type="hidden" class="form-control" data-bind="value: nombre, attr: { 'name': 'criteriosEvaluacion[' + $index() + '].nombre'  }">
-                                                </td>
-                                                <td style="width: 60%">
-                                                    <span data-bind="text: nombreSubcriterio" ></span>
-                                                    <input type="hidden" data-bind="value: id, attr: { 'name': 'criteriosEvaluacion[' + $index() + '].idSubcriterio'  }" />
-                                                    <input type="hidden" class="form-control" data-bind="value: nombre, attr: { 'name': 'criteriosEvaluacion[' + $index() + '].nombreSubcriterio'  }">
-                                                </td>
-                                                <td style="width: 30%" align="center">
-                                                    <input type="hidden" data-bind="value: id, attr: { 'name': 'criteriosEvaluacion[' + $index() + '].id'  }" />
-                                                    <input type="text" class="form-control input-sm numbersOnly" style="width:100px;" data-bind="value: peso, attr: { 'name': 'criteriosEvaluacion[' + $index() + '].peso'  }">
-                                                </td>
-                                                <td style="width: 10%" align="center">
-                                                    <button class='btn btn-danger btn-xs' type='button' data-bind="click: $root.eliminarCriterioEvaluacion"><span class='glyphicon glyphicon-remove'></span></button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>                        
-            <div id="formcrithab" style="display: none;">
-                <div class="row">   
-                    <div class="col-md-12">
-                        <center><legend>Criterios Habilitantes</legend></center>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Agregar formaci&oacute;n</label> 
-                                    <button  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_formacion"><span class="glyphicon glyphicon-plus"></span></button><br>
-                                    <table class="table table-hover tableestilo2" id="tbform">
-                                        <thead>
-                                        <th>Programa</th>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Agregar formaci&oacute;n complementaria requerida</label> 
-                                    <button  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_formcomreq"><span class="glyphicon glyphicon-plus"></span></button><br>
-                                    <table class="table table-hover tableestilo2" id="tbformcomreq">
-                                        <thead>
-                                        <th>Nombre de la capacitación o certificaci&oacute;n</th>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Agregar idioma requerido</label> 
-                                    <button  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_estidioma"><span class="glyphicon glyphicon-plus"></span></button><br>
-                                    <table class="table table-hover tableestilo2" id="tbformidiom">
-                                        <thead>
-                                        <th>Idioma</th>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>                    
-                        <div class="modal fade" role="dialog" id="md_formacion">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header mhsuccess">
-                                        <button class="close" data-dismiss="modal">&times;</button>
-                                        <h4>Formaci&oacute;n</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="con_descripcion">Nivel de formaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe describir el perfil requerido con el cargo y la experiencia requerida">
-                                                        <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                                    <select name="conv_nivel_form" id="conv_nivel_form" style="width: 100%;" class="js-select-basic-single js-states form-control">
-                                                        <option value=""></option>
-                                                        <option value="T&eacute;cnico">T&eacute;cnico</option>
-                                                        <option value="Tecnol&oacute;go">Tecnol&oacute;go</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de títutlo obtenido">
-                                                        <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                    <select style="width: 100%;" name="conv_nucleo" id="conv_nucleo" class="js-select-basic-single js-states form-control">
-                                                        <option></option>
-                                                        <option value='Administracion'>Administracion</option>
-                                                        <option value='Agronomia'>Agronomia</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row"> 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="est_programa_cursado">Programa</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa cursado">
-                                                        <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                    <select style="width: 100%;" name="conv_programa_cursado" id="conv_programa_cursado" class="js-select-basic-single js-states form-control">
-                                                        <option></option>
-                                                        <option value="Matem&aacute;ticas puras">Matem&aacute;ticas puras</option>
-                                                        <option value="Ingenieria de sistemas">Ingenieria de sistemas</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button"  class="btn btn-success" id="addprog">Agregar</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <div class="row"  style="display: none;" id="inpvalornum">
+                                    <div class="col-md-5">
+                                        <label>Valor</label>
+                                        <input type="text" name="txtvalornum" class="form-control txtvalornum" >
                                     </div>
                                 </div>
-
-                            </div>
-                        </div>
-                        <div class="modal fade" role="dialog" id="md_formcomreq">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header mhsuccess">
-                                        <button class="close" data-dismiss="modal">&times;</button>
-                                        <h4>Formaci&oacute;n complementaria requerida</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="est_area_saber">Tipo de capacitaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el tipo de capacitaci&oacute;n">
-                                                        <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                    <select style="width: 100%;" name="con_tipo_capacitacion" id="con_tipo_capacitacion" class="js-select-basic-single js-states form-control">
-                                                        <option value=""></option>
-                                                        <option value="Diplomado">Diplomado</option>
-                                                        <option value="Curso">Curso</option>
-                                                        <option value="Seminario">Seminario</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de títutlo obtenido">
-                                                        <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                    <select style="width: 100%;" name="conformreq_nbc" id="conformreq_nbc" class="js-select-basic-single js-states form-control">
-                                                        <option></option>
-                                                        <option value='Administracion'>Administracion</option>
-                                                        <option value='Agronomia'>Agronomia</option>
-                                                        <option value='Antropologia, Artes Liberales'>Antropologia, Artes Liberales</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row"> 
-                                            <div class="col-md-9">
-                                                <div class="form-group">
-                                                    <label for="est_programa_cursado">Nombre de la capacitaci&oacute;n o certificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa cursado">
-                                                        <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                    <input type="text" name="con_capaci_certi" id="con_capaci_certi" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button"  class="btn btn-success" id="addformcomreq">Agregar</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <div class="row" style="display: none;" id="selvalcat">
+                                    <div class="col-md-5">
+                                        <label>Valor</label>
+                                        <select class="js-select-basic-single js-states form-control " id="txtvalornum"  name="txtvalornum" style="width: 100%;">
+                                            <option value=""></option>
+                                            <option value="ejemplo1">ejemplo1</option>
+                                            <option value="ejemplo2">ejemplo2</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal fade" role="dialog" id="md_estidioma">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header mhsuccess">
-                                        <button class="close" data-dismiss="modal">&times;</button>
-                                        <h4>Estudios idioma</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="">Tipo de certificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de adenda">
-                                                        <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
-                                                    <select style="width: 100%;" name="con_tipo_cert" id="con_tipo_cert" class="js-select-basic-single js-states form-control">
-                                                        <option></option>
-                                                        <option value="TOEFL">TOEFL</option>
-                                                        <option value="IELTS">IELTS</option>
-                                                        <option value="Cambridge English Key">Cambridge English Key</option>
-                                                        <option value="Cambridge English Preliminary">Cambridge English Preliminary</option>
-                                                        <option value="Cambridge English Advanced">Cambridge English Advanced</option>
-                                                        <option value="Cambridge English Proficiency">Cambridge English Proficiency</option>
-                                                        <option value="Aptis">Aptis</option>
-                                                        <option value="Otro">Otro</option>
-                                                    </select>
-                                                </div>  
-                                            </div>
-
-                                        </div>
-                                        <div class="row" id="formotro" style="display: none;">
-                                            <div class="col-md-12" >
-                                                <div class="form-group">
-                                                    <label for="">Cual?</label>
-                                                    <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar cuando eliga el tipo otro cual?">
-                                                        <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                                    <input type="text" name="txtotro" id="txtotro" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="">Puntaje</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el puntaje de estudio idioma">
-                                                        <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                                    <input type="text" name="txtpuntaje" id="txtpuntaje" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button"  class="btn btn-success" id="addestidiom">Agregar</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5"  style="margin-top: -15px;">
-                            <div class="form-group">
-                                <select name="criteriosHabilitantesPorAsignar" id="criteriosHabilitantesPorAsignar" class="form-control" multiple>
-                                    <c:forEach var="criterioHabilitante" items="${criteriosHabilitantes}">
-                                        <option value="${criterioHabilitante.getId()}">${criterioHabilitante.getNombre()}</option>
-                                    </c:forEach>                            
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <center><button class="btn btn-success btn-xs" type="button" id="asignarCriterioHabilitante" style="margin-top: 20px;"><i class="fa fa-arrow-right" aria-hidden="true"></i></button></center>
-                        </div>
-                        <div class="col-md-5" style="margin-top: -25px;">
-                            <div class="form-group">
-                                <div class="table-responsive">
-                                    <table class="table table-hover tableestilo2">
-                                        <thead>
-                                            <tr>
-                                                <th>Criterio</th>
-                                                <th>Valor</th>
-                                                <th>Opcion</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody data-bind="foreach: { data: criteriosHabilitantes }">
-                                            <tr class="table-row">
-                                                <td style="width: 60%">
-                                                    <span data-bind="text: nombre" ></span>
-                                                    <input type="hidden" class="form-control" data-bind="value: nombre, attr: { 'name': 'criteriosHabilitantes[' + $index() + '].nombre'  }">
-                                                </td>
-                                                <td style="width: 30%" align="center">
-                                                    <input type="text" class="form-control input-sm numbersOnly" style="width:100px;" data-bind="value: nombre, attr: { 'name': 'criteriosHabilitantes[' + $index() + '].valor'  }">
-                                                </td>
-                                                <td style="width: 10%" align="center">
-                                                    <input type="hidden" data-bind="value: id, attr: { 'name': 'criteriosHabilitantes[' + $index() + '].id'  }" />
-                                                    <button class='btn btn-danger btn-xs' type='button' data-bind="click: $root.eliminarCriterioHabilitante"><span class='glyphicon glyphicon-remove'></span></button>
-                                                </td>
-                                            </tr>
-                                        </tbody>                                    
-                                    </table>
-                                </div>
+                            <div class="modal-footer">
+                                <button type="button"  class="btn btn-success" id="addconfiguracion">Agregar</button>
+                                <button type="button" class="btn btn-default btnclose" data-dismiss="modal" >Cerrar</button>
                             </div>
                         </div>
                     </div>
@@ -1118,7 +805,8 @@
                                     <button class="close" onclick="cerrarVentanaAndenda();">&times;</button>
                                     <h4><i class="fa fa-address-book-o" aria-hidden="true"></i>Agregar adenda</h4>
                                 </div>
-                                <div class="modal-body">  
+                                <div class="modal-body">
+                                    <div id="alert_adenda"></div>
                                     <div class="form-group">
                                         <label for="tipoAdenda">Tipo de adenda</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de adenda">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
@@ -1202,6 +890,10 @@
 </div>
 <!-- jQuery -->
 <script>
+    var DOCENCIA_MEDELLIN = "3";
+    var DOCENCIA_REGIONES = "4";
+    var TIPO_CERTIFICACION_OTRO = "8";
+    
     $.validate({
         validateOnBlur: false, // disable validation when input looses focus
         errorMessagePosition: 'top', // Instead of 'inline' which is default
@@ -1245,7 +937,7 @@
 
         $('#tipoConvocatoria').change(function () {
             var valor = $(this).val();
-            if (valor === "3" || valor === "4") {
+            if (valor === DOCENCIA_MEDELLIN || valor === DOCENCIA_REGIONES) {
                 $('#formcurso').show();
             } else {
                 $('#formcurso').hide();
@@ -1288,36 +980,20 @@
             $('#inputscurso').show();
             $('#md_curso').modal('hide');
         });
-        if ($('#tipoConvocatoria').val() === "3" ||
-                $('#tipoConvocatoria').val() === "4") {
+        if ($('#tipoConvocatoria').val() === DOCENCIA_MEDELLIN || $('#tipoConvocatoria').val() === DOCENCIA_REGIONES) {
             $('#formcurso').show();
         } else {
             $('#formcurso').hide();
         }
-
-        $('#asignarCriterioHabilitante').click(function () {
-            $('#criteriosHabilitantesPorAsignar option:selected').each(function () {
-                convocatoriaModel.criteriosHabilitantes.push(
-                        {
-                            id: ko.observable($(this).val()),
-                            nombre: ko.observable($(this).text())
-                        });
-                $(this).remove();
-            });
-        });
-
-        $('#asignarCriterioEvaluacion').click(function () {
-            $('#criteriosEvaluacionPorAsignar option:selected').each(function () {
-                convocatoriaModel.criteriosEvaluacion.push(
-                        {
-                            id: ko.observable($(this).val()),
-                            nombre: ko.observable($(this).text())
-                        });
-                $(this).remove();
-            });
-        });
     });
-
+    $('#tipoCertificacion').change(function(){
+      var valor = $(this).val();
+      if(valor === TIPO_CERTIFICACION_OTRO) {
+        $('#divOtroCertificacionIdioma').css("display","block");
+      } else {
+        $('#divOtroCertificacionIdioma').css("display","none");
+      }
+    });
     $('#btndatosgen').click(function () {
         $('#formdatosgen').css('display', 'block');
         $('#formcrithab').css('display', 'none');
@@ -1367,7 +1043,7 @@
             }});
     });
 
-    bootstrap_alert_convocatoria = function () { };
+    bootstrap_alert_convocatoria = { };
     bootstrap_alert_convocatoria.warning = function (message) {
         $('#alert_placeholder_convocatoria').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
@@ -1378,17 +1054,51 @@
         $('#alert_placeholder_convocatoria').html('');
     };
 
-    var ConvocatoriaModel = function (adendas, criteriosHabilitantes, criteriosEvaluacion) {
+    bootstrap_alert_adenda = {};
+    bootstrap_alert_adenda.warning = function (message) {
+        $('#alert_adenda').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_adenda.removeWarning = function () {
+        $('#alert_adenda').html('');
+    };
+
+    bootstrap_alert_anyos_experiencia = {};
+    bootstrap_alert_anyos_experiencia.warning = function (message) {
+        $('#alert_anyos_experiencia').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_anyos_experiencia.removeWarning = function () {
+        $('#alert_anyos_experiencia').html('');
+    };
+
+    var ConvocatoriaModel = function (adendas, anyosExperiencias, idiomas) {
         self = this;
         self.adendas = ko.observableArray(adendas);
-        self.criteriosHabilitantes = ko.observableArray(criteriosHabilitantes);
-        self.criteriosEvaluacion = ko.observableArray(criteriosEvaluacion);
+        self.anyosExperiencias = ko.observableArray(anyosExperiencias);
+        self.idiomas = ko.observableArray(idiomas);
         self.adicionarAdenda = function () {
             var tipoAdenda = $('#tipoAdenda').val();
             var nombreTipoAdenda = $('#tipoAdenda option:selected').text();
             var descripcionAdenda = $('#descripcionAdenda').val();
             var fechaAdenda = $('#fechaAdenda').val();
+            
+            if (tipoAdenda === "") {
+                bootstrap_alert_adenda.warning('Debe seleccionar el tipo de adenda');
+                return false;
+            }
+            if (descripcionAdenda === "") {
+                bootstrap_alert_adenda.warning('Debe ingresar la descripción de la adenda');
+                return false;
+            }
+            if (fechaAdenda === "") {
+                bootstrap_alert_adenda.warning('Debe ingresar la fecha de la adenda');
+                return false;
+            }
+            
             if ($('#consecutivo').val() === "") {
+                if ($('input:file[name="adendas[' + self.adendas().length + '].documento"]').val() === "") {
+                    bootstrap_alert_adenda.warning('Debe ingresar el documento');
+                    return false;
+                }
                 self.adendas.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.adendas().length),
@@ -1443,17 +1153,130 @@
                 window.location.href = "${pageContext.request.contextPath}/convocatorias/adenda/documento/" + adenda.id();
             }
         };
+        
+        self.adicionarAnyosExperiencia = function () {
+            var nucleoBasicoConocimientoAnyosExperiencia = $('#nucleoBasicoConocimientoAnyosExperiencia').val();
+            var nombreNucleoBasicoConocimientoAnyosExperiencia = $('#nucleoBasicoConocimientoAnyosExperiencia option:selected').text();
+            var anyosExperiencia = $('#anyosExperiencia').val();
 
-        self.eliminarCriterioHabilitante = function (criterioHabilitante) {
-            self.criteriosHabilitantes.remove(criterioHabilitante);
-            $('#criteriosHabilitantesPorAsignar').append("<option value='" + criterioHabilitante.id() + "'>" + criterioHabilitante.nombre() + "</option>");
-            ordenarOpciones($('#criteriosHabilitantesPorAsignar option'));
+            if (nucleoBasicoConocimientoAnyosExperiencia === "") {
+                bootstrap_alert_anyos_experiencia.warning('Debe seleccionar el núcleo básico de conocimento');
+                return false;
+            }
+            if (anyosExperiencia === "") {
+                bootstrap_alert_anyos_experiencia.warning('Debe ingresar el número de años de experiencia');
+                return false;
+            }
+
+            if ($('#consecutivo').val() === "") {
+                self.anyosExperiencias.push({
+                    id: ko.observable(0),
+                    consecutivo: ko.observable(self.anyosExperiencias().length),
+                    nucleoBasicoConocimiento: ko.observable(nucleoBasicoConocimientoAnyosExperiencia),
+                    nombreNucleoBasicoConocimiento: ko.observable(nombreNucleoBasicoConocimientoAnyosExperiencia),
+                    anyos: ko.observable(anyosExperiencia)
+                });
+            } else {
+                var consecutivo = parseInt($('#consecutivo').val(), 10);
+                var indice = 0;
+                for (i = 0; i < self.anyosExperiencias().length; i++) {
+                    if (self.anyosExperiencias()[i].consecutivo() === consecutivo) {
+                        indice = i;
+                        break;
+                    }
+                }
+                self.anyosExperiencias()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoAnyosExperiencia);
+                self.anyosExperiencias()[indice].nombreNucleoBasicoConocimiento(nombreNucleoBasicoConocimientoAnyosExperiencia);
+                self.anyosExperiencias()[indice].anyos(anyosExperiencia);
+            }
+            $('#md_anyos_experiencia').modal('hide');
         };
 
-        self.eliminarCriterioEvaluacion = function (criterioEvaluacion) {
-            self.criteriosEvaluacion.remove(criterioEvaluacion);
-            $('#criteriosEvaluacionPorAsignar').append("<option value='" + criterioEvaluacion.id() + "'>" + criterioEvaluacion.nombre() + "</option>");
-            ordenarOpciones($('#criteriosEvaluacionPorAsignar option'));
+        self.eliminarAnyosExperiencia = function (anyosExperiencia) {
+            self.anyosExperiencias.remove(anyosExperiencia);
+        };
+
+        self.editarAnyosExperiencia = function (anyosExperiencia) {
+            $('#nucleoBasicoConocimientoAnyosExperiencia').val(anyosExperiencia.nucleoBasicoConocimiento()).trigger('change');
+            $('#anyosExperiencia').val(anyosExperiencia.anyos());
+            $('#consecutivo').val(anyosExperiencia.consecutivo());
+            bootstrap_alert_anyos_experiencia.removeWarning();
+            $('#md_anyos_experiencia').modal('show');
+        };
+
+        self.adicionarIdioma = function () {
+            var idioma = $('#idioma').val();
+            var nombreIdioma = $('#idioma option:selected').text();
+            var otraCertificacion = $('#otraCertificacionIdioma').val();
+            var tipoCertificacion = $('#tipoCertificacionIdioma').val();
+            var nombreTipoCertificacion = $('#tipoCertificacionIdioma option:selected').text();
+            var puntajeMinimoCertificacion = $('#puntajeMinimoCertificacionIdioma').val();
+
+            if (idioma === "") {
+                bootstrap_alert_idioma.warning('Debe seleccionar el idioma');
+                return false;
+            }
+            if (tipoCertificacion === "") {
+                bootstrap_alert_idioma.warning('Debe seleccionar el tipo de certificación');
+                return false;
+            }
+            if (tipoCertificacion === TIPO_CERTIFICACION_OTRO && otraCertificacion === "") {
+                bootstrap_alert_idioma.warning('Debe ingresar la certificación');
+                return false;
+            }
+            if (puntajeMinimoCertificacion === "") {
+                bootstrap_alert_idioma.warning('Debe ingresar el puntaje de certificación');
+                return false;
+            }
+            if ($('#consecutivo').val() === "") {
+                self.idiomas.push({
+                    id: ko.observable(0),
+                    consecutivo: ko.observable(self.idiomas().length),
+                    idioma: ko.observable(idioma),
+                    nombreIdioma: ko.observable(nombreIdioma),
+                    otraCertificacion: ko.observable(otraCertificacion),
+                    tipoCertificacion: ko.observable(tipoCertificacion),
+                    nombreTipoCertificacion: ko.observable(nombreTipoCertificacion),
+                    puntajeMinimoCertificacion: ko.observable(puntajeMinimoCertificacion)
+                });
+            } else {
+                var consecutivo = parseInt($('#consecutivo').val(), 10);
+                var indice = 0;
+                for (i = 0; i < self.idiomas().length; i++) {
+                    if (self.idiomas()[i].consecutivo() === consecutivo) {
+                        indice = i;
+                        break;
+                    }
+                }
+                self.idiomas()[indice].idioma(idioma);
+                self.idiomas()[indice].nombreIdioma(nombreIdioma);
+                self.idiomas()[indice].otraCertificacion(otraCertificacion);
+                self.idiomas()[indice].tipoCertificacion(tipoCertificacion);
+                self.idiomas()[indice].nombreTipoCertificacion(nombreTipoCertificacion);
+                self.idiomas()[indice].puntajeMinimoCertificacion(puntajeMinimoCertificacion);
+            }
+            $('#md_idioma').modal('hide');
+        };
+
+        self.eliminarIdioma = function (idioma) {
+            self.idiomas.remove(idioma);
+        };
+
+        self.editarIdioma = function (idioma) {
+            ocultarCertificadosIdiomas();
+            $('#idioma').val(idioma.idioma()).trigger('change');
+            $('#nivelConversacionIdioma').val(idioma.nivelConversacion()).trigger('change');
+            $('#otraCertificacionIdioma').val(idioma.otraCertificacion());
+            $('#tipoCertificacionIdioma').val(idioma.tipoCertificacion()).trigger('change');
+            if($('#tipoCertificacionIdioma').val() === TIPO_CERTIFICACION_OTRO) {
+              $('#divOtroCertificacionIdioma').css("display","block");
+            } else {
+              $('#divOtroCertificacionIdioma').css("display","none");
+            }            
+            $('#puntajeMinimoCertificacionIdioma').val(idioma.puntajeMinimoCertificacion());
+            $('#consecutivo').val(idioma.consecutivo());
+            bootstrap_alert_idioma.removeWarning();
+            $('#md_idioma').modal('show');
         };
     };
 
@@ -1476,12 +1299,38 @@
         $('#md_adenda').modal('show');
     }
 
+    function nuevoAnyosExperiencia() {
+        $('#nucleoBasicoConocimientoAnyosExperiencia').val("").trigger('change');
+        $('#anyosExperiencia').val("");
+        $('#consecutivo').val("");
+        bootstrap_alert_anyos_experiencia.removeWarning();
+        $('#md_anyos_experiencia').modal('show');
+    }
+
+    function nuevoIdioma() {
+        $('#idioma').val("").trigger('change');
+        $('#otraCertificacionIdioma').val("");
+        $('#tipoCertificacionIdioma').val("").trigger('change');
+        $('#puntajeMinimoCertificacionIdioma').val("");
+        $('#consecutivo').val("");
+        bootstrap_alert_idioma.removeWarning();
+        $('#md_idioma').modal('show');
+    }
+    
     function cerrarVentanaAndenda() {
-        if($('input:file[name="adendas[' + self.documentosSoporte().length + '].documento"]')) {
-           $('input:file[name="adendas[' + self.documentosSoporte().length + '].documento"]').remove(); 
+        if ($('input:file[name="adendas[' + self.documentosSoporte().length + '].documento"]')) {
+            $('input:file[name="adendas[' + self.documentosSoporte().length + '].documento"]').remove();
         }
         $('#md_adenda').modal('hide');
-    } 
+    }
+
+    function cerrarVentanaAnyosExperiencia() {
+        $('#md_anyos_experiencia').modal('hide');
+    }
+
+    function cerrarVentanaIdioma() {
+        $('#md_idioma').modal('hide');
+    }
 
     function ocultarDocumentoAdendas() {
         for (var i = 0; i < convocatoriaModel.adendas().length; i++) {
@@ -1494,8 +1343,7 @@
     }
 
     var adendas = [];
-    var criteriosHabilitantes = [];
-    var criteriosEvaluacion = [];
+    var anyosExperiencias = [];
     <c:if test = "${adendasJSON != null}">
     adendas = ${adendasJSON};
     for (var i = 0; i < adendas.length; i++) {
@@ -1504,12 +1352,12 @@
         $('input:file[name="adendas[' + i + '].documento"]').hide();
     }
     </c:if>
-    <c:if test = "${criteriosHabilitantesJSON != null}">
-    criteriosHabilitantes = ${criteriosHabilitantesJSON};
+    <c:if test = "${anyosExperienciasJSON != null}">
+    anyosExperiencias = ${anyosExperienciasJSON};
     </c:if>
-    <c:if test = "${criteriosHabilitantesJSON != null}">
-    criteriosEvaluacion = ${criteriosEvaluacionJSON};
+    <c:if test = "${idiomasJSON != null}">
+    idiomas = ${idiomasJSON};
     </c:if>
-    var convocatoriaModel = new ConvocatoriaModel(adendas, criteriosHabilitantes, criteriosEvaluacion);
+    var convocatoriaModel = new ConvocatoriaModel(adendas, anyosExperiencias, idiomas);
     ko.applyBindings(convocatoriaModel);
 </script>

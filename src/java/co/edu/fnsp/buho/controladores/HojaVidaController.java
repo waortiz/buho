@@ -90,7 +90,7 @@ public class HojaVidaController {
         List<Maestro> tiposInvestigador = servicioMaestro.obtenerTiposInvestigador();
         List<Maestro> tiposAutorArticulo = servicioMaestro.obtenerTiposAutorArticulo();
         List<Maestro> tiposPatente = servicioMaestro.obtenerTiposPatente();
-        List<Maestro> tiposProductoConocimento = servicioMaestro.obtenerTiposProductoConocimiento();
+        List<Maestro> tiposProductosConocimiento = servicioMaestro.obtenerTiposProductosConocimiento();
         List<Maestro> clasesPatente = servicioMaestro.obtenerClasesPatente();
         
         model.addAttribute("paises", paises);
@@ -116,7 +116,7 @@ public class HojaVidaController {
         model.addAttribute("tiposInvestigador", tiposInvestigador);
         model.addAttribute("tiposAutorArticulo", tiposAutorArticulo);
         model.addAttribute("tiposPatente", tiposPatente);
-        model.addAttribute("tiposProductoConocimento", tiposProductoConocimento);
+        model.addAttribute("tiposProductosConocimiento", tiposProductosConocimiento);
         model.addAttribute("clasesPatente", clasesPatente);
 
         model.addAttribute("hojaVida", new HojaVida());
@@ -425,7 +425,7 @@ public class HojaVidaController {
         List<Maestro> tiposInvestigador = servicioMaestro.obtenerTiposInvestigador();
         List<Maestro> tiposAutorArticulo = servicioMaestro.obtenerTiposAutorArticulo();
         List<Maestro> tiposPatente = servicioMaestro.obtenerTiposPatente();
-        List<Maestro> tiposProductoConocimento = servicioMaestro.obtenerTiposProductoConocimiento();
+        List<Maestro> tiposProductosConocimiento = servicioMaestro.obtenerTiposProductosConocimiento();
         List<Maestro> clasesPatente = servicioMaestro.obtenerClasesPatente();
 
         model.addAttribute("paises", paises);
@@ -451,7 +451,7 @@ public class HojaVidaController {
         model.addAttribute("tiposInvestigador", tiposInvestigador);
         model.addAttribute("tiposAutorArticulo", tiposAutorArticulo);
         model.addAttribute("tiposPatente", tiposPatente);
-        model.addAttribute("tiposProductoConocimento", tiposProductoConocimento);
+        model.addAttribute("tiposProductosConocimiento", tiposProductosConocimiento);
         model.addAttribute("clasesPatente", clasesPatente);
         
         co.edu.fnsp.buho.entidades.HojaVida hojaVida = servicioHojaVida.obtenerHojaVida(idPersona);
@@ -495,8 +495,8 @@ public class HojaVidaController {
         if (hojaVida.getPatentes().size() > 0) {
             model.addAttribute("patentesJSON", Util.obtenerPatentesJSON(hojaVida.getPatentes()));
         }
-        if (hojaVida.getProductosConocimento().size() > 0) {
-            model.addAttribute("productosConocimentoJSON", Util.obtenerProductosConocimentoJSON(hojaVida.getProductosConocimento()));
+        if (hojaVida.getProductosConocimiento().size() > 0) {
+            model.addAttribute("productosConocimientoJSON", Util.obtenerProductosConocimientoJSON(hojaVida.getProductosConocimiento()));
         }
 
         model.addAttribute("hojaVida", hojaVida);
@@ -719,9 +719,9 @@ public class HojaVidaController {
         }
     }
     
-    @RequestMapping(value = "/documentoProductoConocimento/{idProductoConocimento}", method = RequestMethod.GET)
-    public void obtenerDocumentoProductoConocimento(@PathVariable("idProductoConocimento") int idProductoConocimento, HttpServletResponse response) throws IOException {
-        Documento documento = servicioHojaVida.obtenerDocumentoProductoConocimento(idProductoConocimento);
+    @RequestMapping(value = "/documentoProductoConocimiento/{idProductoConocimiento}", method = RequestMethod.GET)
+    public void obtenerDocumentoProductoConocimiento(@PathVariable("idProductoConocimiento") int idProductoConocimiento, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerDocumentoProductoConocimiento(idProductoConocimiento);
         if (documento != null) {
             response.reset();
             response.resetBuffer();

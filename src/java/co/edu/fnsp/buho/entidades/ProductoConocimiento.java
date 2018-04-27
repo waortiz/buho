@@ -3,22 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.fnsp.buho.entidadesVista;
-
-import org.springframework.web.multipart.MultipartFile;
+package co.edu.fnsp.buho.entidades;
 
 /**
  *
  * @author William
  */
-public class ProductoConocimento {
+public class ProductoConocimiento {
     private int id;
     private String nombreTipo;
-    private String tipo;
-    private String nucleoBasicoConocimento;
+    private int tipo;
+    private int nucleoBasicoConocimiento;
     private String url;
     private String descripcion;
-    private MultipartFile documento;
+    private Documento documento;
 
     /**
      * @return the id
@@ -51,29 +49,29 @@ public class ProductoConocimento {
     /**
      * @return the tipo
      */
-    public String getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
     /**
      * @param tipo the tipo to set
      */
-    public void setTipo(String tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 
     /**
-     * @return the nucleoBasicoConocimento
+     * @return the nucleoBasicoConocimiento
      */
-    public String getNucleoBasicoConocimento() {
-        return nucleoBasicoConocimento;
+    public int getNucleoBasicoConocimiento() {
+        return nucleoBasicoConocimiento;
     }
 
     /**
-     * @param nucleoBasicoConocimento the nucleoBasicoConocimento to set
+     * @param nucleoBasicoConocimiento the nucleoBasicoConocimiento to set
      */
-    public void setNucleoBasicoConocimento(String nucleoBasicoConocimento) {
-        this.nucleoBasicoConocimento = nucleoBasicoConocimento;
+    public void setNucleoBasicoConocimiento(int nucleoBasicoConocimiento) {
+        this.nucleoBasicoConocimiento = nucleoBasicoConocimiento;
     }
 
     /**
@@ -107,14 +105,14 @@ public class ProductoConocimento {
     /**
      * @return the documento
      */
-    public MultipartFile getDocumento() {
+    public Documento getDocumento() {
         return documento;
     }
 
     /**
      * @param documento the documento to set
      */
-    public void setDocumento(MultipartFile documento) {
+    public void setDocumento(Documento documento) {
         this.documento = documento;
     }
     

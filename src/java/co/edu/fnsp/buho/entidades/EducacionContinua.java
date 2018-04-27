@@ -17,7 +17,7 @@ public class EducacionContinua {
     private String nombreTipoCapacitacion;
     private int institucion;
     private String nombreInstitucion;
-    private int areaSaber;
+    private int nucleoBasicoConocimiento;
     private String nombreNucleoBasicoConocimiento;    
     private String nombreCapacitacion;    
     private int numeroHoras;    
@@ -95,17 +95,17 @@ public class EducacionContinua {
     }
 
     /**
-     * @return the areaSaber
+     * @return the nucleoBasicoConocimiento
      */
     public int getNucleoBasicoConocimiento() {
-        return areaSaber;
+        return nucleoBasicoConocimiento;
     }
 
     /**
-     * @param areaSaber the areaSaber to set
+     * @param nucleoBasicoConocimiento the nucleoBasicoConocimiento to set
      */
-    public void setNucleoBasicoConocimiento(int areaSaber) {
-        this.areaSaber = areaSaber;
+    public void setNucleoBasicoConocimiento(int nucleoBasicoConocimiento) {
+        this.nucleoBasicoConocimiento = nucleoBasicoConocimiento;
     }
 
     /**

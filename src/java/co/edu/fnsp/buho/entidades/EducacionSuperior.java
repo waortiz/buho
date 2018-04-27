@@ -22,7 +22,7 @@ public class EducacionSuperior {
     private String nombreInstitucion;
     private boolean tituloExterior;
     private String programa;
-    private int areaSaber;
+    private int nucleoBasicoConocimiento;
     private String nombreNucleoBasicoConocimiento;
     private int anyoInicio;
     private Integer anyoFinalizacion;
@@ -173,17 +173,17 @@ public class EducacionSuperior {
     }
 
     /**
-     * @return the areaSaber
+     * @return the nucleoBasicoConocimiento
      */
     public int getNucleoBasicoConocimiento() {
-        return areaSaber;
+        return nucleoBasicoConocimiento;
     }
 
     /**
-     * @param areaSaber the areaSaber to set
+     * @param nucleoBasicoConocimiento the nucleoBasicoConocimiento to set
      */
-    public void setNucleoBasicoConocimiento(int areaSaber) {
-        this.areaSaber = areaSaber;
+    public void setNucleoBasicoConocimiento(int nucleoBasicoConocimiento) {
+        this.nucleoBasicoConocimiento = nucleoBasicoConocimiento;
     }
 
     /**

@@ -22,7 +22,7 @@ import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.TipoDocumento;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.Patente;
-import co.edu.fnsp.buho.entidades.ProductoConocimento;
+import co.edu.fnsp.buho.entidades.ProductoConocimiento;
 import co.edu.fnsp.buho.utilidades.Util;
 import java.util.ArrayList;
 import java.util.Date;
@@ -155,13 +155,13 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     private SimpleJdbcCall actualizarDocumentoPatente;
     private SimpleJdbcCall obtenerDocumentoPatente;
 
-    private SimpleJdbcCall ingresarProductoConocimento;
-    private SimpleJdbcCall obtenerProductosConocimento;
-    private SimpleJdbcCall actualizarProductoConocimento;
-    private SimpleJdbcCall eliminarProductoConocimento;
-    private SimpleJdbcCall ingresarDocumentoProductoConocimento;
-    private SimpleJdbcCall actualizarDocumentoProductoConocimento;
-    private SimpleJdbcCall obtenerDocumentoProductoConocimento;
+    private SimpleJdbcCall ingresarProductoConocimiento;
+    private SimpleJdbcCall obtenerProductosConocimiento;
+    private SimpleJdbcCall actualizarProductoConocimiento;
+    private SimpleJdbcCall eliminarProductoConocimiento;
+    private SimpleJdbcCall ingresarDocumentoProductoConocimiento;
+    private SimpleJdbcCall actualizarDocumentoProductoConocimiento;
+    private SimpleJdbcCall obtenerDocumentoProductoConocimiento;
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -280,13 +280,13 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         this.ingresarDocumentoPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoPatente");
         this.actualizarDocumentoPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoPatente");
 
-        this.ingresarProductoConocimento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarProductoConocimento");
-        this.eliminarProductoConocimento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarProductoConocimento");
-        this.actualizarProductoConocimento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarProductoConocimento");
-        this.obtenerProductosConocimento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerProductosConocimento").returningResultSet("productosConocimento", BeanPropertyRowMapper.newInstance(ProductoConocimento.class));
-        this.obtenerDocumentoProductoConocimento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoProductoConocimento");
-        this.ingresarDocumentoProductoConocimento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoProductoConocimento");
-        this.actualizarDocumentoProductoConocimento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoProductoConocimento");
+        this.ingresarProductoConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarProductoConocimiento");
+        this.eliminarProductoConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarProductoConocimiento");
+        this.actualizarProductoConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarProductoConocimiento");
+        this.obtenerProductosConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerProductosConocimiento").returningResultSet("productosConocimiento", BeanPropertyRowMapper.newInstance(ProductoConocimiento.class));
+        this.obtenerDocumentoProductoConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoProductoConocimiento");
+        this.ingresarDocumentoProductoConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoProductoConocimiento");
+        this.actualizarDocumentoProductoConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoProductoConocimiento");
     }
 
     @Override
@@ -621,23 +621,23 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
             }
         }
 
-        MapSqlParameterSource parametrosIngresoProductoConocimento = new MapSqlParameterSource();
-        parametrosIngresoProductoConocimento.addValue("varIdPersona", idPersona);
-        for (ProductoConocimento productoConocimento : hojaVida.getProductosConocimento()) {
-            parametrosIngresoPatente.addValue("varDescripcion", productoConocimento.getDescripcion());
-            parametrosIngresoProductoConocimento.addValue("varNucleoBasicoConocimento", productoConocimento.getNucleoBasicoConocimento());
-            parametrosIngresoProductoConocimento.addValue("varUrl", productoConocimento.getUrl());
-            parametrosIngresoProductoConocimento.addValue("varTipo", productoConocimento.getTipo());
-            Map resultadoIngresoProductoConocimento = ingresarProductoConocimento.execute(parametrosIngresoProductoConocimento);
-            int idProductoConocimento = (int) resultadoIngresoProductoConocimento.get("varId");
-            Documento documento = productoConocimento.getDocumento();
+        MapSqlParameterSource parametrosIngresoProductoConocimiento = new MapSqlParameterSource();
+        parametrosIngresoProductoConocimiento.addValue("varIdPersona", idPersona);
+        for (ProductoConocimiento productoConocimiento : hojaVida.getProductosConocimiento()) {
+            parametrosIngresoPatente.addValue("varDescripcion", productoConocimiento.getDescripcion());
+            parametrosIngresoProductoConocimiento.addValue("varNucleoBasicoConocimiento", productoConocimiento.getNucleoBasicoConocimiento());
+            parametrosIngresoProductoConocimiento.addValue("varUrl", productoConocimiento.getUrl());
+            parametrosIngresoProductoConocimiento.addValue("varTipo", productoConocimiento.getTipo());
+            Map resultadoIngresoProductoConocimiento = ingresarProductoConocimiento.execute(parametrosIngresoProductoConocimiento);
+            int idProductoConocimiento = (int) resultadoIngresoProductoConocimiento.get("varId");
+            Documento documento = productoConocimiento.getDocumento();
             if (documento != null) {
-                MapSqlParameterSource parametrosIngresoDocumentoProductoConocimento = new MapSqlParameterSource();
-                parametrosIngresoDocumentoProductoConocimento.addValue("varIdProductoConocimento", idProductoConocimento);
-                parametrosIngresoDocumentoProductoConocimento.addValue("varNombre", documento.getNombre());
-                parametrosIngresoDocumentoProductoConocimento.addValue("varTipoContenido", documento.getTipoContenido());
-                parametrosIngresoDocumentoProductoConocimento.addValue("varContenido", documento.getContenido());
-                ingresarDocumentoProductoConocimento.execute(parametrosIngresoDocumentoProductoConocimento);
+                MapSqlParameterSource parametrosIngresoDocumentoProductoConocimiento = new MapSqlParameterSource();
+                parametrosIngresoDocumentoProductoConocimiento.addValue("varIdProductoConocimiento", idProductoConocimiento);
+                parametrosIngresoDocumentoProductoConocimiento.addValue("varNombre", documento.getNombre());
+                parametrosIngresoDocumentoProductoConocimiento.addValue("varTipoContenido", documento.getTipoContenido());
+                parametrosIngresoDocumentoProductoConocimiento.addValue("varContenido", documento.getContenido());
+                ingresarDocumentoProductoConocimiento.execute(parametrosIngresoDocumentoProductoConocimiento);
             }
         }
     }
@@ -695,7 +695,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         actualizarInvestigador(hojaVida);
         actualizarArticulos(hojaVida.getIdPersona(), hojaVida.getArticulos());
         actualizarPatentes(hojaVida.getIdPersona(), hojaVida.getPatentes());
-        actualizarProductosConocimento(hojaVida.getIdPersona(), hojaVida.getProductosConocimento());
+        actualizarProductosConocimiento(hojaVida.getIdPersona(), hojaVida.getProductosConocimiento());
 
         Documento copiaDocumentoIdentificacion = hojaVida.getCopiaDocumentoIdentificacion();
         if (copiaDocumentoIdentificacion != null) {
@@ -933,8 +933,8 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         Map resultadoPatentes = obtenerPatentes.execute(parametros);
         List<Patente> patentes = (List<Patente>) resultadoPatentes.get("patentes");
 
-        Map resultadoProductosConocimento = obtenerProductosConocimento.execute(parametros);
-        List<ProductoConocimento> productosConocimento = (List<ProductoConocimento>) resultadoProductosConocimento.get("productosConocimento");
+        Map resultadoProductosConocimiento = obtenerProductosConocimiento.execute(parametros);
+        List<ProductoConocimiento> productosConocimiento = (List<ProductoConocimiento>) resultadoProductosConocimiento.get("productosConocimiento");
 
         hojaVida.setTelefonos(telefonos);
         hojaVida.setCorreosElectronicos(correosElectronicos);
@@ -949,7 +949,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         hojaVida.setExperienciasDocencia(experienciasDocencia);
         hojaVida.setArticulos(articulos);
         hojaVida.setPatentes(patentes);
-        hojaVida.setProductosConocimento(productosConocimento);
+        hojaVida.setProductosConocimiento(productosConocimiento);
 
         return hojaVida;
     }
@@ -1099,12 +1099,12 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     }
 
     @Override
-    public Documento obtenerDocumentoProductoConocimento(int idProductoConocimento) {
+    public Documento obtenerDocumentoProductoConocimiento(int idProductoConocimiento) {
         Documento documento = null;
         MapSqlParameterSource parametros = new MapSqlParameterSource();
-        parametros.addValue("varidProductoConocimento", idProductoConocimento);
+        parametros.addValue("varidProductoConocimiento", idProductoConocimiento);
 
-        Map resultado = obtenerDocumentoProductoConocimento.execute(parametros);
+        Map resultado = obtenerDocumentoProductoConocimiento.execute(parametros);
 
         if (resultado.get("varNombre") != null) {
             documento = new Documento();
@@ -1993,62 +1993,62 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         }
     }
 
-    private void actualizarProductosConocimento(long idPersona, List<ProductoConocimento> productosConocimento) {
-        MapSqlParameterSource parametrosConsultaProductoConocimento = new MapSqlParameterSource();
-        parametrosConsultaProductoConocimento.addValue("varIdPersona", idPersona);
-        Map resultadoProductosConocimento = obtenerProductosConocimento.execute(parametrosConsultaProductoConocimento);
-        ArrayList<ProductoConocimento> productosConocimentoActuales = (ArrayList<ProductoConocimento>) resultadoProductosConocimento.get("productosConocimento");
+    private void actualizarProductosConocimiento(long idPersona, List<ProductoConocimiento> productosConocimiento) {
+        MapSqlParameterSource parametrosConsultaProductoConocimiento = new MapSqlParameterSource();
+        parametrosConsultaProductoConocimiento.addValue("varIdPersona", idPersona);
+        Map resultadoProductosConocimiento = obtenerProductosConocimiento.execute(parametrosConsultaProductoConocimiento);
+        ArrayList<ProductoConocimiento> productosConocimientoActuales = (ArrayList<ProductoConocimiento>) resultadoProductosConocimiento.get("productosConocimiento");
 
-        MapSqlParameterSource parametrosEliminacionProductoConocimento = new MapSqlParameterSource();
-        MapSqlParameterSource parametrosActualizacionProductoConocimento = new MapSqlParameterSource();
-        for (ProductoConocimento productoConocimentoActual : productosConocimentoActuales) {
-            ProductoConocimento productoConocimentoModificado = null;
-            for (ProductoConocimento productoConocimento : productosConocimento) {
-                if (productoConocimento.getId() == productoConocimentoActual.getId()) {
-                    productoConocimentoModificado = productoConocimento;
+        MapSqlParameterSource parametrosEliminacionProductoConocimiento = new MapSqlParameterSource();
+        MapSqlParameterSource parametrosActualizacionProductoConocimiento = new MapSqlParameterSource();
+        for (ProductoConocimiento productoConocimientoActual : productosConocimientoActuales) {
+            ProductoConocimiento productoConocimientoModificado = null;
+            for (ProductoConocimiento productoConocimiento : productosConocimiento) {
+                if (productoConocimiento.getId() == productoConocimientoActual.getId()) {
+                    productoConocimientoModificado = productoConocimiento;
                     break;
                 }
             }
-            if (productoConocimentoModificado == null) {
-                parametrosEliminacionProductoConocimento.addValue("varId", productoConocimentoActual.getId());
-                eliminarProductoConocimento.execute(parametrosEliminacionProductoConocimento);
+            if (productoConocimientoModificado == null) {
+                parametrosEliminacionProductoConocimiento.addValue("varId", productoConocimientoActual.getId());
+                eliminarProductoConocimiento.execute(parametrosEliminacionProductoConocimiento);
             } else {
-                parametrosActualizacionProductoConocimento.addValue("varId", productoConocimentoModificado.getId());
-                parametrosActualizacionProductoConocimento.addValue("varDescripcion", productoConocimentoModificado.getDescripcion());
-                parametrosActualizacionProductoConocimento.addValue("varNucleoBasicoConocimento", productoConocimentoModificado.getNucleoBasicoConocimento());
-                parametrosActualizacionProductoConocimento.addValue("varUrl", productoConocimentoModificado.getUrl());
-                parametrosActualizacionProductoConocimento.addValue("varTipo", productoConocimentoModificado.getTipo());
-                actualizarProductoConocimento.execute(parametrosActualizacionProductoConocimento);
-                Documento documento = productoConocimentoModificado.getDocumento();
+                parametrosActualizacionProductoConocimiento.addValue("varId", productoConocimientoModificado.getId());
+                parametrosActualizacionProductoConocimiento.addValue("varDescripcion", productoConocimientoModificado.getDescripcion());
+                parametrosActualizacionProductoConocimiento.addValue("varNucleoBasicoConocimiento", productoConocimientoModificado.getNucleoBasicoConocimiento());
+                parametrosActualizacionProductoConocimiento.addValue("varUrl", productoConocimientoModificado.getUrl());
+                parametrosActualizacionProductoConocimiento.addValue("varTipo", productoConocimientoModificado.getTipo());
+                actualizarProductoConocimiento.execute(parametrosActualizacionProductoConocimiento);
+                Documento documento = productoConocimientoModificado.getDocumento();
                 if (documento != null) {
-                    MapSqlParameterSource parametrosActualizarDocumentoProductoConocimento = new MapSqlParameterSource();
-                    parametrosActualizarDocumentoProductoConocimento.addValue("varIdProductoConocimento", productoConocimentoModificado.getId());
-                    parametrosActualizarDocumentoProductoConocimento.addValue("varNombre", documento.getNombre());
-                    parametrosActualizarDocumentoProductoConocimento.addValue("varTipoContenido", documento.getTipoContenido());
-                    parametrosActualizarDocumentoProductoConocimento.addValue("varContenido", documento.getContenido());
-                    actualizarDocumentoProductoConocimento.execute(parametrosActualizarDocumentoProductoConocimento);
+                    MapSqlParameterSource parametrosActualizarDocumentoProductoConocimiento = new MapSqlParameterSource();
+                    parametrosActualizarDocumentoProductoConocimiento.addValue("varIdProductoConocimiento", productoConocimientoModificado.getId());
+                    parametrosActualizarDocumentoProductoConocimiento.addValue("varNombre", documento.getNombre());
+                    parametrosActualizarDocumentoProductoConocimiento.addValue("varTipoContenido", documento.getTipoContenido());
+                    parametrosActualizarDocumentoProductoConocimiento.addValue("varContenido", documento.getContenido());
+                    actualizarDocumentoProductoConocimiento.execute(parametrosActualizarDocumentoProductoConocimiento);
                 }
             }
         }
 
-        MapSqlParameterSource parametrosIngresoProductoConocimento = new MapSqlParameterSource();
-        parametrosIngresoProductoConocimento.addValue("varIdPersona", idPersona);
-        for (ProductoConocimento productoConocimento : productosConocimento) {
-            if (productoConocimento.getId() == 0) {
-                parametrosIngresoProductoConocimento.addValue("varDescripcion", productoConocimento.getDescripcion());
-                parametrosIngresoProductoConocimento.addValue("varNucleoBasicoConocimento", productoConocimento.getNucleoBasicoConocimento());
-                parametrosIngresoProductoConocimento.addValue("varUrl", productoConocimento.getUrl());
-                parametrosIngresoProductoConocimento.addValue("varTipo", productoConocimento.getTipo());
-                Map resultadoIngresoProductoConocimento = ingresarProductoConocimento.execute(parametrosIngresoProductoConocimento);
-                int idProductoConocimento = (int) resultadoIngresoProductoConocimento.get("varId");
-                Documento documento = productoConocimento.getDocumento();
+        MapSqlParameterSource parametrosIngresoProductoConocimiento = new MapSqlParameterSource();
+        parametrosIngresoProductoConocimiento.addValue("varIdPersona", idPersona);
+        for (ProductoConocimiento productoConocimiento : productosConocimiento) {
+            if (productoConocimiento.getId() == 0) {
+                parametrosIngresoProductoConocimiento.addValue("varDescripcion", productoConocimiento.getDescripcion());
+                parametrosIngresoProductoConocimiento.addValue("varNucleoBasicoConocimiento", productoConocimiento.getNucleoBasicoConocimiento());
+                parametrosIngresoProductoConocimiento.addValue("varUrl", productoConocimiento.getUrl());
+                parametrosIngresoProductoConocimiento.addValue("varTipo", productoConocimiento.getTipo());
+                Map resultadoIngresoProductoConocimiento = ingresarProductoConocimiento.execute(parametrosIngresoProductoConocimiento);
+                int idProductoConocimiento = (int) resultadoIngresoProductoConocimiento.get("varId");
+                Documento documento = productoConocimiento.getDocumento();
                 if (documento != null) {
-                    MapSqlParameterSource parametrosIngresoDocumentoProductoConocimento = new MapSqlParameterSource();
-                    parametrosIngresoDocumentoProductoConocimento.addValue("varIdProductoConocimento", idProductoConocimento);
-                    parametrosIngresoDocumentoProductoConocimento.addValue("varNombre", documento.getNombre());
-                    parametrosIngresoDocumentoProductoConocimento.addValue("varTipoContenido", documento.getTipoContenido());
-                    parametrosIngresoDocumentoProductoConocimento.addValue("varContenido", documento.getContenido());
-                    ingresarDocumentoProductoConocimento.execute(parametrosIngresoDocumentoProductoConocimento);
+                    MapSqlParameterSource parametrosIngresoDocumentoProductoConocimiento = new MapSqlParameterSource();
+                    parametrosIngresoDocumentoProductoConocimiento.addValue("varIdProductoConocimiento", idProductoConocimiento);
+                    parametrosIngresoDocumentoProductoConocimiento.addValue("varNombre", documento.getNombre());
+                    parametrosIngresoDocumentoProductoConocimiento.addValue("varTipoContenido", documento.getTipoContenido());
+                    parametrosIngresoDocumentoProductoConocimiento.addValue("varContenido", documento.getContenido());
+                    ingresarDocumentoProductoConocimiento.execute(parametrosIngresoDocumentoProductoConocimiento);
                 }
             }
         }
