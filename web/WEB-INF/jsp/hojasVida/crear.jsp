@@ -4506,7 +4506,7 @@
                 return false;
             }
             if (descripcionPatente === "") {
-                bootstrap_alert_patente.warning('Debe ingresar la descripción de la patente);
+                bootstrap_alert_patente.warning('Debe ingresar la descripción de la patente');
                 return false;
             }
             if ($('#consecutivo').val() === "") {
@@ -4601,7 +4601,7 @@
                 return false;
             }
             if (descripcionProductoConocimiento === "") {
-                bootstrap_alert_producto_conocimiento.warning('Debe ingresar la descripción de la patente);
+                bootstrap_alert_producto_conocimiento.warning('Debe ingresar la descripción');
                 return false;
             }
             if ($('#consecutivo').val() === "") {
