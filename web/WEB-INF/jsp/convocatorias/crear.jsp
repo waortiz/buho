@@ -18,12 +18,6 @@
                     <span class="nav-link-text">Criterios habilitantes</span>
                 </a>
             </li>
-            <li class="nav-item" id="btncriteva" data-toggle="tooltip" data-placement="right" title="" data-original-title="Criterios evaluaci&oacute;n" style="margin-right: 5px !important;">
-                <a class="nav-link" >
-                    <i class="fa fa-check-square-o" style="font-size:36px;"></i>
-                    <span class="nav-link-text">Criterios evaluaci&oacute;n</span>
-                </a>
-            </li>
             <li class="nav-item" id="btnadendas" data-toggle="tooltip" data-placement="right" title="" data-original-title="Adendas">
                 <a class="nav-link" >          
                     <i class="fa fa-pencil-square-o" style="font-size:36px;"></i>
@@ -86,19 +80,19 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">
+                            <label for="nombre">Nombre</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de la convocatoria">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                <form:input class="form-control" path="nombre" data-validation="required" data-validation-error-msg="Debe ingresar el nombre" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label for="area">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el el núcleo básico del conocimiento">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
                                 <form:select style="width: 100%;" path="nucleoBasicoConocimiento" class="js-select-basic-single js-states form-control">
                                     <form:option value=""></form:option>
                                     <form:options items="${nucleosBasicosConocimiento}" itemLabel="nombre" itemValue="id"/>
                                 </form:select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="nombre">Nombre</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de la convocatoria">
-                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                <form:input class="form-control" path="nombre" data-validation="required" data-validation-error-msg="Debe ingresar el nombre" />
                         </div>
                     </div>
                 </div>
@@ -218,7 +212,7 @@
                                 <input type="file" class="form-control" name="documento" id="documento" >
                                 <c:if test = "${convocatoria.getId() > 0}">
                                     <button class="btn btn-success btn-xs" type="button" onclick="verDocumentoConvocatoria()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
-                                </c:if>
+                                    </c:if>
                             </div>
                         </div>
                     </div>
@@ -239,7 +233,7 @@
                         <div class="form-group">
                             <label>Años experiencia</label>
                             <div class="table-responsive">
-                                <table class="table table-hover tableestilo2">
+                                <table class="table table-hover tableestilo">
                                     <thead>
                                         <tr>
                                             <th>M&iacute;nimo de a&ntilde;os</th>
@@ -247,11 +241,11 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <center>
-                                                    <input type="text" name="minimoAnyosExperiencia" id="minimoAnyosExperiencia" class="form-control input-sm" style="width: 100px;text-align: center;">
-                                                </center>
-                                            </td>
-                                        </tr>
+                                    <center>
+                                        <form:input path="anyosMinimosExperiencia" class="form-control input-sm" style="width: 100px;text-align: center;" />
+                                    </center>
+                                    </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -261,7 +255,7 @@
                         <label>Agregar a&ntilde;os experiencia</label>
                         <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoAnyosExperiencia()" ><span class="glyphicon glyphicon-plus"></span></button>
                         <div class="table-responsive">
-                            <table class="table table-hover tableestilo2">
+                            <table class="table table-hover tableestilo">
                                 <thead>
                                     <tr>
                                         <th style="width:300px;">Nucleo básico de conocimiento</th>
@@ -271,8 +265,11 @@
                                 </thead>
                                 <tbody data-bind="foreach: { data: anyosExperiencias }">
                                     <tr class="table-row">
-                                        <td style="width: 90%">
+                                        <td style="width: 50%">
                                             <span data-bind="text: nombreNucleoBasicoConocimiento" ></span>
+                                        </td>
+                                        <td style="width: 40%">
+                                            <span data-bind="text: anyos" ></span>
                                         </td>
                                         <td style='white-space: nowrap; width: 10%' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarAnyosExperiencia"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -301,12 +298,12 @@
                                             <div class="form-group">
                                                 <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                    <select style="width: 100%;" name="nucleoBasicoConocimientoAnyosExperiencia" id="nucleoBasicoConocimientoAnyosExperiencia" class="js-select-basic-single js-states form-control">
-                                                        <option></option>
-                                                        <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
+                                                <select style="width: 100%;" name="nucleoBasicoConocimientoAnyosExperiencia" id="nucleoBasicoConocimientoAnyosExperiencia" class="js-select-basic-single js-states form-control">
+                                                    <option></option>
+                                                    <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
                                                         <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
-                                                        </c:forEach>
-                                                    </select>
+                                                    </c:forEach>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -331,11 +328,11 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Agregar idioma requerido</label> 
-                            <button  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_formidiom"><span class="glyphicon glyphicon-plus"></span></button><br>
-                            <table class="table table-hover tableestilo2" id="tbformidiom">
+                            <button  type="button" class="btn btn-success btn-sm" onclick="nuevoIdioma()"><span class="glyphicon glyphicon-plus"></span></button><br>
+                            <table class="table table-hover tableestilo" id="tbformidiom">
                                 <thead>
-                                    <th>Idioma</th>
-                                    <th>Opción</th>
+                                <th>Idioma</th>
+                                <th>Opción</th>
                                 </thead>
                                 <tbody data-bind="foreach: { data: idiomas }">
                                     <tr class="table-row">
@@ -349,6 +346,8 @@
                                             <input type="hidden" data-bind="value: nombreIdioma, attr: { 'name': 'idiomas[' + $index() + '].nombreIdioma'  }" />
                                             <input type="hidden" data-bind="value: tipoCertificacion, attr: { 'name': 'idiomas[' + $index() + '].tipoCertificacion'  }" />
                                             <input type="hidden" data-bind="value: nombreTipoCertificacion, attr: { 'name': 'idiomas[' + $index() + '].nombreTipoCertificacion'  }" />
+                                            <input type="hidden" data-bind="value: puntajeMinimoCertificacion, attr: { 'name': 'idiomas[' + $index() + '].puntajeMinimoCertificacion'  }" />
+                                            <input type="hidden" data-bind="value: otraCertificacion, attr: { 'name': 'idiomas[' + $index() + '].otraCertificacion'  }" />
                                             <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'idiomas[' + $index() + '].consecutivo'  }" />
                                             <input type="hidden" data-bind="value: id, attr: { 'name': 'idiomas[' + $index() + '].id'  }" />
                                         </td>
@@ -357,7 +356,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="modal fade" role="dialog" id="md_idiomas">
+                    <div class="modal fade" role="dialog" id="md_idioma">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header mhsuccess">
@@ -373,20 +372,20 @@
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
                                                 <select style="width: 100%;" name="idioma" id="idioma" class="js-select-basic-single js-states form-control">
                                                     <option></option>
-                                                     <c:forEach var="idioma" items="${idiomas}">
-                                                     <option value="${idioma.getId()}">${idioma.getNombre()}</option>
-                                                     </c:forEach>   
+                                                    <c:forEach var="idioma" items="${idiomas}">
+                                                        <option value="${idioma.getId()}">${idioma.getNombre()}</option>
+                                                    </c:forEach>   
                                                 </select>
                                             </div>
                                         </div>  
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Tipo de certificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de adenda">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
+                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
                                                 <select style="width: 100%;" name="tipoCertificacionIdioma" id="tipoCertificacionIdioma" class="js-select-basic-single js-states form-control">
                                                     <option></option>
                                                     <c:forEach var="tipoCertificacion" items="${tiposCertificacion}">
-                                                    <option value="${tipoCertificacion.getId()}">${tipoCertificacion.getNombre()}</option>
+                                                        <option value="${tipoCertificacion.getId()}">${tipoCertificacion.getNombre()}</option>
                                                     </c:forEach> 
                                                 </select>
                                             </div>  
@@ -397,13 +396,13 @@
                                             <div class="form-group">
                                                 <label for="">Cual?</label>
                                                 <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el otro tipo de certificación">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                                                 <input type="text" name="otraCertificacionIdioma" id="otraCertificacionIdioma" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">Puntaje minimo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el puntaje minimo de estudio idioma">
+                                                <label for="">Puntaje mínimo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el puntaje mínimo de estudio idioma">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                                                 <input type="text" name="puntajeMinimoCertificacionIdioma" id="puntajeMinimoCertificacionIdioma" class="form-control" style="width: 70px;">
                                             </div>
@@ -423,11 +422,11 @@
                         <div class="form-group">
                             <label>Agregar formaci&oacute;n requerida</label> 
                             <button  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_form"><span class="glyphicon glyphicon-plus"></span></button><br>
-                            <table class="table table-hover tableestilo2" id="tbform">
+                            <table class="table table-hover tableestilo" id="tbform">
                                 <thead>
-                                    <th>Programa</th>
-                                    <th>Nivel de formaci&oacute;n</th>
-                                    <th>Opciones</th>
+                                <th>Programa</th>
+                                <th>Nivel de formaci&oacute;n</th>
+                                <th>Opciones</th>
                                 </thead>
                             </table>
                         </div>
@@ -436,7 +435,7 @@
                         <div class="form-group">
                             <label>Agregar formaci&oacute;n complementaria requerida</label> 
                             <button  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_formcomreq"><span class="glyphicon glyphicon-plus"></span></button><br>
-                            <table class="table table-hover tableestilo2" id="tbformcomreq">
+                            <table class="table table-hover tableestilo" id="tbformcomreq">
                                 <thead>
                                 <th>Nombre de la capacitación o certificaci&oacute;n</th>
                                 <th>Tipo</th>
@@ -461,7 +460,7 @@
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                                             <select name="freq_nivel_form" id="freq_nivel_form" style="width: 100%;" class="js-select-basic-single js-states form-control">
                                                 <option value=""></option>
-                                               <c:forEach var="nivelEstudio" items="${nivelesEstudio}">
+                                                <c:forEach var="nivelEstudio" items="${nivelesEstudio}">
                                                     <option value="${nivelEstudio.getId()}">${nivelEstudio.getNombre()}</option>
                                                 </c:forEach>
                                             </select>
@@ -474,7 +473,7 @@
                                             <select style="width: 100%;" name="freq_nucleo" id="freq_nucleo" class="js-select-basic-single js-states form-control">
                                                 <option></option>
                                                 <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
-                                                <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
+                                                    <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
@@ -501,7 +500,7 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <div class="table-responsive">
-                                                <table class="table table-hover tableestilo2" id="tbfreqpro">
+                                                <table class="table table-hover tableestilo" id="tbfreqpro">
                                                     <thead>
                                                         <tr>
                                                             <th>Programa</th>
@@ -539,7 +538,7 @@
                                             <select style="width: 100%;" name="con_tipo_capacitacion" id="con_tipo_capacitacion" class="js-select-basic-single js-states form-control">
                                                 <option value=""></option>
                                                 <c:forEach var="tipoCapacitacion" items="${tiposCapacitacion}">
-                                                <option value="${tipoCapacitacion.getId()}">${tipoCapacitacion.getNombre()}</option>
+                                                    <option value="${tipoCapacitacion.getId()}">${tipoCapacitacion.getNombre()}</option>
                                                 </c:forEach>    
                                             </select>
                                         </div>
@@ -551,7 +550,7 @@
                                             <select style="width: 100%;" name="conformreq_nbc" id="conformreq_nbc" class="js-select-basic-single js-states form-control">
                                                 <option></option>
                                                 <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
-                                                <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
+                                                    <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
@@ -580,7 +579,7 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <div class="table-responsive">
-                                                <table class="table table-hover tableestilo2" id="tbcapaci">
+                                                <table class="table table-hover tableestilo" id="tbcapaci">
                                                     <thead>
                                                         <tr>
                                                             <th>Nombre de la capacitación o certificación</th>
@@ -619,7 +618,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="table-responsive">
-                            <table class="table table-hover tableestilo2" id="tbcrihab">
+                            <table class="table table-hover tableestilo" id="tbcrihab">
                                 <thead>
                                 <th>Criterio</th>
                                 <th>Tipo</th>
@@ -635,7 +634,7 @@
                     </div>
                     <div class="col-md-5">
                         <div class="table-responsive">
-                            <table class="table table-hover tableestilo2" id="tbconfig">
+                            <table class="table table-hover tableestilo" id="tbconfig">
                                 <thead>
                                 <th>Criterio</th>
                                 <th></th>
@@ -844,10 +843,31 @@
                     </div>
                 </div>
             </div>
-            <input type="submit" class="btn btn-success" style="margin-bottom: 10px;" value="Guardar" />
+            <input type="submit" class="btn btn-success" type="button" style="margin-top: 30px;float: right;" value="Guardar" />
             <input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <form:hidden path="id" />
         </form:form>
+        <div id="md_guardar" class="modal fade" role="dialog" disabled>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header mhsuccess">
+                        <h4>Por favor espere guardando...</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="barprogress">
+                            <div class="progress" >
+                                <div  class="progress-bar progress-bar-success progress-bar-striped active dynamic" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"><span id="current-progress"></span>
+
+                                </div>
+                            </div><span>Guardando...</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>             
         <div class="modal fade" id="confirmacionAlmacenamientoConvocatoria" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -893,7 +913,7 @@
     var DOCENCIA_MEDELLIN = "3";
     var DOCENCIA_REGIONES = "4";
     var TIPO_CERTIFICACION_OTRO = "8";
-    
+
     $.validate({
         validateOnBlur: false, // disable validation when input looses focus
         errorMessagePosition: 'top', // Instead of 'inline' which is default
@@ -986,13 +1006,13 @@
             $('#formcurso').hide();
         }
     });
-    $('#tipoCertificacion').change(function(){
-      var valor = $(this).val();
-      if(valor === TIPO_CERTIFICACION_OTRO) {
-        $('#divOtroCertificacionIdioma').css("display","block");
-      } else {
-        $('#divOtroCertificacionIdioma').css("display","none");
-      }
+    $('#tipoCertificacionIdioma').change(function () {
+        var valor = $(this).val();
+        if (valor === TIPO_CERTIFICACION_OTRO) {
+            $('#divOtroCertificacionIdioma').css("display", "block");
+        } else {
+            $('#divOtroCertificacionIdioma').css("display", "none");
+        }
     });
     $('#btndatosgen').click(function () {
         $('#formdatosgen').css('display', 'block');
@@ -1018,9 +1038,29 @@
         $('#formcriteva').css('display', 'none');
         $('#formadendas').css('display', 'block');
     });
-
+    $('#anyosExperiencia').keyup(function () {
+        this.value = (this.value + '').replace(/[^0-9]/g, '');
+    });
+    $('#puntajeMinimoCertificacionIdioma').keyup(function () {
+        this.value = (this.value + '').replace(/[^0-9]/g, '');
+    });
     $('#convocatoria').submit(function (evt) {
         evt.preventDefault();
+        $('#md_guardar').modal('show');
+        current_progress = 0;
+        var interval = setInterval(function () {
+            current_progress += 10;
+            $(".dynamic")
+                    .css("width", current_progress + "%")
+                    .attr("aria-valuenow", current_progress)
+                    .text(current_progress + "% Completado");
+            if (current_progress >= 100) {
+                clearInterval(interval);
+            }
+            if (current_progress === 100) {
+                $('#md_guardar').modal('hide');
+            }
+        }, 1000);
         var formData = new FormData(this);
         $.ajax({
             type: "POST",
@@ -1032,6 +1072,7 @@
                 xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
             },
             success: function (response) {
+                $('#md_guardar').modal('hide');
                 if (response === "") {
                     $('#confirmacionAlmacenamientoConvocatoria').modal('show');
                 } else {
@@ -1040,10 +1081,11 @@
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 bootstrap_alert_convocatoria.warning("Error al almacenar la convocatoria.");
+                $('#md_guardar').modal('hide');
             }});
     });
 
-    bootstrap_alert_convocatoria = { };
+    bootstrap_alert_convocatoria = {};
     bootstrap_alert_convocatoria.warning = function (message) {
         $('#alert_placeholder_convocatoria').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
@@ -1070,6 +1112,14 @@
         $('#alert_anyos_experiencia').html('');
     };
 
+    bootstrap_alert_idioma = {};
+    bootstrap_alert_idioma.warning = function (message) {
+        $('#alert_idioma').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_idioma.removeWarning = function () {
+        $('#alert_idioma').html('');
+    };
+
     var ConvocatoriaModel = function (adendas, anyosExperiencias, idiomas) {
         self = this;
         self.adendas = ko.observableArray(adendas);
@@ -1080,7 +1130,7 @@
             var nombreTipoAdenda = $('#tipoAdenda option:selected').text();
             var descripcionAdenda = $('#descripcionAdenda').val();
             var fechaAdenda = $('#fechaAdenda').val();
-            
+
             if (tipoAdenda === "") {
                 bootstrap_alert_adenda.warning('Debe seleccionar el tipo de adenda');
                 return false;
@@ -1093,7 +1143,7 @@
                 bootstrap_alert_adenda.warning('Debe ingresar la fecha de la adenda');
                 return false;
             }
-            
+
             if ($('#consecutivo').val() === "") {
                 if ($('input:file[name="adendas[' + self.adendas().length + '].documento"]').val() === "") {
                     bootstrap_alert_adenda.warning('Debe ingresar el documento');
@@ -1153,7 +1203,7 @@
                 window.location.href = "${pageContext.request.contextPath}/convocatorias/adenda/documento/" + adenda.id();
             }
         };
-        
+
         self.adicionarAnyosExperiencia = function () {
             var nucleoBasicoConocimientoAnyosExperiencia = $('#nucleoBasicoConocimientoAnyosExperiencia').val();
             var nombreNucleoBasicoConocimientoAnyosExperiencia = $('#nucleoBasicoConocimientoAnyosExperiencia option:selected').text();
@@ -1221,7 +1271,7 @@
                 return false;
             }
             if (tipoCertificacion === TIPO_CERTIFICACION_OTRO && otraCertificacion === "") {
-                bootstrap_alert_idioma.warning('Debe ingresar la certificación');
+                bootstrap_alert_idioma.warning('Debe ingresar la otra certificación');
                 return false;
             }
             if (puntajeMinimoCertificacion === "") {
@@ -1263,16 +1313,14 @@
         };
 
         self.editarIdioma = function (idioma) {
-            ocultarCertificadosIdiomas();
             $('#idioma').val(idioma.idioma()).trigger('change');
-            $('#nivelConversacionIdioma').val(idioma.nivelConversacion()).trigger('change');
             $('#otraCertificacionIdioma').val(idioma.otraCertificacion());
             $('#tipoCertificacionIdioma').val(idioma.tipoCertificacion()).trigger('change');
-            if($('#tipoCertificacionIdioma').val() === TIPO_CERTIFICACION_OTRO) {
-              $('#divOtroCertificacionIdioma').css("display","block");
+            if ($('#tipoCertificacionIdioma').val() === TIPO_CERTIFICACION_OTRO) {
+                $('#divOtroCertificacionIdioma').css("display", "block");
             } else {
-              $('#divOtroCertificacionIdioma').css("display","none");
-            }            
+                $('#divOtroCertificacionIdioma').css("display", "none");
+            }
             $('#puntajeMinimoCertificacionIdioma').val(idioma.puntajeMinimoCertificacion());
             $('#consecutivo').val(idioma.consecutivo());
             bootstrap_alert_idioma.removeWarning();
@@ -1316,7 +1364,7 @@
         bootstrap_alert_idioma.removeWarning();
         $('#md_idioma').modal('show');
     }
-    
+
     function cerrarVentanaAndenda() {
         if ($('input:file[name="adendas[' + self.documentosSoporte().length + '].documento"]')) {
             $('input:file[name="adendas[' + self.documentosSoporte().length + '].documento"]').remove();
@@ -1344,6 +1392,7 @@
 
     var adendas = [];
     var anyosExperiencias = [];
+    var idiomas = [];
     <c:if test = "${adendasJSON != null}">
     adendas = ${adendasJSON};
     for (var i = 0; i < adendas.length; i++) {

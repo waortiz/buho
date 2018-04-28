@@ -122,7 +122,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     @Override
     public List<Maestro> obtenerNucleosBasicosConocimiento() {
         Map resultado = obtenerNucleosBasicosConocimiento.execute(new HashMap<>());
-        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("areasSaber");
+        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("nucleosBasicoConocimiento");
 
         return coleccion;
     }

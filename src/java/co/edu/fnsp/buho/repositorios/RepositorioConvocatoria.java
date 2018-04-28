@@ -32,7 +32,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("repositorioConvocatoria")
 public class RepositorioConvocatoria implements IRepositorioConvocatoria {
-
+    
     private SimpleJdbcCall ingresarConvocatoria;
     private SimpleJdbcCall eliminarConvocatoria;
     private SimpleJdbcCall postularConvocatoria;
@@ -43,7 +43,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     private SimpleJdbcCall ingresarDocumentoConvocatoria;
     private SimpleJdbcCall actualizarDocumentoConvocatoria;
     private SimpleJdbcCall obtenerDocumentoConvocatoria;
-
+    
     private SimpleJdbcCall ingresarAdenda;
     private SimpleJdbcCall eliminarAdenda;
     private SimpleJdbcCall actualizarAdenda;
@@ -61,12 +61,12 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     private SimpleJdbcCall eliminarIdiomaConvocatoria;
     private SimpleJdbcCall actualizarIdiomaConvocatoria;
     private SimpleJdbcCall obtenerIdiomasConvocatoria;
-
+    
     @Autowired
     public void setDataSource(DataSource dataSource) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.setResultsMapCaseInsensitive(true);
-
+        
         this.ingresarConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarConvocatoria");
         this.eliminarConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarConvocatoria");
         this.postularConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("postularConvocatoria");
@@ -77,7 +77,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         this.obtenerDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoConvocatoria");
         this.ingresarDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoConvocatoria");
         this.actualizarDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoConvocatoria");
-
+        
         this.ingresarAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarAdenda");
         this.eliminarAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarAdenda");
         this.actualizarAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarAdenda");
@@ -85,18 +85,18 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         this.obtenerDocumentoAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoAdenda");
         this.ingresarDocumentoAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoAdenda");
         this.actualizarDocumentoAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoAdenda");
-
+        
         this.ingresarAnyosExperiencia = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarAnyosExperiencia");
         this.eliminarAnyosExperiencia = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarAnyosExperiencia");
         this.actualizarAnyosExperiencia = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarAnyosExperiencia");
         this.obtenerAnyosExperiencias = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerAnyosExperiencias").returningResultSet("anyosExperiencias", BeanPropertyRowMapper.newInstance(AnyosExperiencia.class));
-
+        
         this.ingresarIdiomaConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarIdiomaConvocatoria");
         this.eliminarIdiomaConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarIdiomaConvocatoria");
         this.actualizarIdiomaConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarIdiomaConvocatoria");
         this.obtenerIdiomasConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerIdiomasConvocatoria").returningResultSet("idiomasConvocatoria", BeanPropertyRowMapper.newInstance(IdiomaConvocatoria.class));
     }
-
+    
     @Override
     public void ingresarConvocatoria(long idUsuario, Convocatoria convocatoria) {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
@@ -130,7 +130,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         parametros.addValue("varPersonaRegistra", idUsuario);
         Map resultado = ingresarConvocatoria.execute(parametros);
         int idConvocatoria = (int) resultado.get("varIdConvocatoria");
-
+        
         MapSqlParameterSource parametrosIngresoAdenda = new MapSqlParameterSource();
         parametrosIngresoAdenda.addValue("varIdConvocatoria", idConvocatoria);
         parametrosIngresoAdenda.addValue("varPersonaRegistra", idUsuario);
@@ -150,7 +150,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
                 ingresarDocumentoAdenda.execute(parametrosIngresoDocumentoAdenda);
             }
         }
-
+        
         MapSqlParameterSource parametrosIngresoAnyosExperiencia = new MapSqlParameterSource();
         parametrosIngresoAnyosExperiencia.addValue("varIdConvocatoria", idConvocatoria);
         for (AnyosExperiencia anyosExperiencia : convocatoria.getAnyosExperiencias()) {
@@ -158,7 +158,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             parametrosIngresoAnyosExperiencia.addValue("varAnyos", anyosExperiencia.getAnyos());
             ingresarAnyosExperiencia.execute(parametrosIngresoAnyosExperiencia);
         }
-
+        
         MapSqlParameterSource parametrosIngresoIdioma = new MapSqlParameterSource();
         parametrosIngresoIdioma.addValue("varIdConvocatoria", idConvocatoria);
         for (IdiomaConvocatoria idioma : convocatoria.getIdiomas()) {
@@ -180,7 +180,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             ingresarDocumentoConvocatoria.execute(parametrosIngresoDocumentoConvocatoria);
         }
     }
-
+    
     @Override
     public void actualizarConvocatoria(long idUsuario, Convocatoria convocatoria) {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
@@ -192,7 +192,6 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         parametros.addValue("varFechaInicio", convocatoria.getFechaInicio());
         parametros.addValue("varFechaResultados", convocatoria.getFechaPublicacionResultados());
         parametros.addValue("varNucleoBasicoConocimiento", convocatoria.getNucleoBasicoConocimiento());
-        parametros.addValue("varPrograma", convocatoria.getIdProgramaCurso());
         parametros.addValue("varCurso", convocatoria.getNombreCurso());
         if (convocatoria.getTotalHorasSemestreCurso() != null
                 && convocatoria.getTotalHorasSemestreCurso().length() > 0) {
@@ -204,8 +203,29 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         } else {
             parametros.addValue("varNumeroHoras", 0);
         }
+        if (convocatoria.getIdProgramaCurso() != null
+                && convocatoria.getIdProgramaCurso().length() > 0) {
+            try {
+                parametros.addValue("varPrograma", Util.obtenerEntero(convocatoria.getIdProgramaCurso()));
+            } catch (ParseException ex) {
+                Logger.getLogger(RepositorioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            parametros.addValue("varPrograma", null);
+        }
+        if (convocatoria.getAnyosMinimosExperiencia()!= null
+                && convocatoria.getAnyosMinimosExperiencia().length() > 0) {
+            try {
+                parametros.addValue("varanyosminimosexperiencia", Util.obtenerEntero(convocatoria.getAnyosMinimosExperiencia()));
+            } catch (ParseException ex) {
+                Logger.getLogger(RepositorioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            parametros.addValue("varanyosminimosexperiencia", null);
+        }
+        
         actualizarConvocatoria.execute(parametros);
-
+        
         Documento documento = convocatoria.getDocumento();
         if (documento != null) {
             MapSqlParameterSource parametrosActualizacionDocumentoConvocatoria = new MapSqlParameterSource();
@@ -215,18 +235,18 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             parametrosActualizacionDocumentoConvocatoria.addValue("varContenido", documento.getContenido());
             actualizarDocumentoConvocatoria.execute(parametrosActualizacionDocumentoConvocatoria);
         }
-
+        
         actualizarAdenda(convocatoria.getId(), idUsuario, convocatoria.getAdendas());
         actualizarAnyosExperiencias(convocatoria.getId(), convocatoria.getAnyosExperiencias());
         actualizarIdiomas(convocatoria.getId(), idUsuario, convocatoria.getIdiomas());
     }
-
+    
     @Override
     public Convocatoria obtenerConvocatoria(int idConvocatoria) {
         Convocatoria convocatoria = new Convocatoria();
         MapSqlParameterSource parametros = new MapSqlParameterSource();
         parametros.addValue("varIdConvocatoria", idConvocatoria);
-
+        
         Map resultado = obtenerConvocatoria.execute(parametros);
         convocatoria.setId(idConvocatoria);
         convocatoria.setNucleoBasicoConocimiento(((Integer) resultado.get("varNucleoBasicoConocimiento")).toString());
@@ -251,65 +271,68 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             convocatoria.setNombreCurso((String) resultado.get("varCurso"));
             convocatoria.setTotalHorasSemestreCurso(((Integer) resultado.get("varNumeroHoras")).toString());
         }
-
+        if (resultado.get("varanyosminimosexperiencia") != null) {
+            convocatoria.setAnyosMinimosExperiencia(((Integer) resultado.get("varanyosminimosexperiencia")).toString());
+        }
+        
         Map resultadoAdendas = obtenerAdendas.execute(parametros);
         List<Adenda> adendas = (List<Adenda>) resultadoAdendas.get("adendas");
         convocatoria.setAdendas(adendas);
-
+        
         Map resultadoAnyosExperiencias = obtenerAnyosExperiencias.execute(parametros);
         List<AnyosExperiencia> anyosExperiencias = (List<AnyosExperiencia>) resultadoAnyosExperiencias.get("anyosExperiencias");
         convocatoria.setAnyosExperiencias(anyosExperiencias);
-
+        
         Map resultadoIdiomas = obtenerIdiomasConvocatoria.execute(parametros);
         List<IdiomaConvocatoria> idiomas = (List<IdiomaConvocatoria>) resultadoIdiomas.get("idiomasConvocatoria");
         convocatoria.setIdiomas(idiomas);
-
+        
         return convocatoria;
     }
-
+    
     @Override
     public void eliminarConvocatoria(int idConvocatoria) {
         MapSqlParameterSource parametrosEliminacionConvocatoria = new MapSqlParameterSource();
         parametrosEliminacionConvocatoria.addValue("varIdConvocatoria", idConvocatoria);
         eliminarConvocatoria.execute(parametrosEliminacionConvocatoria);
     }
-
+    
     @Override
     public Documento obtenerDocumentoConvocatoria(int idConvocatoria) {
         Documento documento = null;
         MapSqlParameterSource parametros = new MapSqlParameterSource();
         parametros.addValue("varIdConvocatoria", idConvocatoria);
-
+        
         Map resultado = obtenerDocumentoConvocatoria.execute(parametros);
-
+        
         if (resultado.get("varNombre") != null) {
             documento = new Documento();
             documento.setNombre((String) resultado.get("varNombre"));
             documento.setTipoContenido((String) resultado.get("varTipoContenido"));
             documento.setContenido((byte[]) resultado.get("varContenido"));
         }
-
+        
         return documento;
     }
-
+    
     @Override
     public Documento obtenerDocumentoAdenda(int idAdenda) {
         Documento documento = null;
         MapSqlParameterSource parametros = new MapSqlParameterSource();
         parametros.addValue("varIdAdenda", idAdenda);
-
+        
         Map resultado = obtenerDocumentoAdenda.execute(parametros);
-
+        
         if (resultado.get("varNombre") != null) {
             documento = new Documento();
             documento.setNombre((String) resultado.get("varNombre"));
             documento.setTipoContenido((String) resultado.get("varTipoContenido"));
             documento.setContenido((byte[]) resultado.get("varContenido"));
         }
-
+        
         return documento;
     }
-
+    
     @Override
     public List<Convocatoria> obtenerConvocatorias(long idUsuario) {
         MapSqlParameterSource parametrosConsultaConvocatorias = new MapSqlParameterSource();
@@ -319,16 +342,16 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         for (Convocatoria convocatoria : convocatorias) {
             convocatoria.setFechaFinFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaFin()));
         }
-
+        
         return convocatorias;
     }
-
+    
     private void actualizarAdenda(int idConvocatoria, long idUsuario, List<Adenda> adendas) {
         MapSqlParameterSource parametrosConsultaAdenda = new MapSqlParameterSource();
         parametrosConsultaAdenda.addValue("varIdConvocatoria", idConvocatoria);
         Map resultadoAdendas = obtenerAdendas.execute(parametrosConsultaAdenda);
         ArrayList<Adenda> adendasActuales = (ArrayList<Adenda>) resultadoAdendas.get("adendas");
-
+        
         MapSqlParameterSource parametrosEliminacionAdenda = new MapSqlParameterSource();
         MapSqlParameterSource parametrosActualizacionAdenda = new MapSqlParameterSource();
         for (Adenda adendaActual : adendasActuales) {
@@ -359,7 +382,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
                 }
             }
         }
-
+        
         MapSqlParameterSource parametrosIngresoAdenda = new MapSqlParameterSource();
         parametrosIngresoAdenda.addValue("varIdConvocatoria", idConvocatoria);
         for (Adenda adenda : adendas) {
@@ -382,7 +405,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             }
         }
     }
-
+    
     @Override
     public void postularConvocatoria(long idPersona, int idConvocatoria) {
         MapSqlParameterSource parametrosPostularConvocatoria = new MapSqlParameterSource();
@@ -390,7 +413,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         parametrosPostularConvocatoria.addValue("varIdConvocatoria", idConvocatoria);
         postularConvocatoria.execute(parametrosPostularConvocatoria);
     }
-
+    
     @Override
     public void retirarPostulacion(long idPersona, int idConvocatoria) {
         MapSqlParameterSource parametrosRetirarPostulacionConvocatoria = new MapSqlParameterSource();
@@ -398,13 +421,13 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         parametrosRetirarPostulacionConvocatoria.addValue("varIdConvocatoria", idConvocatoria);
         retirarPostulacionConvocatoria.execute(parametrosRetirarPostulacionConvocatoria);
     }
-
+    
     private void actualizarAnyosExperiencias(int idConvocatoria, List<AnyosExperiencia> anyosExperiencias) {
         MapSqlParameterSource parametrosConsultaAnyosExperiencias = new MapSqlParameterSource();
         parametrosConsultaAnyosExperiencias.addValue("varIdConvocatoria", idConvocatoria);
         Map resultadoAnyosExperiencias = obtenerAnyosExperiencias.execute(parametrosConsultaAnyosExperiencias);
         ArrayList<AnyosExperiencia> anyosExperienciasActuales = (ArrayList<AnyosExperiencia>) resultadoAnyosExperiencias.get("anyosExperiencias");
-
+        
         MapSqlParameterSource parametrosEliminacionAnyosExperiencia = new MapSqlParameterSource();
         MapSqlParameterSource parametrosActualizacionAnyosExperiencia = new MapSqlParameterSource();
         for (AnyosExperiencia anyosExperienciaActual : anyosExperienciasActuales) {
@@ -425,7 +448,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
                 actualizarAnyosExperiencia.execute(parametrosActualizacionAnyosExperiencia);
             }
         }
-
+        
         MapSqlParameterSource parametrosIngresoAnyosExperiencia = new MapSqlParameterSource();
         parametrosIngresoAnyosExperiencia.addValue("varIdConvocatoria", idConvocatoria);
         for (AnyosExperiencia anyosExperiencia : anyosExperiencias) {
@@ -442,7 +465,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         parametrosConsultaIdioma.addValue("varIdConvocatoria", idConvocatoria);
         Map resultadoIdiomas = obtenerIdiomasConvocatoria.execute(parametrosConsultaIdioma);
         ArrayList<IdiomaConvocatoria> idiomasActuales = (ArrayList<IdiomaConvocatoria>) resultadoIdiomas.get("idiomasConvocatoria");
-
+        
         MapSqlParameterSource parametrosEliminacionIdioma = new MapSqlParameterSource();
         MapSqlParameterSource parametrosActualizacionIdioma = new MapSqlParameterSource();
         for (IdiomaConvocatoria idiomaActual : idiomasActuales) {
@@ -465,7 +488,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
                 actualizarIdiomaConvocatoria.execute(parametrosActualizacionIdioma);
             }
         }
-
+        
         MapSqlParameterSource parametrosIngresoIdioma = new MapSqlParameterSource();
         parametrosIngresoIdioma.addValue("varIdConvocatoria", idConvocatoria);
         for (IdiomaConvocatoria idioma : idiomas) {

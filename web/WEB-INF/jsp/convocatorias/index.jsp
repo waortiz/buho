@@ -178,29 +178,6 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                         </div>
                     </div>
                     <hr>
-                    <center><legend>Criterios Habilitantes</legend></center>   
-                    <div class="form-group">    
-                        <table class="table table-hover tableestilo" id="criteriosHabilitantes">
-                            <thead> 
-                                <tr>
-                                    <th>Criterio</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <hr>
-                    <center><legend>Criterios evaluaci&oacute;n</legend></center>   
-                    <div class="form-group">    
-                        <table class="table table-hover tableestilo" id="adendas">
-                            <thead> 
-                                <tr>
-                                    <th>Criterio</th>
-                                    <th>Peso</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <hr>
                     <center><legend>Informaci&oacute;n de adenda</legend></center>   
                     <div class="form-group">    
                         <table class="table table-hover tableestilo" id="adendas">
@@ -249,9 +226,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
 <!-- jQuery -->
 <script>
     var adendas = null;
-    var criteriosHabilitantes = null;
-    var criteriosEvaluacion = null;
-    
+
     $(document).ready(function () {
         var table = $('#tbconvo').DataTable({
             "language": {
@@ -304,58 +279,6 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
         });
-
-        criteriosHabilitantes = $('#criteriosHabilitantes').DataTable({
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"}
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        });
-        
-        criteriosEvaluacion = $('#criteriosEvaluacion').DataTable({
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"}
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        });        
         
         $('#intip').on('keyup', function () {
             table
@@ -449,8 +372,6 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                     $('#fechaPublicacion').html(convocatoria.fechaPublicacionResultadosFormateada);
                     $('#descripcion').val(convocatoria.descripcion);
                     adendas.clear().draw();
-                    criteriosHabilitantes.clear().draw();
-                    criteriosEvaluacion.clear().draw();
                     for (var i = 0; i < convocatoria.adendas.length; i++) {
                         var row = "";
                         if(convocatoria.adendas[i].tieneDocumento) {
@@ -465,16 +386,6 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                                 '</td><td>&nbsp;<td></tr>');
                         }
                         adendas.row.add(row).draw();
-                    }
-                    for (var i = 0; i < convocatoria.criteriosHabilitantes.length; i++) {
-                        var row = $('<tr><td>' + convocatoria.criteriosHabilitantes[i].nombreCriterio + 
-                        '</td><td>' + convocatoria.criteriosHabilitantes[i].peso +         
-                        '</td></tr>');
-                        criteriosHabilitantes.row.add(row).draw();
-                    }
-                    for (var i = 0; i < convocatoria.criteriosEvaluacion.length; i++) {
-                        var row = $('<tr><td>' + convocatoria.criteriosEvaluacion[i].nombreCriterio + '</td></tr>');
-                        criteriosEvaluacion.row.add(row).draw();
                     }
                     $('#tieneDocumento').val(convocatoria.tieneDocumento);
                     if (!convocatoria.tieneDocumento) {

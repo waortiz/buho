@@ -329,6 +329,7 @@ CREATE TABLE `con_convocatoria` (
   `con_fecha_resultados` datetime NOT NULL,
   `con_fecha_registro` datetime NOT NULL,
   `con_persona_registra` bigint(20) NOT NULL,
+  `con_anyos_minimo_experiencia` int(11) DEFAULT NULL,
   PRIMARY KEY (`con_id`),
   KEY `FK_con_convocatoria_area_convocatoria_idx` (`con_nucleo_basico_conocimiento`),
   KEY `FK_con_convocatoria_ma_tipo_convocatoria_idx` (`con_tipo_convocatoria`),
@@ -345,66 +346,8 @@ CREATE TABLE `con_convocatoria` (
 
 LOCK TABLES `con_convocatoria` WRITE;
 /*!40000 ALTER TABLE `con_convocatoria` DISABLE KEYS */;
-INSERT INTO `con_convocatoria` VALUES (8,1,1,'2018-01-31 00:00:00','2018-02-28 00:00:00','DESARROLLADOR NUEVO','DESARROLLADOR SENIOR','2018-01-31 00:00:00','2018-01-31 22:43:40',1),(12,1,1,'2018-02-01 00:00:00','2018-02-28 00:00:00','TEAM LEAD','FULL STACK','2018-02-28 00:00:00','2018-02-01 18:53:09',1),(15,1,1,'2018-02-04 00:00:00','2018-02-04 00:00:00','DESARROLLADOR NUEVO','JAVA DEVELOPER','2018-02-04 00:00:00','2018-02-04 15:38:57',1),(16,2,1,'2018-02-08 00:00:00','2018-02-08 00:00:00','AUXILIAR DE PLANEACIÓN','AUXILIAR DE PLANEACIÓN','2018-02-08 00:00:00','2018-02-08 21:03:28',1);
+INSERT INTO `con_convocatoria` VALUES (8,1,1,'2018-01-31 00:00:00','2018-02-28 00:00:00','DESARROLLADOR NUEVO','DESARROLLADOR SENIOR','2018-01-31 00:00:00','2018-01-31 22:43:40',1,NULL),(12,1,1,'2018-02-01 00:00:00','2018-02-28 00:00:00','TEAM LEAD','FULL STACK','2018-02-28 00:00:00','2018-02-01 18:53:09',1,NULL),(15,1,1,'2018-02-04 00:00:00','2018-02-04 00:00:00','DESARROLLADOR NUEVO','JAVA DEVELOPER','2018-02-04 00:00:00','2018-02-04 15:38:57',1,NULL),(16,2,1,'2018-02-08 00:00:00','2018-02-08 00:00:00','AUXILIAR DE PLANEACIÓN','AUXILIAR DE PLANEACIÓN','2018-02-08 00:00:00','2018-02-08 21:03:28',1,3);
 /*!40000 ALTER TABLE `con_convocatoria` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `con_crit_eval_convocatoria`
---
-
-DROP TABLE IF EXISTS `con_crit_eval_convocatoria`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `con_crit_eval_convocatoria` (
-  `cec_convocatoria` int(11) NOT NULL COMMENT 'Id de la convocatoria',
-  `cec_subcriterio` int(11) NOT NULL COMMENT 'Subcriterio de evaluación ',
-  `cec_fec_registro` datetime NOT NULL,
-  `cec_per_registro` bigint(20) NOT NULL COMMENT 'Persona que registra',
-  `cec_peso` int(11) DEFAULT NULL,
-  PRIMARY KEY (`cec_convocatoria`,`cec_subcriterio`),
-  KEY `FK_conv_crit_eval_conv_eval_subcriterio_idx` (`cec_subcriterio`),
-  KEY `FK_conv_crit_eval_conv_con_convocatoria_idx` (`cec_convocatoria`),
-  KEY `FK_conv_crit_eval_conv_pe_persona_idx` (`cec_per_registro`),
-  CONSTRAINT `FK_conv_crit_eval_conv_con_convocatoria` FOREIGN KEY (`cec_convocatoria`) REFERENCES `con_convocatoria` (`con_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `FK_conv_crit_eval_conv_eval_subcriterio` FOREIGN KEY (`cec_subcriterio`) REFERENCES `eval_subcriterio` (`sce_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `FK_conv_crit_eval_conv_pe_persona` FOREIGN KEY (`cec_per_registro`) REFERENCES `pe_persona` (`pe_id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `con_crit_eval_convocatoria`
---
-
-LOCK TABLES `con_crit_eval_convocatoria` WRITE;
-/*!40000 ALTER TABLE `con_crit_eval_convocatoria` DISABLE KEYS */;
-/*!40000 ALTER TABLE `con_crit_eval_convocatoria` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `con_crit_hab_convocatoria`
---
-
-DROP TABLE IF EXISTS `con_crit_hab_convocatoria`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `con_crit_hab_convocatoria` (
-  `chc_convocatoria` int(11) NOT NULL,
-  `chc_minimo_anyos_experiencia` int(11) NOT NULL,
-  `chc_fec_registro` datetime NOT NULL COMMENT 'Fecha de registro del criterio habilitante para la convocatoria ',
-  PRIMARY KEY (`chc_convocatoria`),
-  KEY `FK_con_criterio_evaluacion_convocatoria_idx` (`chc_convocatoria`),
-  CONSTRAINT `FK_con_crit_hab_convocatoria_convocatoria` FOREIGN KEY (`chc_convocatoria`) REFERENCES `con_convocatoria` (`con_id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `con_crit_hab_convocatoria`
---
-
-LOCK TABLES `con_crit_hab_convocatoria` WRITE;
-/*!40000 ALTER TABLE `con_crit_hab_convocatoria` DISABLE KEYS */;
-/*!40000 ALTER TABLE `con_crit_hab_convocatoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -674,7 +617,7 @@ CREATE TABLE `conv_ch_anyo_exp` (
   KEY `FK_con_anyo_crit_hab_conv_nucleo_basico_cto_idx` (`achc_nucleo_basico_conocimiento`),
   CONSTRAINT `FK_con_anyo_crit_hab_conv_convocatoria` FOREIGN KEY (`achc_convocatoria`) REFERENCES `con_convocatoria` (`con_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `FK_con_anyo_crit_hab_conv_nucleo_basico_cto` FOREIGN KEY (`achc_nucleo_basico_conocimiento`) REFERENCES `ma_nucleo_basico_conocimiento` (`nbc_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -683,6 +626,7 @@ CREATE TABLE `conv_ch_anyo_exp` (
 
 LOCK TABLES `conv_ch_anyo_exp` WRITE;
 /*!40000 ALTER TABLE `conv_ch_anyo_exp` DISABLE KEYS */;
+INSERT INTO `conv_ch_anyo_exp` VALUES (1,16,2,34,'2018-04-27 20:09:05');
 /*!40000 ALTER TABLE `conv_ch_anyo_exp` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -711,7 +655,7 @@ CREATE TABLE `conv_ch_idioma` (
   CONSTRAINT `FK_conv_ch_idioma_ma_idioma` FOREIGN KEY (`chi_idioma`) REFERENCES `ma_idioma` (`idioma_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `FK_conv_ch_idioma_ma_tip_cer_idioma` FOREIGN KEY (`chi_certificacion`) REFERENCES `ma_tipo_certificacion_idioma` (`tci_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `FK_conv_ch_idioma_pe_persona` FOREIGN KEY (`chi_per_registro`) REFERENCES `pe_persona` (`pe_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -720,6 +664,7 @@ CREATE TABLE `conv_ch_idioma` (
 
 LOCK TABLES `conv_ch_idioma` WRITE;
 /*!40000 ALTER TABLE `conv_ch_idioma` DISABLE KEYS */;
+INSERT INTO `conv_ch_idioma` VALUES (1,16,5,5,34,'2018-04-27 21:39:45',1,'null');
 /*!40000 ALTER TABLE `conv_ch_idioma` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2770,17 +2715,17 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizarAnyosExperiencia`(
-varIdAnyosExperiencia int,
+varId int,
 varNucleoBasicoConocimiento int, 
 varAnyos int
 )
 BEGIN
 
-	UPDATE `con_anyo_exp_crit_hab_convocatoria`
+	UPDATE `conv_ch_anyo_exp`
 	SET
 	`achc_nucleo_basico_conocimiento` = varNucleoBasicoConocimiento,
 	`achc_anyos_experiencia` = varAnyos
-	WHERE `achc_id` = varIdAnyosExperiencia;
+	WHERE `achc_id` = varId;
 
 
 
@@ -3227,7 +3172,7 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizarConvocatoria`(
 varIdConvocatoria int,
 varTipoConvocatoria int(11), 
-vararea int(11), 
+varNucleoBasicoConocimiento int(11), 
 varFechaInicio datetime, 
 varFechaFin datetime, 
 varNombre varchar(150), 
@@ -3235,19 +3180,21 @@ varDescripcion varchar(200),
 varFechaResultados datetime, 
 varPrograma int,
 varCurso varchar(100),
-varNumeroHoras int
+varNumeroHoras int,
+varanyosminimosexperiencia int
 )
 BEGIN
 
 UPDATE `con_convocatoria`
 SET
 `con_tipo_convocatoria` = vartipoconvocatoria,
-`con_area` = vararea,
+`con_nucleo_basico_conocimiento` = varNucleoBasicoConocimiento,
 `con_fecha_inicio` = varfechainicio,
 `con_fecha_fin` = varfechafin,
 `con_nombre` = varnombre,
 `con_descripcion` = vardescripcion,
-`con_fecha_resultados` = varfecharesultados
+`con_fecha_resultados` = varfecharesultados,
+ con_anyos_minimo_experiencia = varanyosminimosexperiencia
 WHERE `con_id` = varIdConvocatoria;
 
 IF varTipoConvocatoria = 3 or varTipoConvocatoria = 4 THEN
@@ -4293,12 +4240,12 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarAnyosExperiencia`(
-varIdAnyosExperiencia int
+varId int
 )
 BEGIN
 
-	DELETE FROM `con_anyo_exp_crit_hab_convocatoria`
-	WHERE `achc_id` = varIdAnyosExperiencia;
+	DELETE FROM `conv_ch_anyo_exp`
+	WHERE `achc_id` = varId;
 
 END ;;
 DELIMITER ;
@@ -4430,6 +4377,12 @@ WHERE ade_convocatoria = varIdConvocatoria;
 
 DELETE FROM con_documento
 WHERE dconv_convocatoria = varIdConvocatoria;
+
+DELETE FROM `conv_ch_anyo_exp`
+WHERE achc_convocatoria = varIdConvocatoria;
+
+DELETE FROM `conv_ch_idioma`
+WHERE chi_convocatoria = varIdConvocatoria;
 
 DELETE FROM `con_convocatoria`
 WHERE `con_id` = varIdConvocatoria;
@@ -5137,7 +5090,7 @@ varAnyos int
 )
 BEGIN
 
-	INSERT INTO `con_anyo_exp_crit_hab_convocatoria`
+	INSERT INTO `conv_ch_anyo_exp`
 	(
 	`achc_convocatoria`,
 	`achc_nucleo_basico_conocimiento`,
@@ -5520,7 +5473,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ingresarConvocatoria`(
 varTipoConvocatoria int(11), 
-vararea int(11), 
+varNucleoBasicoConocimiento int(11), 
 varFechaInicio datetime, 
 varFechaFin datetime, 
 varNombre varchar(150), 
@@ -5530,31 +5483,34 @@ varPersonaRegistra bigint(20),
 varPrograma int,
 varCurso varchar(100),
 varNumeroHoras int,
+varanyosminimosexperiencia int,
 out varIdConvocatoria int
 )
 BEGIN
 
 INSERT INTO con_convocatoria
 (con_tipo_convocatoria,
-con_area,
+con_nucleo_basico_conocimiento,
 con_fecha_inicio,
 con_fecha_fin,
 con_nombre,
 con_descripcion,
 con_fecha_resultados,
 con_fecha_registro,
-con_persona_registra)
+con_persona_registra,
+con_anyos_minimo_experiencia)
 VALUES
 (
  vartipoconvocatoria,
- vararea,
+ varNucleoBasicoConocimiento,
  varfechainicio,
  varfechafin,
  varnombre,
  vardescripcion,
  varfecharesultados,
  now(),
- varpersonaRegistra);
+ varpersonaRegistra,
+ varanyosminimosexperiencia);
 
 set varIdConvocatoria = LAST_INSERT_ID();
 
@@ -6262,7 +6218,7 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ingresarIdiomaConvocatoria`(
-varConvocatoria int,
+varIdConvocatoria int,
 varIdioma int,
 varTipoCertificacion int, 
 varOtraCertificacion varchar(100),
@@ -6282,7 +6238,7 @@ BEGIN
 	`chi_otra_certificacion`)
 	VALUES
 	(
-	varConvocatoria,
+	varIdConvocatoria,
 	varIdioma,
 	varTipoCertificacion,
 	varPuntajeMinimoCertificacion,
@@ -6710,8 +6666,8 @@ BEGIN
 	SELECT `achc_id` id,
     `achc_nucleo_basico_conocimiento` nucleoBasicoConocimiento,
      nbc_nombre nombrenucleoBasicoConocimiento,
-    `achc_anyos_experiencia` anyosExperiencia
-	FROM `con_anyo_exp_crit_hab_convocatoria`
+    `achc_anyos_experiencia` anyos
+	FROM `conv_ch_anyo_exp`
      inner join ma_nucleo_basico_conocimiento on achc_nucleo_basico_conocimiento = nbc_id
     WHERE achc_convocatoria = varIdConvocatoria; 
 
@@ -7095,8 +7051,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerConvocatoria`(
 varIdConvocatoria int,
 out varTipoConvocatoria int(11), 
 out varNombreTipoConvocatoria varchar(100), 
-out vararea int(11), 
-out varNombreArea varchar(75),
+out varNucleoBasicoConocimiento int(11), 
+out varNombreNucleoBasicoConocimiento varchar(75),
 out varFechaInicio datetime, 
 out varFechaFin datetime, 
 out varNombre varchar(150), 
@@ -7108,35 +7064,38 @@ out varSede varchar(100),
 out varIdPrograma int,
 out varPrograma varchar(100),
 out varCurso varchar(100),
-out varNumeroHoras int
+out varNumeroHoras int,
+out varanyosminimosexperiencia int
 )
 BEGIN
 
 
 
-SELECT con.con_tipo_convocatoria,
-tc.tc_descripcion,
-con.con_area,
-areas.ai_nombre,
-con.con_fecha_inicio,
-con.con_fecha_fin,
-con.con_nombre,
-con.con_descripcion,
-con.con_fecha_resultados
+SELECT con_tipo_convocatoria,
+tc_descripcion,
+con_nucleo_basico_conocimiento,
+nbc_nombre,
+con_fecha_inicio,
+con_fecha_fin,
+con_nombre,
+con_descripcion,
+con_fecha_resultados,
+con_anyos_minimo_experiencia
 INTO 
 varTipoConvocatoria, 
 varNombreTipoConvocatoria,
-vararea, 
-varNombreArea,
+varNucleoBasicoConocimiento, 
+varNombreNucleoBasicoConocimiento,
 varFechaInicio, 
 varFechaFin, 
 varNombre, 
 varDescripcion, 
-varFechaResultados
+varFechaResultados,
+varanyosminimosexperiencia
 FROM con_convocatoria con
-inner join ma_areas areas on areas.ai_id = con.con_area
-inner join ma_tipo_convocatoria tc on tc.tc_id = con.con_tipo_convocatoria
-WHERE con.con_id = varIdConvocatoria;
+inner join ma_nucleo_basico_conocimiento on nbc_id = con_nucleo_basico_conocimiento
+inner join ma_tipo_convocatoria on tc_id = con_tipo_convocatoria
+WHERE con_id = varIdConvocatoria;
 
 SET varTieneDocumento = false;
 IF exists(SELECT dconv_convocatoria 
@@ -8012,7 +7971,7 @@ SELECT `chi_id` id,
     idioma_nombre nombreIdioma,
     `chi_certificacion` tipoCertificacion,
 	tci_nombre nombretipoCertificacion,
-    id_otra_certificacion otraCertificacion,
+    chi_otra_certificacion otraCertificacion,
     chi_puntaje puntajeMinimoCertificacion    
 FROM conv_ch_idioma
   inner join ma_idioma on chi_idioma = idioma_id
@@ -9188,4 +9147,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-27 18:37:51
+-- Dump completed on 2018-04-27 21:46:11

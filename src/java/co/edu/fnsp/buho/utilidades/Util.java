@@ -20,6 +20,7 @@ import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.Idioma;
+import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
 import co.edu.fnsp.buho.entidades.Patente;
 import co.edu.fnsp.buho.entidades.ProductoConocimiento;
 import java.text.DecimalFormat;
@@ -246,6 +247,35 @@ public class Util {
                         + "puntajeCertificacion:ko.observable(" + idioma.getPuntajeCertificacion() + "),"
                         + "certificado:ko.observable(''),"
                         + "tieneCertificado:ko.observable(true),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < idiomas.size() - 1) {
+                    json = json + ",";
+                }
+            }
+
+            json = json + "]";
+        }
+
+        return json;
+    }
+
+    public static String obtenerIdiomasConvocatoriaJSON(List<IdiomaConvocatoria> idiomas) {
+        String json = "";
+
+        if (idiomas.size() > 0) {
+            json = "[";
+
+            for (int i = 0; i < idiomas.size(); i++) {
+                IdiomaConvocatoria idioma = idiomas.get(i);
+                json = json
+                        + "{id: ko.observable(" + idioma.getId() + "),"
+                        + "idioma:ko.observable(" + idioma.getIdioma() + "),"
+                        + "nombreIdioma:ko.observable('" + idioma.getNombreIdioma() + "'),"
+                        + "otraCertificacion:ko.observable('" + idioma.getOtraCertificacion() + "'),"
+                        + "tipoCertificacion:ko.observable('" + idioma.getTipoCertificacion() + "'),"
+                        + "nombreTipoCertificacion:ko.observable('" + idioma.getNombreTipoCertificacion() + "'),"
+                        + "puntajeMinimoCertificacion:ko.observable(" + idioma.getPuntajeMinimoCertificacion() + "),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < idiomas.size() - 1) {

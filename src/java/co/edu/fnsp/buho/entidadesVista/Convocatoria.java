@@ -25,7 +25,7 @@ public class Convocatoria {
     private Date fechaInicio;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaFin;
-    private String area;
+    private String nucleoBasicoConocimiento;
     private String nombre;
     private String descripcion;
     private MultipartFile documento;
@@ -37,6 +37,7 @@ public class Convocatoria {
     private String programaCurso;
     private String nombreCurso;
     private String totalHorasSemestreCurso;
+    private String anyosMinimosExperiencia;
     private List<Adenda> adendas = new ArrayList<>();
     private List<AnyosExperiencia> anyosExperiencias = new ArrayList<>();
     private List<IdiomaConvocatoria> idiomas = new ArrayList<>();
@@ -98,17 +99,17 @@ public class Convocatoria {
     }
 
     /**
-     * @return the area
+     * @return the nucleoBasicoConocimiento
      */
     public String getNucleoBasicoConocimiento() {
-        return area;
+        return nucleoBasicoConocimiento;
     }
 
     /**
-     * @param area the area to set
+     * @param nucleoBasicoConocimiento the nucleoBasicoConocimiento to set
      */
-    public void setNucleoBasicoConocimiento(String area) {
-        this.area = area;
+    public void setNucleoBasicoConocimiento(String nucleoBasicoConocimiento) {
+        this.nucleoBasicoConocimiento = nucleoBasicoConocimiento;
     }
 
     /**
@@ -291,5 +292,19 @@ public class Convocatoria {
      */
     public void setIdiomas(List<IdiomaConvocatoria> idiomas) {
         this.idiomas = idiomas;
+    }
+
+    /**
+     * @return the anyosMinimosExperiencia
+     */
+    public String getAnyosMinimosExperiencia() {
+        return anyosMinimosExperiencia;
+    }
+
+    /**
+     * @param anyosMinimosExperiencia the anyosMinimosExperiencia to set
+     */
+    public void setAnyosMinimosExperiencia(String anyosMinimosExperiencia) {
+        this.anyosMinimosExperiencia = anyosMinimosExperiencia;
     }
 }

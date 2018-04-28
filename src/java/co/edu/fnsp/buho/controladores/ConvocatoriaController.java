@@ -67,16 +67,18 @@ public class ConvocatoriaController {
     public String crear(Model model) {
 
         List<Maestro> tiposConvocatoria = servicioMaestro.obtenerTiposConvocatoria();
-        model.addAttribute("tiposConvocatoria", tiposConvocatoria);
-
         List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
-        model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
-
         List<Maestro> tiposAdenda = servicioMaestro.obtenerTiposAdenda();
-        model.addAttribute("tiposAdenda", tiposAdenda);
-
         List<Maestro> sedes = servicioMaestro.obtenerSedes();
+        List<Maestro> idiomas = servicioMaestro.obtenerIdiomas();
+        List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
+
+        model.addAttribute("tiposConvocatoria", tiposConvocatoria);
+        model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
+        model.addAttribute("tiposAdenda", tiposAdenda);
         model.addAttribute("sedes", sedes);
+        model.addAttribute("idiomas", idiomas);
+        model.addAttribute("tiposCertificacion", tiposCertificacion);
 
         model.addAttribute("convocatoria", new Convocatoria());
 
@@ -90,6 +92,7 @@ public class ConvocatoriaController {
             Convocatoria convocatoriaIngresar = new Convocatoria();
             convocatoriaIngresar.setId(convocatoria.getId());
             convocatoriaIngresar.setNucleoBasicoConocimiento(convocatoria.getNucleoBasicoConocimiento());
+            convocatoriaIngresar.setAnyosMinimosExperiencia(convocatoria.getAnyosMinimosExperiencia());
             convocatoriaIngresar.setDescripcion(convocatoria.getDescripcion());
             convocatoriaIngresar.setFechaFin(convocatoria.getFechaFin());
             convocatoriaIngresar.setFechaInicio(convocatoria.getFechaInicio());
@@ -145,23 +148,28 @@ public class ConvocatoriaController {
         Convocatoria convocatoria = servicioConvocatoria.obtenerConvocatoria(idConvocatoria);
 
         List<Maestro> tiposConvocatoria = servicioMaestro.obtenerTiposConvocatoria();
-        model.addAttribute("tiposConvocatoria", tiposConvocatoria);
-
         List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
-        model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
-
         List<Maestro> tiposAdenda = servicioMaestro.obtenerTiposAdenda();
-        model.addAttribute("tiposAdenda", tiposAdenda);
-
         List<Maestro> sedes = servicioMaestro.obtenerSedes();
-        model.addAttribute("sedes", sedes);
+        List<Maestro> idiomas = servicioMaestro.obtenerIdiomas();
+        List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
 
+        model.addAttribute("tiposConvocatoria", tiposConvocatoria);
+        model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
+        model.addAttribute("tiposAdenda", tiposAdenda);
+        model.addAttribute("sedes", sedes);
+        model.addAttribute("idiomas", idiomas);
+        model.addAttribute("tiposCertificacion", tiposCertificacion);
         model.addAttribute("convocatoria", convocatoria);
+        
         if (convocatoria.getAdendas().size() > 0) {
             model.addAttribute("adendasJSON", Util.obtenerAdendasJSON(convocatoria.getAdendas()));
         }
         if (convocatoria.getAnyosExperiencias().size() > 0) {
             model.addAttribute("anyosExperienciasJSON", Util.obtenerAnyosExperienciaJSON(convocatoria.getAnyosExperiencias()));
+        }
+        if (convocatoria.getIdiomas().size() > 0) {
+            model.addAttribute("idiomasJSON", Util.obtenerIdiomasConvocatoriaJSON(convocatoria.getIdiomas()));
         }
 
         return "convocatorias/crear";

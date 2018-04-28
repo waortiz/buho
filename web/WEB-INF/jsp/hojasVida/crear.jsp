@@ -3373,7 +3373,7 @@
                 return false;
             }
             if (tipoCertificacion === TIPO_CERTIFICACION_OTRO && otraCertificacion === "") {
-                bootstrap_alert_idioma.warning('Debe ingresar la certificación');
+                bootstrap_alert_idioma.warning('Debe ingresar la otra certificación');
                 return false;
             }
             if (puntajeCertificacion === "") {
