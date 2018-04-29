@@ -6,9 +6,9 @@
             <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/repositorios/RepositorioHojaVida.java</file>
             <file>file:/D:/Desarrollo/Java/buho/web/WEB-INF/jsp/convocatorias/crear.jsp</file>
             <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/repositorios/RepositorioConvocatoria.java</file>
+            <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/servicios/ServicioMaestro.java</file>
             <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/controladores/HojaVidaController.java</file>
             <file>file:/D:/Desarrollo/Java/buho/web/WEB-INF/jsp/hojasVida/crear.jsp</file>
-            <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/entidades/Programa.java</file>
             <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/controladores/ConvocatoriaController.java</file>
         </group>
     </open-files>
