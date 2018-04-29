@@ -46,6 +46,8 @@ public class Convocatoria {
     private List<AnyosExperiencia> anyosExperiencias = new ArrayList<>();
     private List<Adenda> adendas = new ArrayList<>();
     private List<IdiomaConvocatoria> idiomas = new ArrayList<>();
+    private List<ProgramaConvocatoria> programas = new ArrayList<>();
+    private List<EducacionContinuaConvocatoria> educacionesContinuas = new ArrayList<>();
     
     /**
      * @return the tipoConvocatoria
@@ -409,5 +411,33 @@ public class Convocatoria {
      */
     public void setAnyosMinimosExperiencia(String anyosMinimosExperiencia) {
         this.anyosMinimosExperiencia = anyosMinimosExperiencia;
+    }
+
+    /**
+     * @return the programas
+     */
+    public List<ProgramaConvocatoria> getProgramas() {
+        return programas;
+    }
+
+    /**
+     * @param programas the programas to set
+     */
+    public void setProgramas(List<ProgramaConvocatoria> programas) {
+        this.programas = programas;
+    }
+
+    /**
+     * @return the educacionesContinuas
+     */
+    public List<EducacionContinuaConvocatoria> getEducacionesContinuas() {
+        return educacionesContinuas;
+    }
+
+    /**
+     * @param educacionesContinuas the educacionesContinuas to set
+     */
+    public void setEducacionesContinuas(List<EducacionContinuaConvocatoria> educacionesContinuas) {
+        this.educacionesContinuas = educacionesContinuas;
     }
 }

@@ -10,6 +10,7 @@ import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Adenda;
 import co.edu.fnsp.buho.entidades.DetalleUsuario;
+import co.edu.fnsp.buho.entidades.Programa;
 import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
 import co.edu.fnsp.buho.utilidades.Util;
@@ -17,6 +18,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -72,6 +74,8 @@ public class ConvocatoriaController {
         List<Maestro> sedes = servicioMaestro.obtenerSedes();
         List<Maestro> idiomas = servicioMaestro.obtenerIdiomas();
         List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
+        List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
+        List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
 
         model.addAttribute("tiposConvocatoria", tiposConvocatoria);
         model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
@@ -79,7 +83,8 @@ public class ConvocatoriaController {
         model.addAttribute("sedes", sedes);
         model.addAttribute("idiomas", idiomas);
         model.addAttribute("tiposCertificacion", tiposCertificacion);
-
+        model.addAttribute("nivelesFormacion", nivelesFormacion);
+        model.addAttribute("tiposCapacitacion", tiposCapacitacion);
         model.addAttribute("convocatoria", new Convocatoria());
 
         return "convocatorias/crear";
@@ -128,6 +133,8 @@ public class ConvocatoriaController {
             }
             convocatoriaIngresar.setAnyosExperiencias(convocatoria.getAnyosExperiencias());
             convocatoriaIngresar.setIdiomas(convocatoria.getIdiomas());
+            convocatoriaIngresar.setProgramas(convocatoria.getProgramas());
+            convocatoriaIngresar.setEducacionesContinuas(convocatoria.getEducacionesContinuas());
             long idUsuario = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario();
             if (convocatoriaIngresar.getId() == 0) {
                 servicioConvocatoria.ingresarConvocatoria(idUsuario, convocatoriaIngresar);
@@ -153,6 +160,8 @@ public class ConvocatoriaController {
         List<Maestro> sedes = servicioMaestro.obtenerSedes();
         List<Maestro> idiomas = servicioMaestro.obtenerIdiomas();
         List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
+        List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
+        List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
 
         model.addAttribute("tiposConvocatoria", tiposConvocatoria);
         model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
@@ -161,7 +170,9 @@ public class ConvocatoriaController {
         model.addAttribute("idiomas", idiomas);
         model.addAttribute("tiposCertificacion", tiposCertificacion);
         model.addAttribute("convocatoria", convocatoria);
-        
+        model.addAttribute("nivelesFormacion", nivelesFormacion);
+        model.addAttribute("tiposCapacitacion", tiposCapacitacion);
+
         if (convocatoria.getAdendas().size() > 0) {
             model.addAttribute("adendasJSON", Util.obtenerAdendasJSON(convocatoria.getAdendas()));
         }
@@ -170,6 +181,12 @@ public class ConvocatoriaController {
         }
         if (convocatoria.getIdiomas().size() > 0) {
             model.addAttribute("idiomasJSON", Util.obtenerIdiomasConvocatoriaJSON(convocatoria.getIdiomas()));
+        }
+        if (convocatoria.getProgramas().size() > 0) {
+            model.addAttribute("programasJSON", Util.obtenerProgramasConvocatoriaJSON(convocatoria.getProgramas()));
+        }
+        if (convocatoria.getEducacionesContinuas().size() > 0) {
+            model.addAttribute("educacionesContinuasJSON", Util.obtenerEducacionesContinuasConvocatoriaJSON(convocatoria.getEducacionesContinuas()));
         }
 
         return "convocatorias/crear";
@@ -257,10 +274,58 @@ public class ConvocatoriaController {
 
     @RequestMapping(value = "/programasSede/{idSede}", method = RequestMethod.GET)
     public @ResponseBody
-    String obtenerSedes(@ModelAttribute(value = "idSede") int idSede, Model model) {
-        List<Maestro> sedes = servicioMaestro.obtenerProgramas(idSede);
+    String obtenerProgramas(@ModelAttribute(value = "idSede") int idSede, Model model) {
+        List<Maestro> programas = servicioMaestro.obtenerProgramas(idSede);
         Gson gson = new Gson();
 
-        return gson.toJson(sedes);
+        return gson.toJson(programas);
+    }
+
+    @RequestMapping(value = "/programas", method = RequestMethod.GET)
+    public @ResponseBody
+    String obtenerProgramasInstitucion(@ModelAttribute(value = "nucleoBasicoConocimiento") String nucleoBasicoConocimiento,
+            Model model) {
+
+        Integer idInstitucion = null;
+        Integer idNucleoBasicoConocimiento = null;
+        if (nucleoBasicoConocimiento != null && nucleoBasicoConocimiento.length() > 0) {
+            try {
+                idNucleoBasicoConocimiento = Util.obtenerEntero(nucleoBasicoConocimiento);
+            } catch (ParseException ex) {
+                java.util.logging.Logger.getLogger(HojaVidaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        List<Programa> programas = servicioMaestro.obtenerProgramasInstitucion(idInstitucion, idNucleoBasicoConocimiento);
+        Gson gson = new Gson();
+
+        return gson.toJson(programas);
+    }
+
+    @RequestMapping(value = "/capacitaciones", method = RequestMethod.GET)
+    public @ResponseBody
+    String obtenerCapacitaciones(@ModelAttribute(value = "tipoCapacitacion") String tipoCapacitacion,
+            @ModelAttribute(value = "nucleoBasicoConocimiento") String nucleoBasicoConocimiento,
+            Model model) {
+
+        Integer idTipoCapacitacion = null;
+        Integer idNucleoBasicoConocimiento = null;
+        if (tipoCapacitacion != null && tipoCapacitacion.length() > 0) {
+            try {
+                idTipoCapacitacion = Util.obtenerEntero(tipoCapacitacion);
+            } catch (ParseException ex) {
+                java.util.logging.Logger.getLogger(HojaVidaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (nucleoBasicoConocimiento != null && nucleoBasicoConocimiento.length() > 0) {
+            try {
+                idNucleoBasicoConocimiento = Util.obtenerEntero(nucleoBasicoConocimiento);
+            } catch (ParseException ex) {
+                java.util.logging.Logger.getLogger(HojaVidaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        List<Maestro> capacitaciones = servicioMaestro.obtenerCapacitaciones(idTipoCapacitacion, idNucleoBasicoConocimiento);
+        Gson gson = new Gson();
+
+        return gson.toJson(capacitaciones);
     }
 }

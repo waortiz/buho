@@ -329,10 +329,10 @@
                         <div class="form-group">
                             <label>Agregar idioma requerido</label> 
                             <button  type="button" class="btn btn-success btn-sm" onclick="nuevoIdioma()"><span class="glyphicon glyphicon-plus"></span></button><br>
-                            <table class="table table-hover tableestilo" id="tbformidiom">
+                            <table class="table table-hover tableestilo">
                                 <thead>
-                                <th>Idioma</th>
-                                <th>Opción</th>
+                                    <th>Idioma</th>
+                                    <th>Opción</th>
                                 </thead>
                                 <tbody data-bind="foreach: { data: idiomas }">
                                     <tr class="table-row">
@@ -421,31 +421,69 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Agregar formaci&oacute;n requerida</label> 
-                            <button  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_form"><span class="glyphicon glyphicon-plus"></span></button><br>
+                            <button  type="button" class="btn btn-success btn-sm" onclick="nuevoPrograma()"><span class="glyphicon glyphicon-plus"></span></button><br>
                             <table class="table table-hover tableestilo" id="tbform">
                                 <thead>
-                                <th>Programa</th>
-                                <th>Nivel de formaci&oacute;n</th>
-                                <th>Opciones</th>
+                                    <th>Programa</th>
+                                    <th>Nivel de formaci&oacute;n</th>
+                                    <th>Opciones</th>
                                 </thead>
+                                <tbody data-bind="foreach: { data: programas }">
+                                    <tr class="table-row">
+                                        <td style="width: 70%">
+                                            <span data-bind="text: nombrePrograma" ></span>
+                                        </td>
+                                        <td style="width: 20%">
+                                            <span data-bind="text: nombreNivelFormacion" ></span>
+                                        </td>
+                                        <td style='white-space: nowrap; width: 10%' align="center">
+                                            <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarPrograma"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                            <button class='btn btn-danger btn-xs' type='button' style='margin-left:10px;' data-bind="click: $root.eliminarPrograma"><span class='glyphicon glyphicon-remove'></span></button>
+                                            <input type="hidden" data-bind="value: programa, attr: { 'name': 'programas[' + $index() + '].programa'  }" />
+                                            <input type="hidden" data-bind="value: nivelFormacion, attr: { 'name': 'programas[' + $index() + '].nivelFormacion'  }" />
+                                            <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'programas[' + $index() + '].consecutivo'  }" />
+                                            <input type="hidden" data-bind="value: id, attr: { 'name': 'programas[' + $index() + '].id'  }" />
+                                        </td>
+                                    </tr>
+                                </tbody>    
                             </table>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Agregar formaci&oacute;n complementaria requerida</label> 
-                            <button  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_formcomreq"><span class="glyphicon glyphicon-plus"></span></button><br>
-                            <table class="table table-hover tableestilo" id="tbformcomreq">
+                            <button  type="button" class="btn btn-success btn-sm" onclick="nuevaEducacionContinua()"><span class="glyphicon glyphicon-plus"></span></button><br>
+                            <br>
+                            <table class="table table-hover tableestilo">
                                 <thead>
-                                <th>Nombre de la capacitación o certificaci&oacute;n</th>
-                                <th>Tipo</th>
-                                <th>Opciones</th>
+                                    <th>Nombre de la capacitación o certificaci&oacute;n</th>
+                                    <th>Tipo</th>
+                                    <th>Opciones</th>
                                 </thead>
+                                <tbody data-bind="foreach: { data: educacionesContinuas }">
+                                    <tr class="table-row">
+                                        <td style="width: 70%">
+                                            <span data-bind="text: nombreCapacitacion" ></span>
+                                        </td>
+                                        <td style="width: 20%">
+                                            <span data-bind="text: nombreTipoCapacitacion" ></span>
+                                        </td>
+                                        <td style='white-space: nowrap; width: 10%' align="center">
+                                            <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarEducacionContinua"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                            <button class='btn btn-danger btn-xs' type='button' style='margin-left:10px;' data-bind="click: $root.eliminarEducacionContinua"><span class='glyphicon glyphicon-remove'></span></button>
+                                            <input type="hidden" data-bind="value: nombreCapacitacion, attr: { 'name': 'educacionesContinuas[' + $index() + '].nombreCapacitacion'  }" />
+                                            <input type="hidden" data-bind="value: tipoCapacitacion, attr: { 'name': 'educacionesContinuas[' + $index() + '].tipoCapacitacion'  }" />
+                                            <input type="hidden" data-bind="value: nucleoBasicoConocimiento, attr: { 'name': 'educacionesContinuas[' + $index() + '].nucleoBasicoConocimiento'  }" />
+                                            <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'educacionesContinuas[' + $index() + '].consecutivo'  }" />
+                                            <input type="hidden" data-bind="value: id, attr: { 'name': 'educacionesContinuas[' + $index() + '].id'  }" />
+                                        </td>
+                                    </tr>
+                                </tbody>    
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" role="dialog" id="md_form">
+                <div class="modal fade" role="dialog" id="md_programa">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header mhsuccess">
@@ -453,24 +491,25 @@
                                 <h4>Formaci&oacute;n requerida</h4>
                             </div>
                             <div class="modal-body">
+                                <div id="alert_programa"></div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="con_descripcion">Nivel de formaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe describir el perfil requerido con el cargo y la experiencia requerida">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                            <select name="freq_nivel_form" id="freq_nivel_form" style="width: 100%;" class="js-select-basic-single js-states form-control">
+                                            <label for="nivelFormacion">Nivel de formaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el nivel formación">
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                            <select name="nivelFormacionPrograma" id="nivelFormacionPrograma" style="width: 100%;" class="js-select-basic-single js-states form-control">
                                                 <option value=""></option>
-                                                <c:forEach var="nivelEstudio" items="${nivelesEstudio}">
+                                                <c:forEach var="nivelEstudio" items="${nivelesFormacion}">
                                                     <option value="${nivelEstudio.getId()}">${nivelEstudio.getNombre()}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de títutlo obtenido">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <select style="width: 100%;" name="freq_nucleo" id="freq_nucleo" class="js-select-basic-single js-states form-control">
+                                            <select style="width: 100%;" name="nucleoBasicoConocimientoPrograma" id="nucleoBasicoConocimientoPrograma" class="js-select-basic-single js-states form-control">
                                                 <option></option>
                                                 <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
                                                     <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
@@ -478,51 +517,27 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group form-inline">
-                                            <label for="est_programa_cursado">Programa</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa cursado">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <input  name="txtformpro" id="txtformpro" class="form-control" style="width:210px;"><button type="button" class="btn btn-success btn-sm" id="btnbuscapro" style="margin-left: 10px;"><span class="glyphicon glyphicon-search"></span></button>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="row"> 
-                                    <div class="col-md-5" style="margin-top: 10px;">
-                                        <div class="form-group">
-                                            <select name="prog[]" id="selpro" class="form-control" multiple size="10">
+                                    <div class="col-md-12">
+                                        <div class="form-group form-inline">
+                                            <label for="programaCursado">Programa</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa">
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                            <select style="width: 100%;" name="programaCursado" id="programaCursado" class="js-select-basic-single js-states form-control">
+                                                <option value=""></option>
                                             </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2" style="margin-top: 20px;">
-                                        <center><button class="btn btn-success btn-xs" type="button" id="pasarderfreq" ><i class="fa fa-arrow-right" aria-hidden="true"></i></button></center><br>
-                                        <center><button class="btn btn-success btn-xs" type="button" id="pasarizqfreq" ><i class="fa fa-arrow-left" aria-hidden="true"></i></button></center>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <div class="table-responsive">
-                                                <table class="table table-hover tableestilo" id="tbfreqpro">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Programa</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button"  class="btn btn-success" id="addprog">Agregar</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-success" data-bind="click: adicionarPrograma">Agregar</button>
+                                <button type="button" class="btn btn-success" onclick="cerrarVentanaPrograma();">Cancelar</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" role="dialog" id="md_formcomreq">
+                <div class="modal fade" role="dialog" id="md_educacion_continua">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header mhsuccess">
@@ -530,12 +545,13 @@
                                 <h4>Formaci&oacute;n complementaria requerida</h4>
                             </div>
                             <div class="modal-body">
+                                <div id="alert_educacion_continua"></div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="est_area_saber">Tipo de capacitaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el tipo de capacitaci&oacute;n">
+                                            <label for="tipoCapacitacionEducacionContinua">Tipo de capacitaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el tipo de capacitaci&oacute;n">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <select style="width: 100%;" name="con_tipo_capacitacion" id="con_tipo_capacitacion" class="js-select-basic-single js-states form-control">
+                                            <select style="width: 100%;" name="tipoCapacitacionEducacionContinua" id="tipoCapacitacionEducacionContinua" class="js-select-basic-single js-states form-control">
                                                 <option value=""></option>
                                                 <c:forEach var="tipoCapacitacion" items="${tiposCapacitacion}">
                                                     <option value="${tipoCapacitacion.getId()}">${tipoCapacitacion.getNombre()}</option>
@@ -545,9 +561,9 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de títutlo obtenido">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <select style="width: 100%;" name="conformreq_nbc" id="conformreq_nbc" class="js-select-basic-single js-states form-control">
+                                            <label for="nucleoBasicoConocimientoEducacionContinua">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de títutlo obtenido">
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                            <select style="width: 100%;" name="nucleoBasicoConocimientoEducacionContinua" id="nucleoBasicoConocimientoEducacionContinua" class="js-select-basic-single js-states form-control">
                                                 <option></option>
                                                 <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
                                                     <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
@@ -557,49 +573,22 @@
                                     </div>
                                 </div>
                                 <div class="row"> 
-                                    <div class="col-md-9">
+                                    <div class="col-md-12">
                                         <div class="form-group form-inline">
-                                            <label for="est_programa_cursado">Nombre de la capacitaci&oacute;n o certificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa cursado">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <input type="text" name="con_capaci_certi" id="con_capaci_certi" class="form-control" style="width: 500px" ><button type="button" class="btn btn-success btn-sm" id="btnbuscap" style="margin-left: 10px;"><span class="glyphicon glyphicon-search"></span></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row"> 
-                                    <div class="col-md-5" style="margin-top: 10px;">
-                                        <div class="form-group">
-                                            <select name="capaci[]" id="selcapaci" class="form-control" multiple size="10">
+                                            <label for="capacitacionEducacionContinua">Nombre de la capacitaci&oacute;n o certificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa cursado">
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                            <select style="width: 100%;" name="capacitacionEducacionContinua" id="capacitacionEducacionContinua" class="js-select-basic-single js-states form-control">
+                                                <option></option>
                                             </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2" style="margin-top: 20px;">
-                                        <center><button class="btn btn-success btn-xs" type="button" id="pasardercapaci" ><i class="fa fa-arrow-right" aria-hidden="true"></i></button></center><br>
-                                        <center><button class="btn btn-success btn-xs" type="button" id="pasarizqcapaci" ><i class="fa fa-arrow-left" aria-hidden="true"></i></button></center>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <div class="table-responsive">
-                                                <table class="table table-hover tableestilo" id="tbcapaci">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Nombre de la capacitación o certificación</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button"  class="btn btn-success" id="addformcomreq">Agregar</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-success" data-bind="click: adicionarEducacionContinua">Agregar</button>
+                                <button type="button" class="btn btn-success" onclick="cerrarVentanaEducacionContinua();">Cancelar</button>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="row">
@@ -871,7 +860,7 @@
         <div class="modal fade" id="confirmacionAlmacenamientoConvocatoria" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header mhsuccess">
                         <c:if test = "${convocatoria.getId() == 0}">
                             <button type="button" class="close" data-dismiss="modal" onclick="window.location.href = '${pageContext.request.contextPath}/convocatorias/crear'">&times;</button>
                         </c:if>
@@ -913,7 +902,10 @@
     var DOCENCIA_MEDELLIN = "3";
     var DOCENCIA_REGIONES = "4";
     var TIPO_CERTIFICACION_OTRO = "8";
-
+    var programas = [];
+    var programaCursado = '';
+    var capacitacionEducacionContinua = '';
+    
     $.validate({
         validateOnBlur: false, // disable validation when input looses focus
         errorMessagePosition: 'top', // Instead of 'inline' which is default
@@ -1005,6 +997,16 @@
         } else {
             $('#formcurso').hide();
         }
+        $('#nucleoBasicoConocimientoPrograma').change(function () {
+           obtenerProgramasCursados();
+        }); 
+        $('#nucleoBasicoConocimientoEducacionContinua').change(function () {
+           obtenerCapacitaciones();
+        }); 
+        $('#tipoCapacitacionEducacionContinua').change(function () {
+           obtenerCapacitaciones();
+        }); 
+        
     });
     $('#tipoCertificacionIdioma').change(function () {
         var valor = $(this).val();
@@ -1084,7 +1086,54 @@
                 $('#md_guardar').modal('hide');
             }});
     });
-
+    
+    function obtenerProgramasCursados() {
+        var nucleoBasicoConocimiento = $('#nucleoBasicoConocimientoPrograma').val();
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/convocatorias/programas?nucleoBasicoConocimiento=" + nucleoBasicoConocimiento,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response !== "") {
+                    $('#programaCursado').find('option').remove();
+                    $('#programaCursado').append('<option></option>');
+                    programas = JSON.parse(response);
+                    for (var i = 0; i < programas.length; i++) {
+                        $('#programaCursado').append('<option value=' + programas[i].id + '>' + programas[i].nombre + '</option>');
+                    }
+                    if(programaCursado != '') {
+                       $('#programaCursado').val(programaCursado).trigger('change');
+                    }
+                }
+            }});
+    }
+    
+    function obtenerCapacitaciones() {
+        var nucleoBasicoConocimiento = $('#nucleoBasicoConocimientoEducacionContinua').val();
+        var tipoCapacitacion = $('#tipoCapacitacionEducacionContinua').val();
+        if(nucleoBasicoConocimiento !== "" && tipoCapacitacion !== "") {
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/convocatorias/capacitaciones?nucleoBasicoConocimiento=" + nucleoBasicoConocimiento + "&tipoCapacitacion=" + tipoCapacitacion,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response !== "") {
+                        $('#capacitacionEducacionContinua').find('option').remove();
+                        $('#capacitacionEducacionContinua').append('<option></option>');
+                        capacitaciones = JSON.parse(response);
+                        for (var i = 0; i < capacitaciones.length; i++) {
+                            $('#capacitacionEducacionContinua').append('<option value=' + capacitaciones[i].nombre + '>' + capacitaciones[i].nombre + '</option>');
+                        }
+                        if(capacitacionEducacionContinua != '') {
+                           $('#capacitacionEducacionContinua').val(capacitacionEducacionContinua).trigger('change');
+                        }
+                    }
+                }});
+        }
+    }
+    
     bootstrap_alert_convocatoria = {};
     bootstrap_alert_convocatoria.warning = function (message) {
         $('#alert_placeholder_convocatoria').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
@@ -1120,11 +1169,30 @@
         $('#alert_idioma').html('');
     };
 
-    var ConvocatoriaModel = function (adendas, anyosExperiencias, idiomas) {
+    bootstrap_alert_programa = {};
+    bootstrap_alert_programa.warning = function (message) {
+        $('#alert_programa').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_programa.removeWarning = function () {
+        $('#alert_programa').html('');
+    };
+
+    bootstrap_alert_educacion_continua = {};
+    bootstrap_alert_educacion_continua.warning = function (message) {
+        $('#alert_educacion_continua').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_educacion_continua.removeWarning = function () {
+        $('#alert_educacion_continua').html('');
+    };
+    
+    var ConvocatoriaModel = function (adendas, anyosExperiencias, idiomas, programas, educacionesContinuas) {
         self = this;
         self.adendas = ko.observableArray(adendas);
         self.anyosExperiencias = ko.observableArray(anyosExperiencias);
         self.idiomas = ko.observableArray(idiomas);
+        self.programas = ko.observableArray(programas);
+        self.educacionesContinuas = ko.observableArray(educacionesContinuas);
+        
         self.adicionarAdenda = function () {
             var tipoAdenda = $('#tipoAdenda').val();
             var nombreTipoAdenda = $('#tipoAdenda option:selected').text();
@@ -1326,6 +1394,120 @@
             bootstrap_alert_idioma.removeWarning();
             $('#md_idioma').modal('show');
         };
+        
+        self.adicionarPrograma = function () {
+            var nivelFormacion = $('#nivelFormacionPrograma').val();
+            var nombreNivelFormacion = $('#nivelFormacionPrograma option:selected').text();
+            var nucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoPrograma').val();
+            var programa = $('#programaCursado').val();
+            var nombrePrograma = $('#programaCursado option:selected').text();
+
+            if (nivelFormacion === "") {
+                bootstrap_alert_programa.warning('Debe seleccionar el nivel de formación');
+                return false;
+            }
+            if (programa === "") {
+                bootstrap_alert_programa.warning('Debe seleccionar el programa');
+                return false;
+            }
+            if ($('#consecutivo').val() === "") {
+                self.programas.push({
+                    id: ko.observable(0),
+                    consecutivo: ko.observable(self.programas().length),
+                    nivelFormacion: ko.observable(nivelFormacion),
+                    nombreNivelFormacion: ko.observable(nombreNivelFormacion),
+                    nucleoBasicoConocimiento: ko.observable(nucleoBasicoConocimientoPrograma),
+                    programa: ko.observable(programa),
+                    nombrePrograma: ko.observable(nombrePrograma)
+                });
+            } else {
+                var consecutivo = parseInt($('#consecutivo').val(), 10);
+                var indice = 0;
+                for (i = 0; i < self.programas().length; i++) {
+                    if (self.programas()[i].consecutivo() === consecutivo) {
+                        indice = i;
+                        break;
+                    }
+                }
+                self.programas()[indice].nivelFormacion(nivelFormacion);
+                self.programas()[indice].nombreNivelFormacion(nombreNivelFormacion);
+                self.programas()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoPrograma);
+                self.programas()[indice].programa(programa);
+                self.programas()[indice].nombrePrograma(nombrePrograma);
+            }
+            $('#md_programa').modal('hide');
+        };
+
+        self.eliminarPrograma = function (programa) {
+            self.programas.remove(programa);
+        };
+
+        self.editarPrograma = function (programa) {
+            programaCursado = programa.programa();
+            $('#nivelFormacionPrograma').val(programa.nivelFormacion()).trigger('change');
+            $('#nucleoBasicoConocimientoPrograma').val(programa.nucleoBasicoConocimiento()).trigger('change');
+            $('#consecutivo').val(programa.consecutivo());
+            bootstrap_alert_programa.removeWarning();
+            $('#md_programa').modal('show');
+        };
+        
+        self.adicionarEducacionContinua = function () {
+            var tipoCapacitacion = $('#tipoCapacitacionEducacionContinua').val();
+            var nombreTipoCapacitacion = $('#tipoCapacitacionEducacionContinua option:selected').text();
+            var nucleoBasicoConocimiento = $('#nucleoBasicoConocimientoEducacionContinua').val();
+            var capacitacion = $('#capacitacionEducacionContinua').val();
+
+            if (tipoCapacitacion === "") {
+                bootstrap_alert_educacion_continua.warning('Debe seleccionar el tipo de capacitación');
+                return false;
+            }
+            if (nucleoBasicoConocimiento === "") {
+                bootstrap_alert_educacion_continua.warning('Debe seleccionar el núcleo básico de conocimiento');
+                return false;
+            }
+            if (capacitacion === "") {
+                bootstrap_alert_educacion_continua.warning('Debe seleccionar la capacitación');
+                return false;
+            }
+            if ($('#consecutivo').val() === "") {
+                self.educacionesContinuas.push({
+                    id: ko.observable(0),
+                    consecutivo: ko.observable(self.educacionesContinuas().length),
+                    tipoCapacitacion: ko.observable(tipoCapacitacion),
+                    nombreTipoCapacitacion: ko.observable(nombreTipoCapacitacion),
+                    nucleoBasicoConocimiento: ko.observable(nucleoBasicoConocimiento),
+                    nombreCapacitacion: ko.observable(capacitacion)
+                });
+            } else {
+                var consecutivo = parseInt($('#consecutivo').val(), 10);
+                var indice = 0;
+                for (i = 0; i < self.educacionesContinuas().length; i++) {
+                    if (self.educacionesContinuas()[i].consecutivo() === consecutivo) {
+                        indice = i;
+                        break;
+                    }
+                }
+                self.educacionesContinuas()[indice].tipoCapacitacion(tipoCapacitacion);
+                self.educacionesContinuas()[indice].nombreTipoCapacitacion(nombreTipoCapacitacion);
+                self.educacionesContinuas()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimiento);
+                self.educacionesContinuas()[indice].nombreCapacitacion(capacitacion);
+            }
+            $('#md_educacion_continua').modal('hide');
+        };
+
+        self.eliminarEducacionContinua = function (educacionContinua) {
+            self.educacionesContinuas.remove(educacionContinua);
+        };
+
+        self.editarEducacionContinua = function (educacionContinua) {
+            capacitacionEducacionContinua = educacionContinua.nombreCapacitacion();
+            $('#tipoCapacitacionEducacionContinua').val(educacionContinua.tipoCapacitacion()).trigger('change');
+            $('#nucleoBasicoConocimientoEducacionContinua').val(educacionContinua.nucleoBasicoConocimiento()).trigger('change');
+            $('#capacitacionEducacionContinua').val(educacionContinua.nombreCapacitacion()).trigger('change');
+            $('#consecutivo').val(educacionContinua.consecutivo());
+            bootstrap_alert_educacion_continua.removeWarning();
+            $('#md_educacion_continua').modal('show');
+        };
     };
 
     function verDocumentoConvocatoria() {
@@ -1365,6 +1547,26 @@
         $('#md_idioma').modal('show');
     }
 
+    function nuevoPrograma() {
+        programaCursado = '';
+        $('#programaCursado').val("").trigger('change');
+        $('#nivelFormacionPrograma').val("").trigger('change');
+        $('#nucleoBasicoConocimientoPrograma').val("").trigger('change');
+        $('#consecutivo').val("");
+        bootstrap_alert_programa.removeWarning();
+        $('#md_programa').modal('show');
+    }
+
+    function nuevaEducacionContinua() {
+        capacitacionEducacionContinua = '';
+        $('#tipoCapacitacionEducacionContinua').val("").trigger('change');
+        $('#nucleoBasicoConocimientoEducacionContinua').val("").trigger('change');
+        $('#capacitacionEducacionContinua').val("").trigger('change');
+        $('#consecutivo').val("");
+        bootstrap_alert_educacion_continua.removeWarning();
+        $('#md_educacion_continua').modal('show');
+    }
+
     function cerrarVentanaAndenda() {
         if ($('input:file[name="adendas[' + self.documentosSoporte().length + '].documento"]')) {
             $('input:file[name="adendas[' + self.documentosSoporte().length + '].documento"]').remove();
@@ -1380,6 +1582,14 @@
         $('#md_idioma').modal('hide');
     }
 
+    function cerrarVentanaPrograma() {
+        $('#md_programa').modal('hide');
+    }
+
+    function cerrarVentanaEducacionContinua() {
+        $('#md_educacion_continua').modal('hide');
+    }
+    
     function ocultarDocumentoAdendas() {
         for (var i = 0; i < convocatoriaModel.adendas().length; i++) {
             $('input:file[name="adendas[' + i + '].documento"]').hide();
@@ -1393,6 +1603,8 @@
     var adendas = [];
     var anyosExperiencias = [];
     var idiomas = [];
+    var programas = [];
+    var educacionesContinuas = [];
     <c:if test = "${adendasJSON != null}">
     adendas = ${adendasJSON};
     for (var i = 0; i < adendas.length; i++) {
@@ -1407,6 +1619,12 @@
     <c:if test = "${idiomasJSON != null}">
     idiomas = ${idiomasJSON};
     </c:if>
-    var convocatoriaModel = new ConvocatoriaModel(adendas, anyosExperiencias, idiomas);
+    <c:if test = "${programasJSON != null}">
+    programas = ${programasJSON};
+    </c:if>
+    <c:if test = "${educacionesContinuasJSON != null}">
+    educacionesContinuas = ${educacionesContinuasJSON};
+    </c:if>
+    var convocatoriaModel = new ConvocatoriaModel(adendas, anyosExperiencias, idiomas, programas, educacionesContinuas);
     ko.applyBindings(convocatoriaModel);
 </script>

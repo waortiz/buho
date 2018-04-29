@@ -6,6 +6,7 @@
 package co.edu.fnsp.buho.servicios;
 
 import co.edu.fnsp.buho.entidades.Maestro;
+import co.edu.fnsp.buho.entidades.Programa;
 import co.edu.fnsp.buho.repositorios.IRepositorioMaestro;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -195,5 +196,15 @@ public class ServicioMaestro implements IServicioMaestro {
     @Override
     public List<Maestro> obtenerClasesPatente() {
         return repositorioMaestro.obtenerClasesPatente();
+    }
+
+    @Override
+    public List<Programa> obtenerProgramasInstitucion(Integer institucion, Integer nucleoBasicoConocimiento) {
+        return repositorioMaestro.obtenerProgramasInstitucion(institucion, nucleoBasicoConocimiento);
+    }
+
+    @Override
+    public List<Maestro> obtenerCapacitaciones(Integer tipoCapacitacion, Integer nucleoBasicoConocimiento) {
+        return repositorioMaestro.obtenerCapacitaciones(tipoCapacitacion, nucleoBasicoConocimiento);
     }
 }

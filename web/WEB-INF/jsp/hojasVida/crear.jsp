@@ -281,11 +281,11 @@
                     <div class="col-md-12">
                         <div class="form-group form-inline">
                             <label for="direccion">Direcci&oacute;n</label>
-                            <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la direccion">
+                            <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la dirección">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i>
                             </a>
                             <br>     
-                            <form:input class="form-control" path="direccion" style="width: 90%" readonly="true" data-validation="required" data-validation-error-msg="Debe indicar la direccion"/>
+                            <form:input class="form-control" path="direccion" style="width: 90%" readonly="true" data-validation="required" data-validation-error-msg="Debe indicar la dirección"/>
                             <button type="button" class="btn btn-success btn-sm" data-target="#md_direccion" data-toggle="modal">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
@@ -445,9 +445,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="grupoEtnico">Grupo &eacute;tnico </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el grupo etnico que pertenece">
+                            <label for="grupoEtnico">Grupo &eacute;tnico </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el grupo étnico que pertenece">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                <form:select path="grupoEtnico" class="js-select-basic-single js-states form-control" data-validation="required" data-validation-error-msg="Debe seleccionar el grupo etnico que pertenece">
+                                <form:select path="grupoEtnico" class="js-select-basic-single js-states form-control" data-validation="required" data-validation-error-msg="Debe seleccionar el grupo étnico que pertenece">
                                     <form:option value=""></form:option>
                                     <form:options items="${gruposEtnico}" itemLabel="nombre" itemValue="id"/>
                                 </form:select>
@@ -971,8 +971,8 @@
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                             <select name="nivelEstudioEducacionBasica" id="nivelEstudioEducacionBasica" style="width: 100%;" class="js-select-basic-single js-states form-control">
                                                 <option value=""></option>
-                                                <c:forEach var="nivelEstudio" items="${nivelesEstudio}">
-                                                    <option value="${nivelEstudio.getId()}">${nivelEstudio.getNombre()}</option>
+                                                <c:forEach var="nivelFormacion" items="${nivelesFormacion}">
+                                                    <option value="${nivelFormacion.getId()}">${nivelFormacion.getNombre()}</option>
                                                 </c:forEach>                                             
                                             </select>
                                         </div>
@@ -993,7 +993,7 @@
                                         <div class="col-md-5">
                                             <label for="tituloEducacionBasica">T&iacute;tulo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del t&iacute;tulo">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input type="text" name="tituloEducacionBasica" id="tituloEducacionBasica" class="form-control">
+                                                <input type="text" name="tituloEducacionBasica" id="tituloEducacionBasica" class="form-control" readonly>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="graduadoEducacionBasica">Graduado?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar que si estan graduado?">
@@ -1067,7 +1067,7 @@
                                             <input type="hidden" class="form-control" data-bind="value: institucion, attr: { 'name': 'educacionesSuperiores[' + $index() + '].institucion'  }">
                                         </td>
                                         <td style="width: 20%">
-                                            <span data-bind="text: programa" ></span>
+                                            <span data-bind="text: nombrePrograma" ></span>
                                             <input type="hidden" class="form-control" data-bind="value: programa, attr: { 'name': 'educacionesSuperiores[' + $index() + '].programa'  }">
                                             <input type="hidden" class="form-control" data-bind="value: titulo, attr: { 'name': 'educacionesSuperiores[' + $index() + '].titulo'  }">
                                         </td>
@@ -1147,8 +1147,8 @@
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                                 <select name="nivelEstudioEducacionSuperior" id="nivelEstudioEducacionSuperior" style="width: 100%;" class="js-select-basic-single js-states form-control">
                                                     <option value=""></option>
-                                                    <c:forEach var="nivelEstudio" items="${nivelesEstudio}">
-                                                        <option value="${nivelEstudio.getId()}">${nivelEstudio.getNombre()}</option>
+                                                    <c:forEach var="nivelFormacion" items="${nivelesFormacion}">
+                                                        <option value="${nivelFormacion.getId()}">${nivelFormacion.getNombre()}</option>
                                                     </c:forEach>                                                 
                                                 </select> 
                                             </div>
@@ -1187,7 +1187,9 @@
                                                             <div class="form-group">
                                                                 <label for="programaCursado">Programa cursado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa cursado">
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                                <input type="text" class="form-control" name="programaCursado" id="programaCursado" />
+                                                                <select style="width: 100%;" name="programaCursado" id="programaCursado" class="js-select-basic-single js-states form-control">
+                                                                    <option value=""></option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1196,7 +1198,7 @@
                                                             <div class="form-group">
                                                                 <label for="tituloPrograma">T&iacute;tulo obtenido</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de título obtenido">
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                                <input type="text" class="form-control" name="tituloPrograma" id="tituloPrograma">
+                                                                <input type="text" class="form-control" name="tituloPrograma" id="tituloPrograma" readonly>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5">
@@ -1232,7 +1234,8 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="programaCursadoEducacionSuperior">Programa</label><br>
-                                                    <input type="text" style="border:0;font-style: italic;margin-left: 20px;" readonly id="programaCursadoEducacionSuperior">
+                                                    <input type="text" style="border:0;font-style: italic;margin-left: 20px;" readonly id="nombreProgramaCursadoEducacionSuperior">
+                                                    <input type="hidden" id="programaCursadoEducacionSuperior">
                                                 </div>
                                             </div>
                                             <div class="col-md-5">
@@ -2037,8 +2040,8 @@
                                         <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                         <select name="nivelEstudioCursoExperienciaDocencia" id="nivelEstudioCursoExperienciaDocencia" style="width: 100%;" class="js-select-basic-single js-states form-control">
                                             <option value=""></option>
-                                            <c:forEach var="nivelEstudio" items="${nivelesEstudio}">
-                                            <option value="${nivelEstudio.getId()}">${nivelEstudio.getNombre()}</option>
+                                            <c:forEach var="nivelFormacion" items="${nivelesFormacion}">
+                                            <option value="${nivelFormacion.getId()}">${nivelFormacion.getNombre()}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -2389,124 +2392,123 @@
                            </div>
                        </div>
                    </div>
-                   <div class="row">
-                       <div class="col-md-12">
-                            <legend>Productos conocimiento</legend>
-                            <label>Agregar producto del conocimiento</label>
-                            <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoProductoConocimiento();" ><span class="glyphicon glyphicon-plus"></span></button>
-                            <br>
-                            <div class="table-responsive">
-                                <table class="table table-hover tableestilo" id="tbprodcono">
-                                    <thead>
-                                        <tr>
-                                            <th>Tipo</th>
-                                            <th>Cita</th>
-                                            <th>Descripci&oacute;n</th>
-                                            <th class="cer">Documento</th>
-                                            <th class="opc">Opciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody data-bind="foreach: { data: productosConocimiento }">
-                                        <tr class="table-row">
-                                            <td style="width: 30%">
-                                                <span data-bind="text: nombreTipo" ></span>
-                                            </td>
-                                            <td style="width: 30%">
-                                                <span data-bind="text: url" ></span>
-                                            </td>
-                                            <td style="width: 20%">
-                                                <span data-bind="text: descripcion" ></span>
-                                            </td>
-                                            <td style="width: 10%" align="center">
-                                                <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoProductoConocimiento, visible: tieneDocumento" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                            </td>
-                                            <td style='white-space: nowrap; width: 10%' align="center">
-                                                <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarProductoConocimiento"><i class='fa fa-pencil' aria-hidden='true'></i></button>
-                                                <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarProductoConocimiento"><span class='glyphicon glyphicon-remove'></span></button>
-                                                <input type="hidden" data-bind="value: tipo, attr: { 'name': 'productosConocimiento[' + $index() + '].tipo'  }" />
-                                                <input type="hidden" data-bind="value: nombreTipo, attr: { 'name': 'productosConocimiento[' + $index() + '].nombreTipo'  }" />
-                                                <input type="hidden" data-bind="value: nucleoBasicoConocimiento, attr: { 'name': 'productosConocimiento[' + $index() + '].nucleoBasicoConocimiento'  }" />
-                                                <input type="hidden" data-bind="value: url, attr: { 'name': 'productosConocimiento[' + $index() + '].url'  }" />
-                                                <input type="hidden" data-bind="value: descripcion, attr: { 'name': 'productosConocimiento[' + $index() + '].descripcion'  }" />
-                                                <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'productosConocimiento[' + $index() + '].consecutivo'  }" />
-                                                <input type="hidden" data-bind="value: id, attr: { 'name': 'productosConocimiento[' + $index() + '].id'  }" />
-                                            </td>
-                                        </tr>
-                                    </tbody>                                     
-                                </table>
-                            </div>
-                       </div>
-                   </div>
-                   <div class="modal fade" id="md_producto_conocimiento" role="dialog">
-                       <div class="modal-dialog modal-lg">
-                           <div class="modal-content">
-                                <div class="modal-header mhsuccess">
-                                    <button type="button" class="close" onclick="cerrarVentanaProductoConocimiento();">&times;</button>
-                                    <h4 class="modal-title">Producto del conocimiento</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div id="alert_producto_conocimiento"></div>
-                                    <div class="row">
-                                        <div class="col-md-2" style="width:160px;">
-                                            <div class="form-group">
-                                                <label>Tipo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo del producto del conocimiento">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <select style="width: 100%;" class="js-select-basic-single js-states form-control" name="tipoProductoConocimiento" id="tipoProductoConocimiento">
-                                                    <option></option>
-                                                    <c:forEach var="tipoProductoConocimiento" items="${tiposProductosConocimiento}">
-                                                    <option value="${tipoProductoConocimiento.getId()}">${tipoProductoConocimiento.getNombre()}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4" style="width:270px !important;">
-                                            <div class="form-group">
-                                                <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de títutlo obtenido">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                <select style="width: 100%;" name="nucleoBasicoProductoConocimiento" id="nucleoBasicoProductoConocimiento" class="js-select-basic-single js-states form-control">
-                                                    <option></option>
-                                                    <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
-                                                    <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Direcci&oacute;n electr&oacute;nica URL</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la cita">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <input type="text" name="urlProductoConocimiento" id="urlProductoConocimiento" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Descripci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la descripción del producto del conocimiento">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <textarea class="form-control" name="descripcionProductoConocimiento" id="descripcionProductoConocimiento"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="form-group form-inline">
-                                                <label>Documento del soporte</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el documento de soporte del producto del conocimiento">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                                <div id="documentosProductosConocimiento"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" data-bind="click: adicionarProductoConocimiento">Agregar</button>
-                                    <button type="button" class="btn btn-success" onclick="cerrarVentanaProductoConocimiento();">Cancelar</button>
-                                </div>
-                           </div>
-                       </div>
-                   </div>
-                </div>                        
-            </div>
+                <div class="row">
+                    <div class="col-md-12">
+                         <legend>Productos conocimiento</legend>
+                         <label>Agregar producto del conocimiento</label>
+                         <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoProductoConocimiento();" ><span class="glyphicon glyphicon-plus"></span></button>
+                         <br>
+                         <div class="table-responsive">
+                             <table class="table table-hover tableestilo" id="tbprodcono">
+                                 <thead>
+                                     <tr>
+                                         <th>Tipo</th>
+                                         <th>Cita</th>
+                                         <th>Descripci&oacute;n</th>
+                                         <th class="cer">Documento</th>
+                                         <th class="opc">Opciones</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody data-bind="foreach: { data: productosConocimiento }">
+                                     <tr class="table-row">
+                                         <td style="width: 30%">
+                                             <span data-bind="text: nombreTipo" ></span>
+                                         </td>
+                                         <td style="width: 30%">
+                                             <span data-bind="text: url" ></span>
+                                         </td>
+                                         <td style="width: 20%">
+                                             <span data-bind="text: descripcion" ></span>
+                                         </td>
+                                         <td style="width: 10%" align="center">
+                                             <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoProductoConocimiento, visible: tieneDocumento" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                         </td>
+                                         <td style='white-space: nowrap; width: 10%' align="center">
+                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarProductoConocimiento"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                             <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarProductoConocimiento"><span class='glyphicon glyphicon-remove'></span></button>
+                                             <input type="hidden" data-bind="value: tipo, attr: { 'name': 'productosConocimiento[' + $index() + '].tipo'  }" />
+                                             <input type="hidden" data-bind="value: nombreTipo, attr: { 'name': 'productosConocimiento[' + $index() + '].nombreTipo'  }" />
+                                             <input type="hidden" data-bind="value: nucleoBasicoConocimiento, attr: { 'name': 'productosConocimiento[' + $index() + '].nucleoBasicoConocimiento'  }" />
+                                             <input type="hidden" data-bind="value: url, attr: { 'name': 'productosConocimiento[' + $index() + '].url'  }" />
+                                             <input type="hidden" data-bind="value: descripcion, attr: { 'name': 'productosConocimiento[' + $index() + '].descripcion'  }" />
+                                             <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'productosConocimiento[' + $index() + '].consecutivo'  }" />
+                                             <input type="hidden" data-bind="value: id, attr: { 'name': 'productosConocimiento[' + $index() + '].id'  }" />
+                                         </td>
+                                     </tr>
+                                 </tbody>                                     
+                             </table>
+                         </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="md_producto_conocimiento" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                             <div class="modal-header mhsuccess">
+                                 <button type="button" class="close" onclick="cerrarVentanaProductoConocimiento();">&times;</button>
+                                 <h4 class="modal-title">Producto del conocimiento</h4>
+                             </div>
+                             <div class="modal-body">
+                                 <div id="alert_producto_conocimiento"></div>
+                                 <div class="row">
+                                     <div class="col-md-2" style="width:160px;">
+                                         <div class="form-group">
+                                             <label>Tipo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo del producto del conocimiento">
+                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                             <select style="width: 100%;" class="js-select-basic-single js-states form-control" name="tipoProductoConocimiento" id="tipoProductoConocimiento">
+                                                 <option></option>
+                                                 <c:forEach var="tipoProductoConocimiento" items="${tiposProductosConocimiento}">
+                                                 <option value="${tipoProductoConocimiento.getId()}">${tipoProductoConocimiento.getNombre()}</option>
+                                                 </c:forEach>
+                                             </select>
+                                         </div>
+                                     </div>
+                                     <div class="col-md-4" style="width:270px !important;">
+                                         <div class="form-group">
+                                             <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de títutlo obtenido">
+                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                             <select style="width: 100%;" name="nucleoBasicoProductoConocimiento" id="nucleoBasicoProductoConocimiento" class="js-select-basic-single js-states form-control">
+                                                 <option></option>
+                                                 <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
+                                                 <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
+                                                 </c:forEach>
+                                             </select>
+                                         </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>Direcci&oacute;n electr&oacute;nica URL</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la cita">
+                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                             <input type="text" name="urlProductoConocimiento" id="urlProductoConocimiento" class="form-control">
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="row">
+                                     <div class="col-md-12">
+                                         <div class="form-group">
+                                             <label>Descripci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la descripción del producto del conocimiento">
+                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                             <textarea class="form-control" name="descripcionProductoConocimiento" id="descripcionProductoConocimiento"></textarea>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="row">
+                                     <div class="col-md-8">
+                                         <div class="form-group form-inline">
+                                             <label>Documento del soporte</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el documento de soporte del producto del conocimiento">
+                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                             <div id="documentosProductosConocimiento"></div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="modal-footer">
+                                 <button type="button" class="btn btn-success" data-bind="click: adicionarProductoConocimiento">Agregar</button>
+                                 <button type="button" class="btn btn-success" onclick="cerrarVentanaProductoConocimiento();">Cancelar</button>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                        
             <div id="formdistin" style="display: none;">
                 <div class="row">   
                     <div class="col-md-1" style="margin-bottom: 20px;">
@@ -2686,6 +2688,7 @@
     var ID_UNIVERSIDAD_ANTIOQUIA = '209';
     var UNIVERSIDAD_ANTIOQUIA = 'Universidad de Antioquia';
     var TIPO_CERTIFICACION_OTRO = "8";
+    var programas = [];
     
     $('.fecha').datepicker({
         dateFormat: "dd/mm/yy",
@@ -2814,6 +2817,7 @@
           var institucion = $('#institucionEducativaPrograma').val();
           var nombreInstitucion = $('#institucionEducativaPrograma option:selected').text().toUpperCase();
           var programaCursado = $('#programaCursado').val();
+          var nombreProgramaCursado = $('#programaCursado option:selected').text().toUpperCase();
           var nucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoPrograma').val();
           var nombreNucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoPrograma option:selected').text().toUpperCase();
           var tituloPrograma = $('#tituloPrograma').val();
@@ -2823,6 +2827,7 @@
           $('#institucionEducacionSuperior').val(institucion);
           $('#nombreInstitucionEducacionSuperior').val(nombreInstitucion);
           $('#programaCursadoEducacionSuperior').val(programaCursado);
+          $('#nombreProgramaCursadoEducacionSuperior').val(nombreProgramaCursado);
           $('#nucleoBasicoConocimientoEducacionSuperior').val(nucleoBasicoConocimientoPrograma);
           $('#nombreNucleoBasicoConocimientoEducacionSuperior').val(nombreNucleoBasicoConocimientoPrograma);
           $('#tituloEducacionSuperior').val(tituloPrograma);
@@ -3014,6 +3019,20 @@
                 $('#md_direccion').modal('hide');
                 $('#radrural').prop('checked', false);
             }
+        });
+        $('#institucionEducativaPrograma').change(function () {
+           obtenerProgramasCursados();
+        });
+
+        $('#nucleoBasicoConocimientoPrograma').change(function () {
+           obtenerProgramasCursados();
+        });
+        
+        $('#programaCursado').change(function () {
+            var programa = programas.find(function(element) {
+                return element.id == $('#programaCursado').val();
+            });
+            $('#tituloPrograma').val(programa.titulo);
         });
     });
 
@@ -3495,10 +3514,6 @@
                 bootstrap_alert_educacion_basica.warning('Debe ingresar el año de finalización');
                 return false;
             }
-            if (tituloEducacionBasica === "") {
-                bootstrap_alert_educacion_basica.warning('Debe ingresar el título');
-                return false;
-            }
             if ($('#consecutivo').val() === "") {
                 if ($('input:file[name="educacionesBasicas[' + self.educacionesBasicas().length + '].certificado"]').val() === "") {
                     bootstrap_alert_educacion_basica.warning('Debe ingresar el certificado');
@@ -3591,6 +3606,7 @@
             var paisTituloExteriorEducacionSuperior = $('#paisTituloExteriorEducacionSuperior').val();
             var nombrePaisTituloExteriorEducacionSuperior = $('#paisTituloExteriorEducacionSuperior option:selected').text();
             var programaCursadoEducacionSuperior = $('#programaCursadoEducacionSuperior').val();
+            var nombreProgramaCursadoEducacionSuperior = $('#nombreProgramaCursadoEducacionSuperior').val();
             var institucionEducacionSuperior = $('#institucionEducacionSuperior').val();
             var nombreInstitucionEducacionSuperior = $('#nombreInstitucionEducacionSuperior').val();
             var nucleoBasicoConocimientoEducacionSuperior = $('#nucleoBasicoConocimientoEducacionSuperior').val();
@@ -3659,6 +3675,7 @@
                     institucion: ko.observable(institucionEducacionSuperior),
                     nombreInstitucion: ko.observable(nombreInstitucionEducacionSuperior),
                     programa: ko.observable(programaCursadoEducacionSuperior),
+                    nombrePrograma: ko.observable(nombreProgramaCursadoEducacionSuperior),
                     nucleoBasicoConocimiento: ko.observable(nucleoBasicoConocimientoEducacionSuperior),
                     nombreNucleoBasicoConocimiento: ko.observable(nombreNucleoBasicoConocimientoEducacionSuperior),
                     nivel: ko.observable(nivelEstudioEducacionSuperior),
@@ -3699,6 +3716,7 @@
                 self.educacionesSuperiores()[indice].nivel(nivelEstudioEducacionSuperior);
                 self.educacionesSuperiores()[indice].nombreNivel(nombreNivelEducacionSuperior);
                 self.educacionesSuperiores()[indice].programa(programaCursadoEducacionSuperior);
+                self.educacionesSuperiores()[indice].nombrePrograma(nombreProgramaCursadoEducacionSuperior);
                 self.educacionesSuperiores()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoEducacionSuperior);
                 self.educacionesSuperiores()[indice].nombreNucleoBasicoConocimiento(nombreNucleoBasicoConocimientoEducacionSuperior);
                 self.educacionesSuperiores()[indice].anyoInicio(anyoInicioEducacionSuperior);
@@ -3740,16 +3758,12 @@
                 $('#certhomo').css('display','none');
             }
             
-            $('#institucionEducativaPrograma').val(educacionSuperior.institucion()).trigger('change');
-            $('#programaCursado').val(educacionSuperior.programa());
-            $('#nucleoBasicoConocimientoPrograma').val(educacionSuperior.nucleoBasicoConocimiento()).trigger('change');
-            $('#tituloPrograma').val(educacionSuperior.titulo());
-            
             $('#formprograma').css("display","block");
             
             $('#institucionEducacionSuperior').val(educacionSuperior.institucion());
             $('#nombreInstitucionEducacionSuperior').val(educacionSuperior.nombreInstitucion());
             $('#programaCursadoEducacionSuperior').val(educacionSuperior.programa());
+            $('#nombreProgramaCursadoEducacionSuperior').val(educacionSuperior.nombrePrograma());
             $('#nucleoBasicoConocimientoEducacionSuperior').val(educacionSuperior.nucleoBasicoConocimiento());
             $('#nombreNucleoBasicoConocimientoEducacionSuperior').val(educacionSuperior.nombreNucleoBasicoConocimiento());
             $('#tituloEducacionSuperior').val(educacionSuperior.titulo());
@@ -4757,6 +4771,7 @@
         $('#institucionEducacionSuperior').val("");
         $('#nombreInstitucionEducacionSuperior').val("");
         $('#programaCursadoEducacionSuperior').val('');
+        $('#nombreProgramaCursadoEducacionSuperior').val('');
         $('#nucleoBasicoConocimientoEducacionSuperior').val('');
         $('#nombreNucleoBasicoConocimientoEducacionSuperior').val('');
         $('#anyoInicioEducacionSuperior').val("").trigger('change');
@@ -5188,6 +5203,27 @@
                 $('#md_guardar').modal('hide');
             }});
     });
+
+    function obtenerProgramasCursados() {
+        var institucion = $('#institucionEducativaPrograma').val();
+        var nucleoBasicoConocimiento = $('#nucleoBasicoConocimientoPrograma').val();
+        $('#tituloPrograma').val('');
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/hojasVida/programasInstitucion?institucion=" + institucion + "&nucleoBasicoConocimiento=" + nucleoBasicoConocimiento,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response !== "") {
+                    $('#programaCursado').find('option').remove();
+                    $('#programaCursado').append('<option></option>');
+                    programas = JSON.parse(response);
+                    for (var i = 0; i < programas.length; i++) {
+                        $('#programaCursado').append('<option value=' + programas[i].id + '>' + programas[i].nombre + '</option>');
+                    }
+                }
+            }});
+    }
 
     function verCopiaCedula() {
         window.location.href = "${pageContext.request.contextPath}/hojasVida/copiaCedula/" + $('#idPersona').val();

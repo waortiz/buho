@@ -21,7 +21,8 @@ public class EducacionSuperior {
     private int institucion;
     private String nombreInstitucion;
     private boolean tituloExterior;
-    private String programa;
+    private int programa;
+    private String nombrePrograma;
     private int nucleoBasicoConocimiento;
     private String nombreNucleoBasicoConocimiento;
     private int anyoInicio;
@@ -161,14 +162,14 @@ public class EducacionSuperior {
     /**
      * @return the programa
      */
-    public String getPrograma() {
+    public int getPrograma() {
         return programa;
     }
 
     /**
      * @param programa the programa to set
      */
-    public void setPrograma(String programa) {
+    public void setPrograma(int programa) {
         this.programa = programa;
     }
 
@@ -282,5 +283,19 @@ public class EducacionSuperior {
      */
     public void setNombrePaisTituloExterior(String nombrePaisTituloExterior) {
         this.nombrePaisTituloExterior = nombrePaisTituloExterior;
+    }
+
+    /**
+     * @return the nombrePrograma
+     */
+    public String getNombrePrograma() {
+        return nombrePrograma;
+    }
+
+    /**
+     * @param nombrePrograma the nombrePrograma to set
+     */
+    public void setNombrePrograma(String nombrePrograma) {
+        this.nombrePrograma = nombrePrograma;
     }
 }

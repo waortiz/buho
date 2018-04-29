@@ -425,89 +425,81 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         MapSqlParameterSource parametrosIngresoEducacionBasica = new MapSqlParameterSource();
         parametrosIngresoEducacionBasica.addValue("varIdPersona", idPersona);
         for (EducacionBasica educacionBasica : hojaVida.getEducacionesBasicas()) {
-            if (educacionBasica.getId() == 0) {
-                parametrosIngresoEducacionBasica.addValue("varNivel", educacionBasica.getNivel());
-                parametrosIngresoEducacionBasica.addValue("varInstitucion", educacionBasica.getInstitucion());
-                parametrosIngresoEducacionBasica.addValue("varAnyoFinalizacion", educacionBasica.getAnyoFinalizacion());
-                parametrosIngresoEducacionBasica.addValue("varAnyoInicio", educacionBasica.getAnyoInicio());
-                parametrosIngresoEducacionBasica.addValue("varTitulo", educacionBasica.getTitulo());
-                parametrosIngresoEducacionBasica.addValue("varGraduado", educacionBasica.isGraduado());
-                Map resultadoIngresoEducacionBasica = ingresarEducacionBasica.execute(parametrosIngresoEducacionBasica);
-                int idEducacionBasica = (int) resultadoIngresoEducacionBasica.get("varId");
-                Documento documento = educacionBasica.getCertificado();
-                if (documento != null) {
-                    MapSqlParameterSource parametrosIngresoCertificadoEducacionBasica = new MapSqlParameterSource();
-                    parametrosIngresoCertificadoEducacionBasica.addValue("varIdEducacionBasica", idEducacionBasica);
-                    parametrosIngresoCertificadoEducacionBasica.addValue("varNombre", documento.getNombre());
-                    parametrosIngresoCertificadoEducacionBasica.addValue("varTipoContenido", documento.getTipoContenido());
-                    parametrosIngresoCertificadoEducacionBasica.addValue("varContenido", documento.getContenido());
-                    ingresarCertificadoEducacionBasica.execute(parametrosIngresoCertificadoEducacionBasica);
-                }
+            parametrosIngresoEducacionBasica.addValue("varNivel", educacionBasica.getNivel());
+            parametrosIngresoEducacionBasica.addValue("varInstitucion", educacionBasica.getInstitucion());
+            parametrosIngresoEducacionBasica.addValue("varAnyoFinalizacion", educacionBasica.getAnyoFinalizacion());
+            parametrosIngresoEducacionBasica.addValue("varAnyoInicio", educacionBasica.getAnyoInicio());
+            parametrosIngresoEducacionBasica.addValue("varTitulo", educacionBasica.getTitulo());
+            parametrosIngresoEducacionBasica.addValue("varGraduado", educacionBasica.isGraduado());
+            Map resultadoIngresoEducacionBasica = ingresarEducacionBasica.execute(parametrosIngresoEducacionBasica);
+            int idEducacionBasica = (int) resultadoIngresoEducacionBasica.get("varId");
+            Documento documento = educacionBasica.getCertificado();
+            if (documento != null) {
+                MapSqlParameterSource parametrosIngresoCertificadoEducacionBasica = new MapSqlParameterSource();
+                parametrosIngresoCertificadoEducacionBasica.addValue("varIdEducacionBasica", idEducacionBasica);
+                parametrosIngresoCertificadoEducacionBasica.addValue("varNombre", documento.getNombre());
+                parametrosIngresoCertificadoEducacionBasica.addValue("varTipoContenido", documento.getTipoContenido());
+                parametrosIngresoCertificadoEducacionBasica.addValue("varContenido", documento.getContenido());
+                ingresarCertificadoEducacionBasica.execute(parametrosIngresoCertificadoEducacionBasica);
             }
         }
 
         MapSqlParameterSource parametrosIngresoEducacionSuperior = new MapSqlParameterSource();
         parametrosIngresoEducacionSuperior.addValue("varIdPersona", idPersona);
         for (EducacionSuperior educacionSuperior : hojaVida.getEducacionesSuperiores()) {
-            if (educacionSuperior.getId() == 0) {
-                parametrosIngresoEducacionSuperior.addValue("varNivel", educacionSuperior.getNivel());
-                parametrosIngresoEducacionSuperior.addValue("varTituloExterior", educacionSuperior.isTituloExterior());
-                parametrosIngresoEducacionSuperior.addValue("varPrograma", educacionSuperior.getPrograma());
-                if (educacionSuperior.getPaisTituloExterior() != null) {
-                    parametrosIngresoEducacionSuperior.addValue("varPaisTituloExterior", educacionSuperior.getPaisTituloExterior());
-                }
-                parametrosIngresoEducacionSuperior.addValue("varFechaTitulo", educacionSuperior.getFechaTitulo());
-                parametrosIngresoEducacionSuperior.addValue("varNucleoBasicoConocimiento", educacionSuperior.getNucleoBasicoConocimiento());
-                parametrosIngresoEducacionSuperior.addValue("varInstitucion", educacionSuperior.getInstitucion());
-                parametrosIngresoEducacionSuperior.addValue("varAnyoFinalizacion", educacionSuperior.getAnyoFinalizacion());
-                parametrosIngresoEducacionSuperior.addValue("varAnyoInicio", educacionSuperior.getAnyoInicio());
-                parametrosIngresoEducacionSuperior.addValue("varTitulo", educacionSuperior.getTitulo());
-                parametrosIngresoEducacionSuperior.addValue("varFechaTitulo", educacionSuperior.getFechaTitulo());
-                parametrosIngresoEducacionSuperior.addValue("varGraduado", educacionSuperior.isGraduado());
-                Map resultadoIngresoEducacionSuperior = ingresarEducacionSuperior.execute(parametrosIngresoEducacionSuperior);
-                int idEducacionSuperior = (int) resultadoIngresoEducacionSuperior.get("varId");
-                Documento documento = educacionSuperior.getCertificado();
-                if (documento != null) {
-                    MapSqlParameterSource parametrosIngresoCertificadoEducacionSuperior = new MapSqlParameterSource();
-                    parametrosIngresoCertificadoEducacionSuperior.addValue("varIdEducacionSuperior", idEducacionSuperior);
-                    parametrosIngresoCertificadoEducacionSuperior.addValue("varNombre", documento.getNombre());
-                    parametrosIngresoCertificadoEducacionSuperior.addValue("varTipoContenido", documento.getTipoContenido());
-                    parametrosIngresoCertificadoEducacionSuperior.addValue("varContenido", documento.getContenido());
-                    ingresarCertificadoEducacionSuperior.execute(parametrosIngresoCertificadoEducacionSuperior);
-                }
-                Documento documentoHomologado = educacionSuperior.getCertificadoHomologado();
-                if (documentoHomologado != null) {
-                    MapSqlParameterSource parametrosIngresoCertificadoHomologadoEducacionSuperior = new MapSqlParameterSource();
-                    parametrosIngresoCertificadoHomologadoEducacionSuperior.addValue("varIdEducacionSuperior", idEducacionSuperior);
-                    parametrosIngresoCertificadoHomologadoEducacionSuperior.addValue("varNombre", documentoHomologado.getNombre());
-                    parametrosIngresoCertificadoHomologadoEducacionSuperior.addValue("varTipoContenido", documentoHomologado.getTipoContenido());
-                    parametrosIngresoCertificadoHomologadoEducacionSuperior.addValue("varContenido", documentoHomologado.getContenido());
-                    ingresarCertificadoHomologadoEducacionSuperior.execute(parametrosIngresoCertificadoHomologadoEducacionSuperior);
-                }
+            parametrosIngresoEducacionSuperior.addValue("varNivel", educacionSuperior.getNivel());
+            parametrosIngresoEducacionSuperior.addValue("varTituloExterior", educacionSuperior.isTituloExterior());
+            parametrosIngresoEducacionSuperior.addValue("varPrograma", educacionSuperior.getPrograma());
+            if (educacionSuperior.getPaisTituloExterior() != null) {
+                parametrosIngresoEducacionSuperior.addValue("varPaisTituloExterior", educacionSuperior.getPaisTituloExterior());
+            }
+            parametrosIngresoEducacionSuperior.addValue("varFechaTitulo", educacionSuperior.getFechaTitulo());
+            parametrosIngresoEducacionSuperior.addValue("varInstitucion", educacionSuperior.getInstitucion());
+            parametrosIngresoEducacionSuperior.addValue("varAnyoFinalizacion", educacionSuperior.getAnyoFinalizacion());
+            parametrosIngresoEducacionSuperior.addValue("varAnyoInicio", educacionSuperior.getAnyoInicio());
+            parametrosIngresoEducacionSuperior.addValue("varFechaTitulo", educacionSuperior.getFechaTitulo());
+            parametrosIngresoEducacionSuperior.addValue("varGraduado", educacionSuperior.isGraduado());
+            Map resultadoIngresoEducacionSuperior = ingresarEducacionSuperior.execute(parametrosIngresoEducacionSuperior);
+            int idEducacionSuperior = (int) resultadoIngresoEducacionSuperior.get("varId");
+            Documento documento = educacionSuperior.getCertificado();
+            if (documento != null) {
+                MapSqlParameterSource parametrosIngresoCertificadoEducacionSuperior = new MapSqlParameterSource();
+                parametrosIngresoCertificadoEducacionSuperior.addValue("varIdEducacionSuperior", idEducacionSuperior);
+                parametrosIngresoCertificadoEducacionSuperior.addValue("varNombre", documento.getNombre());
+                parametrosIngresoCertificadoEducacionSuperior.addValue("varTipoContenido", documento.getTipoContenido());
+                parametrosIngresoCertificadoEducacionSuperior.addValue("varContenido", documento.getContenido());
+                ingresarCertificadoEducacionSuperior.execute(parametrosIngresoCertificadoEducacionSuperior);
+            }
+            Documento documentoHomologado = educacionSuperior.getCertificadoHomologado();
+            if (documentoHomologado != null) {
+                MapSqlParameterSource parametrosIngresoCertificadoHomologadoEducacionSuperior = new MapSqlParameterSource();
+                parametrosIngresoCertificadoHomologadoEducacionSuperior.addValue("varIdEducacionSuperior", idEducacionSuperior);
+                parametrosIngresoCertificadoHomologadoEducacionSuperior.addValue("varNombre", documentoHomologado.getNombre());
+                parametrosIngresoCertificadoHomologadoEducacionSuperior.addValue("varTipoContenido", documentoHomologado.getTipoContenido());
+                parametrosIngresoCertificadoHomologadoEducacionSuperior.addValue("varContenido", documentoHomologado.getContenido());
+                ingresarCertificadoHomologadoEducacionSuperior.execute(parametrosIngresoCertificadoHomologadoEducacionSuperior);
             }
         }
 
         MapSqlParameterSource parametrosIngresoEducacionContinua = new MapSqlParameterSource();
         parametrosIngresoEducacionContinua.addValue("varIdPersona", idPersona);
         for (EducacionContinua educacionContinua : hojaVida.getEducacionesContinuas()) {
-            if (educacionContinua.getId() == 0) {
-                parametrosIngresoEducacionContinua.addValue("varTipoCapacitacion", educacionContinua.getTipoCapacitacion());
-                parametrosIngresoEducacionContinua.addValue("varNombreCapacitacion", educacionContinua.getNombreCapacitacion());
-                parametrosIngresoEducacionContinua.addValue("varNucleoBasicoConocimiento", educacionContinua.getNucleoBasicoConocimiento());
-                parametrosIngresoEducacionContinua.addValue("varInstitucion", educacionContinua.getInstitucion());
-                parametrosIngresoEducacionContinua.addValue("varAnyo", educacionContinua.getAnyo());
-                parametrosIngresoEducacionContinua.addValue("varNumeroHoras", educacionContinua.getNumeroHoras());
-                Map resultadoIngresoEducacionContinua = ingresarEducacionContinua.execute(parametrosIngresoEducacionContinua);
-                int idEducacionContinua = (int) resultadoIngresoEducacionContinua.get("varId");
-                Documento documento = educacionContinua.getCertificado();
-                if (documento != null) {
-                    MapSqlParameterSource parametrosIngresoCertificadoEducacionContinua = new MapSqlParameterSource();
-                    parametrosIngresoCertificadoEducacionContinua.addValue("varIdEducacionContinua", idEducacionContinua);
-                    parametrosIngresoCertificadoEducacionContinua.addValue("varNombre", documento.getNombre());
-                    parametrosIngresoCertificadoEducacionContinua.addValue("varTipoContenido", documento.getTipoContenido());
-                    parametrosIngresoCertificadoEducacionContinua.addValue("varContenido", documento.getContenido());
-                    ingresarCertificadoEducacionContinua.execute(parametrosIngresoCertificadoEducacionContinua);
-                }
+            parametrosIngresoEducacionContinua.addValue("varTipoCapacitacion", educacionContinua.getTipoCapacitacion());
+            parametrosIngresoEducacionContinua.addValue("varNombreCapacitacion", educacionContinua.getNombreCapacitacion());
+            parametrosIngresoEducacionContinua.addValue("varNucleoBasicoConocimiento", educacionContinua.getNucleoBasicoConocimiento());
+            parametrosIngresoEducacionContinua.addValue("varInstitucion", educacionContinua.getInstitucion());
+            parametrosIngresoEducacionContinua.addValue("varAnyo", educacionContinua.getAnyo());
+            parametrosIngresoEducacionContinua.addValue("varNumeroHoras", educacionContinua.getNumeroHoras());
+            Map resultadoIngresoEducacionContinua = ingresarEducacionContinua.execute(parametrosIngresoEducacionContinua);
+            int idEducacionContinua = (int) resultadoIngresoEducacionContinua.get("varId");
+            Documento documento = educacionContinua.getCertificado();
+            if (documento != null) {
+                MapSqlParameterSource parametrosIngresoCertificadoEducacionContinua = new MapSqlParameterSource();
+                parametrosIngresoCertificadoEducacionContinua.addValue("varIdEducacionContinua", idEducacionContinua);
+                parametrosIngresoCertificadoEducacionContinua.addValue("varNombre", documento.getNombre());
+                parametrosIngresoCertificadoEducacionContinua.addValue("varTipoContenido", documento.getTipoContenido());
+                parametrosIngresoCertificadoEducacionContinua.addValue("varContenido", documento.getContenido());
+                ingresarCertificadoEducacionContinua.execute(parametrosIngresoCertificadoEducacionContinua);
             }
         }
 
@@ -1461,7 +1453,6 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                 parametrosActualizacionEducacionSuperior.addValue("varInstitucion", educacionSuperiorModificada.getInstitucion());
                 parametrosActualizacionEducacionSuperior.addValue("varAnyoFinalizacion", educacionSuperiorModificada.getAnyoFinalizacion());
                 parametrosActualizacionEducacionSuperior.addValue("varAnyoInicio", educacionSuperiorModificada.getAnyoInicio());
-                parametrosActualizacionEducacionSuperior.addValue("varTitulo", educacionSuperiorModificada.getTitulo());
                 parametrosActualizacionEducacionSuperior.addValue("varFechaTitulo", educacionSuperiorModificada.getFechaTitulo());
                 parametrosActualizacionEducacionSuperior.addValue("varGraduado", educacionSuperiorModificada.isGraduado());
                 actualizarEducacionSuperior.execute(parametrosActualizacionEducacionSuperior);
@@ -1501,11 +1492,9 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                 parametrosIngresoEducacionSuperior.addValue("varPaisTituloExterior", educacionSuperior.getPaisTituloExterior());
                 parametrosIngresoEducacionSuperior.addValue("varPrograma", educacionSuperior.getPrograma());
                 parametrosIngresoEducacionSuperior.addValue("varFechaTitulo", educacionSuperior.getFechaTitulo());
-                parametrosIngresoEducacionSuperior.addValue("varNucleoBasicoConocimiento", educacionSuperior.getNucleoBasicoConocimiento());
                 parametrosIngresoEducacionSuperior.addValue("varInstitucion", educacionSuperior.getInstitucion());
                 parametrosIngresoEducacionSuperior.addValue("varAnyoFinalizacion", educacionSuperior.getAnyoFinalizacion());
                 parametrosIngresoEducacionSuperior.addValue("varAnyoInicio", educacionSuperior.getAnyoInicio());
-                parametrosIngresoEducacionSuperior.addValue("varTitulo", educacionSuperior.getTitulo());
                 parametrosIngresoEducacionSuperior.addValue("varFechaTitulo", educacionSuperior.getFechaTitulo());
                 parametrosIngresoEducacionSuperior.addValue("varGraduado", educacionSuperior.isGraduado());
                 Map resultadoIngresoEducacionSuperior = ingresarEducacionSuperior.execute(parametrosIngresoEducacionSuperior);
@@ -1554,8 +1543,8 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
             } else {
                 parametrosActualizacionEducacionContinua.addValue("varId", educacionContinuaModificada.getId());
                 parametrosActualizacionEducacionContinua.addValue("varTipoCapacitacion", educacionContinuaModificada.getTipoCapacitacion());
-                parametrosActualizacionEducacionContinua.addValue("varNombreCapacitacion", educacionContinuaModificada.getNombreCapacitacion());
                 parametrosActualizacionEducacionContinua.addValue("varNucleoBasicoConocimiento", educacionContinuaModificada.getNucleoBasicoConocimiento());
+                parametrosActualizacionEducacionContinua.addValue("varNombreCapacitacion", educacionContinuaModificada.getNombreCapacitacion());
                 parametrosActualizacionEducacionContinua.addValue("varInstitucion", educacionContinuaModificada.getInstitucion());
                 parametrosActualizacionEducacionContinua.addValue("varAnyo", educacionContinuaModificada.getAnyo());
                 parametrosActualizacionEducacionContinua.addValue("varNumeroHoras", educacionContinuaModificada.getNumeroHoras());

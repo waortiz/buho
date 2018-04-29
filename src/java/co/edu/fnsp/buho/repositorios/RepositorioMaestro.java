@@ -6,6 +6,7 @@
 package co.edu.fnsp.buho.repositorios;
 
 import co.edu.fnsp.buho.entidades.Maestro;
+import co.edu.fnsp.buho.entidades.Programa;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +52,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     private SimpleJdbcCall obtenerTiposVinculacionUdeA;
     private SimpleJdbcCall obtenerSedes;
     private SimpleJdbcCall obtenerProgramasSede;
+    private SimpleJdbcCall obtenerProgramasInstitucion;
     private SimpleJdbcCall obtenerCriteriosHabilitantes;
     private SimpleJdbcCall obtenerCriteriosEvaluacion;
     private SimpleJdbcCall obtenerModalidadesCurso;
@@ -60,6 +62,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     private SimpleJdbcCall obtenerClasesPatente;
     private SimpleJdbcCall obtenerTiposProductosConocimiento;
     private SimpleJdbcCall obtenerTiposPatente;
+    private SimpleJdbcCall obtenerCapacitaciones;
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -92,6 +95,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         this.obtenerTiposVinculacionUdeA = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposVinculacionUdeA").returningResultSet("tiposVinculacionUdeA", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerSedes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerSedes").returningResultSet("sedes", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerProgramasSede = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerProgramasSede").returningResultSet("programas", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerProgramasInstitucion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerProgramasInstitucion").returningResultSet("programas", BeanPropertyRowMapper.newInstance(Programa.class));
         this.obtenerCriteriosHabilitantes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCriteriosHabilitantes").returningResultSet("criteriosHabilitantes", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerCriteriosEvaluacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCriteriosEvaluacion").returningResultSet("criteriosEvaluacion", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerNaturalezasCargo = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerNaturalezasCargo").returningResultSet("naturalezasCargo", BeanPropertyRowMapper.newInstance(Maestro.class));
@@ -101,6 +105,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         this.obtenerTiposPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposPatente").returningResultSet("tiposPatente", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerTiposProductosConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposProductosConocimiento").returningResultSet("tiposProductosConocimiento", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerClasesPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerClasesPatente").returningResultSet("clasesPatente", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerCapacitaciones = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCapacitaciones").returningResultSet("capacitaciones", BeanPropertyRowMapper.newInstance(Maestro.class));
     }
 
     @Override
@@ -389,4 +394,25 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         return coleccion;
     }
 
+    @Override
+    public List<Programa> obtenerProgramasInstitucion(Integer institucion, Integer nucleoBasicoConocimiento) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varInstitucion", institucion);
+        parametros.addValue("varNucleoBasicoConocimiento", nucleoBasicoConocimiento);
+        Map resultado = obtenerProgramasInstitucion.execute(parametros);
+        List<Programa> coleccion = (ArrayList<Programa>) resultado.get("programas");
+
+        return coleccion;
+    }
+
+    @Override
+    public List<Maestro> obtenerCapacitaciones(Integer tipoCapacitacion, Integer nucleoBasicoConocimiento) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varTipoCapacitacion", tipoCapacitacion);
+        parametros.addValue("varNucleoBasicoConocimiento", nucleoBasicoConocimiento);
+        Map resultado = obtenerCapacitaciones.execute(parametros);
+        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("capacitaciones");
+
+        return coleccion;
+    }
 }

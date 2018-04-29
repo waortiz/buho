@@ -20,6 +20,7 @@ import co.edu.fnsp.buho.entidades.TipoDocumento;
 import co.edu.fnsp.buho.entidadesVista.HojaVida;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
+import co.edu.fnsp.buho.entidades.Programa;
 import co.edu.fnsp.buho.servicios.IServicioHojaVida;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
 import co.edu.fnsp.buho.utilidades.Util;
@@ -27,6 +28,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -78,7 +80,7 @@ public class HojaVidaController {
         List<Maestro> nivelesIdioma = servicioMaestro.obtenerNivelesIdioma();
         List<Maestro> idiomas = servicioMaestro.obtenerIdiomas();
         List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
-        List<Maestro> nivelesEstudio = servicioMaestro.obtenerNivelesFormacion();
+        List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
         List<Maestro> institucionesEducativas = servicioMaestro.obtenerInstitucionesEducativas();
         List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
         List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
@@ -92,7 +94,7 @@ public class HojaVidaController {
         List<Maestro> tiposPatente = servicioMaestro.obtenerTiposPatente();
         List<Maestro> tiposProductosConocimiento = servicioMaestro.obtenerTiposProductosConocimiento();
         List<Maestro> clasesPatente = servicioMaestro.obtenerClasesPatente();
-        
+
         model.addAttribute("paises", paises);
         model.addAttribute("tiposIdentificacion", tiposIdentificacion);
         model.addAttribute("gruposEtnico", gruposEtnico);
@@ -104,7 +106,7 @@ public class HojaVidaController {
         model.addAttribute("nivelesIdioma", nivelesIdioma);
         model.addAttribute("idiomas", idiomas);
         model.addAttribute("tiposCertificacion", tiposCertificacion);
-        model.addAttribute("nivelesEstudio", nivelesEstudio);
+        model.addAttribute("nivelesFormacion", nivelesFormacion);
         model.addAttribute("institucionesEducativas", institucionesEducativas);
         model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
         model.addAttribute("tiposCapacitacion", tiposCapacitacion);
@@ -159,13 +161,13 @@ public class HojaVidaController {
 
             hojaVidaIngresar.setInvestigadorReconocidoColciencias(hojaVida.isInvestigadorReconocidoColciencias());
             hojaVidaIngresar.setUrlCVLAC(hojaVida.getUrlCVLAC());
-            if(!"".equals(hojaVida.getTipoInvestigador())) {
-               hojaVidaIngresar.setTipoInvestigador(Util.obtenerEntero(hojaVida.getTipoInvestigador()));
+            if (!"".equals(hojaVida.getTipoInvestigador())) {
+                hojaVidaIngresar.setTipoInvestigador(Util.obtenerEntero(hojaVida.getTipoInvestigador()));
             }
             hojaVidaIngresar.setCodigoORCID(hojaVida.getCodigoORCID());
             hojaVidaIngresar.setIdentificadorScopus(hojaVida.getIdentificadorScopus());
-            hojaVidaIngresar.setResearcherId(hojaVida.getResearcherId());  
-            
+            hojaVidaIngresar.setResearcherId(hojaVida.getResearcherId());
+
             Documento documento = null;
             if (hojaVida.getCopiaDocumentoIdentificacion() != null && hojaVida.getCopiaDocumentoIdentificacion().getBytes().length > 0) {
                 documento = new Documento();
@@ -264,8 +266,7 @@ public class HojaVidaController {
                 }
                 nuevaEducacionSuperior.setInstitucion(Util.obtenerEntero(educacionSuperior.getInstitucion()));
                 nuevaEducacionSuperior.setTitulo(educacionSuperior.getTitulo());
-                nuevaEducacionSuperior.setPrograma(educacionSuperior.getPrograma());
-                nuevaEducacionSuperior.setNucleoBasicoConocimiento(Util.obtenerEntero(educacionSuperior.getNucleoBasicoConocimiento()));
+                nuevaEducacionSuperior.setPrograma(Util.obtenerEntero(educacionSuperior.getPrograma()));
                 nuevaEducacionSuperior.setFechaTitulo(Util.obtenerFecha(educacionSuperior.getFechaTitulo()));
                 if (!"".equals(educacionSuperior.getAnyoFinalizacion())) {
                     nuevaEducacionSuperior.setAnyoFinalizacion(Util.obtenerEntero(educacionSuperior.getAnyoFinalizacion()));
@@ -413,7 +414,7 @@ public class HojaVidaController {
         List<Maestro> nivelesIdioma = servicioMaestro.obtenerNivelesIdioma();
         List<Maestro> idiomas = servicioMaestro.obtenerIdiomas();
         List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
-        List<Maestro> nivelesEstudio = servicioMaestro.obtenerNivelesFormacion();
+        List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
         List<Maestro> institucionesEducativas = servicioMaestro.obtenerInstitucionesEducativas();
         List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
         List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
@@ -439,7 +440,7 @@ public class HojaVidaController {
         model.addAttribute("nivelesIdioma", nivelesIdioma);
         model.addAttribute("idiomas", idiomas);
         model.addAttribute("tiposCertificacion", tiposCertificacion);
-        model.addAttribute("nivelesEstudio", nivelesEstudio);
+        model.addAttribute("nivelesFormacion", nivelesFormacion);
         model.addAttribute("institucionesEducativas", institucionesEducativas);
         model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
         model.addAttribute("tiposCapacitacion", tiposCapacitacion);
@@ -453,7 +454,7 @@ public class HojaVidaController {
         model.addAttribute("tiposPatente", tiposPatente);
         model.addAttribute("tiposProductosConocimiento", tiposProductosConocimiento);
         model.addAttribute("clasesPatente", clasesPatente);
-        
+
         co.edu.fnsp.buho.entidades.HojaVida hojaVida = servicioHojaVida.obtenerHojaVida(idPersona);
 
         if (hojaVida.getTelefonos().size() > 0) {
@@ -718,7 +719,7 @@ public class HojaVidaController {
             FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
         }
     }
-    
+
     @RequestMapping(value = "/documentoProductoConocimiento/{idProductoConocimiento}", method = RequestMethod.GET)
     public void obtenerDocumentoProductoConocimiento(@PathVariable("idProductoConocimiento") int idProductoConocimiento, HttpServletResponse response) throws IOException {
         Documento documento = servicioHojaVida.obtenerDocumentoProductoConocimiento(idProductoConocimiento);
@@ -733,11 +734,10 @@ public class HojaVidaController {
             FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
         }
     }
-    
+
     @RequestMapping(value = "/eliminar/{idPersona}", method = RequestMethod.GET)
     public @ResponseBody
-    String eliminarHojaVida(@PathVariable long idPersona, Model model
-    ) {
+    String eliminarHojaVida(@PathVariable long idPersona, Model model) {
         try {
             servicioHojaVida.eliminarHojaVida(idPersona);
         } catch (Exception exc) {
@@ -746,5 +746,33 @@ public class HojaVidaController {
         }
 
         return "{\"resultado\":true}";
+    }
+
+    @RequestMapping(value = "/programasInstitucion", method = RequestMethod.GET)
+    public @ResponseBody
+    String obtenerProgramasInstitucion(@ModelAttribute(value = "institucion") String institucion,
+            @ModelAttribute(value = "nucleoBasicoConocimiento") String nucleoBasicoConocimiento,
+            Model model) {
+
+        Integer idInstitucion = null;
+        Integer idNucleoBasicoConocimiento = null;
+        if (institucion != null && institucion.length() > 0) {
+            try {
+                idInstitucion = Util.obtenerEntero(institucion);
+            } catch (ParseException ex) {
+                java.util.logging.Logger.getLogger(HojaVidaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (nucleoBasicoConocimiento != null && nucleoBasicoConocimiento.length() > 0) {
+            try {
+                idNucleoBasicoConocimiento = Util.obtenerEntero(nucleoBasicoConocimiento);
+            } catch (ParseException ex) {
+                java.util.logging.Logger.getLogger(HojaVidaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        List<Programa> programas = servicioMaestro.obtenerProgramasInstitucion(idInstitucion, idNucleoBasicoConocimiento);
+        Gson gson = new Gson();
+
+        return gson.toJson(programas);
     }
 }

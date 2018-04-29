@@ -15,6 +15,7 @@ import co.edu.fnsp.buho.entidades.Distincion;
 import co.edu.fnsp.buho.entidades.DocumentoSoporte;
 import co.edu.fnsp.buho.entidades.EducacionBasica;
 import co.edu.fnsp.buho.entidades.EducacionContinua;
+import co.edu.fnsp.buho.entidades.EducacionContinuaConvocatoria;
 import co.edu.fnsp.buho.entidades.EducacionSuperior;
 import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
@@ -23,6 +24,7 @@ import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
 import co.edu.fnsp.buho.entidades.Patente;
 import co.edu.fnsp.buho.entidades.ProductoConocimiento;
+import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -347,7 +349,8 @@ public class Util {
                         + "nombrePaisTitulo:ko.observable('" + nombrePaisTitulo + "'),"
                         + "nucleoBasicoConocimiento:ko.observable(" + educacionSuperior.getNucleoBasicoConocimiento() + "),"
                         + "nombreNucleoBasicoConocimiento:ko.observable('" + educacionSuperior.getNombreNucleoBasicoConocimiento() + "'),"
-                        + "programa:ko.observable('" + educacionSuperior.getPrograma() + "'),"
+                        + "programa:ko.observable(" + educacionSuperior.getPrograma() + "),"
+                        + "nombrePrograma:ko.observable('" + educacionSuperior.getNombrePrograma() + "'),"
                         + "nivel:ko.observable(" + educacionSuperior.getNivel() + "),"
                         + "nombreNivel:ko.observable('" + educacionSuperior.getNombreNivel() + "'),"
                         + "titulo:ko.observable('" + educacionSuperior.getTitulo() + "'),"
@@ -632,6 +635,62 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < anyosExperiencias.size() - 1) {
+                    json = json + ",";
+                }
+            }
+
+            json = json + "]";
+        }
+
+        return json;
+    }
+
+    public static String obtenerProgramasConvocatoriaJSON(List<ProgramaConvocatoria> programas) {
+        String json = "";
+
+        if (programas.size() > 0) {
+            json = "[";
+
+            for (int i = 0; i < programas.size(); i++) {
+                ProgramaConvocatoria programa = programas.get(i);
+                json = json
+                        + "{id: ko.observable(" + programa.getId() + "),"
+                        + "nivelFormacion:ko.observable(" + programa.getNivelFormacion() + "),"
+                        + "nombreNivelFormacion:ko.observable('" + programa.getNombreNivelFormacion() + "'),"
+                        + "nucleoBasicoConocimiento:ko.observable(" + programa.getNucleoBasicoConocimiento() + "),"
+                        + "programa:ko.observable('" + programa.getPrograma() + "'),"
+                        + "nombrePrograma:ko.observable('" + programa.getNombrePrograma() + "'),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < programas.size() - 1) {
+                    json = json + ",";
+                }
+            }
+
+            json = json + "]";
+        }
+
+        return json;
+    }
+    
+    public static String obtenerEducacionesContinuasConvocatoriaJSON(List<EducacionContinuaConvocatoria> educacionesContinuas) {
+        String json = "";
+
+        if (educacionesContinuas.size() > 0) {
+            json = "[";
+
+            for (int i = 0; i < educacionesContinuas.size(); i++) {
+                EducacionContinuaConvocatoria educacionContinua = educacionesContinuas.get(i);
+                json = json
+                        + "{id: ko.observable(" + educacionContinua.getId() + "),"
+                        + "tipoCapacitacion:ko.observable(" + educacionContinua.getTipoCapacitacion() + "),"
+                        + "nombreTipoCapacitacion:ko.observable('" + educacionContinua.getNombreTipoCapacitacion() + "'),"
+                        + "nombreCapacitacion:ko.observable('" + educacionContinua.getNombreCapacitacion() + "'),"
+                        + "nucleoBasicoConocimiento:ko.observable(" + educacionContinua.getNucleoBasicoConocimiento() + "),"
+                        + "nombreNucleoBasicoConocimiento:ko.observable('" + educacionContinua.getNombreNucleoBasicoConocimiento() + "'),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < educacionesContinuas.size() - 1) {
                     json = json + ",";
                 }
             }
