@@ -29,7 +29,7 @@ public interface IServicioConvocatoria {
 
     Documento obtenerDocumentoAdenda(int idAdenda);
 
-    void postularConvocatoria(long idPersona, int idConvocatoria);
+    void postularConvocatoria(long idPersona, int idConvocatoria) throws Exception;
 
     void retirarPostulacion(long idPersona, int idConvocatoria);
 }

@@ -5,6 +5,7 @@
  */
 package co.edu.fnsp.buho.servicios;
 
+import co.edu.fnsp.buho.entidades.CampoHojaVida;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Programa;
 import java.util.List;
@@ -52,4 +53,5 @@ public interface IServicioMaestro {
     List<Maestro> obtenerTiposProductosConocimiento();
     List<Maestro> obtenerClasesPatente();
     List<Maestro> obtenerCapacitaciones(Integer tipoCapacitacion, Integer nucleoBasicoConocimiento);
+    List<CampoHojaVida> obtenerCamposHojaVida();
 }

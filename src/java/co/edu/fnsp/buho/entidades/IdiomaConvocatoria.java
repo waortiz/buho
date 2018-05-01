@@ -13,7 +13,7 @@ public class IdiomaConvocatoria {
     private int id;
     private int idioma;
     private String nombreIdioma;
-    private String tipoCertificacion;
+    private int tipoCertificacion;
     private String nombreTipoCertificacion;
     private String otraCertificacion;
     private double puntajeMinimoCertificacion;
@@ -91,14 +91,14 @@ public class IdiomaConvocatoria {
     /**
      * @return the tipoCertificacion
      */
-    public String getTipoCertificacion() {
+    public int getTipoCertificacion() {
         return tipoCertificacion;
     }
 
     /**
      * @param tipoCertificacion the tipoCertificacion to set
      */
-    public void setTipoCertificacion(String tipoCertificacion) {
+    public void setTipoCertificacion(int tipoCertificacion) {
         this.tipoCertificacion = tipoCertificacion;
     }
 

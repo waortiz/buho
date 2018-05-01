@@ -9,6 +9,7 @@ import co.edu.fnsp.buho.entidades.Convocatoria;
 import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Adenda;
+import co.edu.fnsp.buho.entidades.CampoHojaVida;
 import co.edu.fnsp.buho.entidades.DetalleUsuario;
 import co.edu.fnsp.buho.entidades.Programa;
 import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
@@ -76,7 +77,8 @@ public class ConvocatoriaController {
         List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
         List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
         List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
-
+        List<CampoHojaVida> camposHojaVida = servicioMaestro.obtenerCamposHojaVida();
+        
         model.addAttribute("tiposConvocatoria", tiposConvocatoria);
         model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
         model.addAttribute("tiposAdenda", tiposAdenda);
@@ -85,6 +87,7 @@ public class ConvocatoriaController {
         model.addAttribute("tiposCertificacion", tiposCertificacion);
         model.addAttribute("nivelesFormacion", nivelesFormacion);
         model.addAttribute("tiposCapacitacion", tiposCapacitacion);
+        model.addAttribute("camposHojaVida", camposHojaVida);
         model.addAttribute("convocatoria", new Convocatoria());
 
         return "convocatorias/crear";
@@ -135,6 +138,7 @@ public class ConvocatoriaController {
             convocatoriaIngresar.setIdiomas(convocatoria.getIdiomas());
             convocatoriaIngresar.setProgramas(convocatoria.getProgramas());
             convocatoriaIngresar.setEducacionesContinuas(convocatoria.getEducacionesContinuas());
+            convocatoriaIngresar.setCriteriosHabilitantes(convocatoria.getCriteriosHabilitantes());
             long idUsuario = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario();
             if (convocatoriaIngresar.getId() == 0) {
                 servicioConvocatoria.ingresarConvocatoria(idUsuario, convocatoriaIngresar);
@@ -162,6 +166,7 @@ public class ConvocatoriaController {
         List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
         List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
         List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
+        List<CampoHojaVida> camposHojaVida = servicioMaestro.obtenerCamposHojaVida();
 
         model.addAttribute("tiposConvocatoria", tiposConvocatoria);
         model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
@@ -172,6 +177,7 @@ public class ConvocatoriaController {
         model.addAttribute("convocatoria", convocatoria);
         model.addAttribute("nivelesFormacion", nivelesFormacion);
         model.addAttribute("tiposCapacitacion", tiposCapacitacion);
+        model.addAttribute("camposHojaVida", camposHojaVida);
 
         if (convocatoria.getAdendas().size() > 0) {
             model.addAttribute("adendasJSON", Util.obtenerAdendasJSON(convocatoria.getAdendas()));
@@ -187,6 +193,9 @@ public class ConvocatoriaController {
         }
         if (convocatoria.getEducacionesContinuas().size() > 0) {
             model.addAttribute("educacionesContinuasJSON", Util.obtenerEducacionesContinuasConvocatoriaJSON(convocatoria.getEducacionesContinuas()));
+        }
+        if (convocatoria.getCriteriosHabilitantes().size() > 0) {
+            model.addAttribute("criteriosHabilitantesJSON", Util.obtenerCriteriosHabilitantesJSON(convocatoria.getCriteriosHabilitantes()));
         }
 
         return "convocatorias/crear";

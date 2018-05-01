@@ -48,6 +48,7 @@ public class Convocatoria {
     private List<IdiomaConvocatoria> idiomas = new ArrayList<>();
     private List<ProgramaConvocatoria> programas = new ArrayList<>();
     private List<EducacionContinuaConvocatoria> educacionesContinuas = new ArrayList<>();
+    private List<CriterioHabilitanteConvocatoria> criteriosHabilitantes = new ArrayList<>();
     
     /**
      * @return the tipoConvocatoria
@@ -439,5 +440,19 @@ public class Convocatoria {
      */
     public void setEducacionesContinuas(List<EducacionContinuaConvocatoria> educacionesContinuas) {
         this.educacionesContinuas = educacionesContinuas;
+    }
+
+    /**
+     * @return the criteriosHabilitantes
+     */
+    public List<CriterioHabilitanteConvocatoria> getCriteriosHabilitantes() {
+        return criteriosHabilitantes;
+    }
+
+    /**
+     * @param criteriosHabilitantes the criteriosHabilitantes to set
+     */
+    public void setCriteriosHabilitantes(List<CriterioHabilitanteConvocatoria> criteriosHabilitantes) {
+        this.criteriosHabilitantes = criteriosHabilitantes;
     }
 }

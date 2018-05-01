@@ -5,6 +5,7 @@
  */
 package co.edu.fnsp.buho.servicios;
 
+import co.edu.fnsp.buho.entidades.CampoHojaVida;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Programa;
 import co.edu.fnsp.buho.repositorios.IRepositorioMaestro;
@@ -206,5 +207,10 @@ public class ServicioMaestro implements IServicioMaestro {
     @Override
     public List<Maestro> obtenerCapacitaciones(Integer tipoCapacitacion, Integer nucleoBasicoConocimiento) {
         return repositorioMaestro.obtenerCapacitaciones(tipoCapacitacion, nucleoBasicoConocimiento);
+    }
+
+    @Override
+    public List<CampoHojaVida> obtenerCamposHojaVida() {
+        return repositorioMaestro.obtenerCamposHojaVida();
     }
 }

@@ -5,6 +5,7 @@
  */
 package co.edu.fnsp.buho.repositorios;
 
+import co.edu.fnsp.buho.entidades.CampoHojaVida;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Programa;
 import java.util.ArrayList;
@@ -63,6 +64,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     private SimpleJdbcCall obtenerTiposProductosConocimiento;
     private SimpleJdbcCall obtenerTiposPatente;
     private SimpleJdbcCall obtenerCapacitaciones;
+    private SimpleJdbcCall obtenerCamposHojaVida;
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -106,6 +108,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         this.obtenerTiposProductosConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposProductosConocimiento").returningResultSet("tiposProductosConocimiento", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerClasesPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerClasesPatente").returningResultSet("clasesPatente", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerCapacitaciones = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCapacitaciones").returningResultSet("capacitaciones", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerCamposHojaVida = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCamposHojaVida").returningResultSet("camposHojaVida", BeanPropertyRowMapper.newInstance(CampoHojaVida.class));
     }
 
     @Override
@@ -412,6 +415,14 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         parametros.addValue("varNucleoBasicoConocimiento", nucleoBasicoConocimiento);
         Map resultado = obtenerCapacitaciones.execute(parametros);
         List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("capacitaciones");
+
+        return coleccion;
+    }
+
+    @Override
+    public List<CampoHojaVida> obtenerCamposHojaVida() {
+        Map resultado = obtenerCamposHojaVida.execute(new HashMap<>());
+        List<CampoHojaVida> coleccion = (ArrayList<CampoHojaVida>) resultado.get("camposHojaVida");
 
         return coleccion;
     }

@@ -2685,9 +2685,9 @@
     </div>
 </div>
 <script type="text/javascript">
-    var ID_UNIVERSIDAD_ANTIOQUIA = '209';
+    var ID_UNIVERSIDAD_ANTIOQUIA = 209;
     var UNIVERSIDAD_ANTIOQUIA = 'Universidad de Antioquia';
-    var TIPO_CERTIFICACION_OTRO = "8";
+    var TIPO_CERTIFICACION_OTRO = 8;
     var programas = [];
     
     $('.fecha').datepicker({

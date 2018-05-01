@@ -9,6 +9,7 @@ import co.edu.fnsp.buho.entidades.Convocatoria;
 import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.Adenda;
 import co.edu.fnsp.buho.entidades.AnyosExperiencia;
+import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
 import co.edu.fnsp.buho.entidades.EducacionContinuaConvocatoria;
 import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
 import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
@@ -74,6 +75,11 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     private SimpleJdbcCall actualizarEducacionContinuaConvocatoria;
     private SimpleJdbcCall eliminarEducacionContinuaConvocatoria;
 
+    private SimpleJdbcCall ingresarCriterioHabilitanteConvocatoria;
+    private SimpleJdbcCall eliminarCriterioHabilitanteConvocatoria;
+    private SimpleJdbcCall actualizarCriterioHabilitanteConvocatoria;
+    private SimpleJdbcCall obtenerCriteriosHabilitantesConvocatoria;
+
     @Autowired
     public void setDataSource(DataSource dataSource) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -117,6 +123,11 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         this.eliminarEducacionContinuaConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarEducacionContinuaConvocatoria");
         this.actualizarEducacionContinuaConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarEducacionContinuaConvocatoria");
         this.obtenerEducacionesContinuasConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerEducacionesContinuasConvocatoria").returningResultSet("educacionesContinuas", BeanPropertyRowMapper.newInstance(EducacionContinuaConvocatoria.class));
+
+        this.ingresarCriterioHabilitanteConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarCriterioHabilitanteConvocatoria");
+        this.eliminarCriterioHabilitanteConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarCriterioHabilitanteConvocatoria");
+        this.actualizarCriterioHabilitanteConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarCriterioHabilitanteConvocatoria");
+        this.obtenerCriteriosHabilitantesConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCriteriosHabilitantesConvocatoria").returningResultSet("criteriosHabilitantes", BeanPropertyRowMapper.newInstance(CriterioHabilitanteConvocatoria.class));
     }
 
     @Override
@@ -201,16 +212,23 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             ingresarProgramaConvocatoria.execute(parametrosIngresoPrograma);
         }
 
+        MapSqlParameterSource parametrosIngresoCriterio = new MapSqlParameterSource();
+        parametrosIngresoCriterio.addValue("varIdConvocatoria", idConvocatoria);
+        for (CriterioHabilitanteConvocatoria criterio : convocatoria.getCriteriosHabilitantes()) {
+            parametrosIngresoCriterio.addValue("varCampoHojaVida", criterio.getCampoHojaVida());
+            parametrosIngresoCriterio.addValue("varValor", criterio.getValor());
+            parametrosIngresoCriterio.addValue("varPersonaRegistra", idUsuario);
+            ingresarCriterioHabilitanteConvocatoria.execute(parametrosIngresoCriterio);
+        }
+
         MapSqlParameterSource parametrosIngresoEducacionContinua = new MapSqlParameterSource();
         parametrosIngresoEducacionContinua.addValue("varIdConvocatoria", idConvocatoria);
         for (EducacionContinuaConvocatoria educacionContinua : convocatoria.getEducacionesContinuas()) {
-            if (educacionContinua.getId() == 0) {
-                parametrosIngresoEducacionContinua.addValue("varTipoCapacitacion", educacionContinua.getTipoCapacitacion());
-                parametrosIngresoEducacionContinua.addValue("varNombreCapacitacion", educacionContinua.getNombreCapacitacion());
-                parametrosIngresoEducacionContinua.addValue("varNucleoBasicoConocimiento", educacionContinua.getNucleoBasicoConocimiento());
-                parametrosIngresoEducacionContinua.addValue("varPersonaRegistra", idUsuario);
-                ingresarEducacionContinuaConvocatoria.execute(parametrosIngresoEducacionContinua);
-            }
+            parametrosIngresoEducacionContinua.addValue("varTipoCapacitacion", educacionContinua.getTipoCapacitacion());
+            parametrosIngresoEducacionContinua.addValue("varNombreCapacitacion", educacionContinua.getNombreCapacitacion());
+            parametrosIngresoEducacionContinua.addValue("varNucleoBasicoConocimiento", educacionContinua.getNucleoBasicoConocimiento());
+            parametrosIngresoEducacionContinua.addValue("varPersonaRegistra", idUsuario);
+            ingresarEducacionContinuaConvocatoria.execute(parametrosIngresoEducacionContinua);
         }
 
         Documento documento = convocatoria.getDocumento();
@@ -284,6 +302,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         actualizarIdiomas(convocatoria.getId(), idUsuario, convocatoria.getIdiomas());
         actualizarProgramas(convocatoria.getId(), idUsuario, convocatoria.getProgramas());
         actualizarEducacionesContinuas(convocatoria.getId(), idUsuario, convocatoria.getEducacionesContinuas());
+        actualizarCriterios(convocatoria.getId(), idUsuario, convocatoria.getCriteriosHabilitantes());
     }
 
     @Override
@@ -339,6 +358,10 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         Map resultadoEducacionesContinuas = obtenerEducacionesContinuasConvocatoria.execute(parametros);
         List<EducacionContinuaConvocatoria> educacionesContinuas = (List<EducacionContinuaConvocatoria>) resultadoEducacionesContinuas.get("educacionesContinuas");
         convocatoria.setEducacionesContinuas(educacionesContinuas);
+
+        Map resultadoCriteriosHabilitantes = obtenerCriteriosHabilitantesConvocatoria.execute(parametros);
+        List<CriterioHabilitanteConvocatoria> criteriosHabilitantes = (List<CriterioHabilitanteConvocatoria>) resultadoCriteriosHabilitantes.get("criteriosHabilitantes");
+        convocatoria.setCriteriosHabilitantes(criteriosHabilitantes);
 
         return convocatoria;
     }
@@ -632,6 +655,45 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
                 parametrosIngresoEducacionContinua.addValue("varNucleoBasicoConocimiento", educacionContinua.getNucleoBasicoConocimiento());
                 parametrosIngresoEducacionContinua.addValue("varPersonaRegistra", idUsuario);
                 ingresarEducacionContinuaConvocatoria.execute(parametrosIngresoEducacionContinua);
+            }
+        }
+    }
+
+    private void actualizarCriterios(long idConvocatoria, long idUsuario, List<CriterioHabilitanteConvocatoria> criterios) {
+        MapSqlParameterSource parametrosConsultaCriterio = new MapSqlParameterSource();
+        parametrosConsultaCriterio.addValue("varIdConvocatoria", idConvocatoria);
+        Map resultadoCriterios = obtenerCriteriosHabilitantesConvocatoria.execute(parametrosConsultaCriterio);
+        ArrayList<CriterioHabilitanteConvocatoria> criteriosActuales = (ArrayList<CriterioHabilitanteConvocatoria>) resultadoCriterios.get("criteriosHabilitantes");
+
+        MapSqlParameterSource parametrosEliminacionCriterio = new MapSqlParameterSource();
+        MapSqlParameterSource parametrosActualizacionCriterio = new MapSqlParameterSource();
+        for (CriterioHabilitanteConvocatoria criterioActual : criteriosActuales) {
+            CriterioHabilitanteConvocatoria criterioModificado = null;
+            for (CriterioHabilitanteConvocatoria criterio : criterios) {
+                if (criterio.getId() == criterioActual.getId()) {
+                    criterioModificado = criterio;
+                    break;
+                }
+            }
+            if (criterioModificado == null) {
+                parametrosEliminacionCriterio.addValue("varId", criterioActual.getId());
+                eliminarCriterioHabilitanteConvocatoria.execute(parametrosEliminacionCriterio);
+            } else {
+                parametrosActualizacionCriterio.addValue("varId", criterioModificado.getId());
+                parametrosActualizacionCriterio.addValue("varValor", criterioModificado.getValor());
+                parametrosActualizacionCriterio.addValue("varCampoHojaVida", criterioModificado.getCampoHojaVida());
+                actualizarCriterioHabilitanteConvocatoria.execute(parametrosActualizacionCriterio);
+            }
+        }
+
+        MapSqlParameterSource parametrosIngresoCriterio = new MapSqlParameterSource();
+        parametrosIngresoCriterio.addValue("varIdConvocatoria", idConvocatoria);
+        for (CriterioHabilitanteConvocatoria criterio : criterios) {
+            if (criterio.getId() == 0) {
+                parametrosIngresoCriterio.addValue("varValor", criterio.getValor());
+                parametrosIngresoCriterio.addValue("varCampoHojaVida", criterio.getCampoHojaVida());
+                parametrosIngresoCriterio.addValue("varPersonaRegistra", idUsuario);
+                ingresarCriterioHabilitanteConvocatoria.execute(parametrosIngresoCriterio);
             }
         }
     }

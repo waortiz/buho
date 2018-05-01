@@ -6,6 +6,8 @@
 package co.edu.fnsp.buho.entidadesVista;
 
 import co.edu.fnsp.buho.entidades.AnyosExperiencia;
+import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
+import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
 import co.edu.fnsp.buho.entidades.EducacionContinuaConvocatoria;
 import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
 import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
@@ -45,6 +47,7 @@ public class Convocatoria {
     private List<IdiomaConvocatoria> idiomas = new ArrayList<>();
     private List<ProgramaConvocatoria> programas = new ArrayList<>();
     private List<EducacionContinuaConvocatoria> educacionesContinuas = new ArrayList<>();
+    private List<CriterioHabilitanteConvocatoria> criteriosHabilitantes = new ArrayList<>();
     
     /**
      * @return the id
@@ -338,5 +341,19 @@ public class Convocatoria {
      */
     public void setEducacionesContinuas(List<EducacionContinuaConvocatoria> educacionesContinuas) {
         this.educacionesContinuas = educacionesContinuas;
+    }
+
+    /**
+     * @return the criteriosHabilitantes
+     */
+    public List<CriterioHabilitanteConvocatoria> getCriteriosHabilitantes() {
+        return criteriosHabilitantes;
+    }
+
+    /**
+     * @param criteriosHabilitantes the criteriosHabilitantes to set
+     */
+    public void setCriterios(List<CriterioHabilitanteConvocatoria> criteriosHabilitantes) {
+        this.criteriosHabilitantes = criteriosHabilitantes;
     }
 }

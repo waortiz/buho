@@ -9,6 +9,7 @@ import co.edu.fnsp.buho.entidades.Adenda;
 import co.edu.fnsp.buho.entidades.AnyosExperiencia;
 import co.edu.fnsp.buho.entidades.Articulo;
 import co.edu.fnsp.buho.entidades.CorreoElectronico;
+import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
 import co.edu.fnsp.buho.entidades.CuentaBancaria;
 import co.edu.fnsp.buho.entidades.CursoExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.Distincion;
@@ -28,6 +29,10 @@ import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import static java.util.Calendar.DATE;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -84,6 +89,23 @@ public class Util {
 
     public static double obtenerNumeroDoble(String numero) throws ParseException {
         return Double.parseDouble(numero);
+    }
+
+    public static int getAnyos(Date fechaInicial, Date fechaFinal) {
+        Calendar a = getCalendar(fechaInicial);
+        Calendar b = getCalendar(fechaFinal);
+        int diff = b.get(YEAR) - a.get(YEAR);
+        if (a.get(MONTH) > b.get(MONTH)
+                || (a.get(MONTH) == b.get(MONTH) && a.get(DATE) > b.get(DATE))) {
+            diff--;
+        }
+        return diff;
+    }
+
+    public static Calendar getCalendar(Date date) {
+        Calendar cal = Calendar.getInstance(Locale.US);
+        cal.setTime(date);
+        return cal;
     }
 
     public static String obtenerAdendasJSON(List<Adenda> correosElectronicos) {
@@ -244,7 +266,7 @@ public class Util {
                         + "nivelLectura:ko.observable('" + idioma.getNivelLectura() + "'),"
                         + "nombreNivelLectura:ko.observable('" + idioma.getNombreNivelLectura() + "'),"
                         + "otraCertificacion:ko.observable('" + idioma.getOtraCertificacion() + "'),"
-                        + "tipoCertificacion:ko.observable('" + idioma.getTipoCertificacion() + "'),"
+                        + "tipoCertificacion:ko.observable(" + idioma.getTipoCertificacion() + "),"
                         + "nombreTipoCertificacion:ko.observable('" + idioma.getNombreTipoCertificacion() + "'),"
                         + "puntajeCertificacion:ko.observable(" + idioma.getPuntajeCertificacion() + "),"
                         + "certificado:ko.observable(''),"
@@ -275,7 +297,7 @@ public class Util {
                         + "idioma:ko.observable(" + idioma.getIdioma() + "),"
                         + "nombreIdioma:ko.observable('" + idioma.getNombreIdioma() + "'),"
                         + "otraCertificacion:ko.observable('" + idioma.getOtraCertificacion() + "'),"
-                        + "tipoCertificacion:ko.observable('" + idioma.getTipoCertificacion() + "'),"
+                        + "tipoCertificacion:ko.observable(" + idioma.getTipoCertificacion() + "),"
                         + "nombreTipoCertificacion:ko.observable('" + idioma.getNombreTipoCertificacion() + "'),"
                         + "puntajeMinimoCertificacion:ko.observable(" + idioma.getPuntajeMinimoCertificacion() + "),"
                         + "consecutivo:ko.observable(" + i + ")"
@@ -672,7 +694,7 @@ public class Util {
 
         return json;
     }
-    
+
     public static String obtenerEducacionesContinuasConvocatoriaJSON(List<EducacionContinuaConvocatoria> educacionesContinuas) {
         String json = "";
 
@@ -691,6 +713,32 @@ public class Util {
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < educacionesContinuas.size() - 1) {
+                    json = json + ",";
+                }
+            }
+
+            json = json + "]";
+        }
+
+        return json;
+    }
+
+    public static String obtenerCriteriosHabilitantesJSON(List<CriterioHabilitanteConvocatoria> criteriosHabilitantes) {
+        String json = "";
+
+        if (criteriosHabilitantes.size() > 0) {
+            json = "[";
+
+            for (int i = 0; i < criteriosHabilitantes.size(); i++) {
+                CriterioHabilitanteConvocatoria criterioHabilitante = criteriosHabilitantes.get(i);
+                json = json
+                        + "{id: ko.observable(" + criterioHabilitante.getId() + "),"
+                        + "campoHojaVida:ko.observable(" + criterioHabilitante.getCampoHojaVida() + "),"
+                        + "nombreCampoHojaVida:ko.observable('" + criterioHabilitante.getNombreCampoHojaVida() + "'),"
+                        + "valor:ko.observable('" + criterioHabilitante.getValor() + "'),"
+                        + "consecutivo:ko.observable(" + i + ")"
+                        + "}";
+                if (i < criteriosHabilitantes.size() - 1) {
                     json = json + ",";
                 }
             }

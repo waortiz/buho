@@ -331,8 +331,8 @@
                             <button  type="button" class="btn btn-success btn-sm" onclick="nuevoIdioma()"><span class="glyphicon glyphicon-plus"></span></button><br>
                             <table class="table table-hover tableestilo">
                                 <thead>
-                                    <th>Idioma</th>
-                                    <th>Opción</th>
+                                <th>Idioma</th>
+                                <th>Opción</th>
                                 </thead>
                                 <tbody data-bind="foreach: { data: idiomas }">
                                     <tr class="table-row">
@@ -424,9 +424,9 @@
                             <button  type="button" class="btn btn-success btn-sm" onclick="nuevoPrograma()"><span class="glyphicon glyphicon-plus"></span></button><br>
                             <table class="table table-hover tableestilo" id="tbform">
                                 <thead>
-                                    <th>Programa</th>
-                                    <th>Nivel de formaci&oacute;n</th>
-                                    <th>Opciones</th>
+                                <th>Programa</th>
+                                <th>Nivel de formaci&oacute;n</th>
+                                <th>Opciones</th>
                                 </thead>
                                 <tbody data-bind="foreach: { data: programas }">
                                     <tr class="table-row">
@@ -456,9 +456,9 @@
                             <br>
                             <table class="table table-hover tableestilo">
                                 <thead>
-                                    <th>Nombre de la capacitación o certificaci&oacute;n</th>
-                                    <th>Tipo</th>
-                                    <th>Opciones</th>
+                                <th>Nombre de la capacitación o certificaci&oacute;n</th>
+                                <th>Tipo</th>
+                                <th>Opciones</th>
                                 </thead>
                                 <tbody data-bind="foreach: { data: educacionesContinuas }">
                                     <tr class="table-row">
@@ -496,7 +496,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="nivelFormacion">Nivel de formaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el nivel formación">
-                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                                             <select name="nivelFormacionPrograma" id="nivelFormacionPrograma" style="width: 100%;" class="js-select-basic-single js-states form-control">
                                                 <option value=""></option>
                                                 <c:forEach var="nivelEstudio" items="${nivelesFormacion}">
@@ -522,7 +522,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group form-inline">
                                             <label for="programaCursado">Programa</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa">
-                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
                                             <select style="width: 100%;" name="programaCursado" id="programaCursado" class="js-select-basic-single js-states form-control">
                                                 <option value=""></option>
                                             </select>
@@ -562,7 +562,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="nucleoBasicoConocimientoEducacionContinua">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de títutlo obtenido">
-                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
                                             <select style="width: 100%;" name="nucleoBasicoConocimientoEducacionContinua" id="nucleoBasicoConocimientoEducacionContinua" class="js-select-basic-single js-states form-control">
                                                 <option></option>
                                                 <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
@@ -576,7 +576,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group form-inline">
                                             <label for="capacitacionEducacionContinua">Nombre de la capacitaci&oacute;n o certificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa cursado">
-                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
                                             <select style="width: 100%;" name="capacitacionEducacionContinua" id="capacitacionEducacionContinua" class="js-select-basic-single js-states form-control">
                                                 <option></option>
                                             </select>
@@ -595,7 +595,7 @@
                     <div class="col-md-7">
                         <div class="form-group">
                             <label>Agregar nuevo criterio</label>
-                            <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" data-target="#md_crithab" data-toggle="modal" ><span class="glyphicon glyphicon-plus"></span></button>
+                            <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoCriterioHabilitante()" ><span class="glyphicon glyphicon-plus"></span></button>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -605,37 +605,37 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbcrihab">
+                            <table class="table table-hover tableestilo">
                                 <thead>
-                                <th>Criterio</th>
-                                <th>Tipo</th>
                                 <th>Campo</th>
-                                <th>Opciones</th>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <center><button class="btn btn-success btn-xs" type="button" id="pasarder" ><i class="fa fa-arrow-right" aria-hidden="true"></i></button></center><br>
-                        <center><button class="btn btn-success btn-xs" type="button" id="pasarizq" ><i class="fa fa-arrow-left" aria-hidden="true"></i></button></center>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbconfig">
-                                <thead>
-                                <th>Criterio</th>
-                                <th></th>
-                                <th></th>
                                 <th>Valor</th>
                                 <th>Opciones</th>
                                 </thead>
+                                <tbody data-bind="foreach: { data: criteriosHabilitantes }">
+                                    <tr class="table-row">
+                                        <td style="width: 45%">
+                                            <span data-bind="text: nombreCampoHojaVida" ></span>
+                                        </td>
+                                        <td style="width: 45%">
+                                            <span data-bind="text: valor" ></span>
+                                        </td>
+                                        <td style='white-space: nowrap; width: 10%' align="center">
+                                            <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCriterioHabilitante"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                            <button class='btn btn-danger btn-xs' type='button' style='margin-left:10px;' data-bind="click: $root.eliminarCriterioHabilitante"><span class='glyphicon glyphicon-remove'></span></button>
+                                            <input type="hidden" data-bind="value: campoHojaVida, attr: { 'name': 'criteriosHabilitantes[' + $index() + '].campoHojaVida'  }" />
+                                            <input type="hidden" data-bind="value: valor, attr: { 'name': 'criteriosHabilitantes[' + $index() + '].valor'  }" />
+                                            <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'criteriosHabilitantes[' + $index() + '].consecutivo'  }" />
+                                            <input type="hidden" data-bind="value: id, attr: { 'name': 'criteriosHabilitantes[' + $index() + '].id'  }" />
+                                        </td>
+                                    </tr>
+                                </tbody>                                    
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" role="dialog" id="md_crithab">
+                <div class="modal fade" role="dialog" id="md_criterio_habilitante">
                     <div class="modal-dialog ">
                         <div class="modal-content">
                             <div class="modal-header mhsuccess">
@@ -643,100 +643,34 @@
                                 <h4>Criterio</h4>
                             </div>
                             <div class="modal-body">
+                                <div id="alert_criterio_habilitante"></div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Nombre de criterio</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de criterio habilitante">
+                                            <label>Campo de hoja de vida</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el campo de la hoja de vida">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                            <input type="text" name="txtcritnew" id="txtcritnew" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Tipo</label>
-                                            <select style="width: 100%;" id="tipcrit" name="tipcrit" class="js-select-basic-single js-states form-control">
+                                            <select style="width: 100%;" id="campoHojaVidaCriterioHabilitante" id="campoHojaVidaCriterioHabilitante" class="js-select-basic-single js-states form-control">
                                                 <option value=""></option>
-                                                <option value="Numerico">Num&eacute;rico</option>
-                                                <option value="Categoria">Texto o categoria</option>
+                                                <c:forEach var="campoHojaVida" items="${camposHojaVida}">
+                                                    <option value="${campoHojaVida.getId()}">${campoHojaVida.getAlias()}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label>Campo de hoja de vida</label>
-                                            <select style="width: 80%;" id="camhoja" id="camhoja" class="js-select-basic-single js-states form-control">
-                                                <option value=""></option>
-                                                <option value="sexo">Sexo</option>
-                                                <option value="Libreta">Libreta</option>
-                                                <option value="Etnico">Etnico</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button"  class="btn btn-success" id="addcrithab">Agregar</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade" role="dialog" id="md_configcampo">
-                    <div class="modal-dialog ">
-                        <div class="modal-content">
-                            <div class="modal-header mhsuccess">
-                                <button class="close btnclose" data-dismiss="modal" >&times;</button>
-                                <h4>Configuraci&oacute;n</h4>
-                            </div>
-                            <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Nombre de criterio</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de criterio habilitante">
+                                            <label>Valor</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el valor del criterio habilitante">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                            <select style="width: 100%" class="js-select-basic-single js-states" id="txtcritnew3" name="txtcritnew3">
-                                                <option value=""></option>
-                                            </select>
+                                            <input type="text" name="valorCriterioHabilitante" id="valorCriterioHabilitante" class="form-control" >
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Tipo</label>
-                                            <input type="text" name="tipcrit3" id="tipcrit3" class="form-control" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label>Campo de hoja de vida</label>
-                                            <input type="text" name="camhoja3" id="camhoja3" class="form-control" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row"  style="display: none;" id="inpvalornum">
-                                    <div class="col-md-5">
-                                        <label>Valor</label>
-                                        <input type="text" name="txtvalornum" class="form-control txtvalornum" >
-                                    </div>
-                                </div>
-                                <div class="row" style="display: none;" id="selvalcat">
-                                    <div class="col-md-5">
-                                        <label>Valor</label>
-                                        <select class="js-select-basic-single js-states form-control " id="txtvalornum"  name="txtvalornum" style="width: 100%;">
-                                            <option value=""></option>
-                                            <option value="ejemplo1">ejemplo1</option>
-                                            <option value="ejemplo2">ejemplo2</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                </div>                                
                             </div>
                             <div class="modal-footer">
-                                <button type="button"  class="btn btn-success" id="addconfiguracion">Agregar</button>
-                                <button type="button" class="btn btn-default btnclose" data-dismiss="modal" >Cerrar</button>
+                                <button type="button" class="btn btn-success" data-bind="click: adicionarCriterioHabilitante">Agregar</button>
+                                <button type="button" class="btn btn-success" onclick="cerrarVentanaCriterioHabilitante();">Cancelar</button>
                             </div>
                         </div>
                     </div>
@@ -905,7 +839,7 @@
     var programas = [];
     var programaCursado = '';
     var capacitacionEducacionContinua = '';
-    
+
     $.validate({
         validateOnBlur: false, // disable validation when input looses focus
         errorMessagePosition: 'top', // Instead of 'inline' which is default
@@ -998,15 +932,15 @@
             $('#formcurso').hide();
         }
         $('#nucleoBasicoConocimientoPrograma').change(function () {
-           obtenerProgramasCursados();
-        }); 
+            obtenerProgramasCursados();
+        });
         $('#nucleoBasicoConocimientoEducacionContinua').change(function () {
-           obtenerCapacitaciones();
-        }); 
+            obtenerCapacitaciones();
+        });
         $('#tipoCapacitacionEducacionContinua').change(function () {
-           obtenerCapacitaciones();
-        }); 
-        
+            obtenerCapacitaciones();
+        });
+
     });
     $('#tipoCertificacionIdioma').change(function () {
         var valor = $(this).val();
@@ -1039,6 +973,10 @@
         $('#formcrithab').css('display', 'none');
         $('#formcriteva').css('display', 'none');
         $('#formadendas').css('display', 'block');
+    });
+    
+    $('#anyosMinimosExperiencia').keyup(function () {
+        this.value = (this.value + '').replace(/[^0-9]/g, '');
     });
     $('#anyosExperiencia').keyup(function () {
         this.value = (this.value + '').replace(/[^0-9]/g, '');
@@ -1086,7 +1024,7 @@
                 $('#md_guardar').modal('hide');
             }});
     });
-    
+
     function obtenerProgramasCursados() {
         var nucleoBasicoConocimiento = $('#nucleoBasicoConocimientoPrograma').val();
         $.ajax({
@@ -1102,17 +1040,17 @@
                     for (var i = 0; i < programas.length; i++) {
                         $('#programaCursado').append('<option value=' + programas[i].id + '>' + programas[i].nombre + '</option>');
                     }
-                    if(programaCursado != '') {
-                       $('#programaCursado').val(programaCursado).trigger('change');
+                    if (programaCursado != '') {
+                        $('#programaCursado').val(programaCursado).trigger('change');
                     }
                 }
             }});
     }
-    
+
     function obtenerCapacitaciones() {
         var nucleoBasicoConocimiento = $('#nucleoBasicoConocimientoEducacionContinua').val();
         var tipoCapacitacion = $('#tipoCapacitacionEducacionContinua').val();
-        if(nucleoBasicoConocimiento !== "" && tipoCapacitacion !== "") {
+        if (nucleoBasicoConocimiento !== "" && tipoCapacitacion !== "") {
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/convocatorias/capacitaciones?nucleoBasicoConocimiento=" + nucleoBasicoConocimiento + "&tipoCapacitacion=" + tipoCapacitacion,
@@ -1126,14 +1064,14 @@
                         for (var i = 0; i < capacitaciones.length; i++) {
                             $('#capacitacionEducacionContinua').append('<option value=' + capacitaciones[i].nombre + '>' + capacitaciones[i].nombre + '</option>');
                         }
-                        if(capacitacionEducacionContinua != '') {
-                           $('#capacitacionEducacionContinua').val(capacitacionEducacionContinua).trigger('change');
+                        if (capacitacionEducacionContinua != '') {
+                            $('#capacitacionEducacionContinua').val(capacitacionEducacionContinua).trigger('change');
                         }
                     }
                 }});
         }
     }
-    
+
     bootstrap_alert_convocatoria = {};
     bootstrap_alert_convocatoria.warning = function (message) {
         $('#alert_placeholder_convocatoria').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
@@ -1185,14 +1123,24 @@
         $('#alert_educacion_continua').html('');
     };
     
-    var ConvocatoriaModel = function (adendas, anyosExperiencias, idiomas, programas, educacionesContinuas) {
+    bootstrap_alert_criterio_habilitante = {};
+    bootstrap_alert_criterio_habilitante.warning = function (message) {
+        $('#alert_criterio_habilitante').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_criterio_habilitante.removeWarning = function () {
+        $('#alert_criterio_habilitante').html('');
+    };
+    
+
+    var ConvocatoriaModel = function (adendas, anyosExperiencias, idiomas, programas, educacionesContinuas, criteriosHabilitantes) {
         self = this;
         self.adendas = ko.observableArray(adendas);
         self.anyosExperiencias = ko.observableArray(anyosExperiencias);
         self.idiomas = ko.observableArray(idiomas);
         self.programas = ko.observableArray(programas);
         self.educacionesContinuas = ko.observableArray(educacionesContinuas);
-        
+        self.criteriosHabilitantes = ko.observableArray(criteriosHabilitantes);
+
         self.adicionarAdenda = function () {
             var tipoAdenda = $('#tipoAdenda').val();
             var nombreTipoAdenda = $('#tipoAdenda option:selected').text();
@@ -1394,7 +1342,7 @@
             bootstrap_alert_idioma.removeWarning();
             $('#md_idioma').modal('show');
         };
-        
+
         self.adicionarPrograma = function () {
             var nivelFormacion = $('#nivelFormacionPrograma').val();
             var nombreNivelFormacion = $('#nivelFormacionPrograma option:selected').text();
@@ -1450,7 +1398,7 @@
             bootstrap_alert_programa.removeWarning();
             $('#md_programa').modal('show');
         };
-        
+
         self.adicionarEducacionContinua = function () {
             var tipoCapacitacion = $('#tipoCapacitacionEducacionContinua').val();
             var nombreTipoCapacitacion = $('#tipoCapacitacionEducacionContinua option:selected').text();
@@ -1507,6 +1455,55 @@
             $('#consecutivo').val(educacionContinua.consecutivo());
             bootstrap_alert_educacion_continua.removeWarning();
             $('#md_educacion_continua').modal('show');
+        };
+
+        self.adicionarCriterioHabilitante = function () {
+            var campoHojaVidaCriterio = $('#campoHojaVidaCriterioHabilitante').val();
+            var nombreCampoHojaVidaCriterio = $('#campoHojaVidaCriterioHabilitante option:selected').text();
+            var valorCriterio = $('#valorCriterioHabilitante').val();
+
+            if (campoHojaVidaCriterio === "") {
+                bootstrap_alert_criterio_habilitante.warning('Debe seleccionar el campo de la hoja de vida');
+                return false;
+            }
+            if (valorCriterio === "") {
+                bootstrap_alert_criterio_habilitante.warning('Debe ingresar el valor');
+                return false;
+            }
+            if ($('#consecutivo').val() === "") {
+                self.criteriosHabilitantes.push({
+                    id: ko.observable(0),
+                    consecutivo: ko.observable(self.criteriosHabilitantes().length),
+                    campoHojaVida: ko.observable(campoHojaVidaCriterio),
+                    nombreCampoHojaVida: ko.observable(nombreCampoHojaVidaCriterio),
+                    valor: ko.observable(valorCriterio)
+                });
+            } else {
+                var consecutivo = parseInt($('#consecutivo').val(), 10);
+                var indice = 0;
+                for (i = 0; i < self.criteriosHabilitantes().length; i++) {
+                    if (self.criteriosHabilitantes()[i].consecutivo() === consecutivo) {
+                        indice = i;
+                        break;
+                    }
+                }
+                self.criteriosHabilitantes()[indice].campoHojaVida(campoHojaVidaCriterio);
+                self.criteriosHabilitantes()[indice].nombreCampoHojaVida(nombreCampoHojaVidaCriterio);
+                self.criteriosHabilitantes()[indice].valor(valorCriterio);
+            }
+            $('#md_criterio_habilitante').modal('hide');
+        };
+
+        self.eliminarCriterioHabilitante = function (criterio) {
+            self.criteriosHabilitantes.remove(criterio);
+        };
+
+        self.editarCriterioHabilitante = function (criterio) {
+            $('#campoHojaVidaCriterioHabilitante').val(criterio.campoHojaVida()).trigger('change');
+            $('#valorCriterioHabilitante').val(criterio.valor()).trigger('change');
+            $('#consecutivo').val(criterio.consecutivo());
+            bootstrap_alert_criterio_habilitante.removeWarning();
+            $('#md_criterio_habilitante').modal('show');
         };
     };
 
@@ -1567,6 +1564,14 @@
         $('#md_educacion_continua').modal('show');
     }
 
+    function nuevoCriterioHabilitante() {
+        $('#campoHojaVidaCriterioHabilitante').val("").trigger('change');
+        $('#valorCriterioHabilitante').val("").trigger('change');
+        $('#consecutivo').val("");
+        bootstrap_alert_criterio_habilitante.removeWarning();
+        $('#md_criterio_habilitante').modal('show');
+    }
+
     function cerrarVentanaAndenda() {
         if ($('input:file[name="adendas[' + self.documentosSoporte().length + '].documento"]')) {
             $('input:file[name="adendas[' + self.documentosSoporte().length + '].documento"]').remove();
@@ -1589,7 +1594,11 @@
     function cerrarVentanaEducacionContinua() {
         $('#md_educacion_continua').modal('hide');
     }
-    
+
+    function cerrarVentanaCriterioHabilitante() {
+        $('#md_criterio_habilitante').modal('hide');
+    }
+
     function ocultarDocumentoAdendas() {
         for (var i = 0; i < convocatoriaModel.adendas().length; i++) {
             $('input:file[name="adendas[' + i + '].documento"]').hide();
@@ -1605,6 +1614,7 @@
     var idiomas = [];
     var programas = [];
     var educacionesContinuas = [];
+    var criteriosHabilitantes = [];
     <c:if test = "${adendasJSON != null}">
     adendas = ${adendasJSON};
     for (var i = 0; i < adendas.length; i++) {
@@ -1625,6 +1635,9 @@
     <c:if test = "${educacionesContinuasJSON != null}">
     educacionesContinuas = ${educacionesContinuasJSON};
     </c:if>
-    var convocatoriaModel = new ConvocatoriaModel(adendas, anyosExperiencias, idiomas, programas, educacionesContinuas);
+    <c:if test = "${criteriosHabilitantesJSON != null}">
+    criteriosHabilitantes = ${criteriosHabilitantesJSON};
+    </c:if>
+    var convocatoriaModel = new ConvocatoriaModel(adendas, anyosExperiencias, idiomas, programas, educacionesContinuas, criteriosHabilitantes);
     ko.applyBindings(convocatoriaModel);
 </script>

@@ -351,51 +351,34 @@ INSERT INTO `con_convocatoria` VALUES (8,1,1,'2018-01-31 00:00:00','2018-02-28 0
 UNLOCK TABLES;
 
 --
--- Table structure for table `con_criterio_evaluacion`
+-- Table structure for table `con_crit_hab_convocatoria`
 --
 
-DROP TABLE IF EXISTS `con_criterio_evaluacion`;
+DROP TABLE IF EXISTS `con_crit_hab_convocatoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `con_criterio_evaluacion` (
-  `cce_id` int(11) NOT NULL,
-  `cce_nombre` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
-  PRIMARY KEY (`cce_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+CREATE TABLE `con_crit_hab_convocatoria` (
+  `ch_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del nuevo criterio habilitante ',
+  `ch_convocatoria` int(11) NOT NULL COMMENT 'Id de la convocatoria para el criterio habilitante',
+  `ch_campohv` int(3) NOT NULL COMMENT 'Id del campo de campo ',
+  `ch_valor` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Valor del criterio habilitante ',
+  `ch_fec_registro` datetime NOT NULL COMMENT 'Fecha de registro del criterio',
+  `ch_per_registro` bigint(20) NOT NULL COMMENT 'Id de la persona que realiza el registro ',
+  PRIMARY KEY (`ch_id`),
+  KEY `FK_con_ch_criterio_cat_convocatoria_idx` (`ch_convocatoria`),
+  KEY `FK_con_ch_criterio_cat_campohv_idx` (`ch_campohv`),
+  KEY `FL_con_ch_criterio_cat_persona_reg_idx` (`ch_per_registro`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `con_criterio_evaluacion`
+-- Dumping data for table `con_crit_hab_convocatoria`
 --
 
-LOCK TABLES `con_criterio_evaluacion` WRITE;
-/*!40000 ALTER TABLE `con_criterio_evaluacion` DISABLE KEYS */;
-INSERT INTO `con_criterio_evaluacion` VALUES (1,'Hoja de vida'),(2,'Tiempo experiencia'),(3,'Prueba'),(4,'Entrevista');
-/*!40000 ALTER TABLE `con_criterio_evaluacion` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `con_criterio_habilitante`
---
-
-DROP TABLE IF EXISTS `con_criterio_habilitante`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `con_criterio_habilitante` (
-  `cch_id` int(11) NOT NULL COMMENT 'Id del criterio habilitante ',
-  `cch_nombre` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL COMMENT 'Nombre del criterio habilitante',
-  PRIMARY KEY (`cch_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `con_criterio_habilitante`
---
-
-LOCK TABLES `con_criterio_habilitante` WRITE;
-/*!40000 ALTER TABLE `con_criterio_habilitante` DISABLE KEYS */;
-INSERT INTO `con_criterio_habilitante` VALUES (1,'Tiempo experiencia especifica'),(2,'Formación de base'),(3,'Tiempo experiencia total'),(4,'Formación complementaria');
-/*!40000 ALTER TABLE `con_criterio_habilitante` ENABLE KEYS */;
+LOCK TABLES `con_crit_hab_convocatoria` WRITE;
+/*!40000 ALTER TABLE `con_crit_hab_convocatoria` DISABLE KEYS */;
+INSERT INTO `con_crit_hab_convocatoria` VALUES (1,16,9,'MEDELLIN','2018-04-30 20:35:29',1);
+/*!40000 ALTER TABLE `con_crit_hab_convocatoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -488,36 +471,6 @@ INSERT INTO `con_documento` VALUES (8,'Viajes Mundo.jpg','�\��\�\0JFIF\0\0\0
 UNLOCK TABLES;
 
 --
--- Table structure for table `con_evaluacion_persona`
---
-
-DROP TABLE IF EXISTS `con_evaluacion_persona`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `con_evaluacion_persona` (
-  `cep_id` int(11) NOT NULL AUTO_INCREMENT,
-  `cep_preseleccionado` int(11) NOT NULL,
-  `cep_subcriterio` int(11) DEFAULT NULL,
-  `cep_puntaje` double DEFAULT NULL,
-  `cep_fec_registro` datetime NOT NULL,
-  PRIMARY KEY (`cep_id`),
-  KEY `con_evaluacion_persona_con_preseleccionado_idx` (`cep_preseleccionado`),
-  KEY `con_evaluacion_persona_con_criterio_idx` (`cep_subcriterio`),
-  CONSTRAINT `con_evaluacion_persona_con_preseleccionado` FOREIGN KEY (`cep_preseleccionado`) REFERENCES `con_preseleccionado` (`cp_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `con_evaluacion_persona_con_subcriterio` FOREIGN KEY (`cep_subcriterio`) REFERENCES `con_sub_criterios` (`sub_id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `con_evaluacion_persona`
---
-
-LOCK TABLES `con_evaluacion_persona` WRITE;
-/*!40000 ALTER TABLE `con_evaluacion_persona` DISABLE KEYS */;
-/*!40000 ALTER TABLE `con_evaluacion_persona` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `con_postulacion`
 --
 
@@ -545,58 +498,6 @@ LOCK TABLES `con_postulacion` WRITE;
 /*!40000 ALTER TABLE `con_postulacion` DISABLE KEYS */;
 INSERT INTO `con_postulacion` VALUES (28,16,1,'2018-02-10 15:02:46'),(29,15,1,'2018-02-10 15:02:48'),(30,12,1,'2018-02-10 15:02:50');
 /*!40000 ALTER TABLE `con_postulacion` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `con_preseleccionado`
---
-
-DROP TABLE IF EXISTS `con_preseleccionado`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `con_preseleccionado` (
-  `cp_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id preseleccionado',
-  `cp_postulado` int(11) DEFAULT NULL,
-  `cp_preselecionado` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL COMMENT 'Se preselecciona la persona postulada SI _ No',
-  `cp_fec_presel` datetime DEFAULT NULL COMMENT 'Fecha de preselección ',
-  PRIMARY KEY (`cp_id`),
-  KEY `FK_con_preseleccionado_con_postulado_idx` (`cp_postulado`),
-  CONSTRAINT `FK_con_preseleccionado_con_postulado` FOREIGN KEY (`cp_postulado`) REFERENCES `con_postulacion` (`ptl_id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `con_preseleccionado`
---
-
-LOCK TABLES `con_preseleccionado` WRITE;
-/*!40000 ALTER TABLE `con_preseleccionado` DISABLE KEYS */;
-/*!40000 ALTER TABLE `con_preseleccionado` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `con_sub_criterios`
---
-
-DROP TABLE IF EXISTS `con_sub_criterios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `con_sub_criterios` (
-  `sub_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sub_criterio_conv` int(11) NOT NULL COMMENT 'Id del criterio',
-  `sub_peso` double NOT NULL COMMENT 'Peso dado al subcriterio con base en el criterio de la convocatoria ',
-  `sub_fec_registro` datetime NOT NULL COMMENT 'Fecha de registro del subcriterio',
-  PRIMARY KEY (`sub_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `con_sub_criterios`
---
-
-LOCK TABLES `con_sub_criterios` WRITE;
-/*!40000 ALTER TABLE `con_sub_criterios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `con_sub_criterios` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -825,116 +726,6 @@ LOCK TABLES `est_idioma_certificado` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `eval_crit_hab_convocatoria`
---
-
-DROP TABLE IF EXISTS `eval_crit_hab_convocatoria`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `eval_crit_hab_convocatoria` (
-  `chc_id` int(11) NOT NULL AUTO_INCREMENT,
-  `chc_convocatoria` int(11) DEFAULT NULL,
-  `chc_criterio_hab` int(11) DEFAULT NULL,
-  `chc_fec_registro` datetime NOT NULL COMMENT 'Fecha de registro del criterio habilitante para la convocatoria ',
-  `chc_valor` int(11) DEFAULT NULL,
-  PRIMARY KEY (`chc_id`),
-  KEY `FK_eval_con_criterio_evaluacion_convocatoria_idx` (`chc_convocatoria`),
-  KEY `FK_eval_con_crit_hab_convocatoria_criterio_idx` (`chc_criterio_hab`),
-  CONSTRAINT `FK_eval_con_crit_hab_convocatoria_convocatoria` FOREIGN KEY (`chc_convocatoria`) REFERENCES `con_convocatoria` (`con_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `FK_eval_con_crit_hab_convocatoria_criterio` FOREIGN KEY (`chc_criterio_hab`) REFERENCES `eval_criterio_habilitante` (`cch_id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `eval_crit_hab_convocatoria`
---
-
-LOCK TABLES `eval_crit_hab_convocatoria` WRITE;
-/*!40000 ALTER TABLE `eval_crit_hab_convocatoria` DISABLE KEYS */;
-/*!40000 ALTER TABLE `eval_crit_hab_convocatoria` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `eval_criterio`
---
-
-DROP TABLE IF EXISTS `eval_criterio`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `eval_criterio` (
-  `cce_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id criterios de evaluación ',
-  `cce_descripción` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `cce_fec_registro` datetime NOT NULL COMMENT 'fecha de registro del criterio de evaluación ',
-  `cce_per_registra` bigint(20) NOT NULL COMMENT 'Persona que registra el criterio de evaluación ',
-  PRIMARY KEY (`cce_id`),
-  KEY `FK_eval_criterio_pe_persona_idx` (`cce_per_registra`),
-  CONSTRAINT `FK_eval_criterio_pe_persona` FOREIGN KEY (`cce_per_registra`) REFERENCES `pe_persona` (`pe_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `eval_criterio`
---
-
-LOCK TABLES `eval_criterio` WRITE;
-/*!40000 ALTER TABLE `eval_criterio` DISABLE KEYS */;
-/*!40000 ALTER TABLE `eval_criterio` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `eval_criterio_habilitante`
---
-
-DROP TABLE IF EXISTS `eval_criterio_habilitante`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `eval_criterio_habilitante` (
-  `cch_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del criterio habilitante ',
-  `cch_nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre del criterio habilitante',
-  PRIMARY KEY (`cch_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `eval_criterio_habilitante`
---
-
-LOCK TABLES `eval_criterio_habilitante` WRITE;
-/*!40000 ALTER TABLE `eval_criterio_habilitante` DISABLE KEYS */;
-/*!40000 ALTER TABLE `eval_criterio_habilitante` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `eval_subcriterio`
---
-
-DROP TABLE IF EXISTS `eval_subcriterio`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `eval_subcriterio` (
-  `sce_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id criterios de evaluación ',
-  `sce_criterio` int(11) NOT NULL COMMENT 'Criterio de evaluación ',
-  `sce_descripcion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL COMMENT 'Descripción de subcriterio de evaluación ',
-  `sce_fec_registro` datetime NOT NULL COMMENT 'fecha de registro del subcriterio de evaluación ',
-  `sce_per_registra` bigint(20) NOT NULL COMMENT 'Persona que subregistra el criterio de evaluación ',
-  PRIMARY KEY (`sce_id`),
-  KEY `FK_ma_subcriterio_eval_con_criterio_idx` (`sce_criterio`),
-  KEY `FK_eval_subcriterio_pe_persona_idx` (`sce_per_registra`),
-  CONSTRAINT `FK_eval_subcriterio_eval_criterio` FOREIGN KEY (`sce_criterio`) REFERENCES `eval_criterio` (`cce_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `FK_eval_subcriterio_pe_persona` FOREIGN KEY (`sce_per_registra`) REFERENCES `pe_persona` (`pe_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `eval_subcriterio`
---
-
-LOCK TABLES `eval_subcriterio` WRITE;
-/*!40000 ALTER TABLE `eval_subcriterio` DISABLE KEYS */;
-/*!40000 ALTER TABLE `eval_subcriterio` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `ma_actividad_economica`
 --
 
@@ -1010,6 +801,31 @@ CREATE TABLE `ma_asignatura` (
 LOCK TABLES `ma_asignatura` WRITE;
 /*!40000 ALTER TABLE `ma_asignatura` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ma_asignatura` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ma_campos_hv`
+--
+
+DROP TABLE IF EXISTS `ma_campos_hv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ma_campos_hv` (
+  `chv_id` int(11) NOT NULL COMMENT 'Id de campo de de hoja de vida ',
+  `chv_nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre del campo de la hoja de vida ',
+  `chv_alias` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`chv_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ma_campos_hv`
+--
+
+LOCK TABLES `ma_campos_hv` WRITE;
+/*!40000 ALTER TABLE `ma_campos_hv` DISABLE KEYS */;
+INSERT INTO `ma_campos_hv` VALUES (1,'pe_tipo_id','Tipo de Identificación'),(2,'pe_lugar_expedicion','Lugar Expedición'),(3,'pe_fecha_expedicion','Fecha de Expedición'),(4,'pe_libreta_militar','Libreta Militar'),(6,'pe_nombres','Nombres'),(7,'pe_apellidos','Apellidos'),(8,'pe_fecha_nacimiento','Fecha Nacimiento'),(9,'pe_lugar_nacimiento','Lugar Nacimiento'),(10,'pe_nacionalidad','Nacionalidad'),(11,'pe_sexo','Sexo'),(12,'pe_ciudad_residencia','Ciudad Residencia'),(13,'pe_direccion','Direccion'),(14,'pe_egresado_udea','Egresado U de A'),(15,'pe_grupo_etnico','Grupo Étnico'),(16,'pe_discapacidad','Discapacidad'),(17,'pe_dispone_rut','Dispone RUT'),(18,'pe_actividad_economica','Actividad Económica'),(19,'pe_disponibilidad_viajar','Disponibilidad Viajar'),(20,'pe_tipo_vinculacion','Tipo Vinculación'),(21,'pe_empleado_udea','Empleado U de A');
+/*!40000 ALTER TABLE `ma_campos_hv` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -3367,35 +3183,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `actualizarCriterioEvaluacionConvocatoria` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizarCriterioEvaluacionConvocatoria`(
-varIdConvocatoria int,
-varIdCriterioEvaluacion int, 
-varPeso double
-)
-BEGIN
-
-	UPDATE con_crit_eval_convocatoria
-	SET	cce_peso = varPeso
-	WHERE cce_convocatoria = varIdConvocatoria
-     AND cce_criterio = varIdCriterioEvaluacion;
-
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `actualizarCriterioHabilitanteConvocatoria` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -3407,16 +3194,15 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizarCriterioHabilitanteConvocatoria`(
-varIdConvocatoria int,
-varIdCriterioHabilitante int,
-varValor int
+varId int,
+varValor varchar(100)
 )
 BEGIN
 
 	UPDATE `con_crit_hab_convocatoria`
-    SET chc_valor = varValor
-	WHERE `chc_convocatoria` = varIdConvocatoria
-     AND chc_criterio = varIdCriterioHabilitante;
+	SET
+	`ch_valor` = varValor
+	WHERE `ch_id` = varId;
 
 
 END ;;
@@ -4554,6 +4340,9 @@ WHERE pr_convocatoria = varIdConvocatoria;
 DELETE FROM `conv_ch_edu_noformal`
 WHERE `chc_convocatoria` = varIdConvocatoria;
 
+DELETE FROM con_crit_hab_convocatoria
+WHERE `ch_convocatoria` = varIdConvocatoria;
+
 DELETE FROM `con_convocatoria`
 WHERE `con_id` = varIdConvocatoria;
 
@@ -4588,33 +4377,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `eliminarCriterioEvaluacionConvocatoria` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarCriterioEvaluacionConvocatoria`(
-varIdConvocatoria int,
-varIdCriterioEvaluacion int
-)
-BEGIN
-
-DELETE FROM con_crit_eval_convocatoria
-WHERE cce_convocatoria = varIdConvocatoria
-and cce_criterio = varIdCriterioEvaluacion;
-
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `eliminarCriterioHabilitanteConvocatoria` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -4626,14 +4388,12 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarCriterioHabilitanteConvocatoria`(
-varIdConvocatoria int,
-varIdCriterioHabilitante int
+varId int
 )
 BEGIN
 
-DELETE FROM con_crit_hab_convocatoria
-WHERE chc_convocatoria = varIdConvocatoria
-and chc_criterio = varIdCriterioHabilitante;
+	DELETE FROM `con_crit_hab_convocatoria`
+	WHERE `ch_id` = varId;
 
 
 END ;;
@@ -5769,75 +5529,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `ingresarCriterioEvaluacionConvocatoria` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ingresarCriterioEvaluacionConvocatoria`(
-varIdConvocatoria int,
-varIdCriterioEvaluacion int, 
-varPeso double
-)
-BEGIN
-
-	INSERT INTO `con_crit_eval_convocatoria`
-	(`cce_convocatoria`,
-	`cce_criterio`,
-	`cce_peso`,
-	`cce_fecha_registro`)
-	VALUES
-	(varIdConvocatoria,
-	varIdCriterioEvaluacion,
-	varPeso,
-	now());
-
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `ingresarCriterioHabilitante` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ingresarCriterioHabilitante`(
-varNombre varchar(45),
-out varidcriteriohabilitante int
-)
-BEGIN
-        
-	select MAX(cch_id) + 1 
-    into varidcriteriohabilitante
-    FROM con_criterio_habilitante;
-    
-	INSERT INTO `con_criterio_habilitante`
-	(`cch_id`,
-	`cch_nombre`)
-	VALUES
-	(varidcriteriohabilitante,
-	varNombre);
-
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `ingresarCriterioHabilitanteConvocatoria` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -5850,21 +5541,26 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ingresarCriterioHabilitanteConvocatoria`(
 varIdConvocatoria int,
-varIdCriterioHabilitante int,
-varValor int
+varCampoHojaVida int,
+varValor varchar(100),
+varPersonaRegistra bigint
 )
 BEGIN
 
-	INSERT INTO `con_crit_hab_convocatoria`
-	(`chc_convocatoria`,
-	`chc_criterio`,
-     chc_valor,
-	`chc_fec_registro`)
-	VALUES
-	(varIdConvocatoria,
-	varIdCriterioHabilitante,
-    varValor,
-	now());
+INSERT INTO `con_crit_hab_convocatoria`
+(
+`ch_convocatoria`,
+`ch_campohv`,
+`ch_valor`,
+`ch_fec_registro`,
+`ch_per_registro`)
+VALUES
+(
+varIdConvocatoria,
+varCampoHojaVida,
+varValor,
+now(),
+varPersonaRegistra);
 
 
 END ;;
@@ -6982,6 +6678,30 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `obtenerCamposHojaVida` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerCamposHojaVida`()
+BEGIN
+SELECT chv_id id,
+    chv_nombre nombre,
+    chv_alias alias
+FROM ma_campos_hv
+order by chv_nombre;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `obtenerCapacitaciones` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -7493,88 +7213,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `obtenerCriteriosEvaluacion` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerCriteriosEvaluacion`(
-
-)
-BEGIN
-
-	SELECT ce.cce_id id,
-    ce.cce_nombre nombre
-    FROM con_criterio_evaluacion ce
-    order by ce.cce_nombre; 
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `obtenerCriteriosEvaluacionConvocatoria` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerCriteriosEvaluacionConvocatoria`(
-varIdConvocatoria int
-)
-BEGIN
-
-	SELECT cec.cec_subcriterio id,
-    es.sce_descripcion nombre,
-    cec.cec_peso peso
-    FROM con_crit_eval_convocatoria cec
-    inner join eval_subcriterio es on es.sce_id = cec.cec_subcriterio
-    WHERE cec.cec_convocatoria = varIdConvocatoria
-    order by es.sce_descripcion; 
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `obtenerCriteriosHabilitantes` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerCriteriosHabilitantes`(
-
-)
-BEGIN
-
-	SELECT ch.cch_id id,
-    ch.cch_nombre nombre
-    FROM con_criterio_habilitante ch
-    order by ch.cch_nombre; 
-
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `obtenerCriteriosHabilitantesConvocatoria` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -7590,13 +7228,14 @@ varIdConvocatoria int
 )
 BEGIN
 
-	SELECT ch.cch_id id,
-    ch.cch_nombre nombre,
-    chc.chc_valor valor
-    FROM con_crit_hab_convocatoria chc
-    inner join con_criterio_habilitante ch on chc.chc_criterio = ch.cch_id
-    WHERE chc.chc_convocatoria = varIdConvocatoria
-    order by ch.cch_nombre; 
+SELECT `ch_id` id,
+       `ch_campohv` campoHojaVida,
+       chv_alias nombreCampoHojaVida,
+       `ch_valor` valor
+FROM `con_crit_hab_convocatoria`
+  inner join ma_campos_hv on chv_id = ch_campohv
+where `ch_convocatoria` = varIdConvocatoria
+order by chv_alias;
 
 
 END ;;
@@ -9543,4 +9182,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-29 12:40:39
+-- Dump completed on 2018-04-30 22:26:21
