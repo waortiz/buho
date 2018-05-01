@@ -33,7 +33,6 @@
                             <td>${hojaVida.getFechaNacimientoFormateada()}</td>
                             <td>${hojaVida.getTelefono()}</td>
                             <td style='white-space: nowrap'>
-                                <button type="button" class="btn btn-success btn-sm" style="margin-right: 10px;" onclick="mostrarHojaVida(${hojaVida.getIdPersona()})">Ver</button>
                                 <button type="button" class="btn btn-success btn-sm"  onclick="window.location.href = '${pageContext.request.contextPath}/hojasVida/editar/${hojaVida.getIdPersona()}'" style="margin-right: 5px;" >
                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                 </button>

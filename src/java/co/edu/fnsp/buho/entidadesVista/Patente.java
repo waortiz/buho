@@ -14,10 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class Patente {
     private int id;
     private String nombreTipo;
-    private String tipo;
+    private int tipo;
     private String fecha;
     private boolean propiedadCompartida;
-    private String clase;
+    private int clase;
     private String descripcion;
     private MultipartFile documento;
 
@@ -52,14 +52,14 @@ public class Patente {
     /**
      * @return the tipo
      */
-    public String getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
     /**
      * @param tipo the tipo to set
      */
-    public void setTipo(String tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 
@@ -94,14 +94,14 @@ public class Patente {
     /**
      * @return the clase
      */
-    public String getClase() {
+    public int getClase() {
         return clase;
     }
 
     /**
      * @param clase the clase to set
      */
-    public void setClase(String clase) {
+    public void setClase(int clase) {
         this.clase = clase;
     }
 

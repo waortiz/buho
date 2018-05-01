@@ -7,6 +7,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
 
+<br />
 <div class="container">
     <div class="panel panel-success">
         <div class="panel-heading">Cambiar Clave</div>
@@ -48,7 +49,7 @@
 
     $('#cambioClave').submit(function (evt) {
         evt.preventDefault();
-        if ($('#claveNueva').val() != $('#claveRepetida').val()) {
+        if ($('#claveNueva').val() !== $('#claveRepetida').val()) {
             bootstrap_alert_usuario.warning("Las claves no coinciden");
             return false;
         }
@@ -63,7 +64,7 @@
                 xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
             },
             success: function (response) {
-                if (response != "") {
+                if (response !== "") {
                     bootstrap_alert_usuario.warning(response);
                 } else {
                     bootstrap_alert_usuario.success("Clave cambiada exitosamente");

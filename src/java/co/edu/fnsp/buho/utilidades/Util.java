@@ -589,10 +589,16 @@ public class Util {
 
             for (int i = 0; i < patentes.size(); i++) {
                 Patente patente = patentes.get(i);
+                String nombrePropiedadCompartida = "No";
+                if (patente.isPropiedadCompartida()) {
+                    nombrePropiedadCompartida = "Si";
+                }
                 json = json
                         + "{id: ko.observable(" + patente.getId() + "),"
                         + "descripcion:ko.observable('" + patente.getDescripcion() + "'),"
                         + "nombreTipo:ko.observable('" + patente.getNombreTipo() + "'),"
+                        + "propiedadCompartida:ko.observable(" + patente.isPropiedadCompartida() + "),"
+                        + "nombrePropiedadCompartida:ko.observable('" + nombrePropiedadCompartida + "'),"
                         + "tipo:ko.observable(" + patente.getTipo() + "),"
                         + "clase:ko.observable(" + patente.getClase() + "),"
                         + "fecha:ko.observable('" + Util.obtenerFechaFormateada(patente.getFecha()) + "'),"

@@ -187,6 +187,10 @@
                                     <a class="btn btn-primary btn-sm notActive" data-toggle="sexo" data-title="1">M</a>
                                     <a class="btn btn-primary btn-sm active" data-toggle="sexo" data-title="2">F</a>
                                 </c:if>
+                                <c:if test = "${hojaVida.getSexo() != 1 && hojaVida.getSexo() != 2}">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="sexo" data-title="1">M</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="sexo" data-title="2">F</a>
+                                </c:if>
                             </div>
                             <form:hidden path="sexo" />
                         </div>
@@ -993,7 +997,7 @@
                                         <div class="col-md-5">
                                             <label for="tituloEducacionBasica">T&iacute;tulo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del t&iacute;tulo">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <input type="text" name="tituloEducacionBasica" id="tituloEducacionBasica" class="form-control" readonly>
+                                                <input type="text" name="tituloEducacionBasica" id="tituloEducacionBasica" class="form-control">
                                         </div>
                                         <div class="col-md-2">
                                             <label for="graduadoEducacionBasica">Graduado?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar que si estan graduado?">
@@ -2291,7 +2295,7 @@
                                         <span data-bind="text: nombreTipo" ></span>
                                     </td>
                                     <td style="width: 20%">
-                                        <span data-bind="text: propiedadCompartida" ></span>
+                                        <span data-bind="text: nombrePropiedadCompartida" ></span>
                                     </td>
                                     <td style="width: 10%" align="center">
                                         <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoPatente, visible: tieneDocumento" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
@@ -2301,7 +2305,6 @@
                                         <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarPatente"><span class='glyphicon glyphicon-remove'></span></button>
                                         <input type="hidden" data-bind="value: fecha, attr: { 'name': 'patentes[' + $index() + '].fecha'  }" />
                                         <input type="hidden" data-bind="value: tipo, attr: { 'name': 'patentes[' + $index() + '].tipo'  }" />
-                                        <input type="hidden" data-bind="value: nombreTipo, attr: { 'name': 'patentes[' + $index() + '].nombreTipo'  }" />
                                         <input type="hidden" data-bind="value: propiedadCompartida, attr: { 'name': 'patentes[' + $index() + '].propiedadCompartida'  }" />
                                         <input type="hidden" data-bind="value: clase, attr: { 'name': 'patentes[' + $index() + '].clase'  }" />
                                         <input type="hidden" data-bind="value: descripcion, attr: { 'name': 'patentes[' + $index() + '].descripcion'  }" />
@@ -2427,7 +2430,6 @@
                                              <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarProductoConocimiento"><i class='fa fa-pencil' aria-hidden='true'></i></button>
                                              <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarProductoConocimiento"><span class='glyphicon glyphicon-remove'></span></button>
                                              <input type="hidden" data-bind="value: tipo, attr: { 'name': 'productosConocimiento[' + $index() + '].tipo'  }" />
-                                             <input type="hidden" data-bind="value: nombreTipo, attr: { 'name': 'productosConocimiento[' + $index() + '].nombreTipo'  }" />
                                              <input type="hidden" data-bind="value: nucleoBasicoConocimiento, attr: { 'name': 'productosConocimiento[' + $index() + '].nucleoBasicoConocimiento'  }" />
                                              <input type="hidden" data-bind="value: url, attr: { 'name': 'productosConocimiento[' + $index() + '].url'  }" />
                                              <input type="hidden" data-bind="value: descripcion, attr: { 'name': 'productosConocimiento[' + $index() + '].descripcion'  }" />
@@ -2793,10 +2795,10 @@
             }
         });     
         $('#btnGraduadoSiEducacionBasica').click(function(){
-          $('#anyoInicioEducacionBasica').prop('disabled',false);
+          $('#anyoFinalizacionEducacionBasica').prop('disabled', false);
         });
         $('#btnGraduadoNoEducacionBasica').click(function(){
-          $('#anyoFinalizacionEducacionBasica').prop('disabled','disabled');
+          $('#anyoFinalizacionEducacionBasica').prop('disabled', 'disabled');
           $('#anyoFinalizacionEducacionBasica').val("");
         });
         $('#btnTituloExtranjeroSiEducacionSuperior').click(function(){
@@ -2804,14 +2806,15 @@
           $('#certhomo').css('display','block');
         });
         $('#btnTituloExtranjeroNoEducacionSuperior').click(function(){
-          $('#paistit').css("display","none");
-          $('#certhomo').css('display','none');
+          $('#paistit').css("display", "none");
+          $('#certhomo').css('display', 'none');
         });  
         $('#btnGraduadoSiEducacionSuperior').click(function () {
           $('#anyoFinalizacionEducacionSuperior').prop('disabled', false);
         });
         $('#btnGraduadoNoEducacionSuperior').click(function () {
           $('#anyoFinalizacionEducacionSuperior').prop('disabled', 'disabled');
+          $('#anyoFinalizacionEducacionSuperior').val("");
         });
         $('#addprograma').click(function(){
           var institucion = $('#institucionEducativaPrograma').val();
@@ -3347,7 +3350,7 @@
             $('#md_documento_soporte').modal('show');
         };
 
-        self.verDocumentoDocumentoSoporte = function (documentoSoporte) {
+        self.verDocumentoSoporte = function (documentoSoporte) {
             window.location.href = "${pageContext.request.contextPath}/hojasVida/documentoSoporte/" + documentoSoporte.id();
         };
 
@@ -4523,6 +4526,10 @@
                 bootstrap_alert_patente.warning('Debe ingresar la descripción de la patente');
                 return false;
             }
+            var nombrePropiedadCompartidaPatente = "No";
+            if(propiedadCompartidaPatente) {
+               nombrePropiedadCompartidaPatente = "Si";  
+            }
             if ($('#consecutivo').val() === "") {
                 if ($('input:file[name="patentes[' + self.patentes().length + '].documento"]').val() === "") {
                     bootstrap_alert_patente.warning('Debe ingresar el documento');
@@ -4535,6 +4542,7 @@
                     nombreTipo: ko.observable(nombreTipoPatente),
                     tipo: ko.observable(tipoPatente),
                     propiedadCompartida: ko.observable(propiedadCompartidaPatente),
+                    nombrePropiedadCompartida: ko.observable(nombrePropiedadCompartidaPatente),
                     clase: ko.observable(clasePatente),
                     descripcion: ko.observable(descripcionPatente),
                     documento: ko.observable(''),
@@ -4554,6 +4562,7 @@
                 self.patentes()[indice].nombreTipo(nombreTipoPatente);
                 self.patentes()[indice].tipo(tipoPatente);
                 self.patentes()[indice].propiedadCompartida(propiedadCompartidaPatente);
+                self.patentes()[indice].nombrePropiedadCompartida(nombrePropiedadCompartidaPatente);
                 self.patentes()[indice].clase(clasePatente);
                 self.patentes()[indice].descripcion(descripcionPatente);
                 self.patentes()[indice].documento('');
@@ -4626,8 +4635,8 @@
                 self.productosConocimiento.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.productosConocimiento().length),
-                    nombreTipo: ko.observable(nombreTipoPatente),
-                    tipo: ko.observable(tipoPatente),
+                    nombreTipo: ko.observable(nombreTipoProductoConocimiento),
+                    tipo: ko.observable(tipoProductoConocimiento),
                     nucleoBasicoConocimiento: ko.observable(nucleoBasicoProductoConocimiento),
                     url: ko.observable(urlProductoConocimiento),
                     descripcion: ko.observable(descripcionProductoConocimiento),
@@ -4656,7 +4665,7 @@
         };
 
         self.eliminarProductoConocimiento = function (productoConocimiento) {
-            $('input:file[name="productosConocimiento[' + productosConocimiento.consecutivo() + '].documento"]').remove();
+            $('input:file[name="productosConocimiento[' + productoConocimiento.consecutivo() + '].documento"]').remove();
             self.productosConocimiento.remove(productoConocimiento);
             for(i = productosConocimiento.consecutivo(); i < hojaVidaModel.productosConocimiento().length; i++) {
                $('input:file[name="productosConocimiento[' + (i + 1) + '].documento"]').attr('name', 'productosConocimiento[' + i + '].documento'); 
@@ -4859,6 +4868,37 @@
         $('#md_distincion').modal('show');
     } 
 
+    function nuevaExperienciaLaboral() {
+        $('#tipoExperienciaLaboral').val("").trigger('change');
+        $('#trabajoActualExperienciaLaboral').val("false");
+        $('#btnTrabajoActualExperienciaLaboralSi').removeClass('active').addClass('notActive');  
+        $('#btnTrabajoActualExperienciaLaboralNo').removeClass('active').addClass('notActive');  
+        $('#experienciaLaboralFNSP').val("false");
+        $('#btnExperienciaLaboralFNSPSi').removeClass('active').addClass('notActive');  
+        $('#btnExperienciaLaboralFNSPNo').removeClass('active').addClass('notActive');
+        $('#fechaIngresoExperienciaLaboral').val("");
+        $('#fechaRetiroExperienciaLaboral').val("");
+        $('#areaSaberExperienciaLaboral').val("").trigger('change');
+        $('#tipoEmpresaExperienciaLaboral').val("").trigger('change');
+        $('#nombreEmpresaExperienciaLaboral').val("");
+        $('#nombreEmpresaExperienciaLaboral').prop('disabled', false);
+        $('#actividadEconomicaExperienciaLaboral').val("").trigger('change');
+        $('#tipoContratoExperienciaLaboral').val("").trigger('change');
+        $('#cargoExperienciaLaboral').val("");
+        $('#naturalezaCargoExperienciaLaboral').val("").trigger('change');
+        $('#consecutivo').val("");
+        ocultarCertificadosExperienciaLaboral();
+        var fileInput = $('input:file[name="experienciasLaborales[' + hojaVidaModel.experienciasLaborales().length + '].certificado"]');
+        if (!fileInput.attr('id')) {
+            fileInput = $('<input type="file" class="form-control" name="experienciasLaborales[' + (self.experienciasLaborales().length) + '].certificado" />');
+            $('#certificadosExperienciasLaborales').append(fileInput);
+        } else {
+            fileInput.show();
+        }
+        bootstrap_alert_experiencia_laboral.removeWarning();
+        $('#md_experiencia_laboral').modal('show');
+    } 
+
     function nuevaExperienciaDocencia() {
         $('#trabajoActualDocencia').val("false");
         $('#btnTrabajoActualExperienciaDocenciaSi').removeClass('active').addClass('notActive');
@@ -4914,7 +4954,7 @@
         $('#propiedadCompartidaPatente').val("false");
         $('#clasePatente').val("").trigger('change');
         $('#descripcionPatente').val("");            
-        $('#btnPropiedadCompartidaPatenteSi').removeClass('notActive').addClass('noActive');  
+        $('#btnPropiedadCompartidaPatenteSi').removeClass('active').addClass('notActive');  
         $('#btnPropiedadCompartidaPatenteNo').removeClass('active').addClass('notActive');
         $('#consecutivo').val("");
         
@@ -5146,8 +5186,8 @@
     }    
 
     function ocultarDocumentosProductosConocimiento() {
-        for (var i = 0; i < hojaVidaModel.patentes().length; i++) {
-            $('input:file[name="documentosProductosConocimiento[' + i + '].documento"]').hide();
+        for (var i = 0; i < hojaVidaModel.productosConocimiento().length; i++) {
+            $('input:file[name="productosConocimiento[' + i + '].documento"]').hide();
         }
         var fileInput = $('input:file[name="productosConocimiento[' + hojaVidaModel.productosConocimiento().length + '].documento"]');
         if (fileInput.attr('id')) {

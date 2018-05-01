@@ -146,6 +146,7 @@ public class RepositorioSeguridad implements IRepositorioSeguridad {
     @Override
     public void crearUsuario(Usuario usuario) {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdPersona", usuario.getIdPersona());
         parametros.addValue("varNombreUsuario", usuario.getNombreUsuario());
         parametros.addValue("varClave", usuario.getClave());
         parametros.addValue("varNombres", usuario.getNombres());

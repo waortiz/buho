@@ -108,7 +108,6 @@
                             </a>
                             <ul>
                                 <li><a href='${pageContext.request.contextPath}/login/cambiarClave'>Cambiar contraseña</a></li>
-                                <li><a href='${pageContext.request.contextPath}/usuarios/editar'>Actualizaci&oacute;n de datos</a></li>
                                 <li class="divider"></li>
                                 <li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
                                 </li>                                

@@ -20,6 +20,8 @@ import co.edu.fnsp.buho.entidades.TipoDocumento;
 import co.edu.fnsp.buho.entidadesVista.HojaVida;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
+import co.edu.fnsp.buho.entidades.Patente;
+import co.edu.fnsp.buho.entidades.ProductoConocimiento;
 import co.edu.fnsp.buho.entidades.Programa;
 import co.edu.fnsp.buho.servicios.IServicioHojaVida;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
@@ -376,6 +378,41 @@ public class HojaVidaController {
                 hojaVidaIngresar.getArticulos().add(articulo);
             }
 
+            for (co.edu.fnsp.buho.entidadesVista.Patente patente : hojaVida.getPatentes()) {
+                Patente nuevaPatente = new Patente();
+                nuevaPatente.setId(patente.getId());
+                nuevaPatente.setDescripcion(patente.getDescripcion());
+                nuevaPatente.setClase(patente.getClase());
+                nuevaPatente.setTipo(patente.getTipo());
+                nuevaPatente.setFecha(Util.obtenerFecha(patente.getFecha()));
+                nuevaPatente.setPropiedadCompartida(patente.isPropiedadCompartida());
+                if (patente.getDocumento()!= null && patente.getDocumento().getBytes().length > 0) {
+                    documento = new Documento();
+                    documento.setContenido(patente.getDocumento().getBytes());
+                    documento.setNombre(patente.getDocumento().getOriginalFilename());
+                    documento.setTipoContenido(patente.getDocumento().getContentType());
+                    nuevaPatente.setDocumento(documento);
+                }
+                hojaVidaIngresar.getPatentes().add(nuevaPatente);
+            }
+
+            for (co.edu.fnsp.buho.entidadesVista.ProductoConocimiento productoConocimiento : hojaVida.getProductosConocimiento()) {
+                ProductoConocimiento nuevoProductoConocimiento = new ProductoConocimiento();
+                nuevoProductoConocimiento.setId(productoConocimiento.getId());
+                nuevoProductoConocimiento.setDescripcion(productoConocimiento.getDescripcion());
+                nuevoProductoConocimiento.setNucleoBasicoConocimiento(productoConocimiento.getNucleoBasicoConocimiento());
+                nuevoProductoConocimiento.setTipo(productoConocimiento.getTipo());
+                nuevoProductoConocimiento.setUrl(productoConocimiento.getUrl());
+                if (productoConocimiento.getDocumento()!= null && productoConocimiento.getDocumento().getBytes().length > 0) {
+                    documento = new Documento();
+                    documento.setContenido(productoConocimiento.getDocumento().getBytes());
+                    documento.setNombre(productoConocimiento.getDocumento().getOriginalFilename());
+                    documento.setTipoContenido(productoConocimiento.getDocumento().getContentType());
+                    nuevoProductoConocimiento.setDocumento(documento);
+                }
+                hojaVidaIngresar.getProductosConocimiento().add(nuevoProductoConocimiento);
+            }
+            
             long idUsuario = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario();
             if (hojaVidaIngresar.getIdPersona() == 0) {
                 if (!servicioHojaVida.existePersona(hojaVidaIngresar.getNumeroIdentificacion())) {

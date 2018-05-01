@@ -51,7 +51,7 @@
             <div id="mensajeRegistro" class="label">
             </div>
             <form:form method="POST" modelAttribute="usuario">
-                <input type="text" placeholder="Número de identificación" required  name="numeroidentificacion" id="numeroidentificacion"/>
+                <input type="text" placeholder="Número de identificación" required  name="numeroIdentificacion" id="numeroIdentificacion"/>
                 <input type="text" placeholder="Nombre Usuario" required pattern="[0-9a-zA-Z]{1,15}" name="nombreUsuario" id="nombreUsuario" maxlength="50"/>
                 <input type="text" placeholder="Nombres" required name="nombres" id="nombres" maxlength="250"/>
                 <input type="text" placeholder="Apellidos" required name="apellidos" id="apellidos" maxlength="250" />
@@ -88,7 +88,6 @@
         </div>            
     </div>
     <script>
-        
     $('.registro').click(function(){
       if(!$('#divRegistro').hasClass('deactive')) {
          $('#divRegistro').toggleClass('deactive');
@@ -171,7 +170,7 @@
     });   
     
     $('#usuario').submit(function (evt) {
-                if($('#clave').val() != $('#claveRepetida').val()) {
+                if($('#clave').val() !== $('#claveRepetida').val()) {
                     $('#mensajeRegistro').html("Las claves no coinciden");
                     return false;
                 }
@@ -188,11 +187,13 @@
                            $('#mensajeRegistro').html(response);
                         } else {
                            $('#mensajeRegistro').html("Usuario creado exitosamente");
+                           $('#numeroIdentificacion').val("");
                            $('#nombreUsuario').val("");
                            $('#correoElectronico').val("");
                            $('#nombres').val("");
                            $('#apellidos').val("");
                            $('#clave').val("");
+                           $('#claveRepetida').val("");
                         }
                     },
                     error: function (xhr, ajaxOptions, thrownError) {

@@ -14,8 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class ProductoConocimiento {
     private int id;
     private String nombreTipo;
-    private String tipo;
-    private String nucleoBasicoConocimento;
+    private int tipo;
+    private int nucleoBasicoConocimiento;
     private String url;
     private String descripcion;
     private MultipartFile documento;
@@ -51,29 +51,29 @@ public class ProductoConocimiento {
     /**
      * @return the tipo
      */
-    public String getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
     /**
      * @param tipo the tipo to set
      */
-    public void setTipo(String tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 
     /**
-     * @return the nucleoBasicoConocimento
+     * @return the nucleoBasicoConocimiento
      */
-    public String getNucleoBasicoConocimento() {
-        return nucleoBasicoConocimento;
+    public int getNucleoBasicoConocimiento() {
+        return nucleoBasicoConocimiento;
     }
 
     /**
-     * @param nucleoBasicoConocimento the nucleoBasicoConocimento to set
+     * @param nucleoBasicoConocimiento the nucleoBasicoConocimiento to set
      */
-    public void setNucleoBasicoConocimento(String nucleoBasicoConocimento) {
-        this.nucleoBasicoConocimento = nucleoBasicoConocimento;
+    public void setNucleoBasicoConocimiento(int nucleoBasicoConocimiento) {
+        this.nucleoBasicoConocimiento = nucleoBasicoConocimiento;
     }
 
     /**

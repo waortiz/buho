@@ -290,7 +290,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     }
 
     @Override
-    public void ingresarHojaVida(long idUsuario, HojaVida hojaVida) {
+    public long ingresarHojaVida(long idUsuario, HojaVida hojaVida) {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
 
         parametros.addValue("varNumeroId", hojaVida.getNumeroIdentificacion());
@@ -313,13 +313,13 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         parametros.addValue("varDiscapacidad", hojaVida.getDiscapacidad());
         parametros.addValue("varDisponeRut", hojaVida.isDisponeRUT());
         parametros.addValue("varPerfil", hojaVida.getPerfil());
-        if (hojaVida.getActividadEconomica().length() > 0) {
+        if (hojaVida.getActividadEconomica() != null && hojaVida.getActividadEconomica().length() > 0) {
             parametros.addValue("varActividadEconomica", hojaVida.getActividadEconomica());
         } else {
             parametros.addValue("varActividadEconomica", null);
         }
         parametros.addValue("varDisponibilidadViajar", hojaVida.isDisponibilidadViajar());
-        if (hojaVida.getTipoVinculacion().length() > 0) {
+        if (hojaVida.getTipoVinculacion() != null && hojaVida.getTipoVinculacion().length() > 0) {
             parametros.addValue("varTipoVinculacion", hojaVida.getTipoVinculacion());
         } else {
             parametros.addValue("varTipoVinculacion", null);
@@ -599,7 +599,8 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
             parametrosIngresoPatente.addValue("varDescripcion", patente.getDescripcion());
             parametrosIngresoPatente.addValue("varClase", patente.getClase());
             parametrosIngresoPatente.addValue("varFecha", patente.getFecha());
-            parametrosIngresoPatente.addValue("varTipo", patente.getTipo());
+            parametrosIngresoPatente.addValue("vartipopatente", patente.getTipo());
+            parametrosIngresoPatente.addValue("varpropiedadcompartida", patente.isPropiedadCompartida());
             Map resultadoIngresoPatente = ingresarPatente.execute(parametrosIngresoPatente);
             int idPatente = (int) resultadoIngresoPatente.get("varId");
             Documento documento = patente.getDocumento();
@@ -632,6 +633,8 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                 ingresarDocumentoProductoConocimiento.execute(parametrosIngresoDocumentoProductoConocimiento);
             }
         }
+        
+        return idPersona;
     }
 
     @Override
@@ -1945,16 +1948,17 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                 parametrosActualizacionPatente.addValue("varDescripcion", patenteModificado.getDescripcion());
                 parametrosActualizacionPatente.addValue("varClase", patenteModificado.getClase());
                 parametrosActualizacionPatente.addValue("varFecha", patenteModificado.getFecha());
-                parametrosActualizacionPatente.addValue("varTipo", patenteModificado.getTipo());
+                parametrosActualizacionPatente.addValue("vartipopatente", patenteModificado.getTipo());
+                parametrosActualizacionPatente.addValue("varpropiedadcompartida", patenteModificado.isPropiedadCompartida());
                 actualizarPatente.execute(parametrosActualizacionPatente);
                 Documento documento = patenteModificado.getDocumento();
                 if (documento != null) {
-                    MapSqlParameterSource parametrosActualizarCertificadoPatente = new MapSqlParameterSource();
-                    parametrosActualizarCertificadoPatente.addValue("varIdPatente", patenteModificado.getId());
-                    parametrosActualizarCertificadoPatente.addValue("varNombre", documento.getNombre());
-                    parametrosActualizarCertificadoPatente.addValue("varTipoContenido", documento.getTipoContenido());
-                    parametrosActualizarCertificadoPatente.addValue("varContenido", documento.getContenido());
-                    actualizarDocumentoPatente.execute(parametrosActualizarCertificadoPatente);
+                    MapSqlParameterSource parametrosActualizarDocumentoPatente = new MapSqlParameterSource();
+                    parametrosActualizarDocumentoPatente.addValue("varIdPatente", patenteModificado.getId());
+                    parametrosActualizarDocumentoPatente.addValue("varNombre", documento.getNombre());
+                    parametrosActualizarDocumentoPatente.addValue("varTipoContenido", documento.getTipoContenido());
+                    parametrosActualizarDocumentoPatente.addValue("varContenido", documento.getContenido());
+                    actualizarDocumentoPatente.execute(parametrosActualizarDocumentoPatente);
                 }
             }
         }
@@ -1966,7 +1970,8 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                 parametrosIngresoPatente.addValue("varDescripcion", patente.getDescripcion());
                 parametrosIngresoPatente.addValue("varClase", patente.getClase());
                 parametrosIngresoPatente.addValue("varFecha", patente.getFecha());
-                parametrosIngresoPatente.addValue("varTipo", patente.getTipo());
+                parametrosIngresoPatente.addValue("vartipopatente", patente.getTipo());
+                parametrosIngresoPatente.addValue("varpropiedadcompartida", patente.isPropiedadCompartida());
                 Map resultadoIngresoPatente = ingresarPatente.execute(parametrosIngresoPatente);
                 int idPatente = (int) resultadoIngresoPatente.get("varId");
                 Documento documento = patente.getDocumento();

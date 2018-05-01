@@ -17,7 +17,7 @@ public interface IRepositorioHojaVida {
     
     void actualizarHojaVida(long idUsuario, HojaVida hojaVida);
 
-    void ingresarHojaVida(long idUsuario, HojaVida hojaVida);
+    long ingresarHojaVida(long idUsuario, HojaVida hojaVida);
     
     List<HojaVida> obtenerHojasVida();
 

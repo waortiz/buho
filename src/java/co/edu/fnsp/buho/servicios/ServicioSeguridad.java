@@ -5,9 +5,14 @@
  */
 package co.edu.fnsp.buho.servicios;
 
+import co.edu.fnsp.buho.entidades.CorreoElectronico;
+import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.Privilegio;
 import co.edu.fnsp.buho.entidades.Usuario;
+import co.edu.fnsp.buho.repositorios.IRepositorioHojaVida;
 import co.edu.fnsp.buho.repositorios.IRepositorioSeguridad;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -29,6 +34,9 @@ public class ServicioSeguridad implements IServicioSeguridad {
     private IRepositorioSeguridad repositorioSeguridad;
 
     @Autowired
+    private IRepositorioHojaVida repositorioHojaVida;
+    
+    @Autowired
     private PlatformTransactionManager transactionManager;
 
     @Override
@@ -46,6 +54,28 @@ public class ServicioSeguridad implements IServicioSeguridad {
         TransactionDefinition txDef = new DefaultTransactionDefinition();
         TransactionStatus txStatus = transactionManager.getTransaction(txDef);
         try {
+            HojaVida hojaVida = new HojaVida();
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(1900, 1, 1);
+            hojaVida.setFechaNacimiento(calendar.getTime());
+            hojaVida.setFechaExpedicion(calendar.getTime());
+            hojaVida.setCiudadResidencia("00105");
+            hojaVida.setLugarNacimiento("00105");
+            hojaVida.setLugarExpedicion("00105");
+            hojaVida.setNacionalidad("343");
+            hojaVida.setDireccion("");
+            hojaVida.setSexo("1");
+            hojaVida.setDiscapacidad("5");
+            hojaVida.setGrupoEtnico("5");
+            hojaVida.setTipoIdentificacion("CC");
+            hojaVida.setNombres(usuario.getNombres());
+            hojaVida.setApellidos(usuario.getApellidos());
+            hojaVida.setNumeroIdentificacion(usuario.getNumeroIdentificacion());
+            CorreoElectronico correoElectronico = new CorreoElectronico();
+            correoElectronico.setCorreoElectronico(usuario.getCorreoElectronico());
+            hojaVida.getCorreosElectronicos().add(correoElectronico);
+            long idPersona = repositorioHojaVida.ingresarHojaVida(0, hojaVida);
+            usuario.setIdPersona(idPersona);
             repositorioSeguridad.crearUsuario(usuario);
             transactionManager.commit(txStatus);
         } catch (TransactionException exc) {
