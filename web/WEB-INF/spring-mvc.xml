@@ -73,7 +73,7 @@
     </bean>  
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com" />
-        <property name="port" value="465" />
+        <property name="port" value="587" />
         <property name="username" value="gestiontifnsp@udea.edu.co" />
         <property name="password" value="Udea@2016fn" />
 

@@ -216,7 +216,7 @@ CREATE TABLE `us_perfil` (
 
 LOCK TABLES `us_perfil` WRITE;
 /*!40000 ALTER TABLE `us_perfil` DISABLE KEYS */;
-INSERT INTO `us_perfil` VALUES (1,1,1,1);
+INSERT INTO `us_perfil` VALUES (1,1,2,1);
 /*!40000 ALTER TABLE `us_perfil` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,7 +244,7 @@ CREATE TABLE `us_usuario` (
 
 LOCK TABLES `us_usuario` WRITE;
 /*!40000 ALTER TABLE `us_usuario` DISABLE KEYS */;
-INSERT INTO `us_usuario` VALUES (1,'william','123',1),(2,'Patricio','123',17);
+INSERT INTO `us_usuario` VALUES (1,'william','123',1),(2,'Patricio','321',17);
 /*!40000 ALTER TABLE `us_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -899,4 +899,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-01 17:18:52
+-- Dump completed on 2018-05-01 22:09:31

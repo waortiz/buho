@@ -68,33 +68,7 @@
                                 Inicio
                             </a>
                         </li>
-                        <li class='active'>
-                            <a href='#'><i class="fa fa-dashboard fa-1x"></i>
-                                Configurar
-                            </a>
-                            <ul>
-                                <li><a href='${pageContext.request.contextPath}/administracion/perfiles'>Perfiles</a></li>
-                                <li><a href='${pageContext.request.contextPath}/administracion/usuarios'>Usuarios</a></li>
-                            </ul>
-                        </li>
-                        <li class='active'>
-                            <a href='#'><i class="fa fa-users fa-1x" aria-hidden="true"></i>
-                                Convocatorias
-                            </a>
-                            <ul>
-                              <li><a href='${pageContext.request.contextPath}/convocatorias/crear'>Crear</a></li>
-                              <li><a href='${pageContext.request.contextPath}/convocatorias/index'>Consultar</a></li>
-                            </ul>
-                        </li>                        
-                         <li class='active'>
-                            <a href='#'><i class="fa fa-user fa-1x"></i>
-                                Hoja de vida
-                            </a>
-                            <ul>
-                                <li><a href='${pageContext.request.contextPath}/hojasVida/crear'>Crear</a></li>
-                                <li><a href='${pageContext.request.contextPath}/hojasVida/index'>Consultar</a></li>
-                            </ul>
-                        </li>
+                        <tiles:insertAttribute name="menu" />
                     </ul>
                 </div>
             </div>

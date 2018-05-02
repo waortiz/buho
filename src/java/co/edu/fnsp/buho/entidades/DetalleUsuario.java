@@ -17,11 +17,13 @@ import org.springframework.security.core.userdetails.User;
 public class DetalleUsuario extends User {
 
     private long idUsuario;
+    private long idPersona;
     private ArrayList<OpcionMenu> opcionesMenu = new ArrayList<>();
     
-    public DetalleUsuario(long idUsuario, String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
+    public DetalleUsuario(long idUsuario, long idPersona, String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         super( username,  password,  enabled, accountNonExpired, credentialsNonExpired,  accountNonLocked,  authorities);
         this.idUsuario = idUsuario;
+        this.idPersona = idPersona;
     }
 
     /**
@@ -50,5 +52,19 @@ public class DetalleUsuario extends User {
      */
     public void setOpcionesMenu(ArrayList<OpcionMenu> opcionesMenu) {
         this.opcionesMenu = opcionesMenu;
+    }
+
+    /**
+     * @return the idPersona
+     */
+    public long getIdPersona() {
+        return idPersona;
+    }
+
+    /**
+     * @param idPersona the idPersona to set
+     */
+    public void setIdPersona(long idPersona) {
+        this.idPersona = idPersona;
     }
 }

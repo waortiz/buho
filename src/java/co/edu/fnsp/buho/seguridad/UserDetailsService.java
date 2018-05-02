@@ -37,6 +37,7 @@ public class UserDetailsService implements AuthenticationUserDetailsService<Auth
         Collection<? extends GrantedAuthority> privilegios = usuario.getPrivilegios();
         
         return new DetalleUsuario(usuario.getIdUsuario(), 
+                usuario.getIdPersona(), 
                 usuario.getNombreUsuario(), 
                 usuario.getClave(), 
                 true, 

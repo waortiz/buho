@@ -50,6 +50,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         Collection<? extends GrantedAuthority> privilegios = usuario.getPrivilegios();
         
         return new UsernamePasswordAuthenticationToken(new DetalleUsuario(usuario.getIdUsuario(), 
+                usuario.getIdPersona(),
                 usuario.getNombreUsuario(), 
                 password, 
                 true, 

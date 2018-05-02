@@ -58,6 +58,14 @@ public class ConvocatoriaController {
         return "convocatorias/index";
     }
 
+    @RequestMapping(value = "/postular", method = RequestMethod.GET)
+    public String postular(Model model) {
+        List<Convocatoria> convocatorias = servicioConvocatoria.obtenerConvocatorias(((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario());
+        model.addAttribute("convocatorias", convocatorias);
+
+        return "convocatorias/postular";
+    }
+    
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String obtenerConvocatorias(Model model) {
         List<Convocatoria> convocatorias = servicioConvocatoria.obtenerConvocatorias(((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario());

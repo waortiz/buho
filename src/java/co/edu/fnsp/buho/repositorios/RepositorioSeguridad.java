@@ -99,6 +99,7 @@ public class RepositorioSeguridad implements IRepositorioSeguridad {
             usuario.setClave((String) resultado.get("varClave"));
             usuario.setCorreoElectronico((String) resultado.get("varCorreoElectronico"));
             usuario.setIdUsuario(Integer.parseInt(resultado.get("varIdUsuario").toString()));
+            usuario.setIdPersona((long) resultado.get("varIdPersona"));
 
             MapSqlParameterSource parametrosPrivilegios = new MapSqlParameterSource();
             parametrosPrivilegios.addValue("varIdUsuario", usuario.getIdUsuario());
@@ -130,6 +131,7 @@ public class RepositorioSeguridad implements IRepositorioSeguridad {
             usuario.setApellidos((String) resultado.get("varApellidos"));
             usuario.setClave((String) resultado.get("varClave"));
             usuario.setCorreoElectronico((String) resultado.get("varCorreoElectronico"));
+            usuario.setIdPersona((long) resultado.get("varIdPersona"));
             usuario.setIdUsuario(idUsuario);
             usuario.setNombreUsuario(resultado.get("varNombreUsuario").toString());
 

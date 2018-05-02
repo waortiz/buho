@@ -1,5 +1,6 @@
 package co.edu.fnsp.buho.controladores;
 
+import co.edu.fnsp.buho.entidades.DetalleUsuario;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Usuario;
 import co.edu.fnsp.buho.entidadesVista.CambioClave;
@@ -21,7 +22,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -114,10 +114,9 @@ public class LoginController {
     public @ResponseBody
     String cambiarClave(@ModelAttribute(value = "cambioClave") CambioClave cambioClave, Model model) {
         String mensaje = "";
-        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        DetalleUsuario detalleUsuario = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         try {
-            servicioSeguridad.actualizarClaveUsuario(usuario.getIdUsuario(), cambioClave.getClaveAnterior(), cambioClave.getClaveNueva());
-            usuario.setClave(cambioClave.getClaveNueva());
+            servicioSeguridad.actualizarClaveUsuario(detalleUsuario.getIdUsuario(), cambioClave.getClaveAnterior(), cambioClave.getClaveNueva());
         } catch (BadCredentialsException exc) {
             logger.error(exc);
             mensaje = exc.getMessage();
