@@ -330,7 +330,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                 if(resultado.resultado) {
                    $('#md_postular').modal('show');
                 } else {
-                   bootstrap_alert_convocatoria.warning('No se pudo postular a la convocatoria'); 
+                   bootstrap_alert_convocatoria.warning('No cumple con los criterios para postularse a la convocatoria'); 
                 } 
             }
         }});      

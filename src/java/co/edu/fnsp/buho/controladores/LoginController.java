@@ -44,9 +44,6 @@ public class LoginController {
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public String loginPage(Model model) {
 
-        List<Maestro> tiposIdentificacion = servicioMaestro.obtenerTiposIdentificacion();
-        model.addAttribute("tiposIdentificacion", tiposIdentificacion);
-
         return "login";
     }
 
@@ -61,7 +58,7 @@ public class LoginController {
         List<Maestro> tiposIdentificacion = servicioMaestro.obtenerTiposIdentificacion();
         model.addAttribute("tiposIdentificacion", tiposIdentificacion);
         
-        return "redirect:/login";
+        return "redirect:/index";
     }
     
     @RequestMapping(value = "/login/recuperarClave", method = RequestMethod.POST)

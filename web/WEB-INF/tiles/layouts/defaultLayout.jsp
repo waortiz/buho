@@ -74,21 +74,7 @@
             </div>
             <div id="contenedorB">
                 <div id='cssmenu'>
-                    <ul>  
-                        <!-- Menu perfil-->
-                        <li class='active'><a href='#'>${pageContext.request.userPrincipal.getPrincipal().username}</a></li>
-                        <li class='active'>
-                            <a href='#'><i class="fa fa-user fa-1x"></i>   <i class="fa fa-chevron-down" aria-hidden="true"></i>                             
-                            </a>
-                            <ul>
-                                <li><a href='${pageContext.request.contextPath}/login/cambiarClave'>Cambiar contraseña</a></li>
-                                <li class="divider"></li>
-                                <li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out fa-fw"></i>Salir</a>
-                                </li>                                
-                            </ul>
-                        </li> 
-                                                                    
-                    </ul>
+                    <tiles:insertAttribute name="usuario" />
                 </div>
             </div>  
             <br>

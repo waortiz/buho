@@ -32,6 +32,11 @@ public class MenuViewPreparer implements ViewPreparer {
     @Override
     public void execute(Request request, AttributeContext attributeContext) {
         boolean administrador = false;
+        String menu = "";
+        String usuario = "<ul>\n" +
+                      "<!-- Menu perfil-->\n" +
+                      "<li class='active'><a href='#'></a></li></ul>\n";
+
         if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof DetalleUsuario) {
             DetalleUsuario detalleUsuario = (DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             for (GrantedAuthority authority : detalleUsuario.getAuthorities()) {
@@ -41,47 +46,70 @@ public class MenuViewPreparer implements ViewPreparer {
                     break;
                 }
             }
-        }
-        String menu = null;
-        if (administrador) {
-            menu = "<li class='active'>\n"
-                    + "<a href='#'><i class=\"fa fa-users fa-1x\" aria-hidden=\"true\"></i>\n"
-                    + "   Convocatorias\n"
-                    + "</a>\n"
-                    + "<ul>\n"
-                    + "  <li><a href=\"javascript:abrirOpcion('/convocatorias/crear')\">Crear</a></li>\n"
-                    + "  <li><a href=\"javascript:abrirOpcion('/convocatorias/index')\">Consultar</a></li>\n"
-                    + "</ul>\n"
-                    + "</li>\n"
-                    + "<li class='active'>\n"
-                    + "  <a href='#'><i class=\"fa fa-user fa-1x\"></i>\n"
-                    + "     Hoja de vida\n"
-                    + "  </a>\n"
-                    + "<ul>\n"
-                    + "<li><a href=\"javascript:abrirOpcion('/hojasVida/crear')\">Crear</a></li>\n"
-                    + "<li><a href=\"javascript:abrirOpcion(/hojasVida/index')\">Consultar</a></li>\n"
-                    + "</ul>\n"
-                    + "</li>\n";
+            if (administrador) {
+                menu = "<li class='active'>\n"
+                        + "<a href='#'><i class=\"fa fa-users fa-1x\" aria-hidden=\"true\"></i>\n"
+                        + "   Convocatorias\n"
+                        + "</a>\n"
+                        + "<ul>\n"
+                        + "  <li><a href=\"javascript:abrirOpcion('/convocatorias/crear')\">Crear</a></li>\n"
+                        + "  <li><a href=\"javascript:abrirOpcion('/convocatorias/index')\">Consultar</a></li>\n"
+                        + "</ul>\n"
+                        + "</li>\n"
+                        + "<li class='active'>\n"
+                        + "  <a href='#'><i class=\"fa fa-user fa-1x\"></i>\n"
+                        + "     Hoja de vida\n"
+                        + "  </a>\n"
+                        + "<ul>\n"
+                        + "<li><a href=\"javascript:abrirOpcion('/hojasVida/editar')\">Editar</a></li>\n"
+                        + "</ul>\n"
+                        + "</li>\n";
+            } else {
+                menu = "<li class='active'>\n"
+                        + "<a href='#'><i class=\"fa fa-users fa-1x\" aria-hidden=\"true\"></i>\n"
+                        + "   Convocatorias\n"
+                        + "</a>\n"
+                        + "<ul>\n"
+                        + "  <li><a href=\"javascript:abrirOpcion('/convocatorias/postular')\">Consultar</a></li>\n"
+                        + "</ul>\n"
+                        + "</li>\n"
+                        + "<li class='active'>\n"
+                        + "  <a href='#'><i class=\"fa fa-user fa-1x\"></i>\n"
+                        + "     Hoja de vida\n"
+                        + "  </a>\n"
+                        + "<ul>\n"
+                        + "<li><a href=\"javascript:abrirOpcion('/hojasVida/editar')\">Editar</a></li>\n"
+                        + "</ul>\n"
+                        + "</li>\n";
+            }
+            usuario = "<ul>\n" +
+                      "<!-- Menu perfil-->\n" +
+                      "<li class='active'><a href='#'>" + detalleUsuario.getUsername() + "</a></li>\n" +
+                      "<li class='active'>\n" +
+                      " <a href='#'><i class=\"fa fa-user fa-1x\"></i>   <i class=\"fa fa-chevron-down\" aria-hidden=\"true\"></i>\n" +
+                      " </a>\n" +
+                      "<ul>\n" +
+                      " <li><a href=\"javascript:abrirOpcion('/login/cambiarClave')\">Cambiar contraseña</a></li>\n" +
+                      " <li class=\"divider\"></li>\n" +
+                      " <li><a href=\"javascript:abrirOpcion('/logout')\"><i class=\"fa fa-sign-out fa-fw\"></i>Salir</a>\n" +
+                      " </li>\n" +
+                      "</ul>\n" +
+                      "</li> \n" +
+                      "</ul>\n";
         } else {
             menu = "<li class='active'>\n"
-                    + "<a href='#'><i class=\"fa fa-users fa-1x\" aria-hidden=\"true\"></i>\n"
-                    + "   Convocatorias\n"
-                    + "</a>\n"
-                    + "<ul>\n"
-                    + "  <li><a href=\"javascript:abrirOpcion('/convocatorias/postular')\">Postular</a></li>\n"
-                    + "</ul>\n"
-                    + "</li>\n"
                     + "<li class='active'>\n"
                     + "  <a href='#'><i class=\"fa fa-user fa-1x\"></i>\n"
                     + "     Hoja de vida\n"
                     + "  </a>\n"
                     + "<ul>\n"
-                    + "<li><a href=\"javascript:abrirOpcion('/hojasVida/modificar')\">Modificar</a></li>\n"
+                    + "<li><a href=\"javascript:abrirOpcion('/hojasVida/editar')\">Editar</a></li>\n"
                     + "</ul>\n"
                     + "</li>\n";
-        }
 
+        }
         attributeContext.putAttribute("menu", new Attribute(menu));
+        attributeContext.putAttribute("usuario", new Attribute(usuario));
     }
 
 }

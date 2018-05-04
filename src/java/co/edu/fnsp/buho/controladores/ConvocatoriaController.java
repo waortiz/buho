@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,26 +53,40 @@ public class ConvocatoriaController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(Model model) {
-        List<Convocatoria> convocatorias = servicioConvocatoria.obtenerConvocatorias(((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario());
+        List<Convocatoria> convocatorias = servicioConvocatoria.obtenerConvocatorias(obtenerIdUsuario());
         model.addAttribute("convocatorias", convocatorias);
 
-        return "convocatorias/index";
+        if (esAdministrador()) {
+            return "convocatorias/index";
+        } else {
+            model.addAttribute("autenticado", esAutenticado());
+
+            return "convocatorias/postular";
+        }
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String obtenerConvocatorias(Model model) {
+        List<Convocatoria> convocatorias = servicioConvocatoria.obtenerConvocatorias(obtenerIdUsuario());
+        model.addAttribute("convocatorias", convocatorias);
+
+        if (esAdministrador()) {
+            return "convocatorias/index";
+        } else {
+            model.addAttribute("autenticado", esAutenticado());
+
+            return "convocatorias/postular";
+        }
     }
 
     @RequestMapping(value = "/postular", method = RequestMethod.GET)
     public String postular(Model model) {
-        List<Convocatoria> convocatorias = servicioConvocatoria.obtenerConvocatorias(((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario());
+        List<Convocatoria> convocatorias = servicioConvocatoria.obtenerConvocatorias(obtenerIdUsuario());
         model.addAttribute("convocatorias", convocatorias);
+
+        model.addAttribute("autenticado", esAutenticado());
 
         return "convocatorias/postular";
-    }
-    
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public String obtenerConvocatorias(Model model) {
-        List<Convocatoria> convocatorias = servicioConvocatoria.obtenerConvocatorias(((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario());
-        model.addAttribute("convocatorias", convocatorias);
-
-        return "convocatorias/index";
     }
 
     @RequestMapping(value = "/crear", method = RequestMethod.GET)
@@ -86,7 +101,7 @@ public class ConvocatoriaController {
         List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
         List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
         List<CampoHojaVida> camposHojaVida = servicioMaestro.obtenerCamposHojaVida();
-        
+
         model.addAttribute("tiposConvocatoria", tiposConvocatoria);
         model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
         model.addAttribute("tiposAdenda", tiposAdenda);
@@ -147,7 +162,7 @@ public class ConvocatoriaController {
             convocatoriaIngresar.setProgramas(convocatoria.getProgramas());
             convocatoriaIngresar.setEducacionesContinuas(convocatoria.getEducacionesContinuas());
             convocatoriaIngresar.setCriteriosHabilitantes(convocatoria.getCriteriosHabilitantes());
-            long idUsuario = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario();
+            long idUsuario = obtenerIdUsuario();
             if (convocatoriaIngresar.getId() == 0) {
                 servicioConvocatoria.ingresarConvocatoria(idUsuario, convocatoriaIngresar);
             } else {
@@ -235,8 +250,7 @@ public class ConvocatoriaController {
     public @ResponseBody
     String postularConvocatoria(@PathVariable int idConvocatoria, Model model) {
         try {
-            servicioConvocatoria.postularConvocatoria(((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario(),
-                    idConvocatoria);
+            servicioConvocatoria.postularConvocatoria(obtenerIdUsuario(), idConvocatoria);
         } catch (Exception exc) {
             logger.error(exc);
             return "{\"resultado\":false}";
@@ -249,8 +263,7 @@ public class ConvocatoriaController {
     public @ResponseBody
     String retirarConvocatoria(@PathVariable int idConvocatoria, Model model) {
         try {
-            servicioConvocatoria.retirarPostulacion(((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario(),
-                    idConvocatoria);
+            servicioConvocatoria.retirarPostulacion(obtenerIdUsuario(), idConvocatoria);
         } catch (Exception exc) {
             logger.error(exc);
             return "{\"resultado\":false}";
@@ -345,4 +358,39 @@ public class ConvocatoriaController {
 
         return gson.toJson(capacitaciones);
     }
+
+    private boolean esAdministrador() {
+        boolean administrador = false;
+        if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof DetalleUsuario) {
+            DetalleUsuario detalleUsuario = (DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            for (GrantedAuthority authority : detalleUsuario.getAuthorities()) {
+                if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR")
+                        || authority.getAuthority().equalsIgnoreCase("SUPER_ADMINISTRADOR")) {
+                    administrador = true;
+                    break;
+                }
+            }
+        }
+
+        return administrador;
+    }
+
+    private boolean esAutenticado() {
+        boolean autenticado = false;
+        if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof DetalleUsuario) {
+            autenticado = true;
+        }
+
+        return autenticado;
+    }
+
+    private long obtenerIdUsuario() {
+        long idUsuario = 0;
+        if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof DetalleUsuario) {
+            idUsuario = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario();
+        }
+
+        return idUsuario;
+    }
+
 }

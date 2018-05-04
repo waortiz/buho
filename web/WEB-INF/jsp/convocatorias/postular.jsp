@@ -34,7 +34,7 @@
                                     <td>${convocatoria.getNombreTipoConvocatoria()}</td>
                                     <td>${convocatoria.getNombre()}</td>               
                                     <td>${convocatoria.getFechaFinFormateada()}</td>
-                                    <td>
+                                    <td style="text-align: center">
                                         <c:if test = "${convocatoria.isTieneDocumento()}">
                                             <a href="#" title="Ver documento" onclick="verDocumento(${convocatoria.getId()})"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                                         </c:if>
@@ -313,6 +313,10 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
     }
   
     function postularConvocatoria(idConvocatoria) {
+        <c:if test = "${!autenticado}">
+            location.href = '${pageContext.request.contextPath}/login';    
+            return;    
+        </c:if>
         $.ajax({
         type: "GET",
         url: "${pageContext.request.contextPath}/convocatorias/postular/" + idConvocatoria,
@@ -324,13 +328,17 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                 if(resultado.resultado) {
                    $('#md_postular').modal('show');
                 } else {
-                   bootstrap_alert_convocatoria.warning('No se pudo postular a la convocatoria'); 
+                   bootstrap_alert_convocatoria.warning('No cumple con los criterios para postularse a la convocatoria'); 
                 } 
             }
         }});      
     }
 
     function retirarPostulacionConvocatoria(idConvocatoria) {
+        <c:if test = "${!autenticado}">
+            location.href = '${pageContext.request.contextPath}/login';    
+            return;    
+        </c:if>
         $.ajax({
         type: "GET",
         url: "${pageContext.request.contextPath}/convocatorias/retirarPostulacion/" + idConvocatoria,
@@ -406,30 +414,6 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
         window.location.href = "${pageContext.request.contextPath}/convocatorias/adenda/documento/" + idAdenda;
     }
 
-    function confirmarEliminacionConvocatoria(idConvocatoria) {
-        $('#idConvocatoria').val(idConvocatoria);
-        $('#modalEliminacionConvocatoria').modal('show');
-    }
-
-    function eliminarConvocatoria() {
-        $.ajax({
-        type: "GET",
-        url: "${pageContext.request.contextPath}/convocatorias/eliminar/" + $('#idConvocatoria').val(),
-        processData: false,
-        contentType: false,
-        success: function (response) {
-            if (response !== "") {
-                var resultado = JSON.parse(response);
-                if(resultado.resultado) {
-                   window.location.href = '${pageContext.request.contextPath}/convocatorias/index';
-                } else {
-                   bootstrap_alert_convocatoria.warning('No se pudo eliminar la convocatoria'); 
-                } 
-                $('#modalEliminacionConvocatoria').modal('hide');
-            }
-        }});
-   }
-   
     bootstrap_alert_convocatoria = function () { };
     bootstrap_alert_convocatoria.warning = function (message) {
         $('#alert_placeholder_convocatoria').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
