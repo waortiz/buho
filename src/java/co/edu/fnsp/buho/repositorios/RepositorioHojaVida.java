@@ -23,6 +23,7 @@ import co.edu.fnsp.buho.entidades.TipoDocumento;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.Patente;
 import co.edu.fnsp.buho.entidades.ProductoConocimiento;
+import co.edu.fnsp.buho.entidades.Terminos;
 import co.edu.fnsp.buho.utilidades.Util;
 import java.util.ArrayList;
 import java.util.Date;
@@ -163,6 +164,9 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     private SimpleJdbcCall actualizarDocumentoProductoConocimiento;
     private SimpleJdbcCall obtenerDocumentoProductoConocimiento;
 
+    private SimpleJdbcCall ingresarTerminos;
+    private SimpleJdbcCall existenTerminos;
+
     @Autowired
     public void setDataSource(DataSource dataSource) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -287,6 +291,9 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         this.obtenerDocumentoProductoConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoProductoConocimiento");
         this.ingresarDocumentoProductoConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoProductoConocimiento");
         this.actualizarDocumentoProductoConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoProductoConocimiento");
+
+        this.ingresarTerminos = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarTerminos");
+        this.existenTerminos = new SimpleJdbcCall(jdbcTemplate).withProcedureName("existenTerminos");
     }
 
     @Override
@@ -633,7 +640,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                 ingresarDocumentoProductoConocimiento.execute(parametrosIngresoDocumentoProductoConocimiento);
             }
         }
-        
+
         return idPersona;
     }
 
@@ -1127,6 +1134,48 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         }
 
         return documento;
+    }
+
+    @Override
+    public void ingresarTerminos(long idPersona, Terminos terminos) {
+        MapSqlParameterSource parametrosIngresoTerminos = new MapSqlParameterSource();
+        parametrosIngresoTerminos.addValue("varIdPersona", idPersona);
+        parametrosIngresoTerminos.addValue("varActualizacionInformacion", terminos.isActualizacionInformacion());
+        parametrosIngresoTerminos.addValue("varConectividadUso", terminos.isConectividadUso());
+        parametrosIngresoTerminos.addValue("varDanyosExternos", terminos.isDanyosExternos());
+        parametrosIngresoTerminos.addValue("varDanyosPerjuicios", terminos.isDanyosPerjuicios());
+        parametrosIngresoTerminos.addValue("varDerechosReservados", terminos.isDerechosReservados());
+        parametrosIngresoTerminos.addValue("varDisposicionesFinales", terminos.isDisposicionesFinales());
+        parametrosIngresoTerminos.addValue("varEntrevista", terminos.isEntrevista());
+        parametrosIngresoTerminos.addValue("varHabeasData", terminos.isHabeasData());
+        parametrosIngresoTerminos.addValue("varIngresoIlegal", terminos.isIngresoIlegal());
+        parametrosIngresoTerminos.addValue("varInterconectividad", terminos.isInterconectividad());
+        parametrosIngresoTerminos.addValue("varInterrupcionServicio", terminos.isInterrupcionServicio());
+        parametrosIngresoTerminos.addValue("varModificacionCondiciones", terminos.isModificacionCondiciones());
+        parametrosIngresoTerminos.addValue("varOtrasExoneraciones", terminos.isOtrasExoneraciones());
+        parametrosIngresoTerminos.addValue("varPostulacion", terminos.isPostulacion());
+        parametrosIngresoTerminos.addValue("varPresenciaVirus", terminos.isPresenciaVirus());
+        parametrosIngresoTerminos.addValue("varPublicidad", terminos.isPublicidad());
+        parametrosIngresoTerminos.addValue("varRacionalidad", terminos.isRacionalidad());
+        parametrosIngresoTerminos.addValue("varReservaEstadistica", terminos.isReservaEstadistica());
+        parametrosIngresoTerminos.addValue("varResponsabilidad", terminos.isResponsabilidad());
+        parametrosIngresoTerminos.addValue("varSeguridad", terminos.isSeguridad());
+        parametrosIngresoTerminos.addValue("varTitulos", terminos.isTitulos());
+        parametrosIngresoTerminos.addValue("varTratamientosDatosPersonales", terminos.isTratamientosDatosPersonales());
+        parametrosIngresoTerminos.addValue("varUsoIlegal", terminos.isUsoIlegal());
+        parametrosIngresoTerminos.addValue("varVeracidad", terminos.isVeracidad());
+        parametrosIngresoTerminos.addValue("varVinculacionLaboral", terminos.isVinculacionLaboral());
+
+        ingresarTerminos.execute(parametrosIngresoTerminos);
+    }
+
+    @Override
+    public boolean existenTerminos(long idPersona) {
+        MapSqlParameterSource parametrosExistenTerminos = new MapSqlParameterSource();
+        parametrosExistenTerminos.addValue("varIdPersona", idPersona);
+        Map resultado = existenTerminos.execute(parametrosExistenTerminos);
+        
+        return (boolean) resultado.get("varExistenTerminos");
     }
 
     private void actualizarTelefonos(long idPersona, List<Telefono> telefonos) {

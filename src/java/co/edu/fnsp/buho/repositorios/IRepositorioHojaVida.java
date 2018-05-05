@@ -7,6 +7,7 @@ package co.edu.fnsp.buho.repositorios;
 
 import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.HojaVida;
+import co.edu.fnsp.buho.entidades.Terminos;
 import java.util.List;
 
 /**
@@ -52,4 +53,8 @@ public interface IRepositorioHojaVida {
     Documento obtenerDocumentoProductoConocimiento(int idProductoConocimiento);
 
     Documento obtenerDocumentoPatente(int idPatente);
+
+    void ingresarTerminos(long idPersona, Terminos terminos);
+
+    public boolean existenTerminos(long idPersona);
 }

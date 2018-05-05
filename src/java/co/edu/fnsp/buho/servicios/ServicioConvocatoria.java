@@ -26,9 +26,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
@@ -49,9 +49,14 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
     @Autowired
     private IRepositorioHojaVida repositorioHojaVida;
 
+    @Value( "${jdbc.timeout}" )
+    private int timeout;
+    
+    
     @Override
     public void ingresarConvocatoria(long idUsuario, Convocatoria convocatoria) {
-        TransactionDefinition txDef = new DefaultTransactionDefinition();
+        DefaultTransactionDefinition  txDef = new DefaultTransactionDefinition();
+        txDef.setTimeout(timeout);
         TransactionStatus txStatus = transactionManager.getTransaction(txDef);
         try {
             repositorioConvocatoria.ingresarConvocatoria(idUsuario, convocatoria);
@@ -69,7 +74,8 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
 
     @Override
     public void eliminarConvocatoria(int idConvocatoria) {
-        TransactionDefinition txDef = new DefaultTransactionDefinition();
+        DefaultTransactionDefinition txDef = new DefaultTransactionDefinition();
+        txDef.setTimeout(timeout);
         TransactionStatus txStatus = transactionManager.getTransaction(txDef);
         try {
             repositorioConvocatoria.eliminarConvocatoria(idConvocatoria);
@@ -87,7 +93,8 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
 
     @Override
     public void actualizarConvocatoria(long idUsuario, Convocatoria convocatoria) {
-        TransactionDefinition txDef = new DefaultTransactionDefinition();
+        DefaultTransactionDefinition txDef = new DefaultTransactionDefinition();
+        txDef.setTimeout(timeout);
         TransactionStatus txStatus = transactionManager.getTransaction(txDef);
         try {
             repositorioConvocatoria.actualizarConvocatoria(idUsuario, convocatoria);

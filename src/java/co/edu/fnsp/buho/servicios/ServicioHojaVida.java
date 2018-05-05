@@ -7,12 +7,13 @@ package co.edu.fnsp.buho.servicios;
 
 import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.HojaVida;
+import co.edu.fnsp.buho.entidades.Terminos;
 import co.edu.fnsp.buho.repositorios.IRepositorioHojaVida;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
@@ -30,9 +31,13 @@ public class ServicioHojaVida implements IServicioHojaVida {
     @Autowired
     private IRepositorioHojaVida repositorioHojaVida;
 
+    @Value( "${jdbc.timeout}" )
+    private int timeout;
+    
     @Override
     public void ingresarHojaVida(long idUsuario, HojaVida hojaVida) {
-        TransactionDefinition txDef = new DefaultTransactionDefinition();
+        DefaultTransactionDefinition txDef = new DefaultTransactionDefinition();
+        txDef.setTimeout(timeout);
         TransactionStatus txStatus = transactionManager.getTransaction(txDef);
         try {
             repositorioHojaVida.ingresarHojaVida(idUsuario, hojaVida);
@@ -45,7 +50,8 @@ public class ServicioHojaVida implements IServicioHojaVida {
 
     @Override
     public void actualizarHojaVida(long idUsuario, HojaVida hojaVida) {
-        TransactionDefinition txDef = new DefaultTransactionDefinition();
+        DefaultTransactionDefinition txDef = new DefaultTransactionDefinition();
+        txDef.setTimeout(timeout);
         TransactionStatus txStatus = transactionManager.getTransaction(txDef);
         try {
             repositorioHojaVida.actualizarHojaVida(idUsuario, hojaVida);
@@ -73,7 +79,8 @@ public class ServicioHojaVida implements IServicioHojaVida {
 
     @Override
     public void eliminarHojaVida(long idPersona) {
-        TransactionDefinition txDef = new DefaultTransactionDefinition();
+        DefaultTransactionDefinition txDef = new DefaultTransactionDefinition();
+        txDef.setTimeout(timeout);
         TransactionStatus txStatus = transactionManager.getTransaction(txDef);
         try {
             repositorioHojaVida.eliminarHojaVida(idPersona);
@@ -147,5 +154,15 @@ public class ServicioHojaVida implements IServicioHojaVida {
     @Override
     public Documento obtenerDocumentoProductoConocimiento(int idProductoConocimiento) {
         return repositorioHojaVida.obtenerDocumentoProductoConocimiento(idProductoConocimiento);
+    }
+
+    @Override
+    public void ingresarTerminos(long idPersona, Terminos terminos) {
+         repositorioHojaVida.ingresarTerminos(idPersona, terminos);
+    }
+    
+    @Override
+    public boolean existenTerminos(long idPersona) {
+         return repositorioHojaVida.existenTerminos(idPersona);
     }
 }

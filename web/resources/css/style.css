@@ -695,3 +695,7 @@ table
 .btn {
     height: 30px;
 }
+
+#modal-terminos {
+    width: 1200px !important;
+}

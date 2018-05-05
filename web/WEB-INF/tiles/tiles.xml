@@ -34,6 +34,10 @@
         <put-attribute name="title" value="Editar" />  
         <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/editar.jsp" />  
     </definition>  
+    <definition name="hojasVida/terminos" extends="base-definition">  
+        <put-attribute name="title" value="Términos" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/terminos.jsp" />  
+    </definition>  
 
     <!-- Convocatorias Page -->
     <definition name="convocatorias/crear" extends="base-definition">  

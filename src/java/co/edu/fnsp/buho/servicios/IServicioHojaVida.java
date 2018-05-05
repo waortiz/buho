@@ -7,6 +7,7 @@ package co.edu.fnsp.buho.servicios;
 
 import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.HojaVida;
+import co.edu.fnsp.buho.entidades.Terminos;
 import java.util.List;
 
 /**
@@ -49,7 +50,11 @@ public interface IServicioHojaVida {
 
     Documento obtenerCertificadoCursoExperienciaDocencia(int idCursoExperienciaDocencia);
 
-    public Documento obtenerDocumentoPatente(int idPatente);
+    Documento obtenerDocumentoPatente(int idPatente);
 
-    public Documento obtenerDocumentoProductoConocimiento(int idProductoConocimiento);
+    Documento obtenerDocumentoProductoConocimiento(int idProductoConocimiento);
+
+    void ingresarTerminos(long idPersona, Terminos terminos);
+    
+    boolean existenTerminos(long idPersona);
 }

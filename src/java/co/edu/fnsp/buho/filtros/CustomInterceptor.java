@@ -6,7 +6,6 @@
 package co.edu.fnsp.buho.filtros;
 
 import co.edu.fnsp.buho.entidades.DetalleUsuario;
-import co.edu.fnsp.buho.entidades.OpcionMenu;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.GrantedAuthority;
@@ -39,9 +38,6 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
                 }
             }
             if (!administrador) {
-                if(request.getRequestURI().toLowerCase().contains("hojasvida/editar")) {
-                    response.sendRedirect(request.getContextPath() + "/hojasVida/modificar");
-                }
                 if(request.getRequestURI().toLowerCase().contains("convocatorias/crear") ||
                    request.getRequestURI().toLowerCase().contains("convocatorias/index")) {
                     response.sendRedirect(request.getContextPath() + "/convocatorias/postular");

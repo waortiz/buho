@@ -17,12 +17,12 @@ import co.edu.fnsp.buho.entidades.EducacionSuperior;
 import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.TipoDocumento;
-import co.edu.fnsp.buho.entidadesVista.HojaVida;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.Patente;
 import co.edu.fnsp.buho.entidades.ProductoConocimiento;
 import co.edu.fnsp.buho.entidades.Programa;
+import co.edu.fnsp.buho.entidades.Terminos;
 import co.edu.fnsp.buho.servicios.IServicioHojaVida;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
 import co.edu.fnsp.buho.utilidades.Util;
@@ -67,6 +67,20 @@ public class HojaVidaController {
         model.addAttribute("hojasVida", hojasVida);
 
         return "hojasVida/index";
+    }
+
+    @RequestMapping(value = "/terminos", method = RequestMethod.POST)
+    public @ResponseBody
+    String ingresarTerminos(@ModelAttribute Terminos terminos, Model model) throws ParseException, IOException {
+        try {
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.ingresarTerminos(idPersona, terminos);
+
+            return "";
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
     }
 
     @RequestMapping(value = "/editar", method = RequestMethod.POST)
@@ -327,7 +341,7 @@ public class HojaVidaController {
                 nuevaPatente.setTipo(patente.getTipo());
                 nuevaPatente.setFecha(Util.obtenerFecha(patente.getFecha()));
                 nuevaPatente.setPropiedadCompartida(patente.isPropiedadCompartida());
-                if (patente.getDocumento()!= null && patente.getDocumento().getBytes().length > 0) {
+                if (patente.getDocumento() != null && patente.getDocumento().getBytes().length > 0) {
                     documento = new Documento();
                     documento.setContenido(patente.getDocumento().getBytes());
                     documento.setNombre(patente.getDocumento().getOriginalFilename());
@@ -344,7 +358,7 @@ public class HojaVidaController {
                 nuevoProductoConocimiento.setNucleoBasicoConocimiento(productoConocimiento.getNucleoBasicoConocimiento());
                 nuevoProductoConocimiento.setTipo(productoConocimiento.getTipo());
                 nuevoProductoConocimiento.setUrl(productoConocimiento.getUrl());
-                if (productoConocimiento.getDocumento()!= null && productoConocimiento.getDocumento().getBytes().length > 0) {
+                if (productoConocimiento.getDocumento() != null && productoConocimiento.getDocumento().getBytes().length > 0) {
                     documento = new Documento();
                     documento.setContenido(productoConocimiento.getDocumento().getBytes());
                     documento.setNombre(productoConocimiento.getDocumento().getOriginalFilename());
@@ -353,7 +367,7 @@ public class HojaVidaController {
                 }
                 hojaVidaIngresar.getProductosConocimiento().add(nuevoProductoConocimiento);
             }
-            
+
             long idUsuario = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario();
             if (hojaVidaIngresar.getIdPersona() == 0) {
                 if (!servicioHojaVida.existePersona(hojaVidaIngresar.getNumeroIdentificacion())) {
@@ -372,14 +386,21 @@ public class HojaVidaController {
             }
 
             return "";
-        } catch (IOException exc) {
+        } catch (Exception exc) {
             logger.error(exc);
             throw exc;
         }
     }
 
     @RequestMapping(value = "/editar", method = RequestMethod.GET)
-    public String modificarHojaVidaUsuarioActual(Model model) {
+    public String editarHojaVidaUsuarioActual(Model model) {
+
+        long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+        boolean terminos = servicioHojaVida.existenTerminos(idPersona);;
+        if (!terminos) {
+            return "hojasVida/terminos";
+        }
+
         List<Maestro> paises = servicioMaestro.obtenerPaises();
         List<Maestro> tiposIdentificacion = servicioMaestro.obtenerTiposIdentificacion();
         List<Maestro> gruposEtnico = servicioMaestro.obtenerGruposEtnicos();
@@ -432,7 +453,6 @@ public class HojaVidaController {
         model.addAttribute("tiposProductosConocimiento", tiposProductosConocimiento);
         model.addAttribute("clasesPatente", clasesPatente);
 
-        long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
         co.edu.fnsp.buho.entidades.HojaVida hojaVida = servicioHojaVida.obtenerHojaVida(idPersona);
 
         if (hojaVida.getTelefonos().size() > 0) {
