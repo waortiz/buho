@@ -66,6 +66,9 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     private SimpleJdbcCall obtenerCapacitaciones;
     private SimpleJdbcCall obtenerCamposHojaVida;
 
+    private SimpleJdbcCall ingresarPrograma;
+    private SimpleJdbcCall ingresarInstitucion;
+
     @Autowired
     public void setDataSource(DataSource dataSource) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -109,6 +112,8 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         this.obtenerClasesPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerClasesPatente").returningResultSet("clasesPatente", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerCapacitaciones = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCapacitaciones").returningResultSet("capacitaciones", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerCamposHojaVida = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCamposHojaVida").returningResultSet("camposHojaVida", BeanPropertyRowMapper.newInstance(CampoHojaVida.class));
+        this.ingresarPrograma = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarPrograma");
+        this.ingresarInstitucion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarInstitucion");
     }
 
     @Override
@@ -378,7 +383,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         Map resultado = obtenerClasesPatente.execute(new HashMap<>());
         List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("clasesPatente");
 
-        return coleccion;    
+        return coleccion;
     }
 
     @Override
@@ -425,5 +430,24 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         List<CampoHojaVida> coleccion = (ArrayList<CampoHojaVida>) resultado.get("camposHojaVida");
 
         return coleccion;
+    }
+
+    @Override
+    public int ingresarProgramaInstitucion(Programa programa) {
+        MapSqlParameterSource parametrosIngresoInstitucion = new MapSqlParameterSource();
+        parametrosIngresoInstitucion.addValue("varNombre", programa.getInstitucion());
+        Map resultadoIngresoInstitucion = ingresarInstitucion.execute(parametrosIngresoInstitucion);
+        int idInstitucion = (int) resultadoIngresoInstitucion.get("varId");
+
+        MapSqlParameterSource parametrosIngresoPrograma = new MapSqlParameterSource();
+        parametrosIngresoPrograma.addValue("varinstitucion", idInstitucion);
+        parametrosIngresoPrograma.addValue("varnucleobasicoconocimiento", programa.getNucleoBasicoConocimiento());
+        parametrosIngresoPrograma.addValue("varnombre", programa.getNombre());
+        parametrosIngresoPrograma.addValue("vartitulo", programa.getTitulo());
+        
+        Map resultadoIngresoPrograma = ingresarPrograma.execute(parametrosIngresoPrograma);
+        int idPrograma = (int) resultadoIngresoPrograma.get("varId");
+
+        return idPrograma;
     }
 }

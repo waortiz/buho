@@ -110,7 +110,7 @@
                             <label for="">Copia c&eacute;dula</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe cargar la copia de cedula">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                             <div class="form-inline">
-                                <input type="file" name="copiaDocumentoIdentificacion" id="copiaDocumentoIdentificacion" class="form-control" style="width: 80%">
+                                <input type="file" accept=".pdf,.png,.jpg,.jpeg" name="copiaDocumentoIdentificacion" id="copiaDocumentoIdentificacion" class="form-control" style="width: 80%">
                                 <c:if test = "${!hojaVida.isCopiaDocumentoIdentificacionValidado()}">
                                     <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='glyphicon glyphicon-remove'></span></button>
                                     </c:if>    
@@ -253,7 +253,7 @@
                     <div class="col-md-7">
                         <div class="form-group form-inline">
                             <label>Copia libreta militar</label>
-                            <input type="file" name="copiaLibretaMilitar" id="copiaLibretaMilitar" class="form-control" style="width: 80%">
+                            <input type="file" accept=".pdf,.png,.jpg,.jpeg" name="copiaLibretaMilitar" id="copiaLibretaMilitar" class="form-control" style="width: 80%">
                             <c:if test = "${!hojaVida.isCopiaLibretaMilitarValidado()}">
                                 <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='glyphicon glyphicon-remove'></span></button>
                                 </c:if>    
@@ -502,7 +502,7 @@
                         <div class="form-group form-inline">
                             <label for="">Documento de soporte RUT</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe cargar el documento de RUT">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <input type="file" name="documentoRUT" id="documentoRUT" class="form-control" style="width: 80%">
+                            <input type="file" accept=".pdf,.png,.jpg,.jpeg" name="documentoRUT" id="documentoRUT" class="form-control" style="width: 80%">
                             <c:if test = "${!hojaVida.isDocumentoRUTValidado()}">
                                 <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='glyphicon glyphicon-remove'></span></button>
                                 </c:if>    
@@ -932,7 +932,7 @@
                                             <input type="hidden" class="form-control" data-bind="value: nivel, attr: { 'name': 'educacionesBasicas[' + $index() + '].nivel'  }">
                                         </td>
                                         <td style="width: 20%">
-                                            <span data-bind="text: nombreInstitucion" ></span>
+                                            <span data-bind="text: institucion" ></span>
                                             <input type="hidden" class="form-control" data-bind="value: institucion, attr: { 'name': 'educacionesBasicas[' + $index() + '].institucion'  }">
                                         </td>
                                         <td style="width: 20%">
@@ -976,7 +976,9 @@
                                             <select name="nivelEstudioEducacionBasica" id="nivelEstudioEducacionBasica" style="width: 100%;" class="js-select-basic-single js-states form-control">
                                                 <option value=""></option>
                                                 <c:forEach var="nivelFormacion" items="${nivelesFormacion}">
-                                                    <option value="${nivelFormacion.getId()}">${nivelFormacion.getNombre()}</option>
+                                                    <c:if test = "${nivelFormacion.getId() == 1 || nivelFormacion.getId() == 2}">
+                                                        <option value="${nivelFormacion.getId()}">${nivelFormacion.getNombre()}</option>
+                                                    </c:if>
                                                 </c:forEach>                                             
                                             </select>
                                         </div>
@@ -984,12 +986,7 @@
                                             <div class="form-group">
                                                 <label for="institucionEducacionBasica">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la institucion que estudio">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                <select style="width: 100%;" name="institucionEducacionBasica" id="institucionEducacionBasica" class="js-select-basic-single js-states form-control">
-                                                    <option></option>
-                                                    <c:forEach var="institucionEducativa" items="${institucionesEducativas}">
-                                                        <option value="${institucionEducativa.getId()}">${institucionEducativa.getNombre()}</option>
-                                                    </c:forEach>                                             
-                                                </select>
+                                                <input name="institucionEducacionBasica" id="institucionEducacionBasica" class="form-control" maxlength="150" />
                                             </div>
                                         </div>
                                     </div>
@@ -1068,7 +1065,6 @@
                                         </td>
                                         <td style="width: 20%">
                                             <span data-bind="text: nombreInstitucion" ></span>
-                                            <input type="hidden" class="form-control" data-bind="value: institucion, attr: { 'name': 'educacionesSuperiores[' + $index() + '].institucion'  }">
                                         </td>
                                         <td style="width: 20%">
                                             <span data-bind="text: nombrePrograma" ></span>
@@ -1093,7 +1089,6 @@
                                             <input type="hidden" data-bind="value: graduado, attr: { 'name': 'educacionesSuperiores[' + $index() + '].graduado'  }" />
                                             <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'educacionesSuperiores[' + $index() + '].consecutivo'  }" />
                                             <input type="hidden" data-bind="value: id, attr: { 'name': 'educacionesSuperiores[' + $index() + '].id'  }" />
-                                            <input type="hidden" data-bind="value: nucleoBasicoConocimiento, attr: { 'name': 'educacionesSuperiores[' + $index() + '].nucleoBasicoConocimiento'  }" />
                                             <input type="hidden" data-bind="value: tituloExterior, attr: { 'name': 'educacionesSuperiores[' + $index() + '].tituloExterior'  }" />
                                             <input type="hidden" data-bind="value: paisTituloExterior, attr: { 'name': 'educacionesSuperiores[' + $index() + '].paisTituloExterior'  }" />
                                         </td>
@@ -1177,7 +1172,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="institucionEducativaPrograma">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institucion que estudio">
+                                                                <label for="institucionEducativaPrograma">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institución que estudio">
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
                                                                 <select style="width: 100%;" name="institucionEducativaPrograma" id="institucionEducativaPrograma" class="js-select-basic-single js-states form-control">
                                                                     <option value=""></option>
@@ -1205,9 +1200,10 @@
                                                             <div class="form-group">
                                                                 <label for="programaCursado">Programa cursado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa cursado">
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                                <select style="width: 100%;" name="programaCursado" id="programaCursado" class="js-select-basic-single js-states form-control">
-                                                                    <option value=""></option>
+                                                                <select style="width: 88%;" name="programaCursado" id="programaCursado" class="js-select-basic-single js-states form-control">
+                                                                <option value=""></option>
                                                                 </select>
+                                                                <button id="btnNuevoProgramaExtranjero" style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoProgramaExtranjero();"><span class="glyphicon glyphicon-plus"></span></button>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -1226,6 +1222,60 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="modal fade" id="md_programa_extranjero" role="dialog">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header mhsuccess">
+                                                    <button type="button" class="close" onclick="cerrarVentanaProgramaExtranjero();">&times;</button>
+                                                    <h4 class="modal-title">Programa</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div id="alert_programa_extranjero"></div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="institucionEducativaProgramaExtranjero">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institución que estudio">
+                                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                                <input type="text" name="institucionEducativaProgramaExtranjero" id="institucionEducativaProgramaExtranjero" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcloe básico de conocimiento">
+                                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                                <select style="width: 100%;" name="nucleoBasicoConocimientoProgramaExtranjero" id="nucleoBasicoConocimientoProgramaExtranjero" class="js-select-basic-single js-states form-control">
+                                                                    <option></option>
+                                                                    <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
+                                                                        <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
+                                                                    </c:forEach>                                                                   
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="programaCursadoExtranjero">Programa cursado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa cursado">
+                                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                                <input type="text" name="programaCursadoExtranjero" id="programaCursadoExtranjero" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="tituloProgramaExtranjero">T&iacute;tulo obtenido</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de título obtenido">
+                                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                                <input type="text" class="form-control" name="tituloProgramaExtranjero" id="tituloProgramaExtranjero" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" id="addprogramaextranjero">Agregar</button>
+                                                    <button type="button" class="btn btn-success" onclick="cerrarVentanaProgramaExtranjero();">Cancelar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                    
                                     <div id="formprograma" style="display: none;">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -2671,6 +2721,7 @@
     var UNIVERSIDAD_ANTIOQUIA = 'Universidad de Antioquia';
     var TIPO_CERTIFICACION_OTRO = 8;
     var programas = [];
+    var MAXIMO_TAMANYO_ARCHIVO = 2097152;
     
     $('.fecha').datepicker({
         dateFormat: "dd/mm/yy",
@@ -2692,6 +2743,7 @@
             $('#forminves').css("display", "none");
             $('#formdistin').css("display", "none");
         });
+        
         $('#btnpersopor').click(function () {
             $('#formperfilsopor').css("display", "block");
             $('#formpersonal').css("display", "none");
@@ -2701,6 +2753,7 @@
             $('#forminves').css("display", "none");
             $('#formdistin').css("display", "none");
         });
+        
         $('#btnacademico').click(function () {
             $('#formpersonal').css("display", "none");
             $('#formperfilsopor').css("display", "none");
@@ -2710,6 +2763,7 @@
             $('#forminves').css("display", "none");
             $('#formdistin').css("display", "none");
         });
+        
         $('#btneducontinua').click(function () {
             $('#formeducontinua').css("display", "block");
             $('#formpersonal').css("display", "none");
@@ -2719,6 +2773,7 @@
             $('#forminves').css("display", "none");
             $('#formdistin').css("display", "none");
         });
+        
         $('#btnexperiencia').click(function () {
             $('#formpersonal').css("display", "none");
             $('#formperfilsopor').css("display", "none");
@@ -2728,6 +2783,7 @@
             $('#forminves').css("display", "none");
             $('#formdistin').css("display", "none");
         });
+        
         $('#btninvestigacion').click(function () {
             $('#forminves').css("display", "block");
             $('#formpersonal').css("display", "none");
@@ -2737,6 +2793,7 @@
             $('#formexperiencia').css("display", "none");
             $('#formdistin').css("display", "none");
         });
+        
         $('#btndist').click(function () {
             $('#formdistin').css("display", "block");
             $('#formpersonal').css("display", "none");
@@ -2746,9 +2803,11 @@
             $('#forminves').css("display", "none");
             $('#formexperiencia').css("display", "none");
         });
+        
         $('#btnrutsi').click(function () {
             $('#actividadEconomica').prop('disabled', false);
         });
+        
         if ($('#disponeRUT').val() === "false") {
             $('#actividadEconomica').prop('disabled', true);
         }
@@ -2756,16 +2815,19 @@
             $('#actividadEconomica').val("").trigger("change.select2");
             $('#actividadEconomica').prop('disabled', 'disabled');
         });
+        
         if ($('#empleadoUDEA').val() === "false") {
             $('#tipoVinculacion').prop('disabled', true);
         }
         $('#btnempleadosi').click(function () {
             $("#tipoVinculacion").prop('disabled', false);
         });
+        
         $('#btnempleadono').click(function () {
             $("#tipoVinculacion").prop('disabled', 'disabled');
             $('#tipoVinculacion').val("").trigger("change.select2");
         });
+        
         $('#tipoCertificacionIdioma').change(function(){
             var valor = $(this).val();
             if(valor === TIPO_CERTIFICACION_OTRO) {
@@ -2773,29 +2835,38 @@
             } else {
               $('#divOtroCertificacionIdioma').css("display","none");
             }
-        });     
+        });   
+        
         $('#btnGraduadoSiEducacionBasica').click(function(){
           $('#anyoFinalizacionEducacionBasica').prop('disabled', false);
         });
+        
         $('#btnGraduadoNoEducacionBasica').click(function(){
           $('#anyoFinalizacionEducacionBasica').prop('disabled', 'disabled');
           $('#anyoFinalizacionEducacionBasica').val("");
         });
+        
         $('#btnTituloExtranjeroSiEducacionSuperior').click(function(){
           $('#paistit').css("display","block");
           $('#certhomo').css('display','block');
+          $('#btnNuevoProgramaExtranjero').show();
         });
+        
         $('#btnTituloExtranjeroNoEducacionSuperior').click(function(){
           $('#paistit').css("display", "none");
           $('#certhomo').css('display', 'none');
+          $('#btnNuevoProgramaExtranjero').hide();
         });  
+        
         $('#btnGraduadoSiEducacionSuperior').click(function () {
           $('#anyoFinalizacionEducacionSuperior').prop('disabled', false);
         });
+        
         $('#btnGraduadoNoEducacionSuperior').click(function () {
           $('#anyoFinalizacionEducacionSuperior').prop('disabled', 'disabled');
           $('#anyoFinalizacionEducacionSuperior').val("");
         });
+        
         $('#addprograma').click(function(){
           var institucion = $('#institucionEducativaPrograma').val();
           var nombreInstitucion = $('#institucionEducativaPrograma option:selected').text().toUpperCase();
@@ -2805,7 +2876,7 @@
           var nombreNucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoPrograma option:selected').text().toUpperCase();
           var tituloPrograma = $('#tituloPrograma').val();
 
-          $('#formprograma').css("display","block");
+          $('#formprograma').show();
           
           $('#institucionEducacionSuperior').val(institucion);
           $('#nombreInstitucionEducacionSuperior').val(nombreInstitucion);
@@ -2821,6 +2892,70 @@
           $('#tituloPrograma').val("");
           
           $('#md_programa').modal('hide');
+        });
+        
+        $('#addprogramaextranjero').click(function(){
+          var institucion = $('#institucionEducativaProgramaExtranjero').val();
+          var programaCursado = $('#programaCursadoExtranjero').val();
+          var nucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoProgramaExtranjero').val();
+          var nombreNucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoProgramaExtranjero option:selected').text().toUpperCase();
+          var tituloPrograma = $('#tituloProgramaExtranjero').val();
+
+        if (institucion === "") {
+            bootstrap_alert_programa_extranjero.warning('Debe ingresar la institución');
+            return false;
+        }
+        
+        if (programaCursado === "") {
+            bootstrap_alert_programa_extranjero.warning('Debe ingresar el programa cursado');
+            return false;
+        }
+
+        if (nucleoBasicoConocimientoPrograma === "") {
+            bootstrap_alert_programa_extranjero.warning('Debe ingresar núcleo básico de conocimiento');
+            return false;
+        }
+
+        if (tituloPrograma === "") {
+            bootstrap_alert_programa_extranjero.warning('Debe ingresar el título');
+            return false;
+        }
+
+        var formData = new FormData(this);
+        formData.append("nombre", programaCursado);
+        formData.append("institucion", institucion);
+        formData.append("nucleoBasicoConocimiento", nucleoBasicoConocimientoPrograma);
+        formData.append("titulo", tituloPrograma);
+        $.ajax({
+            type: "POST",
+            url: "${pageContext.request.contextPath}/hojasVida/programa",
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+            },
+            success: function (response) {
+                if (response !== "") {
+                    var respuesta = JSON.parse(response);
+                    
+                    $('#institucionEducacionSuperior').val("");
+                    $('#nombreInstitucionEducacionSuperior').val(institucion);
+                    $('#programaCursadoEducacionSuperior').val(respuesta.id);
+                    $('#nombreProgramaCursadoEducacionSuperior').val(programaCursado);
+                    $('#nucleoBasicoConocimientoEducacionSuperior').val("");
+                    $('#nombreNucleoBasicoConocimientoEducacionSuperior').val(nombreNucleoBasicoConocimientoPrograma);
+                    $('#tituloEducacionSuperior').val(tituloPrograma);
+                    $('#formprograma').show();
+                    $('#md_programa_extranjero').modal('hide');
+                    $('#md_programa').modal('hide');
+                } else {
+                    bootstrap_alert_programa_extranjero.warning(response);
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                bootstrap_alert_programa_extranjero.warning("Error al almacenar el programa.");
+            }});
         });
         $('#btnExperienciaDocenciaFNSPSi').click(function () {
             $('#institucionExperienciaDocencia').val(ID_UNIVERSIDAD_ANTIOQUIA).trigger('change.select2');
@@ -3277,6 +3412,11 @@
                     bootstrap_alert_documento_soporte.warning('Debe ingresar el documento');
                     return false;
                 }
+                if ($('input:file[name="documentosSoporte[' + self.documentosSoporte().length + '].documento"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_documento_soporte.warning('El documento no debe ser mayor a 2MB');
+                    return false;
+                }
+                
                 self.documentosSoporte.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.documentosSoporte().length),
@@ -3285,7 +3425,6 @@
                     documento: ko.observable(''),
                     tieneDocumento: ko.observable(false)
                 });
-                $('input:file[name="documentosSoporte[' + self.documentosSoporte().length + '].documento"]').hide();
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -3300,14 +3439,17 @@
                     bootstrap_alert_documento_soporte.warning('Debe ingresar el documento');
                     return false;
                 }
-
+                if ($('input:file[name="documentosSoporte[' + indice + '].documento"]').val() !== "" &&
+                    $('input:file[name="documentosSoporte[' + indice + '].documento"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_documento_soporte.warning('El documento no debe ser mayor a 2MB');
+                    return false;
+                }
                 self.documentosSoporte()[indice].tipoDocumento(tipoDocumento);
                 self.documentosSoporte()[indice].nombreTipoDocumento(nombreTipoDocumento);
                 self.documentosSoporte()[indice].documento('');
                 if ($('input:file[name="documentosSoporte[' + indice + '].documento"]').val() !== "") {
                     self.documentosSoporte()[indice].tieneDocumento(false);
                 }
-                $('input:file[name="documentosSoporte[' + indice + '].documento"]').hide();
             }
             $('#md_documento_soporte').modal('hide');
         };
@@ -3316,7 +3458,7 @@
             $('input:file[name="documentosSoporte[' + documentoSoporte.consecutivo() + '].documento"]').remove();
             self.documentosSoporte.remove(documentoSoporte);
             for(i = documentoSoporte.consecutivo(); i < hojaVidaModel.documentosSoporte().length; i++) {
-               $('input:file[name="documentosSoporte[' + (i + 1) + '].certificado"]').attr('name', 'documentosSoporte[' + i + '].certificado'); 
+               $('input:file[name="documentosSoporte[' + (i + 1) + '].documento"]').attr('name', 'documentosSoporte[' + i + '].documento'); 
                 hojaVidaModel.documentosSoporte()[i].consecutivo(i);
             }
         };
@@ -3387,6 +3529,10 @@
                     bootstrap_alert_idioma.warning('Debe ingresar el certificado');
                     return false;
                 }
+                if ($('input:file[name="idiomas[' + self.idiomas().length + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_idioma.warning('El certificado no debe ser mayor a 2MB');
+                    return false;
+                }                
                 self.idiomas.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.idiomas().length),
@@ -3407,7 +3553,6 @@
                     certificado: ko.observable(''),
                     tieneCertificado: ko.observable(false)
                 });
-                $('input:file[name="idiomas[' + self.idiomas().length + '].certificado"]').hide();
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -3416,6 +3561,11 @@
                         indice = i;
                         break;
                     }
+                }
+                if ($('input:file[name="idiomas[' + indice + '].certificado"]').val() != "" && 
+                    $('input:file[name="idiomas[' + indice + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_idioma.warning('El certificado no debe ser mayor a 2MB');
+                    return false;
                 }
                 self.idiomas()[indice].idioma(idioma);
                 self.idiomas()[indice].nombreIdioma(nombreIdioma);
@@ -3432,7 +3582,6 @@
                 self.idiomas()[indice].nombreTipoCertificacion(nombreTipoCertificacion);
                 self.idiomas()[indice].puntajeCertificacion(puntajeCertificacion);
                 self.idiomas()[indice].certificado('');
-                $('input:file[name="idiomas[' + indice + '].certificado"]').hide();
             }
             $('#md_idioma').modal('hide');
         };
@@ -3475,7 +3624,6 @@
             var nivelEstudioEducacionBasica = $('#nivelEstudioEducacionBasica').val();
             var nombreNivelEducacionBasica = $('#nivelEstudioEducacionBasica option:selected').text();
             var institucionEducacionBasica = $('#institucionEducacionBasica').val();
-            var nombreInstitucionEducacionBasica = $('#institucionEducacionBasica option:selected').text();
             var anyoInicioEducacionBasica = $('#anyoInicioEducacionBasica').val();
             var anyoFinalizacionEducacionBasica = $('#anyoFinalizacionEducacionBasica').val();
             var tituloEducacionBasica = $('#tituloEducacionBasica').val();
@@ -3486,7 +3634,7 @@
                 return false;
             }
             if (institucionEducacionBasica === "") {
-                bootstrap_alert_educacion_basica.warning('Debe seleccionar la institución');
+                bootstrap_alert_educacion_basica.warning('Debe ingresar la institución');
                 return false;
             }
             if (anyoInicioEducacionBasica === "") {
@@ -3502,11 +3650,15 @@
                     bootstrap_alert_educacion_basica.warning('Debe ingresar el certificado');
                     return false;
                 }
+                if ($('input:file[name="educacionesBasicas[' + self.educacionesBasicas().length + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_educacion_basica.warning('El certificado no debe ser mayor a 2MB');
+                    return false;
+                }                
+                
                 self.educacionesBasicas.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.educacionesBasicas().length),
                     institucion: ko.observable(institucionEducacionBasica),
-                    nombreInstitucion: ko.observable(nombreInstitucionEducacionBasica),
                     nivel: ko.observable(nivelEstudioEducacionBasica),
                     nombreNivel: ko.observable(nombreNivelEducacionBasica),
                     anyoInicio: ko.observable(anyoInicioEducacionBasica),
@@ -3516,7 +3668,6 @@
                     certificado: ko.observable(''),
                     tieneCertificado: ko.observable(false)
                 });
-                $('input:file[name="educacionesBasicas[' + self.educacionesBasicas().length + '].certificado"]').hide();
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -3526,8 +3677,12 @@
                         break;
                     }
                 }
+                if ($('input:file[name="educacionesBasicas[' + indice + '].certificado"]').val() != "" && 
+                    $('input:file[name="educacionesBasicas[' + indice + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_educacion_basica.warning('El documento no debe ser mayor a 2MB');
+                    return false;
+                }                
                 self.educacionesBasicas()[indice].institucion(institucionEducacionBasica);
-                self.educacionesBasicas()[indice].nombreInstitucion(nombreInstitucionEducacionBasica);
                 self.educacionesBasicas()[indice].nivel(nivelEstudioEducacionBasica);
                 self.educacionesBasicas()[indice].nombreNivel(nombreNivelEducacionBasica);
                 self.educacionesBasicas()[indice].anyoInicio(anyoInicioEducacionBasica);
@@ -3535,7 +3690,6 @@
                 self.educacionesBasicas()[indice].titulo(tituloEducacionBasica);
                 self.educacionesBasicas()[indice].graduado(graduadoEducacionBasica);
                 self.educacionesBasicas()[indice].certificado('');
-                $('input:file[name="educacionesBasicas[' + indice + '].certificado"]').hide();
             }
             $('#md_educacion_basica').modal('hide');
         };
@@ -3553,7 +3707,7 @@
             ocultarCertificadosEducacionesBasicas();
             
             $('#nivelEstudioEducacionBasica').val(educacionBasica.nivel()).trigger('change');
-            $('#institucionEducacionBasica').val(educacionBasica.institucion()).trigger('change');
+            $('#institucionEducacionBasica').val(educacionBasica.institucion());
             $('#anyoInicioEducacionBasica').val(educacionBasica.anyoInicio());
             $('#anyoFinalizacionEducacionBasica').val(educacionBasica.anyoFinalizacion()).trigger('change');
             $('#tituloEducacionBasica').val(educacionBasica.titulo());
@@ -3614,18 +3768,14 @@
                         bootstrap_alert_educacion_superior.warning('Debe ingresar el certificado homologado del título');
                         return false;
                     }
+                    if ($('input:file[name="educacionesSuperiores[' + self.educacionesSuperiores().length + '].certificadoHomologado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                        bootstrap_alert_educacion_superior.warning('El certificado homologado no debe ser mayor a 2MB');
+                        return false;
+                    }                
                 } 
             }
             if (programaCursadoEducacionSuperior === "") {
                 bootstrap_alert_educacion_superior.warning('Debe ingresar el programa');
-                return false;
-            }
-            if (institucionEducacionSuperior === "") {
-                bootstrap_alert_educacion_superior.warning('Debe seleccionar la institución');
-                return false;
-            }
-            if (nucleoBasicoConocimientoEducacionSuperior === "") {
-                bootstrap_alert_educacion_superior.warning('Debe seleccionar el área de saber');
                 return false;
             }
             if (anyoInicioEducacionSuperior === "") {
@@ -3649,12 +3799,16 @@
                     bootstrap_alert_educacion_superior.warning('Debe ingresar el certificado');
                     return false;
                 }
+                if ($('input:file[name="educacionesSuperiores[' + self.educacionesSuperiores().length + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_educacion_superior.warning('El certificado no debe ser mayor a 2MB');
+                    return false;
+                }             
                 self.educacionesSuperiores.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.educacionesSuperiores().length),
                     tituloExterior: ko.observable(tituloExteriorEducacionSuperior),
                     paisTituloExterior: ko.observable(paisTituloExteriorEducacionSuperior),
-                    nombrePais: ko.observable(nombrePaisTituloExteriorEducacionSuperior),
+                    nombrePaisTituloExterior: ko.observable(nombrePaisTituloExteriorEducacionSuperior),
                     institucion: ko.observable(institucionEducacionSuperior),
                     nombreInstitucion: ko.observable(nombreInstitucionEducacionSuperior),
                     programa: ko.observable(programaCursadoEducacionSuperior),
@@ -3673,8 +3827,6 @@
                     certificado: ko.observable(''),
                     tieneCertificado: ko.observable(false)
                 });
-                $('input:file[name="educacionesSuperiores[' + self.educacionesSuperiores().length + '].certificado"]').hide();
-                $('input:file[name="educacionesSuperiores[' + self.educacionesSuperiores().length + '].certificadoHomologado"]').hide();
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -3689,7 +3841,17 @@
                         bootstrap_alert_educacion_superior.warning('Debe ingresar el certificado homologado del título');
                         return false;
                     }
+                    if ($('input:file[name="educacionesSuperiores[' + indice + '].certificadoHomologado"]').val() != "" && 
+                        $('input:file[name="educacionesSuperiores[' + indice + '].certificadoHomologado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                        bootstrap_alert_educacion_superior.warning('El certificado homologado no debe ser mayor a 2MB');
+                        return false;
+                    }                    
                 }
+                if ($('input:file[name="educacionesSuperiores[' + indice + '].certificado"]').val() != "" && 
+                    $('input:file[name="educacionesSuperiores[' + indice + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_educacion_superior.warning('El certificado no debe ser mayor a 2MB');
+                    return false;
+                }                    
                 self.educacionesSuperiores()[indice].institucion(institucionEducacionSuperior);
                 self.educacionesSuperiores()[indice].nombreInstitucion(nombreInstitucionEducacionSuperior);
                 self.educacionesSuperiores()[indice].tituloExterior(tituloExteriorEducacionSuperior);
@@ -3709,8 +3871,6 @@
                 self.educacionesSuperiores()[indice].fechaTitulo(fechaTituloEducacionSuperior);
                 self.educacionesSuperiores()[indice].certificado('');
                 self.educacionesSuperiores()[indice].certificadoHomologado('');
-                $('input:file[name="educacionesSuperiores[' + indice + '].certificado"]').hide();
-                $('input:file[name="educacionesSuperiores[' + indice + '].certificadoHomologado"]').hide();
             }
             $('#md_educacion_superior').modal('hide');
         };
@@ -3736,9 +3896,11 @@
             if(educacionSuperior.tituloExterior()) {
                 $('#paistit').css("display","block");
                 $('#certhomo').css('display','block');
+                $('#btnNuevoProgramaExtranjero').show();
             } else {
                 $('#paistit').css("display","none");
                 $('#certhomo').css('display','none');
+                $('#btnNuevoProgramaExtranjero').hide();
             }
             
             $('#formprograma').css("display","block");
@@ -3828,6 +3990,10 @@
                     bootstrap_alert_educacion_continua.warning('Debe ingresar el certificado');
                     return false;
                 }
+                if ($('input:file[name="educacionesContinuas[' + self.educacionesContinuas().length + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_educacion_continua.warning('El certificado no debe ser mayor a 2MB');
+                    return false;
+                }             
                 self.educacionesContinuas.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.educacionesContinuas().length),
@@ -3843,7 +4009,6 @@
                     certificado: ko.observable(''),
                     tieneCertificado: ko.observable(false)
                 });
-                $('input:file[name="educacionesContinuas[' + self.educacionesContinuas().length + '].certificado"]').hide();
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -3853,6 +4018,11 @@
                         break;
                     }
                 }
+                if ($('input:file[name="educacionesContinuas[' + indice + '].certificado"]').val() != "" && 
+                    $('input:file[name="educacionesContinuas[' + indice + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_educacion_continua.warning('El certificado no debe ser mayor a 2MB');
+                    return false;
+                }                    
                 self.educacionesContinuas()[indice].tipoCapacitacion(tipoCapacitacionEducacionContinua);
                 self.educacionesContinuas()[indice].nombreTipoCapacitacion(nombreTipoCapacitacionEducacionContinua);
                 self.educacionesContinuas()[indice].institucion(institucionEducacionContinua);
@@ -3863,7 +4033,6 @@
                 self.educacionesContinuas()[indice].nombreNucleoBasicoConocimiento(nombreNucleoBasicoConocimientoEducacionContinua);
                 self.educacionesContinuas()[indice].anyo(anyoEducacionContinua);
                 self.educacionesContinuas()[indice].certificado('');
-                $('input:file[name="educacionesContinuas[' + indice + '].certificado"]').hide();
             }
             $('#md_educacion_continua').modal('hide');
         };
@@ -3918,6 +4087,10 @@
                     bootstrap_alert_distincion.warning('Debe ingresar el certificado');
                     return false;
                 }
+                if ($('input:file[name="distinciones[' + self.distinciones().length + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_distincion.warning('El certificado no debe ser mayor a 2MB');
+                    return false;
+                }             
                 self.distinciones.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.distinciones().length),
@@ -3927,7 +4100,6 @@
                     certificado: ko.observable(''),
                     tieneCertificado: ko.observable(false)
                 });
-                $('input:file[name="distinciones[' + self.distinciones().length + '].certificado"]').hide();
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -3937,11 +4109,15 @@
                         break;
                     }
                 }
+                if ($('input:file[name="distinciones[' + indice + '].certificado"]').val() != "" && 
+                    $('input:file[name="distinciones[' + indice + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_distincion.warning('El certificado no debe ser mayor a 2MB');
+                    return false;
+                }                    
                 self.distinciones()[indice].fechaDistincion(fechaDistincion);
                 self.distinciones()[indice].institucionOtorga(institucionOtorgaDistincion);
                 self.distinciones()[indice].descripcion(descripcionDistincion);
                 self.distinciones()[indice].certificado('');
-                $('input:file[name="distinciones[' + indice + '].certificado"]').hide();
             }
             $('#md_distincion').modal('hide');
         };
@@ -3949,9 +4125,9 @@
         self.eliminarDistincion = function (distincion) {
             $('input:file[name="distinciones[' + distincion.consecutivo() + '].certificado"]').remove();
             self.distinciones.remove(distincion);
-            for(i = distincion.consecutivo(); i < hojaVidaModel.distinciones().length; i++) {
+            for(i = distincion.consecutivo(); i < self.distinciones().length; i++) {
                $('input:file[name="distinciones[' + (i + 1) + '].certificado"]').attr('name', 'distinciones[' + i + '].certificado'); 
-                hojaVidaModel.distinciones()[i].consecutivo(i);
+                self.distinciones()[i].consecutivo(i);
             }
         };
 
@@ -4036,6 +4212,10 @@
                     bootstrap_alert_experiencia_laboral.warning('Debe ingresar el certificado');
                     return false;
                 }
+                if ($('input:file[name="experienciasLaborales[' + self.experienciasLaborales().length + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_experiencia_laboral.warning('El certificado no debe ser mayor a 2MB');
+                    return false;
+                }             
                 self.experienciasLaborales.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.experienciasLaborales().length),
@@ -4060,7 +4240,6 @@
                     certificado: ko.observable(''),
                     tieneCertificado: ko.observable(false)
                 });
-                $('input:file[name="experienciasLaborales[' + self.experienciasLaborales().length + '].certificado"]').hide();
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -4070,6 +4249,11 @@
                         break;
                     }
                 }
+                if ($('input:file[name="experienciasLaborales[' + indice + '].certificado"]').val() != "" && 
+                    $('input:file[name="experienciasLaborales[' + indice + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_experiencia_laboral.warning('El certificado no debe ser mayor a 2MB');
+                    return false;
+                }                    
                 self.experienciasLaborales()[indice].tipoExperiencia(tipoExperienciaLaboral);
                 self.experienciasLaborales()[indice].nombreTipoExperiencia(nombreTipoExperienciaLaboral);
                 self.experienciasLaborales()[indice].trabajoActual(trabajoActualExperienciaLaboral);
@@ -4089,7 +4273,6 @@
                 self.experienciasLaborales()[indice].naturalezaCargo(naturalezaCargoExperienciaLaboral);
                 self.experienciasLaborales()[indice].nombreNaturalezaCargo(nombreNaturalezaCargoExperienciaLaboral);
                 self.experienciasLaborales()[indice].certificado('');
-                $('input:file[name="experienciasLaborales[' + indice + '].certificado"]').hide();
             }
             $('#md_experiencia_laboral').modal('hide');
         };
@@ -4097,9 +4280,9 @@
         self.eliminarExperienciaLaboral = function (experienciaLaboral) {
             $('input:file[name="experienciasLaborales[' + experienciaLaboral.consecutivo() + '].certificado"]').remove();
             self.experienciasLaborales.remove(experienciaLaboral);
-            for(i = experienciaLaboral.consecutivo(); i < hojaVidaModel.experienciasLaborales().length; i++) {
+            for(i = experienciaLaboral.consecutivo(); i < self.experienciasLaborales().length; i++) {
                $('input:file[name="experienciasLaborales[' + (i + 1) + '].certificado"]').attr('name', 'experienciasLaborales[' + i + '].certificado'); 
-                hojaVidaModel.experienciasLaborales()[i].consecutivo(i);
+                self.experienciasLaborales()[i].consecutivo(i);
             }
         };
 
@@ -4193,8 +4376,8 @@
                $('input:file[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].certificado"]').remove();
             }            
             self.experienciasDocencia.remove(experienciaDocencia);
-            for(i = experienciaDocencia.consecutivo(); i < hojaVidaModel.experienciasDocencia().length; i++) {
-                for(j = 0; j < hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia().length; j++) {
+            for(i = experienciaDocencia.consecutivo(); i < self.experienciasDocencia().length; i++) {
+                for(j = 0; j < self.experienciasDocencia()[i].cursosExperienciaDocencia().length; j++) {
                    $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].id"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].id'); 
                    $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].consecutivo"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].consecutivo'); 
                    $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].nucleoBasicoConocimiento"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nucleoBasicoConocimiento'); 
@@ -4205,7 +4388,7 @@
                    $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].anyo"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].anyo'); 
                    $('input:file[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].certificado"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].certificado'); 
                 }
-                hojaVidaModel.experienciasDocencia()[i].consecutivo(i);
+                self.experienciasDocencia()[i].consecutivo(i);
             }
         };
 
@@ -4284,6 +4467,10 @@
                     bootstrap_alert_curso_experiencia_docencia.warning('Debe ingresar el certificado');
                     return false;
                 }
+                if ($('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_curso_experiencia_docencia.warning('El certificado no debe ser mayor a 2MB');
+                    return false;
+                }             
                
                 id = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].id" />');
                 consecutivo = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].consecutivo" />');
@@ -4327,7 +4514,6 @@
                     certificado: ko.observable(''),
                     tieneCertificado: ko.observable(false)
                 });
-                $('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].certificado"]').hide();
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -4337,7 +4523,12 @@
                         break;
                     }
                 }
-                
+                if ($('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].certificado"]').val() != "" &&
+                    $('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_curso_experiencia_docencia.warning('El certificado no debe ser mayor a 2MB');
+                    return false;
+                }             
+
                 $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].nucleoBasicoConocimiento"]').val(nucleoBasicoConocimientoCursoExperienciaDocencia);
                 $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].nombreCurso"]').val(nombreCursoExperienciaDocencia);
                 $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].modalidad"]').val(modalidadCursoExperienciaDocencia);
@@ -4355,7 +4546,6 @@
                 self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].numeroHoras(numeroHorasCursoExperienciaDocencia);
                 self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].anyo(anyoCursoExperienciaDocencia);
                 self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].certificado('');
-                $('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].certificado"]').hide();
             }
             $('#md_curso_experiencia_docencia').modal('hide');
         };
@@ -4371,7 +4561,7 @@
             $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].anyo"]').remove();
             $('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].certificado"]').remove();
             self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia.remove(cursoExperienciaDocencia);
-            for(i = cursoExperienciaDocencia.consecutivo(); i < hojaVidaModel.cursosExperienciaDocencia().length; i++) {
+            for(i = cursoExperienciaDocencia.consecutivo(); i < self.cursosExperienciaDocencia().length; i++) {
                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].id"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].id'); 
                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].consecutivo"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].consecutivo'); 
                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].nucleoBasicoConocimiento"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].nucleoBasicoConocimiento'); 
@@ -4515,6 +4705,11 @@
                     bootstrap_alert_patente.warning('Debe ingresar el documento');
                     return false;
                 }
+                if ($('input:file[name="patentes[' + self.patentes().length + '].documento"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_patente.warning('El documento no debe ser mayor a 2MB');
+                    return false;
+                }
+                
                 self.patentes.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.patentes().length),
@@ -4528,7 +4723,6 @@
                     documento: ko.observable(''),
                     tieneDocumento: ko.observable(false)
                 });
-                $('input:file[name="patentes[' + self.patentes().length + '].documento"]').hide();
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -4538,6 +4732,12 @@
                         break;
                     }
                 }
+                if ($('input:file[name="patentes[' + indice + '].documento"]').val() != "" && 
+                    $('input:file[name="patentes[' + indice + '].documento"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_patente.warning('El documento no debe ser mayor a 2MB');
+                    return false;
+                }
+                
                 self.patentes()[indice].fecha(fechaPatente);
                 self.patentes()[indice].nombreTipo(nombreTipoPatente);
                 self.patentes()[indice].tipo(tipoPatente);
@@ -4546,7 +4746,6 @@
                 self.patentes()[indice].clase(clasePatente);
                 self.patentes()[indice].descripcion(descripcionPatente);
                 self.patentes()[indice].documento('');
-                $('input:file[name="patentes[' + indice + '].documento"]').hide();
             }
             $('#md_patente').modal('hide');
         };
@@ -4554,9 +4753,9 @@
         self.eliminarPatente = function (patente) {
             $('input:file[name="patentes[' + patente.consecutivo() + '].documento"]').remove();
             self.patentes.remove(patente);
-            for(i = patente.consecutivo(); i < hojaVidaModel.patentes().length; i++) {
+            for(i = patente.consecutivo(); i < self.patentes().length; i++) {
                $('input:file[name="patentes[' + (i + 1) + '].documento"]').attr('name', 'patentes[' + i + '].documento'); 
-                hojaVidaModel.patentes()[i].consecutivo(i);
+                self.patentes()[i].consecutivo(i);
             }
         };
 
@@ -4612,6 +4811,10 @@
                     bootstrap_alert_producto_conocimiento.warning('Debe ingresar el documento');
                     return false;
                 }
+                if ($('input:file[name="productosConocimiento[' + self.productosConocimiento().length + '].documento"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_producto_conocimiento.warning('El documento no debe ser mayor a 2MB');
+                    return false;
+                }
                 self.productosConocimiento.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.productosConocimiento().length),
@@ -4623,7 +4826,6 @@
                     documento: ko.observable(''),
                     tieneDocumento: ko.observable(false)
                 });
-                $('input:file[name="productosConocimiento[' + self.patentes().length + '].documento"]').hide();
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -4633,13 +4835,18 @@
                         break;
                     }
                 }
+                if ($('input:file[name="productosConocimiento[' + indice + '].documento"]').val() != "" && 
+                    $('input:file[name="productosConocimiento[' + indice + '].documento"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_producto_conocimiento.warning('El documento no debe ser mayor a 2MB');
+                    return false;
+                }
+                
                 self.productosConocimiento()[indice].nombreTipo(nombreTipoProductoConocimiento);
                 self.productosConocimiento()[indice].tipo(tipoProductoConocimiento);
                 self.productosConocimiento()[indice].nucleoBasicoConocimiento(nucleoBasicoProductoConocimiento);
                 self.productosConocimiento()[indice].url(urlProductoConocimiento);
                 self.productosConocimiento()[indice].descripcion(descripcionProductoConocimiento);
                 self.productosConocimiento()[indice].documento('');
-                $('input:file[name="productosConocimiento[' + indice + '].documento"]').hide();
             }
             $('#md_producto_conocimiento').modal('hide');
         };
@@ -4647,9 +4854,9 @@
         self.eliminarProductoConocimiento = function (productoConocimiento) {
             $('input:file[name="productosConocimiento[' + productoConocimiento.consecutivo() + '].documento"]').remove();
             self.productosConocimiento.remove(productoConocimiento);
-            for(i = productosConocimiento.consecutivo(); i < hojaVidaModel.productosConocimiento().length; i++) {
+            for(i = productosConocimiento.consecutivo(); i < self.productosConocimiento().length; i++) {
                $('input:file[name="productosConocimiento[' + (i + 1) + '].documento"]').attr('name', 'productosConocimiento[' + i + '].documento'); 
-                hojaVidaModel.productosConocimiento()[i].consecutivo(i);
+                self.productosConocimiento()[i].consecutivo(i);
             }
         };
 
@@ -4668,7 +4875,7 @@
         self.verDocumentoProductoConocimiento = function (productoConocimiento) {
             window.location.href = "${pageContext.request.contextPath}/hojasVida/documentoProductoConocimiento/" + productoConocimiento.id();
         };        
-};
+    };
 
     function nuevoCorreoElectronico() {
         $('#correoElectronico').val("");
@@ -4722,7 +4929,7 @@
         ocultarCertificadosIdiomas();
         var fileInput = $('input:file[name="idiomas[' + hojaVidaModel.idiomas().length + '].certificado"]');
         if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" class="form-control" name="idiomas[' + (self.idiomas().length) + '].certificado" />');
+            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="idiomas[' + (self.idiomas().length) + '].certificado" />');
             $('#certificadosIdiomas').append(fileInput);
         } else {
             fileInput.show();
@@ -4733,7 +4940,7 @@
         
     function nuevaEducacionBasica() {
         $('#nivelEstudioEducacionBasica').val("").trigger('change');
-        $('#institucionEducacionBasica').val("").trigger('change');
+        $('#institucionEducacionBasica').val("");
         $('#anyoInicioEducacionBasica').val("").trigger('change');
         $('#anyoFinalizacionEducacionBasica').val("").trigger('change');
         $('#tituloEducacionBasica').val("");
@@ -4744,7 +4951,7 @@
         ocultarCertificadosEducacionesBasicas();
         var fileInput = $('input:file[name="educacionesBasicas[' + hojaVidaModel.educacionesBasicas().length + '].certificado"]');
         if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" class="form-control" name="educacionesBasicas[' + (self.educacionesBasicas().length) + '].certificado" />');
+            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesBasicas[' + (self.educacionesBasicas().length) + '].certificado" />');
             $('#certificadosEducacionesBasicas').append(fileInput);
         } else {
             fileInput.show();
@@ -4773,6 +4980,7 @@
         $('#institucionEducativaPrograma').val("").trigger("change.select2");
         $('#programaCursado').val("");
         $('#tituloPrograma').val("");        
+        $('#btnNuevoProgramaExtranjero').hide();
         
         $('#btnTituloExtranjeroSiEducacionSuperior').removeClass('active').addClass('notActive');  
         $('#btnTituloExtranjeroNoEducacionSuperior').removeClass('active').addClass('notActive');  
@@ -4786,14 +4994,14 @@
         ocultarCertificadosEducacionesSuperiores();
         var fileInput = $('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificado"]');
         if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" class="form-control" name="educacionesSuperiores[' + (self.educacionesSuperiores().length) + '].certificado" />');
+            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesSuperiores[' + (self.educacionesSuperiores().length) + '].certificado" />');
             $('#certificadosEducacionesSuperiores').append(fileInput);
         } else {
             fileInput.show();
         }
         fileInput = $('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificadoHomologado"]');
         if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" class="form-control" name="educacionesSuperiores[' + (self.educacionesSuperiores().length) + '].certificadoHomologado" />');
+            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesSuperiores[' + (self.educacionesSuperiores().length) + '].certificadoHomologado" />');
             $('#certificadosHomologadosEducacionesSuperiores').append(fileInput);
         } else {
             fileInput.show();
@@ -4810,7 +5018,16 @@
 
         $('#md_programa').modal('show');
     }
+    
+    function nuevoProgramaExtranjero() {
+        $('#institucionEducativaProgramaExtranjero').val("");
+        $('#programaCursadoExtranjero').val("");
+        $('#nucleoBasicoConocimientoProgramaExtranjero').val("");
+        $('#tituloProgramaExtranjero').val("");                    
 
+        $('#md_programa_extranjero').modal('show');
+    }
+    
     function nuevaEducacionContinua() {
         $('#tipoCapacitacionEducacionContinua').val("").trigger('change');
         $('#institucionEducacionContinua').val("").trigger('change');
@@ -4822,7 +5039,7 @@
         ocultarCertificadosEducacionesContinuas();
         var fileInput = $('input:file[name="educacionesContinuas[' + hojaVidaModel.educacionesContinuas().length + '].certificado"]');
         if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" class="form-control" name="educacionesContinuas[' + (self.educacionesContinuas().length) + '].certificado" />');
+            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesContinuas[' + (self.educacionesContinuas().length) + '].certificado" />');
             $('#certificadosEducacionesContinuas').append(fileInput);
         } else {
             fileInput.show();
@@ -4839,7 +5056,7 @@
         ocultarCertificadosDistinciones();
         var fileInput = $('input:file[name="distinciones[' + hojaVidaModel.distinciones().length + '].certificado"]');
         if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" class="form-control" name="distinciones[' + (self.distinciones().length) + '].certificado" />');
+            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="distinciones[' + (self.distinciones().length) + '].certificado" />');
             $('#certificadosDistinciones').append(fileInput);
         } else {
             fileInput.show();
@@ -4870,7 +5087,7 @@
         ocultarCertificadosExperienciaLaboral();
         var fileInput = $('input:file[name="experienciasLaborales[' + hojaVidaModel.experienciasLaborales().length + '].certificado"]');
         if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" class="form-control" name="experienciasLaborales[' + (self.experienciasLaborales().length) + '].certificado" />');
+            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="experienciasLaborales[' + (self.experienciasLaborales().length) + '].certificado" />');
             $('#certificadosExperienciasLaborales').append(fileInput);
         } else {
             fileInput.show();
@@ -4906,7 +5123,7 @@
         }
         var fileInput = $('input:file[name="experienciasDocencia[' + hojaVidaModel.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]');
         if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" class="form-control" name="experienciasDocencia[' + hojaVidaModel.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado" />');
+            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="experienciasDocencia[' + hojaVidaModel.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado" />');
             $('#certificadosCursosExperienciaDocencia').append(fileInput);
         } else {
             fileInput.show();
@@ -4941,7 +5158,7 @@
         ocultarDocumentosPatentes();
         var fileInput = $('input:file[name="patentes[' + hojaVidaModel.patentes().length + '].documento"]');
         if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" class="form-control" name="patentes[' + (self.patentes().length) + '].documento" />');
+            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="patentes[' + (self.patentes().length) + '].documento" />');
             $('#documentosPatentes').append(fileInput);
         } else {
             fileInput.show();
@@ -4960,7 +5177,7 @@
         ocultarDocumentosProductosConocimiento();
         var fileInput = $('input:file[name="productosConocimiento[' + hojaVidaModel.productosConocimiento().length + '].documento"]');
         if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" class="form-control" name="productosConocimiento[' + (self.productosConocimiento().length) + '].documento" />');
+            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="productosConocimiento[' + (self.productosConocimiento().length) + '].documento" />');
             $('#documentosProductosConocimiento').append(fileInput);
         } else {
             fileInput.show();
@@ -5003,7 +5220,11 @@
     function cerrarVentanaPrograma() {
         $('#md_programa').modal('hide');
     }
-
+    
+    function cerrarVentanaProgramaExtranjero() {
+        $('#md_programa_extranjero').modal('hide');
+    }
+    
     function cerrarVentanaEducacionContinua() {
         if ($('input:file[name="educacionesContinuas[' + hojaVidaModel.educacionesContinuas().length + '].certificado"]')) {
             $('input:file[name="educacionesContinuas[' + hojaVidaModel.educacionesContinuas().length + '].certificado"]').remove();
@@ -5177,6 +5398,25 @@
 
     $('#hojaVida').submit(function (evt) {
         evt.preventDefault();
+        
+        if ($('#copiaDocumentoIdentificacion').val() !== "" &&
+            $('#copiaDocumentoIdentificacion')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+            bootstrap_alert_hoja_vida.warning('La copia del documento no debe ser mayor a 2MB');
+            return false;
+        }
+        
+        if ($('#copiaLibretaMilitar').val() !== "" &&
+            $('#copiaLibretaMilitar')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+            bootstrap_alert_hoja_vida.warning('La copia de la libreta militar no debe ser mayor a 2MB');
+            return false;
+        }
+
+        if ($('#documentoRUT').val() !== "" &&
+            $('#documentoRUT')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+            bootstrap_alert_hoja_vida.warning('La copia del RUT no debe ser mayor a 2MB');
+            return false;
+        }
+
         if ($('#disponeRUT').val() === 'true' && $('#actividadEconomica').val() === "") {
             bootstrap_alert_hoja_vida.warning("Debe ingresar la actividad económica");
             return;
@@ -5324,6 +5564,14 @@
         $('#alert_educacion_superior').html('');
     };
 
+    bootstrap_alert_programa_extranjero = {};
+    bootstrap_alert_programa_extranjero.warning = function (message) {
+        $('#alert_programa_extranjero').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_programa_extranjero.removeWarning = function () {
+        $('#alert_programa_extranjero').html('');
+    };
+
     bootstrap_alert_educacion_continua = {};
     bootstrap_alert_educacion_continua.warning = function (message) {
         $('#alert_educacion_continua').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
@@ -5415,7 +5663,7 @@
     <c:if test = "${documentosSoporteJSON != null}">
     documentosSoporte = ${documentosSoporteJSON};
     for (var i = 0; i < documentosSoporte.length; i++) {
-        var fileInput = $('<input type="file" class="form-control" name="documentosSoporte[' + i + '].documento" />');
+        var fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="documentosSoporte[' + i + '].documento" />');
         $('#documentosSoporte').append(fileInput);
         $('input:file[name="documentosSoporte[' + i + '].documento"]').hide();
     }
@@ -5423,7 +5671,7 @@
     <c:if test = "${idiomasJSON != null}">
     idiomas = ${idiomasJSON};
     for (var i = 0; i < idiomas.length; i++) {
-        var fileInput = $('<input type="file" class="form-control" name="idiomas[' + i + '].certificado" />');
+        var fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="idiomas[' + i + '].certificado" />');
         $('#certificadosIdiomas').append(fileInput);
         $('input:file[name="idiomas[' + i + '].certificado"]').hide();
     }
@@ -5431,7 +5679,7 @@
     <c:if test = "${educacionesBasicasJSON != null}">
     educacionesBasicas = ${educacionesBasicasJSON};
     for (var i = 0; i < educacionesBasicas.length; i++) {
-        var fileInput = $('<input type="file" class="form-control" name="educacionesBasicas[' + i + '].certificado" />');
+        var fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesBasicas[' + i + '].certificado" />');
         $('#certificadosEducacionesBasicas').append(fileInput);
         $('input:file[name="educacionesBasicas[' + i + '].certificado"]').hide();
     }
@@ -5439,11 +5687,11 @@
     <c:if test = "${educacionesSuperioresJSON != null}">
     educacionesSuperiores = ${educacionesSuperioresJSON};
     for (var i = 0; i < educacionesSuperiores.length; i++) {
-        var fileInput = $('<input type="file" class="form-control" name="educacionesSuperiores[' + i + '].certificadoHomologado" />');
+        var fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesSuperiores[' + i + '].certificadoHomologado" />');
         $('#certificadosHomologadosEducacionesSuperiores').append(fileInput);
         $('input:file[name="educacionesSuperiores[' + i + '].certificadoHomologado"]').hide();
 
-        fileInput = $('<input type="file" class="form-control" name="educacionesSuperiores[' + i + '].certificado" />');
+        fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesSuperiores[' + i + '].certificado" />');
         $('#certificadosEducacionesSuperiores').append(fileInput);
         $('input:file[name="educacionesSuperiores[' + i + '].certificado"]').hide();
     }
@@ -5451,7 +5699,7 @@
     <c:if test = "${educacionesContinuasJSON != null}">
     educacionesContinuas = ${educacionesContinuasJSON};
     for (var i = 0; i < educacionesContinuas.length; i++) {
-        fileInput = $('<input type="file" class="form-control" name="educacionesContinuas[' + i + '].certificado" />');
+        fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesContinuas[' + i + '].certificado" />');
         $('#certificadosEducacionesContinuas').append(fileInput);
         $('input:file[name="educacionesContinuas[' + i + '].certificado"]').hide();
     }    
@@ -5459,7 +5707,7 @@
     <c:if test = "${distincionesJSON != null}">
     distinciones = ${distincionesJSON};
     for (var i = 0; i < distinciones.length; i++) {
-        fileInput = $('<input type="file" class="form-control" name="distinciones[' + i + '].certificado" />');
+        fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="distinciones[' + i + '].certificado" />');
         $('#certificadosDistinciones').append(fileInput);
         $('input:file[name="distinciones[' + i + '].certificado"]').hide();
     }    
@@ -5467,7 +5715,7 @@
     <c:if test = "${experienciasLaboralesJSON != null}">
     experienciasLaborales = ${experienciasLaboralesJSON};
     for (var i = 0; i < experienciasLaborales.length; i++) {
-        fileInput = $('<input type="file" class="form-control" name="experienciasLaborales[' + i + '].certificado" />');
+        fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="experienciasLaborales[' + i + '].certificado" />');
         $('#certificadosExperienciasLaborales').append(fileInput);
         $('input:file[name="experienciasLaborales[' + i + '].certificado"]').hide();
     }    
@@ -5481,7 +5729,7 @@
     <c:if test = "${patentesJSON != null}">
     patentes = ${patentesJSON};
     for (var i = 0; i < patentes.length; i++) {
-        fileInput = $('<input type="file" class="form-control" name="patentes[' + i + '].documento" />');
+        fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="patentes[' + i + '].documento" />');
         $('#documentosPatentes').append(fileInput);
         $('input:file[name="patentes[' + i + '].documento"]').hide();
     }    
@@ -5489,7 +5737,7 @@
     <c:if test = "${productosConocimientoJSON != null}">
     productosConocimiento = ${productosConocimientoJSON};
     for (var i = 0; i < productosConocimiento.length; i++) {
-        fileInput = $('<input type="file" class="form-control" name="productosConocimiento[' + i + '].documento" />');
+        fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="productosConocimiento[' + i + '].documento" />');
         $('#documentosProductosConocimiento').append(fileInput);
         $('input:file[name="productosConocimiento[' + i + '].documento"]').hide();
     }    
@@ -5512,7 +5760,7 @@
     
     for (var i = 0; i < hojaVidaModel.experienciasDocencia().length; i++) {
         for (var j = 0; j < hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia().length; j++) {
-            fileInput = $('<input type="file" class="form-control" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].certificado" />');
+            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].certificado" />');
             $('#certificadosCursosExperienciaDocencia').append(fileInput);
             $('input:file[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].certificado"]').hide();
 

@@ -165,6 +165,24 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                             </div>
                         </div>
                     </div>
+                    <div class="row" id="inputscurso">
+                        <div class="col-md-2">
+                            <label for="">Sede</label><br>
+                            <input type="text" style="border:0;font-style: italic;margin-left: 20px;" readonly id="sede" value="Medell&iacute;n">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Programa</label><br>
+                            <input type="text" name="" style="border: 0;font-style: italic; margin-left: 20px; width: 300px;"   readonly id="programa" value="Gesti&oacute;n de servicios de salud">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="">Curso</label><br>
+                            <input type="text" name="" style="border: 0;font-style: italic; margin-left: 20px;" readonly id="curso" value="Historia de salud">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="">Total de horas</label><br>
+                            <input type="text" style="border:0;font-style: italic;margin-left: 20px; width:120px; " readonly id="totalHorasSemestre" value="160">
+                        </div>
+                    </div>                    
                     <div class="row">
                         <div class="col-md-12">
                             <label for="">Documento de convocatoria</label>
@@ -220,7 +238,9 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
 <!-- jQuery -->
 <script>
     var adendas = null;
-
+    var DOCENCIA_MEDELLIN = "3";
+    var DOCENCIA_REGIONES = "4";
+    
     $(document).ready(function () {
         var table = $('#tbconvo').DataTable({
             "language": {
@@ -373,6 +393,19 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                     $('#nombre').html(convocatoria.nombre);
                     $('#fechaPublicacion').html(convocatoria.fechaPublicacionResultadosFormateada);
                     $('#descripcion').val(convocatoria.descripcion);
+                    if (convocatoria.tipoConvocatoria == DOCENCIA_MEDELLIN || convocatoria.tipoConvocatoria == DOCENCIA_REGIONES) {
+                        $('#inputscurso').show();
+                        $('#sede').val(convocatoria.sedeCurso);
+                        $('#programa').val(convocatoria.programaCurso);
+                        $('#curso').val(convocatoria.nombreCurso);
+                        $('#totalHorasSemestre').val(convocatoria.totalHorasSemestreCurso);
+                    } else {
+                        $('#inputscurso').hide();
+                        $('#sede').val('');
+                        $('#programa').val('');
+                        $('#curso').val('');
+                        $('#totalHorasSemestre').val('');
+                    }                     
                     adendas.clear().draw();
                     for (var i = 0; i < convocatoria.adendas.length; i++) {
                         var row = "";

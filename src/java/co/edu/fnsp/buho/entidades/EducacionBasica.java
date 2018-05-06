@@ -14,8 +14,7 @@ public class EducacionBasica {
     private int id;
     private int nivel;
     private String nombreNivel;
-    private int institucion;
-    private String nombreInstitucion;
+    private String institucion;
     private int anyoInicio;
     private Integer anyoFinalizacion;
     private String titulo;
@@ -62,34 +61,6 @@ public class EducacionBasica {
      */
     public void setNombreNivel(String nombreNivel) {
         this.nombreNivel = nombreNivel;
-    }
-
-    /**
-     * @return the institucion
-     */
-    public int getInstitucion() {
-        return institucion;
-    }
-
-    /**
-     * @param institucion the institucion to set
-     */
-    public void setInstitucion(int institucion) {
-        this.institucion = institucion;
-    }
-
-    /**
-     * @return the nombreInstitucion
-     */
-    public String getNombreInstitucion() {
-        return nombreInstitucion;
-    }
-
-    /**
-     * @param nombreInstitucion the nombreInstitucion to set
-     */
-    public void setNombreInstitucion(String nombreInstitucion) {
-        this.nombreInstitucion = nombreInstitucion;
     }
 
     /**
@@ -160,5 +131,19 @@ public class EducacionBasica {
      */
     public void setCertificado(Documento certificado) {
         this.certificado = certificado;
+    }
+
+    /**
+     * @return the institucion
+     */
+    public String getInstitucion() {
+        return institucion;
+    }
+
+    /**
+     * @param institucion the institucion to set
+     */
+    public void setInstitucion(String institucion) {
+        this.institucion = institucion;
     }
 }

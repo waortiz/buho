@@ -26,12 +26,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionException;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 /**
  *
@@ -41,30 +36,14 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 public class ServicioConvocatoria implements IServicioConvocatoria {
 
     @Autowired
-    private PlatformTransactionManager transactionManager;
-
-    @Autowired
     private IRepositorioConvocatoria repositorioConvocatoria;
 
     @Autowired
     private IRepositorioHojaVida repositorioHojaVida;
 
-    @Value( "${jdbc.timeout}" )
-    private int timeout;
-    
-    
     @Override
     public void ingresarConvocatoria(long idUsuario, Convocatoria convocatoria) {
-        DefaultTransactionDefinition  txDef = new DefaultTransactionDefinition();
-        txDef.setTimeout(timeout);
-        TransactionStatus txStatus = transactionManager.getTransaction(txDef);
-        try {
-            repositorioConvocatoria.ingresarConvocatoria(idUsuario, convocatoria);
-            transactionManager.commit(txStatus);
-        } catch (TransactionException exc) {
-            transactionManager.rollback(txStatus);
-            throw exc;
-        }
+        repositorioConvocatoria.ingresarConvocatoria(idUsuario, convocatoria);
     }
 
     @Override
@@ -74,16 +53,7 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
 
     @Override
     public void eliminarConvocatoria(int idConvocatoria) {
-        DefaultTransactionDefinition txDef = new DefaultTransactionDefinition();
-        txDef.setTimeout(timeout);
-        TransactionStatus txStatus = transactionManager.getTransaction(txDef);
-        try {
-            repositorioConvocatoria.eliminarConvocatoria(idConvocatoria);
-            transactionManager.commit(txStatus);
-        } catch (TransactionException exc) {
-            transactionManager.rollback(txStatus);
-            throw exc;
-        }
+        repositorioConvocatoria.eliminarConvocatoria(idConvocatoria);
     }
 
     @Override
@@ -92,17 +62,13 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
     }
 
     @Override
+    public List<Convocatoria> obtenerConvocatoriasVigentes(long idUsuario) {
+        return repositorioConvocatoria.obtenerConvocatoriasVigentes(idUsuario);
+    }
+    
+    @Override
     public void actualizarConvocatoria(long idUsuario, Convocatoria convocatoria) {
-        DefaultTransactionDefinition txDef = new DefaultTransactionDefinition();
-        txDef.setTimeout(timeout);
-        TransactionStatus txStatus = transactionManager.getTransaction(txDef);
-        try {
-            repositorioConvocatoria.actualizarConvocatoria(idUsuario, convocatoria);
-            transactionManager.commit(txStatus);
-        } catch (TransactionException exc) {
-            transactionManager.rollback(txStatus);
-            throw exc;
-        }
+        repositorioConvocatoria.actualizarConvocatoria(idUsuario, convocatoria);
     }
 
     @Override

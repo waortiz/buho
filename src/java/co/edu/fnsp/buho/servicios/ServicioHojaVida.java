@@ -11,55 +11,26 @@ import co.edu.fnsp.buho.entidades.Terminos;
 import co.edu.fnsp.buho.repositorios.IRepositorioHojaVida;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionException;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 /**
  *
  * @author William
  */
-
 @Service("servicioHojaVida")
 public class ServicioHojaVida implements IServicioHojaVida {
-    @Autowired
-    private PlatformTransactionManager transactionManager;
-        
+
     @Autowired
     private IRepositorioHojaVida repositorioHojaVida;
 
-    @Value( "${jdbc.timeout}" )
-    private int timeout;
-    
     @Override
     public void ingresarHojaVida(long idUsuario, HojaVida hojaVida) {
-        DefaultTransactionDefinition txDef = new DefaultTransactionDefinition();
-        txDef.setTimeout(timeout);
-        TransactionStatus txStatus = transactionManager.getTransaction(txDef);
-        try {
-            repositorioHojaVida.ingresarHojaVida(idUsuario, hojaVida);
-            transactionManager.commit(txStatus);
-        } catch (TransactionException exc) {
-            transactionManager.rollback(txStatus);
-            throw exc;
-        }
+        repositorioHojaVida.ingresarHojaVida(idUsuario, hojaVida);
     }
 
     @Override
     public void actualizarHojaVida(long idUsuario, HojaVida hojaVida) {
-        DefaultTransactionDefinition txDef = new DefaultTransactionDefinition();
-        txDef.setTimeout(timeout);
-        TransactionStatus txStatus = transactionManager.getTransaction(txDef);
-        try {
-            repositorioHojaVida.actualizarHojaVida(idUsuario, hojaVida);
-            transactionManager.commit(txStatus);
-        } catch (TransactionException exc) {
-            transactionManager.rollback(txStatus);
-            throw exc;
-        }
+        repositorioHojaVida.actualizarHojaVida(idUsuario, hojaVida);
     }
 
     @Override
@@ -71,7 +42,7 @@ public class ServicioHojaVida implements IServicioHojaVida {
     public Documento obtenerDocumentoSoporte(long idDocumentoSoporte) {
         return repositorioHojaVida.obtenerDocumentoSoporte(idDocumentoSoporte);
     }
-    
+
     @Override
     public List<HojaVida> obtenerHojasVida() {
         return repositorioHojaVida.obtenerHojasVida();
@@ -79,21 +50,12 @@ public class ServicioHojaVida implements IServicioHojaVida {
 
     @Override
     public void eliminarHojaVida(long idPersona) {
-        DefaultTransactionDefinition txDef = new DefaultTransactionDefinition();
-        txDef.setTimeout(timeout);
-        TransactionStatus txStatus = transactionManager.getTransaction(txDef);
-        try {
-            repositorioHojaVida.eliminarHojaVida(idPersona);
-            transactionManager.commit(txStatus);
-        } catch (TransactionException exc) {
-            transactionManager.rollback(txStatus);
-            throw exc;
-        }
+        repositorioHojaVida.eliminarHojaVida(idPersona);
     }
-    
+
     @Override
-    public boolean existePersona(String numeroIdentificacion){
-         return repositorioHojaVida.existePersona(numeroIdentificacion);
+    public boolean existePersona(String numeroIdentificacion) {
+        return repositorioHojaVida.existePersona(numeroIdentificacion);
     }
 
     @Override
@@ -128,7 +90,7 @@ public class ServicioHojaVida implements IServicioHojaVida {
 
     @Override
     public Documento obtenerCertificadoEducacionContinua(int idEducacionContinua) {
-       return repositorioHojaVida.obtenerCertificadoEducacionContinua(idEducacionContinua);
+        return repositorioHojaVida.obtenerCertificadoEducacionContinua(idEducacionContinua);
     }
 
     @Override
@@ -158,11 +120,11 @@ public class ServicioHojaVida implements IServicioHojaVida {
 
     @Override
     public void ingresarTerminos(long idPersona, Terminos terminos) {
-         repositorioHojaVida.ingresarTerminos(idPersona, terminos);
+        repositorioHojaVida.ingresarTerminos(idPersona, terminos);
     }
-    
+
     @Override
     public boolean existenTerminos(long idPersona) {
-         return repositorioHojaVida.existenTerminos(idPersona);
+        return repositorioHojaVida.existenTerminos(idPersona);
     }
 }

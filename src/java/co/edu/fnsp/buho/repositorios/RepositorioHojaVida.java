@@ -461,7 +461,6 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                 parametrosIngresoEducacionSuperior.addValue("varPaisTituloExterior", educacionSuperior.getPaisTituloExterior());
             }
             parametrosIngresoEducacionSuperior.addValue("varFechaTitulo", educacionSuperior.getFechaTitulo());
-            parametrosIngresoEducacionSuperior.addValue("varInstitucion", educacionSuperior.getInstitucion());
             parametrosIngresoEducacionSuperior.addValue("varAnyoFinalizacion", educacionSuperior.getAnyoFinalizacion());
             parametrosIngresoEducacionSuperior.addValue("varAnyoInicio", educacionSuperior.getAnyoInicio());
             parametrosIngresoEducacionSuperior.addValue("varFechaTitulo", educacionSuperior.getFechaTitulo());
@@ -1502,7 +1501,6 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                 parametrosActualizacionEducacionSuperior.addValue("varPrograma", educacionSuperiorModificada.getPrograma());
                 parametrosActualizacionEducacionSuperior.addValue("varFechaTitulo", educacionSuperiorModificada.getFechaTitulo());
                 parametrosActualizacionEducacionSuperior.addValue("varNucleoBasicoConocimiento", educacionSuperiorModificada.getNucleoBasicoConocimiento());
-                parametrosActualizacionEducacionSuperior.addValue("varInstitucion", educacionSuperiorModificada.getInstitucion());
                 parametrosActualizacionEducacionSuperior.addValue("varAnyoFinalizacion", educacionSuperiorModificada.getAnyoFinalizacion());
                 parametrosActualizacionEducacionSuperior.addValue("varAnyoInicio", educacionSuperiorModificada.getAnyoInicio());
                 parametrosActualizacionEducacionSuperior.addValue("varFechaTitulo", educacionSuperiorModificada.getFechaTitulo());
@@ -1544,7 +1542,6 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
                 parametrosIngresoEducacionSuperior.addValue("varPaisTituloExterior", educacionSuperior.getPaisTituloExterior());
                 parametrosIngresoEducacionSuperior.addValue("varPrograma", educacionSuperior.getPrograma());
                 parametrosIngresoEducacionSuperior.addValue("varFechaTitulo", educacionSuperior.getFechaTitulo());
-                parametrosIngresoEducacionSuperior.addValue("varInstitucion", educacionSuperior.getInstitucion());
                 parametrosIngresoEducacionSuperior.addValue("varAnyoFinalizacion", educacionSuperior.getAnyoFinalizacion());
                 parametrosIngresoEducacionSuperior.addValue("varAnyoInicio", educacionSuperior.getAnyoInicio());
                 parametrosIngresoEducacionSuperior.addValue("varFechaTitulo", educacionSuperior.getFechaTitulo());

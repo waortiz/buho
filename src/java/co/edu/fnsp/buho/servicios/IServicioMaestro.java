@@ -54,4 +54,5 @@ public interface IServicioMaestro {
     List<Maestro> obtenerClasesPatente();
     List<Maestro> obtenerCapacitaciones(Integer tipoCapacitacion, Integer nucleoBasicoConocimiento);
     List<CampoHojaVida> obtenerCamposHojaVida();
+    int ingresarProgramaInstitucion(Programa programa);
 }

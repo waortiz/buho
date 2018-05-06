@@ -17,7 +17,6 @@ public class EducacionBasica {
     private String nivel;
     private String nombreNivel;
     private String institucion;
-    private String nombreInstitucion;
     private String anyoInicio;
     private String anyoFinalizacion;
     private String titulo;
@@ -78,20 +77,6 @@ public class EducacionBasica {
      */
     public void setInstitucion(String institucion) {
         this.institucion = institucion;
-    }
-
-    /**
-     * @return the nombreInstitucion
-     */
-    public String getNombreInstitucion() {
-        return nombreInstitucion;
-    }
-
-    /**
-     * @param nombreInstitucion the nombreInstitucion to set
-     */
-    public void setNombreInstitucion(String nombreInstitucion) {
-        this.nombreInstitucion = nombreInstitucion;
     }
 
     /**

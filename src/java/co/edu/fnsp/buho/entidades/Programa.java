@@ -13,6 +13,8 @@ public class Programa {
     private String id;
     private String nombre;
     private String titulo;
+    private int nucleoBasicoConocimiento;
+    private String institucion;
     
     /**
      * @return the id
@@ -54,6 +56,34 @@ public class Programa {
      */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    /**
+     * @return the nucleoBasicoConocimiento
+     */
+    public int getNucleoBasicoConocimiento() {
+        return nucleoBasicoConocimiento;
+    }
+
+    /**
+     * @param nucleoBasicoConocimiento the nucleoBasicoConocimiento to set
+     */
+    public void setNucleoBasicoConocimiento(int nucleoBasicoConocimiento) {
+        this.nucleoBasicoConocimiento = nucleoBasicoConocimiento;
+    }
+
+    /**
+     * @return the institucion
+     */
+    public String getInstitucion() {
+        return institucion;
+    }
+
+    /**
+     * @param institucion the institucion to set
+     */
+    public void setInstitucion(String institucion) {
+        this.institucion = institucion;
     }
 
 }

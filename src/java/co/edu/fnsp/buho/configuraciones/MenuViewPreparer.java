@@ -66,13 +66,6 @@ public class MenuViewPreparer implements ViewPreparer {
                         + "</li>\n";
             } else {
                 menu = "<li class='active'>\n"
-                        + "<a href='#'><i class=\"fa fa-users fa-1x\" aria-hidden=\"true\"></i>\n"
-                        + "   Convocatorias\n"
-                        + "</a>\n"
-                        + "<ul>\n"
-                        + "  <li><a href=\"javascript:abrirOpcion('/convocatorias/postular')\">Consultar</a></li>\n"
-                        + "</ul>\n"
-                        + "</li>\n"
                         + "<li class='active'>\n"
                         + "  <a href='#'><i class=\"fa fa-user fa-1x\"></i>\n"
                         + "     Hoja de vida\n"

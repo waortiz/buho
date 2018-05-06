@@ -53,4 +53,5 @@ public interface IRepositorioMaestro {
     List<Programa> obtenerProgramasInstitucion(Integer institucion, Integer nucleoBasicoConocimiento);
     List<Maestro> obtenerCapacitaciones(Integer tipoCapacitacion, Integer nucleoBasicoConocimiento);
     List<CampoHojaVida> obtenerCamposHojaVida();
+    int ingresarProgramaInstitucion(Programa programa);
 }

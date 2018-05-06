@@ -213,4 +213,9 @@ public class ServicioMaestro implements IServicioMaestro {
     public List<CampoHojaVida> obtenerCamposHojaVida() {
         return repositorioMaestro.obtenerCamposHojaVida();
     }
+
+    @Override
+    public int ingresarProgramaInstitucion(Programa programa) {
+        return repositorioMaestro.ingresarProgramaInstitucion(programa);
+    }
 }

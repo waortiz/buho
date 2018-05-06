@@ -69,8 +69,8 @@
                         <div class="form-group">
                             <label for="fechaPublicacionResultados">Fecha publicación resultados</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de resultado de publicaci&oacute;n">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                            <div class='input-group date' id='datetimepicker1' style="width: 165px">
-                                <form:input class="form-control fecha" path="fechaPublicacionResultados" data-validation="required" data-validation-error-msg="Debe ingresar la fecha de publicación de resultados" style="width: 126px"/>
+                            <div class='input-group date'>
+                                <form:input class="form-control fecha" path="fechaPublicacionResultados" data-validation="required" data-validation-error-msg="Debe ingresar la fecha de publicación de resultados"/>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div>
@@ -209,7 +209,7 @@
                             <label for="documento">Documento de soporte</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe adjuntar un documento de la convocatoria">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
                             <div class="form-inline">
-                                <input type="file" class="form-control" name="documento" id="documento" >
+                                <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="documento" id="documento" >
                                 <c:if test = "${convocatoria.getId() > 0}">
                                     <button class="btn btn-success btn-xs" type="button" onclick="verDocumentoConvocatoria()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
                                     </c:if>
@@ -839,11 +839,18 @@
     var programas = [];
     var programaCursado = '';
     var capacitacionEducacionContinua = '';
-
+    var MAXIMO_TAMANYO_ARCHIVO = 2097152;
+    
     $.validate({
         validateOnBlur: false, // disable validation when input looses focus
         errorMessagePosition: 'top', // Instead of 'inline' which is default
         scrollToTopOnError: false // Set this property to true on longer forms
+    });
+
+    $('.fecha').datepicker({
+        dateFormat: "dd/mm/yy",
+        changeMonth: true,
+        changeYear: true
     });
 
     $('#tbadendas').DataTable({
@@ -986,6 +993,11 @@
     });
     $('#convocatoria').submit(function (evt) {
         evt.preventDefault();
+        if($('#documento').val() != "" && $('#documento')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+            bootstrap_alert_convocatoria.warning("El documento de la convocatoria no puede ser mayor a 2MB.");
+            return;
+        }
+        
         $('#md_guardar').modal('show');
         current_progress = 0;
         var interval = setInterval(function () {
@@ -1165,6 +1177,11 @@
                     bootstrap_alert_adenda.warning('Debe ingresar el documento');
                     return false;
                 }
+                if ($('input:file[name="adendas[' + self.adendas().length + '].documento"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_adenda.warning('El documento no debe ser mayor a 2MB');
+                    return false;
+                }
+                
                 self.adendas.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.adendas().length),
@@ -1175,7 +1192,6 @@
                     fecha: ko.observable(fechaAdenda),
                     tieneDocumento: ko.observable(false)
                 });
-                $('input:file[name="adendas[' + self.adendas().length + '].documento"]').hide();
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -1185,12 +1201,16 @@
                         break;
                     }
                 }
+                if ($('input:file[name="adendas[' + indice + '].documento"]').val() != "" && 
+                    $('input:file[name="adendas[' + indice + '].documento"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    bootstrap_alert_adenda.warning('El documento no debe ser mayor a 2MB');
+                    return false;
+                }
                 self.adendas()[indice].tipoAdenda(tipoAdenda);
                 self.adendas()[indice].nombreTipoAdenda(nombreTipoAdenda);
                 self.adendas()[indice].descripcion(descripcionAdenda);
                 self.adendas()[indice].documento('');
                 self.adendas()[indice].fecha(fechaAdenda);
-                $('input:file[name="adendas[' + indice + '].documento"]').hide();
             }
             $('#md_adenda').modal('hide');
             $('#tipoAdenda').val("").trigger('change');
@@ -1201,12 +1221,15 @@
         self.eliminarAdenda = function (adenda) {
             $('input:file[name="adendas[' + adenda.consecutivo() + '].documento"]').remove();
             self.adendas.remove(adenda);
+            for(i = adenda.consecutivo(); i < self.adendas().length; i++) {
+               $('input:file[name="adendas[' + (i + 1) + '].documento"]').attr('name', 'adendas[' + i + '].documento'); 
+                self.adendas()[i].consecutivo(i);
+            }            
         };
 
         self.editarAdenda = function (adenda) {
             ocultarDocumentoAdendas();
             $('#tipoAdenda').val(adenda.tipoAdenda()).trigger('change');
-            ;
             $('#fechaAdenda').val(adenda.fecha());
             $('#descripcionAdenda').val(adenda.descripcion());
             $('#consecutivo').val(adenda.consecutivo());
@@ -1518,7 +1541,7 @@
         ocultarDocumentoAdendas();
         var fileInput = $('input:file[name="adendas[' + convocatoriaModel.adendas().length + '].documento"]');
         if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" class="form-control" id="adendas[' + (convocatoriaModel.adendas().length) + '].documento" name="adendas[' + (self.adendas().length) + '].documento" />');
+            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="adendas[' + (self.adendas().length) + '].documento" />');
             $('#documentosAdenda').append(fileInput);
         } else {
             fileInput.show();
@@ -1573,8 +1596,8 @@
     }
 
     function cerrarVentanaAndenda() {
-        if ($('input:file[name="adendas[' + self.documentosSoporte().length + '].documento"]')) {
-            $('input:file[name="adendas[' + self.documentosSoporte().length + '].documento"]').remove();
+        if ($('input:file[name="adendas[' + self.adendas().length + '].documento"]')) {
+            $('input:file[name="adendas[' + self.adendas().length + '].documento"]').remove();
         }
         $('#md_adenda').modal('hide');
     }
@@ -1618,7 +1641,7 @@
     <c:if test = "${adendasJSON != null}">
     adendas = ${adendasJSON};
     for (var i = 0; i < adendas.length; i++) {
-        var fileInput = $('<input type="file" class="form-control" id="adendas[' + i + '].documento" name="adendas[' + i + '].documento" />');
+        var fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="adendas[' + i + '].documento" />');
         $('#documentosAdenda').append(fileInput);
         $('input:file[name="adendas[' + i + '].documento"]').hide();
     }

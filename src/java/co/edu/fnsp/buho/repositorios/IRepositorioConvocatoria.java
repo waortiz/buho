@@ -32,4 +32,6 @@ public interface IRepositorioConvocatoria {
     void postularConvocatoria(long idPersona, int idConvocatoria);
 
     void retirarPostulacion(long idPersona, int idConvocatoria);
+
+    List<Convocatoria> obtenerConvocatoriasVigentes(long idUsuario);
 }

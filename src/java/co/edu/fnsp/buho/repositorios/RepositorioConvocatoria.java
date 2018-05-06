@@ -43,6 +43,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     private SimpleJdbcCall actualizarConvocatoria;
     private SimpleJdbcCall obtenerConvocatoria;
     private SimpleJdbcCall obtenerConvocatorias;
+    private SimpleJdbcCall obtenerConvocatoriasVigentes;
     private SimpleJdbcCall ingresarDocumentoConvocatoria;
     private SimpleJdbcCall actualizarDocumentoConvocatoria;
     private SimpleJdbcCall obtenerDocumentoConvocatoria;
@@ -92,6 +93,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         this.actualizarConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarConvocatoria");
         this.obtenerConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoria");
         this.obtenerConvocatorias = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatorias").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(Convocatoria.class));
+        this.obtenerConvocatoriasVigentes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasVigentes").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(Convocatoria.class));
         this.obtenerDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoConvocatoria");
         this.ingresarDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoConvocatoria");
         this.actualizarDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoConvocatoria");
@@ -414,6 +416,19 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         MapSqlParameterSource parametrosConsultaConvocatorias = new MapSqlParameterSource();
         parametrosConsultaConvocatorias.addValue("varIdUsuario", idUsuario);
         Map resultado = obtenerConvocatorias.execute(parametrosConsultaConvocatorias);
+        List<Convocatoria> convocatorias = (List<Convocatoria>) resultado.get("convocatorias");
+        for (Convocatoria convocatoria : convocatorias) {
+            convocatoria.setFechaFinFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaFin()));
+        }
+
+        return convocatorias;
+    }
+
+    @Override
+    public List<Convocatoria> obtenerConvocatoriasVigentes(long idUsuario) {
+        MapSqlParameterSource parametrosConsultaConvocatorias = new MapSqlParameterSource();
+        parametrosConsultaConvocatorias.addValue("varIdUsuario", idUsuario);
+        Map resultado = obtenerConvocatoriasVigentes.execute(parametrosConsultaConvocatorias);
         List<Convocatoria> convocatorias = (List<Convocatoria>) resultado.get("convocatorias");
         for (Convocatoria convocatoria : convocatorias) {
             convocatoria.setFechaFinFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaFin()));

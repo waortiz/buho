@@ -323,8 +323,7 @@ public class Util {
                 EducacionBasica educacionBasica = educacionesBasicas.get(i);
                 json = json
                         + "{id: ko.observable(" + educacionBasica.getId() + "),"
-                        + "institucion:ko.observable(" + educacionBasica.getInstitucion() + "),"
-                        + "nombreInstitucion:ko.observable('" + educacionBasica.getNombreInstitucion() + "'),"
+                        + "institucion:ko.observable('" + educacionBasica.getInstitucion() + "'),"
                         + "nivel:ko.observable(" + educacionBasica.getNivel() + "),"
                         + "nombreNivel:ko.observable('" + educacionBasica.getNombreNivel() + "'),"
                         + "titulo:ko.observable('" + educacionBasica.getTitulo() + "'),"
@@ -368,7 +367,7 @@ public class Util {
                         + "nombreInstitucion:ko.observable('" + educacionSuperior.getNombreInstitucion() + "'),"
                         + "tituloExterior:ko.observable(" + educacionSuperior.isTituloExterior() + "),"
                         + "paisTituloExterior:ko.observable(" + paisTitulo + "),"
-                        + "nombrePaisTitulo:ko.observable('" + nombrePaisTitulo + "'),"
+                        + "nombrePaisTituloExterior:ko.observable('" + nombrePaisTitulo + "'),"
                         + "nucleoBasicoConocimiento:ko.observable(" + educacionSuperior.getNucleoBasicoConocimiento() + "),"
                         + "nombreNucleoBasicoConocimiento:ko.observable('" + educacionSuperior.getNombreNucleoBasicoConocimiento() + "'),"
                         + "programa:ko.observable(" + educacionSuperior.getPrograma() + "),"

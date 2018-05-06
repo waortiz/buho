@@ -32,4 +32,6 @@ public interface IServicioConvocatoria {
     void postularConvocatoria(long idPersona, int idConvocatoria) throws Exception;
 
     void retirarPostulacion(long idPersona, int idConvocatoria);
+
+    List<Convocatoria> obtenerConvocatoriasVigentes(long idUsuario);
 }

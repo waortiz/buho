@@ -189,7 +189,7 @@ public class HojaVidaController {
             for (co.edu.fnsp.buho.entidadesVista.EducacionBasica educacionBasica : hojaVida.getEducacionesBasicas()) {
                 EducacionBasica nuevaEducacionBasica = new EducacionBasica();
                 nuevaEducacionBasica.setId(educacionBasica.getId());
-                nuevaEducacionBasica.setInstitucion(Util.obtenerEntero(educacionBasica.getInstitucion()));
+                nuevaEducacionBasica.setInstitucion(educacionBasica.getInstitucion());
                 if (!"".equals(educacionBasica.getAnyoFinalizacion())) {
                     nuevaEducacionBasica.setAnyoFinalizacion(Util.obtenerEntero(educacionBasica.getAnyoFinalizacion()));
                 }
@@ -221,7 +221,6 @@ public class HojaVidaController {
                         nuevaEducacionSuperior.setCertificadoHomologado(documento);
                     }
                 }
-                nuevaEducacionSuperior.setInstitucion(Util.obtenerEntero(educacionSuperior.getInstitucion()));
                 nuevaEducacionSuperior.setTitulo(educacionSuperior.getTitulo());
                 nuevaEducacionSuperior.setPrograma(Util.obtenerEntero(educacionSuperior.getPrograma()));
                 nuevaEducacionSuperior.setFechaTitulo(Util.obtenerFecha(educacionSuperior.getFechaTitulo()));
@@ -772,5 +771,18 @@ public class HojaVidaController {
         Gson gson = new Gson();
 
         return gson.toJson(programas);
+    }
+    
+    @RequestMapping(value = "/programa", method = RequestMethod.POST)
+    public @ResponseBody
+    String ingresarInstitucionPrograma(@ModelAttribute Programa programa, Model model) throws ParseException, IOException {
+        try {
+            int id= servicioMaestro.ingresarProgramaInstitucion(programa);
+
+            return "{\"id\":" + id + "}";
+        } catch (Exception exc) {
+            logger.error(exc);
+            return "";
+        }
     }
 }
