@@ -17,6 +17,7 @@ import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
 import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
 import co.edu.fnsp.buho.entidades.TipoCertificacionEnum;
+import co.edu.fnsp.buho.excepciones.CriteriosHabilitacionException;
 import co.edu.fnsp.buho.repositorios.IRepositorioConvocatoria;
 import co.edu.fnsp.buho.repositorios.IRepositorioHojaVida;
 import co.edu.fnsp.buho.utilidades.Util;
@@ -97,10 +98,10 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
                     if (experienciaLaboral.getFechaRetiro() != null) {
                         fechaRetiro = experienciaLaboral.getFechaRetiro();
                     }
-                    anyosExperiencia = Util.getAnyos(fechaRetiro, experienciaLaboral.getFechaIngreso()) + anyosExperiencia;
+                    anyosExperiencia = Util.getAnyos(experienciaLaboral.getFechaIngreso(), fechaRetiro) + anyosExperiencia;
                 }
                 if (anyosExperiencia < anyosMinimosExperiencia) {
-                    throw new Exception();
+                    throw new CriteriosHabilitacionException("No cumple el tiempo mínimo de experiencia");
                 }
             } catch (ParseException ex) {
                 Logger.getLogger(ServicioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
@@ -116,11 +117,11 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
                     if (experienciaLaboral.getFechaRetiro() != null) {
                         fechaRetiro = experienciaLaboral.getFechaRetiro();
                     }
-                    anyosExperiencia = Util.getAnyos(fechaRetiro, experienciaLaboral.getFechaIngreso()) + anyosExperiencia;
+                    anyosExperiencia = Util.getAnyos(experienciaLaboral.getFechaIngreso(), fechaRetiro) + anyosExperiencia;
                 }
             }
             if (anyosExperiencia < anyoExperiencia.getAnyos()) {
-                throw new Exception();
+                throw new CriteriosHabilitacionException("No cumple los años de experiencia");
             }
         }
 
@@ -140,7 +141,7 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
                 }
             }
             if (puntaje < idiomaConvocatoria.getPuntajeMinimoCertificacion()) {
-                throw new Exception();
+                throw new CriteriosHabilitacionException("No cumple los idiomas");
             }
         }
 
@@ -155,7 +156,7 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
                 }
             }
             if (!existe) {
-                throw new Exception();
+                throw new CriteriosHabilitacionException("No cumple la formación");
             }
         }
 
@@ -169,7 +170,7 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
                 }
             }
             if (!existe) {
-                throw new Exception();
+                throw new CriteriosHabilitacionException("No cumple la educación continua");
             }
         }
 

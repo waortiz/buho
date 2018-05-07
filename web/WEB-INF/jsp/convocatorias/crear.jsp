@@ -78,21 +78,11 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="nombre">Nombre</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de la convocatoria">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                                 <form:input class="form-control" path="nombre" data-validation="required" data-validation-error-msg="Debe ingresar el nombre" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="area">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el el núcleo básico del conocimiento">
-                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
-                                <form:select style="width: 100%;" path="nucleoBasicoConocimiento" class="js-select-basic-single js-states form-control">
-                                    <form:option value=""></form:option>
-                                    <form:options items="${nucleosBasicosConocimiento}" itemLabel="nombre" itemValue="id"/>
-                                </form:select>
                         </div>
                     </div>
                 </div>
@@ -110,7 +100,7 @@
                         <div class="col-md-12 ">
                             <div class="form-group form-inline">
                                 <label>Curso</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el curso">
-                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><button style="margin-left: 10px;"  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_curso"><span class="glyphicon glyphicon-search"></span></button> 
+                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><button style="margin-left: 10px;"  type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#md_curso" data-backdrop="static" data-keyboard="false"><span class="glyphicon glyphicon-search"></span></button> 
                             </div>
                         </div>
                     </div>
@@ -998,7 +988,7 @@
             return;
         }
         
-        $('#md_guardar').modal('show');
+        $('#md_guardar').modal({backdrop: 'static', keyboard: false})  ;
         current_progress = 0;
         var interval = setInterval(function () {
             current_progress += 10;
@@ -1026,7 +1016,7 @@
             success: function (response) {
                 $('#md_guardar').modal('hide');
                 if (response === "") {
-                    $('#confirmacionAlmacenamientoConvocatoria').modal('show');
+                    $('#confirmacionAlmacenamientoConvocatoria').modal({backdrop: 'static', keyboard: false})  ;
                 } else {
                     bootstrap_alert_convocatoria.warning(response);
                 }
@@ -1234,7 +1224,7 @@
             $('#descripcionAdenda').val(adenda.descripcion());
             $('#consecutivo').val(adenda.consecutivo());
             $('input:file[name="adendas[' + adenda.consecutivo() + '].documento"]').show();
-            $('#md_adenda').modal('show');
+            $('#md_adenda').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.verDocumentoAdenda = function (adenda) {
@@ -1290,7 +1280,7 @@
             $('#anyosExperiencia').val(anyosExperiencia.anyos());
             $('#consecutivo').val(anyosExperiencia.consecutivo());
             bootstrap_alert_anyos_experiencia.removeWarning();
-            $('#md_anyos_experiencia').modal('show');
+            $('#md_anyos_experiencia').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.adicionarIdioma = function () {
@@ -1363,7 +1353,7 @@
             $('#puntajeMinimoCertificacionIdioma').val(idioma.puntajeMinimoCertificacion());
             $('#consecutivo').val(idioma.consecutivo());
             bootstrap_alert_idioma.removeWarning();
-            $('#md_idioma').modal('show');
+            $('#md_idioma').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.adicionarPrograma = function () {
@@ -1419,7 +1409,7 @@
             $('#nucleoBasicoConocimientoPrograma').val(programa.nucleoBasicoConocimiento()).trigger('change');
             $('#consecutivo').val(programa.consecutivo());
             bootstrap_alert_programa.removeWarning();
-            $('#md_programa').modal('show');
+            $('#md_programa').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.adicionarEducacionContinua = function () {
@@ -1477,7 +1467,7 @@
             $('#capacitacionEducacionContinua').val(educacionContinua.nombreCapacitacion()).trigger('change');
             $('#consecutivo').val(educacionContinua.consecutivo());
             bootstrap_alert_educacion_continua.removeWarning();
-            $('#md_educacion_continua').modal('show');
+            $('#md_educacion_continua').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.adicionarCriterioHabilitante = function () {
@@ -1526,7 +1516,7 @@
             $('#valorCriterioHabilitante').val(criterio.valor()).trigger('change');
             $('#consecutivo').val(criterio.consecutivo());
             bootstrap_alert_criterio_habilitante.removeWarning();
-            $('#md_criterio_habilitante').modal('show');
+            $('#md_criterio_habilitante').modal({backdrop: 'static', keyboard: false})  ;
         };
     };
 
@@ -1546,7 +1536,7 @@
         } else {
             fileInput.show();
         }
-        $('#md_adenda').modal('show');
+        $('#md_adenda').modal({backdrop: 'static', keyboard: false})  ;
     }
 
     function nuevoAnyosExperiencia() {
@@ -1554,7 +1544,7 @@
         $('#anyosExperiencia').val("");
         $('#consecutivo').val("");
         bootstrap_alert_anyos_experiencia.removeWarning();
-        $('#md_anyos_experiencia').modal('show');
+        $('#md_anyos_experiencia').modal({backdrop: 'static', keyboard: false})  ;
     }
 
     function nuevoIdioma() {
@@ -1564,7 +1554,7 @@
         $('#puntajeMinimoCertificacionIdioma').val("");
         $('#consecutivo').val("");
         bootstrap_alert_idioma.removeWarning();
-        $('#md_idioma').modal('show');
+        $('#md_idioma').modal({backdrop: 'static', keyboard: false})  ;
     }
 
     function nuevoPrograma() {
@@ -1574,7 +1564,7 @@
         $('#nucleoBasicoConocimientoPrograma').val("").trigger('change');
         $('#consecutivo').val("");
         bootstrap_alert_programa.removeWarning();
-        $('#md_programa').modal('show');
+        $('#md_programa').modal({backdrop: 'static', keyboard: false})  ;
     }
 
     function nuevaEducacionContinua() {
@@ -1584,7 +1574,7 @@
         $('#capacitacionEducacionContinua').val("").trigger('change');
         $('#consecutivo').val("");
         bootstrap_alert_educacion_continua.removeWarning();
-        $('#md_educacion_continua').modal('show');
+        $('#md_educacion_continua').modal({backdrop: 'static', keyboard: false})  ;
     }
 
     function nuevoCriterioHabilitante() {
@@ -1592,7 +1582,7 @@
         $('#valorCriterioHabilitante').val("").trigger('change');
         $('#consecutivo').val("");
         bootstrap_alert_criterio_habilitante.removeWarning();
-        $('#md_criterio_habilitante').modal('show');
+        $('#md_criterio_habilitante').modal({backdrop: 'static', keyboard: false})  ;
     }
 
     function cerrarVentanaAndenda() {

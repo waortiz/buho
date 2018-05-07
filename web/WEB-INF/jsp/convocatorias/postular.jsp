@@ -8,21 +8,23 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header">
-                    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Convocatorias vigentes FNSP</h4>
+                    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i>Convocatorias o invitaciones vigentes Facultad Nacional de Salud Pública</h4>
                 </div>
                 <div id="addscroll">
                     <table class="table table-hover" id="tbconvo">
                         <thead>
                             <tr>
-                                <td></td>
                                 <td><input type="text" id="intip" class="form-control input-sm" placeholder="Buscar tipo de convocatoria"></td>
-                                <td><input type="text" id="infechfin" class="form-control input-sm fecha" placeholder="Buscar fecha de finalización"></td>
                                 <td><input type="text" id="innom" class="form-control input-sm" placeholder="Buscar nombre de convocatoria"></td>
+                                <td><input type="text" id="infechfin" class="form-control input-sm fecha" placeholder="Buscar fecha de finalización"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr> 
                                 <th>Tipo</th>
                                 <th>Nombre</th>
-                                <th>Fecha de cierre</th>
+                                <th>Fecha de finalización</th>
                                 <th>Documento</th>
                                 <th>Aplicar</th>
                                 <th></th>
@@ -46,14 +48,14 @@
                                         <div class="input-group">
                                             <c:if test = "${convocatoria.isPostulado()}">
                                                 <div id="radioBtn" class="btn-group">
-                                                    <a class="btn btn-primary btn-sm active" data-toggle="postulado${convocatoria.getId()}" data-title="Y" href="javascript:postularConvocatoria(${convocatoria.getId()})">SI</a>
-                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="postulado${convocatoria.getId()}" data-title="N" href="javascript:retirarPostulacionConvocatoria(${convocatoria.getId()})">NO</a>
+                                                    <a class="btn btn-primary btn-sm active" id="btnPostulado${convocatoria.getId()}Si" data-toggle="postulado${convocatoria.getId()}" data-title="Y" href="javascript:postularConvocatoria(${convocatoria.getId()})">SI</a>
+                                                    <a class="btn btn-primary btn-sm notActive" id="btnPostulado${convocatoria.getId()}No" data-toggle="postulado${convocatoria.getId()}" data-title="N" href="javascript:retirarPostulacionConvocatoria(this, ${convocatoria.getId()})">NO</a>
                                                 </div>
                                             </c:if>
                                             <c:if test = "${!convocatoria.isPostulado()}">
                                                 <div id="radioBtn" class="btn-group">
-                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="postulado${convocatoria.getId()}" data-title="Y" href="javascript:postularConvocatoria(${convocatoria.getId()})">SI</a>
-                                                    <a class="btn btn-primary btn-sm active" data-toggle="postulado${convocatoria.getId()}" data-title="N" href="javascript:retirarPostulacionConvocatoria(${convocatoria.getId()})">NO</a>
+                                                    <a class="btn btn-primary btn-sm notActive" id="btnPostulado${convocatoria.getId()}Si" data-toggle="postulado${convocatoria.getId()}" data-title="Y" href="javascript:postularConvocatoria(${convocatoria.getId()})">SI</a>
+                                                    <a class="btn btn-primary btn-sm active" id="btnPostulado${convocatoria.getId()}No" data-toggle="postulado${convocatoria.getId()}" data-title="N" href="javascript:retirarPostulacionConvocatoria(this, ${convocatoria.getId()})">NO</a>
                                                 </div>                                                
                                             </c:if>
                                         </div>
@@ -109,49 +111,40 @@
                     <input type="hidden" id="idConvocatoria" />
                     <input type="hidden" id="tieneDocumento">
                     <button class="close" data-dismiss="modal">&times;</button>
-                    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Información de la convocatoria</h4>
+                    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Información de la convocatoria<small> FNSP</small></h4>
                 </div>
                 <div class="modal-body">
-                    <center><legend>Vigencia</legend></center>
                     <div class="row">   
-                        <div class="col-md-6"> 
+                        <div class="col-md-2">
+                            <div class="form-group">    
+                                <label>Tipo</label>
+                                <input id="tipoConvocatoria" type="text" name="tipoConvocatoria" style="border: 0;font-style: italic; margin-left: 20px;" readonly value="">
+                            </div>
+                        </div>
+                        <div class="col-md-3"> 
                             <div class="form-group">    
                                 <label>Fecha de inicio</label>
-                                <input id="fechaInicio" name="fechaInicio" disabled style="border: 0; text-align: center;margin-left: 0px; font-style: italic;font-weight: normal; width: 140px;" value="21/11/2017">
+                                <input id="fechaInicio" name="fechaInicio" disabled style="border: 0; text-align: center;margin-left: 0px; font-style: italic;font-weight: normal; width: 140px;" value="">
                             </div>        
                         </div>
-                        <div class="col-md-6"> 
+                        <div class="col-md-3"> 
                             <div class="form-group">    
                                 <label>Fecha de vigencia(cierre)</label>
-                                <input id="fechaVigencia" name="fechaVigencia" disabled style="border: 0; text-align: center;margin-left: 0px; font-style: italic;font-weight: normal; width: 140px;" value="21/11/2017"">
+                                <input id="fechaVigencia" name="fechaVigencia" disabled style="border: 0; text-align: center;margin-left: 0px; font-style: italic;font-weight: normal; width: 140px;" value="">
                             </div>  
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">    
-                                <label>Tipo de convocatoria</label>
-                                <input id="tipoConvocatoria" type="text" name="tipoConvocatoria" style="border: 0;font-style: italic; margin-left: 20px;" readonly value="docencia">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">    
-                                <label>&Aacute;rea de saber</label>
-                                <input id="area" type="text" name="area" style="border: 0;font-style: italic; margin-left: 20px;" readonly value="Tecnologia">
+                                <label>Fecha publicación resultados</label>
+                                <input type="text" id="fechaPublicacion" name="fechaPublicacion" style="border: 0;font-style: italic; margin-left: 20px;" disabled value="">
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">    
                                 <label>Nombre de la convocatoria</label>
-                                <input id="nombre" type="text" name="nombre" style="border: 0;font-style: italic; margin-left: 20px;" readonly value="portal 80">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">    
-                                <label>Fecha de publicaci&oacute;n de resultado</label>
-                                <input type="text" id="fechaPublicacion" name="fechaPublicacion" style="border: 0;font-style: italic; margin-left: 20px;" readonly value="20/04/201753">
+                                <input id="nombre" type="text" name="nombre" style="border: 0;font-style: italic; margin-left: 20px;width: 50%" readonly value="">
                             </div>
                         </div>
                     </div>                        
@@ -160,7 +153,6 @@
                             <div class="form-group">    
                                 <label>Descripci&oacute;n de la convocatoria</label>
                                 <textarea disabled style="border: 1;border-style:dotted;border-color:#aeb6bf;margin-left: 1px;width: 98%;" id="descripcion" readonly>
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo           consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                 </textarea>   
                             </div>
                         </div>
@@ -168,19 +160,19 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                     <div class="row" id="inputscurso">
                         <div class="col-md-2">
                             <label for="">Sede</label><br>
-                            <input type="text" style="border:0;font-style: italic;margin-left: 20px;" readonly id="sede" value="Medell&iacute;n">
+                            <input type="text" style="border:0;font-style: italic;margin-left: 20px;" readonly id="sede" value="">
                         </div>
                         <div class="col-md-4">
                             <label for="">Programa</label><br>
-                            <input type="text" name="" style="border: 0;font-style: italic; margin-left: 20px; width: 300px;"   readonly id="programa" value="Gesti&oacute;n de servicios de salud">
+                            <input type="text" name="" style="border: 0;font-style: italic; margin-left: 20px; width: 300px;"   readonly id="programa" value="">
                         </div>
                         <div class="col-md-3">
                             <label for="">Curso</label><br>
-                            <input type="text" name="" style="border: 0;font-style: italic; margin-left: 20px;" readonly id="curso" value="Historia de salud">
+                            <input type="text" name="" style="border: 0;font-style: italic; margin-left: 20px;" readonly id="curso" value="">
                         </div>
                         <div class="col-md-3">
                             <label for="">Total de horas</label><br>
-                            <input type="text" style="border:0;font-style: italic;margin-left: 20px; width:120px; " readonly id="totalHorasSemestre" value="160">
+                            <input type="text" style="border:0;font-style: italic;margin-left: 20px; width:120px; " readonly id="totalHorasSemestre" value="">
                         </div>
                     </div>                    
                     <div class="row">
@@ -303,13 +295,13 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
 
         $('#infechfin').on('keyup', function () {
             table
-                .columns(1)
+                .columns(2)
                 .search(this.value)
                 .draw();
         });
         $('#innom').on('keyup', function () {
             table
-                .columns(2)
+                .columns(1)
                 .search(this.value)
                 .draw();
         });
@@ -323,15 +315,6 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
         });
     });
     
-    function postular(object) {
-        var sel = object.data('title');
-        var tog = object.data('toggle');
-        $('#' + tog).prop('value', sel);
-
-        $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
-        $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
-    }
-  
     function postularConvocatoria(idConvocatoria) {
         <c:if test = "${!autenticado}">
             location.href = '${pageContext.request.contextPath}/login';    
@@ -346,9 +329,15 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
             if (response !== "") {
                 var resultado = JSON.parse(response);
                 if(resultado.resultado) {
-                   $('#md_postular').modal('show');
+                   $('#md_postular').modal({backdrop: 'static', keyboard: false})  ;
                 } else {
-                   bootstrap_alert_convocatoria.warning('No cumple con los criterios para postularse a la convocatoria'); 
+                   if(resultado.mensaje != '') {
+                     bootstrap_alert_convocatoria.warning('No cumple con los criterios para postularse a la convocatoria: ' + resultado.mensaje); 
+                   } else {
+                     bootstrap_alert_convocatoria.warning('Ocurrió un error al postularse a la convocatoria');   
+                   }
+                   $('#btnPostulado' + idConvocatoria + 'No').removeClass('notActive').addClass('active');  
+                   $('#btnPostulado' + idConvocatoria + 'Si').removeClass('active').addClass('notActive');  
                 } 
             }
         }});      
@@ -368,9 +357,11 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
             if (response !== "") {
                 var resultado = JSON.parse(response);
                 if(resultado.resultado) {
-                   $('#md_retirar_postulacion').modal('show');
+                   $('#md_retirar_postulacion').modal({backdrop: 'static', keyboard: false})  ;
                 } else {
                    bootstrap_alert_convocatoria.warning('No se pudo retirar la postulación de la convocatoria'); 
+                   $('#btnPostulado' + idConvocatoria + 'Si').removeClass('notActive').addClass('active');  
+                   $('#btnPostulado' + idConvocatoria + 'No').removeClass('active').addClass('notActive');  
                 } 
             }
         }});      
@@ -388,10 +379,9 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                     $('#idConvocatoria').val(convocatoria.id);
                     $('#fechaInicio').val(convocatoria.fechaInicioFormateada);
                     $('#fechaVigencia').val(convocatoria.fechaFinFormateada);
-                    $('#tipoConvocatoria').html(convocatoria.nombreTipoConvocatoria);
-                    $('#area').html(convocatoria.nombreArea);
-                    $('#nombre').html(convocatoria.nombre);
-                    $('#fechaPublicacion').html(convocatoria.fechaPublicacionResultadosFormateada);
+                    $('#tipoConvocatoria').val(convocatoria.nombreTipoConvocatoria);
+                    $('#nombre').val(convocatoria.nombre);
+                    $('#fechaPublicacion').val(convocatoria.fechaPublicacionResultadosFormateada);
                     $('#descripcion').val(convocatoria.descripcion);
                     if (convocatoria.tipoConvocatoria == DOCENCIA_MEDELLIN || convocatoria.tipoConvocatoria == DOCENCIA_REGIONES) {
                         $('#inputscurso').show();
@@ -428,7 +418,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod      te
                     } else {
                         $('#verDocumentoConvocatoria').attr("title", 'Ver documento');
                     }
-                    $('#modalConvocatoria').modal('show');
+                    $('#modalConvocatoria').modal({backdrop: 'static', keyboard: false})  ;
                 }
             }});
     }

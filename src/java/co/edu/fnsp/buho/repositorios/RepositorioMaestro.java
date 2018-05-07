@@ -6,6 +6,7 @@
 package co.edu.fnsp.buho.repositorios;
 
 import co.edu.fnsp.buho.entidades.CampoHojaVida;
+import co.edu.fnsp.buho.entidades.Ciudad;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Programa;
 import java.util.ArrayList;
@@ -68,6 +69,8 @@ public class RepositorioMaestro implements IRepositorioMaestro {
 
     private SimpleJdbcCall ingresarPrograma;
     private SimpleJdbcCall ingresarInstitucion;
+    private SimpleJdbcCall ingresarDepartamento;
+    private SimpleJdbcCall ingresarMunicipio;
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -114,6 +117,8 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         this.obtenerCamposHojaVida = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCamposHojaVida").returningResultSet("camposHojaVida", BeanPropertyRowMapper.newInstance(CampoHojaVida.class));
         this.ingresarPrograma = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarPrograma");
         this.ingresarInstitucion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarInstitucion");
+        this.ingresarDepartamento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDepartamento");
+        this.ingresarMunicipio = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarMunicipio");
     }
 
     @Override
@@ -444,10 +449,36 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         parametrosIngresoPrograma.addValue("varnucleobasicoconocimiento", programa.getNucleoBasicoConocimiento());
         parametrosIngresoPrograma.addValue("varnombre", programa.getNombre());
         parametrosIngresoPrograma.addValue("vartitulo", programa.getTitulo());
-        
+
         Map resultadoIngresoPrograma = ingresarPrograma.execute(parametrosIngresoPrograma);
         int idPrograma = (int) resultadoIngresoPrograma.get("varId");
 
         return idPrograma;
+    }
+
+    @Override
+    public Ciudad ingresarCiudad(Ciudad ciudad) {
+        String codigoDepartamento = ciudad.getDepartamento();
+        if (ciudad.getDepartamento() == null || ciudad.getDepartamento().trim().length() == 0) {
+            MapSqlParameterSource parametrosIngresoDepartamento = new MapSqlParameterSource();
+            parametrosIngresoDepartamento.addValue("varNombre", null);
+            parametrosIngresoDepartamento.addValue("varPais", ciudad.getPais());
+            Map resultadoIngresoDepartamento = ingresarDepartamento.execute(parametrosIngresoDepartamento);
+            codigoDepartamento = (String) resultadoIngresoDepartamento.get("varCodigo");
+        }
+
+        MapSqlParameterSource parametrosIngresoMunicipio = new MapSqlParameterSource();
+        parametrosIngresoMunicipio.addValue("varDepartamento", codigoDepartamento);
+        parametrosIngresoMunicipio.addValue("varnombre", ciudad.getNombre());
+
+        Map resultadoIngresoMunicipio = ingresarMunicipio.execute(parametrosIngresoMunicipio);
+        String codigoCiudad = (String) resultadoIngresoMunicipio.get("varCodigo");
+
+        Ciudad nuevaCiudad = new Ciudad();
+        nuevaCiudad.setId(codigoCiudad);
+        nuevaCiudad.setDepartamento(codigoDepartamento);
+        
+        return nuevaCiudad;
+
     }
 }

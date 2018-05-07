@@ -6,6 +6,7 @@
 package co.edu.fnsp.buho.controladores;
 
 import co.edu.fnsp.buho.entidades.Articulo;
+import co.edu.fnsp.buho.entidades.Ciudad;
 import co.edu.fnsp.buho.entidades.CursoExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.DetalleUsuario;
 import co.edu.fnsp.buho.entidades.Distincion;
@@ -780,6 +781,19 @@ public class HojaVidaController {
             int id= servicioMaestro.ingresarProgramaInstitucion(programa);
 
             return "{\"id\":" + id + "}";
+        } catch (Exception exc) {
+            logger.error(exc);
+            return "";
+        }
+    }
+    
+    @RequestMapping(value = "/ciudad", method = RequestMethod.POST)
+    public @ResponseBody
+    String ingresarCiudad(@ModelAttribute Ciudad ciudad, Model model) throws ParseException, IOException {
+        try {
+            Ciudad nuevaCiudad = servicioMaestro.ingresarCiudad(ciudad);
+            Gson gson = new Gson();
+            return gson.toJson(nuevaCiudad);
         } catch (Exception exc) {
             logger.error(exc);
             return "";

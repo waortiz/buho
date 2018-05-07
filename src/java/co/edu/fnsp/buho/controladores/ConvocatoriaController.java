@@ -12,6 +12,7 @@ import co.edu.fnsp.buho.entidades.Adenda;
 import co.edu.fnsp.buho.entidades.CampoHojaVida;
 import co.edu.fnsp.buho.entidades.DetalleUsuario;
 import co.edu.fnsp.buho.entidades.Programa;
+import co.edu.fnsp.buho.excepciones.CriteriosHabilitacionException;
 import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
 import co.edu.fnsp.buho.utilidades.Util;
@@ -126,7 +127,6 @@ public class ConvocatoriaController {
         try {
             Convocatoria convocatoriaIngresar = new Convocatoria();
             convocatoriaIngresar.setId(convocatoria.getId());
-            convocatoriaIngresar.setNucleoBasicoConocimiento(convocatoria.getNucleoBasicoConocimiento());
             convocatoriaIngresar.setAnyosMinimosExperiencia(convocatoria.getAnyosMinimosExperiencia());
             convocatoriaIngresar.setDescripcion(convocatoria.getDescripcion());
             convocatoriaIngresar.setFechaFin(convocatoria.getFechaFin());
@@ -254,10 +254,13 @@ public class ConvocatoriaController {
     public @ResponseBody
     String postularConvocatoria(@PathVariable int idConvocatoria, Model model) {
         try {
-            servicioConvocatoria.postularConvocatoria(obtenerIdUsuario(), idConvocatoria);
+            servicioConvocatoria.postularConvocatoria(obtenerIdPersona(), idConvocatoria);
+        } catch (CriteriosHabilitacionException exc) {
+            logger.error(exc);
+            return "{\"resultado\":false, \"mensaje\":\"" + exc.getMessage() + "\"}";
         } catch (Exception exc) {
             logger.error(exc);
-            return "{\"resultado\":false}";
+            return "{\"resultado\":false, \"mensaje\":''}";
         }
 
         return "{\"resultado\":true}";
@@ -267,7 +270,7 @@ public class ConvocatoriaController {
     public @ResponseBody
     String retirarConvocatoria(@PathVariable int idConvocatoria, Model model) {
         try {
-            servicioConvocatoria.retirarPostulacion(obtenerIdUsuario(), idConvocatoria);
+            servicioConvocatoria.retirarPostulacion(obtenerIdPersona(), idConvocatoria);
         } catch (Exception exc) {
             logger.error(exc);
             return "{\"resultado\":false}";
@@ -395,6 +398,15 @@ public class ConvocatoriaController {
         }
 
         return idUsuario;
+    }
+
+    private long obtenerIdPersona() {
+        long idPersona = 0;
+        if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof DetalleUsuario) {
+            idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+        }
+
+        return idPersona;
     }
 
 }

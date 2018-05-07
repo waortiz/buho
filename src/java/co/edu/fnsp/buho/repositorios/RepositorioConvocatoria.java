@@ -145,12 +145,6 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         parametros.addValue("varFechaFin", convocatoria.getFechaFin());
         parametros.addValue("varFechaInicio", convocatoria.getFechaInicio());
         parametros.addValue("varFechaResultados", convocatoria.getFechaPublicacionResultados());
-        try {
-            parametros.addValue("varNucleoBasicoConocimiento", Util.obtenerEntero(convocatoria.getNucleoBasicoConocimiento()));
-        } catch (ParseException ex) {
-            Logger.getLogger(RepositorioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        parametros.addValue("varPrograma", convocatoria.getIdProgramaCurso());
         parametros.addValue("varCurso", convocatoria.getNombreCurso());
         if (convocatoria.getTotalHorasSemestreCurso() != null
                 && convocatoria.getTotalHorasSemestreCurso().length() > 0) {
@@ -161,6 +155,26 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             }
         } else {
             parametros.addValue("varNumeroHoras", 0);
+        }
+        if (convocatoria.getIdProgramaCurso() != null
+                && convocatoria.getIdProgramaCurso().length() > 0) {
+            try {
+                parametros.addValue("varPrograma", Util.obtenerEntero(convocatoria.getIdProgramaCurso()));
+            } catch (ParseException ex) {
+                Logger.getLogger(RepositorioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            parametros.addValue("varPrograma", null);
+        }
+        if (convocatoria.getAnyosMinimosExperiencia() != null
+                && convocatoria.getAnyosMinimosExperiencia().length() > 0) {
+            try {
+                parametros.addValue("varanyosminimosexperiencia", Util.obtenerEntero(convocatoria.getAnyosMinimosExperiencia()));
+            } catch (ParseException ex) {
+                Logger.getLogger(RepositorioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            parametros.addValue("varanyosminimosexperiencia", null);
         }
         parametros.addValue("varPersonaRegistra", idUsuario);
         Map resultado = ingresarConvocatoria.execute(parametros);
@@ -254,7 +268,6 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         parametros.addValue("varFechaFin", convocatoria.getFechaFin());
         parametros.addValue("varFechaInicio", convocatoria.getFechaInicio());
         parametros.addValue("varFechaResultados", convocatoria.getFechaPublicacionResultados());
-        parametros.addValue("varNucleoBasicoConocimiento", convocatoria.getNucleoBasicoConocimiento());
         parametros.addValue("varCurso", convocatoria.getNombreCurso());
         if (convocatoria.getTotalHorasSemestreCurso() != null
                 && convocatoria.getTotalHorasSemestreCurso().length() > 0) {
@@ -315,8 +328,6 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
 
         Map resultado = obtenerConvocatoria.execute(parametros);
         convocatoria.setId(idConvocatoria);
-        convocatoria.setNucleoBasicoConocimiento(((Integer) resultado.get("varNucleoBasicoConocimiento")).toString());
-        convocatoria.setNombreNucleoBasicoConocimiento((String) resultado.get("varNombreNucleoBasicoConocimiento"));
         convocatoria.setDescripcion((String) resultado.get("varDescripcion"));
         convocatoria.setFechaFin((Date) resultado.get("varFechaFin"));
         convocatoria.setFechaFinFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaFin()));

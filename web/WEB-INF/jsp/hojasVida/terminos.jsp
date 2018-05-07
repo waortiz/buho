@@ -539,7 +539,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#md_acepto').modal('show');
+        $('#md_acepto').modal({backdrop: 'static', keyboard: false})  ;
     });
     
      $('#terminos').submit(function (evt) {

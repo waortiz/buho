@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.CookieClearingLogoutHandler;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.security.web.authentication.rememberme.AbstractRememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,7 +48,15 @@ public class LoginController {
         CookieUtil.clear(response, JwtUtil.jwtTokenCookieName, request.getServerName()); 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
-            new SecurityContextLogoutHandler().logout(request, response, auth);
+            SecurityContextLogoutHandler securityContextLogoutHandler = new SecurityContextLogoutHandler();
+            securityContextLogoutHandler.setInvalidateHttpSession(true);
+            securityContextLogoutHandler.setClearAuthentication(true);
+            securityContextLogoutHandler.logout(request, response, auth);
+
+            CookieClearingLogoutHandler cookieClearingLogoutHandler = new CookieClearingLogoutHandler(AbstractRememberMeServices.SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY);
+            cookieClearingLogoutHandler.logout(request, response, auth);
+
+            SecurityContextHolder.getContext().setAuthentication(null);
         }
         
         return "redirect:/index";

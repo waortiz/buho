@@ -6,6 +6,7 @@
 package co.edu.fnsp.buho.servicios;
 
 import co.edu.fnsp.buho.entidades.CampoHojaVida;
+import co.edu.fnsp.buho.entidades.Ciudad;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Programa;
 import co.edu.fnsp.buho.repositorios.IRepositorioMaestro;
@@ -217,5 +218,10 @@ public class ServicioMaestro implements IServicioMaestro {
     @Override
     public int ingresarProgramaInstitucion(Programa programa) {
         return repositorioMaestro.ingresarProgramaInstitucion(programa);
+    }
+
+    @Override
+    public Ciudad ingresarCiudad(Ciudad ciudad) {
+         return repositorioMaestro.ingresarCiudad(ciudad);
     }
 }

@@ -25,8 +25,6 @@ public class Convocatoria {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaFin;
     private String fechaFinFormateada;
-    private String nucleoBasicoConocimiento;
-    private String nombreNucleoBasicoConocimiento;
     private String nombre;
     private String descripcion;
     private Documento documento;
@@ -90,34 +88,6 @@ public class Convocatoria {
      */
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
-    }
-
-    /**
-     * @return the nucleoBasicoConocimiento
-     */
-    public String getNucleoBasicoConocimiento() {
-        return nucleoBasicoConocimiento;
-    }
-
-    /**
-     * @param nucleoBasicoConocimiento the nucleoBasicoConocimiento to set
-     */
-    public void setNucleoBasicoConocimiento(String nucleoBasicoConocimiento) {
-        this.nucleoBasicoConocimiento = nucleoBasicoConocimiento;
-    }
-
-    /**
-     * @return the nombreNucleoBasicoConocimiento
-     */
-    public String getNombreNucleoBasicoConocimiento() {
-        return nombreNucleoBasicoConocimiento;
-    }
-
-    /**
-     * @param nombreNucleoBasicoConocimiento the nombreNucleoBasicoConocimiento to set
-     */
-    public void setNombreNucleoBasicoConocimiento(String nombreNucleoBasicoConocimiento) {
-        this.nombreNucleoBasicoConocimiento = nombreNucleoBasicoConocimiento;
     }
 
     /**

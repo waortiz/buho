@@ -59,7 +59,7 @@
                         <button  id="btnpersonal" class="btn btn-success">Informaci&oacute;n personal</button>
                     </div>
                 </div>                    
-                <!-- FILA 1 FROMULARIO-->
+                <!-- FILA 1 FORMULARIO-->
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -147,7 +147,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="ciudad">Ciudad</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar su ciudad " style="margin-left: 5px;"><i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                    <select style="width: 100%" id="ciudad" name="ciudad" class="js-select-basic-single js-states form-control"></select>
+                                    <select style="width: 80%" id="ciudad" name="ciudad" class="js-select-basic-single js-states form-control"></select>
+                                    <button id="btnNuevaCiudadExtranjera" style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevaCiudadExtranjera();"><span class="glyphicon glyphicon-plus"></span></button>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -156,9 +157,36 @@
                             </div>
                         </div>
                     </div>
-                </div>                                     
-                <!-- FIN FILA 1 FROMULARIO-->
-                <!-- FILA 2 FROMULARIO-->
+                </div>
+                <div class="modal fade" id="md_ciudad_extranjera" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header mhsuccess">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Ciudad</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="alert_ciudad_extranjera"></div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="ciudadExtranjera">Ciudad</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe ingresar la ciudad">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
+                                            <input name="ciudadExtranjera" id="ciudadExtranjera" type="text" class="form-control">
+                                        </div>
+                                    </div>                  
+                                </div> 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" id="btnAdicionarCiudadExtranjera">Agregar</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- FIN FILA 1 FORMULARIO-->
+                <!-- FILA 2 FORMULARIO-->
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -197,7 +225,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="nacionalidad">Nacionalidad</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar la nacionalidad">
+                            <label for="nacionalidad">País/Nacionalidad</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar la nacionalidad">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                 <form:select path="nacionalidad" class="js-select-basic-single js-states form-control" data-validation="required" data-validation-error-msg="Debe seleccionar la nacionalidad">
                                     <form:option value=""></form:option>
@@ -206,8 +234,8 @@
                         </div>
                     </div>                            
                 </div>
-                <!-- FIN FILA 2 FROMULARIO-->
-                <!-- FILA 3 FROMULARIO-->
+                <!-- FIN FILA 2 FORMULARIO-->
+                <!-- FILA 3 FORMULARIO-->
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -290,13 +318,13 @@
                             </a>
                             <br>     
                             <form:input class="form-control" path="direccion" style="width: 90%" readonly="true" data-validation="required" data-validation-error-msg="Debe indicar la dirección"/>
-                            <button type="button" class="btn btn-success btn-sm" data-target="#md_direccion" data-toggle="modal">
+                            <button type="button" class="btn btn-success btn-sm" data-target="#md_direccion" data-toggle="modal" data-backdrop="static" data-keyboard="false">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </div>
                     </div>
                 </div>
-                <!-- FILA 4 FROMULARIO-->
+                <!-- FILA 4 FORMULARIO-->
                 <div class="modal fade" id="md_direccion" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <!-- Modal content-->
@@ -334,34 +362,29 @@
                                                     <option value="Transversal">Transversal</option>
                                                 </select>
                                                 <p>Ejemplo: Calle</p>
-                                                <input type="text" id="rescalle" style="display:none;">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <input type="text" name="numdir" id="numdir" class="form-control">
                                                 <p>Ejemplo: 65</p>
-                                                <input type="text" id="resnumdir" style="display:none;">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <input type="text" name="letdir" id="letdir" class="form-control">
                                                 <p>Ejemplo: AA</p>
-                                                <input type="text" id="resletdir" style="display:none;">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <select  name="dirsur" id="dirsur" class="js-select-basic-single js-states form-control">
-                                                    <option></option>
-                                                    <option value="-">--</option>
+                                                    <option value="">&nbsp;</option>
                                                     <option value="Sur">Sur</option>
                                                     <option value="Norte">Norte</option>
                                                     <option value="Este">Este</option>
                                                     <option value="Oeste">Oeste</option>
                                                 </select>
-                                                <input type="text" id="resdisur" style="display:none;">
                                                 <p>Ejemplo: sur</p>
                                             </div>
                                         </div>
@@ -370,35 +393,30 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <input type="text" name="num2dir" id="num2dir" class="form-control">
-                                                <input type="text" id="resnum2dir" style="display:none;">
                                                 <p>Ejemplo: 45</p>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <input type="text" name="let2dir" id="let2dir" class="form-control">
-                                                <input type="text" id="reslet2dir" style="display:none;">
                                                 <p>Ejemplo: B</p>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <select  name="direst" id="direst" class="js-select-basic-single js-states form-control">
-                                                    <option></option>
-                                                    <option>-</option>
+                                                    <option value="">&nbsp;</option>
                                                     <option value="Sur">Sur</option>
                                                     <option value="Norte">Norte</option>
                                                     <option value="Este">Este</option>
                                                     <option value="Oeste">Oeste</option>
                                                 </select>
-                                                <input type="text" id="resdirest" style="display:none;">
                                                 <p>Ejemplo: este</p>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <input type="text" name="num3dir" id="num3dir" class="form-control">
-                                                <input type="text" id="resnum3dir" style="display:none;">
                                                 <p>Ejemplo: 45</p>
                                             </div>
                                         </div>
@@ -406,10 +424,9 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="cid_certificado">(urb,bloque.etc)</label> 
+                                                <label for="dirurb">(urb,bloque.etc)</label> 
                                                 <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe diligenciar el nombre de urbanizacion y el numero de bloque y apto"><i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                                 <input type="text" class="form-control" name="dirurb" id="dirurb">
-                                                <input type="text" id="resdirub" style="display:none;">
                                                 <p>Ejemplo: Urbanizaci&oacute;n manzanares bloque 23 Apto 250</p>
                                             </div>
                                         </div>
@@ -441,11 +458,11 @@
                         </div>              
                     </div>
                 </div>
-                <!-- FIN FILA 4 FROMULARIO-->
-                <!-- FILA 5 FROMULARIO-->
+                <!-- FIN FILA 4 FORMULARIO-->
+                <!-- FILA 5 FORMULARIO-->
 
-                <!-- FIN FILA 5 FROMULARIO-->
-                <!-- FILA 6 FROMULARIO-->
+                <!-- FIN FILA 5 FORMULARIO-->
+                <!-- FILA 6 FORMULARIO-->
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -468,8 +485,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- FIN FILA 5 FROMULARIO-->
-                <!-- FILA 6 FROMULARIO-->
+                <!-- FIN FILA 5 FORMULARIO-->
+                <!-- FILA 6 FORMULARIO-->
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group form-inline">
@@ -490,7 +507,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="actividadEconomica">Actividad econ&oacute;mica del RUT</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la actividad económica del RUT">
+                            <label for="actividadEconomica">Actividad económica principal registrada en el RUT</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la actividad económica del RUT">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                 <form:select path="actividadEconomica" class="js-select-basic-single js-states form-control">
                                     <form:option value=""></form:option>
@@ -573,7 +590,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="tipoVinculacion">Tipo de vinculacion</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de vinculaci&oacute;n">
+                            <label for="tipoVinculacion">Tipo de vinculación</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de vinculaci&oacute;n">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                 <form:select path="tipoVinculacion" class="js-select-basic-single js-states form-control">
                                     <form:option value=""></form:option>
@@ -585,7 +602,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label>Agregar Telef&oacute;no</label>
-                        <button type="button" class="btn btn-success btn-sm" onclick="nuevoTelefono()" data-toggle="modal" >
+                        <button type="button" class="btn btn-success btn-sm" onclick="nuevoTelefono()">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                         <div class="table-responsive">
@@ -620,7 +637,7 @@
                     </div>
                     <div class="col-md-3">
                         <label>Agregar correo electr&oacute;nico</label>
-                        <button  type="button" class="btn btn-success btn-sm" onclick="nuevoCorreoElectronico()" data-toggle="modal" >
+                        <button  type="button" class="btn btn-success btn-sm" onclick="nuevoCorreoElectronico()">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button> 
 
@@ -651,7 +668,7 @@
                     </div>
                     <div class="col-md-5">
                         <label>Agregar cuenta bancaria</label>
-                        <button  type="button" class="btn btn-success btn-sm" onclick="nuevaCuentaBancaria()" data-toggle="modal" >
+                        <button  type="button" class="btn btn-success btn-sm" onclick="nuevaCuentaBancaria()" >
                             <span class="glyphicon glyphicon-plus"></span>
                         </button> 
                         <div class="table-responsive">
@@ -826,7 +843,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <label>Agregar documentos de soporte(Foto,certificados bancarios, EPS, ARL, AFP...)</label>
+                        <label>Agregar documentos de soporte(Foto, propuesta de investigación, certificados EPS, ARL, AFP, bancarios y otros documentos requeridos)</label>
                         <button type="button" class="btn btn-success btn-sm" onclick="nuevoDocumentoSoporte()">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
@@ -865,7 +882,7 @@
                         <div class="modal-content">
                             <div class="modal-header mhsuccess">
                                 <button type="button" class="close" onclick="cerrarVentanaDocumentoSoporte()">&times;</button>
-                                <h4 class="modal-title">Documentos adjuntos</h4>
+                                <h4 class="modal-title">Adjuntar documentos de soporte</h4>
                             </div>
                             <div class="modal-body" style="font-size: 16px;">
                                 <div id="alert_documento_soporte"></div>
@@ -1126,7 +1143,9 @@
                                                 <select name="paisTituloExteriorEducacionSuperior" id="paisTituloExteriorEducacionSuperior" class="js-select-basic-single js-states form-control" style="width: 100%;">
                                                     <option></option>
                                                      <c:forEach var="pais" items="${paises}">
+                                                         <c:if test = "${pais.getId() != 343}">
                                                         <option value="${pais.getId()}">${pais.getNombre()}</option>
+                                                        </c:if>
                                                     </c:forEach>    
                                                 </select>
                                             </div>
@@ -1184,7 +1203,7 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcloe básico de conocimiento">
+                                                                <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
                                                                 <select style="width: 100%;" name="nucleoBasicoConocimientoPrograma" id="nucleoBasicoConocimientoPrograma" class="js-select-basic-single js-states form-control">
                                                                     <option></option>
@@ -1814,7 +1833,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="nucleoBasicoConocimientoExperienciaLaboral">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el N&uacute;cleo b&aacute;sico del conocimiento">
+                                            <label for="nucleoBasicoConocimientoExperienciaLaboral">Núcleo básico del conocimiento de desempeño</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el N&uacute;cleo b&aacute;sico del conocimiento">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                             <select style="width: 100%;" name="nucleoBasicoConocimientoExperienciaLaboral" id="nucleoBasicoConocimientoExperienciaLaboral" class="js-select-basic-single js-states form-control">
                                                 <option></option>
@@ -1847,7 +1866,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group">
-                                            <label for="actividadEconomicaExperienciaLaboral">Actividad econ&oacute;mica de la empresa</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la actividad económica">
+                                            <label for="actividadEconomicaExperienciaLaboral">Actividad económica principal de la empresa</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la actividad económica">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                             <select style="width: 100%;" name="actividadEconomicaExperienciaLaboral" id="actividadEconomicaExperienciaLaboral" class="js-select-basic-single js-states form-control">
                                                 <option></option>
@@ -2720,8 +2739,11 @@
     var ID_UNIVERSIDAD_ANTIOQUIA = 209;
     var UNIVERSIDAD_ANTIOQUIA = 'Universidad de Antioquia';
     var TIPO_CERTIFICACION_OTRO = 8;
-    var programas = [];
     var MAXIMO_TAMANYO_ARCHIVO = 2097152;
+    var ID_COLOMBIA = 343;
+    var programas = [];
+    var nombreCampoCiudad;
+    var campoCiudad;
     
     $('.fecha').datepicker({
         dateFormat: "dd/mm/yy",
@@ -2856,6 +2878,7 @@
           $('#paistit').css("display", "none");
           $('#certhomo').css('display', 'none');
           $('#btnNuevoProgramaExtranjero').hide();
+          $('#paisTituloExteriorEducacionSuperior').val('').trigger("change.select2");
         });  
         
         $('#btnGraduadoSiEducacionSuperior').click(function () {
@@ -2957,6 +2980,82 @@
                 bootstrap_alert_programa_extranjero.warning("Error al almacenar el programa.");
             }});
         });
+        
+        $('#addprograma').click(function(){
+          var institucion = $('#institucionEducativaPrograma').val();
+          var nombreInstitucion = $('#institucionEducativaPrograma option:selected').text().toUpperCase();
+          var programaCursado = $('#programaCursado').val();
+          var nombreProgramaCursado = $('#programaCursado option:selected').text().toUpperCase();
+          var nucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoPrograma').val();
+          var nombreNucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoPrograma option:selected').text().toUpperCase();
+          var tituloPrograma = $('#tituloPrograma').val();
+
+          $('#formprograma').show();
+          
+          $('#institucionEducacionSuperior').val(institucion);
+          $('#nombreInstitucionEducacionSuperior').val(nombreInstitucion);
+          $('#programaCursadoEducacionSuperior').val(programaCursado);
+          $('#nombreProgramaCursadoEducacionSuperior').val(nombreProgramaCursado);
+          $('#nucleoBasicoConocimientoEducacionSuperior').val(nucleoBasicoConocimientoPrograma);
+          $('#nombreNucleoBasicoConocimientoEducacionSuperior').val(nombreNucleoBasicoConocimientoPrograma);
+          $('#tituloEducacionSuperior').val(tituloPrograma);
+          
+          $('#nucleoBasicoConocimientoPrograma').val("").trigger("change.select2");
+          $('#institucionEducativaPrograma').val("").trigger("change.select2");
+          $('#programaCursado').val("");
+          $('#tituloPrograma').val("");
+          
+          $('#md_programa').modal('hide');
+        });
+        
+        $('#btnAdicionarCiudadExtranjera').click(function(){
+          var pais = $('#pais').val();
+          var departamento = $('#departamento').val();
+          var nombreCiudad = $('#ciudadExtranjera').val();
+
+          if (nombreCiudad === "") {
+             bootstrap_alert_ciudad_extranjera.warning('Debe ingresar la ciudad');
+            return false;
+          }
+        
+        var formData = new FormData(this);
+        formData.append("pais", pais);
+        formData.append("departamento", departamento);
+        formData.append("nombre", nombreCiudad);
+        
+        $.ajax({
+            type: "POST",
+            url: "${pageContext.request.contextPath}/hojasVida/ciudad",
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+            },
+            success: function (response) {
+                if (response !== "") {
+                    var ciudad = JSON.parse(response);
+                    $('#departamento').find('option').remove();
+                    $('#departamento').append('<option></option>');
+                    $('#departamento').append('<option value=' + ciudad.departamento + '>SIN ESPECIFICAR</option>');
+                    $('#departamento').val(ciudad.departamento).trigger("change.select2");
+
+                    $('#ciudad').find('option').remove();
+                    $('#ciudad').append('<option></option>');
+                    $('#ciudad').append('<option value=' + ciudad.id + '>' + nombreCiudad + '</option>');
+                    $('#ciudad').val(ciudad.id).trigger("change.select2");
+                    
+                    $('#md_ciudad_extranjera').modal('hide');
+                    seleccionarUbicacion();
+                } else {
+                    bootstrap_alert_ciudad_extranjera.warning(response);
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                bootstrap_alert_ciudad_extranjera.warning("Error al almacenar la ciudad.");
+            }});
+        });
+        
         $('#btnExperienciaDocenciaFNSPSi').click(function () {
             $('#institucionExperienciaDocencia').val(ID_UNIVERSIDAD_ANTIOQUIA).trigger('change.select2');
             $('#institucionExperienciaDocencia').prop('disabled', 'disabled');
@@ -3027,86 +3126,33 @@
         $('#num3dir').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
+        
         $('#dircalle').change(function () {
-            var valor = $(this).val();
-            $("#rescalle").val(valor);
-            $("#vistaprevia").val(valor);
+            actualizarDireccion();
         });
-        $('#numdir').keyup(function () {
-            var valor = $(this).val();
-            var rescalle = $("#rescalle").val();
-            $('#resnumdir').val(valor);
-            $("#vistaprevia").val(rescalle + " " + valor);
+        $('#numdir').change(function () {
+            actualizarDireccion();
         });
-        $('#letdir').keyup(function () {
-            var valor = $(this).val();
-            var rescalle = $("#rescalle").val();
-            var resnumdir = $('#resnumdir').val();
-            $('#resletdir').val(valor);
-            $("#vistaprevia").val(rescalle + " " + resnumdir + valor);
+        $('#letdir').change(function () {
+            actualizarDireccion();
         });
         $('#dirsur').change(function () {
-            var valor = $(this).val();
-            var rescalle = $("#rescalle").val();
-            var resnumdir = $('#resnumdir').val();
-            var resletdir = $('#resletdir').val();
-            $("#resdisur").val(valor);
-            $("#vistaprevia").val(rescalle + " " + resnumdir + resletdir + " " + valor);
+            actualizarDireccion();
         });
-        $('#num2dir').keyup(function () {
-            var valor = $(this).val();
-            var rescalle = $("#rescalle").val();
-            var resnumdir = $('#resnumdir').val();
-            var resletdir = $('#resletdir').val();
-            var resdisur = $("#resdisur").val();
-            $('#resnum2dir').val(valor);
-            $("#vistaprevia").val(rescalle + " " + resnumdir + resletdir + " " + resdisur + " # " + valor);
+        $('#num2dir').change(function () {
+            actualizarDireccion();
         });
-        $('#let2dir').keyup(function () {
-            var valor = $(this).val();
-            var rescalle = $("#rescalle").val();
-            var resnumdir = $('#resnumdir').val();
-            var resletdir = $('#resletdir').val();
-            var resdisur = $("#resdisur").val();
-            var resnum2dir = $('#resnum2dir').val();
-            $('#reslet2dir').val(valor);
-            $("#vistaprevia").val(rescalle + " " + resnumdir + resletdir + " " + resdisur + " # " + resnum2dir + valor);
+        $('#let2dir').change(function () {
+            actualizarDireccion();
         });
         $('#direst').change(function () {
-            var valor = $(this).val();
-            var rescalle = $("#rescalle").val();
-            var resnumdir = $('#resnumdir').val();
-            var resletdir = $('#resletdir').val();
-            var resdisur = $("#resdisur").val();
-            var resnum2dir = $('#resnum2dir').val();
-            var reslet2dir = $('#reslet2dir').val();
-            $("#resdirest").val(' ' + valor);
-            $("#vistaprevia").val(rescalle + " " + resnumdir + resletdir + " " + resdisur + " # " + resnum2dir + reslet2dir + " " + valor);
+            actualizarDireccion();
         });
-        $('#num3dir').keyup(function () {
-            var valor = $(this).val();
-            var rescalle = $("#rescalle").val();
-            var resnumdir = $('#resnumdir').val();
-            var resletdir = $('#resletdir').val();
-            var resdisur = $("#resdisur").val();
-            var resnum2dir = $('#resnum2dir').val();
-            var reslet2dir = $('#reslet2dir').val();
-            var resdirest = $("#resdirest").val();
-            $('#resnum3dir').val(valor);
-            $("#vistaprevia").val(rescalle + " " + resnumdir + resletdir + " " + resdisur + " # " + resnum2dir + reslet2dir + resdirest + "-" + valor);
+        $('#num3dir').change(function () {
+            actualizarDireccion();
         });
-        $('#dirurb').keyup(function () {
-            var valor = $(this).val();
-            var rescalle = $("#rescalle").val();
-            var resnumdir = $('#resnumdir').val();
-            var resletdir = $('#resletdir').val();
-            var resdisur = $("#resdisur").val();
-            var resnum2dir = $('#resnum2dir').val();
-            var reslet2dir = $('#reslet2dir').val();
-            var resdirest = $("#resdirest").val();
-            var resnum3dir = $('#resnum3dir').val();
-
-            $("#vistaprevia").val(rescalle + " " + resnumdir + resletdir + " " + resdisur + " # " + resnum2dir + reslet2dir + resdirest + "-" + resnum3dir + " " + valor);
+        $('#dirurb').change(function () {
+            actualizarDireccion();
         });
         $('#anyoInicioEducacionBasica').append($('<option/>').val('').html(''));
         $('#anyoFinalizacionEducacionBasica').append($('<option/>').val('').html(''));
@@ -3154,13 +3200,28 @@
         });
     });
 
-    var nombreCampoCiudad;
-    var campoCiudad;
+    function actualizarDireccion() {
+      var direccion = $('#dircalle').val() + ' ' + $('#numdir').val() + ' ' + $('#letdir').val() + ' ' +  $('#dirsur').val();
+      if($('#num2dir').val() !== '' || $('#let2dir').val() !== '' || $('#direst').val() !== '' || $('#num3dir').val() !== '') {
+        direccion = direccion + ' # ';  
+      }
+      direccion = direccion + $('#num2dir').val() + ' ' + $('#let2dir').val() + ' ' + $('#direst').val();
+      if($('#num3dir').val() !== '') {
+        direccion = direccion + ' - ' +  $('#num3dir').val();
+      }
+      direccion = direccion + ' ' +  $('#dirurb').val();
+      $("#vistaprevia").val(direccion);
+    }
 
     function mostrarUbicacionModal(nombreCampo, campo) {
         nombreCampoCiudad = nombreCampo;
         campoCiudad = campo;
-        $('#ubicacionModal').modal('show');
+        if($('#pais').val() != ID_COLOMBIA) {
+          $('#btnNuevaCiudadExtranjera').show();   
+        } else {
+          $('#btnNuevaCiudadExtranjera').hide();   
+        }
+        $('#ubicacionModal').modal({backdrop: 'static', keyboard: false})  ;
     }
 
     function seleccionarUbicacion() {
@@ -3173,6 +3234,11 @@
     }
 
     function buscarDepartamentos(idPais) {
+        if(idPais != ID_COLOMBIA) {
+          $('#btnNuevaCiudadExtranjera').show();   
+        } else {
+          $('#btnNuevaCiudadExtranjera').hide();   
+        }
         $.ajax({
             type: "GET",
             url: "${pageContext.request.contextPath}/hojasVida/departamentosPais/" + idPais,
@@ -3181,10 +3247,15 @@
             success: function (response) {
                 if (response !== "") {
                     $('#departamento').find('option').remove();
+                    $('#ciudad').find('option').remove();
                     $('#departamento').append('<option></option>');
                     var departamentos = JSON.parse(response);
                     for (var i = 0; i < departamentos.length; i++) {
                         $('#departamento').append('<option value=' + departamentos[i].id + '>' + departamentos[i].nombre + '</option>');
+                    }
+                    
+                    if(departamentos.length == 1) {
+                        $('#departamento').val(departamentos[0].id).trigger('change.select2');
                     }
                 }
             }});
@@ -3204,6 +3275,9 @@
                     for (var i = 0; i < ciudades.length; i++) {
                         $('#ciudad').append('<option value=' + ciudades[i].id + '>' + ciudades[i].nombre + '</option>');
                     }
+                    if(ciudades.length == 1) {
+                        $('#ciudad').val(ciudades[0].id).trigger('change.select2');
+                    }                    
                 }
             }});
     }
@@ -3286,7 +3360,7 @@
             $('#correoElectronico').val(correoElectronico.correoElectronico());
             $('#consecutivo').val(correoElectronico.consecutivo());
             bootstrap_alert_correo_electronico.removeWarning();
-            $('#md_correo_electronico').modal('show');
+            $('#md_correo_electronico').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.adicionarCuentaBancaria = function () {
@@ -3345,7 +3419,7 @@
             $('#entidadCuentaBancaria').val(cuentaBancaria.entidad());
             $('#consecutivo').val(cuentaBancaria.consecutivo());
             bootstrap_alert_cuenta_bancaria.removeWarning();
-            $('#md_cuenta_bancaria').modal('show');
+            $('#md_cuenta_bancaria').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.adicionarTelefono = function () {
@@ -3396,7 +3470,7 @@
             $('#numeroTelefono').val(telefono.numero());
             $('#consecutivo').val(telefono.consecutivo());
             bootstrap_alert_telefono.removeWarning();
-            $('#md_telefono').modal('show');
+            $('#md_telefono').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.adicionarDocumentoSoporte = function () {
@@ -3469,7 +3543,7 @@
             $('#consecutivo').val(documentoSoporte.consecutivo());
             $('input:file[name="documentosSoporte[' + documentoSoporte.consecutivo() + '].documento"]').show();
             bootstrap_alert_documento_soporte.removeWarning();
-            $('#md_documento_soporte').modal('show');
+            $('#md_documento_soporte').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.verDocumentoSoporte = function (documentoSoporte) {
@@ -3613,7 +3687,7 @@
             $('#consecutivo').val(idioma.consecutivo());
             $('input:file[name="idiomas[' + idioma.consecutivo() + '].certificado"]').show();
             bootstrap_alert_idioma.removeWarning();
-            $('#md_idioma').modal('show');
+            $('#md_idioma').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.verCertificadoIdioma = function (idioma) {
@@ -3729,7 +3803,7 @@
             $('#consecutivo').val(educacionBasica.consecutivo());
             $('input:file[name="educacionesBasicas[' + educacionBasica.consecutivo() + '].certificado"]').show();
             bootstrap_alert_educacion_basica.removeWarning();
-            $('#md_educacion_basica').modal('show');
+            $('#md_educacion_basica').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.verCertificadoEducacionBasica = function (educacionBasica) {
@@ -3939,7 +4013,7 @@
             $('input:file[name="educacionesSuperiores[' + educacionSuperior.consecutivo() + '].certificado"]').show();
             $('input:file[name="educacionesSuperiores[' + educacionSuperior.consecutivo() + '].certificadoHomologado"]').show();
             bootstrap_alert_educacion_superior.removeWarning();
-            $('#md_educacion_superior').modal('show');
+            $('#md_educacion_superior').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.verCertificadoHomologadoEducacionSuperior = function (educacionSuperior) {
@@ -4058,7 +4132,7 @@
             $('#consecutivo').val(educacionContinua.consecutivo());
             $('input:file[name="educacionesContinuas[' + educacionContinua.consecutivo() + '].certificado"]').show();
             bootstrap_alert_educacion_continua.removeWarning();
-            $('#md_educacion_continua').modal('show');
+            $('#md_educacion_continua').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.verCertificadoEducacionContinua = function (educacionContinua) {
@@ -4140,7 +4214,7 @@
             $('#consecutivo').val(distincion.consecutivo());
             $('input:file[name="distinciones[' + distincion.consecutivo() + '].certificado"]').show();
             bootstrap_alert_distincion.removeWarning();
-            $('#md_distincion').modal('show');
+            $('#md_distincion').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.verCertificadoDistincion = function (distincion) {
@@ -4322,7 +4396,7 @@
             $('#consecutivo').val(experienciaLaboral.consecutivo());
             $('input:file[name="experienciasLaborales[' + experienciaLaboral.consecutivo() + '].certificado"]').show();
             bootstrap_alert_experiencia_laboral.removeWarning();
-            $('#md_experiencia_laboral').modal('show');
+            $('#md_experiencia_laboral').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.verCertificadoExperienciaLaboral = function (experienciaLaboral) {
@@ -4412,7 +4486,7 @@
             $('#institucionExperienciaDocencia').val(experienciaDocencia.institucion()).trigger('change');
             self.consecutivoExperienciaDocencia(experienciaDocencia.consecutivo());
             bootstrap_alert_experiencia_docencia.removeWarning();
-            $('#md_experiencia_docencia').modal('show');
+            $('#md_experiencia_docencia').modal({backdrop: 'static', keyboard: false})  ;
         };
 
        self.adicionarCursoExperienciaDocencia = function () {
@@ -4586,7 +4660,7 @@
             $('#consecutivo').val(cursoExperienciaDocencia.consecutivo());
             $('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].certificado"]').show();
             bootstrap_alert_curso_experiencia_docencia.removeWarning();
-            $('#md_curso_experiencia_docencia').modal('show');
+            $('#md_curso_experiencia_docencia').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.verCertificadoCursoExperienciaDocencia = function (cursoExperienciaDocencia) {
@@ -4669,7 +4743,7 @@
             $('#nucleoBasicoConocimientoArticulo').val(articulo.nucleoBasicoConocimiento()).trigger('change');
             $('#consecutivo').val(articulo.consecutivo());
             bootstrap_alert_articulo.removeWarning();
-            $('#md_articulo').modal('show');
+            $('#md_articulo').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.adicionarPatente = function () {
@@ -4776,7 +4850,7 @@
             $('#consecutivo').val(patente.consecutivo());
             $('input:file[name="patentes[' + patente.consecutivo() + '].documento"]').show();
             bootstrap_alert_patente.removeWarning();
-            $('#md_patente').modal('show');
+            $('#md_patente').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.verDocumentoPatente = function (patente) {
@@ -4869,7 +4943,7 @@
             $('#consecutivo').val(productoConocimiento.consecutivo());
             $('input:file[name="productosConocimiento[' + productoConocimiento.consecutivo() + '].documento"]').show();
             bootstrap_alert_producto_conocimiento.removeWarning();
-            $('#md_producto_conocimiento').modal('show');
+            $('#md_producto_conocimiento').modal({backdrop: 'static', keyboard: false})  ;
         };
 
         self.verDocumentoProductoConocimiento = function (productoConocimiento) {
@@ -4877,11 +4951,17 @@
         };        
     };
 
+    function nuevaCiudadExtranjera() {
+        $('#ciudadExtranjera').val("");
+
+        $('#md_ciudad_extranjera').modal({backdrop: 'static', keyboard: false})  ;
+    }
+
     function nuevoCorreoElectronico() {
         $('#correoElectronico').val("");
         $('#consecutivo').val("");
         bootstrap_alert_correo_electronico.removeWarning();
-        $('#md_correo_electronico').modal('show');
+        $('#md_correo_electronico').modal({backdrop: 'static', keyboard: false})  ;
     }
 
     function nuevoTelefono() {
@@ -4889,7 +4969,7 @@
         $('#numeroTelefono').val("");
         $('#consecutivo').val("");
         bootstrap_alert_telefono.removeWarning();
-        $('#md_telefono').modal('show');
+        $('#md_telefono').modal({backdrop: 'static', keyboard: false})  ;
     }
 
     function nuevaCuentaBancaria() {
@@ -4898,7 +4978,7 @@
         $('#entidadCuentaBancaria').val("");
         $('#consecutivo').val("");
         bootstrap_alert_cuenta_bancaria.removeWarning();
-        $('#md_cuenta_bancaria').modal('show');
+        $('#md_cuenta_bancaria').modal({backdrop: 'static', keyboard: false})  ;
     }
 
     function nuevoDocumentoSoporte() {
@@ -4913,7 +4993,7 @@
             fileInput.show();
         }
         bootstrap_alert_documento_soporte.removeWarning();
-        $('#md_documento_soporte').modal('show');
+        $('#md_documento_soporte').modal({backdrop: 'static', keyboard: false})  ;
     }
 
     function nuevoIdioma() {
@@ -4935,7 +5015,7 @@
             fileInput.show();
         }
         bootstrap_alert_idioma.removeWarning();
-        $('#md_idioma').modal('show');
+        $('#md_idioma').modal({backdrop: 'static', keyboard: false})  ;
     }
         
     function nuevaEducacionBasica() {
@@ -4957,7 +5037,7 @@
             fileInput.show();
         }
         bootstrap_alert_educacion_basica.removeWarning();
-        $('#md_educacion_basica').modal('show');
+        $('#md_educacion_basica').modal({backdrop: 'static', keyboard: false})  ;
     }
     
     function nuevaEducacionSuperior() {
@@ -5007,7 +5087,7 @@
             fileInput.show();
         }
         bootstrap_alert_educacion_superior.removeWarning();
-        $('#md_educacion_superior').modal('show');
+        $('#md_educacion_superior').modal({backdrop: 'static', keyboard: false})  ;
     }    
 
     function nuevoPrograma() {
@@ -5016,7 +5096,7 @@
         $('#programaCursado').val("").trigger("change.select2");
         $('#tituloPrograma').val("");
 
-        $('#md_programa').modal('show');
+        $('#md_programa').modal({backdrop: 'static', keyboard: false})  ;
     }
     
     function nuevoProgramaExtranjero() {
@@ -5025,7 +5105,7 @@
         $('#nucleoBasicoConocimientoProgramaExtranjero').val("");
         $('#tituloProgramaExtranjero').val("");                    
 
-        $('#md_programa_extranjero').modal('show');
+        $('#md_programa_extranjero').modal({backdrop: 'static', keyboard: false})  ;
     }
     
     function nuevaEducacionContinua() {
@@ -5045,7 +5125,7 @@
             fileInput.show();
         }
         bootstrap_alert_educacion_continua.removeWarning();
-        $('#md_educacion_continua').modal('show');
+        $('#md_educacion_continua').modal({backdrop: 'static', keyboard: false})  ;
     }    
 
     function nuevaDistincion() {
@@ -5062,7 +5142,7 @@
             fileInput.show();
         }
         bootstrap_alert_distincion.removeWarning();
-        $('#md_distincion').modal('show');
+        $('#md_distincion').modal({backdrop: 'static', keyboard: false})  ;
     } 
 
     function nuevaExperienciaLaboral() {
@@ -5093,7 +5173,7 @@
             fileInput.show();
         }
         bootstrap_alert_experiencia_laboral.removeWarning();
-        $('#md_experiencia_laboral').modal('show');
+        $('#md_experiencia_laboral').modal({backdrop: 'static', keyboard: false})  ;
     } 
 
     function nuevaExperienciaDocencia() {
@@ -5106,7 +5186,7 @@
         $('#institucionExperienciaDocencia').val("").trigger('change');
         hojaVidaModel.consecutivoExperienciaDocencia(hojaVidaModel.experienciasDocencia().length);
         bootstrap_alert_experiencia_docencia.removeWarning();
-        $('#md_experiencia_docencia').modal('show');
+        $('#md_experiencia_docencia').modal({backdrop: 'static', keyboard: false})  ;
     } 
 
     function nuevoCursoExperienciaDocencia() {
@@ -5130,7 +5210,7 @@
         }
         $('#consecutivo').val("");
         bootstrap_alert_curso_experiencia_docencia.removeWarning();
-        $('#md_curso_experiencia_docencia').modal('show');
+        $('#md_curso_experiencia_docencia').modal({backdrop: 'static', keyboard: false})  ;
     } 
 
     function nuevoArticulo() {
@@ -5142,7 +5222,7 @@
         $('#nucleoBasicoConocimientoArticulo').val("").trigger('change');
         $('#consecutivo').val("");
         bootstrap_alert_articulo.removeWarning();
-        $('#md_articulo').modal('show');
+        $('#md_articulo').modal({backdrop: 'static', keyboard: false})  ;
     } 
 
     function nuevaPatente() {
@@ -5164,7 +5244,7 @@
             fileInput.show();
         }
         bootstrap_alert_patente.removeWarning();
-        $('#md_patente').modal('show');
+        $('#md_patente').modal({backdrop: 'static', keyboard: false})  ;
     }
 
     function nuevoProductoConocimiento() {
@@ -5183,7 +5263,7 @@
             fileInput.show();
         }
         bootstrap_alert_producto_conocimiento.removeWarning();
-        $('#md_producto_conocimiento').modal('show');
+        $('#md_producto_conocimiento').modal({backdrop: 'static', keyboard: false})  ;
     }
 
     function cerrarVentanaDocumentoSoporte() {
@@ -5425,7 +5505,7 @@
             bootstrap_alert_hoja_vida.warning("Debe ingresar el tipo de vinculación con la U de A");
             return;
         }
-        $('#md_guardar').modal('show');
+        $('#md_guardar').modal({backdrop: 'static', keyboard: false})  ;
         current_progress = 0;
         var interval = setInterval(function() {
             current_progress += 10;
@@ -5453,7 +5533,7 @@
             success: function (response) {
                 $('#md_guardar').modal('hide');
                 if (response === "") {
-                    $('#confirmacionAlmacenamientoHojaVida').modal('show');
+                    $('#confirmacionAlmacenamientoHojaVida').modal({backdrop: 'static', keyboard: false})  ;
                 } else {
                     bootstrap_alert_hoja_vida.warning(response);
                 }
@@ -5497,6 +5577,14 @@
         window.location.href = "${pageContext.request.contextPath}/hojasVida/copiaLibretaMilitar/" + $('#idPersona').val();
     }
 
+    bootstrap_alert_ciudad_extranjera = {};
+    bootstrap_alert_ciudad_extranjera.warning = function (message) {
+        $('#alert_ciudad_extranjera').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_ciudad_extranjera.removeWarning = function () {
+        $('#alert_ciudad_extranjera').html('');
+    };
+    
     bootstrap_alert_hoja_vida = {};
     bootstrap_alert_hoja_vida.warning = function (message) {
         $('#alert_hoja_vida').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');

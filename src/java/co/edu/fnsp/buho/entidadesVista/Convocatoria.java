@@ -29,7 +29,6 @@ public class Convocatoria {
     private Date fechaInicio;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaFin;
-    private String nucleoBasicoConocimiento;
     private String nombre;
     private String descripcion;
     private MultipartFile documento;
@@ -103,20 +102,6 @@ public class Convocatoria {
      */
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
-    }
-
-    /**
-     * @return the nucleoBasicoConocimiento
-     */
-    public String getNucleoBasicoConocimiento() {
-        return nucleoBasicoConocimiento;
-    }
-
-    /**
-     * @param nucleoBasicoConocimiento the nucleoBasicoConocimiento to set
-     */
-    public void setNucleoBasicoConocimiento(String nucleoBasicoConocimiento) {
-        this.nucleoBasicoConocimiento = nucleoBasicoConocimiento;
     }
 
     /**

@@ -57,22 +57,16 @@ public class MenuViewPreparer implements ViewPreparer {
                         + "</ul>\n"
                         + "</li>\n"
                         + "<li class='active'>\n"
-                        + "  <a href='#'><i class=\"fa fa-user fa-1x\"></i>\n"
+                        + "  <a href=\"javascript:abrirOpcion('/hojasVida/editar')\"><i class=\"fa fa-user fa-1x\"></i>\n"
                         + "     Hoja de vida\n"
                         + "  </a>\n"
-                        + "<ul>\n"
-                        + "<li><a href=\"javascript:abrirOpcion('/hojasVida/editar')\">Editar</a></li>\n"
-                        + "</ul>\n"
                         + "</li>\n";
             } else {
                 menu = "<li class='active'>\n"
                         + "<li class='active'>\n"
-                        + "  <a href='#'><i class=\"fa fa-user fa-1x\"></i>\n"
+                        + "  <a href=\"javascript:abrirOpcion('/hojasVida/editar')\"><i class=\"fa fa-user fa-1x\"></i>\n"
                         + "     Hoja de vida\n"
                         + "  </a>\n"
-                        + "<ul>\n"
-                        + "<li><a href=\"javascript:abrirOpcion('/hojasVida/editar')\">Editar</a></li>\n"
-                        + "</ul>\n"
                         + "</li>\n";
             }
             usuario = "<ul>\n" +
@@ -90,16 +84,11 @@ public class MenuViewPreparer implements ViewPreparer {
                       "</li> \n" +
                       "</ul>\n";
         } else {
-            menu = "<li class='active'>\n"
-                    + "<li class='active'>\n"
-                    + "  <a href='#'><i class=\"fa fa-user fa-1x\"></i>\n"
+            menu =   "<li class='active'>\n"
+                    + "  <a href=\"javascript:abrirOpcion('/hojasVida/editar')\"><i class=\"fa fa-user fa-1x\"></i>\n"
                     + "     Hoja de vida\n"
                     + "  </a>\n"
-                    + "<ul>\n"
-                    + "<li><a href=\"javascript:abrirOpcion('/hojasVida/editar')\">Editar</a></li>\n"
-                    + "</ul>\n"
                     + "</li>\n";
-
         }
         attributeContext.putAttribute("menu", new Attribute(menu));
         attributeContext.putAttribute("usuario", new Attribute(usuario));
