@@ -141,7 +141,7 @@
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="divDepartamento">
                                     <label for="departamento">Departamento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar su departamento " style="margin-left: 5px;"><i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                                     <select style="width: 100%" name="departamento" id="departamento" class="js-select-basic-single js-states form-control" onchange="buscarCiudades(this.value)"></select>
                                 </div>
@@ -168,6 +168,14 @@
                             </div>
                             <div class="modal-body">
                                 <div id="alert_ciudad_extranjera"></div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="ciudadExtranjera">País</label>
+                                            <input name="paisCiudad" id="paisCiudad" readonly type="text" class="form-control">
+                                        </div>
+                                    </div>                  
+                                </div> 
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -1166,7 +1174,9 @@
                                                 <select name="nivelEstudioEducacionSuperior" id="nivelEstudioEducacionSuperior" style="width: 100%;" class="js-select-basic-single js-states form-control">
                                                     <option value=""></option>
                                                     <c:forEach var="nivelFormacion" items="${nivelesFormacion}">
+                                                        <c:if test = "${nivelFormacion.getId() != 1 && nivelFormacion.getId() != 2}">
                                                         <option value="${nivelFormacion.getId()}">${nivelFormacion.getNombre()}</option>
+                                                        </c:if>     
                                                     </c:forEach>                                                 
                                                 </select> 
                                             </div>
@@ -1203,26 +1213,22 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
-                                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                                <select style="width: 100%;" name="nucleoBasicoConocimientoPrograma" id="nucleoBasicoConocimientoPrograma" class="js-select-basic-single js-states form-control">
-                                                                    <option></option>
-                                                                    <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
-                                                                        <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
-                                                                    </c:forEach>                                                                   
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
                                                                 <label for="programaCursado">Programa cursado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa cursado">
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
                                                                 <select style="width: 88%;" name="programaCursado" id="programaCursado" class="js-select-basic-single js-states form-control">
                                                                 <option value=""></option>
                                                                 </select>
                                                                 <button id="btnNuevoProgramaExtranjero" style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoProgramaExtranjero();"><span class="glyphicon glyphicon-plus"></span></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
+                                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                                <input type="text" class="form-control" name="nombreNucleoBasicoConocimientoPrograma" id="nombreNucleoBasicoConocimientoPrograma" readonly>
+                                                                <input type="hidden" name="nucleoBasicoConocimientoPrograma" id="nucleoBasicoConocimientoPrograma">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -2872,6 +2878,7 @@
           $('#paistit').css("display","block");
           $('#certhomo').css('display','block');
           $('#btnNuevoProgramaExtranjero').show();
+          buscarInstitucionesEducativasProgramaExtranjeras();
         });
         
         $('#btnTituloExtranjeroNoEducacionSuperior').click(function(){
@@ -2879,6 +2886,7 @@
           $('#certhomo').css('display', 'none');
           $('#btnNuevoProgramaExtranjero').hide();
           $('#paisTituloExteriorEducacionSuperior').val('').trigger("change.select2");
+          buscarInstitucionesEducativasProgramaColombianas();
         });  
         
         $('#btnGraduadoSiEducacionSuperior').click(function () {
@@ -2896,7 +2904,7 @@
           var programaCursado = $('#programaCursado').val();
           var nombreProgramaCursado = $('#programaCursado option:selected').text().toUpperCase();
           var nucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoPrograma').val();
-          var nombreNucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoPrograma option:selected').text().toUpperCase();
+          var nombreNucleoBasicoConocimientoPrograma = $('#nombreNucleoBasicoConocimientoPrograma').val().toUpperCase();
           var tituloPrograma = $('#tituloPrograma').val();
 
           $('#formprograma').show();
@@ -2908,10 +2916,11 @@
           $('#nucleoBasicoConocimientoEducacionSuperior').val(nucleoBasicoConocimientoPrograma);
           $('#nombreNucleoBasicoConocimientoEducacionSuperior').val(nombreNucleoBasicoConocimientoPrograma);
           $('#tituloEducacionSuperior').val(tituloPrograma);
-          
-          $('#nucleoBasicoConocimientoPrograma').val("").trigger("change.select2");
+
+          $('#nucleoBasicoConocimientoPrograma').val("");
+          $('#nombreNucleoBasicoConocimientoPrograma').val("");
           $('#institucionEducativaPrograma').val("").trigger("change.select2");
-          $('#programaCursado').val("");
+          $('#programaCursado').val("").trigger("change.select2");
           $('#tituloPrograma').val("");
           
           $('#md_programa').modal('hide');
@@ -2979,33 +2988,6 @@
             error: function (xhr, ajaxOptions, thrownError) {
                 bootstrap_alert_programa_extranjero.warning("Error al almacenar el programa.");
             }});
-        });
-        
-        $('#addprograma').click(function(){
-          var institucion = $('#institucionEducativaPrograma').val();
-          var nombreInstitucion = $('#institucionEducativaPrograma option:selected').text().toUpperCase();
-          var programaCursado = $('#programaCursado').val();
-          var nombreProgramaCursado = $('#programaCursado option:selected').text().toUpperCase();
-          var nucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoPrograma').val();
-          var nombreNucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoPrograma option:selected').text().toUpperCase();
-          var tituloPrograma = $('#tituloPrograma').val();
-
-          $('#formprograma').show();
-          
-          $('#institucionEducacionSuperior').val(institucion);
-          $('#nombreInstitucionEducacionSuperior').val(nombreInstitucion);
-          $('#programaCursadoEducacionSuperior').val(programaCursado);
-          $('#nombreProgramaCursadoEducacionSuperior').val(nombreProgramaCursado);
-          $('#nucleoBasicoConocimientoEducacionSuperior').val(nucleoBasicoConocimientoPrograma);
-          $('#nombreNucleoBasicoConocimientoEducacionSuperior').val(nombreNucleoBasicoConocimientoPrograma);
-          $('#tituloEducacionSuperior').val(tituloPrograma);
-          
-          $('#nucleoBasicoConocimientoPrograma').val("").trigger("change.select2");
-          $('#institucionEducativaPrograma').val("").trigger("change.select2");
-          $('#programaCursado').val("");
-          $('#tituloPrograma').val("");
-          
-          $('#md_programa').modal('hide');
         });
         
         $('#btnAdicionarCiudadExtranjera').click(function(){
@@ -3187,16 +3169,14 @@
         $('#institucionEducativaPrograma').change(function () {
            obtenerProgramasCursados();
         });
-
-        $('#nucleoBasicoConocimientoPrograma').change(function () {
-           obtenerProgramasCursados();
-        });
         
         $('#programaCursado').change(function () {
             var programa = programas.find(function(element) {
                 return element.id == $('#programaCursado').val();
             });
             $('#tituloPrograma').val(programa.titulo);
+            $('#nucleoBasicoConocimientoPrograma').val(programa.nucleoBasicoConocimiento);
+            $('#nombreNucleoBasicoConocimientoPrograma').val(programa.nombreNucleoBasicoConocimiento);
         });
     });
 
@@ -3216,7 +3196,7 @@
     function mostrarUbicacionModal(nombreCampo, campo) {
         nombreCampoCiudad = nombreCampo;
         campoCiudad = campo;
-        if($('#pais').val() != ID_COLOMBIA) {
+        if($('#pais').val() != "" && $('#pais').val() != ID_COLOMBIA) {
           $('#btnNuevaCiudadExtranjera').show();   
         } else {
           $('#btnNuevaCiudadExtranjera').hide();   
@@ -3229,15 +3209,22 @@
         var dep = $('#departamento option:selected').text().toUpperCase();
         var ciu = $('#ciudad option:selected').text().toUpperCase();
         $('#' + campoCiudad).val($('#ciudad').val());
-        $('#' + nombreCampoCiudad).val(pais + " - " + dep + " - " + ciu);
+        if(dep != "SIN ESPECIFICAR") {
+           $('#' + nombreCampoCiudad).val(pais + " - " + dep + " - " + ciu);
+        }
+        else {
+           $('#' + nombreCampoCiudad).val(pais + " - " + ciu); 
+        }
         $('#ubicacionModal').modal('hide');
     }
 
     function buscarDepartamentos(idPais) {
         if(idPais != ID_COLOMBIA) {
           $('#btnNuevaCiudadExtranjera').show();   
+          $('#divDepartamento').hide();   
         } else {
           $('#btnNuevaCiudadExtranjera').hide();   
+          $('#divDepartamento').show();
         }
         $.ajax({
             type: "GET",
@@ -3278,6 +3265,42 @@
                     if(ciudades.length == 1) {
                         $('#ciudad').val(ciudades[0].id).trigger('change.select2');
                     }                    
+                }
+            }});
+    }
+
+    function buscarInstitucionesEducativasProgramaExtranjeras() {
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/hojasVida/institucionesEducativasExtranjeras",
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response !== "") {
+                    $('#institucionEducativaPrograma').find('option').remove();
+                    $('#institucionEducativaPrograma').append('<option></option>');
+                    var instituciones = JSON.parse(response);
+                    for (var i = 0; i < instituciones.length; i++) {
+                        $('#institucionEducativaPrograma').append('<option value=' + instituciones[i].id + '>' + instituciones[i].nombre + '</option>');
+                    }
+                }
+            }});
+    }
+
+    function buscarInstitucionesEducativasProgramaColombianas() {
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/hojasVida/institucionesEducativasColombianas",
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response !== "") {
+                    $('#institucionEducativaPrograma').find('option').remove();
+                    $('#institucionEducativaPrograma').append('<option></option>');
+                    var instituciones = JSON.parse(response);
+                    for (var i = 0; i < instituciones.length; i++) {
+                        $('#institucionEducativaPrograma').append('<option value=' + instituciones[i].id + '>' + instituciones[i].nombre + '</option>');
+                    }
                 }
             }});
     }
@@ -4952,6 +4975,8 @@
     };
 
     function nuevaCiudadExtranjera() {
+    
+        $('#paisCiudad').val($('#pais option:selected').text().toUpperCase());
         $('#ciudadExtranjera').val("");
 
         $('#md_ciudad_extranjera').modal({backdrop: 'static', keyboard: false})  ;
@@ -5091,7 +5116,8 @@
     }    
 
     function nuevoPrograma() {
-        $('#nucleoBasicoConocimientoPrograma').val("").trigger("change.select2");
+        $('#nucleoBasicoConocimientoPrograma').val("");
+        $('#nombreNucleoBasicoConocimientoPrograma').val("");
         $('#institucionEducativaPrograma').val("").trigger("change.select2");
         $('#programaCursado').val("").trigger("change.select2");
         $('#tituloPrograma').val("");
@@ -5546,11 +5572,10 @@
 
     function obtenerProgramasCursados() {
         var institucion = $('#institucionEducativaPrograma').val();
-        var nucleoBasicoConocimiento = $('#nucleoBasicoConocimientoPrograma').val();
         $('#tituloPrograma').val('');
         $.ajax({
             type: "GET",
-            url: "${pageContext.request.contextPath}/hojasVida/programasInstitucion?institucion=" + institucion + "&nucleoBasicoConocimiento=" + nucleoBasicoConocimiento,
+            url: "${pageContext.request.contextPath}/hojasVida/programasInstitucion?institucion=" + institucion,
             processData: false,
             contentType: false,
             success: function (response) {

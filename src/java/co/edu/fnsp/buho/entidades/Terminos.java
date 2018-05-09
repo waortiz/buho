@@ -35,7 +35,9 @@ public class Terminos {
     private boolean presenciaVirus;
     private boolean otrasExoneraciones;
     private boolean disposicionesFinales;
-    private boolean tratamientosDatosPersonales;
+    private boolean consentimientoTerminosEstablecidos;
+    private boolean reconocimientoInformacionSuministrada;
+    private boolean aceptoTratamientoDatosPersonales;
 
     /**
      * @return the postulacion
@@ -374,17 +376,45 @@ public class Terminos {
     }
 
     /**
-     * @return the tratamientosDatosPersonales
+     * @return the consentimientoTerminosEstablecidos
      */
-    public boolean isTratamientosDatosPersonales() {
-        return tratamientosDatosPersonales;
+    public boolean isConsentimientoTerminosEstablecidos() {
+        return consentimientoTerminosEstablecidos;
     }
 
     /**
-     * @param tratamientosDatosPersonales the tratamientosDatosPersonales to set
+     * @param consentimientoTerminosEstablecidos the consentimientoTerminosEstablecidos to set
      */
-    public void setTratamientosDatosPersonales(boolean tratamientosDatosPersonales) {
-        this.tratamientosDatosPersonales = tratamientosDatosPersonales;
+    public void setConsentimientoTerminosEstablecidos(boolean consentimientoTerminosEstablecidos) {
+        this.consentimientoTerminosEstablecidos = consentimientoTerminosEstablecidos;
+    }
+
+    /**
+     * @return the reconocimientoInformacionSuministrada
+     */
+    public boolean isReconocimientoInformacionSuministrada() {
+        return reconocimientoInformacionSuministrada;
+    }
+
+    /**
+     * @param reconocimientoInformacionSuministrada the reconocimientoInformacionSuministrada to set
+     */
+    public void setReconocimientoInformacionSuministrada(boolean reconocimientoInformacionSuministrada) {
+        this.reconocimientoInformacionSuministrada = reconocimientoInformacionSuministrada;
+    }
+
+    /**
+     * @return the aceptoTratamientoDatosPersonales
+     */
+    public boolean isAceptoTratamientoDatosPersonales() {
+        return aceptoTratamientoDatosPersonales;
+    }
+
+    /**
+     * @param aceptoTratamientoDatosPersonales the aceptoTratamientoDatosPersonales to set
+     */
+    public void setAceptoTratamientoDatosPersonales(boolean aceptoTratamientoDatosPersonales) {
+        this.aceptoTratamientoDatosPersonales = aceptoTratamientoDatosPersonales;
     }
     
 }

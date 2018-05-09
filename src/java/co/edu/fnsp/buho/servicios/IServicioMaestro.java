@@ -57,4 +57,6 @@ public interface IServicioMaestro {
     List<CampoHojaVida> obtenerCamposHojaVida();
     int ingresarProgramaInstitucion(Programa programa);
     Ciudad ingresarCiudad(Ciudad ciudad);
+    List<Maestro> obtenerInstitucionesEducativasExtranjeras();
+    List<Maestro> obtenerInstitucionesEducativasColombianas();
 }

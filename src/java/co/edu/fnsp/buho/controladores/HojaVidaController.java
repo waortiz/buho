@@ -413,7 +413,7 @@ public class HojaVidaController {
         List<Maestro> idiomas = servicioMaestro.obtenerIdiomas();
         List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
         List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
-        List<Maestro> institucionesEducativas = servicioMaestro.obtenerInstitucionesEducativas();
+        List<Maestro> institucionesEducativas = servicioMaestro.obtenerInstitucionesEducativasColombianas();
         List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
         List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
         List<Maestro> tiposInstitucion = servicioMaestro.obtenerTiposInstitucion();
@@ -749,11 +749,9 @@ public class HojaVidaController {
     @RequestMapping(value = "/programasInstitucion", method = RequestMethod.GET)
     public @ResponseBody
     String obtenerProgramasInstitucion(@ModelAttribute(value = "institucion") String institucion,
-            @ModelAttribute(value = "nucleoBasicoConocimiento") String nucleoBasicoConocimiento,
             Model model) {
 
         Integer idInstitucion = null;
-        Integer idNucleoBasicoConocimiento = null;
         if (institucion != null && institucion.length() > 0) {
             try {
                 idInstitucion = Util.obtenerEntero(institucion);
@@ -761,24 +759,17 @@ public class HojaVidaController {
                 java.util.logging.Logger.getLogger(HojaVidaController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if (nucleoBasicoConocimiento != null && nucleoBasicoConocimiento.length() > 0) {
-            try {
-                idNucleoBasicoConocimiento = Util.obtenerEntero(nucleoBasicoConocimiento);
-            } catch (ParseException ex) {
-                java.util.logging.Logger.getLogger(HojaVidaController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        List<Programa> programas = servicioMaestro.obtenerProgramasInstitucion(idInstitucion, idNucleoBasicoConocimiento);
+        List<Programa> programas = servicioMaestro.obtenerProgramasInstitucion(idInstitucion, null);
         Gson gson = new Gson();
 
         return gson.toJson(programas);
     }
-    
+
     @RequestMapping(value = "/programa", method = RequestMethod.POST)
     public @ResponseBody
     String ingresarInstitucionPrograma(@ModelAttribute Programa programa, Model model) throws ParseException, IOException {
         try {
-            int id= servicioMaestro.ingresarProgramaInstitucion(programa);
+            int id = servicioMaestro.ingresarProgramaInstitucion(programa);
 
             return "{\"id\":" + id + "}";
         } catch (Exception exc) {
@@ -786,7 +777,7 @@ public class HojaVidaController {
             return "";
         }
     }
-    
+
     @RequestMapping(value = "/ciudad", method = RequestMethod.POST)
     public @ResponseBody
     String ingresarCiudad(@ModelAttribute Ciudad ciudad, Model model) throws ParseException, IOException {
@@ -794,6 +785,32 @@ public class HojaVidaController {
             Ciudad nuevaCiudad = servicioMaestro.ingresarCiudad(ciudad);
             Gson gson = new Gson();
             return gson.toJson(nuevaCiudad);
+        } catch (Exception exc) {
+            logger.error(exc);
+            return "";
+        }
+    }
+
+    @RequestMapping(value = "/institucionesEducativasExtranjeras", method = RequestMethod.GET)
+    public @ResponseBody
+    String obtenerInstitucionesEducativasExtranjeras(Model model) throws ParseException, IOException {
+        try {
+            List<Maestro> maestros = servicioMaestro.obtenerInstitucionesEducativasExtranjeras();
+            Gson gson = new Gson();
+            return gson.toJson(maestros);
+        } catch (Exception exc) {
+            logger.error(exc);
+            return "";
+        }
+    }
+
+    @RequestMapping(value = "/institucionesEducativasColombianas", method = RequestMethod.GET)
+    public @ResponseBody
+    String obtenerInstitucionesEducativasColombianas(Model model) throws ParseException, IOException {
+        try {
+            List<Maestro> maestros = servicioMaestro.obtenerInstitucionesEducativasColombianas();
+            Gson gson = new Gson();
+            return gson.toJson(maestros);
         } catch (Exception exc) {
             logger.error(exc);
             return "";

@@ -58,8 +58,8 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
     }
 
     @Override
-    public List<Convocatoria> obtenerConvocatorias(long idUsuario) {
-        return repositorioConvocatoria.obtenerConvocatorias(idUsuario);
+    public List<Convocatoria> obtenerConvocatoriasCerradas() {
+        return repositorioConvocatoria.obtenerConvocatoriasCerradas();
     }
 
     @Override

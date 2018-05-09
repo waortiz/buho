@@ -224,4 +224,14 @@ public class ServicioMaestro implements IServicioMaestro {
     public Ciudad ingresarCiudad(Ciudad ciudad) {
          return repositorioMaestro.ingresarCiudad(ciudad);
     }
+
+    @Override
+    public List<Maestro> obtenerInstitucionesEducativasExtranjeras() {
+        return repositorioMaestro.obtenerInstitucionesEducativasExtranjeras();
+    }
+
+    @Override
+    public List<Maestro> obtenerInstitucionesEducativasColombianas() {
+        return repositorioMaestro.obtenerInstitucionesEducativasColombianas();
+    }
 }

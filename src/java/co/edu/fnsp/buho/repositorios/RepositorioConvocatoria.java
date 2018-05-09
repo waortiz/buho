@@ -42,7 +42,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     private SimpleJdbcCall retirarPostulacionConvocatoria;
     private SimpleJdbcCall actualizarConvocatoria;
     private SimpleJdbcCall obtenerConvocatoria;
-    private SimpleJdbcCall obtenerConvocatorias;
+    private SimpleJdbcCall obtenerConvocatoriasCerradas;
     private SimpleJdbcCall obtenerConvocatoriasVigentes;
     private SimpleJdbcCall ingresarDocumentoConvocatoria;
     private SimpleJdbcCall actualizarDocumentoConvocatoria;
@@ -92,7 +92,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         this.retirarPostulacionConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("retirarPostulacionConvocatoria");
         this.actualizarConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarConvocatoria");
         this.obtenerConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoria");
-        this.obtenerConvocatorias = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatorias").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(Convocatoria.class));
+        this.obtenerConvocatoriasCerradas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasCerradas").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(Convocatoria.class));
         this.obtenerConvocatoriasVigentes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasVigentes").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(Convocatoria.class));
         this.obtenerDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoConvocatoria");
         this.ingresarDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoConvocatoria");
@@ -423,10 +423,8 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     }
 
     @Override
-    public List<Convocatoria> obtenerConvocatorias(long idUsuario) {
-        MapSqlParameterSource parametrosConsultaConvocatorias = new MapSqlParameterSource();
-        parametrosConsultaConvocatorias.addValue("varIdUsuario", idUsuario);
-        Map resultado = obtenerConvocatorias.execute(parametrosConsultaConvocatorias);
+    public List<Convocatoria> obtenerConvocatoriasCerradas() {
+        Map resultado = obtenerConvocatoriasCerradas.execute(new MapSqlParameterSource());
         List<Convocatoria> convocatorias = (List<Convocatoria>) resultado.get("convocatorias");
         for (Convocatoria convocatoria : convocatorias) {
             convocatoria.setFechaFinFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaFin()));

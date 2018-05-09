@@ -1160,10 +1160,12 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         parametrosIngresoTerminos.addValue("varResponsabilidad", terminos.isResponsabilidad());
         parametrosIngresoTerminos.addValue("varSeguridad", terminos.isSeguridad());
         parametrosIngresoTerminos.addValue("varTitulos", terminos.isTitulos());
-        parametrosIngresoTerminos.addValue("varTratamientosDatosPersonales", terminos.isTratamientosDatosPersonales());
+        parametrosIngresoTerminos.addValue("varConsentimientoTerminosEstablecidos", terminos.isConsentimientoTerminosEstablecidos());
         parametrosIngresoTerminos.addValue("varUsoIlegal", terminos.isUsoIlegal());
         parametrosIngresoTerminos.addValue("varVeracidad", terminos.isVeracidad());
         parametrosIngresoTerminos.addValue("varVinculacionLaboral", terminos.isVinculacionLaboral());
+        parametrosIngresoTerminos.addValue("varreconocimientoInformacionSuministrada", terminos.isReconocimientoInformacionSuministrada());
+        parametrosIngresoTerminos.addValue("varaceptoTratamientoDatosPersonales", terminos.isAceptoTratamientoDatosPersonales());
 
         ingresarTerminos.execute(parametrosIngresoTerminos);
     }

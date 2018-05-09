@@ -54,30 +54,34 @@ public class ConvocatoriaController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(Model model) {
+        List<Convocatoria> convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdUsuario());
+        model.addAttribute("convocatoriasVigentes", convocatoriasVigentes);
+
+        List<Convocatoria> convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradas();
+        model.addAttribute("convocatoriasCerradas", convocatoriasCerradas);
+
         if (esAdministrador()) {
-            List<Convocatoria> convocatorias = servicioConvocatoria.obtenerConvocatorias(obtenerIdUsuario());
-            model.addAttribute("convocatorias", convocatorias);
 
             return "convocatorias/index";
         } else {
-            List<Convocatoria> convocatorias = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdUsuario());
-            model.addAttribute("convocatorias", convocatorias);
-            model.addAttribute("autenticado", esAutenticado());
 
+            model.addAttribute("autenticado", esAutenticado());
             return "convocatorias/postular";
         }
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String obtenerConvocatorias(Model model) {
+        List<Convocatoria> convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdUsuario());
+        model.addAttribute("convocatoriasVigentes", convocatoriasVigentes);
+
+        List<Convocatoria> convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradas();
+        model.addAttribute("convocatoriasCerradas", convocatoriasCerradas);
+
         if (esAdministrador()) {
-            List<Convocatoria> convocatorias = servicioConvocatoria.obtenerConvocatorias(obtenerIdUsuario());
-            model.addAttribute("convocatorias", convocatorias);
 
             return "convocatorias/index";
         } else {
-            List<Convocatoria> convocatorias = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdUsuario());
-            model.addAttribute("convocatorias", convocatorias);
             model.addAttribute("autenticado", esAutenticado());
 
             return "convocatorias/postular";
@@ -86,8 +90,11 @@ public class ConvocatoriaController {
 
     @RequestMapping(value = "/postular", method = RequestMethod.GET)
     public String postular(Model model) {
-        List<Convocatoria> convocatorias = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdUsuario());
-        model.addAttribute("convocatorias", convocatorias);
+        List<Convocatoria> convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdUsuario());
+        model.addAttribute("convocatoriasVigentes", convocatoriasVigentes);
+
+        List<Convocatoria> convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradas();
+        model.addAttribute("convocatoriasCerradas", convocatoriasCerradas);
 
         model.addAttribute("autenticado", esAutenticado());
 

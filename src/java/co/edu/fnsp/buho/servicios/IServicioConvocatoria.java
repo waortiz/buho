@@ -21,7 +21,7 @@ public interface IServicioConvocatoria {
 
     void eliminarConvocatoria(int idConvocatoria);
 
-    List<Convocatoria> obtenerConvocatorias(long idUsuario);
+    List<Convocatoria> obtenerConvocatoriasCerradas();
 
     void actualizarConvocatoria(long idUsuario, Convocatoria convocatoria);
 

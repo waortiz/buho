@@ -10,69 +10,128 @@
                 <div class="page-header">
                     <h4><i class="fa fa-address-book-o" aria-hidden="true"></i>Convocatorias o invitaciones vigentes Facultad Nacional de Salud Pública</h4>
                 </div>
-                <div id="addscroll">
-                    <table class="table table-hover" id="tbconvo">
-                        <thead>
-                            <tr>
-                                <td><input type="text" id="intip" class="form-control input-sm" placeholder="Buscar tipo de convocatoria"></td>
-                                <td><input type="text" id="innom" class="form-control input-sm" placeholder="Buscar nombre de convocatoria"></td>
-                                <td><input type="text" id="infechfin" class="form-control input-sm fecha" placeholder="Buscar fecha de finalización"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr> 
-                                <th>Tipo</th>
-                                <th>Nombre</th>
-                                <th>Fecha de finalización</th>
-                                <th>Documento</th>
-                                <th>Aplicar</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="convocatoria" items="${convocatorias}">   
-                                <tr>
-                                    <td>${convocatoria.getNombreTipoConvocatoria()}</td>
-                                    <td>${convocatoria.getNombre()}</td>               
-                                    <td>${convocatoria.getFechaFinFormateada()}</td>
-                                    <td>
-                                        <c:if test = "${convocatoria.isTieneDocumento()}">
-                                            <a href="#" title="Ver documento" onclick="verDocumento(${convocatoria.getId()})"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
-                                        </c:if>
-                                        <c:if test = "${!convocatoria.isTieneDocumento()}">
-                                            <a href="#" title="No tiene documento"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
-                                        </c:if>
-                                    </td>
-                                    <td>
-                                        <div class="input-group">
-                                            <c:if test = "${convocatoria.isPostulado()}">
-                                                <div id="radioBtn" class="btn-group">
-                                                    <a class="btn btn-primary btn-sm active" id="btnPostulado${convocatoria.getId()}Si" data-toggle="postulado${convocatoria.getId()}" data-title="Y" href="javascript:postularConvocatoria(${convocatoria.getId()})">SI</a>
-                                                    <a class="btn btn-primary btn-sm notActive" id="btnPostulado${convocatoria.getId()}No" data-toggle="postulado${convocatoria.getId()}" data-title="N" href="javascript:retirarPostulacionConvocatoria(${convocatoria.getId()})">NO</a>
-                                                </div>
-                                            </c:if>
-                                            <c:if test = "${!convocatoria.isPostulado()}">
-                                                <div id="radioBtn" class="btn-group">
-                                                    <a class="btn btn-primary btn-sm notActive" id="btnPostulado${convocatoria.getId()}Si" data-toggle="postulado${convocatoria.getId()}" data-title="Y" href="javascript:postularConvocatoria(${convocatoria.getId()})">SI</a>
-                                                    <a class="btn btn-primary btn-sm active" id="btnPostulado${convocatoria.getId()}No" data-toggle="postulado${convocatoria.getId()}" data-title="N" href="javascript:retirarPostulacionConvocatoria(${convocatoria.getId()})">NO</a>
-                                                </div>                                                
-                                            </c:if>
-                                        </div>
-                                    </td>
-                                    <td style='white-space: nowrap'>
-                                        <button type="button" class="btn btn-success btn-sm" style="margin-right: 10px;" onclick="mostrarConvocatoria(${convocatoria.getId()})">Ver</button>
-                                        <button type="button" class="btn btn-success btn-sm"  onclick="window.location.href = '${pageContext.request.contextPath}/convocatorias/editar/${convocatoria.getId()}'" style="margin-right: 5px;" >
-                                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                                        </button>
-                                            <button type='button'  id='btnborrar' class='btn btn-danger btn-sm' onclick="confirmarEliminacionConvocatoria(${convocatoria.getId()})">
-                                            <span id='btnbo' class='glyphicon glyphicon-remove'></span>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                <div class="form-group">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#tabvige">
+                                <i class="fa fa-unlock" aria-hidden="true"></i>
+                                Vigente
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#tabcer">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                Cerrada
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tabvige">
+                            <div class="form-group" style="margin-top: 10px;">
+                                <div id="addscroll">
+                                    <table class="table table-hover" id="tbconvo">
+                                        <thead>
+                                            <tr>
+                                                <td><input type="text" id="intip" class="form-control input-sm" placeholder="Buscar tipo de convocatoria"></td>
+                                                <td><input type="text" id="innom" class="form-control input-sm" placeholder="Buscar nombre de convocatoria"></td>
+                                                <td><input type="text" id="infechfin" class="form-control input-sm fecha" placeholder="Buscar fecha de finalización"></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr> 
+                                                <th>Tipo</th>
+                                                <th>Nombre</th>
+                                                <th>Fecha de finalización</th>
+                                                <th>Documento</th>
+                                                <th>Aplicar</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="convocatoria" items="${convocatoriasVigentes}">   
+                                                <tr>
+                                                    <td>${convocatoria.getNombreTipoConvocatoria()}</td>
+                                                    <td>${convocatoria.getNombre()}</td>               
+                                                    <td>${convocatoria.getFechaFinFormateada()}</td>
+                                                    <td>
+                                                        <c:if test = "${convocatoria.isTieneDocumento()}">
+                                                            <a href="#" title="Ver documento" onclick="verDocumento(${convocatoria.getId()})"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                                                            </c:if>
+                                                            <c:if test = "${!convocatoria.isTieneDocumento()}">
+                                                            <a href="#" title="No tiene documento"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                                                            </c:if>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <c:if test = "${convocatoria.isPostulado()}">
+                                                                <div id="radioBtn" class="btn-group">
+                                                                    <a class="btn btn-primary btn-sm active" id="btnPostulado${convocatoria.getId()}Si" data-toggle="postulado${convocatoria.getId()}" data-title="Y" href="javascript:postularConvocatoria(${convocatoria.getId()})">SI</a>
+                                                                    <a class="btn btn-primary btn-sm notActive" id="btnPostulado${convocatoria.getId()}No" data-toggle="postulado${convocatoria.getId()}" data-title="N" href="javascript:retirarPostulacionConvocatoria(${convocatoria.getId()})">NO</a>
+                                                                </div>
+                                                            </c:if>
+                                                            <c:if test = "${!convocatoria.isPostulado()}">
+                                                                <div id="radioBtn" class="btn-group">
+                                                                    <a class="btn btn-primary btn-sm notActive" id="btnPostulado${convocatoria.getId()}Si" data-toggle="postulado${convocatoria.getId()}" data-title="Y" href="javascript:postularConvocatoria(${convocatoria.getId()})">SI</a>
+                                                                    <a class="btn btn-primary btn-sm active" id="btnPostulado${convocatoria.getId()}No" data-toggle="postulado${convocatoria.getId()}" data-title="N" href="javascript:retirarPostulacionConvocatoria(${convocatoria.getId()})">NO</a>
+                                                                </div>                                                
+                                                            </c:if>
+                                                        </div>
+                                                    </td>
+                                                    <td style='white-space: nowrap'>
+                                                        <button type="button" class="btn btn-success btn-sm" style="margin-right: 10px;" onclick="mostrarConvocatoria(${convocatoria.getId()})">Ver</button>
+                                                        <button type="button" class="btn btn-success btn-sm"  onclick="window.location.href = '${pageContext.request.contextPath}/convocatorias/editar/${convocatoria.getId()}'" style="margin-right: 5px;" >
+                                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        </button>
+                                                        <button type='button'  id='btnborrar' class='btn btn-danger btn-sm' onclick="confirmarEliminacionConvocatoria(${convocatoria.getId()})">
+                                                            <span id='btnbo' class='glyphicon glyphicon-remove'></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tabcer">
+                            <div class="form-group" style="margin-top: 10px;">
+                                <table class="table table-hover" id="tblcerradas">
+                                    <thead>
+                                        <tr>
+                                            <td><input type="text" id="intnom" class="form-control input-sm" placeholder="Buscar nombre de convocatoria"></td>
+                                            <td><input type="text" id="intdes" class="form-control input-sm" placeholder="Buscar la descripci&oacute;n"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Descripci&oacute;n</th>
+                                            <th>Resultados</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="convocatoria" items="${convocatoriasCerradas}">   
+                                            <tr>
+                                                <td>${convocatoria.getNombreTipoConvocatoria()}</td>
+                                                <td>${convocatoria.getNombre()}</td>               
+                                                <td>
+                                                    <a href="#" target="_black" title="Ver documento" style="margin-left: 30px;" class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"> </i></a>
+                                                </td>
+                                                <td style='white-space: nowrap'>
+                                                    <button type="button" class="btn btn-success btn-sm"  onclick="window.location.href = '${pageContext.request.contextPath}/convocatorias/editar/${convocatoria.getId()}'" style="margin-right: 5px;" >
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                    </button>
+                                                    <button type='button'  id='btnborrar' class='btn btn-danger btn-sm' onclick="confirmarEliminacionConvocatoria(${convocatoria.getId()})">
+                                                        <span id='btnbo' class='glyphicon glyphicon-remove'></span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,7 +141,7 @@
             <div class="modal-content">
                 <div class="modal-header mhsuccess">
                     <button class="close" data-dismiss="modal"><label style="color:white !important;">&times;</label></button>
-                   <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Confirmacion</h4>
+                    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Confirmacion</h4>
                 </div>
                 <div class="modal-body">
                     <label for="">Su hoja de vida fue postulada para la convocatoria, recuerde actualizarla y cargar todos los documentos de soporte</label>
@@ -98,7 +157,7 @@
             <div class="modal-content">
                 <div class="modal-header mhsuccess">
                     <button class="close" data-dismiss="modal"><label style="color:white !important;">&times;</label></button>
-                   <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Confirmacion</h4>
+                    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Confirmacion</h4>
                 </div>
                 <div class="modal-body">
                     <label for="">Su hoja de vida fue retirada de la convocatoria</label>
@@ -238,7 +297,7 @@
     var adendas = null;
     var DOCENCIA_MEDELLIN = "3";
     var DOCENCIA_REGIONES = "4";
-    
+
     $(document).ready(function () {
         var table = $('#tbconvo').DataTable({
             "language": {
@@ -265,7 +324,7 @@
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
         });
-        
+
         adendas = $('#adendas').DataTable({
             "language": {
                 "sProcessing": "Procesando...",
@@ -291,28 +350,28 @@
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
         });
-        
+
         $('#intip').on('keyup', function () {
             table
-                .columns(0)
-                .search(this.value)
-                .draw();
+                    .columns(0)
+                    .search(this.value)
+                    .draw();
         });
 
         $('#infechfin').on('keyup', function () {
             table
-                .columns(2)
-                .search(this.value)
-                .draw();
+                    .columns(2)
+                    .search(this.value)
+                    .draw();
         });
         $('#innom').on('keyup', function () {
             table
-                .columns(1)
-                .search(this.value)
-                .draw();
+                    .columns(1)
+                    .search(this.value)
+                    .draw();
         });
-        
-        $('#radioBtn a').on('click', function(){
+
+        $('#radioBtn a').on('click', function () {
             var sel = $(this).data('title');
             var tog = $(this).data('toggle');
             $('#' + tog).prop('value', sel);
@@ -320,49 +379,49 @@
             $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
         });
     });
-  
+
     function postularConvocatoria(idConvocatoria) {
         $.ajax({
-        type: "GET",
-        url: "${pageContext.request.contextPath}/convocatorias/postular/" + idConvocatoria,
-        processData: false,
-        contentType: false,
-        success: function (response) {
-            if (response !== "") {
-                var resultado = JSON.parse(response);
-                if(resultado.resultado) {
-                   $('#md_postular').modal({backdrop: 'static', keyboard: false})  ;
-                } else {
-                   if(resultado.mensaje != '') {
-                     bootstrap_alert_convocatoria.warning('No cumple con los criterios para postularse a la convocatoria: ' + resultado.mensaje); 
-                   } else {
-                     bootstrap_alert_convocatoria.warning('Ocurrió un error al postularse a la convocatoria');   
-                   }
-                   $('#btnPostulado' + idConvocatoria + 'No').removeClass('notActive').addClass('active');  
-                   $('#btnPostulado' + idConvocatoria + 'Si').removeClass('active').addClass('notActive');  
-                } 
-            }
-        }});      
+            type: "GET",
+            url: "${pageContext.request.contextPath}/convocatorias/postular/" + idConvocatoria,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response !== "") {
+                    var resultado = JSON.parse(response);
+                    if (resultado.resultado) {
+                        $('#md_postular').modal({backdrop: 'static', keyboard: false});
+                    } else {
+                        if (resultado.mensaje != '') {
+                            bootstrap_alert_convocatoria.warning('No cumple con los criterios para postularse a la convocatoria: ' + resultado.mensaje);
+                        } else {
+                            bootstrap_alert_convocatoria.warning('Ocurrió un error al postularse a la convocatoria');
+                        }
+                        $('#btnPostulado' + idConvocatoria + 'No').removeClass('notActive').addClass('active');
+                        $('#btnPostulado' + idConvocatoria + 'Si').removeClass('active').addClass('notActive');
+                    }
+                }
+            }});
     }
 
     function retirarPostulacionConvocatoria(idConvocatoria) {
         $.ajax({
-        type: "GET",
-        url: "${pageContext.request.contextPath}/convocatorias/retirarPostulacion/" + idConvocatoria,
-        processData: false,
-        contentType: false,
-        success: function (response) {
-            if (response !== "") {
-                var resultado = JSON.parse(response);
-                if(resultado.resultado) {
-                   $('#md_retirar_postulacion').modal({backdrop: 'static', keyboard: false})  ;
-                } else {
-                   bootstrap_alert_convocatoria.warning('No se pudo retirar la postulación de la convocatoria'); 
-                   $('#btnPostulado' + idConvocatoria + 'Si').removeClass('notActive').addClass('active');  
-                   $('#btnPostulado' + idConvocatoria + 'No').removeClass('active').addClass('notActive');  
-                } 
-            }
-        }});      
+            type: "GET",
+            url: "${pageContext.request.contextPath}/convocatorias/retirarPostulacion/" + idConvocatoria,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response !== "") {
+                    var resultado = JSON.parse(response);
+                    if (resultado.resultado) {
+                        $('#md_retirar_postulacion').modal({backdrop: 'static', keyboard: false});
+                    } else {
+                        bootstrap_alert_convocatoria.warning('No se pudo retirar la postulación de la convocatoria');
+                        $('#btnPostulado' + idConvocatoria + 'Si').removeClass('notActive').addClass('active');
+                        $('#btnPostulado' + idConvocatoria + 'No').removeClass('active').addClass('notActive');
+                    }
+                }
+            }});
     }
 
     function mostrarConvocatoria(idConvocatoria) {
@@ -393,20 +452,20 @@
                         $('#programa').val('');
                         $('#curso').val('');
                         $('#totalHorasSemestre').val('');
-                    }                   
+                    }
                     adendas.clear().draw();
                     for (var i = 0; i < convocatoria.adendas.length; i++) {
                         var row = "";
-                        if(convocatoria.adendas[i].tieneDocumento) {
-                          row = $('<tr><td>' + convocatoria.adendas[i].nombreTipoAdenda + 
-                                '</td><td>' + convocatoria.adendas[i].descripcion + 
-                                '</td><td><a href="#" onclick="verDocumentoAdenda(' + convocatoria.adendas[i].id + ')" title="Ver documento" style="margin-left: 30px;" \n\
+                        if (convocatoria.adendas[i].tieneDocumento) {
+                            row = $('<tr><td>' + convocatoria.adendas[i].nombreTipoAdenda +
+                                    '</td><td>' + convocatoria.adendas[i].descripcion +
+                                    '</td><td><a href="#" onclick="verDocumentoAdenda(' + convocatoria.adendas[i].id + ')" title="Ver documento" style="margin-left: 30px;" \n\
                                     class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" \n\
                                     aria-hidden="true"></i></a><td></tr>');
                         } else {
-                          row = $('<tr><td>' + convocatoria.adendas[i].nombreTipoAdenda + 
-                                '</td><td>' + convocatoria.adendas[i].descripcion + 
-                                '</td><td>&nbsp;<td></tr>');
+                            row = $('<tr><td>' + convocatoria.adendas[i].nombreTipoAdenda +
+                                    '</td><td>' + convocatoria.adendas[i].descripcion +
+                                    '</td><td>&nbsp;<td></tr>');
                         }
                         adendas.row.add(row).draw();
                     }
@@ -416,14 +475,14 @@
                     } else {
                         $('#verDocumentoConvocatoria').attr("title", 'Ver documento');
                     }
-                    $('#modalConvocatoria').modal({backdrop: 'static', keyboard: false})  ;
+                    $('#modalConvocatoria').modal({backdrop: 'static', keyboard: false});
                 }
             }});
     }
 
     function verDocumentoConvocatoria() {
         if ($('#tieneDocumento').val() === "true") {
-           window.location.href = "${pageContext.request.contextPath}/convocatorias/documento/" + $('#idConvocatoria').val();
+            window.location.href = "${pageContext.request.contextPath}/convocatorias/documento/" + $('#idConvocatoria').val();
         }
     }
 
@@ -437,28 +496,28 @@
 
     function confirmarEliminacionConvocatoria(idConvocatoria) {
         $('#idConvocatoria').val(idConvocatoria);
-        $('#modalEliminacionConvocatoria').modal({backdrop: 'static', keyboard: false})  ;
+        $('#modalEliminacionConvocatoria').modal({backdrop: 'static', keyboard: false});
     }
 
     function eliminarConvocatoria() {
         $.ajax({
-        type: "GET",
-        url: "${pageContext.request.contextPath}/convocatorias/eliminar/" + $('#idConvocatoria').val(),
-        processData: false,
-        contentType: false,
-        success: function (response) {
-            if (response !== "") {
-                var resultado = JSON.parse(response);
-                if(resultado.resultado) {
-                   window.location.href = '${pageContext.request.contextPath}/convocatorias/index';
-                } else {
-                   bootstrap_alert_convocatoria.warning('No se pudo eliminar la convocatoria'); 
-                } 
-                $('#modalEliminacionConvocatoria').modal('hide');
-            }
-        }});
-   }
-   
+            type: "GET",
+            url: "${pageContext.request.contextPath}/convocatorias/eliminar/" + $('#idConvocatoria').val(),
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response !== "") {
+                    var resultado = JSON.parse(response);
+                    if (resultado.resultado) {
+                        window.location.href = '${pageContext.request.contextPath}/convocatorias/index';
+                    } else {
+                        bootstrap_alert_convocatoria.warning('No se pudo eliminar la convocatoria');
+                    }
+                    $('#modalEliminacionConvocatoria').modal('hide');
+                }
+            }});
+    }
+
     bootstrap_alert_convocatoria = function () { };
     bootstrap_alert_convocatoria.warning = function (message) {
         $('#alert_placeholder_convocatoria').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');

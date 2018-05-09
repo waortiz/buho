@@ -14,6 +14,7 @@ public class Programa {
     private String nombre;
     private String titulo;
     private int nucleoBasicoConocimiento;
+    private String nombreNucleoBasicoConocimiento;
     private String institucion;
     
     /**
@@ -84,6 +85,20 @@ public class Programa {
      */
     public void setInstitucion(String institucion) {
         this.institucion = institucion;
+    }
+
+    /**
+     * @return the nombreNucleoBasicoConocimiento
+     */
+    public String getNombreNucleoBasicoConocimiento() {
+        return nombreNucleoBasicoConocimiento;
+    }
+
+    /**
+     * @param nombreNucleoBasicoConocimiento the nombreNucleoBasicoConocimiento to set
+     */
+    public void setNombreNucleoBasicoConocimiento(String nombreNucleoBasicoConocimiento) {
+        this.nombreNucleoBasicoConocimiento = nombreNucleoBasicoConocimiento;
     }
 
 }

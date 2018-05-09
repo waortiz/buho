@@ -6,18 +6,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class CookieUtil {
-    public static void create(HttpServletResponse httpServletResponse, String name, String value, Boolean secure, Integer maxAge) {
+    public static void create(HttpServletResponse httpServletResponse, String name, String value, Boolean secure, Integer maxAge, String domain) {
         Cookie cookie = new Cookie(name, value);
         cookie.setSecure(secure);
         cookie.setHttpOnly(true);
         cookie.setMaxAge(maxAge);
-        cookie.setPath("/");
+        cookie.setPath("/buho");
+        cookie.setDomain(domain);
         httpServletResponse.addCookie(cookie);
     }
 
     public static void clear(HttpServletResponse httpServletResponse, String name, String domain) {
         Cookie cookie = new Cookie(name, null);
-        cookie.setPath("/");
+        cookie.setPath("/buho");
         cookie.setHttpOnly(true);
         cookie.setMaxAge(0);
         cookie.setDomain(domain);

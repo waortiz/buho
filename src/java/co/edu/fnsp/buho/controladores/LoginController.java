@@ -8,8 +8,10 @@ import co.edu.fnsp.buho.servicios.IServicioSeguridad;
 import co.edu.fnsp.buho.utilidades.CookieUtil;
 import co.edu.fnsp.buho.utilidades.JwtUtil;
 import co.edu.fnsp.buho.utilidades.Mail;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +31,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/")
 public class LoginController {
+
     private static final Logger logger = LogManager.getLogger(LoginController.class.getName());
-    
+
     @Autowired
     private IServicioSeguridad servicioSeguridad;
-    
+
     @Autowired
     private Mail mail;
-        
+
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public String loginPage(Model model) {
 
@@ -45,23 +48,11 @@ public class LoginController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logoutPage(HttpServletRequest request, HttpServletResponse response, Model model) {
-        CookieUtil.clear(response, JwtUtil.jwtTokenCookieName, request.getServerName()); 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            SecurityContextLogoutHandler securityContextLogoutHandler = new SecurityContextLogoutHandler();
-            securityContextLogoutHandler.setInvalidateHttpSession(true);
-            securityContextLogoutHandler.setClearAuthentication(true);
-            securityContextLogoutHandler.logout(request, response, auth);
+        CookieUtil.clear(response, JwtUtil.jwtTokenCookieName, request.getServerName());
 
-            CookieClearingLogoutHandler cookieClearingLogoutHandler = new CookieClearingLogoutHandler(AbstractRememberMeServices.SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY);
-            cookieClearingLogoutHandler.logout(request, response, auth);
-
-            SecurityContextHolder.getContext().setAuthentication(null);
-        }
-        
         return "redirect:/index";
     }
-    
+
     @RequestMapping(value = "/login/recuperarClave", method = RequestMethod.POST)
     public @ResponseBody
     String recuperarClave(@ModelAttribute(value = "recuperacionClave") RecuperacionClave recuperacionClave, Model model) {
@@ -81,7 +72,7 @@ public class LoginController {
 
         return mensaje;
     }
-    
+
     @RequestMapping(value = "/login/crear", method = RequestMethod.POST)
     public @ResponseBody
     String crearUsuario(@ModelAttribute(value = "usuario") Usuario usuario, Model model) {
@@ -97,17 +88,16 @@ public class LoginController {
             logger.error(exc);
             throw exc;
         }
-        
+
         return mensaje;
     }
-    
-    
+
     @RequestMapping(value = "/login/cambiarClave", method = RequestMethod.GET)
     public String mostrarCambioClave(Model model) {
-        
+
         return "login/cambioClave";
     }
-    
+
     @RequestMapping(value = "/login/cambiarClave", method = RequestMethod.POST)
     public @ResponseBody
     String cambiarClave(@ModelAttribute(value = "cambioClave") CambioClave cambioClave, Model model) {
