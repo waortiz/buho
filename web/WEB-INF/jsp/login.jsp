@@ -35,6 +35,9 @@
             <div class="cta">
                 <a href="#" class="clave">Recuperar contraseña</a>
             </div>
+            <div class="cta" style="padding: 0px 40px !important;">
+                <a href="#" class="registro">Registrar</a>
+            </div>                    
         </div>
         <div id="divFormRegistro" class="form form-registro">
             <div class="contenedorLogo">

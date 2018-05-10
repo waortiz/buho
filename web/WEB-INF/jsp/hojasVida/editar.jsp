@@ -112,7 +112,7 @@
                             <div class="form-inline">
                                 <input type="file" accept=".pdf,.png,.jpg,.jpeg" name="copiaDocumentoIdentificacion" id="copiaDocumentoIdentificacion" class="form-control" style="width: 80%">
                                 <c:if test = "${!hojaVida.isCopiaDocumentoIdentificacionValidado()}">
-                                    <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='glyphicon glyphicon-remove'></span></button>
+                                    <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
                                     </c:if>    
                                     <c:if test = "${hojaVida.isCopiaDocumentoIdentificacionValidado()}">
                                     <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
@@ -291,7 +291,7 @@
                             <label>Copia libreta militar</label>
                             <input type="file" accept=".pdf,.png,.jpg,.jpeg" name="copiaLibretaMilitar" id="copiaLibretaMilitar" class="form-control" style="width: 80%">
                             <c:if test = "${!hojaVida.isCopiaLibretaMilitarValidado()}">
-                                <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='glyphicon glyphicon-remove'></span></button>
+                                <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
                                 </c:if>    
                                 <c:if test = "${hojaVida.isCopiaLibretaMilitarValidado()}">
                                 <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
@@ -529,7 +529,7 @@
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
                             <input type="file" accept=".pdf,.png,.jpg,.jpeg" name="documentoRUT" id="documentoRUT" class="form-control" style="width: 80%">
                             <c:if test = "${!hojaVida.isDocumentoRUTValidado()}">
-                                <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='glyphicon glyphicon-remove'></span></button>
+                                <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
                                 </c:if>    
                                 <c:if test = "${hojaVida.isDocumentoRUTValidado()}">
                                 <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
@@ -1905,7 +1905,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="naturalezaCargoExperienciaLaboral">Naturaleza del cargo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar naturaleza del cargo">
+                                            <label for="naturalezaCargoExperienciaLaboral">Naturaleza del cargo o labor</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar naturaleza del cargo">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                             <select style="width: 100%;" name="naturalezaCargoExperienciaLaboral" id="naturalezaCargoExperienciaLaboral" class="js-select-basic-single js-states form-control">
                                                 <option></option>
@@ -2169,12 +2169,12 @@
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
                             <div id="radioBtn" class="btn-group" style="margin-left: 50px;">
                                 <c:if test = "${hojaVida.isInvestigadorReconocidoColciencias()}">
-                                <a class="btn btn-primary btn-sm active" data-toggle="investigadorReconocidoColciencias" data-title="true" id="btnInvestigadorReconocidoColciencias">Si</a>
-                                <a class="btn btn-primary btn-sm notActive" data-toggle="investigadorReconocidoColciencias" data-title="false" id="btnInvestigadorReconocidoColciencias">No</a>
+                                <a class="btn btn-primary btn-sm active" data-toggle="investigadorReconocidoColciencias" data-title="true" id="btnInvestigadorReconocidoColcienciasSi">Si</a>
+                                <a class="btn btn-primary btn-sm notActive" data-toggle="investigadorReconocidoColciencias" data-title="false" id="btnInvestigadorReconocidoColcienciasNo">No</a>
                                 </c:if>
                                 <c:if test = "${!hojaVida.isInvestigadorReconocidoColciencias()}">
-                                <a class="btn btn-primary btn-sm notActive" data-toggle="investigadorReconocidoColciencias" data-title="true" id="btnInvestigadorReconocidoColciencias">Si</a>
-                                <a class="btn btn-primary btn-sm active" data-toggle="investigadorReconocidoColciencias" data-title="false" id="btnInvestigadorReconocidoColciencias">No</a>
+                                <a class="btn btn-primary btn-sm notActive" data-toggle="investigadorReconocidoColciencias" data-title="true" id="btnInvestigadorReconocidoColcienciasSi">Si</a>
+                                <a class="btn btn-primary btn-sm active" data-toggle="investigadorReconocidoColciencias" data-title="false" id="btnInvestigadorReconocidoColcienciasNo">No</a>
                                 </c:if>
                             </div>
                             <form:hidden path="investigadorReconocidoColciencias" />
@@ -3178,6 +3178,19 @@
             $('#nucleoBasicoConocimientoPrograma').val(programa.nucleoBasicoConocimiento);
             $('#nombreNucleoBasicoConocimientoPrograma').val(programa.nombreNucleoBasicoConocimiento);
         });
+        
+        $('#btnInvestigadorReconocidoColcienciasSi').click(function () {
+            $("#tipoInvestigador").prop('disabled', false);
+        });
+        
+        $('#btnInvestigadorReconocidoColcienciasNo').click(function () {
+            $("#tipoInvestigador").prop('disabled', 'disabled');
+            $('#tipoInvestigador').val("").trigger("change.select2");
+        });
+        
+        if ($('#investigadorReconocidoColciencias').val() === "false") {
+           $('#tipoInvestigador').prop('disabled', true);
+        }
     });
 
     function actualizarDireccion() {

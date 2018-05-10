@@ -7,6 +7,7 @@ package co.edu.fnsp.buho.repositorios;
 
 import co.edu.fnsp.buho.entidades.Convocatoria;
 import co.edu.fnsp.buho.entidades.Documento;
+import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public interface IRepositorioConvocatoria {
 
     void eliminarConvocatoria(int idConvocatoria);
 
-    List<Convocatoria> obtenerConvocatoriasCerradas();
+    List<ListadoConvocatoria> obtenerConvocatoriasCerradas();
 
     Documento obtenerDocumentoConvocatoria(int idConvocatoria);
 
@@ -33,5 +34,5 @@ public interface IRepositorioConvocatoria {
 
     void retirarPostulacion(long idPersona, int idConvocatoria);
 
-    List<Convocatoria> obtenerConvocatoriasVigentes(long idUsuario);
+    List<ListadoConvocatoria> obtenerConvocatoriasVigentes(long idPersona);
 }

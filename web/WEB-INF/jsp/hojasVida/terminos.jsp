@@ -12,7 +12,14 @@
                         <button class="close" data-dismiss="modal"><label style="color:white !important;">&times;</label></button>
                     </div>
                     <div class="modal-body" >
-                        <div id="alert_terminos"></div> 
+                        <div id="alert_terminos"></div>
+                        <table class="table table-bordered tableestilo">
+                            <thead>
+                                <tr>
+                                    <th><button class="btn btn-success btn-sm btntableAll" style="float: right;" type="button">Seleccionar todos los términos</button></th>
+                                </tr>
+                            </thead>
+                        </table>
                         <div class="form-group" id="tabssmall">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#datosol">
@@ -514,7 +521,7 @@
                                                                             lo definido y autorizado por el Ministerio del Trabajo. El manejo de mi
                                                                             información igualmente lo autorizo para que se realice según los términos y
                                                                             exigencias de la Ley 1636 y el Decreto 2852 de 2013.</p></td>
-                                                                    <td><input type="checkbox" name="consentimientoTerminosEstablecidos" style="margin-top: 20%;"></td>
+                                                                    <td><input type="checkbox" name="consentimientoTerminosEstablecidos" id="consentimientoTerminosEstablecidos" style="margin-top: 20%;"></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
@@ -527,7 +534,7 @@
                                                                             antes señalada.
                                                                         </p>
                                                                     </td>
-                                                                    <td><input type="checkbox" name="reconocimientoInformacionSuministrada" style="margin-top: 20%;"></td>
+                                                                    <td><input type="checkbox" name="reconocimientoInformacionSuministrada" id="reconocimientoInformacionSuministrada" style="margin-top: 20%;"></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
@@ -536,7 +543,7 @@
                                                                             datos personales
                                                                         </p>
                                                                     </td>
-                                                                    <td><input type="checkbox" name="aceptoTratamientoDatosPersonales" style="margin-top: 20%;"></td>
+                                                                    <td><input type="checkbox" name="aceptoTratamientoDatosPersonales" id="aceptoTratamientoDatosPersonales" style="margin-top: 20%;"></td>
                                                                 </tr>                                                                
                                                             </table>
                                                         </center>
@@ -562,6 +569,13 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#md_acepto').modal({backdrop: 'static', keyboard: false});
+        $('.btntableAll').click(function () {
+            $('#table1 tr:has(td)').find('input[type="checkbox"]').prop("checked", 'checked');
+            $('#table2 tr:has(td)').find('input[type="checkbox"]').prop("checked", 'checked');
+            $('#table3 tr:has(td)').find('input[type="checkbox"]').prop("checked", 'checked');
+            $('#table4 tr:has(td)').find('input[type="checkbox"]').prop("checked", 'checked');
+            $('#table6 tr:has(td)').find('input[type="checkbox"]').prop("checked", 'checked');
+        });
         $('.btntable1').click(function () {
             $('#table1 tr:has(td)').find('input[type="checkbox"]').prop("checked", 'checked');
         });
@@ -581,6 +595,13 @@
 
     $('#terminos').submit(function (evt) {
         evt.preventDefault();
+        if(!$("#consentimientoTerminosEstablecidos").prop('checked') || 
+           !$("#reconocimientoInformacionSuministrada").prop('checked') ||
+           !$("#aceptoTratamientoDatosPersonales").prop('checked')) {
+          bootstrap_alert_terminos.warning("Debe aceptar los términos de tratamiento de datos personales.");
+          return;
+        }
+        
         var formData = new FormData(this);
         $.ajax({
             type: "POST",

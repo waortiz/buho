@@ -12,6 +12,7 @@ import co.edu.fnsp.buho.entidades.AnyosExperiencia;
 import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
 import co.edu.fnsp.buho.entidades.EducacionContinuaConvocatoria;
 import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
+import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
 import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
 import co.edu.fnsp.buho.utilidades.Util;
 import java.text.ParseException;
@@ -92,8 +93,8 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         this.retirarPostulacionConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("retirarPostulacionConvocatoria");
         this.actualizarConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarConvocatoria");
         this.obtenerConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoria");
-        this.obtenerConvocatoriasCerradas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasCerradas").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(Convocatoria.class));
-        this.obtenerConvocatoriasVigentes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasVigentes").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(Convocatoria.class));
+        this.obtenerConvocatoriasCerradas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasCerradas").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(ListadoConvocatoria.class));
+        this.obtenerConvocatoriasVigentes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasVigentes").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(ListadoConvocatoria.class));
         this.obtenerDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoConvocatoria");
         this.ingresarDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoConvocatoria");
         this.actualizarDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoConvocatoria");
@@ -423,10 +424,10 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     }
 
     @Override
-    public List<Convocatoria> obtenerConvocatoriasCerradas() {
+    public List<ListadoConvocatoria> obtenerConvocatoriasCerradas() {
         Map resultado = obtenerConvocatoriasCerradas.execute(new MapSqlParameterSource());
-        List<Convocatoria> convocatorias = (List<Convocatoria>) resultado.get("convocatorias");
-        for (Convocatoria convocatoria : convocatorias) {
+        List<ListadoConvocatoria> convocatorias = (List<ListadoConvocatoria>) resultado.get("convocatorias");
+        for (ListadoConvocatoria convocatoria : convocatorias) {
             convocatoria.setFechaFinFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaFin()));
         }
 
@@ -434,12 +435,12 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     }
 
     @Override
-    public List<Convocatoria> obtenerConvocatoriasVigentes(long idUsuario) {
+    public List<ListadoConvocatoria> obtenerConvocatoriasVigentes(long idPersona) {
         MapSqlParameterSource parametrosConsultaConvocatorias = new MapSqlParameterSource();
-        parametrosConsultaConvocatorias.addValue("varIdUsuario", idUsuario);
+        parametrosConsultaConvocatorias.addValue("varIdPersona", idPersona);
         Map resultado = obtenerConvocatoriasVigentes.execute(parametrosConsultaConvocatorias);
-        List<Convocatoria> convocatorias = (List<Convocatoria>) resultado.get("convocatorias");
-        for (Convocatoria convocatoria : convocatorias) {
+        List<ListadoConvocatoria> convocatorias = (List<ListadoConvocatoria>) resultado.get("convocatorias");
+        for (ListadoConvocatoria convocatoria : convocatorias) {
             convocatoria.setFechaFinFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaFin()));
         }
 

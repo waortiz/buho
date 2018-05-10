@@ -15,6 +15,7 @@ import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
+import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
 import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
 import co.edu.fnsp.buho.entidades.TipoCertificacionEnum;
 import co.edu.fnsp.buho.excepciones.CriteriosHabilitacionException;
@@ -58,13 +59,13 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
     }
 
     @Override
-    public List<Convocatoria> obtenerConvocatoriasCerradas() {
+    public List<ListadoConvocatoria> obtenerConvocatoriasCerradas() {
         return repositorioConvocatoria.obtenerConvocatoriasCerradas();
     }
 
     @Override
-    public List<Convocatoria> obtenerConvocatoriasVigentes(long idUsuario) {
-        return repositorioConvocatoria.obtenerConvocatoriasVigentes(idUsuario);
+    public List<ListadoConvocatoria> obtenerConvocatoriasVigentes(long idPersona) {
+        return repositorioConvocatoria.obtenerConvocatoriasVigentes(idPersona);
     }
     
     @Override

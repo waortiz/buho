@@ -57,10 +57,10 @@
                                                     <td style="text-align: center">
                                                         <c:if test = "${convocatoria.isTieneDocumento()}">
                                                             <a href="#" title="Ver documento" onclick="verDocumento(${convocatoria.getId()})"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
-                                                            </c:if>
-                                                            <c:if test = "${!convocatoria.isTieneDocumento()}">
+                                                        </c:if>
+                                                        <c:if test = "${!convocatoria.isTieneDocumento()}">
                                                             <a href="#" title="No tiene documento"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
-                                                            </c:if>
+                                                        </c:if>
                                                     </td>
                                                     <td>
                                                         <div class="input-group">

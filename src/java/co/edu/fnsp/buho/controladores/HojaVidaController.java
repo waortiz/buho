@@ -119,7 +119,7 @@ public class HojaVidaController {
 
             hojaVidaIngresar.setInvestigadorReconocidoColciencias(hojaVida.isInvestigadorReconocidoColciencias());
             hojaVidaIngresar.setUrlCVLAC(hojaVida.getUrlCVLAC());
-            if (!"".equals(hojaVida.getTipoInvestigador())) {
+            if (hojaVida.getTipoInvestigador() != null && !"".equals(hojaVida.getTipoInvestigador())) {
                 hojaVidaIngresar.setTipoInvestigador(Util.obtenerEntero(hojaVida.getTipoInvestigador()));
             }
             hojaVidaIngresar.setCodigoORCID(hojaVida.getCodigoORCID());

@@ -11,6 +11,7 @@ import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Adenda;
 import co.edu.fnsp.buho.entidades.CampoHojaVida;
 import co.edu.fnsp.buho.entidades.DetalleUsuario;
+import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
 import co.edu.fnsp.buho.entidades.Programa;
 import co.edu.fnsp.buho.excepciones.CriteriosHabilitacionException;
 import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
@@ -54,10 +55,10 @@ public class ConvocatoriaController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(Model model) {
-        List<Convocatoria> convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdUsuario());
+        List<ListadoConvocatoria> convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdPersona());
         model.addAttribute("convocatoriasVigentes", convocatoriasVigentes);
 
-        List<Convocatoria> convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradas();
+        List<ListadoConvocatoria> convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradas();
         model.addAttribute("convocatoriasCerradas", convocatoriasCerradas);
 
         if (esAdministrador()) {
@@ -72,10 +73,10 @@ public class ConvocatoriaController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String obtenerConvocatorias(Model model) {
-        List<Convocatoria> convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdUsuario());
+        List<ListadoConvocatoria> convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdPersona());
         model.addAttribute("convocatoriasVigentes", convocatoriasVigentes);
 
-        List<Convocatoria> convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradas();
+        List<ListadoConvocatoria> convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradas();
         model.addAttribute("convocatoriasCerradas", convocatoriasCerradas);
 
         if (esAdministrador()) {
@@ -90,10 +91,10 @@ public class ConvocatoriaController {
 
     @RequestMapping(value = "/postular", method = RequestMethod.GET)
     public String postular(Model model) {
-        List<Convocatoria> convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdUsuario());
+        List<ListadoConvocatoria> convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdPersona());
         model.addAttribute("convocatoriasVigentes", convocatoriasVigentes);
 
-        List<Convocatoria> convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradas();
+        List<ListadoConvocatoria> convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradas();
         model.addAttribute("convocatoriasCerradas", convocatoriasCerradas);
 
         model.addAttribute("autenticado", esAutenticado());
