@@ -6,43 +6,43 @@
 <div id="contenido">         
     <div class="contenido-nav2">
         <ul class="navbar-nav navbar-sidenav">
-            <li class="nav-item" id="btnpersonal" data-toggle="tooltip" data-placement="right" title="" data-original-title="Información personal">
+            <li class="nav-item" id="personal" data-toggle="tooltip" data-placement="right" title="" data-original-title="Información personal">
                 <a class="nav-link" >
                     <i  class="fa fa-address-book" style="font-size:36px;"></i>
                     <span class="nav-link-text">Información personal</span>
                 </a>
             </li>
-            <li class="nav-item" id="btnpersopor" data-toggle="tooltip" data-placement="right" title="" data-original-title="Perfil">
+            <li class="nav-item" id="perfil" data-toggle="tooltip" data-placement="right" title="" data-original-title="Perfil">
                 <a class="nav-link" >
                     <i  class="fa fa-address-book-o" style="font-size:36px;"></i>
                     <span class="nav-link-text">Perfil</span>
                 </a>
             </li>
-            <li class="nav-item" id="btnacademico" data-toggle="tooltip" data-placement="right" title="" data-original-title="Aspectos Acádemicos" style="margin-right: 5px !important;">
+            <li class="nav-item" id="academico" data-toggle="tooltip" data-placement="right" title="" data-original-title="Aspectos Acádemicos" style="margin-right: 5px !important;">
                 <a class="nav-link" >
                     <i  class="fa fa-mortar-board" style="font-size:36px;"></i>
                     <span class="nav-link-text">Aspectos Acádemicos</span>
                 </a>
             </li>
-            <li class="nav-item" id="btneducontinua" data-toggle="tooltip" data-placement="right" title="" data-original-title="Educación continúa">
+            <li class="nav-item" id="educacioncontinua" data-toggle="tooltip" data-placement="right" title="" data-original-title="Educación continúa">
                 <a class="nav-link" >          
                     <i  class="fa fa-address-card-o" style="font-size:36px;"></i> 
                     <span class="nav-link-text">Educación continúa </span>
                 </a>
             </li>
-            <li class="nav-item" id="btnexperiencia" data-toggle="tooltip" data-placement="right" title="" data-original-title="Experiencia laboral">
+            <li class="nav-item" id="experiencia" data-toggle="tooltip" data-placement="right" title="" data-original-title="Experiencia laboral">
                 <a class="nav-link" >
                     <i  class="fa fa-list" style="font-size:36px;"></i> 
                     <span class="nav-link-text">Experiencia laboral</span>
                 </a>
             </li>
-            <li class="nav-item" id="btninvestigacion" data-toggle="tooltip" data-placement="right" title="" data-original-title="Investigación e Innovación">
+            <li class="nav-item" id="investigacion" data-toggle="tooltip" data-placement="right" title="" data-original-title="Investigación e Innovación">
                 <a class="nav-link" style="margin-left: 8px;" >
                     <i  class="fa fa-lightbulb-o" style="font-size:36px;"></i></center>
                     <span class="nav-link-text">Investigación e Innovación</span>
                 </a>
             </li>
-            <li class="nav-item" id="btndist" data-toggle="tooltip" data-placement="right" title="" data-original-title="Distinciones">
+            <li class="nav-item" id="distinciones" data-toggle="tooltip" data-placement="right" title="" data-original-title="Distinciones">
                 <a class="nav-link" >
                     <i  class="fa fa-trophy" style="font-size:36px;"></i> 
                     <span class="nav-link-text">Distinciones</span>
@@ -56,7 +56,7 @@
             <div id="formpersonal">
                 <div class="row">   
                     <div class="col-md-1" style="margin-bottom: 20px;">
-                        <button  id="btnpersonal" class="btn btn-success">Informaci&oacute;n personal</button>
+                        <button class="btn btn-success">Informaci&oacute;n personal</button>
                     </div>
                 </div>                    
                 <!-- FILA 1 FORMULARIO-->
@@ -75,7 +75,7 @@
                         <div class="form-group">
                             <label for="numeroIdentificacion">N&deg; de identificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el número de identificación">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                <form:input class="form-control" path="numeroIdentificacion" maxlength="12" data-validation="required" data-validation-error-msg="Debe indicar el numero de identificación"/>
+                                <form:input class="form-control" path="numeroIdentificacion" maxlength="20" data-validation="required" data-validation-error-msg="Debe indicar el numero de identificación"/>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -83,7 +83,7 @@
                             <label for="fechaExpedicion">Fecha de expedici&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de expedición">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                             <div class='input-group date'>
-                                <form:input class="form-control fecha" path="fechaExpedicion" data-validation="required" data-validation-error-msg="Debe indicar la fecha de expedición"/>
+                                <form:input class="form-control fecha" path="fechaExpedicion" data-validation="required" data-validation-error-msg="Debe indicar la fecha de expedición" maxlength="10"/>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div>
@@ -181,7 +181,7 @@
                                         <div class="form-group">
                                             <label for="ciudadExtranjera">Ciudad</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe ingresar la ciudad">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
-                                            <input name="ciudadExtranjera" id="ciudadExtranjera" type="text" class="form-control">
+                                            <input name="ciudadExtranjera" id="ciudadExtranjera" type="text" class="form-control" maxlength="100">
                                         </div>
                                     </div>                  
                                 </div> 
@@ -200,14 +200,14 @@
                         <div class="form-group">
                             <label for="nombres">Nombres</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar su nombre completo ">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                <form:input class="form-control" path="nombres" data-validation="required" data-validation-error-msg="Debe indicar su nombre completo"/>
+                                <form:input class="form-control" path="nombres" data-validation="required" data-validation-error-msg="Debe indicar su nombre completo" maxlength="45"/>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="apellidos">Apellidos</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el apellido completo">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                <form:input class="form-control" path="apellidos" data-validation="required" data-validation-error-msg="Debe indicar el apellido completo"/>
+                                <form:input class="form-control" path="apellidos" data-validation="required" data-validation-error-msg="Debe indicar el apellido completo" maxlength="45"/>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -250,7 +250,7 @@
                             <label for="fechaNacimiento">Fecha de nacimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de nacimiento">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                             <div class='input-group date' data-validation="required" data-validation-error-msg="Debe indicar la fecha de nacimiento">
-                                <form:input class="form-control fecha" path="fechaNacimiento"/>
+                                <form:input class="form-control fecha" path="fechaNacimiento" maxlength="10"/>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div>
@@ -272,16 +272,16 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>N&deg; libreta militar</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el numero de libreta militar ">
+                            <label>N&deg; libreta militar</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el número de libreta militar ">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                <form:input type="text" class="form-control" path="libretaMilitar" />
+                                <form:input type="text" class="form-control" path="libretaMilitar" maxlength="15"/>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label>Distrito -- clase</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el numero de distrito y su clase de la libreta militar">
+                            <label>Distrito -- clase</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el número de distrito y su clase de la libreta militar">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                <form:input type="text" class="form-control" path="distritoClase" />
+                                <form:input type="text" class="form-control" path="distritoClase" maxlength="15"/>
                         </div>
                     </div>
                 </div>
@@ -346,7 +346,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group form-inline">
                                             <label >Tipo de direcci&oacute;n</label>
-                                            <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de direccion"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de dirección"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                             <div class="radio">
                                                 <label><input type="radio" name="radrural" id="radrural" value="rural" style="margin-left: 10px;margin-right: 5px;">Rural o extranjera</label>
                                             </div>
@@ -374,13 +374,13 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" name="numdir" id="numdir" class="form-control">
+                                                <input type="text" name="numdir" id="numdir" class="form-control" maxlength="5">
                                                 <p>Ejemplo: 65</p>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" name="letdir" id="letdir" class="form-control">
+                                                <input type="text" name="letdir" id="letdir" class="form-control" maxlength="4">
                                                 <p>Ejemplo: AA</p>
                                             </div>
                                         </div>
@@ -400,13 +400,13 @@
                                     <div class="row" >
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" name="num2dir" id="num2dir" class="form-control">
+                                                <input type="text" name="num2dir" id="num2dir" class="form-control" maxlength="5">
                                                 <p>Ejemplo: 45</p>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" name="let2dir" id="let2dir" class="form-control">
+                                                <input type="text" name="let2dir" id="let2dir" class="form-control" maxlength="5">
                                                 <p>Ejemplo: B</p>
                                             </div>
                                         </div>
@@ -424,7 +424,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" name="num3dir" id="num3dir" class="form-control">
+                                                <input type="text" name="num3dir" id="num3dir" class="form-control" maxlength="5">
                                                 <p>Ejemplo: 45</p>
                                             </div>
                                         </div>
@@ -433,8 +433,8 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="dirurb">(urb,bloque.etc)</label> 
-                                                <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe diligenciar el nombre de urbanizacion y el numero de bloque y apto"><i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <input type="text" class="form-control" name="dirurb" id="dirurb">
+                                                <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe diligenciar el nombre de urbanización y el número de bloque y apartamento"><i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                                <input type="text" class="form-control" name="dirurb" id="dirurb" maxlength="100">
                                                 <p>Ejemplo: Urbanizaci&oacute;n manzanares bloque 23 Apto 250</p>
                                             </div>
                                         </div>
@@ -452,7 +452,7 @@
                                             <div class="form-group">
                                                 <label for="cid_certificado">Direcci&oacute;n</label> 
                                                 <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe diligenciar el nombre de urbanizacion y el numero de bloque y apto"><i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <input type="text" class="form-control" name="dirrural" id="dirrural">
+                                                <input type="text" class="form-control" name="dirrural" id="dirrural" maxlength="300">
                                                 <p>Ejemplo: Vereda villa, 1412 Westside fl 33144</p>
                                             </div>
                                         </div>
@@ -564,14 +564,14 @@
                         <div class="form-group">
                             <label for="">¿Egresado de la Universidad de Antioquia?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger que usted es egresado de la universidad de Antioquia">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
-                            <div id="radioBtn" class="btn-group" style="margin-left: 40px;">
+                            <div id="radioBtn1" class="btn-group" style="margin-left: 40px;">
                                 <c:if test = "${hojaVida.isEgresadoUDEA()}">
-                                    <a class="btn btn-primary btn-sm active" data-toggle="egresadoUDEA" data-title="true">Si</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="egresadoUDEA" data-title="false">No</a>
+                                    <a class="btn btn-primary btn-sm active" data-toggle="egresadoUDEA" data-title="true" id="btnEgresadoUdeASi">Si</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="egresadoUDEA" data-title="false" id="btnEgresadoUdeANo">No</a>
                                 </c:if>
                                 <c:if test = "${!hojaVida.isEgresadoUDEA()}">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="egresadoUDEA" data-title="true">Si</a>
-                                    <a class="btn btn-primary btn-sm active" data-toggle="egresadoUDEA" data-title="false">No</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="egresadoUDEA" data-title="true" id="btnEgresadoUdeASi">Si</a>
+                                    <a class="btn btn-primary btn-sm active" data-toggle="egresadoUDEA" data-title="false" id="btnEgresadoUdeANo">No</a>
                                 </c:if>
                             </div>
                             <form:hidden path="egresadoUDEA" />
@@ -733,7 +733,7 @@
                                         <div class="form-group">
                                             <label for="correoElectronico">Nombre del correo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar su correo">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
-                                            <input name="correoElectronico" id="correoElectronico" type="text" class="form-control">
+                                            <input name="correoElectronico" id="correoElectronico" type="text" class="form-control" maxlength="200">
                                         </div>
                                     </div>                  
                                 </div> 
@@ -773,7 +773,7 @@
                                         <div class="form-group">
                                             <label for="numeroTelefono">N&uacute;mero</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar su número">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> <br> 
-                                            <input type="text" name="numeroTelefono" id="numeroTelefono" class="form-control">
+                                            <input type="text" name="numeroTelefono" id="numeroTelefono" class="form-control" maxlength="15">
                                         </div>
                                     </div>
                                 </div> 
@@ -812,7 +812,7 @@
                                         <div class="form-group">
                                             <label>N&uacute;mero de cuenta</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el n&uacute;mero de cuenta bancaria ">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                            <input type="text" name="numeroCuentaBancaria" id="numeroCuentaBancaria" class="form-control">
+                                            <input type="text" name="numeroCuentaBancaria" id="numeroCuentaBancaria" class="form-control" maxlength="50">
                                         </div>
                                     </div>
                                 </div>
@@ -821,7 +821,7 @@
                                         <div class="form-group">
                                             <label>Entidad</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la entidad de su cuenta bancaria">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                            <input type="text" name="entidadCuentaBancaria" id="entidadCuentaBancaria" class="form-control">
+                                            <input type="text" name="entidadCuentaBancaria" id="entidadCuentaBancaria" class="form-control" maxlength="200">
                                         </div>
                                     </div> 
                                 </div> 
@@ -837,7 +837,7 @@
             <div id="formperfilsopor" style="display: none;">
                 <div class="row">   
                     <div class="col-md-1" style="margin-bottom: 20px;">
-                        <button type="button" id="btnpersopor" class="btn btn-success">Perfil y soportes</button></li>
+                        <button type="button" class="btn btn-success">Perfil y soportes</button></li>
                     </div>
                 </div>
                 <div class="row">
@@ -929,7 +929,7 @@
             <div id="formacademico" style="display: none;"> 
                 <div class="row">   
                     <div class="col-md-1" style="margin-bottom: 20px;">
-                        <button type="button" id="btnacademico" class="btn btn-success">Aspectos acad&eacute;micos</button>
+                        <button type="button" class="btn btn-success">Aspectos acad&eacute;micos</button>
                     </div>
                 </div>
                 <div class="row">
@@ -1019,7 +1019,7 @@
                                         <div class="col-md-5">
                                             <label for="tituloEducacionBasica">T&iacute;tulo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del t&iacute;tulo">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <input type="text" name="tituloEducacionBasica" id="tituloEducacionBasica" class="form-control">
+                                                <input type="text" name="tituloEducacionBasica" id="tituloEducacionBasica" class="form-control" maxlength="150" >
                                         </div>
                                         <div class="col-md-2">
                                             <label for="graduadoEducacionBasica">Graduado?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar que si estan graduado?">
@@ -1032,14 +1032,14 @@
                                         </div>
                                         <div class="col-md-2" style="width: 180px;">
                                             <div class="form-group">
-                                                <label for="anyoInicioEducacionBasica">A&ntilde;o de inicio </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de inicio">
+                                                <label for="anyoInicioEducacionBasica">A&ntilde;o de inicio </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el año de inicio">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                                 <select name="anyoInicioEducacionBasica" id="anyoInicioEducacionBasica" class="form-control"></select>
                                             </div>
                                         </div>
                                         <div class="col-md-2" style="width: 180px;">
                                             <div class="form-group">
-                                                <label for="anyoFinalizacionEducacionBasica">A&ntilde;o de finalizaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de finalización">
+                                                <label for="anyoFinalizacionEducacionBasica">A&ntilde;o de finalizaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar año de finalización">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                                 <select name="anyoFinalizacionEducacionBasica" id="anyoFinalizacionEducacionBasica" class="form-control"></select>
                                             </div>
@@ -1225,19 +1225,19 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
-                                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                                <input type="text" class="form-control" name="nombreNucleoBasicoConocimientoPrograma" id="nombreNucleoBasicoConocimientoPrograma" readonly>
-                                                                <input type="hidden" name="nucleoBasicoConocimientoPrograma" id="nucleoBasicoConocimientoPrograma">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
                                                                 <label for="tituloPrograma">T&iacute;tulo obtenido</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de título obtenido">
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
                                                                 <input type="text" class="form-control" name="tituloPrograma" id="tituloPrograma" readonly>
                                                             </div>
                                                         </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
+                                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                                <input type="text" class="form-control" name="nombreNucleoBasicoConocimientoPrograma" id="nombreNucleoBasicoConocimientoPrograma" readonly>
+                                                                <input type="hidden" name="nucleoBasicoConocimientoPrograma" id="nucleoBasicoConocimientoPrograma">
+                                                            </div>
+                                                        </div>                                                       
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -1261,18 +1261,16 @@
                                                             <div class="form-group">
                                                                 <label for="institucionEducativaProgramaExtranjero">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institución que estudio">
                                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                                <input type="text" name="institucionEducativaProgramaExtranjero" id="institucionEducativaProgramaExtranjero" class="form-control">
+                                                                <input type="text" name="institucionEducativaProgramaExtranjero" id="institucionEducativaProgramaExtranjero" class="form-control" maxlength="150" >
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcloe básico de conocimiento">
+                                                            <div class="form-group form-inline">
+                                                                <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                                <select style="width: 100%;" name="nucleoBasicoConocimientoProgramaExtranjero" id="nucleoBasicoConocimientoProgramaExtranjero" class="js-select-basic-single js-states form-control">
-                                                                    <option></option>
-                                                                    <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
-                                                                        <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
-                                                                    </c:forEach>                                                                   
+                                                                    <input type="text" name="nombreNucleoBasicoConocimientoProgramaExtranjero" id="nombreNucleoBasicoConocimientoProgramaExtranjero" class="form-control" style="width: 85%;" readonly>
+                                                                    <input type="hidden" name="nucleoBasicoConocimientoProgramaExtranjero" id="nucleoBasicoConocimientoProgramaExtranjero" />
+                                                                    <button type="button" class="btn btn-success btn-sm" onclick="mostrarNucleoBasicoConocimiento('nucleoBasicoConocimientoProgramaExtranjero','nombreNucleoBasicoConocimientoProgramaExtranjero')"  style="margin-left: 10px;"><span class="glyphicon glyphicon-search"></span></button>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -1282,14 +1280,14 @@
                                                             <div class="form-group">
                                                                 <label for="programaCursadoExtranjero">Programa cursado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa cursado">
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                                <input type="text" name="programaCursadoExtranjero" id="programaCursadoExtranjero" class="form-control">
+                                                                <input type="text" name="programaCursadoExtranjero" id="programaCursadoExtranjero" class="form-control" maxlength="250" >
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="tituloProgramaExtranjero">T&iacute;tulo obtenido</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de título obtenido">
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                                <input type="text" class="form-control" name="tituloProgramaExtranjero" id="tituloProgramaExtranjero" >
+                                                                <input type="text" class="form-control" name="tituloProgramaExtranjero" id="tituloProgramaExtranjero" maxlength="250" >
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1348,14 +1346,14 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="anyoInicioEducacionSuperior">A&ntilde;o de inicio </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de inicio">
+                                                <label for="anyoInicioEducacionSuperior">A&ntilde;o de inicio </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el años de inicio">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                                 <select name="anyoInicioEducacionSuperior" id="anyoInicioEducacionSuperior" class="form-control"></select>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="anyoFinalizacionEducacionSuperior">A&ntilde;o de finalizaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de finalización">
+                                                <label for="anyoFinalizacionEducacionSuperior">A&ntilde;o de finalizaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el años de finalización">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                                 <select name="anyoFinalizacionEducacionSuperior" id="anyoFinalizacionEducacionSuperior" class="form-control"></select>
                                             </div>
@@ -1538,14 +1536,14 @@
                                                 <label for="">Cual?</label>
                                                 <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el otro tipo de certificación">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                                <input type="text" name="otraCertificacionIdioma" id="otraCertificacionIdioma" class="form-control">
+                                                <input type="text" name="otraCertificacionIdioma" id="otraCertificacionIdioma" class="form-control" maxlength="100" >
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="">Puntaje</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el puntaje de estudio idioma">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                                <input type="text" name="puntajeCertificacionIdioma" id="puntajeCertificacionIdioma" class="form-control">
+                                                <input type="text" name="puntajeCertificacionIdioma" id="puntajeCertificacionIdioma" class="form-control" maxlength="5">
                                             </div>
                                         </div>
                                     </div>
@@ -1573,7 +1571,7 @@
                     <div class="col-md-12">
                         <div class="row">   
                             <div class="col-md-1" style="margin-bottom: 20px;">
-                                <button id="btneducontinua" class="btn btn-success">Educaci&oacute;n no formal</button>
+                                <button class="btn btn-success">Educaci&oacute;n no formal</button>
                             </div>
                         </div>
                         <label>Estudios educaci&oacute;n continua</label>
@@ -1638,7 +1636,7 @@
                             <div class="modal-body">
                                 <div id="alert_educacion_continua"></div>
                                 <div class="row">
-                                    <div class="col-md-2" style="width: 190px;">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="tipoCapacitacionEducacionContinua">Tipo de capacitaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cuál es el tipo de capacitaci&oacute;n">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
@@ -1650,7 +1648,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6" style="width: 430px;">
+                                    <div class="col-md-8">
                                         <div class="form-group">
                                             <label for="institucionEducacionContinua">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institución que estudio">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
@@ -1662,18 +1660,18 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4" style="width: 260px;">
-                                        <div class="form-group">
+				</div>
+				<div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group form-inline">
                                             <label for="nucleoBasicoConocimientoEducacionContinua">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el area del estudio">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <select style="width: 100%;" name="nucleoBasicoConocimientoEducacionContinua" id="nucleoBasicoConocimientoEducacionContinua" class="js-select-basic-single js-states form-control">
-                                                <option value=""></option>
-                                                <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
-                                                <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
-                                                </c:forEach>                                                 
-                                            </select></div>
-                                    </div>                                    
-                                </div>
+                                            <input type="text" name="nombreNucleoBasicoConocimientoEducacionContinua" id="nombreNucleoBasicoConocimientoEducacionContinua" class="form-control" style="width: 90%;" readonly>
+                                            <input type="hidden" name="nucleoBasicoConocimientoEducacionContinua" id="nucleoBasicoConocimientoEducacionContinua" />
+                                            <button type="button" class="btn btn-success btn-sm" onclick="mostrarNucleoBasicoConocimiento('nucleoBasicoConocimientoEducacionContinua','nombreNucleoBasicoConocimientoEducacionContinua')"  style="margin-left: 10px;"><span class="glyphicon glyphicon-search"></span></button>
+                                        </div> 
+                                    </div>
+                                </div> 
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="form-group">
@@ -1686,7 +1684,7 @@
                                         <div class="form-group">
                                             <label for="numeroHorasEducacionContinua">N&deg; de horas  </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el número de horas de la capacitaci&oacute;n">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input type='text' class="form-control input-sm" name="numeroHorasEducacionContinua" id="numeroHorasEducacionContinua" >                                     
+                                            <input type='text' class="form-control input-sm" name="numeroHorasEducacionContinua" id="numeroHorasEducacionContinua" maxlength="5" >                                     
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -1712,8 +1710,8 @@
                                 </div>
                             </div>              
                         </div>
-                    </div>
-                </div><!--fin modal aspectos academicos modal estudios educacion continua -->
+                    </div><!--fin modal aspectos academicos modal estudios educacion continua -->
+                </div>
             </div>
             <div id="formexperiencia" style="display: none;">
                 <div class="row">   
@@ -1823,7 +1821,7 @@
                                         <div class="form-group">
                                             <label for="fechaIngresoExperienciaLaboral">Fecha Ingreso/Inicio</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de ingreso">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                            <input type='text' class="form-control fecha input-sm" style="display: inline;width: 75%;margin-right: -5px;" name="fechaIngresoExperienciaLaboral" id="fechaIngresoExperienciaLaboral" />
+                                            <input type='text' class="form-control fecha input-sm" style="display: inline;width: 75%;margin-right: -5px;" name="fechaIngresoExperienciaLaboral" id="fechaIngresoExperienciaLaboral" maxlength="10" />
                                             <span class="input-group-addon" style="display: inline;"><span class="glyphicon glyphicon-calendar"></span>
                                             </span>
                                         </div>
@@ -1832,21 +1830,18 @@
                                         <div class="form-group">
                                             <label for="fechaRetiroExperienciaLaboral">Fecha Retiro/Fin</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de retiro">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input type='text' class="form-control fecha input-sm" style="display: inline;width: 75%;margin-right: -5px;" name="fechaRetiroExperienciaLaboral" id="fechaRetiroExperienciaLaboral" />
+                                            <input type='text' class="form-control fecha input-sm" style="display: inline;width: 75%;margin-right: -5px;" name="fechaRetiroExperienciaLaboral" id="fechaRetiroExperienciaLaboral" maxlength="10" />
                                             <span class="input-group-addon" style="display: inline;"><span class="glyphicon glyphicon-calendar"></span>
                                             </span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group">
+                                        <div class="form-group form-inline">
                                             <label for="nucleoBasicoConocimientoExperienciaLaboral">Núcleo básico del conocimiento de desempeño</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el N&uacute;cleo b&aacute;sico del conocimiento">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <select style="width: 100%;" name="nucleoBasicoConocimientoExperienciaLaboral" id="nucleoBasicoConocimientoExperienciaLaboral" class="js-select-basic-single js-states form-control">
-                                                <option></option>
-                                                <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
-                                                <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
-                                                </c:forEach>  
-                                            </select>
+                                            <input type="text" name="nombreNucleoBasicoConocimientoExperienciaLaboral" id="nombreNucleoBasicoConocimientoExperienciaLaboral" class="form-control" style="width: 80%;" readonly>
+                                            <input type="hidden" name="nucleoBasicoConocimientoExperienciaLaboral" id="nucleoBasicoConocimientoExperienciaLaboral" />
+                                            <button type="button" class="btn btn-success btn-sm" onclick="mostrarNucleoBasicoConocimiento('nucleoBasicoConocimientoExperienciaLaboral','nombreNucleoBasicoConocimientoExperienciaLaboral')"  style="margin-left: 10px;"><span class="glyphicon glyphicon-search"></span></button>
                                         </div>
                                     </div>
                                 </div>
@@ -1867,7 +1862,7 @@
                                         <div class="form-group">
                                             <label for="nombreEmpresaExperienciaLaboral">Empresa/Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de empresa">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input type="text" class="form-control" name="nombreEmpresaExperienciaLaboral" id="nombreEmpresaExperienciaLaboral">
+                                            <input type="text" class="form-control" name="nombreEmpresaExperienciaLaboral" id="nombreEmpresaExperienciaLaboral" maxlength="250" >
                                         </div>
                                     </div>
                                     <div class="col-md-5">
@@ -1900,7 +1895,7 @@
                                         <div class="form-group">
                                             <label for="cargoExperienciaLaboral">Cargo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar cual es su cargo">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                            <input type="text" class="form-control" name="cargoExperienciaLaboral" id="cargoExperienciaLaboral">
+                                            <input type="text" class="form-control" name="cargoExperienciaLaboral" id="cargoExperienciaLaboral" maxlength="250">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -2085,19 +2080,16 @@
                                         <div class="form-group">
                                         <label>Nombre del curso</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el nombre del curso que han enseñado">
                                         <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                        <input type="text" name="nombreCursoExperienciaDocencia" id="nombreCursoExperienciaDocencia" class="form-control">
+                                        <input type="text" name="nombreCursoExperienciaDocencia" id="nombreCursoExperienciaDocencia" class="form-control" maxlength="250" >
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="form-group">
+                                        <div class="form-group form-inline">
                                             <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcloe básico del conocimiento">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <select style="width: 100%;" name="nucleoBasicoConocimientoCursoExperienciaDocencia" id="nucleoBasicoConocimientoCursoExperienciaDocencia" class="js-select-basic-single js-states form-control">
-                                                <option></option>
-                                                <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
-                                                <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
-                                                </c:forEach>
-                                            </select>
+                                            <input type="text" name="nombreNucleoBasicoConocimientoExperienciaDocencia" id="nombreNucleoBasicoConocimientoExperienciaDocencia" class="form-control" style="width: 80%;" readonly>
+                                            <input type="hidden" name="nucleoBasicoConocimientoExperienciaDocencia" id="nucleoBasicoConocimientoExperienciaDocencia" />
+                                            <button type="button" class="btn btn-success btn-sm" onclick="mostrarNucleoBasicoConocimiento('nucleoBasicoConocimientoExperienciaDocencia','nombreNucleoBasicoConocimientoExperienciaDocencia')"  style="margin-left: 10px;"><span class="glyphicon glyphicon-search"></span></button>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -2128,7 +2120,7 @@
                                         <div class="form-group">
                                             <label>N&uacute;mero de horas</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el numero de horas del curso">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input type="text" name="numeroHorasCursoExperienciaDocencia" id="numeroHorasCursoExperienciaDocencia" class="form-control">
+                                            <input type="text" name="numeroHorasCursoExperienciaDocencia" id="numeroHorasCursoExperienciaDocencia" class="form-control" maxlength="5" >
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -2184,7 +2176,7 @@
                         <div class="form-group">    
                             <label>Curr&iacute;culum vitae de latinoamerica y el caribe (CVLAC)</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el Curr&iacute;culum vitae de latinoamerica y el caribe (CVLAC) ">
                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <form:input path="urlCVLAC" class="form-control" />
+                            <form:input path="urlCVLAC" class="form-control" maxlength="500"/>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -2210,14 +2202,14 @@
                         <div class="form-group">
                             <label>Identificador Scopus</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe ingresar el código de Identificación de autor Scopus">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <form:input path="identificadorScopus" class="form-control" />
+                            <form:input path="identificadorScopus" class="form-control" maxlength="10"/>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Researcher Id</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe ingresar el numero de id Researcher">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <form:input path="researcherId" class="form-control" />
+                            <form:input path="researcherId" class="form-control" maxlength="12"/>
                         </div>
                     </div>
                 </div>
@@ -2283,12 +2275,12 @@
                                             <div class="form-group">
                                                 <label>Nombre</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el nombre del artículo que han hecho">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <input type="text" name="nombreArticulo" id="nombreArticulo" class="form-control">
+                                                <input type="text" name="nombreArticulo" id="nombreArticulo" class="form-control" maxlength="250">
                                             </div> 
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-2">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Tipo de autor</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo de autor">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
@@ -2300,38 +2292,37 @@
                                                 </select>
                                                 </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-8">
                                             <div class="form-group">
                                                 <label>Nombre de la revista</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el nombre del articulo que han hecho">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <input type="text" name="nombreRevistaArticulo" id="nombreRevistaArticulo" class="form-control">
+                                                <input type="text" name="nombreRevistaArticulo" id="nombreRevistaArticulo" class="form-control" maxlength="250">
                                             </div> 
                                         </div>
-                                        <div class="col-md-2">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>A&ntilde;o</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el a&ntilde;o del articulo">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                                 <select name="anyoArticulo" id="anyoArticulo" class="form-control"></select>
                                             </div> 
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
+                                        <div class="col-md-8">
+                                            <div class="form-group form-inline">
                                                 <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de título obtenido">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                <select style="width: 100%;" name="nucleoBasicoConocimientoArticulo" id="nucleoBasicoConocimientoArticulo" class="js-select-basic-single js-states form-control">
-                                                    <option></option>
-                                                    <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
-                                                    <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
-                                                    </c:forEach>
-                                                </select>
+                                                <input type="text" name="nombreNucleoBasicoConocimientoArticulo" id="nombreNucleoBasicoConocimientoArticulo" class="form-control" style="width: 80%;" readonly>
+                                                <input type="hidden" name="nucleoBasicoConocimientoArticulo" id="nucleoBasicoConocimientoArticulo" />
+                                                <button type="button" class="btn btn-success btn-sm" onclick="mostrarNucleoBasicoConocimiento('nucleoBasicoConocimientoArticulo','nombreNucleoBasicoConocimientoArticulo')"  style="margin-left: 10px;"><span class="glyphicon glyphicon-search"></span></button>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-12">
                                             <label>Dirección electrónica (URL)</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el URL del articulo ">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input type="text" name="urlArticulo" id="urlArticulo" class="form-control">
+                                            <input type="text" name="urlArticulo" id="urlArticulo" class="form-control" maxlength="500">
                                         </div>
                                     </div>
                                 </div>
@@ -2406,7 +2397,7 @@
                                             <div class="form-group">
                                                 <label>Fecha</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de la patente">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <input type="text" name="fechaPatente" id="fechaPatente" class="form-control fecha">
+                                                <input type="text" name="fechaPatente" id="fechaPatente" class="form-control fecha" maxlength="10">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -2450,7 +2441,7 @@
                                             <div class="form-group">
                                                 <label>Descripci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la descripción de la patente">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                                <textarea class="form-control" name="descripcionPatente" id="descripcionPatente"></textarea>
+                                                <textarea class="form-control" name="descripcionPatente" id="descripcionPatente" maxlength="500"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -2527,7 +2518,7 @@
                              <div class="modal-body">
                                  <div id="alert_producto_conocimiento"></div>
                                  <div class="row">
-                                     <div class="col-md-2" style="width:160px;">
+                                     <div class="col-md-4">
                                          <div class="form-group">
                                              <label>Tipo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el tipo del producto del conocimiento">
                                              <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
@@ -2539,19 +2530,18 @@
                                              </select>
                                          </div>
                                      </div>
-                                     <div class="col-md-4" style="width:270px !important;">
-                                         <div class="form-group">
+                                     <div class="col-md-8">
+                                         <div class="form-group form-inline">
                                              <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de títutlo obtenido">
                                              <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                             <select style="width: 100%;" name="nucleoBasicoProductoConocimiento" id="nucleoBasicoProductoConocimiento" class="js-select-basic-single js-states form-control">
-                                                 <option></option>
-                                                 <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
-                                                 <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
-                                                 </c:forEach>
-                                             </select>
+                                            <input type="text" name="nombreNucleoBasicoProductoConocimiento" id="nombreNucleoBasicoProductoConocimiento" class="form-control" style="width: 80%;" readonly>
+                                            <input type="hidden" name="nucleoBasicoProductoConocimiento" id="nucleoBasicoProductoConocimiento" />
+                                            <button type="button" class="btn btn-success btn-sm" onclick="mostrarNucleoBasicoConocimiento('nucleoBasicoProductoConocimiento','nombreNucleoBasicoProductoConocimiento')"  style="margin-left: 10px;"><span class="glyphicon glyphicon-search"></span></button>
                                          </div>
                                      </div>
-                                     <div class="col-md-6">
+                                </div>
+                                <div class="row">
+                                     <div class="col-md-12">
                                          <div class="form-group">
                                              <label>Direcci&oacute;n electr&oacute;nica URL</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la cita">
                                              <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
@@ -2564,7 +2554,7 @@
                                          <div class="form-group">
                                              <label>Descripci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la descripción del producto del conocimiento">
                                              <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                             <textarea class="form-control" name="descripcionProductoConocimiento" id="descripcionProductoConocimiento"></textarea>
+                                             <textarea class="form-control" name="descripcionProductoConocimiento" id="descripcionProductoConocimiento" maxlength="500"></textarea>
                                          </div>
                                      </div>
                                  </div>
@@ -2589,7 +2579,7 @@
             <div id="formdistin" style="display: none;">
                 <div class="row">   
                     <div class="col-md-1" style="margin-bottom: 20px;">
-                        <button id="btndist" class="btn btn-success">Distinciones</button>
+                        <button class="btn btn-success">Distinciones</button>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -2653,7 +2643,7 @@
                                         <div class="form-group">
                                             <label>Fecha</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de distinci&oacute;n">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input type='text' class="form-control fecha input-sm" style="display: inline;width: 80%;margin-right: -5px;" name="fechaDistincion" id="fechaDistincion" />
+                                            <input type='text' class="form-control fecha input-sm" style="display: inline;width: 80%;margin-right: -5px;" name="fechaDistincion" id="fechaDistincion" maxlength="10" />
                                             <span class="input-group-addon" style="display: inline;"><span class="glyphicon glyphicon-calendar"></span>
                                             </span>
                                         </div>
@@ -2662,7 +2652,7 @@
                                         <div class="form-group">
                                             <label for="institucionOtorgaDistincion">Instituci&oacute;n otorga</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe ingresar el nombre de instituci&oacute;n">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input  name="institucionOtorgaDistincion" id="institucionOtorgaDistincion" class="form-control">
+                                            <input  name="institucionOtorgaDistincion" id="institucionOtorgaDistincion" class="form-control" maxlength="250">
                                         </div>
                                     </div>
                                 </div>
@@ -2671,7 +2661,7 @@
                                         <div class="form-group">
                                             <label for="descripcionDistincion">Descripci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe ingresar la descripción">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                            <textarea class="form-control" id="descripcionDistincion" name="descripcionDistincion" ></textarea>
+                                            <textarea class="form-control" id="descripcionDistincion" name="descripcionDistincion" maxlength="250"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -2695,9 +2685,40 @@
                 </div>
                 <!--fin de modal distincion-->
             </div>
+            <div class="modal fade" id="md_nucleo_basico_conocimiento" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header mhsuccess">
+                            <button class="close" data-dismiss="modal">&times;</button>
+                            <h4><i class="fa fa-book" aria-hidden="true"></i>
+                            Seleccione un núcleo</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Seleccione un N&uacute;cleo b&aacute;sico del conocimiento</label>
+                                        <select size="10" class="form-control" id="nucleoBasicoConocimiento" name="nucleoBasicoConocimiento">
+                                            <c:forEach var="nucleoBasicoConocimiento" items="${nucleosBasicosConocimiento}">
+                                            <option value="${nucleoBasicoConocimiento.getId()}">${nucleoBasicoConocimiento.getNombre()}</option>
+                                            </c:forEach>                                                 
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" onclick="seleccionarNucleoBasicoConocimiento();">Agregar</button>
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <button class="btn btn-success" style="float: right; margin-bottom:20px;" type="submit">Guardar</button>
             <input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <form:hidden path="idPersona" />
+            <input type="hidden" id="tab" name="tab" />
             <input type="hidden" id="consecutivo" name="consecutivo" />
         </form:form>
         <div id="md_guardar" class="modal fade" role="dialog" disabled>
@@ -2721,35 +2742,28 @@
                </div>
            </div>
        </div>            
-        <div class="modal fade" id="confirmacionAlmacenamientoHojaVida" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header mhsuccess">
-                        <button type="button" class="close" data-dismiss="modal" onclick="window.location.href = '${pageContext.request.contextPath}/hojasVida/editar'">&times;</button>
-                        <h4 class="modal-title">
-                            Actualización Hoja de Vida
-                        </h4>   
-                    </div>
-                    <div class="modal-body">
-                        La hoja vida se ha actualizado exitosamente
-                    </div>
-                    <div class="modal-footer">
-                       <button type="button" class="btn btn-success" onclick="window.location.href = '${pageContext.request.contextPath}/hojasVida/editar'">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <script type="text/javascript">
-    var ID_UNIVERSIDAD_ANTIOQUIA = 209;
+    var ID_UNIVERSIDAD_ANTIOQUIA_MEDELLIN = 1201;
+    var ID_UNIVERSIDAD_ANTIOQUIA_EL_CARMEN_DE_VIBORAL = 1219;
+    var ID_UNIVERSIDAD_ANTIOQUIA_ANDES = 1220;
+    var ID_UNIVERSIDAD_ANTIOQUIA_CAUCASIA = 1221;
+    var ID_UNIVERSIDAD_ANTIOQUIA_PUERTO_BERRIO = 1222;
+    var ID_UNIVERSIDAD_ANTIOQUIA_TURBO = 1223;
+    var ID_UNIVERSIDAD_ANTIOQUIA_SANTAFE_DE_ANTIOQUIA = 9125;
+
     var UNIVERSIDAD_ANTIOQUIA = 'Universidad de Antioquia';
     var TIPO_CERTIFICACION_OTRO = 8;
     var MAXIMO_TAMANYO_ARCHIVO = 2097152;
     var ID_COLOMBIA = 343;
+    var ACTVIDAD_ECONOMICA_EDUCACION_SUPERIOR = "8030";
+    var TIPO_EMPRESA_PUBLICA = "1";
     var programas = [];
     var nombreCampoCiudad;
     var campoCiudad;
+    var campoNucleoBasicoConocimiento;
+    var campoNombreNucleoBasicoConocimiento;
     
     $('.fecha').datepicker({
         dateFormat: "dd/mm/yy",
@@ -2761,8 +2775,17 @@
         errorMessagePosition: 'top', // Instead of 'inline' which is default
         scrollToTopOnError: false // Set this property to true on longer forms
     });
+    
+    function recargarPagina() {
+        if($('#tab').val() != "") {
+            window.location.href = "${pageContext.request.contextPath}/hojasVida/editar/" + $('#tab').val();
+        } else {
+            window.location.href = "${pageContext.request.contextPath}/hojasVida/editar";
+        }
+    }
+    
     $(document).ready(function () {
-        $('#btnpersonal').click(function () {
+        $('#personal').click(function () {
             $('#formpersonal').css("display", "block");
             $('#formperfilsopor').css("display", "none");
             $('#formacademico').css("display", "none");
@@ -2770,9 +2793,10 @@
             $('#formexperiencia').css("display", "none");
             $('#forminves').css("display", "none");
             $('#formdistin').css("display", "none");
+            $('#tab').val("personal");
         });
         
-        $('#btnpersopor').click(function () {
+        $('#perfil').click(function () {
             $('#formperfilsopor').css("display", "block");
             $('#formpersonal').css("display", "none");
             $('#formacademico').css("display", "none");
@@ -2780,9 +2804,10 @@
             $('#formexperiencia').css("display", "none");
             $('#forminves').css("display", "none");
             $('#formdistin').css("display", "none");
+            $('#tab').val("perfil");
         });
         
-        $('#btnacademico').click(function () {
+        $('#academico').click(function () {
             $('#formpersonal').css("display", "none");
             $('#formperfilsopor').css("display", "none");
             $('#formacademico').css("display", "block");
@@ -2790,9 +2815,10 @@
             $('#formexperiencia').css("display", "none");
             $('#forminves').css("display", "none");
             $('#formdistin').css("display", "none");
+            $('#tab').val("academico");
         });
         
-        $('#btneducontinua').click(function () {
+        $('#educacioncontinua').click(function () {
             $('#formeducontinua').css("display", "block");
             $('#formpersonal').css("display", "none");
             $('#formperfilsopor').css("display", "none");
@@ -2800,9 +2826,10 @@
             $('#formexperiencia').css("display", "none");
             $('#forminves').css("display", "none");
             $('#formdistin').css("display", "none");
+            $('#tab').val("educacioncontinua");
         });
         
-        $('#btnexperiencia').click(function () {
+        $('#experiencia').click(function () {
             $('#formpersonal').css("display", "none");
             $('#formperfilsopor').css("display", "none");
             $('#formacademico').css("display", "none");
@@ -2810,9 +2837,10 @@
             $('#formexperiencia').css("display", "block");
             $('#forminves').css("display", "none");
             $('#formdistin').css("display", "none");
+            $('#tab').val("experiencia");
         });
         
-        $('#btninvestigacion').click(function () {
+        $('#investigacion').click(function () {
             $('#forminves').css("display", "block");
             $('#formpersonal').css("display", "none");
             $('#formperfilsopor').css("display", "none");
@@ -2820,9 +2848,10 @@
             $('#formeducontinua').css("display", "none");
             $('#formexperiencia').css("display", "none");
             $('#formdistin').css("display", "none");
+            $('#tab').val("investigacion");
         });
         
-        $('#btndist').click(function () {
+        $('#distinciones').click(function () {
             $('#formdistin').css("display", "block");
             $('#formpersonal').css("display", "none");
             $('#formperfilsopor').css("display", "none");
@@ -2830,6 +2859,7 @@
             $('#formeducontinua').css("display", "none");
             $('#forminves').css("display", "none");
             $('#formexperiencia').css("display", "none");
+            $('#tab').val("distinciones");
         });
         
         $('#btnrutsi').click(function () {
@@ -2891,20 +2921,23 @@
         
         $('#btnGraduadoSiEducacionSuperior').click(function () {
           $('#anyoFinalizacionEducacionSuperior').prop('disabled', false);
+          $('#fechaTituloEducacionSuperior').prop('disabled', false);
         });
         
         $('#btnGraduadoNoEducacionSuperior').click(function () {
           $('#anyoFinalizacionEducacionSuperior').prop('disabled', 'disabled');
           $('#anyoFinalizacionEducacionSuperior').val("");
+          $('#fechaTituloEducacionSuperior').prop('disabled', 'disabled');
+          $('#fechaTituloEducacionSuperior').val("");
         });
         
         $('#addprograma').click(function(){
           var institucion = $('#institucionEducativaPrograma').val();
-          var nombreInstitucion = $('#institucionEducativaPrograma option:selected').text().toUpperCase();
+          var nombreInstitucion = $('#institucionEducativaPrograma option:selected').text();
           var programaCursado = $('#programaCursado').val();
-          var nombreProgramaCursado = $('#programaCursado option:selected').text().toUpperCase();
+          var nombreProgramaCursado = $('#programaCursado option:selected').text();
           var nucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoPrograma').val();
-          var nombreNucleoBasicoConocimientoPrograma = $('#nombreNucleoBasicoConocimientoPrograma').val().toUpperCase();
+          var nombreNucleoBasicoConocimientoPrograma = $('#nombreNucleoBasicoConocimientoPrograma').val();
           var tituloPrograma = $('#tituloPrograma').val();
 
           $('#formprograma').show();
@@ -2930,7 +2963,7 @@
           var institucion = $('#institucionEducativaProgramaExtranjero').val();
           var programaCursado = $('#programaCursadoExtranjero').val();
           var nucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoProgramaExtranjero').val();
-          var nombreNucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoProgramaExtranjero option:selected').text().toUpperCase();
+          var nombreNucleoBasicoConocimientoPrograma = $('#nombreNucleoBasicoConocimientoProgramaExtranjero').val();
           var tituloPrograma = $('#tituloProgramaExtranjero').val();
 
         if (institucion === "") {
@@ -2953,7 +2986,7 @@
             return false;
         }
 
-        var formData = new FormData(this);
+        var formData = new FormData();
         formData.append("nombre", programaCursado);
         formData.append("institucion", institucion);
         formData.append("nucleoBasicoConocimiento", nucleoBasicoConocimientoPrograma);
@@ -3000,7 +3033,7 @@
             return false;
           }
         
-        var formData = new FormData(this);
+        var formData = new FormData();
         formData.append("pais", pais);
         formData.append("departamento", departamento);
         formData.append("nombre", nombreCiudad);
@@ -3039,7 +3072,7 @@
         });
         
         $('#btnExperienciaDocenciaFNSPSi').click(function () {
-            $('#institucionExperienciaDocencia').val(ID_UNIVERSIDAD_ANTIOQUIA).trigger('change.select2');
+            $('#institucionExperienciaDocencia').val(ID_UNIVERSIDAD_ANTIOQUIA_MEDELLIN).trigger('change.select2');
             $('#institucionExperienciaDocencia').prop('disabled', 'disabled');
         });
         $('#btnExperienciaDocenciaFNSPNo').click(function () {
@@ -3055,10 +3088,18 @@
         $('#btnExperienciaLaboralFNSPSi').click(function () {
             $('#nombreEmpresaExperienciaLaboral').val(UNIVERSIDAD_ANTIOQUIA);
             $('#nombreEmpresaExperienciaLaboral').prop('disabled', 'disabled');
+            $('#tipoEmpresaExperienciaLaboral').val(TIPO_EMPRESA_PUBLICA).trigger('change.select2');
+            $('#tipoEmpresaExperienciaLaboral').prop('disabled', 'disabled');
+            $('#actividadEconomicaExperienciaLaboral').val(ACTVIDAD_ECONOMICA_EDUCACION_SUPERIOR).trigger('change.select2');
+            $('#actividadEconomicaExperienciaLaboral').prop('disabled', 'disabled');
         });
         $('#btnExperienciaLaboralFNSPNo').click(function () {
             $('#nombreEmpresaExperienciaLaboral').val("");
             $('#nombreEmpresaExperienciaLaboral').prop('disabled', false);
+            $('#tipoEmpresaExperienciaLaboral').val("").trigger('change.select2');
+            $('#tipoEmpresaExperienciaLaboral').prop('disabled', false);
+            $('#actividadEconomicaExperienciaLaboral').val("").trigger('change.select2');
+            $('#actividadEconomicaExperienciaLaboral').prop('disabled', false);
         });
         $('#radrural').change(function () {
             var valor = $(this).val();
@@ -3078,6 +3119,42 @@
                 $('#radrural').prop('checked', false);
             }
         });
+        $('#fechaNacimiento').change(function () {
+             if(!moment(this.value, 'DD/MM/YYYY',true).isValid()) {
+               this.value = '';  
+             }
+        });
+        $('#fechaExpedicion').change(function () {
+             if(!moment(this.value, 'DD/MM/YYYY',true).isValid()) {
+               this.value = '';  
+             }
+        });
+        $('#fechaTituloEducacionSuperior').change(function () {
+             if(!moment(this.value, 'DD/MM/YYYY',true).isValid()) {
+               this.value = '';  
+             }
+        });
+        $('#fechaIngresoExperienciaLaboral').change(function () {
+             if(!moment(this.value, 'DD/MM/YYYY',true).isValid()) {
+               this.value = '';  
+             }
+        });
+        $('#fechaRetiroExperienciaLaboral').change(function () {
+             if(!moment(this.value, 'DD/MM/YYYY',true).isValid()) {
+               this.value = '';  
+             }
+        });
+        $('#fechaPatente').change(function () {
+             if(!moment(this.value, 'DD/MM/YYYY',true).isValid()) {
+               this.value = '';  
+             }
+        });
+        $('#fechaDistincion').change(function () {
+             if(!moment(this.value, 'DD/MM/YYYY',true).isValid()) {
+               this.value = '';  
+             }
+        });
+       
         $('#numeroCuentaBancaria').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
@@ -3107,6 +3184,12 @@
         });
         $('#num3dir').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
+        });
+        $('#puntajeCertificacionIdioma').change(function () {
+            var decimalOnly = /^\s*[0-9]\d*(\.\d+)?\s*$/;
+            if(!decimalOnly.test(this.value)) {
+                this.value = '';
+            }
         });
         
         $('#dircalle').change(function () {
@@ -3191,6 +3274,10 @@
         if ($('#investigadorReconocidoColciencias').val() === "false") {
            $('#tipoInvestigador').prop('disabled', true);
         }
+        
+        <c:if test = "${tab != null}">
+        $('#${tab}').click();
+        </c:if>
     });
 
     function actualizarDireccion() {
@@ -3229,6 +3316,22 @@
            $('#' + nombreCampoCiudad).val(pais + " - " + ciu); 
         }
         $('#ubicacionModal').modal('hide');
+    }
+
+    function mostrarNucleoBasicoConocimiento(campo, nombreCampo) {
+        campoNucleoBasicoConocimiento = campo;
+        nombreCampoNucleoBasicoConocimiento = nombreCampo;
+        $('#nucleoBasicoConocimiento').val('');
+        $('#md_nucleo_basico_conocimiento').modal({backdrop: 'static', keyboard: false});
+    }
+
+    function seleccionarNucleoBasicoConocimiento() {
+        var nucleoBasicoConocimiento = $('#nucleoBasicoConocimiento').val();
+        var nombreNucleoBasicoConocimiento = $('#nucleoBasicoConocimiento option:selected').text();
+        $('#' + campoNucleoBasicoConocimiento).val(nucleoBasicoConocimiento); 
+        $('#' + nombreCampoNucleoBasicoConocimiento).val(nombreNucleoBasicoConocimiento); 
+         
+        $('#md_nucleo_basico_conocimiento').modal('hide');
     }
 
     function buscarDepartamentos(idPais) {
@@ -3900,7 +4003,7 @@
                 bootstrap_alert_educacion_superior.warning('Debe ingresar el título');
                 return false;
             }
-            if (fechaTituloEducacionSuperior === "") {
+            if (graduadoEducacionSuperior === "true" && fechaTituloEducacionSuperior === "") {
                 bootstrap_alert_educacion_superior.warning('Debe ingresar la fecha del título');
                 return false;
             }
@@ -3982,6 +4085,7 @@
                 self.educacionesSuperiores()[indice].certificado('');
                 self.educacionesSuperiores()[indice].certificadoHomologado('');
             }
+            establecerEgresadoUdeA();
             $('#md_educacion_superior').modal('hide');
         };
 
@@ -4031,10 +4135,12 @@
               $('#btnGraduadoSiEducacionSuperior').removeClass('notActive').addClass('active');  
               $('#btnGraduadoNoEducacionSuperior').removeClass('active').addClass('notActive');
               $('#anyoFinalizacionEducacionSuperior').prop('disabled',false);
+              $('#fechaTituloEducacionSuperior').prop('disabled',false);
             } else {
               $('#btnGraduadoNoEducacionSuperior').removeClass('notActive').addClass('active');  
               $('#btnGraduadoSiEducacionSuperior').removeClass('active').addClass('notActive');  
               $('#anyoFinalizacionEducacionSuperior').prop('disabled','disabled');
+              $('#fechaTituloEducacionSuperior').prop('disabled','disabled');
             }
             if(educacionSuperior.tituloExterior()) {
               $('#btnTituloExtranjeroSiEducacionSuperior').removeClass('notActive').addClass('active');  
@@ -4066,7 +4172,7 @@
             var institucionEducacionContinua = $('#institucionEducacionContinua').val();
             var nombreInstitucionEducacionContinua = $('#institucionEducacionContinua option:selected').text();
             var nucleoBasicoConocimientoEducacionContinua = $('#nucleoBasicoConocimientoEducacionContinua').val();
-            var nombreNucleoBasicoConocimientoEducacionContinua = $('#nucleoBasicoConocimientoEducacionContinua option:selected').text();
+            var nombreNucleoBasicoConocimientoEducacionContinua = $('#nombreNucleoBasicoConocimientoEducacionContinua').val();
             var nombreCapacitacionEducacionContinua = $('#nombreCapacitacionEducacionContinua').val();
             var numeroHorasEducacionContinua = $('#numeroHorasEducacionContinua').val();
             var anyoEducacionContinua = $('#anyoEducacionContinua').val();
@@ -4163,7 +4269,8 @@
             $('#institucionEducacionContinua').val(educacionContinua.institucion()).trigger('change');
             $('#nombreCapacitacionEducacionContinua').val(educacionContinua.nombreCapacitacion());
             $('#numeroHorasEducacionContinua').val(educacionContinua.numeroHoras());
-            $('#nucleoBasicoConocimientoEducacionContinua').val(educacionContinua.nucleoBasicoConocimiento()).trigger('change');
+            $('#nucleoBasicoConocimientoEducacionContinua').val(educacionContinua.nucleoBasicoConocimiento());
+            $('#nombreNucleoBasicoConocimientoEducacionContinua').val(educacionContinua.nombreNucleoBasicoConocimiento());
             $('#anyoEducacionContinua').val(educacionContinua.anyo()).trigger('change');
             $('#consecutivo').val(educacionContinua.consecutivo());
             $('input:file[name="educacionesContinuas[' + educacionContinua.consecutivo() + '].certificado"]').show();
@@ -4265,7 +4372,7 @@
             var fechaIngresoExperienciaLaboral = $('#fechaIngresoExperienciaLaboral').val();
             var fechaRetiroExperienciaLaboral = $('#fechaRetiroExperienciaLaboral').val();
             var nucleoBasicoConocimientoExperienciaLaboral = $('#nucleoBasicoConocimientoExperienciaLaboral').val();
-            var nombreNucleoBasicoConocimientoExperienciaLaboral = $('#nucleoBasicoConocimientoExperienciaLaboral option:selected').text();
+            var nombreNucleoBasicoConocimientoExperienciaLaboral = $('#nombreNucleoBasicoConocimientoExperienciaLaboral').val();
             var tipoEmpresaExperienciaLaboral = $('#tipoEmpresaExperienciaLaboral').val();
             var nombreTipoEmpresaExperienciaLaboral = $('#tipoEmpresaExperienciaLaboral option:selected').text();
             var nombreEmpresaExperienciaLaboral = $('#nombreEmpresaExperienciaLaboral').val();
@@ -4415,14 +4522,19 @@
               $('#btnExperienciaLaboralFNSPSi').removeClass('notActive').addClass('active');  
               $('#btnExperienciaLaboralFNSPNo').removeClass('active').addClass('notActive');
               $('#nombreEmpresaExperienciaLaboral').prop('disabled', 'disabled');
+              $('#tipoEmpresaExperienciaLaboral').prop('disabled', 'disabled');
+              $('#actividadEconomicaExperienciaLaboral').prop('disabled', 'disabled');
             } else {
               $('#btnExperienciaLaboralFNSPNo').removeClass('notActive').addClass('active');  
               $('#btnExperienciaLaboralFNSPSi').removeClass('active').addClass('notActive');  
               $('#nombreEmpresaExperienciaLaboral').prop('disabled', false);
+              $('#tipoEmpresaExperienciaLaboral').prop('disabled', false);
+              $('#actividadEconomicaExperienciaLaboral').prop('disabled', false);
             }
             $('#fechaIngresoExperienciaLaboral').val(experienciaLaboral.fechaIngreso());
             $('#fechaRetiroExperienciaLaboral').val(experienciaLaboral.fechaRetiro());
-            $('#nucleoBasicoConocimientoExperienciaLaboral').val(experienciaLaboral.nucleoBasicoConocimiento()).trigger('change');
+            $('#nucleoBasicoConocimientoExperienciaLaboral').val(experienciaLaboral.nucleoBasicoConocimiento());
+            $('#nombreNucleoBasicoConocimientoExperienciaLaboral').val(experienciaLaboral.nombreNucleoBasicoConocimiento());
             $('#tipoEmpresaExperienciaLaboral').val(experienciaLaboral.tipoEmpresa()).trigger('change');
             $('#nombreEmpresaExperienciaLaboral').val(experienciaLaboral.nombreEmpresa());
             $('#actividadEconomicaExperienciaLaboral').val(experienciaLaboral.actividadEconomica()).trigger('change');
@@ -4528,7 +4640,7 @@
        self.adicionarCursoExperienciaDocencia = function () {
             var nombreCursoExperienciaDocencia = $('#nombreCursoExperienciaDocencia').val();
             var nucleoBasicoConocimientoCursoExperienciaDocencia = $('#nucleoBasicoConocimientoCursoExperienciaDocencia').val();
-            var nombreNucleoBasicoConocimientoCursoExperienciaDocencia = $('#nucleoBasicoConocimientoCursoExperienciaDocencia option:selected').text();
+            var nombreNucleoBasicoConocimientoCursoExperienciaDocencia = $('#nombreNucleoBasicoConocimientoCursoExperienciaDocencia').val();
             var modalidadCursoExperienciaDocencia = $('#modalidadCursoExperienciaDocencia').val();
             var nombreModalidadCursoExperienciaDocencia = $('#modalidadCursoExperienciaDocencia option:selected').text();
             var nivelEstudioCursoExperienciaDocencia = $('#nivelEstudioCursoExperienciaDocencia').val();
@@ -4688,7 +4800,8 @@
         self.editarCursoExperienciaDocencia = function (cursoExperienciaDocencia) {
             ocultarCertificadosCursoExperienciaDocencia();
             $('#nombreCursoExperienciaDocencia').val(cursoExperienciaDocencia.nombreCurso());
-            $('#nucleoBasicoConocimientoCursoExperienciaDocencia').val(cursoExperienciaDocencia.nucleoBasicoConocimiento()).trigger('change');
+            $('#nucleoBasicoConocimientoCursoExperienciaDocencia').val(cursoExperienciaDocencia.nucleoBasicoConocimiento());
+            $('#nombreNucleoBasicoConocimientoCursoExperienciaDocencia').val(cursoExperienciaDocencia.nombreNucleoBasicoConocimiento());
             $('#modalidadCursoExperienciaDocencia').val(cursoExperienciaDocencia.modalidad()).trigger('change');
             $('#nivelEstudioCursoExperienciaDocencia').val(cursoExperienciaDocencia.nivelEstudio()).trigger('change');
             $('#numeroHorasCursoExperienciaDocencia').val(cursoExperienciaDocencia.numeroHoras());
@@ -5094,7 +5207,8 @@
         $('#graduadoEducacionSuperior').val("false");
         $('#fechaTituloEducacionSuperior').val("");
         
-        $('#nucleoBasicoConocimientoPrograma').val("").trigger("change.select2");
+        $('#nucleoBasicoConocimientoPrograma').val("");
+        $('#nombreNucleoBasicoConocimientoPrograma').val("");
         $('#institucionEducativaPrograma').val("").trigger("change.select2");
         $('#programaCursado').val("");
         $('#tituloPrograma').val("");        
@@ -5107,7 +5221,8 @@
         $('#btnGraduadoSiEducacionSuperior').removeClass('active').addClass('notActive');  
         $('#btnGraduadoNoEducacionSuperior').removeClass('active').addClass('notActive');  
         $('#anyoFinalizacionEducacionSuperior').prop('disabled','disabled');
-        
+        $('#fechaTituloEducacionSuperior').prop('disabled','disabled');
+                
         $('#consecutivo').val("");
         ocultarCertificadosEducacionesSuperiores();
         var fileInput = $('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificado"]');
@@ -5134,6 +5249,8 @@
         $('#institucionEducativaPrograma').val("").trigger("change.select2");
         $('#programaCursado').val("").trigger("change.select2");
         $('#tituloPrograma').val("");
+        $('#btnProgramaActivo').removeClass('active').addClass('notActive');  
+        $('#btnProgramaActivo').removeClass('active').addClass('notActive');
 
         $('#md_programa').modal({backdrop: 'static', keyboard: false})  ;
     }
@@ -5142,6 +5259,7 @@
         $('#institucionEducativaProgramaExtranjero').val("");
         $('#programaCursadoExtranjero').val("");
         $('#nucleoBasicoConocimientoProgramaExtranjero').val("");
+        $('#nombreNucleoBasicoConocimientoProgramaExtranjero').val("");
         $('#tituloProgramaExtranjero').val("");                    
 
         $('#md_programa_extranjero').modal({backdrop: 'static', keyboard: false})  ;
@@ -5152,7 +5270,8 @@
         $('#institucionEducacionContinua').val("").trigger('change');
         $('#nombreCapacitacionEducacionContinua').val("");
         $('#numeroHorasEducacionContinua').val("");
-        $('#nucleoBasicoConocimientoEducacionContinua').val("").trigger('change');
+        $('#nucleoBasicoConocimientoEducacionContinua').val("");
+        $('#nombreNucleoBasicoConocimientoEducacionContinua').val("");
         $('#anyoEducacionContinua').val("");
         $('#consecutivo').val("");
         ocultarCertificadosEducacionesContinuas();
@@ -5197,7 +5316,6 @@
         $('#areaSaberExperienciaLaboral').val("").trigger('change');
         $('#tipoEmpresaExperienciaLaboral').val("").trigger('change');
         $('#nombreEmpresaExperienciaLaboral').val("");
-        $('#nombreEmpresaExperienciaLaboral').prop('disabled', false);
         $('#actividadEconomicaExperienciaLaboral').val("").trigger('change');
         $('#tipoContratoExperienciaLaboral').val("").trigger('change');
         $('#cargoExperienciaLaboral').val("");
@@ -5230,7 +5348,8 @@
 
     function nuevoCursoExperienciaDocencia() {
         $('#nombreCursoExperienciaDocencia').val("");
-        $('#nucleoBasicoConocimientoCursoExperienciaDocencia').val("").trigger('change');
+        $('#nucleoBasicoConocimientoCursoExperienciaDocencia').val("");
+        $('#nombreNucleoBasicoConocimientoCursoExperienciaDocencia').val("");
         $('#modalidadCursoExperienciaDocencia').val("").trigger('change');
         $('#nivelEstudioCursoExperienciaDocencia').val("").trigger('change');
         $('#numeroHorasCursoExperienciaDocencia').val("");
@@ -5258,7 +5377,8 @@
         $('#tipoAutorArticulo').val("").trigger('change');
         $('#urlArticulo').val("");
         $('#anyoArticulo').val("").trigger('change');
-        $('#nucleoBasicoConocimientoArticulo').val("").trigger('change');
+        $('#nucleoBasicoConocimientoArticulo').val("");
+        $('#nombreNucleoBasicoConocimientoArticulo').val("");
         $('#consecutivo').val("");
         bootstrap_alert_articulo.removeWarning();
         $('#md_articulo').modal({backdrop: 'static', keyboard: false})  ;
@@ -5288,7 +5408,8 @@
 
     function nuevoProductoConocimiento() {
         $('#tipoProductoConocimiento').val("").trigger('change');
-        $('#nucleoBasicoProductoConocimiento').val("").trigger('change');
+        $('#nucleoBasicoProductoConocimiento').val("");
+        $('#nombreNucleoBasicoProductoConocimiento').val("");
         $('#urlProductoConocimiento').val("");
         $('#descripcionProductoConocimiento').val("");            
         $('#consecutivo').val("");
@@ -5572,7 +5693,7 @@
             success: function (response) {
                 $('#md_guardar').modal('hide');
                 if (response === "") {
-                    $('#confirmacionAlmacenamientoHojaVida').modal({backdrop: 'static', keyboard: false})  ;
+                    recargarPagina();
                 } else {
                     bootstrap_alert_hoja_vida.warning(response);
                 }
@@ -5584,8 +5705,9 @@
     });
 
     function obtenerProgramasCursados() {
-        var institucion = $('#institucionEducativaPrograma').val();
         $('#tituloPrograma').val('');
+        var institucion = $('#institucionEducativaPrograma').val();
+        if(institucion != "") {
         $.ajax({
             type: "GET",
             url: "${pageContext.request.contextPath}/hojasVida/programasInstitucion?institucion=" + institucion,
@@ -5601,6 +5723,9 @@
                     }
                 }
             }});
+        } else {
+          $('#programaCursado').find('option').remove();  
+        }
     }
 
     function verCopiaCedula() {
@@ -5613,6 +5738,33 @@
 
     function verCopiaLibretaMilitar() {
         window.location.href = "${pageContext.request.contextPath}/hojasVida/copiaLibretaMilitar/" + $('#idPersona').val();
+    }
+
+    function establecerEgresadoUdeA() {
+        var egresadoUDEA = false;
+        for (var i = 0; i < hojaVidaModel.educacionesSuperiores().length; i++) {
+            if(hojaVidaModel.educacionesSuperiores()[i].institucion() == ID_UNIVERSIDAD_ANTIOQUIA_MEDELLIN ||
+               hojaVidaModel.educacionesSuperiores()[i].institucion() == ID_UNIVERSIDAD_ANTIOQUIA_EL_CARMEN_DE_VIBORAL ||
+               hojaVidaModel.educacionesSuperiores()[i].institucion() == ID_UNIVERSIDAD_ANTIOQUIA_ANDES ||
+               hojaVidaModel.educacionesSuperiores()[i].institucion() == ID_UNIVERSIDAD_ANTIOQUIA_CAUCASIA ||
+               hojaVidaModel.educacionesSuperiores()[i].institucion() == ID_UNIVERSIDAD_ANTIOQUIA_PUERTO_BERRIO ||
+               hojaVidaModel.educacionesSuperiores()[i].institucion() == ID_UNIVERSIDAD_ANTIOQUIA_TURBO ||
+               hojaVidaModel.educacionesSuperiores()[i].institucion() == ID_UNIVERSIDAD_ANTIOQUIA_SANTAFE_DE_ANTIOQUIA) {
+
+              egresadoUDEA = true;
+
+               break;
+            }
+        }
+        if(egresadoUDEA) {
+            $('#btnEgresadoUdeASi').removeClass('notActive').addClass('active');  
+            $('#btnEgresadoUdeANo').removeClass('active').addClass('notActive');
+            $('#egresadoUDEA').val('true');
+        } else {
+            $('#btnEgresadoUdeANo').removeClass('notActive').addClass('active');  
+            $('#btnEgresadoUdeASi').removeClass('active').addClass('notActive');
+            $('#egresadoUDEA').val('false');
+        }
     }
 
     bootstrap_alert_ciudad_extranjera = {};
@@ -5883,7 +6035,7 @@
         patentes,
         productosConocimiento);
     ko.applyBindings(hojaVidaModel);
-    
+
     for (var i = 0; i < hojaVidaModel.experienciasDocencia().length; i++) {
         for (var j = 0; j < hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia().length; j++) {
             fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].certificado" />');
@@ -5917,6 +6069,6 @@
             $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].numeroHoras"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].numeroHoras());
             $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].anyo"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].anyo());
         }
-    }    
-    
+    } 
+    establecerEgresadoUdeA();
 </script>

@@ -59,12 +59,6 @@ public class ServicioSeguridad implements IServicioSeguridad {
             calendar.set(1900, 1, 1);
             hojaVida.setFechaNacimiento(calendar.getTime());
             hojaVida.setFechaExpedicion(calendar.getTime());
-            hojaVida.setCiudadResidencia("00105");
-            hojaVida.setLugarNacimiento("00105");
-            hojaVida.setLugarExpedicion("00105");
-            hojaVida.setNacionalidad("343");
-            hojaVida.setDireccion("");
-            hojaVida.setSexo("1");
             hojaVida.setDiscapacidad("5");
             hojaVida.setGrupoEtnico("5");
             hojaVida.setTipoIdentificacion("CC");

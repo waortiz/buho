@@ -84,6 +84,9 @@ public class Util {
     }
 
     public static int obtenerEntero(String numero) throws ParseException {
+        if (numero == null || numero.length() == 0) {
+            return 0;
+        }
         return Integer.parseInt(numero);
     }
 

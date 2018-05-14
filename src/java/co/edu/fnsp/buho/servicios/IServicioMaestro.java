@@ -33,7 +33,7 @@ public interface IServicioMaestro {
     List<Maestro> obtenerPaises();
     List<Maestro> obtenerSedes();
     List<Maestro> obtenerProgramas(int idSede);
-    List<Programa> obtenerProgramasInstitucion(Integer institucion, Integer nucleoBasicoConocimiento);
+    List<Programa> obtenerProgramasInstitucion(int institucion);
     List<Maestro> obtenerTiposAdenda();
     List<Maestro> obtenerTiposCapacitacion();
     List<Maestro> obtenerTiposContrato();
@@ -59,4 +59,5 @@ public interface IServicioMaestro {
     Ciudad ingresarCiudad(Ciudad ciudad);
     List<Maestro> obtenerInstitucionesEducativasExtranjeras();
     List<Maestro> obtenerInstitucionesEducativasColombianas();
+    List<Programa> obtenerProgramasNucleoBasicoConocimiento(int nucleoBasicoConocimiento);
 }

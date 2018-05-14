@@ -31,7 +31,6 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
-import java.util.logging.Level;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -392,114 +391,31 @@ public class HojaVidaController {
         }
     }
 
+    @RequestMapping(value = "/editar/{tab}", method = RequestMethod.GET)
+    public String editarHojaVidaUsuarioActualConTab(@ModelAttribute(value = "tab") String tab, Model model) {
+        long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+        boolean terminos = servicioHojaVida.existenTerminos(idPersona);
+        if (!terminos) {
+            return "hojasVida/terminos";
+        }
+        establecerHojaVida(model);
+        if (tab != null && tab.length() > 0) {
+            model.addAttribute("tab", tab);
+        }
+        
+        return "hojasVida/editar";
+    }
+    
     @RequestMapping(value = "/editar", method = RequestMethod.GET)
     public String editarHojaVidaUsuarioActual(Model model) {
-
         long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
-        boolean terminos = servicioHojaVida.existenTerminos(idPersona);;
+        boolean terminos = servicioHojaVida.existenTerminos(idPersona);
         if (!terminos) {
             return "hojasVida/terminos";
         }
 
-        List<Maestro> paises = servicioMaestro.obtenerPaises();
-        List<Maestro> tiposIdentificacion = servicioMaestro.obtenerTiposIdentificacion();
-        List<Maestro> gruposEtnico = servicioMaestro.obtenerGruposEtnicos();
-        List<Maestro> discapacidades = servicioMaestro.obtenerDiscapacidades();
-        List<Maestro> actividadesEconomicas = servicioMaestro.obtenerActividadesEconomicas();
-        List<Maestro> tiposVinculacion = servicioMaestro.obtenerTiposVinculacionUdeA();
-        List<Maestro> tiposTelefono = servicioMaestro.obtenerTiposTelefono();
-        List<Maestro> tiposDocumento = servicioMaestro.obtenerTiposDocumento();
-        List<Maestro> nivelesIdioma = servicioMaestro.obtenerNivelesIdioma();
-        List<Maestro> idiomas = servicioMaestro.obtenerIdiomas();
-        List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
-        List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
-        List<Maestro> institucionesEducativas = servicioMaestro.obtenerInstitucionesEducativasColombianas();
-        List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
-        List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
-        List<Maestro> tiposInstitucion = servicioMaestro.obtenerTiposInstitucion();
-        List<Maestro> tiposContrato = servicioMaestro.obtenerTiposContrato();
-        List<Maestro> tiposExperiencia = servicioMaestro.obtenerTiposExperiencia();
-        List<Maestro> naturalezasCargo = servicioMaestro.obtenerNaturalezasCargo();
-        List<Maestro> modalidadesCurso = servicioMaestro.obtenerModalidadesCurso();
-        List<Maestro> tiposInvestigador = servicioMaestro.obtenerTiposInvestigador();
-        List<Maestro> tiposAutorArticulo = servicioMaestro.obtenerTiposAutorArticulo();
-        List<Maestro> tiposPatente = servicioMaestro.obtenerTiposPatente();
-        List<Maestro> tiposProductosConocimiento = servicioMaestro.obtenerTiposProductosConocimiento();
-        List<Maestro> clasesPatente = servicioMaestro.obtenerClasesPatente();
-
-        model.addAttribute("paises", paises);
-        model.addAttribute("tiposIdentificacion", tiposIdentificacion);
-        model.addAttribute("gruposEtnico", gruposEtnico);
-        model.addAttribute("discapacidades", discapacidades);
-        model.addAttribute("actividadesEconomicas", actividadesEconomicas);
-        model.addAttribute("tiposVinculacion", tiposVinculacion);
-        model.addAttribute("tiposTelefono", tiposTelefono);
-        model.addAttribute("tiposDocumento", tiposDocumento);
-        model.addAttribute("nivelesIdioma", nivelesIdioma);
-        model.addAttribute("idiomas", idiomas);
-        model.addAttribute("tiposCertificacion", tiposCertificacion);
-        model.addAttribute("nivelesFormacion", nivelesFormacion);
-        model.addAttribute("institucionesEducativas", institucionesEducativas);
-        model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
-        model.addAttribute("tiposCapacitacion", tiposCapacitacion);
-        model.addAttribute("tiposInstitucion", tiposInstitucion);
-        model.addAttribute("tiposContrato", tiposContrato);
-        model.addAttribute("tiposExperiencia", tiposExperiencia);
-        model.addAttribute("naturalezasCargo", naturalezasCargo);
-        model.addAttribute("modalidadesCurso", modalidadesCurso);
-        model.addAttribute("tiposInvestigador", tiposInvestigador);
-        model.addAttribute("tiposAutorArticulo", tiposAutorArticulo);
-        model.addAttribute("tiposPatente", tiposPatente);
-        model.addAttribute("tiposProductosConocimiento", tiposProductosConocimiento);
-        model.addAttribute("clasesPatente", clasesPatente);
-
-        co.edu.fnsp.buho.entidades.HojaVida hojaVida = servicioHojaVida.obtenerHojaVida(idPersona);
-
-        if (hojaVida.getTelefonos().size() > 0) {
-            model.addAttribute("telefonosJSON", Util.obtenerTelefonosJSON(hojaVida.getTelefonos()));
-        }
-        if (hojaVida.getCuentasBancarias().size() > 0) {
-            model.addAttribute("cuentasBancariasJSON", Util.obtenerCuentasBancariasJSON(hojaVida.getCuentasBancarias()));
-        }
-        if (hojaVida.getCorreosElectronicos().size() > 0) {
-            model.addAttribute("correosElectronicosJSON", Util.obtenerCorreosElectronicosJSON(hojaVida.getCorreosElectronicos()));
-        }
-        if (hojaVida.getDocumentosSoporte().size() > 0) {
-            model.addAttribute("documentosSoporteJSON", Util.obtenerDocumentosSoporteJSON(hojaVida.getDocumentosSoporte()));
-        }
-        if (hojaVida.getIdiomas().size() > 0) {
-            model.addAttribute("idiomasJSON", Util.obtenerIdiomasJSON(hojaVida.getIdiomas()));
-        }
-        if (hojaVida.getEducacionesBasicas().size() > 0) {
-            model.addAttribute("educacionesBasicasJSON", Util.obtenerEducacionesBasicasJSON(hojaVida.getEducacionesBasicas()));
-        }
-        if (hojaVida.getEducacionesSuperiores().size() > 0) {
-            model.addAttribute("educacionesSuperioresJSON", Util.obtenerEducacionesSuperioresJSON(hojaVida.getEducacionesSuperiores()));
-        }
-        if (hojaVida.getEducacionesContinuas().size() > 0) {
-            model.addAttribute("educacionesContinuasJSON", Util.obtenerEducacionesContinuasJSON(hojaVida.getEducacionesContinuas()));
-        }
-        if (hojaVida.getDistinciones().size() > 0) {
-            model.addAttribute("distincionesJSON", Util.obtenerDistincionesJSON(hojaVida.getDistinciones()));
-        }
-        if (hojaVida.getExperienciasLaborales().size() > 0) {
-            model.addAttribute("experienciasLaboralesJSON", Util.obtenerExperienciasLaboralesJSON(hojaVida.getExperienciasLaborales()));
-        }
-        if (hojaVida.getExperienciasDocencia().size() > 0) {
-            model.addAttribute("experienciasDocenciaJSON", Util.obtenerExperienciasDocenciaJSON(hojaVida.getExperienciasDocencia()));
-        }
-        if (hojaVida.getArticulos().size() > 0) {
-            model.addAttribute("articulosJSON", Util.obtenerArticulosJSON(hojaVida.getArticulos()));
-        }
-        if (hojaVida.getPatentes().size() > 0) {
-            model.addAttribute("patentesJSON", Util.obtenerPatentesJSON(hojaVida.getPatentes()));
-        }
-        if (hojaVida.getProductosConocimiento().size() > 0) {
-            model.addAttribute("productosConocimientoJSON", Util.obtenerProductosConocimientoJSON(hojaVida.getProductosConocimiento()));
-        }
-
-        model.addAttribute("hojaVida", hojaVida);
-
+        establecerHojaVida(model);
+        
         return "hojasVida/editar";
     }
 
@@ -748,18 +664,9 @@ public class HojaVidaController {
 
     @RequestMapping(value = "/programasInstitucion", method = RequestMethod.GET)
     public @ResponseBody
-    String obtenerProgramasInstitucion(@ModelAttribute(value = "institucion") String institucion,
+    String obtenerProgramasInstitucion(@ModelAttribute(value = "institucion") int institucion,
             Model model) {
-
-        Integer idInstitucion = null;
-        if (institucion != null && institucion.length() > 0) {
-            try {
-                idInstitucion = Util.obtenerEntero(institucion);
-            } catch (ParseException ex) {
-                java.util.logging.Logger.getLogger(HojaVidaController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        List<Programa> programas = servicioMaestro.obtenerProgramasInstitucion(idInstitucion, null);
+        List<Programa> programas = servicioMaestro.obtenerProgramasInstitucion(institucion);
         Gson gson = new Gson();
 
         return gson.toJson(programas);
@@ -815,5 +722,109 @@ public class HojaVidaController {
             logger.error(exc);
             return "";
         }
+    }
+
+    private void establecerHojaVida(Model model) {
+       long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+
+        List<Maestro> paises = servicioMaestro.obtenerPaises();
+        List<Maestro> tiposIdentificacion = servicioMaestro.obtenerTiposIdentificacion();
+        List<Maestro> gruposEtnico = servicioMaestro.obtenerGruposEtnicos();
+        List<Maestro> discapacidades = servicioMaestro.obtenerDiscapacidades();
+        List<Maestro> actividadesEconomicas = servicioMaestro.obtenerActividadesEconomicas();
+        List<Maestro> tiposVinculacion = servicioMaestro.obtenerTiposVinculacionUdeA();
+        List<Maestro> tiposTelefono = servicioMaestro.obtenerTiposTelefono();
+        List<Maestro> tiposDocumento = servicioMaestro.obtenerTiposDocumento();
+        List<Maestro> nivelesIdioma = servicioMaestro.obtenerNivelesIdioma();
+        List<Maestro> idiomas = servicioMaestro.obtenerIdiomas();
+        List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
+        List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
+        List<Maestro> institucionesEducativas = servicioMaestro.obtenerInstitucionesEducativasColombianas();
+        List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
+        List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
+        List<Maestro> tiposInstitucion = servicioMaestro.obtenerTiposInstitucion();
+        List<Maestro> tiposContrato = servicioMaestro.obtenerTiposContrato();
+        List<Maestro> tiposExperiencia = servicioMaestro.obtenerTiposExperiencia();
+        List<Maestro> naturalezasCargo = servicioMaestro.obtenerNaturalezasCargo();
+        List<Maestro> modalidadesCurso = servicioMaestro.obtenerModalidadesCurso();
+        List<Maestro> tiposInvestigador = servicioMaestro.obtenerTiposInvestigador();
+        List<Maestro> tiposAutorArticulo = servicioMaestro.obtenerTiposAutorArticulo();
+        List<Maestro> tiposPatente = servicioMaestro.obtenerTiposPatente();
+        List<Maestro> tiposProductosConocimiento = servicioMaestro.obtenerTiposProductosConocimiento();
+        List<Maestro> clasesPatente = servicioMaestro.obtenerClasesPatente();
+
+        model.addAttribute("paises", paises);
+        model.addAttribute("tiposIdentificacion", tiposIdentificacion);
+        model.addAttribute("gruposEtnico", gruposEtnico);
+        model.addAttribute("discapacidades", discapacidades);
+        model.addAttribute("actividadesEconomicas", actividadesEconomicas);
+        model.addAttribute("tiposVinculacion", tiposVinculacion);
+        model.addAttribute("tiposTelefono", tiposTelefono);
+        model.addAttribute("tiposDocumento", tiposDocumento);
+        model.addAttribute("nivelesIdioma", nivelesIdioma);
+        model.addAttribute("idiomas", idiomas);
+        model.addAttribute("tiposCertificacion", tiposCertificacion);
+        model.addAttribute("nivelesFormacion", nivelesFormacion);
+        model.addAttribute("institucionesEducativas", institucionesEducativas);
+        model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
+        model.addAttribute("tiposCapacitacion", tiposCapacitacion);
+        model.addAttribute("tiposInstitucion", tiposInstitucion);
+        model.addAttribute("tiposContrato", tiposContrato);
+        model.addAttribute("tiposExperiencia", tiposExperiencia);
+        model.addAttribute("naturalezasCargo", naturalezasCargo);
+        model.addAttribute("modalidadesCurso", modalidadesCurso);
+        model.addAttribute("tiposInvestigador", tiposInvestigador);
+        model.addAttribute("tiposAutorArticulo", tiposAutorArticulo);
+        model.addAttribute("tiposPatente", tiposPatente);
+        model.addAttribute("tiposProductosConocimiento", tiposProductosConocimiento);
+        model.addAttribute("clasesPatente", clasesPatente);
+
+        co.edu.fnsp.buho.entidades.HojaVida hojaVida = servicioHojaVida.obtenerHojaVida(idPersona);
+
+        if (hojaVida.getTelefonos().size() > 0) {
+            model.addAttribute("telefonosJSON", Util.obtenerTelefonosJSON(hojaVida.getTelefonos()));
+        }
+        if (hojaVida.getCuentasBancarias().size() > 0) {
+            model.addAttribute("cuentasBancariasJSON", Util.obtenerCuentasBancariasJSON(hojaVida.getCuentasBancarias()));
+        }
+        if (hojaVida.getCorreosElectronicos().size() > 0) {
+            model.addAttribute("correosElectronicosJSON", Util.obtenerCorreosElectronicosJSON(hojaVida.getCorreosElectronicos()));
+        }
+        if (hojaVida.getDocumentosSoporte().size() > 0) {
+            model.addAttribute("documentosSoporteJSON", Util.obtenerDocumentosSoporteJSON(hojaVida.getDocumentosSoporte()));
+        }
+        if (hojaVida.getIdiomas().size() > 0) {
+            model.addAttribute("idiomasJSON", Util.obtenerIdiomasJSON(hojaVida.getIdiomas()));
+        }
+        if (hojaVida.getEducacionesBasicas().size() > 0) {
+            model.addAttribute("educacionesBasicasJSON", Util.obtenerEducacionesBasicasJSON(hojaVida.getEducacionesBasicas()));
+        }
+        if (hojaVida.getEducacionesSuperiores().size() > 0) {
+            model.addAttribute("educacionesSuperioresJSON", Util.obtenerEducacionesSuperioresJSON(hojaVida.getEducacionesSuperiores()));
+        }
+        if (hojaVida.getEducacionesContinuas().size() > 0) {
+            model.addAttribute("educacionesContinuasJSON", Util.obtenerEducacionesContinuasJSON(hojaVida.getEducacionesContinuas()));
+        }
+        if (hojaVida.getDistinciones().size() > 0) {
+            model.addAttribute("distincionesJSON", Util.obtenerDistincionesJSON(hojaVida.getDistinciones()));
+        }
+        if (hojaVida.getExperienciasLaborales().size() > 0) {
+            model.addAttribute("experienciasLaboralesJSON", Util.obtenerExperienciasLaboralesJSON(hojaVida.getExperienciasLaborales()));
+        }
+        if (hojaVida.getExperienciasDocencia().size() > 0) {
+            model.addAttribute("experienciasDocenciaJSON", Util.obtenerExperienciasDocenciaJSON(hojaVida.getExperienciasDocencia()));
+        }
+        if (hojaVida.getArticulos().size() > 0) {
+            model.addAttribute("articulosJSON", Util.obtenerArticulosJSON(hojaVida.getArticulos()));
+        }
+        if (hojaVida.getPatentes().size() > 0) {
+            model.addAttribute("patentesJSON", Util.obtenerPatentesJSON(hojaVida.getPatentes()));
+        }
+        if (hojaVida.getProductosConocimiento().size() > 0) {
+            model.addAttribute("productosConocimientoJSON", Util.obtenerProductosConocimientoJSON(hojaVida.getProductosConocimiento()));
+        }
+
+        model.addAttribute("hojaVida", hojaVida);
+
     }
 }

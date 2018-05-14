@@ -167,6 +167,14 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     private SimpleJdbcCall ingresarTerminos;
     private SimpleJdbcCall existenTerminos;
 
+    private final int ID_UNIVERSIDAD_ANTIOQUIA_MEDELLIN = 1201;
+    private final int ID_UNIVERSIDAD_ANTIOQUIA_EL_CARMEN_DE_VIBORAL = 1219;
+    private final int ID_UNIVERSIDAD_ANTIOQUIA_ANDES = 1220;
+    private final int ID_UNIVERSIDAD_ANTIOQUIA_CAUCASIA = 1221;
+    private final int ID_UNIVERSIDAD_ANTIOQUIA_PUERTO_BERRIO = 1222;
+    private final int ID_UNIVERSIDAD_ANTIOQUIA_TURBO = 1223;
+    private final int ID_UNIVERSIDAD_ANTIOQUIA_SANTAFE_DE_ANTIOQUIA = 9125;
+    
     @Autowired
     public void setDataSource(DataSource dataSource) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -821,25 +829,31 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         hojaVida.setTipoIdentificacion((String) resultado.get("varTipoId"));
         hojaVida.setLugarExpedicion((String) resultado.get("varLugarExpedicion"));
         hojaVida.setNombreLugarExpedicion((String) resultado.get("varNombreLugarExpedicion"));
-        hojaVida.setFechaExpedicion((Date) resultado.get("varFechaExpedicion"));
+        if (resultado.get("varFechaExpedicion") != null) {
+            hojaVida.setFechaExpedicion((Date) resultado.get("varFechaExpedicion"));
+        }
         hojaVida.setLibretaMilitar((String) resultado.get("varLibretaMilitar"));
         hojaVida.setDistritoClase((String) resultado.get("varDistritoClase"));
         hojaVida.setNombres((String) resultado.get("varNombres"));
         hojaVida.setApellidos((String) resultado.get("varApellidos"));
-        hojaVida.setFechaNacimiento((Date) resultado.get("varFechaNacimiento"));
+        if (resultado.get("varFechaNacimiento") != null) {
+            hojaVida.setFechaNacimiento((Date) resultado.get("varFechaNacimiento"));
+        }
         hojaVida.setLugarNacimiento((String) resultado.get("varLugarNacimiento"));
         hojaVida.setNombreLugarNacimiento((String) resultado.get("varNombreLugarNacimiento"));
-        hojaVida.setNacionalidad(((Integer) resultado.get("varNacionalidad")).toString());
+        if (resultado.get("varNacionalidad") != null) {
+            hojaVida.setNacionalidad(((Integer) resultado.get("varNacionalidad")).toString());
+        }
         hojaVida.setNombreNacionalidad((String) resultado.get("varNombreNacionalidad"));
-        hojaVida.setSexo(((Integer) resultado.get("varSexo")).toString());
+        if (resultado.get("varSexo") != null) {
+            hojaVida.setSexo(((Integer) resultado.get("varSexo")).toString());
+        }
         hojaVida.setNombreSexo(((String) resultado.get("varNombreSexo")));
         hojaVida.setCiudadResidencia((String) resultado.get("varCiudadResidencia"));
         hojaVida.setNombreCiudadResidencia((String) resultado.get("varNombreCiudadResidencia"));
         hojaVida.setDireccion((String) resultado.get("varDireccion"));
         hojaVida.setPerfil((String) resultado.get("varPerfil"));
-        if (resultado.get("varEgresadoUdea") != null) {
-            hojaVida.setEgresadoUDEA((Boolean) resultado.get("varEgresadoUdea"));
-        }
+        
         if (resultado.get("varEmpleadoUdea") != null) {
             hojaVida.setEmpleadoUDEA((Boolean) resultado.get("varEmpleadoUdea"));
         }
@@ -951,6 +965,22 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         hojaVida.setArticulos(articulos);
         hojaVida.setPatentes(patentes);
         hojaVida.setProductosConocimiento(productosConocimiento);
+
+        boolean egresadoUdeA = false;
+        for (int i = 0; i < hojaVida.getEducacionesSuperiores().size(); i++) {
+            if (hojaVida.getEducacionesSuperiores().get(i).getInstitucion() == ID_UNIVERSIDAD_ANTIOQUIA_MEDELLIN
+                    || hojaVida.getEducacionesSuperiores().get(i).getInstitucion() == ID_UNIVERSIDAD_ANTIOQUIA_EL_CARMEN_DE_VIBORAL
+                    || hojaVida.getEducacionesSuperiores().get(i).getInstitucion() == ID_UNIVERSIDAD_ANTIOQUIA_ANDES
+                    || hojaVida.getEducacionesSuperiores().get(i).getInstitucion() == ID_UNIVERSIDAD_ANTIOQUIA_CAUCASIA
+                    || hojaVida.getEducacionesSuperiores().get(i).getInstitucion() == ID_UNIVERSIDAD_ANTIOQUIA_PUERTO_BERRIO
+                    || hojaVida.getEducacionesSuperiores().get(i).getInstitucion() == ID_UNIVERSIDAD_ANTIOQUIA_TURBO
+                    || hojaVida.getEducacionesSuperiores().get(i).getInstitucion() == ID_UNIVERSIDAD_ANTIOQUIA_SANTAFE_DE_ANTIOQUIA) {
+
+                egresadoUdeA = true;
+                break;
+            }
+        }
+        hojaVida.setEgresadoUDEA(egresadoUdeA);
 
         return hojaVida;
     }
@@ -1175,7 +1205,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         MapSqlParameterSource parametrosExistenTerminos = new MapSqlParameterSource();
         parametrosExistenTerminos.addValue("varIdPersona", idPersona);
         Map resultado = existenTerminos.execute(parametrosExistenTerminos);
-        
+
         return (boolean) resultado.get("varExistenTerminos");
     }
 

@@ -201,8 +201,8 @@ public class ServicioMaestro implements IServicioMaestro {
     }
 
     @Override
-    public List<Programa> obtenerProgramasInstitucion(Integer institucion, Integer nucleoBasicoConocimiento) {
-        return repositorioMaestro.obtenerProgramasInstitucion(institucion, nucleoBasicoConocimiento);
+    public List<Programa> obtenerProgramasInstitucion(int institucion) {
+        return repositorioMaestro.obtenerProgramasInstitucion(institucion);
     }
 
     @Override
@@ -233,5 +233,10 @@ public class ServicioMaestro implements IServicioMaestro {
     @Override
     public List<Maestro> obtenerInstitucionesEducativasColombianas() {
         return repositorioMaestro.obtenerInstitucionesEducativasColombianas();
+    }
+
+    @Override
+    public List<Programa> obtenerProgramasNucleoBasicoConocimiento(int nucleoBasicoConocimiento) {
+        return repositorioMaestro.obtenerProgramasNucleoBasicoConocimiento(nucleoBasicoConocimiento);
     }
 }

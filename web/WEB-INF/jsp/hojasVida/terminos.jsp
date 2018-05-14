@@ -456,7 +456,7 @@
                                                             </table>
                                                         </center>
                                                         <center>
-                                                            <table class="table table-bordered tableestilo">
+                                                            <table class="table table-bordered tableestilo" id="table5">
                                                                 <thead>
                                                                     <tr>
                                                                         <th colspan="2">6. DISPOSICIONES FINALES</th>
@@ -574,6 +574,7 @@
             $('#table2 tr:has(td)').find('input[type="checkbox"]').prop("checked", 'checked');
             $('#table3 tr:has(td)').find('input[type="checkbox"]').prop("checked", 'checked');
             $('#table4 tr:has(td)').find('input[type="checkbox"]').prop("checked", 'checked');
+            $('#table5 tr:has(td)').find('input[type="checkbox"]').prop("checked", 'checked');
             $('#table6 tr:has(td)').find('input[type="checkbox"]').prop("checked", 'checked');
         });
         $('.btntable1').click(function () {

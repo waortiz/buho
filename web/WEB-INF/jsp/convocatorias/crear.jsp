@@ -48,7 +48,7 @@
                             <label for="fechaInicio">Fecha de inicio</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de inicio">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                             <div class='input-group date'>
-                                <form:input class="form-control fecha" path="fechaInicio" data-validation="required" data-validation-error-msg="Debe ingresar la fecha de inicio" />
+                                <form:input class="form-control fecha" path="fechaInicio" data-validation="required" data-validation-error-msg="Debe ingresar la fecha de inicio" maxlength="10" />
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div>
@@ -59,7 +59,7 @@
                             <label for="fechaFin">Fecha de cierre</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de finalizaci&oacute;n" data-validation="required" data-validation-error-msg="Debe ingresar la fecha de finalización">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                             <div class='input-group date'>
-                                <form:input class="form-control fecha" path="fechaFin" data-validation="required" data-validation-error-msg="Debe ingresar la fecha de finalización"/>
+                                <form:input class="form-control fecha" path="fechaFin" data-validation="required" data-validation-error-msg="Debe ingresar la fecha de finalización" maxlength="10"/>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div>
@@ -70,7 +70,7 @@
                             <label for="fechaPublicacionResultados">Fecha publicación resultados</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de resultado de publicaci&oacute;n">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                             <div class='input-group date'>
-                                <form:input class="form-control fecha" path="fechaPublicacionResultados" data-validation="required" data-validation-error-msg="Debe ingresar la fecha de publicación de resultados"/>
+                                <form:input class="form-control fecha" path="fechaPublicacionResultados" data-validation="required" data-validation-error-msg="Debe ingresar la fecha de publicación de resultados" maxlength="10"/>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div>
@@ -82,7 +82,7 @@
                         <div class="form-group">
                             <label for="nombre">Nombre</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de la convocatoria">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                <form:input class="form-control" path="nombre" data-validation="required" data-validation-error-msg="Debe ingresar el nombre" />
+                                <form:input class="form-control" path="nombre" data-validation="required" data-validation-error-msg="Debe ingresar el nombre" maxlength="150"/>
                         </div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                         <div class="form-group">
                             <label for="descripcion">Descripci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe describir el perfil requerido con el cargo y la experiencia requerida">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                <form:textarea class="form-control" path="descripcion" data-validation="required" data-validation-error-msg="Debe ingresar la descripción" />
+                                <form:textarea class="form-control" path="descripcion" data-validation="required" data-validation-error-msg="Debe ingresar la descripción" maxlength="300"/>
                         </div>
                     </div>
                 </div>
@@ -171,7 +171,7 @@
                                             <div class="form-group">
                                                 <label for="curso">Curso </label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el programa del curso">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
-                                                <input style="width: 100%;" id="curso" class="form-control">
+                                                    <input style="width: 100%;" id="curso" class="form-control" maxlength="100">
                                             </div>
                                         </div>
                                     </div>
@@ -180,7 +180,7 @@
                                             <div class="form-group">
                                                 <label>Total de horas</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el total de horas">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                                <input type="text" id="totalHorasSemestre" class="form-control">
+                                                    <input type="text" id="totalHorasSemestre" class="form-control" maxlength="5">
                                             </div> 
                                         </div>
                                     </div>
@@ -232,7 +232,7 @@
                                         <tr>
                                             <td>
                                     <center>
-                                        <form:input path="anyosMinimosExperiencia" class="form-control input-sm" style="width: 100px;text-align: center;" />
+                                        <form:input path="anyosMinimosExperiencia" class="form-control input-sm" style="width: 100px;text-align: center;" maxlength="4" />
                                     </center>
                                     </td>
                                     </tr>
@@ -302,7 +302,7 @@
                                             <div class="form-group ">
                                                 <label>A&ntilde;os experiencia minima</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el valor de años experiencia minima">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                <input  name="anyosExperiencia" id="anyosExperiencia" class="form-control" >
+                                                    <input  name="anyosExperiencia" id="anyosExperiencia" class="form-control" maxlength="4">
                                             </div>
                                         </div>
                                     </div>
@@ -387,14 +387,14 @@
                                                 <label for="">Cual?</label>
                                                 <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el otro tipo de certificación">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                                <input type="text" name="otraCertificacionIdioma" id="otraCertificacionIdioma" class="form-control">
+                                                    <input type="text" name="otraCertificacionIdioma" id="otraCertificacionIdioma" class="form-control" maxlength="100">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">Puntaje mínimo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el puntaje mínimo de estudio idioma">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                                <input type="text" name="puntajeMinimoCertificacionIdioma" id="puntajeMinimoCertificacionIdioma" class="form-control" style="width: 70px;">
+                                                    <input type="text" name="puntajeMinimoCertificacionIdioma" id="puntajeMinimoCertificacionIdioma" class="form-control" style="width: 70px;" maxlength="5">
                                             </div>
                                         </div> 
                                     </div>
@@ -653,7 +653,7 @@
                                         <div class="form-group">
                                             <label>Valor</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el valor del criterio habilitante">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                            <input type="text" name="valorCriterioHabilitante" id="valorCriterioHabilitante" class="form-control" >
+                                                <input type="text" name="valorCriterioHabilitante" id="valorCriterioHabilitante" class="form-control" maxlength="100" >
                                         </div>
                                     </div>
                                 </div>                                
@@ -737,8 +737,8 @@
                                     </div>
                                     <div class="form-group form-inline">
                                         <label for="fechaAdenda">Fecha</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la fecha de inicio">
-                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>                                
-                                        <input type='text' class="form-control fecha" name="fechaAdenda" id="fechaAdenda" />
+                                        <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>                                
+                                        <input type='text' class="form-control fecha" name="fechaAdenda" id="fechaAdenda" maxlength="10" />
                                     </div>
                                     <div class="form-group">    
                                         <label>Documento de adenda</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el documento de adenda">
@@ -870,14 +870,37 @@
     });
 
     $(document).ready(function () {
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-        var output = (dd < 10 ? '0' : '') + dd + '/' + (mm < 10 ? '0' : '') + mm + "/" + yyyy;
-        $('fechaInicio').val(output);
-        $('fechaFin').val(output);
-
+        var output = moment().format('DD/MM/YYYY');
+        if($('#fechaInicio').val() == '') {
+            $('#fechaInicio').val(output);
+        }
+        if($('#fechaFin').val() == '') {
+            $('#fechaFin').val(output);
+        }
+        if($('#fechaPublicacionResultados').val() == '') {
+            $('#fechaPublicacionResultados').val(output);
+        }
+        $('#fechaInicio').change(function () {
+             if(!moment(this.value, 'DD/MM/YYYY',true).isValid()) {
+               this.value = '';  
+             }
+        });
+        $('#fechaFin').change(function () {
+             if(!moment(this.value, 'DD/MM/YYYY',true).isValid()) {
+               this.value = '';  
+             }
+        });
+        $('#fechaPublicacionResultados').change(function () {
+             if(!moment(this.value, 'DD/MM/YYYY',true).isValid()) {
+               this.value = '';  
+             }
+        });
+        $('#fechaAdenda').change(function () {
+             if(!moment(this.value, 'DD/MM/YYYY',true).isValid()) {
+               this.value = '';  
+             }
+        });
+        
         $('#tipoConvocatoria').change(function () {
             var valor = $(this).val();
             if (valor === DOCENCIA_MEDELLIN || valor === DOCENCIA_REGIONES) {
@@ -886,7 +909,9 @@
                 $('#formcurso').hide();
             }
         });
-
+        $('#totalHorasSemestre').keyup(function () {
+            this.value = (this.value + '').replace(/[^0-9]/g, '');
+        });
         $('#sede').change(function () {
             var idSede = $(this).val();
             $.ajax({
@@ -978,9 +1003,13 @@
     $('#anyosExperiencia').keyup(function () {
         this.value = (this.value + '').replace(/[^0-9]/g, '');
     });
-    $('#puntajeMinimoCertificacionIdioma').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9]/g, '');
+    $('#puntajeMinimoCertificacionIdioma').change(function () {
+        var decimalOnly = /^\s*[0-9]\d*(\.\d+)?\s*$/;
+        if(!decimalOnly.test(this.value)) {
+            this.value = '';
+        }
     });
+        
     $('#convocatoria').submit(function (evt) {
         evt.preventDefault();
         if($('#documento').val() != "" && $('#documento')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {

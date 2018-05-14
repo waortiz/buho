@@ -661,6 +661,11 @@ table
     background-color: #fff;
     border: 1px dotted #bfbfbf;						   
 }
+#radioBtn1 .notActive{
+    color: #3276b1;
+    background-color: #fff;
+    border: 1px dotted #bfbfbf;						   
+}
 .btn-xl {
     padding: 10px 16px;
     font-size: 23px;

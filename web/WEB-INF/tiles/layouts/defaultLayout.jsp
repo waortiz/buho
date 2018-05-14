@@ -50,7 +50,8 @@
         <script type="text/javascript" src='<c:url value="/resources/js/jquery.form-validator.min.js" />'></script>
         <script type="text/javascript" src='<c:url value="/resources/js/knockout-3.4.2.js" />'></script>
         <script type="text/javascript" src='<c:url value="/resources/js/funciones.js" />'></script>
-        
+        <script type="text/javascript" src='<c:url value="/resources/js/moment.js" />'></script>
+        <script type="text/javascript" src='<c:url value="/resources/js/moment-with-locales.js" />'></script>
     </head>
     <body class="sidenav-toggled">
         <div id="contenedorA">

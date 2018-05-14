@@ -51,11 +51,12 @@ public interface IRepositorioMaestro {
     List<Maestro> obtenerClasesPatente();
     List<Maestro> obtenerTiposProductosConocimiento();
     List<Maestro> obtenerTiposPatente();
-    List<Programa> obtenerProgramasInstitucion(Integer institucion, Integer nucleoBasicoConocimiento);
+    List<Programa> obtenerProgramasInstitucion(int institucion);
     List<Maestro> obtenerCapacitaciones(Integer tipoCapacitacion, Integer nucleoBasicoConocimiento);
     List<CampoHojaVida> obtenerCamposHojaVida();
     int ingresarProgramaInstitucion(Programa programa);
     Ciudad ingresarCiudad(Ciudad ciudad);
     List<Maestro> obtenerInstitucionesEducativasExtranjeras();
     List<Maestro> obtenerInstitucionesEducativasColombianas();
+    List<Programa> obtenerProgramasNucleoBasicoConocimiento(int nucleoBasicoConocimiento);
 }

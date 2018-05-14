@@ -328,19 +328,10 @@ public class ConvocatoriaController {
 
     @RequestMapping(value = "/programas", method = RequestMethod.GET)
     public @ResponseBody
-    String obtenerProgramasInstitucion(@ModelAttribute(value = "nucleoBasicoConocimiento") String nucleoBasicoConocimiento,
+    String obtenerProgramasInstitucion(@ModelAttribute(value = "nucleoBasicoConocimiento") int nucleoBasicoConocimiento,
             Model model) {
 
-        Integer idInstitucion = null;
-        Integer idNucleoBasicoConocimiento = null;
-        if (nucleoBasicoConocimiento != null && nucleoBasicoConocimiento.length() > 0) {
-            try {
-                idNucleoBasicoConocimiento = Util.obtenerEntero(nucleoBasicoConocimiento);
-            } catch (ParseException ex) {
-                java.util.logging.Logger.getLogger(HojaVidaController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        List<Programa> programas = servicioMaestro.obtenerProgramasInstitucion(idInstitucion, idNucleoBasicoConocimiento);
+        List<Programa> programas = servicioMaestro.obtenerProgramasNucleoBasicoConocimiento(nucleoBasicoConocimiento);
         Gson gson = new Gson();
 
         return gson.toJson(programas);

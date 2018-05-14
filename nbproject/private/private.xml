@@ -5,12 +5,7 @@
         <group>
             <file>file:/D:/Desarrollo/Java/buho/web/WEB-INF/jsp/hojasVida/editar.jsp</file>
             <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/repositorios/RepositorioHojaVida.java</file>
-            <file>file:/D:/Desarrollo/Java/buho/web/WEB-INF/jsp/hojasVida/terminos.jsp</file>
-            <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/repositorios/RepositorioConvocatoria.java</file>
-            <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/entidades/Convocatoria.java</file>
-            <file>file:/D:/Desarrollo/Java/buho/web/WEB-INF/jsp/convocatorias/index.jsp</file>
-            <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/entidades/Terminos.java</file>
-            <file>file:/D:/Desarrollo/Java/buho/web/WEB-INF/jsp/convocatorias/postular.jsp</file>
+            <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/controladores/HojaVidaController.java</file>
         </group>
     </open-files>
 </project-private>

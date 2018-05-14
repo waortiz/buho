@@ -57,6 +57,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     private SimpleJdbcCall obtenerSedes;
     private SimpleJdbcCall obtenerProgramasSede;
     private SimpleJdbcCall obtenerProgramasInstitucion;
+    private SimpleJdbcCall obtenerProgramasNucleoBasicoConocimiento;
     private SimpleJdbcCall obtenerCriteriosHabilitantes;
     private SimpleJdbcCall obtenerCriteriosEvaluacion;
     private SimpleJdbcCall obtenerModalidadesCurso;
@@ -108,6 +109,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         this.obtenerSedes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerSedes").returningResultSet("sedes", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerProgramasSede = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerProgramasSede").returningResultSet("programas", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerProgramasInstitucion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerProgramasInstitucion").returningResultSet("programas", BeanPropertyRowMapper.newInstance(Programa.class));
+        this.obtenerProgramasNucleoBasicoConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerProgramasNucleoBasicoConocimiento").returningResultSet("programas", BeanPropertyRowMapper.newInstance(Programa.class));
         this.obtenerCriteriosHabilitantes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCriteriosHabilitantes").returningResultSet("criteriosHabilitantes", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerCriteriosEvaluacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCriteriosEvaluacion").returningResultSet("criteriosEvaluacion", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerNaturalezasCargo = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerNaturalezasCargo").returningResultSet("naturalezasCargo", BeanPropertyRowMapper.newInstance(Maestro.class));
@@ -412,16 +414,25 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     }
 
     @Override
-    public List<Programa> obtenerProgramasInstitucion(Integer institucion, Integer nucleoBasicoConocimiento) {
+    public List<Programa> obtenerProgramasInstitucion(int institucion) {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
         parametros.addValue("varInstitucion", institucion);
-        parametros.addValue("varNucleoBasicoConocimiento", nucleoBasicoConocimiento);
         Map resultado = obtenerProgramasInstitucion.execute(parametros);
         List<Programa> coleccion = (ArrayList<Programa>) resultado.get("programas");
 
         return coleccion;
     }
 
+    @Override
+    public List<Programa> obtenerProgramasNucleoBasicoConocimiento(int nucleoBasicoConocimiento) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varNucleoBasicoConocimiento", nucleoBasicoConocimiento);
+        Map resultado = obtenerProgramasNucleoBasicoConocimiento.execute(parametros);
+        List<Programa> coleccion = (ArrayList<Programa>) resultado.get("programas");
+
+        return coleccion;
+    }
+    
     @Override
     public List<Maestro> obtenerCapacitaciones(Integer tipoCapacitacion, Integer nucleoBasicoConocimiento) {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
