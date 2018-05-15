@@ -29,6 +29,8 @@ import co.edu.fnsp.buho.servicios.IServicioMaestro;
 import co.edu.fnsp.buho.utilidades.Util;
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;

@@ -429,6 +429,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         List<ListadoConvocatoria> convocatorias = (List<ListadoConvocatoria>) resultado.get("convocatorias");
         for (ListadoConvocatoria convocatoria : convocatorias) {
             convocatoria.setFechaFinFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaFin()));
+            convocatoria.setFechaPostulacionFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaPostulacion()));
         }
 
         return convocatorias;
@@ -442,6 +443,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         List<ListadoConvocatoria> convocatorias = (List<ListadoConvocatoria>) resultado.get("convocatorias");
         for (ListadoConvocatoria convocatoria : convocatorias) {
             convocatoria.setFechaFinFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaFin()));
+            convocatoria.setFechaPostulacionFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaPostulacion()));
         }
 
         return convocatorias;

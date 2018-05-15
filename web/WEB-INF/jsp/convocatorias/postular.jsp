@@ -32,17 +32,17 @@
                                     <table class="table table-hover" id="tbconvo">
                                         <thead>
                                             <tr>
-                                                <td><input type="text" id="intip" class="form-control input-sm" placeholder="Buscar tipo de convocatoria"></td>
                                                 <td><input type="text" id="innom" class="form-control input-sm" placeholder="Buscar nombre de convocatoria"></td>
                                                 <td><input type="text" id="infechfin" class="form-control input-sm fecha" placeholder="Buscar fecha de finalización"></td>
+                                                <td><input type="text" id="infechpos" class="form-control input-sm" placeholder="Buscar fecha de postulación"></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
                                             </tr>
                                             <tr> 
-                                                <th>Tipo</th>
                                                 <th>Nombre</th>
                                                 <th>Fecha de finalización</th>
+                                                <th>Fecha de postulación</th>
                                                 <th>Documento</th>
                                                 <th>Aplicar</th>
                                                 <th></th>
@@ -51,9 +51,9 @@
                                         <tbody>
                                             <c:forEach var="convocatoria" items="${convocatoriasVigentes}">   
                                                 <tr>
-                                                    <td>${convocatoria.getNombreTipoConvocatoria()}</td>
                                                     <td>${convocatoria.getNombre()}</td>               
                                                     <td>${convocatoria.getFechaFinFormateada()}</td>
+                                                    <td>${convocatoria.getFechaPostulacionFormateada()}</td>
                                                     <td style="text-align: center">
                                                         <c:if test = "${convocatoria.isTieneDocumento()}">
                                                             <a href="#" title="Ver documento" onclick="verDocumento(${convocatoria.getId()})"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
@@ -166,19 +166,13 @@
             </div>
             <div class="modal-body">
                 <div class="row">   
-                    <div class="col-md-2">
-                        <div class="form-group">    
-                            <label>Tipo</label>
-                            <input id="tipoConvocatoria" type="text" name="tipoConvocatoria" style="border: 0;font-style: italic; margin-left: 20px;" readonly value="">
-                        </div>
-                    </div>
                     <div class="col-md-3"> 
                         <div class="form-group">    
                             <label>Fecha de inicio</label>
                             <input id="fechaInicio" name="fechaInicio" disabled style="border: 0; text-align: center;margin-left: 0px; font-style: italic;font-weight: normal; width: 140px;" value="">
                         </div>        
                     </div>
-                    <div class="col-md-3"> 
+                    <div class="col-md-4"> 
                         <div class="form-group">    
                             <label>Fecha de vigencia(cierre)</label>
                             <input id="fechaVigencia" name="fechaVigencia" disabled style="border: 0; text-align: center;margin-left: 0px; font-style: italic;font-weight: normal; width: 140px;" value="">
@@ -337,22 +331,21 @@
             }
         });
 
-        $('#intip').on('keyup', function () {
+        $('#innom').on('keyup', function () {
             table
                     .columns(0)
                     .search(this.value)
                     .draw();
         });
-
         $('#infechfin').on('keyup', function () {
             table
-                    .columns(2)
+                    .columns(1)
                     .search(this.value)
                     .draw();
         });
-        $('#innom').on('keyup', function () {
+        $('#infechpos').on('keyup', function () {
             table
-                    .columns(1)
+                    .columns(2)
                     .search(this.value)
                     .draw();
         });
@@ -430,7 +423,6 @@
                     $('#idConvocatoria').val(convocatoria.id);
                     $('#fechaInicio').val(convocatoria.fechaInicioFormateada);
                     $('#fechaVigencia').val(convocatoria.fechaFinFormateada);
-                    $('#tipoConvocatoria').val(convocatoria.nombreTipoConvocatoria);
                     $('#nombre').val(convocatoria.nombre);
                     $('#fechaPublicacion').val(convocatoria.fechaPublicacionResultadosFormateada);
                     $('#descripcion').val(convocatoria.descripcion);

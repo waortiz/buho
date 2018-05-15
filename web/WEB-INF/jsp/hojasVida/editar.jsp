@@ -1076,8 +1076,7 @@
                                         <th>Nivel de estudio</th>
                                         <th>Instituci&oacute;n</th>
                                         <th>Programa cursado</th>
-                                        <th>Fecha de título</th>
-                                        <th class="cer" align="center">Certificado Homologado</th>
+                                        <th class="cer" align="center">Certificado homologación</th>
                                         <th class="cer" align="center">Certificado</th>
                                         <th class="opc" align="center">Opciones</th>
                                     </tr> 
@@ -1088,16 +1087,13 @@
                                             <span data-bind="text: nombreNivel" ></span>
                                             <input type="hidden" class="form-control" data-bind="value: nivel, attr: { 'name': 'educacionesSuperiores[' + $index() + '].nivel'  }">
                                         </td>
-                                        <td style="width: 20%">
+                                        <td style="width: 25%">
                                             <span data-bind="text: nombreInstitucion" ></span>
                                         </td>
-                                        <td style="width: 20%">
+                                        <td style="width: 25%">
                                             <span data-bind="text: nombrePrograma" ></span>
                                             <input type="hidden" class="form-control" data-bind="value: programa, attr: { 'name': 'educacionesSuperiores[' + $index() + '].programa'  }">
                                             <input type="hidden" class="form-control" data-bind="value: titulo, attr: { 'name': 'educacionesSuperiores[' + $index() + '].titulo'  }">
-                                        </td>
-                                        <td style="width: 20%">
-                                            <span data-bind="text: fechaTitulo" ></span>
                                             <input type="hidden" class="form-control" data-bind="value: anyoFinalizacion, attr: { 'name': 'educacionesSuperiores[' + $index() + '].anyoFinalizacion'  }">
                                             <input type="hidden" class="form-control" data-bind="value: fechaTitulo, attr: { 'name': 'educacionesSuperiores[' + $index() + '].fechaTitulo'  }">
                                         </td>
@@ -1574,7 +1570,7 @@
                                 <button class="btn btn-success">Educaci&oacute;n no formal</button>
                             </div>
                         </div>
-                        <label>Estudios educaci&oacute;n continua</label>
+                        <label>Estudios educación no formal</label>
                         <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevaEducacionContinua();" >
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>               
@@ -2087,9 +2083,9 @@
                                         <div class="form-group form-inline">
                                             <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcloe básico del conocimiento">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <input type="text" name="nombreNucleoBasicoConocimientoExperienciaDocencia" id="nombreNucleoBasicoConocimientoExperienciaDocencia" class="form-control" style="width: 80%;" readonly>
-                                            <input type="hidden" name="nucleoBasicoConocimientoExperienciaDocencia" id="nucleoBasicoConocimientoExperienciaDocencia" />
-                                            <button type="button" class="btn btn-success btn-sm" onclick="mostrarNucleoBasicoConocimiento('nucleoBasicoConocimientoExperienciaDocencia','nombreNucleoBasicoConocimientoExperienciaDocencia')"  style="margin-left: 10px;"><span class="glyphicon glyphicon-search"></span></button>
+                                            <input type="text" name="nombreNucleoBasicoConocimientoCursoExperienciaDocencia" id="nombreNucleoBasicoConocimientoCursoExperienciaDocencia" class="form-control" style="width: 80%;" readonly>
+                                            <input type="hidden" name="nucleoBasicoConocimientoCursoExperienciaDocencia" id="nucleoBasicoConocimientoCursoExperienciaDocencia" />
+                                            <button type="button" class="btn btn-success btn-sm" onclick="mostrarNucleoBasicoConocimiento('nucleoBasicoConocimientoCursoExperienciaDocencia','nombreNucleoBasicoConocimientoCursoExperienciaDocencia')"  style="margin-left: 10px;"><span class="glyphicon glyphicon-search"></span></button>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -3081,6 +3077,7 @@
         });
         $('#btnTrabajoActualExperienciaLaboralSi').click(function () {
             $('#fechaRetiroExperienciaLaboral').prop('disabled', 'disabled');
+            $('#fechaRetiroExperienciaLaboral').val('');
         });
         $('#btnTrabajoActualExperienciaLaboralNo').click(function () {
             $('#fechaRetiroExperienciaLaboral').prop('disabled', false);
@@ -3686,7 +3683,21 @@
         };
 
         self.verDocumentoSoporte = function (documentoSoporte) {
-            window.location.href = "${pageContext.request.contextPath}/hojasVida/documentoSoporte/" + documentoSoporte.id();
+            
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/documentoSoporte/" + documentoSoporte.id(),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                   if(response != "") {
+                     window.location.href = "${pageContext.request.contextPath}/hojasVida/documentoSoporte/" + documentoSoporte.id();
+                   }
+                },
+                error:function (xhr, ajaxOptions, thrownError) {
+                    
+                } 
+            });
         };
 
         self.adicionarIdioma = function () {
@@ -3830,7 +3841,20 @@
         };
 
         self.verCertificadoIdioma = function (idioma) {
-            window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoIdioma/" + idioma.id();
+           $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/certificadoIdioma/" + idioma.id(),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                  if(response != "") {
+                      window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoIdioma/" + idioma.id();
+                  }
+                },
+                error:function (xhr, ajaxOptions, thrownError) {
+                    
+                } 
+            });            
         };
         
         self.adicionarEducacionBasica = function () {
@@ -3840,7 +3864,7 @@
             var anyoInicioEducacionBasica = $('#anyoInicioEducacionBasica').val();
             var anyoFinalizacionEducacionBasica = $('#anyoFinalizacionEducacionBasica').val();
             var tituloEducacionBasica = $('#tituloEducacionBasica').val();
-            var graduadoEducacionBasica = $('#graduadoEducacionBasica').val();
+            var graduadoEducacionBasica = strToBool($('#graduadoEducacionBasica').val());
         
             if (nivelEstudioEducacionBasica === "") {
                 bootstrap_alert_educacion_basica.warning('Debe seleccionar el nivel de estudio');
@@ -3854,7 +3878,7 @@
                 bootstrap_alert_educacion_basica.warning('Debe ingresar el año de inicio');
                 return false;
             }
-            if (graduadoEducacionBasica === "true" && anyoFinalizacionEducacionBasica === "") {
+            if (graduadoEducacionBasica && anyoFinalizacionEducacionBasica === "") {
                 bootstrap_alert_educacion_basica.warning('Debe ingresar el año de finalización');
                 return false;
             }
@@ -3946,13 +3970,26 @@
         };
 
         self.verCertificadoEducacionBasica = function (educacionBasica) {
-            window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoEducacionBasica/" + educacionBasica.id();
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/certificadoEducacionBasica/" + educacionBasica.id(),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                   if(response != "") {
+                     window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoEducacionBasica/" + educacionBasica.id();
+                   }
+                },
+                error:function (xhr, ajaxOptions, thrownError) {
+                    
+                } 
+            });
         };        
 
         self.adicionarEducacionSuperior = function () {
             var nivelEstudioEducacionSuperior = $('#nivelEstudioEducacionSuperior').val();
             var nombreNivelEducacionSuperior = $('#nivelEstudioEducacionSuperior option:selected').text();
-            var tituloExteriorEducacionSuperior = $('#tituloExteriorEducacionSuperior').val();
+            var tituloExteriorEducacionSuperior = strToBool($('#tituloExteriorEducacionSuperior').val());
             var paisTituloExteriorEducacionSuperior = $('#paisTituloExteriorEducacionSuperior').val();
             var nombrePaisTituloExteriorEducacionSuperior = $('#paisTituloExteriorEducacionSuperior option:selected').text();
             var programaCursadoEducacionSuperior = $('#programaCursadoEducacionSuperior').val();
@@ -3964,14 +4001,14 @@
             var anyoInicioEducacionSuperior = $('#anyoInicioEducacionSuperior').val();
             var anyoFinalizacionEducacionSuperior = $('#anyoFinalizacionEducacionSuperior').val();
             var tituloEducacionSuperior = $('#tituloEducacionSuperior').val();
-            var graduadoEducacionSuperior = $('#graduadoEducacionSuperior').val();
+            var graduadoEducacionSuperior = strToBool($('#graduadoEducacionSuperior').val());
             var fechaTituloEducacionSuperior = $('#fechaTituloEducacionSuperior').val();
         
             if (nivelEstudioEducacionSuperior === "") {
                 bootstrap_alert_educacion_superior.warning('Debe seleccionar el nivel de estudio');
                 return false;
             }
-            if(tituloExteriorEducacionSuperior === "true") {
+            if(tituloExteriorEducacionSuperior) {
                 if(paisTituloExteriorEducacionSuperior === "") {
                     bootstrap_alert_educacion_superior.warning('Debe seleccionar el país');
                     return false;
@@ -3995,7 +4032,7 @@
                 bootstrap_alert_educacion_superior.warning('Debe ingresar el año de inicio');
                 return false;
             }
-            if (graduadoEducacionSuperior === "true" && anyoFinalizacionEducacionSuperior === "") {
+            if (graduadoEducacionSuperior && anyoFinalizacionEducacionSuperior === "") {
                 bootstrap_alert_educacion_superior.warning('Debe ingresar el año de finalización');
                 return false;
             }
@@ -4003,7 +4040,7 @@
                 bootstrap_alert_educacion_superior.warning('Debe ingresar el título');
                 return false;
             }
-            if (graduadoEducacionSuperior === "true" && fechaTituloEducacionSuperior === "") {
+            if (graduadoEducacionSuperior && fechaTituloEducacionSuperior === "") {
                 bootstrap_alert_educacion_superior.warning('Debe ingresar la fecha del título');
                 return false;
             }
@@ -4049,7 +4086,7 @@
                         break;
                     }
                 }
-                if(tituloExteriorEducacionSuperior === "true" && self.educacionesSuperiores()[indice].tituloExterior() === false) {
+                if(tituloExteriorEducacionSuperior && self.educacionesSuperiores()[indice].tituloExterior() === false) {
                     if($('input:file[name="educacionesSuperiores[' + indice + '].certificadoHomologado"]').val() === "") {
                         bootstrap_alert_educacion_superior.warning('Debe ingresar el certificado homologado del título');
                         return false;
@@ -4159,11 +4196,37 @@
         };
 
         self.verCertificadoHomologadoEducacionSuperior = function (educacionSuperior) {
-            window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoHomologadoEducacionSuperior/" + educacionSuperior.id();
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/certificadoHomologadoEducacionSuperior/" + educacionSuperior.id(),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                   if(response != "") {
+                     window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoHomologadoEducacionSuperior/" + educacionSuperior.id();
+                   }
+                },
+                error:function (xhr, ajaxOptions, thrownError) {
+                    
+                } 
+            });
         };        
 
         self.verCertificadoEducacionSuperior = function (educacionSuperior) {
-            window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoEducacionSuperior/" + educacionSuperior.id();
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/certificadoEducacionSuperior/" + educacionSuperior.id(),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                   if(response != "") {
+                     window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoEducacionSuperior/" + educacionSuperior.id();
+                   }
+                },
+                error:function (xhr, ajaxOptions, thrownError) {
+                    
+                } 
+            });
         };        
 
         self.adicionarEducacionContinua = function () {
@@ -4279,7 +4342,20 @@
         };
 
         self.verCertificadoEducacionContinua = function (educacionContinua) {
-            window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoEducacionContinua/" + educacionContinua.id();
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/certificadoEducacionContinua/" + educacionContinua.id(),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                   if(response != "") {
+                     window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoEducacionContinua/" + educacionContinua.id();
+                   }
+                },
+                error:function (xhr, ajaxOptions, thrownError) {
+                    
+                } 
+            });
         };        
 
         self.adicionarDistincion = function () {
@@ -4361,14 +4437,27 @@
         };
 
         self.verCertificadoDistincion = function (distincion) {
-            window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoDistincion/" + distincion.id();
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/certificadoDistincion/" + distincion.id(),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                   if(response != "") {
+                     window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoDistincion/" + distincion.id();
+                   }
+                },
+                error:function (xhr, ajaxOptions, thrownError) {
+                    
+                } 
+            });
         };
         
        self.adicionarExperienciaLaboral = function () {
             var tipoExperienciaLaboral = $('#tipoExperienciaLaboral').val();
             var nombreTipoExperienciaLaboral = $('#tipoExperienciaLaboral option:selected').text();
-            var trabajoActualExperienciaLaboral = $('#trabajoActualExperienciaLaboral').val();
-            var experienciaLaboralFNSP = $('#experienciaLaboralFNSP').val();
+            var trabajoActualExperienciaLaboral = strToBool($('#trabajoActualExperienciaLaboral').val());
+            var experienciaLaboralFNSP = strToBool($('#experienciaLaboralFNSP').val());
             var fechaIngresoExperienciaLaboral = $('#fechaIngresoExperienciaLaboral').val();
             var fechaRetiroExperienciaLaboral = $('#fechaRetiroExperienciaLaboral').val();
             var nucleoBasicoConocimientoExperienciaLaboral = $('#nucleoBasicoConocimientoExperienciaLaboral').val();
@@ -4391,7 +4480,7 @@
                 bootstrap_alert_experiencia_laboral.warning('Debe ingresar la la fecha de ingreso');
                 return false;
             }
-            if (trabajoActualExperienciaLaboral === "false" && fechaRetiroExperienciaLaboral === "" ) {
+            if (!trabajoActualExperienciaLaboral && fechaRetiroExperienciaLaboral === "" ) {
                 bootstrap_alert_experiencia_laboral.warning('Debe ingresar la la fecha de retiro');
                 return false;
             }
@@ -4512,9 +4601,10 @@
               $('#btnTrabajoActualExperienciaLaboralSi').removeClass('notActive').addClass('active');  
               $('#btnTrabajoActualExperienciaLaboralNo').removeClass('active').addClass('notActive');
               $('#fechaRetiroExperienciaLaboral').prop('disabled', 'disabled');
+              $('#fechaRetiroExperienciaLaboral').val('');
             } else {
-              $('#btnTrabajoActualExperienciaLaboralSi').removeClass('notActive').addClass('active');  
-              $('#btnTrabajoActualExperienciaLaboralNo').removeClass('active').addClass('notActive');  
+              $('#btnTrabajoActualExperienciaLaboralNo').removeClass('notActive').addClass('active');  
+              $('#btnTrabajoActualExperienciaLaboralSi').removeClass('active').addClass('notActive');  
               $('#fechaRetiroExperienciaLaboral').prop('disabled', false);
             }
             $('#experienciaLaboralFNSP').val(experienciaLaboral.fnsp());
@@ -4548,12 +4638,25 @@
         };
 
         self.verCertificadoExperienciaLaboral = function (experienciaLaboral) {
-            window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoExperienciaLaboral/" + experienciaLaboral.id();
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/certificadoExperienciaLaboral/" + experienciaLaboral.id(),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                   if(response != "") {
+                     window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoExperienciaLaboral/" + experienciaLaboral.id();
+                   }
+                },
+                error:function (xhr, ajaxOptions, thrownError) {
+                    
+                } 
+            });            
         };        
        
         self.adicionarExperienciaDocencia = function () {
-            var trabajoActualDocencia = $('#trabajoActualDocencia').val();
-            var experienciaDocenciaFNSP = $('#experienciaDocenciaFNSP').val();
+            var trabajoActualDocencia = strToBool($('#trabajoActualDocencia').val());
+            var experienciaDocenciaFNSP = strToBool($('#experienciaDocenciaFNSP').val());
             var institucionExperienciaDocencia = $('#institucionExperienciaDocencia').val();
             var nombreInstitucionExperienciaDocencia = $('#institucionExperienciaDocencia option:selected').text();
             if (institucionExperienciaDocencia === "") {
@@ -4627,9 +4730,11 @@
             if(experienciaDocencia.fnsp()) {
               $('#btnExperienciaDocenciaFNSPSi').removeClass('notActive').addClass('active');  
               $('#btnExperienciaDocenciaFNSPNo').removeClass('active').addClass('notActive');
+              $('#institucionExperienciaDocencia').prop('disabled', 'disabled');
             } else {
               $('#btnExperienciaDocenciaFNSPNo').removeClass('notActive').addClass('active');  
               $('#btnExperienciaDocenciaFNSPSi').removeClass('active').addClass('notActive');  
+              $('#institucionExperienciaDocencia').prop('disabled', false);
             }
             $('#institucionExperienciaDocencia').val(experienciaDocencia.institucion()).trigger('change');
             self.consecutivoExperienciaDocencia(experienciaDocencia.consecutivo());
@@ -4813,7 +4918,20 @@
         };
 
         self.verCertificadoCursoExperienciaDocencia = function (cursoExperienciaDocencia) {
-            window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoCursoExperienciaDocencia/" + cursoExperienciaDocencia.id();
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/certificadoCursoExperienciaDocencia/" + cursoExperienciaDocencia.id(),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                   if(response != "") {
+                     window.location.href = "${pageContext.request.contextPath}/hojasVida/certificadoCursoExperienciaDocencia/" + cursoExperienciaDocencia.id();
+                   }
+                },
+                error:function (xhr, ajaxOptions, thrownError) {
+                    
+                } 
+            });                
         };        
 
         self.adicionarArticulo = function () {
@@ -4899,7 +5017,7 @@
             var fechaPatente = $('#fechaPatente').val();
             var tipoPatente = $('#tipoPatente').val();
             var nombreTipoPatente = $('#tipoPatente option:selected').text();
-            var propiedadCompartidaPatente = $('#propiedadCompartidaPatente').val();
+            var propiedadCompartidaPatente = strToBool($('#propiedadCompartidaPatente').val());
             var clasePatente = $('#clasePatente').val();
             var descripcionPatente = $('#descripcionPatente').val();
         
@@ -5003,7 +5121,20 @@
         };
 
         self.verDocumentoPatente = function (patente) {
-            window.location.href = "${pageContext.request.contextPath}/hojasVida/documentoPatente/" + patente.id();
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/documentoPatente/" + patente.id(),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                   if(response != "") {
+                     window.location.href = "${pageContext.request.contextPath}/hojasVida/documentoPatente/" + patente.id();
+                   }
+                },
+                error:function (xhr, ajaxOptions, thrownError) {
+                    
+                } 
+            });  
         };        
 
         self.adicionarProductoConocimiento = function () {
@@ -5096,7 +5227,20 @@
         };
 
         self.verDocumentoProductoConocimiento = function (productoConocimiento) {
-            window.location.href = "${pageContext.request.contextPath}/hojasVida/documentoProductoConocimiento/" + productoConocimiento.id();
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/documentoProductoConocimiento/" + productoConocimiento.id(),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                   if(response != "") {
+                     window.location.href = "${pageContext.request.contextPath}/hojasVida/documentoProductoConocimiento/" + productoConocimiento.id();
+                   }
+                },
+                error:function (xhr, ajaxOptions, thrownError) {
+                    
+                } 
+            });  
         };        
     };
 
@@ -5313,6 +5457,8 @@
         $('#btnExperienciaLaboralFNSPNo').removeClass('active').addClass('notActive');
         $('#fechaIngresoExperienciaLaboral').val("");
         $('#fechaRetiroExperienciaLaboral').val("");
+        $('#nombreNucleoBasicoConocimientoExperienciaLaboral').val("");
+        $('#nucleoBasicoConocimientoExperienciaLaboral').val("");
         $('#areaSaberExperienciaLaboral').val("").trigger('change');
         $('#tipoEmpresaExperienciaLaboral').val("").trigger('change');
         $('#nombreEmpresaExperienciaLaboral').val("");
@@ -5657,11 +5803,11 @@
             return false;
         }
 
-        if ($('#disponeRUT').val() === 'true' && $('#actividadEconomica').val() === "") {
+        if (strToBool($('#disponeRUT').val()) && $('#actividadEconomica').val() === "") {
             bootstrap_alert_hoja_vida.warning("Debe ingresar la actividad económica");
             return;
         }
-        if ($('#empleadoUDEA').val() === "true" && $('#tipoVinculacion').val() === '') {
+        if (strToBool($('#empleadoUDEA').val()) && $('#tipoVinculacion').val() === '') {
             bootstrap_alert_hoja_vida.warning("Debe ingresar el tipo de vinculación con la U de A");
             return;
         }
@@ -5729,15 +5875,54 @@
     }
 
     function verCopiaCedula() {
-        window.location.href = "${pageContext.request.contextPath}/hojasVida/copiaCedula/" + $('#idPersona').val();
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/hojasVida/copiaCedula/" + $('#idPersona').val(),
+            processData: false,
+            contentType: false,
+            success: function (response) {
+               if(response != "") {
+                 window.location.href = "${pageContext.request.contextPath}/hojasVida/copiaCedula/" + $('#idPersona').val();
+               }
+            },
+            error:function (xhr, ajaxOptions, thrownError) {
+
+            } 
+        });  
     }
 
     function verCopiaRUT() {
-        window.location.href = "${pageContext.request.contextPath}/hojasVida/copiaRUT/" + $('#idPersona').val();
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/hojasVida/copiaRUT/" + $('#idPersona').val(),
+            processData: false,
+            contentType: false,
+            success: function (response) {
+               if(response != "") {
+                 window.location.href = "${pageContext.request.contextPath}/hojasVida/copiaRUT/" + $('#idPersona').val();
+               }
+            },
+            error:function (xhr, ajaxOptions, thrownError) {
+
+            } 
+        });  
     }
 
     function verCopiaLibretaMilitar() {
-        window.location.href = "${pageContext.request.contextPath}/hojasVida/copiaLibretaMilitar/" + $('#idPersona').val();
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/hojasVida/copiaLibretaMilitar/" + $('#idPersona').val(),
+            processData: false,
+            contentType: false,
+            success: function (response) {
+               if(response != "") {
+                 window.location.href = "${pageContext.request.contextPath}/hojasVida/copiaLibretaMilitar/" + $('#idPersona').val();
+               }
+            },
+            error:function (xhr, ajaxOptions, thrownError) {
+
+            } 
+        });  
     }
 
     function establecerEgresadoUdeA() {

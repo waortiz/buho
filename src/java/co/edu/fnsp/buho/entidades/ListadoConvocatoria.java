@@ -17,6 +17,8 @@ public class ListadoConvocatoria {
     private String nombreTipoConvocatoria;
     private Date fechaFin;
     private String fechaFinFormateada;
+    private Date fechaPostulacion;
+    private String fechaPostulacionFormateada;
     private String nombre;
     private boolean tieneDocumento;
     private boolean postulado;
@@ -131,6 +133,34 @@ public class ListadoConvocatoria {
      */
     public void setPostulado(boolean postulado) {
         this.postulado = postulado;
+    }
+
+    /**
+     * @return the fechaPostulacion
+     */
+    public Date getFechaPostulacion() {
+        return fechaPostulacion;
+    }
+
+    /**
+     * @param fechaPostulacion the fechaPostulacion to set
+     */
+    public void setFechaPostulacion(Date fechaPostulacion) {
+        this.fechaPostulacion = fechaPostulacion;
+    }
+
+    /**
+     * @return the fechaPostulacionFormateada
+     */
+    public String getFechaPostulacionFormateada() {
+        return fechaPostulacionFormateada;
+    }
+
+    /**
+     * @param fechaPostulacionFormateada the fechaPostulacionFormateada to set
+     */
+    public void setFechaPostulacionFormateada(String fechaPostulacionFormateada) {
+        this.fechaPostulacionFormateada = fechaPostulacionFormateada;
     }
     
 }
