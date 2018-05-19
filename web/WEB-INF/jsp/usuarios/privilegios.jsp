@@ -8,58 +8,68 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
 
 <div class="container">
-    <div class="panel panel-success">
-        <div class="panel-heading">Privilegios Usuario</div>
-        <div class="panel-body">
-            <form:form method="POST" action="${pageContext.request.contextPath}/usuarios/privilegios" modelAttribute="privilegiosUsuario">
-                <div id="alert_placeholder_privilegio"></div>
-                <table class="table table-hover tablaForm" align="center">
-                    <tr>
-                        <td width="33%"><strong>Usuario:</strong></td>
-                        <td width="33%"><strong>Nombres:</strong></td>
-                        <td width="33%"><strong>Apellidos:</strong></td>
-                    </tr>
-                    <tr>
-                        <td>${privilegiosUsuario.getNombreUsuario()}</td>
-                        <td>${privilegiosUsuario.getNombres()}</td>
-                        <td>${privilegiosUsuario.getApellidos()}</td>
-                    </tr>                
-                    <tr>
-                        <td colspan="3"><strong>Privilegios</strong></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            <form:hidden path="idUsuario" />
-                            <table align="center">
-                                <tr>
-                                    <td rowspan="2">
-                                        <select name="privilegiosPorAsignar" id="privilegiosPorAsignar" class="form-control" multiple="true" style="width:450px; height: 200px">
-                                            <c:forEach var="privilegio" items="${privilegiosPorAsignar}">
-                                                <option value="${privilegio.getIdPrivilegio()}">${privilegio.getNombre()}</option>
-                                            </c:forEach>
-                                        </select>                                          
-                                    </td>
-                                    <td>
-                                        <a href="JavaScript:void(0);" id="asignar"><span class="glyphicon glyphicon-arrow-right"></span></a><br><br>
-                                        <a href="JavaScript:void(0);" id="remover"><span class="glyphicon glyphicon-arrow-left"></span></a>
-                                    </td>
-                                    <td rowspan="2">
-                                        <form:select path="privilegios" id="privilegios" cssClass="form-control" multiple="true" style="width:450px; height: 200px">
-                                            <form:options items="${privilegiosAsignados}" itemLabel="nombre" itemValue="idPrivilegio"/>
-                                        </form:select>                                    
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
+    <form:form method="POST" action="${pageContext.request.contextPath}/usuarios/privilegios" modelAttribute="privilegiosUsuario">
+        <br />
+        <div id="alert_placeholder_privilegio"></div>
+        <legend><h3>Privilegio por usuario</h3></legend>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="usuario">Usuario</label>
+                    <br> 
+                    <input class="form-control" disabled style="border: 0; margin-left: 0px; font-style: italic;font-weight: normal;" value="${privilegiosUsuario.getNombreUsuario()}" />
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Aceptar</button>
-            </div>   
-        </form:form>
-    </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="nombres">Nombres</label>
+                    <br> 
+                    <input class="form-control" disabled style="border: 0; margin-left: 0px; font-style: italic;font-weight: normal;" value="${privilegiosUsuario.getNombres()}" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="apellidos">Apellidos</label>
+                    <br> 
+                    <input class="form-control" disabled style="border: 0; margin-left: 0px; font-style: italic;font-weight: normal;" value="${privilegiosUsuario.getApellidos()}" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <strong>Privilegios</strong>
+                    <input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <form:hidden path="idUsuario" />
+                    <table align="center">
+                        <tr>
+                            <td rowspan="2">
+                                <select name="privilegiosPorAsignar" id="privilegiosPorAsignar" class="form-control" multiple="true" style="width:450px; height: 200px">
+                                    <c:forEach var="privilegio" items="${privilegiosPorAsignar}">
+                                        <option value="${privilegio.getIdPrivilegio()}">${privilegio.getNombre()}</option>
+                                    </c:forEach>
+                                </select>                                          
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <a href="JavaScript:void(0);" id="asignar"><span class="glyphicon glyphicon-arrow-right"></span></a><br><br>
+                                <a href="JavaScript:void(0);" id="remover"><span class="glyphicon glyphicon-arrow-left"></span></a>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td rowspan="2">
+                                <form:select path="privilegios" id="privilegios" cssClass="form-control" multiple="true" style="width:450px; height: 200px">
+                                    <form:options items="${privilegiosAsignados}" itemLabel="nombre" itemValue="idPrivilegio"/>
+                                </form:select>                                    
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div>
+            <input type="submit" value="Actualizar privilegios" class="btn btn-success" style="margin-top: 30px;float: right;" />
+        </div>   
+    </form:form>
 </div>
 <script>
     $.validate({
@@ -75,33 +85,17 @@
                 $('#privilegios').append("<option value='" + $(this).val() + "'>" + $(this).text() + "</option>");
                 $(this).remove();
             });
-            ordenarPrivilegios($('#privilegios option'));
+            ordenarOpciones($('#privilegios option'));
         });
         $('#remover').click(function () {
             $('#privilegios option:selected').each(function () {
                 $('#privilegiosPorAsignar').append("<option value='" + $(this).val() + "'>" + $(this).text() + "</option>");
                 $(this).remove();
             });
-            ordenarPrivilegios($('#privilegiosPorAsignar option'));
+            ordenarOpciones($('#privilegiosPorAsignar option'));
         });
 
     });
-
-    function ordenarPrivilegios(options) {
-        var arr = options.map(function (_, o) {
-            return {
-                t: $(o).text(),
-                v: o.value
-            };
-        }).get();
-        arr.sort(function (o1, o2) {
-            return o1.t > o2.t ? 1 : o1.t < o2.t ? -1 : 0;
-        });
-        options.each(function (i, o) {
-            o.value = arr[i].v;
-            $(o).text(arr[i].t);
-        });
-    }
 
     $('#privilegiosUsuario').submit(function (evt) {
         evt.preventDefault();

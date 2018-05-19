@@ -53,7 +53,7 @@ public class PrivilegioController {
 
     @RequestMapping(value = "/crear", method = RequestMethod.POST)
     public @ResponseBody
-    String crearUsuario(@ModelAttribute(value = "privilegio") Privilegio privilegio, Model model) {
+    String crearPrivilegio(@ModelAttribute(value = "privilegio") Privilegio privilegio, Model model) {
         String mensaje = "";
         try {
             boolean existe = false;
@@ -110,16 +110,16 @@ public class PrivilegioController {
         }
         model.addAttribute("privilegios", servicioSeguridad.obtenerPrivilegios());
 
-        return "privilegios/privilegios";
+        return "privilegios/index";
     }
 
-    @RequestMapping(value = "/privilegios", method = RequestMethod.GET)
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String obtenerUsuarios(Model model) {
 
         List<Privilegio> privilegios = servicioSeguridad.obtenerPrivilegios();
         model.addAttribute("privilegios", privilegios);
 
-        return "privilegios/privilegios";
+        return "privilegios/index";
     }
 
     @InitBinder

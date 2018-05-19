@@ -24,7 +24,7 @@
     </definition>  
    
     <!-- Error Page -->
-    <definition name="error" template="/WEB-INF/tiles/layouts/errorLayout.jsp">  
+    <definition name="error" extends="base-definition">  
         <put-attribute name="title" value="Errores" />  
         <put-attribute name="body" value="/WEB-INF/jsp/error.jsp" />  
     </definition>  
@@ -58,8 +58,23 @@
         <put-attribute name="title" value="Cambio Clave" />  
         <put-attribute name="body" value="/WEB-INF/jsp/cambioClave.jsp" />  
     </definition>  
-    <definition name="usuarios/editar" extends="base-definition">  
-        <put-attribute name="title" value="Editar" />  
-        <put-attribute name="body" value="/WEB-INF/jsp/usuarios/editar.jsp" />  
+    <definition name="usuarios/index" extends="base-definition">  
+        <put-attribute name="title" value="Index" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/usuarios/index.jsp" />  
     </definition>  
+   <definition name="usuarios/privilegios" extends="base-definition">  
+       <put-attribute name="title" value="Privilegios" />  
+       <put-attribute name="body" value="/WEB-INF/jsp/usuarios/privilegios.jsp" />  
+   </definition>  
+   
+   <!-- Privilegios Page-->
+   <definition name="privilegios/index" extends="base-definition">  
+       <put-attribute name="title" value="Privilegios" />  
+       <put-attribute name="body" value="/WEB-INF/jsp/privilegios/index.jsp" />  
+   </definition>  
+   <definition name="privilegios/crear" extends="base-definition">  
+       <put-attribute name="title" value="Crear Privilegio" />  
+       <put-attribute name="body" value="/WEB-INF/jsp/privilegios/crear.jsp" />  
+   </definition>  
+   
 </tiles-definitions>

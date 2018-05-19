@@ -15,7 +15,6 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -38,75 +37,19 @@ public class UsuarioController {
 
     @Autowired
     private IServicioSeguridad servicioSeguridad;
-
-    @RequestMapping(value = "/crear", method = RequestMethod.GET)
-    public String mostrarCreacionUsuario(Model model) {
-        List<Privilegio> privilegios = servicioSeguridad.obtenerPrivilegios();
-        model.addAttribute("privilegiosPorAsignar", privilegios);
-        model.addAttribute("privilegiosAsignados", new ArrayList<>());
-        model.addAttribute("usuario", new Usuario());
-        
-        return "usuarios/crear";
-    }
     
-    @RequestMapping(value = "/crear", method = RequestMethod.POST)
-    public @ResponseBody
-    String crearUsuario(@ModelAttribute(value = "usuario") Usuario usuario, Model model) {
-        String mensaje = "";
-        try {
-            Usuario usuarioActual = servicioSeguridad.obtenerUsuario(usuario.getNombreUsuario());
-            if (usuarioActual == null) {
-                servicioSeguridad.crearUsuario(usuario);
-            } else {
-                mensaje = "El usuario ya existe";
-            }
-        } catch (Exception exc) {
-            logger.error(exc);
-            throw exc;
-        }
-        
-        return mensaje;
-    }
-
-    @RequestMapping(value = "/editar", method = RequestMethod.GET)
-    public String mostrarEdicionUsuario(Model model) {
-        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("usuario", usuario);
-        
-        return "usuarios/editar";
-    }
-
-    @RequestMapping(value = "/editar", method = RequestMethod.POST)
-    public @ResponseBody
-    String actualizarUsuario(@ModelAttribute(value = "usuario") Usuario usuario, Model model) {
-        String mensaje = "";
-        try {
-            servicioSeguridad.actualizarUsuario(usuario);
-            Usuario usuarioActual = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            usuarioActual.setNombres(usuario.getNombres());
-            usuarioActual.setApellidos(usuario.getApellidos());
-            usuarioActual.setNombreUsuario(usuario.getNombreUsuario());
-            usuarioActual.setCorreoElectronico(usuario.getCorreoElectronico());
-        } catch (Exception exc) {
-            logger.error(exc);
-            throw exc;
-        }
-        
-        return mensaje;
-    }
-
     /**
      *
      * @param model
      * @return
      */
-    @RequestMapping(value = "/usuarios", method = RequestMethod.GET)
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String obtenerUsuarios(Model model) {
 
         List<Usuario> usuarios = servicioSeguridad.obtenerUsuarios();
         model.addAttribute("usuarios", usuarios);
 
-        return "usuarios/usuarios";
+        return "usuarios/index";
     }
 
     /**

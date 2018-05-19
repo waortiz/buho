@@ -7,6 +7,7 @@ package co.edu.fnsp.buho.repositorios;
 
 import co.edu.fnsp.buho.entidades.CampoHojaVida;
 import co.edu.fnsp.buho.entidades.Ciudad;
+import co.edu.fnsp.buho.entidades.Institucion;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Programa;
 import java.util.ArrayList;
@@ -414,9 +415,10 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     }
 
     @Override
-    public List<Programa> obtenerProgramasInstitucion(int institucion) {
+    public List<Programa> obtenerProgramasInstitucion(int institucion, int nivel) {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
         parametros.addValue("varInstitucion", institucion);
+        parametros.addValue("varNivel", nivel);
         Map resultado = obtenerProgramasInstitucion.execute(parametros);
         List<Programa> coleccion = (ArrayList<Programa>) resultado.get("programas");
 
@@ -464,6 +466,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         parametrosIngresoPrograma.addValue("varnucleobasicoconocimiento", programa.getNucleoBasicoConocimiento());
         parametrosIngresoPrograma.addValue("varnombre", programa.getNombre());
         parametrosIngresoPrograma.addValue("vartitulo", programa.getTitulo());
+        parametrosIngresoPrograma.addValue("varnivel", programa.getNivel());
 
         Map resultadoIngresoPrograma = ingresarPrograma.execute(parametrosIngresoPrograma);
         int idPrograma = (int) resultadoIngresoPrograma.get("varId");
@@ -511,5 +514,15 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("institucionesEducativas");
 
         return coleccion;
+    }
+
+    @Override
+    public int ingresarInstitucion(Institucion institucion) {
+        MapSqlParameterSource parametrosIngresoInstitucion = new MapSqlParameterSource();
+        parametrosIngresoInstitucion.addValue("varNombre", institucion.getNombre());
+        Map resultadoIngresoInstitucion = ingresarInstitucion.execute(parametrosIngresoInstitucion);
+        int idInstitucion = (int) resultadoIngresoInstitucion.get("varId");
+        
+        return idInstitucion;
     }
 }

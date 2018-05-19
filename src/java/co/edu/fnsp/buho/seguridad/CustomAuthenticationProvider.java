@@ -57,7 +57,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                 true, 
                 true, 
                 true,
-                privilegios), 
+                privilegios,
+                usuario.getOpcionesMenu()), 
                 password, 
                 privilegios);
     }

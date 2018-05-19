@@ -20,10 +20,11 @@ public class DetalleUsuario extends User {
     private long idPersona;
     private ArrayList<OpcionMenu> opcionesMenu = new ArrayList<>();
     
-    public DetalleUsuario(long idUsuario, long idPersona, String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
+    public DetalleUsuario(long idUsuario, long idPersona, String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities, ArrayList<OpcionMenu> opcionesMenu) {
         super( username,  password,  enabled, accountNonExpired, credentialsNonExpired,  accountNonLocked,  authorities);
         this.idUsuario = idUsuario;
         this.idPersona = idPersona;
+        this.opcionesMenu = opcionesMenu;
     }
 
     /**

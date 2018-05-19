@@ -296,7 +296,7 @@ body.sidenav-toggled .navbar-sidenav .nav-link-text {
 #cssmenu ul ul li a {
     border-bottom: 1px solid rgba(150, 150, 150, 0.15);
     padding: 11px 15px;
-    width: 170px;
+    width: 250px;
     font-size: 14px;
     text-decoration: none;
     color: rgba(0,94,44,1); /*Color Submenu Reposo */
@@ -613,8 +613,7 @@ table
     border-bottom: 1px dotted #d9d9d9;
     padding: 2px;
 }
-#tbperfil tr th,#tbusuario tr th,#tbpersona tr th,#tbconvocatoria tr th,#tbasacademico tr th,#tbexperiencia tr th,#tbtel tr th,
-#tbemail tr th,#tbcuentabanca tr th,#tbexpdocsal tr th, #tbexpdoc tr th, #tbexplabsal tr th, #tbexpinv tr th, #tbexpext tr th,#tbdocad tr th,#tbcur tr th
+.tabla tr th
 {
     background-color: #e6e6e6;
     color: #214a32;
@@ -623,8 +622,7 @@ table
     border-bottom: 1px solid #e6e6e6;
 
 }
-#tbperfil tr td,#tbusuario tr td,#tbpersona tr td,#tbconvocatoria tr td,#tbidiomas tr td,#tbasacademico tr td,#tbexperiencia tr td,
-#tbexpdocsal tr td, #tbexpdoc tr td, #tbexplabsal tr td, #tbexpinv tr td, #tbexpext tr td,select
+.tabla tr td
 {
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;

@@ -7,6 +7,7 @@ package co.edu.fnsp.buho.servicios;
 
 import co.edu.fnsp.buho.entidades.CampoHojaVida;
 import co.edu.fnsp.buho.entidades.Ciudad;
+import co.edu.fnsp.buho.entidades.Institucion;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Programa;
 import co.edu.fnsp.buho.repositorios.IRepositorioMaestro;
@@ -201,8 +202,8 @@ public class ServicioMaestro implements IServicioMaestro {
     }
 
     @Override
-    public List<Programa> obtenerProgramasInstitucion(int institucion) {
-        return repositorioMaestro.obtenerProgramasInstitucion(institucion);
+    public List<Programa> obtenerProgramasInstitucion(int institucion, int nivel) {
+        return repositorioMaestro.obtenerProgramasInstitucion(institucion, nivel);
     }
 
     @Override
@@ -238,5 +239,10 @@ public class ServicioMaestro implements IServicioMaestro {
     @Override
     public List<Programa> obtenerProgramasNucleoBasicoConocimiento(int nucleoBasicoConocimiento) {
         return repositorioMaestro.obtenerProgramasNucleoBasicoConocimiento(nucleoBasicoConocimiento);
+    }
+
+    @Override
+    public int ingresarInstitucion(Institucion institucion) {
+        return repositorioMaestro.ingresarInstitucion(institucion);
     }
 }

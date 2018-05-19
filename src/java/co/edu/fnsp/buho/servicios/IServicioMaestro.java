@@ -7,6 +7,7 @@ package co.edu.fnsp.buho.servicios;
 
 import co.edu.fnsp.buho.entidades.CampoHojaVida;
 import co.edu.fnsp.buho.entidades.Ciudad;
+import co.edu.fnsp.buho.entidades.Institucion;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Programa;
 import java.util.List;
@@ -33,7 +34,7 @@ public interface IServicioMaestro {
     List<Maestro> obtenerPaises();
     List<Maestro> obtenerSedes();
     List<Maestro> obtenerProgramas(int idSede);
-    List<Programa> obtenerProgramasInstitucion(int institucion);
+    List<Programa> obtenerProgramasInstitucion(int institucion, int nivel);
     List<Maestro> obtenerTiposAdenda();
     List<Maestro> obtenerTiposCapacitacion();
     List<Maestro> obtenerTiposContrato();
@@ -60,4 +61,5 @@ public interface IServicioMaestro {
     List<Maestro> obtenerInstitucionesEducativasExtranjeras();
     List<Maestro> obtenerInstitucionesEducativasColombianas();
     List<Programa> obtenerProgramasNucleoBasicoConocimiento(int nucleoBasicoConocimiento);
+    int ingresarInstitucion(Institucion institucion);
 }

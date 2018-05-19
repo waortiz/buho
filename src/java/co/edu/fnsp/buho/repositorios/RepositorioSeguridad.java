@@ -26,6 +26,8 @@ import org.springframework.stereotype.Repository;
 @Repository("repositorioSeguridad")
 public class RepositorioSeguridad implements IRepositorioSeguridad {
 
+    private final int ID_BUHO = 1;
+    
     private SimpleJdbcCall obtenerUsuario;
     private SimpleJdbcCall obtenerUsuarioPorId;
     private SimpleJdbcCall obtenerClaveUsuario;
@@ -103,16 +105,17 @@ public class RepositorioSeguridad implements IRepositorioSeguridad {
 
             MapSqlParameterSource parametrosPrivilegios = new MapSqlParameterSource();
             parametrosPrivilegios.addValue("varIdUsuario", usuario.getIdUsuario());
+            parametrosPrivilegios.addValue("varIdAplicacion", ID_BUHO);
             Map resultadoPrivilegios = obtenerPrivilegiosUsuario.execute(parametrosPrivilegios);
             ArrayList<Privilegio> privilegios = (ArrayList<Privilegio>) resultadoPrivilegios.get("privilegiosUsuario");
             usuario.setPrivilegios(privilegios);
-
-            /*
+            
             MapSqlParameterSource parametrosOpcionesMenu = new MapSqlParameterSource();
             parametrosOpcionesMenu.addValue("varIdUsuario", usuario.getIdUsuario());
+            parametrosOpcionesMenu.addValue("varIdAplicacion", ID_BUHO);
             Map resultadoOpcionesMenu = obtenerOpcionesMenuUsuario.execute(parametrosOpcionesMenu);
             ArrayList<OpcionMenu> opcionesMenu = (ArrayList<OpcionMenu>) resultadoOpcionesMenu.get("opcionesMenu");
-            usuario.setOpcionesMenu(opcionesMenu);*/
+            usuario.setOpcionesMenu(opcionesMenu);
         }
 
         return usuario;
@@ -129,14 +132,12 @@ public class RepositorioSeguridad implements IRepositorioSeguridad {
             usuario = new Usuario();
             usuario.setNombres((String) resultado.get("varNombres"));
             usuario.setApellidos((String) resultado.get("varApellidos"));
-            usuario.setClave((String) resultado.get("varClave"));
-            usuario.setCorreoElectronico((String) resultado.get("varCorreoElectronico"));
-            usuario.setIdPersona((long) resultado.get("varIdPersona"));
             usuario.setIdUsuario(idUsuario);
             usuario.setNombreUsuario(resultado.get("varNombreUsuario").toString());
 
             MapSqlParameterSource parametrosPrivilegios = new MapSqlParameterSource();
             parametrosPrivilegios.addValue("varIdUsuario", usuario.getIdUsuario());
+            parametrosPrivilegios.addValue("varIdAplicacion", ID_BUHO);
             Map resultadoPrivilegios = obtenerPrivilegiosUsuario.execute(parametrosPrivilegios);
             ArrayList<Privilegio> privilegios = (ArrayList<Privilegio>) resultadoPrivilegios.get("privilegiosUsuario");
             usuario.setPrivilegios(privilegios);
@@ -196,6 +197,7 @@ public class RepositorioSeguridad implements IRepositorioSeguridad {
     @Override
     public ArrayList<Privilegio> obtenerPrivilegios() {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdAplicacion", ID_BUHO);
         Map resultado = obtenerPrivilegios.execute(parametros);
         ArrayList<Privilegio> privilegios = (ArrayList<Privilegio>) resultado.get("privilegios");
 
@@ -206,6 +208,7 @@ public class RepositorioSeguridad implements IRepositorioSeguridad {
     public void actualizarPrivilegiosUsuario(long idUsuario, List<Privilegio> privilegios) {
         MapSqlParameterSource parametrosConsultaPrivilegios = new MapSqlParameterSource();
         parametrosConsultaPrivilegios.addValue("varIdUsuario", idUsuario);
+        parametrosConsultaPrivilegios.addValue("varIdAplicacion", ID_BUHO);
         Map resultadoPrivilegios = obtenerPrivilegiosUsuario.execute(parametrosConsultaPrivilegios);
         ArrayList<Privilegio> privilegiosActuales = (ArrayList<Privilegio>) resultadoPrivilegios.get("privilegiosUsuario");
 
@@ -256,6 +259,7 @@ public class RepositorioSeguridad implements IRepositorioSeguridad {
     public ArrayList<Privilegio> obtenerPrivilegiosUsuario(long idUsuario) {
         MapSqlParameterSource parametrosPrivilegios = new MapSqlParameterSource();
         parametrosPrivilegios.addValue("varIdUsuario", idUsuario);
+        parametrosPrivilegios.addValue("varIdAplicacion", ID_BUHO);
         Map resultadoPrivilegios = obtenerPrivilegiosUsuario.execute(parametrosPrivilegios);
         ArrayList<Privilegio> privilegios = (ArrayList<Privilegio>) resultadoPrivilegios.get("privilegiosUsuario");
 
@@ -266,6 +270,7 @@ public class RepositorioSeguridad implements IRepositorioSeguridad {
     public void crearPrivilegio(Privilegio privilegio) {
         if (privilegio.getIdPrivilegio() == 0) {
             MapSqlParameterSource parametrosIngresoPrivilegio = new MapSqlParameterSource();
+            parametrosIngresoPrivilegio.addValue("varIdAplicacion", ID_BUHO);
             parametrosIngresoPrivilegio.addValue("varCodigo", privilegio.getCodigo());
             parametrosIngresoPrivilegio.addValue("varNombre", privilegio.getNombre());
             Map resultado = ingresarPrivilegio.execute(parametrosIngresoPrivilegio);

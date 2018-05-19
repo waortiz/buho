@@ -12,7 +12,6 @@ import co.edu.fnsp.buho.entidades.Usuario;
 import co.edu.fnsp.buho.repositorios.IRepositorioHojaVida;
 import co.edu.fnsp.buho.repositorios.IRepositorioSeguridad;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -70,6 +69,9 @@ public class ServicioSeguridad implements IServicioSeguridad {
             hojaVida.getCorreosElectronicos().add(correoElectronico);
             long idPersona = repositorioHojaVida.ingresarHojaVida(0, hojaVida);
             usuario.setIdPersona(idPersona);
+            Privilegio privilegio = new Privilegio();
+            privilegio.setIdPrivilegio(1);
+            usuario.getPrivilegios().add(privilegio);
             repositorioSeguridad.crearUsuario(usuario);
             transactionManager.commit(txStatus);
         } catch (TransactionException exc) {

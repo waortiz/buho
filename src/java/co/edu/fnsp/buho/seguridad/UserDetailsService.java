@@ -30,7 +30,7 @@ public class UserDetailsService implements AuthenticationUserDetailsService<Auth
 
         Usuario usuario = servicioSeguridad.obtenerUsuario(authentication.getName());
         if (usuario == null) {
-            throw new UsernameNotFoundException("Could not load user : "
+            throw new UsernameNotFoundException("No se pudo cargar el usuario: "
                     + authentication.getName());
         }
         
@@ -44,6 +44,7 @@ public class UserDetailsService implements AuthenticationUserDetailsService<Auth
                 true, 
                 true, 
                 true,
-                privilegios);
+                privilegios,
+                usuario.getOpcionesMenu());
     }
 }

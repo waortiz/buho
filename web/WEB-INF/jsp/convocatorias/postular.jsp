@@ -29,7 +29,7 @@
                         <div class="tab-pane fade in active" id="tabvige">
                             <div class="form-group" style="margin-top: 10px;">
                                 <div id="addscroll">
-                                    <table class="table table-hover" id="tbconvo">
+                                    <table class="table tabla table-hover" id="tbconvo">
                                         <thead>
                                             <tr>
                                                 <td><input type="text" id="innom" class="form-control input-sm" placeholder="Buscar nombre de convocatoria"></td>
@@ -90,7 +90,7 @@
                         </div>
                         <div class="tab-pane fade" id="tabcer">
                             <div class="form-group" style="margin-top: 10px;">
-                                <table class="table table-hover" id="tblcerradas">
+                                <table class="table tabla table-hover" id="tblcerradas">
                                     <thead>
                                         <tr>
                                             <td><input type="text" id="intnom" class="form-control input-sm" placeholder="Buscar nombre de convocatoria"></td>
@@ -229,7 +229,7 @@
                 <hr>
                 <center><legend>Informaci&oacute;n de adenda</legend></center>   
                 <div class="form-group">    
-                    <table class="table table-hover tableestilo" id="adendas">
+                    <table class="table tabla table-hover tableestilo" id="adendas">
                         <thead> 
                             <tr>
                                 <th>Tipo de Adenda</th>

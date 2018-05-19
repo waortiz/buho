@@ -223,7 +223,7 @@
                         <div class="form-group">
                             <label>Años experiencia</label>
                             <div class="table-responsive">
-                                <table class="table table-hover tableestilo">
+                                <table class="table tabla table-hover tableestilo">
                                     <thead>
                                         <tr>
                                             <th>M&iacute;nimo de a&ntilde;os</th>
@@ -245,7 +245,7 @@
                         <label>Agregar a&ntilde;os experiencia</label>
                         <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoAnyosExperiencia()" ><span class="glyphicon glyphicon-plus"></span></button>
                         <div class="table-responsive">
-                            <table class="table table-hover tableestilo">
+                            <table class="table tabla table-hover tableestilo">
                                 <thead>
                                     <tr>
                                         <th style="width:300px;">Nucleo básico de conocimiento</th>
@@ -319,7 +319,7 @@
                         <div class="form-group">
                             <label>Agregar idioma requerido</label> 
                             <button  type="button" class="btn btn-success btn-sm" onclick="nuevoIdioma()"><span class="glyphicon glyphicon-plus"></span></button><br>
-                            <table class="table table-hover tableestilo">
+                            <table class="table tabla table-hover tableestilo">
                                 <thead>
                                 <th>Idioma</th>
                                 <th>Opción</th>
@@ -412,7 +412,7 @@
                         <div class="form-group">
                             <label>Agregar formaci&oacute;n requerida</label> 
                             <button  type="button" class="btn btn-success btn-sm" onclick="nuevoPrograma()"><span class="glyphicon glyphicon-plus"></span></button><br>
-                            <table class="table table-hover tableestilo" id="tbform">
+                            <table class="table tabla table-hover tableestilo" id="tbform">
                                 <thead>
                                 <th>Programa</th>
                                 <th>Nivel de formaci&oacute;n</th>
@@ -444,7 +444,7 @@
                             <label>Agregar formaci&oacute;n complementaria requerida</label> 
                             <button  type="button" class="btn btn-success btn-sm" onclick="nuevaEducacionContinua()"><span class="glyphicon glyphicon-plus"></span></button><br>
                             <br>
-                            <table class="table table-hover tableestilo">
+                            <table class="table tabla table-hover tableestilo">
                                 <thead>
                                 <th>Nombre de la capacitación o certificaci&oacute;n</th>
                                 <th>Tipo</th>
@@ -597,7 +597,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-hover tableestilo">
+                            <table class="table tabla table-hover tableestilo">
                                 <thead>
                                 <th>Campo</th>
                                 <th>Valor</th>
@@ -672,7 +672,7 @@
                         <legend>Adendas</legend>
                         <label>Agregar adendas</label> 
                         <button style="margin-bottom: 20px;"  type="button" class="btn btn-success" onclick="nuevaAdenda()"><span class="glyphicon glyphicon-plus"></span></button>     
-                        <table class="table table-hover tableestilo" id="tbadendas"> 
+                        <table class="table tabla table-hover tableestilo" id="tbadendas"> 
                             <thead>
                                 <tr>    
                                     <th style="width: 30%">Tipo</th>

@@ -16,6 +16,7 @@ public class Programa {
     private int nucleoBasicoConocimiento;
     private String nombreNucleoBasicoConocimiento;
     private String institucion;
+    private int nivel;
     
     /**
      * @return the id
@@ -99,6 +100,20 @@ public class Programa {
      */
     public void setNombreNucleoBasicoConocimiento(String nombreNucleoBasicoConocimiento) {
         this.nombreNucleoBasicoConocimiento = nombreNucleoBasicoConocimiento;
+    }
+
+    /**
+     * @return the nivel
+     */
+    public int getNivel() {
+        return nivel;
+    }
+
+    /**
+     * @param nivel the nivel to set
+     */
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
     }
 
 }

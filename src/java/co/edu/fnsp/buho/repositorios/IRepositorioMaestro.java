@@ -7,6 +7,7 @@ package co.edu.fnsp.buho.repositorios;
 
 import co.edu.fnsp.buho.entidades.CampoHojaVida;
 import co.edu.fnsp.buho.entidades.Ciudad;
+import co.edu.fnsp.buho.entidades.Institucion;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Programa;
 import java.util.List;
@@ -51,7 +52,7 @@ public interface IRepositorioMaestro {
     List<Maestro> obtenerClasesPatente();
     List<Maestro> obtenerTiposProductosConocimiento();
     List<Maestro> obtenerTiposPatente();
-    List<Programa> obtenerProgramasInstitucion(int institucion);
+    List<Programa> obtenerProgramasInstitucion(int institucion, int nivel);
     List<Maestro> obtenerCapacitaciones(Integer tipoCapacitacion, Integer nucleoBasicoConocimiento);
     List<CampoHojaVida> obtenerCamposHojaVida();
     int ingresarProgramaInstitucion(Programa programa);
@@ -59,4 +60,5 @@ public interface IRepositorioMaestro {
     List<Maestro> obtenerInstitucionesEducativasExtranjeras();
     List<Maestro> obtenerInstitucionesEducativasColombianas();
     List<Programa> obtenerProgramasNucleoBasicoConocimiento(int nucleoBasicoConocimiento);
+    int ingresarInstitucion(Institucion institucion);
 }

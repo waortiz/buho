@@ -6,9 +6,9 @@
 package co.edu.fnsp.buho.filtros;
 
 import co.edu.fnsp.buho.entidades.DetalleUsuario;
+import co.edu.fnsp.buho.entidades.OpcionMenu;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -27,20 +27,32 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request,
             HttpServletResponse response, Object handler) throws Exception {
 
-        if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof DetalleUsuario) {
-            boolean administrador = false;
-            DetalleUsuario detalleUsuario = (DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            for (GrantedAuthority authority : detalleUsuario.getAuthorities()) {
-                if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR")
-                        || authority.getAuthority().equalsIgnoreCase("SUPER_ADMINISTRADOR")) {
-                    administrador = true;
-                    break;
+        if (!request.getRequestURI().toLowerCase().contains("/convocatorias/index")) {
+            if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof DetalleUsuario) {
+
+                boolean existe = false;
+                String requestURI = request.getRequestURI().toLowerCase();
+                if(requestURI.contains("/usuarios/privilegios")) {
+                    requestURI = "/usuarios/index";
                 }
-            }
-            if (!administrador) {
-                if(request.getRequestURI().toLowerCase().contains("convocatorias/crear") ||
-                   request.getRequestURI().toLowerCase().contains("convocatorias/index")) {
-                    response.sendRedirect(request.getContextPath() + "/convocatorias/postular");
+                else if(requestURI.contains("/privilegios/editar") ||
+                   requestURI.contains("/privilegios/eliminar")) {
+                    requestURI = "/privilegios/index";
+                }
+                else if(requestURI.contains("/convocatorias/editar") ||
+                   requestURI.contains("/convocatorias/eliminar")) {
+                   requestURI = "/convocatorias/index";
+                }
+                DetalleUsuario usuario = (DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                for (OpcionMenu opcionMenu : usuario.getOpcionesMenu()) {
+                    existe = false;
+                    if (opcionMenu.getUrl() != null && requestURI.contains(opcionMenu.getUrl().toLowerCase())) {
+                        existe = true;
+                        break;
+                    }
+                }
+                if (!existe) {
+                    response.sendRedirect(request.getContextPath() + "/convocatorias/index");
                 }
             }
         }

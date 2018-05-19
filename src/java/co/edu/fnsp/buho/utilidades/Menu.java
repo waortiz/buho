@@ -17,7 +17,7 @@ public class Menu {
         StringBuilder sb = new StringBuilder();
         for (co.edu.fnsp.buho.entidades.OpcionMenu opcionMenu : opcionesMenu) {
             if (opcionMenu.getNivel() == 1) {
-                sb.append("<li>");
+                sb.append("<li class='active'>");
                 sb.append("<a href='#'").append(opcionMenu.getUrl() != null ? " onclick=\"abrirOpcion('" + opcionMenu.getUrl() + "'); return false;\"" : "").append("><i class=\"").append(opcionMenu.getCss()).append("\"></i>");
                 sb.append(opcionMenu.getNombre());
                 sb.append("</a>");
@@ -43,14 +43,21 @@ public class Menu {
      */
     public static String obtenerOpcionesMenu(int nivel, int padre, List<co.edu.fnsp.buho.entidades.OpcionMenu> opcionesMenu) {
         co.edu.fnsp.buho.entidades.OpcionMenu opcionMenu;
-        StringBuilder r = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < opcionesMenu.size(); i++) {
             opcionMenu = opcionesMenu.get(i);
             if (opcionMenu.isVisible() && opcionMenu.getNivel() == nivel && opcionMenu.getIdPadre() == padre) {
-                r.append("<li><a href='#'").append(opcionMenu.getUrl() != null ? " onclick=\"abrirOpcion('" + opcionMenu.getUrl() + "'); return false;\"" : "").append(">").append(opcionMenu.getNombre()).append("</a></li>");
+                sb.append("<li><a href='#'").append(opcionMenu.getUrl() != null ? " onclick=\"abrirOpcion('" + opcionMenu.getUrl() + "'); return false;\"" : "").append(">").append(opcionMenu.getNombre()).append("</a>");
+                String items = obtenerOpcionesMenu(3, opcionMenu.getIdOpcionMenu(), opcionesMenu);
+                if (items.length() > 0) {
+                    sb.append("<ul>");
+                    sb.append(items);
+                    sb.append("</ul>");
+                }
+                sb.append("</li>");
             }
         }
 
-        return r.toString();
+        return sb.toString();
     }
 }

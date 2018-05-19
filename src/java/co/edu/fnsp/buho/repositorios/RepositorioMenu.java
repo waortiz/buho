@@ -22,7 +22,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("repositorioMenu")
 public class RepositorioMenu implements IRepositorioMenu {
-
+    private final int ID_BUHO = 1;
+    
     private SimpleJdbcCall obtenerOpcionesMenu;
     private SimpleJdbcCall obtenerOpcionesMenuUsuario;
     private SimpleJdbcCall obtenerOpcionesMenuPrivilegio;
@@ -48,6 +49,8 @@ public class RepositorioMenu implements IRepositorioMenu {
     public ArrayList<OpcionMenu> obtenerOpcionesMenuUsuario(long idUsuario) {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
         parametros.addValue("varIdUsuario", idUsuario);
+        parametros.addValue("varidaplicacion", ID_BUHO);
+        
         Map resultado = obtenerOpcionesMenuUsuario.execute(parametros);
         ArrayList<OpcionMenu> opcionesMenu = (ArrayList<OpcionMenu>) resultado.get("opcionesMenu");
 

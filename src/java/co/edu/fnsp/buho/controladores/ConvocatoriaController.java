@@ -236,7 +236,7 @@ public class ConvocatoriaController {
         return "convocatorias/crear";
     }
 
-    @RequestMapping(value = "/{idConvocatoria}", method = RequestMethod.GET)
+    @RequestMapping(value = "/ver/{idConvocatoria}", method = RequestMethod.GET)
     public @ResponseBody
     String obtenerConvocatoria(@PathVariable int idConvocatoria, Model model) {
         Convocatoria convocatoria = servicioConvocatoria.obtenerConvocatoria(idConvocatoria);

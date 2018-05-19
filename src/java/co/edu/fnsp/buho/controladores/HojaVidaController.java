@@ -20,6 +20,7 @@ import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.TipoDocumento;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
+import co.edu.fnsp.buho.entidades.Institucion;
 import co.edu.fnsp.buho.entidades.Patente;
 import co.edu.fnsp.buho.entidades.ProductoConocimiento;
 import co.edu.fnsp.buho.entidades.Programa;
@@ -666,9 +667,9 @@ public class HojaVidaController {
 
     @RequestMapping(value = "/programasInstitucion", method = RequestMethod.GET)
     public @ResponseBody
-    String obtenerProgramasInstitucion(@ModelAttribute(value = "institucion") int institucion,
+    String obtenerProgramasInstitucion(@ModelAttribute(value = "institucion") int institucion, int nivel,
             Model model) {
-        List<Programa> programas = servicioMaestro.obtenerProgramasInstitucion(institucion);
+        List<Programa> programas = servicioMaestro.obtenerProgramasInstitucion(institucion, nivel);
         Gson gson = new Gson();
 
         return gson.toJson(programas);
@@ -687,6 +688,19 @@ public class HojaVidaController {
         }
     }
 
+   @RequestMapping(value = "/institucion", method = RequestMethod.POST)
+    public @ResponseBody
+    String ingresarInstitucionPrograma(@ModelAttribute Institucion institucion, Model model) throws ParseException, IOException {
+        try {
+            int id = servicioMaestro.ingresarInstitucion(institucion);
+
+            return "{\"id\":" + id + "}";
+        } catch (Exception exc) {
+            logger.error(exc);
+            return "";
+        }
+    }
+    
     @RequestMapping(value = "/ciudad", method = RequestMethod.POST)
     public @ResponseBody
     String ingresarCiudad(@ModelAttribute Ciudad ciudad, Model model) throws ParseException, IOException {
@@ -741,7 +755,8 @@ public class HojaVidaController {
         List<Maestro> idiomas = servicioMaestro.obtenerIdiomas();
         List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
         List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
-        List<Maestro> institucionesEducativas = servicioMaestro.obtenerInstitucionesEducativasColombianas();
+        List<Maestro> institucionesEducativas = servicioMaestro.obtenerInstitucionesEducativas();
+        List<Maestro> institucionesEducativasColombianas = servicioMaestro.obtenerInstitucionesEducativasColombianas();
         List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
         List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
         List<Maestro> tiposInstitucion = servicioMaestro.obtenerTiposInstitucion();
@@ -768,6 +783,7 @@ public class HojaVidaController {
         model.addAttribute("tiposCertificacion", tiposCertificacion);
         model.addAttribute("nivelesFormacion", nivelesFormacion);
         model.addAttribute("institucionesEducativas", institucionesEducativas);
+        model.addAttribute("institucionesEducativasColombianas", institucionesEducativasColombianas);
         model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
         model.addAttribute("tiposCapacitacion", tiposCapacitacion);
         model.addAttribute("tiposInstitucion", tiposInstitucion);

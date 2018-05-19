@@ -24,10 +24,10 @@
                     <span class="nav-link-text">Aspectos Acádemicos</span>
                 </a>
             </li>
-            <li class="nav-item" id="educacioncontinua" data-toggle="tooltip" data-placement="right" title="" data-original-title="Educación continúa">
+            <li class="nav-item" id="educacioncontinua" data-toggle="tooltip" data-placement="right" title="" data-original-title="Educación no formal">
                 <a class="nav-link" >          
                     <i  class="fa fa-address-card-o" style="font-size:36px;"></i> 
-                    <span class="nav-link-text">Educación continúa </span>
+                    <span class="nav-link-text">Educación no formal </span>
                 </a>
             </li>
             <li class="nav-item" id="experiencia" data-toggle="tooltip" data-placement="right" title="" data-original-title="Experiencia laboral">
@@ -614,7 +614,7 @@
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                         <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbtel">
+                            <table class="table tabla table-hover tableestilo" id="tbtel">
                                 <thead>
                                     <tr>
                                         <th>Tipo</th>
@@ -650,7 +650,7 @@
                         </button> 
 
                         <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbemail">
+                            <table class="table tabla table-hover tableestilo" id="tbemail">
                                 <thead>
                                     <tr>
                                         <th>Email</th>
@@ -680,7 +680,7 @@
                             <span class="glyphicon glyphicon-plus"></span>
                         </button> 
                         <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbcuentabanca">
+                            <table class="table tabla table-hover tableestilo" id="tbcuentabanca">
                                 <thead>
                                     <tr>
                                         <th>Tipo</th>
@@ -856,7 +856,7 @@
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                         <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbdocad">
+                            <table class="table tabla table-hover tableestilo" id="tbdocad">
                                 <thead>
                                     <tr>
                                         <th>Tipo de documento</th>
@@ -939,7 +939,7 @@
                             <span class="glyphicon glyphicon-plus"></span>   
                         </button>
                         <div class="table-responsive">
-                            <table class="table table-hover tableestilo">
+                            <table class="table tabla table-hover tableestilo">
                                 <thead>
                                     <tr>
                                         <th>Nivel de estudio</th>
@@ -1070,7 +1070,7 @@
                             <span class="glyphicon glyphicon-plus"></span>   
                         </button>
                         <div class="table-responsive">
-                            <table class="table table-hover tableestilo">
+                            <table class="table tabla table-hover tableestilo">
                                 <thead>
                                     <tr>
                                         <th>Nivel de estudio</th>
@@ -1201,7 +1201,7 @@
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
                                                                 <select style="width: 100%;" name="institucionEducativaPrograma" id="institucionEducativaPrograma" class="js-select-basic-single js-states form-control">
                                                                     <option value=""></option>
-                                                                    <c:forEach var="institucionEducativa" items="${institucionesEducativas}">
+                                                                    <c:forEach var="institucionEducativa" items="${institucionesEducativasColombianas}">
                                                                         <option value="${institucionEducativa.getId()}">${institucionEducativa.getNombre()}</option>
                                                                     </c:forEach>                                                                  
                                                                 </select>
@@ -1237,7 +1237,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-success" id="addprograma">Agregar</button>
+                                                    <button type="button" class="btn btn-success" id="btnAdicionarPrograma">Agregar</button>
                                                     <button type="button" class="btn btn-success" onclick="cerrarVentanaPrograma();">Cancelar</button>
                                                 </div>
                                             </div>
@@ -1289,7 +1289,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-success" id="addprogramaextranjero">Agregar</button>
+                                                    <button type="button" class="btn btn-success" id="btnAdicionarProgramaExtranjero">Agregar</button>
                                                     <button type="button" class="btn btn-success" onclick="cerrarVentanaProgramaExtranjero();">Cancelar</button>
                                                 </div>
                                             </div>
@@ -1387,7 +1387,7 @@
                         <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoIdioma();" >
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>                  
-                        <table class="table table-hover tableestilo">
+                        <table class="table tabla table-hover tableestilo">
                             <thead>
                                 <tr>
                                     <th>Idioma</th>
@@ -1575,7 +1575,7 @@
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>               
                         <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbcapaci">
+                            <table class="table tabla table-hover tableestilo" id="tbcapaci">
                                 <thead>
                                     <tr>
                                         <th>Tipo de capacitaci&oacute;n</th>
@@ -1647,13 +1647,16 @@
                                     <div class="col-md-8">
                                         <div class="form-group">
                                             <label for="institucionEducacionContinua">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institución que estudio">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <select style="width: 100%;" name="institucionEducacionContinua" id="institucionEducacionContinua" class="js-select-basic-single js-states form-control">
-                                                <option></option>
-                                                <c:forEach var="institucion" items="${institucionesEducativas}">
-                                                <option value="${institucion.getId()}">${institucion.getNombre()}</option>
-                                                </c:forEach>                                                     
-                                            </select>
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                            <div class="form-inline">
+                                                <select style="width: 90%;" name="institucionEducacionContinua" id="institucionEducacionContinua" class="js-select-basic-single js-states form-control">
+                                                    <option></option>
+                                                    <c:forEach var="institucion" items="${institucionesEducativas}">
+                                                    <option value="${institucion.getId()}">${institucion.getNombre()}</option>
+                                                    </c:forEach>                                                     
+                                                </select>
+                                                <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevaInstitucionExtranjero();"><span class="glyphicon glyphicon-plus"></span></button>
+                                            </div>
                                         </div>
                                     </div>
 				</div>
@@ -1708,6 +1711,33 @@
                         </div>
                     </div><!--fin modal aspectos academicos modal estudios educacion continua -->
                 </div>
+                <div class="modal fade" id="md_institucion_extranjero" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header mhsuccess">
+                                <button type="button" class="close" onclick="cerrarVentanaInstitucionExtranjero();">&times;</button>
+                                <h4 class="modal-title">Institución</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="alert_institucion_extranjero"></div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="institucionEducativaExtranjero">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institución que estudió">
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                            <input type="text" name="institucionEducativaExtranjero" id="institucionEducativaExtranjero" class="form-control" maxlength="150" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" id="btnAdicionarInstitucionExtranjero">Agregar</button>
+                                <button type="button" class="btn btn-success" onclick="cerrarVentanaInstitucionExtranjero();">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>                                    
+                
             </div>
             <div id="formexperiencia" style="display: none;">
                 <div class="row">   
@@ -1719,7 +1749,7 @@
                 <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevaExperienciaLaboral();" ><span class="glyphicon glyphicon-plus"></span></button>
                 <br>	
                 <div class="table-responsive">
-                    <table class="table table-hover tableestilo">
+                    <table class="table tabla table-hover tableestilo">
                         <thead>
                             <tr>
                                 <th>&Aacute;rea</th>
@@ -1930,7 +1960,7 @@
                 <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevaExperienciaDocencia();" ><span class="glyphicon glyphicon-plus"></span></button>
                 <br>
                 <div class="table-responsive">
-                    <table class="table table-hover tableestilo">
+                    <table class="table tabla table-hover tableestilo">
                         <thead>
                             <tr>
                                 <th>Instituci&oacute;n</th>
@@ -1995,7 +2025,7 @@
                                         <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                         <select style="width: 100%;" name="institucionExperienciaDocencia" id="institucionExperienciaDocencia" class="js-select-basic-single js-states form-control">
                                             <option></option>
-                                            <c:forEach var="institucion" items="${institucionesEducativas}">
+                                            <c:forEach var="institucion" items="${institucionesEducativasColombianas}">
                                             <option value="${institucion.getId()}">${institucion.getNombre()}</option>
                                             </c:forEach>                                            
                                         </select>
@@ -2011,7 +2041,7 @@
                                 <div class="row">
                                     <div class="col-md-12">                                           
                                         <div class="table-responsive">
-                                            <table class="table table-hover tableestilo">
+                                            <table class="table tabla table-hover tableestilo">
                                                 <thead>
                                                     <tr>
                                                         <th>Curso</th>
@@ -2219,7 +2249,7 @@
                         <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoArticulo();"><span class="glyphicon glyphicon-plus"></span></button>
                         <br />
                         <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbearticulo">
+                            <table class="table tabla table-hover tableestilo" id="tbearticulo">
                                 <thead>
                                     <tr>
                                         <th>T&iacute;tulo</th>
@@ -2338,7 +2368,7 @@
                     <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevaPatente();" ><span class="glyphicon glyphicon-plus"></span></button>
                     <br>
                     <div class="table-responsive">
-                         <table class="table table-hover tableestilo" id="tbpatente">
+                         <table class="table tabla table-hover tableestilo" id="tbpatente">
                              <thead>
                                  <tr>
                                      <th>Fecha</th>
@@ -2464,7 +2494,7 @@
                          <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoProductoConocimiento();" ><span class="glyphicon glyphicon-plus"></span></button>
                          <br>
                          <div class="table-responsive">
-                             <table class="table table-hover tableestilo" id="tbprodcono">
+                             <table class="table tabla table-hover tableestilo" id="tbprodcono">
                                  <thead>
                                      <tr>
                                          <th>Tipo</th>
@@ -2584,7 +2614,7 @@
                     <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevaDistincion();" ><span class="glyphicon glyphicon-plus"></span></button>
                     <br>
                     <div class="table-responsive">
-                        <table class="table table-hover tableestilo" id="tbdistin" style="width: 100%;">
+                        <table class="table tabla table-hover tableestilo" id="tbdistin" style="width: 100%;">
                             <thead>
                                 <tr>
                                     <th>Instituci&oacute;n otorga</th>
@@ -2927,7 +2957,7 @@
           $('#fechaTituloEducacionSuperior').val("");
         });
         
-        $('#addprograma').click(function(){
+        $('#btnAdicionarPrograma').click(function(){
           var institucion = $('#institucionEducativaPrograma').val();
           var nombreInstitucion = $('#institucionEducativaPrograma option:selected').text();
           var programaCursado = $('#programaCursado').val();
@@ -2955,12 +2985,13 @@
           $('#md_programa').modal('hide');
         });
         
-        $('#addprogramaextranjero').click(function(){
+        $('#btnAdicionarProgramaExtranjero').click(function(){
           var institucion = $('#institucionEducativaProgramaExtranjero').val();
           var programaCursado = $('#programaCursadoExtranjero').val();
           var nucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoProgramaExtranjero').val();
           var nombreNucleoBasicoConocimientoPrograma = $('#nombreNucleoBasicoConocimientoProgramaExtranjero').val();
           var tituloPrograma = $('#tituloProgramaExtranjero').val();
+          var nivel = $('#nivelEstudioEducacionSuperior').val();
 
         if (institucion === "") {
             bootstrap_alert_programa_extranjero.warning('Debe ingresar la institución');
@@ -2985,6 +3016,7 @@
         var formData = new FormData();
         formData.append("nombre", programaCursado);
         formData.append("institucion", institucion);
+        formData.append("nivel", nivel);
         formData.append("nucleoBasicoConocimiento", nucleoBasicoConocimientoPrograma);
         formData.append("titulo", tituloPrograma);
         $.ajax({
@@ -3011,14 +3043,49 @@
                     $('#md_programa_extranjero').modal('hide');
                     $('#md_programa').modal('hide');
                 } else {
-                    bootstrap_alert_programa_extranjero.warning(response);
+                    bootstrap_alert_programa_extranjero.warning("Error al almacenar el programa.");
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 bootstrap_alert_programa_extranjero.warning("Error al almacenar el programa.");
             }});
         });
+
+        $('#btnAdicionarInstitucionExtranjero').click(function(){
+          var institucion = $('#institucionEducativaExtranjero').val();
+
+        if (institucion === "") {
+            bootstrap_alert_institucion_extranjero.warning('Debe ingresar la institución');
+            return false;
+        }
         
+        var formData = new FormData();
+        formData.append("nombre", institucion);
+        $.ajax({
+            type: "POST",
+            url: "${pageContext.request.contextPath}/hojasVida/institucion",
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+            },
+            success: function (response) {
+                if (response !== "") {
+                    var respuesta = JSON.parse(response);
+                    $('#institucionEducacionContinua').append('<option value=' + respuesta.id + '>' + institucion + '</option>');
+                    $('#institucionEducacionContinua').val(respuesta.id).trigger("change.select2");
+                    ordenarOpciones($('#institucionEducacionContinua option'));
+                    $('#md_institucion_extranjero').modal('hide');
+                } else {
+                    bootstrap_alert_institucion_extranjero.warning("Error al almacenar la institución.");
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                bootstrap_alert_institucion_extranjero.warning("Error al almacenar la institución.");
+            }});
+        });
+
         $('#btnAdicionarCiudadExtranjera').click(function(){
           var pais = $('#pais').val();
           var departamento = $('#departamento').val();
@@ -5388,6 +5455,13 @@
     }    
 
     function nuevoPrograma() {
+        bootstrap_alert_educacion_superior.removeWarning();
+        var nivelEstudioEducacionSuperior = $('#nivelEstudioEducacionSuperior').val();
+        if (nivelEstudioEducacionSuperior === "") {
+            bootstrap_alert_educacion_superior.warning('Debe seleccionar el nivel de estudio');
+            return false;
+        }            
+        
         $('#nucleoBasicoConocimientoPrograma').val("");
         $('#nombreNucleoBasicoConocimientoPrograma').val("");
         $('#institucionEducativaPrograma').val("").trigger("change.select2");
@@ -5407,6 +5481,12 @@
         $('#tituloProgramaExtranjero').val("");                    
 
         $('#md_programa_extranjero').modal({backdrop: 'static', keyboard: false})  ;
+    }
+    
+    function nuevaInstitucionExtranjero() {
+        $('#institucionEducativaExtranjero').val("");
+
+        $('#md_institucion_extranjero').modal({backdrop: 'static', keyboard: false})  ;
     }
     
     function nuevaEducacionContinua() {
@@ -5609,6 +5689,10 @@
     
     function cerrarVentanaProgramaExtranjero() {
         $('#md_programa_extranjero').modal('hide');
+    }
+
+    function cerrarVentanaInstitucionExtranjero() {
+        $('#md_institucion_extranjero').modal('hide');
     }
     
     function cerrarVentanaEducacionContinua() {
@@ -5853,10 +5937,11 @@
     function obtenerProgramasCursados() {
         $('#tituloPrograma').val('');
         var institucion = $('#institucionEducativaPrograma').val();
+        var nivel = $('#nivelEstudioEducacionSuperior').val();
         if(institucion != "") {
         $.ajax({
             type: "GET",
-            url: "${pageContext.request.contextPath}/hojasVida/programasInstitucion?institucion=" + institucion,
+            url: "${pageContext.request.contextPath}/hojasVida/programasInstitucion?institucion=" + institucion + "&nivel=" + nivel,
             processData: false,
             contentType: false,
             success: function (response) {
@@ -5951,6 +6036,14 @@
             $('#egresadoUDEA').val('false');
         }
     }
+
+    bootstrap_alert_institucion_extranjero = {};
+    bootstrap_alert_institucion_extranjero.warning = function (message) {
+        $('#alert_institucion_extranjero').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_institucion_extranjero.removeWarning = function () {
+        $('#alert_institucion_extranjero').html('');
+    };
 
     bootstrap_alert_ciudad_extranjera = {};
     bootstrap_alert_ciudad_extranjera.warning = function (message) {
