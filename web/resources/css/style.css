@@ -4,14 +4,20 @@ body{
     background-color: #ffffff;
 }
 
-
 #contenedorPpal{
     width: 100%;
-    height:auto;
     box-sizing: border-box;
     margin: 0 auto;
+    background-color: #f1f1f1;
 }
-
+#barranav
+{
+  width: 100%;
+  background-color: rgba(237,237,237,1);
+  z-index: 1000;
+  box-sizing: border-box; 
+  position: fixed;
+}
 #contenedorA{
     width: 75%;
     background-color: rgba(237,237,237,1);
@@ -36,7 +42,7 @@ body{
 
 #contenido{
   width: 100%;
-  height: auto;
+  margin-top: 50px;
   float: left;
   z-index: -10;
   box-sizing: border-box;
@@ -58,38 +64,117 @@ body{
     background-color: #fff;
 }
 
+.contenido-nav2 ul li a i
+  {
+    cursor:pointer !important;
+  }
 @media (min-width:992px){
-    .contenido-nav2 {
-        width:70px;
-        z-index:1;
-        overflow:auto;
-        margin-left: 30px;
-    }
+  .contenido-nav2
+  {
+    width:70px;
+    z-index:1;
+    overflow:auto;
+    margin-left: 30px;
+  }
+}
+@media (min-width:1170px){
+  .contenido-nav2
+  {
+    margin-left: 1px;
+  }
+}
+@media (min-width:1024px){
+  .contenido-nav2
+  {
+    margin-left: 3px;
+    margin-right: 10px;
+  }
+
+}
+@media (min-width:1280px){
+  .contenido-nav2
+  {
+    text-align: center;
+    margin: auto 2px auto 2px ;
+  }
+}
+
+@media (min-width:1366px){
+  .contenido-nav2
+  {
+    text-align: center;
+    margin-left: 45px;
+  }
 }
 
 @media (min-width:1400px){
-    .contenido-nav2 {
-        margin-left: 60px;
-    }
+  .contenido-nav2
+  {
+    margin-left: 60px;
+  }
 }
 
 @media (min-width:1600px){
-    .contenido-nav2 {
-        margin-left: 150px;
-    }
+  .contenido-nav2
+  {
+    margin-left: 150px;
+  }
 }
 
 @media (min-width:1800px){
-    .contenido-nav2 {
-        margin-left: 250px;
-    }
+  .contenido-nav2
+  {
+    margin-left: 250px;
+  }
 }
+
+@media (min-width:1920px){
+  .contenido-nav2
+  {
+    margin-left: 330px;
+  }
+}
+
+@media (min-width:2880px){
+  .contenido-nav2
+  {
+    width:100px;
+    z-index:1;
+    overflow:auto;
+    margin-left: 810px;
+  }
+  .navbar-sidenav {
+    
+    width: 1px !important;
+    float: left;
+    margin-top: 56px;
+    margin-left: 10px;
+  }
+}
+
+@media (min-width:2990px){
+  .contenido-nav2
+  {
+    width:10  0px;
+    z-index:1;
+    overflow:auto;
+    margin-left: 850px;
+  }
+
+.navbar-sidenav {
+    width: 1px !important;
+    float: left;
+    margin-top: 56px;
+    margin-left: 10px;
+  }
+}
+
 .navbar-sidenav {
     position: absolute;
     width: 5%;
     float: left;
     margin-top: 56px;
-    margin-left: -60px;
+    margin-left: -40px;
 }
 
 .navbar-sidenav li {
@@ -103,7 +188,6 @@ body{
 
 .navbar-sidenav > .nav-item{
     padding-bottom:  1em;
-
 }
 
 body.sidenav-toggled .navbar-sidenav .nav-link-text {
@@ -142,9 +226,7 @@ body.sidenav-toggled .navbar-sidenav .nav-link-text {
 #cssmenu {
     font-family: Montserrat, sans-serif;
     background: rgba(237,237,237,1);/*rgba(0,94,44,1);*/
-
     float: left;
-
 }
 
 #cssmenu > ul > li {
@@ -389,11 +471,6 @@ body.sidenav-toggled .navbar-sidenav .nav-link-text {
     -o-transition: all .25s ease;
     transition: all .25s ease;    
 }
-
-
-
-
-
 
 @media all and (max-width: 768px), only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min--moz-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: 1024px), only screen and (min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min-resolution: 192dpi) and (max-width: 1024px), only screen and (min-resolution: 2dppx) and (max-width: 1024px) {
     #cssmenu {
@@ -660,6 +737,11 @@ table
     border: 1px dotted #bfbfbf;						   
 }
 #radioBtn1 .notActive{
+    color: #3276b1;
+    background-color: #fff;
+    border: 1px dotted #bfbfbf;						   
+}
+#radioSexo .notActive{
     color: #3276b1;
     background-color: #fff;
     border: 1px dotted #bfbfbf;						   

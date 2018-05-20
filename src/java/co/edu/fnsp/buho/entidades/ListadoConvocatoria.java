@@ -21,6 +21,7 @@ public class ListadoConvocatoria {
     private String fechaPostulacionFormateada;
     private String nombre;
     private boolean tieneDocumento;
+    private boolean tieneResultado;
     private boolean postulado;
 
     /**
@@ -161,6 +162,20 @@ public class ListadoConvocatoria {
      */
     public void setFechaPostulacionFormateada(String fechaPostulacionFormateada) {
         this.fechaPostulacionFormateada = fechaPostulacionFormateada;
+    }
+
+    /**
+     * @return the tieneResultado
+     */
+    public boolean isTieneResultado() {
+        return tieneResultado;
+    }
+
+    /**
+     * @param tieneResultado the tieneResultado to set
+     */
+    public void setTieneResultado(boolean tieneResultado) {
+        this.tieneResultado = tieneResultado;
     }
     
 }

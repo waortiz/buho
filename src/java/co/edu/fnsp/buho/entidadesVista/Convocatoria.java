@@ -32,6 +32,7 @@ public class Convocatoria {
     private String nombre;
     private String descripcion;
     private MultipartFile documento;
+    private MultipartFile resultado;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaPublicacionResultados;
     private String sedeCurso;
@@ -340,5 +341,19 @@ public class Convocatoria {
      */
     public void setCriterios(List<CriterioHabilitanteConvocatoria> criteriosHabilitantes) {
         this.criteriosHabilitantes = criteriosHabilitantes;
+    }
+
+    /**
+     * @return the resultado
+     */
+    public MultipartFile getResultado() {
+        return resultado;
+    }
+
+    /**
+     * @param resultado the resultado to set
+     */
+    public void setResultado(MultipartFile resultado) {
+        this.resultado = resultado;
     }
 }

@@ -8,6 +8,7 @@ package co.edu.fnsp.buho.servicios;
 import co.edu.fnsp.buho.entidades.CorreoElectronico;
 import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.Privilegio;
+import co.edu.fnsp.buho.entidades.PrivilegioEnum;
 import co.edu.fnsp.buho.entidades.Usuario;
 import co.edu.fnsp.buho.repositorios.IRepositorioHojaVida;
 import co.edu.fnsp.buho.repositorios.IRepositorioSeguridad;
@@ -70,7 +71,7 @@ public class ServicioSeguridad implements IServicioSeguridad {
             long idPersona = repositorioHojaVida.ingresarHojaVida(0, hojaVida);
             usuario.setIdPersona(idPersona);
             Privilegio privilegio = new Privilegio();
-            privilegio.setIdPrivilegio(1);
+            privilegio.setIdPrivilegio(PrivilegioEnum.USUARIO.getIdPrivilegio());
             usuario.getPrivilegios().add(privilegio);
             repositorioSeguridad.crearUsuario(usuario);
             transactionManager.commit(txStatus);

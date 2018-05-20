@@ -18,20 +18,44 @@
                     <span class="nav-link-text">Criterios habilitantes</span>
                 </a>
             </li>
+            <li class="nav-item" id="btnresultado" data-toggle="tooltip" data-placement="right" title="" data-original-title="Resultados">
+                <a class="nav-link" >
+                    <i class="fa fa-line-chart" aria-hidden="true" style="font-size:30px;"></i>
+                    <span class="nav-link-text">Resultados </span>
+                </a>
+            </li>
             <li class="nav-item" id="btnadendas" data-toggle="tooltip" data-placement="right" title="" data-original-title="Adendas">
                 <a class="nav-link" >          
                     <i class="fa fa-pencil-square-o" style="font-size:36px;"></i>
                     <span class="nav-link-text">Adendas </span>
                 </a>
             </li>
-
         </ul>
     </div>    
     <div class="container">
         <div id="alert_placeholder_convocatoria"></div>
         <form:form method="POST" modelAttribute="convocatoria">
+            <div class="form-group">
+                <ul class="nav nav-tabs">
+                    <li class="active" id="liconvoca"><a data-toggle="tab" href="#tabconvocatoria" >
+                    <i  class="fa fa-address-book"></i>
+                    Datos generales</a></li>
+                     <li class="active" style="display: none;" id="licrihab"><a data-toggle="tab" href="#tabcruhab" >
+                    <i  class="fa fa-address-book-o"></i>
+                   Criterios habilitantes</a></li>
+                     <li class="active" style="display: none;" id="licrieva"><a data-toggle="tab" href="#tabcrieva" >
+                    <i class="fa fa-check-square-o"></i>
+                    Criterios evaluaci&oacute;n</a></li>
+                    <li class="active" style="display: none;" id="liresul"><a data-toggle="tab" href="#tabresultado" >
+                    <i class="fa fa-line-chart" aria-hidden="true"></i>
+                    Resultados</a></li>
+                    <li class="active" style="display: none;" id="liadendas"><a data-toggle="tab" href="#tabadenda" >
+                    <i class="fa fa-pencil-square-o"></i>
+                   Adendas</a></li>
+                </ul>
+            </div>            
             <div id="formdatosgen">
-                <legend><h3>Convocatoria</h3></legend>
+                <legend>Convocatoria</legend>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -202,7 +226,7 @@
                                 <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="documento" id="documento" >
                                 <c:if test = "${convocatoria.getId() > 0}">
                                     <button class="btn btn-success btn-xs" type="button" onclick="verDocumentoConvocatoria()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
-                                    </c:if>
+                                </c:if>
                             </div>
                         </div>
                     </div>
@@ -609,7 +633,7 @@
                                             <span data-bind="text: nombreCampoHojaVida" ></span>
                                         </td>
                                         <td style="width: 45%">
-                                            <span data-bind="text: valor" ></span>
+                                            <span data-bind="text: texto" ></span>
                                         </td>
                                         <td style='white-space: nowrap; width: 10%' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCriterioHabilitante"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -638,8 +662,8 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Campo de hoja de vida</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el campo de la hoja de vida">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                            <select style="width: 100%;" id="campoHojaVidaCriterioHabilitante" id="campoHojaVidaCriterioHabilitante" class="js-select-basic-single js-states form-control">
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                            <select style="width: 100%;" id="campoHojaVidaCriterioHabilitante" id="campoHojaVidaCriterioHabilitante" class="js-select-basic-single js-states form-control" onchange="mostrarCampo(this.value)">
                                                 <option value=""></option>
                                                 <c:forEach var="campoHojaVida" items="${camposHojaVida}">
                                                     <option value="${campoHojaVida.getId()}">${campoHojaVida.getAlias()}</option>
@@ -653,8 +677,84 @@
                                         <div class="form-group">
                                             <label>Valor</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el valor del criterio habilitante">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                                <input type="text" name="valorCriterioHabilitante" id="valorCriterioHabilitante" class="form-control" maxlength="100" >
-                                        </div>
+                                                <div class="form-group form-inline" id="divFecha">
+                                                    <input class="form-control fecha" id="fecha" maxlength="10"/>
+                                                </div>
+                                                <div id="divTexto">
+                                                    <input type="text" class="form-control" id="texto" maxlength="100"/>
+                                                </div> 
+                                                <div id="divLugar" class="form-group form-inline">
+                                                    <input id="nombreLugar" name="nombreLugar" class="form-control" style="width: 90%" readonly />
+                                                    <input type="hidden" id="lugar" name="lugar">
+                                                    <button id="btnLugar" type="button" class="btn btn-success btn-sm" onclick="mostrarUbicacionModal('nombreLugar', 'lugar');">
+                                                        <span class="glyphicon glyphicon-search"></span>
+                                                    </button>
+                                                </div>
+                                                <div id="divSelect">
+                                                    <div id="divTipoIdentificacion">
+                                                        <select id="tipoIdentificacion" class="js-select-basic-single js-states form-control" style="width: 100%" >
+                                                            <option value=""></option>
+                                                            <c:forEach var="tipoIdentificacion" items="${tiposIdentificacion}">
+                                                                <option value="${tipoIdentificacion.getId()}">${tipoIdentificacion.getNombre()}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                    <div id="divNacionalidad">
+                                                        <select id="nacionalidad" class="js-select-basic-single js-states form-control" style="width: 100%">
+                                                            <option value=""></option>
+                                                            <c:forEach var="pais" items="${paises}">
+                                                                <option value="${pais.getId()}">${pais.getNombre()}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                    <div id="divGrupoEtnico">
+                                                        <select id="grupoEtnico" class="js-select-basic-single js-states form-control" style="width: 100%">
+                                                            <option value=""></option>
+                                                            <c:forEach var="grupoEtnico" items="${gruposEtnicos}">
+                                                                <option value="${grupoEtnico.getId()}">${grupoEtnico.getNombre()}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                    <div id="divDiscapacidad">
+                                                        <select id="discapacidad" class="js-select-basic-single js-states form-control" style="width: 100%">
+                                                            <option value=""></option>
+                                                            <c:forEach var="discapacidad" items="${discapacidades}">
+                                                                <option value="${discapacidad.getId()}">${discapacidad.getNombre()}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                    <div id="divActividadEconomica">
+                                                        <select id="actividadEconomica" class="js-select-basic-single js-states form-control" style="width: 100%"> 
+                                                            <option value=""></option>
+                                                            <c:forEach var="actividadEconomica" items="${actividadesEconomicas}">
+                                                                <option value="${actividadEconomica.getId()}">${actividadEconomica.getNombre()}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                    <div id="divTipoVinculacion">
+                                                        <select id="tipoVinculacion" class="js-select-basic-single js-states form-control" style="width: 100%">
+                                                            <option value=""></option>
+                                                            <c:forEach var="tipoVinculacion" items="${tiposVinculacion}">
+                                                                <option value="${tipoVinculacion.getId()}">${tipoVinculacion.getNombre()}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div id="divSexo">
+                                                    <div id="radioSexo" class="btn-group" style="margin-left: 40px;">
+                                                      <a class="btn btn-primary btn-sm notActive" data-toggle="sexo" data-title="1" id="btnSexoSi">M</a>
+                                                      <a class="btn btn-primary btn-sm notActive" data-toggle="sexo" data-title="2" id="btnSexoNo">F</a>
+                                                      <input type="hidden" id="sexo" name="sexo">
+                                                    </div>
+                                                </div>
+                                                <div id="divRadio">
+                                                    <div id="radioBtn" class="btn-group" style="margin-left: 40px;">
+                                                      <a class="btn btn-primary btn-sm notActive" data-toggle="radio" data-title="true" id="btnRadioSi">Sí</a>
+                                                      <a class="btn btn-primary btn-sm notActive" data-toggle="radio" data-title="false" id="btnRadioNo">No</a>
+                                                      <input type="hidden" id="radio" name="radio">
+                                                    </div>
+                                                </div>
+                                          </div>
                                     </div>
                                 </div>                                
                             </div>
@@ -756,6 +856,57 @@
                     </div>
                 </div>
             </div>
+            <div id="formresultado" style="display: none;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <legend>Resultados</legend>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label>Archivo de soporte de los resultados</label>
+                                <div class="form-inline">
+                                <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="resultado" id="resultado" >
+                                <c:if test = "${convocatoria.getId() > 0}">
+                                    <button class="btn btn-success btn-xs" type="button" onclick="verDocumentoResultado()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
+                                </c:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="modal" tabindex="1" id="ubicacionModal">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header mhsuccess">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Buscar ciudad</h4>
+                        </div>                                
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="dep">Pa&iacute;s</label><a href="#" data-toggle="tooltip" data-placement="right" title = "debe seleccionar su país" style="margin-left: 5px;"><i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                <select style="width: 100%" name="pais" id="pais" class="js-select-basic-single js-states form-control" onchange="buscarDepartamentos(this.value)">
+                                    <option value=""></option>
+                                    <c:forEach var="pais" items="${paises}">
+                                        <option value="${pais.getId()}">${pais.getNombre()}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="form-group" id="divDepartamento">
+                                <label for="departamento">Departamento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar su departamento " style="margin-left: 5px;"><i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                <select style="width: 100%" name="departamento" id="departamento" class="js-select-basic-single js-states form-control" onchange="buscarCiudades(this.value)"></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="ciudad">Ciudad</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar su ciudad " style="margin-left: 5px;"><i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                <select style="width: 100%" id="ciudad" name="ciudad" class="js-select-basic-single js-states form-control"></select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" onclick="seleccionarUbicacion()">Aceptar</button>
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <input type="submit" class="btn btn-success" type="button" style="margin-top: 30px;float: right;" value="Guardar" />
             <input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <form:hidden path="id" />
@@ -830,6 +981,28 @@
     var programaCursado = '';
     var capacitacionEducacionContinua = '';
     var MAXIMO_TAMANYO_ARCHIVO = 2097152;
+    
+    var PE_TIPO_ID = 1;
+    var PE_LUGAR_EXPEDICION = 2;
+    var PE_FECHA_EXPEDICION = 3;
+    var PE_LIBRETA_MILITAR=4;
+    var PE_NOMBRES=5;
+    var PE_APELLIDOS=6;
+    var PE_FECHA_NACIMIENTO=7;
+    var PE_LUGAR_NACIMIENTO=8;
+    var PE_NACIONALIDAD=9;
+    var PE_SEXO=10;
+    var PE_CIUDAD_RESIDENCIA=11;
+    var PE_DIRECCION=12;
+    var PE_EGRESADO_UDEA=13;
+    var PE_GRUPO_ETNICO=14;
+    var PE_DISCAPACIDAD=15;
+    var PE_DISPONE_RUT=16;
+    var PE_ACTIVIDAD_ECONOMICA=17;
+    var PE_DISPONIBILIDAD_VIAJAR=18;
+    var PE_TIPO_VINCULACION=19;
+    var PE_EMPLEADO_UDEA=20;
+    var PE_NUMERO_ID = 21;
     
     $.validate({
         validateOnBlur: false, // disable validation when input looses focus
@@ -909,9 +1082,11 @@
                 $('#formcurso').hide();
             }
         });
+        
         $('#totalHorasSemestre').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
+        
         $('#sede').change(function () {
             var idSede = $(this).val();
             $.ajax({
@@ -963,99 +1138,123 @@
             obtenerCapacitaciones();
         });
 
-    });
-    $('#tipoCertificacionIdioma').change(function () {
-        var valor = $(this).val();
-        if (valor === TIPO_CERTIFICACION_OTRO) {
-            $('#divOtroCertificacionIdioma').css("display", "block");
-        } else {
-            $('#divOtroCertificacionIdioma').css("display", "none");
-        }
-    });
-    $('#btndatosgen').click(function () {
-        $('#formdatosgen').css('display', 'block');
-        $('#formcrithab').css('display', 'none');
-        $('#formcriteva').css('display', 'none');
-        $('#formadendas').css('display', 'none');
-    });
-    $('#btncrithab').click(function () {
-        $('#formdatosgen').css('display', 'none');
-        $('#formcrithab').css('display', 'block');
-        $('#formcriteva').css('display', 'none');
-        $('#formadendas').css('display', 'none');
-    });
-    $('#btncriteva').click(function () {
-        $('#formdatosgen').css('display', 'none');
-        $('#formcrithab').css('display', 'none');
-        $('#formcriteva').css('display', 'block');
-        $('#formadendas').css('display', 'none');
-    });
-    $('#btnadendas').click(function () {
-        $('#formdatosgen').css('display', 'none');
-        $('#formcrithab').css('display', 'none');
-        $('#formcriteva').css('display', 'none');
-        $('#formadendas').css('display', 'block');
-    });
+        $('#tipoCertificacionIdioma').change(function () {
+            var valor = $(this).val();
+            if (valor === TIPO_CERTIFICACION_OTRO) {
+                $('#divOtroCertificacionIdioma').css("display", "block");
+            } else {
+                $('#divOtroCertificacionIdioma').css("display", "none");
+            }
+        });
+        $('#btndatosgen').click(function () {
+            $('#formdatosgen').css('display', 'block');
+            $('#formcrithab').css('display', 'none');
+            $('#formcriteva').css('display', 'none');
+            $('#formadendas').css('display', 'none');
+            $('#formresultado').css('display', 'none');
+        });
+        $('#btncrithab').click(function () {
+            $('#formdatosgen').css('display', 'none');
+            $('#formcrithab').css('display', 'block');
+            $('#formcriteva').css('display', 'none');
+            $('#formadendas').css('display', 'none');
+            $('#formresultado').css('display', 'none');
+        });
+        $('#btncriteva').click(function () {
+            $('#formdatosgen').css('display', 'none');
+            $('#formcrithab').css('display', 'none');
+            $('#formcriteva').css('display', 'block');
+            $('#formadendas').css('display', 'none');
+            $('#formresultado').css('display', 'none');
+        });
+        $('#btnadendas').click(function () {
+            $('#formdatosgen').css('display', 'none');
+            $('#formcrithab').css('display', 'none');
+            $('#formcriteva').css('display', 'none');
+            $('#formadendas').css('display', 'block');
+            $('#formresultado').css('display', 'none');
+        });
+        $('#btnresultado').click(function () {
+            $('#formdatosgen').css('display', 'none');
+            $('#formcrithab').css('display', 'none');
+            $('#formcriteva').css('display', 'none');
+            $('#formadendas').css('display', 'none');
+            $('#formresultado').css('display', 'block');
+        });
     
-    $('#anyosMinimosExperiencia').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9]/g, '');
-    });
-    $('#anyosExperiencia').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9]/g, '');
-    });
-    $('#puntajeMinimoCertificacionIdioma').change(function () {
-        var decimalOnly = /^\s*[0-9]\d*(\.\d+)?\s*$/;
-        if(!decimalOnly.test(this.value)) {
-            this.value = '';
-        }
-    });
-        
-    $('#convocatoria').submit(function (evt) {
-        evt.preventDefault();
-        if($('#documento').val() != "" && $('#documento')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
-            bootstrap_alert_convocatoria.warning("El documento de la convocatoria no puede ser mayor a 2MB.");
-            return;
-        }
-        
-        $('#md_guardar').modal({backdrop: 'static', keyboard: false})  ;
-        current_progress = 0;
-        var interval = setInterval(function () {
-            current_progress += 10;
-            $(".dynamic")
-                    .css("width", current_progress + "%")
-                    .attr("aria-valuenow", current_progress)
-                    .text(current_progress + "% Completado");
-            if (current_progress >= 100) {
-                clearInterval(interval);
+        $('#anyosMinimosExperiencia').keyup(function () {
+            this.value = (this.value + '').replace(/[^0-9]/g, '');
+        });
+        $('#anyosExperiencia').keyup(function () {
+            this.value = (this.value + '').replace(/[^0-9]/g, '');
+        });
+        $('#puntajeMinimoCertificacionIdioma').change(function () {
+            var decimalOnly = /^\s*[0-9]\d*(\.\d+)?\s*$/;
+            if(!decimalOnly.test(this.value)) {
+                this.value = '';
             }
-            if (current_progress === 100) {
-                $('#md_guardar').modal('hide');
-            }
-        }, 1000);
-        var formData = new FormData(this);
-        $.ajax({
-            type: "POST",
-            url: "${pageContext.request.contextPath}/convocatorias/crear",
-            data: formData,
-            processData: false,
-            contentType: false,
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
-            },
-            success: function (response) {
-                $('#md_guardar').modal('hide');
-                if (response === "") {
-                    $('#confirmacionAlmacenamientoConvocatoria').modal({backdrop: 'static', keyboard: false})  ;
-                } else {
-                    bootstrap_alert_convocatoria.warning(response);
-                }
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                bootstrap_alert_convocatoria.warning("Error al almacenar la convocatoria.");
-                $('#md_guardar').modal('hide');
-            }});
-    });
+        });
+    
+        $('#radioSexo a').on('click', function () {
+            var sel = $(this).data('title');
+            var tog = $(this).data('toggle');
+            $('#' + tog).prop('value', sel);
 
+            $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+            $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+        });
+    
+        $('#convocatoria').submit(function (evt) {
+            evt.preventDefault();
+            if($('#documento').val() != "" && $('#documento')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                bootstrap_alert_convocatoria.warning("El documento de la convocatoria no puede ser mayor a 2MB.");
+                return;
+            }
+            if($('#resultado').val() != "" && $('#resultado')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                bootstrap_alert_convocatoria.warning("El resultado de la convocatoria no puede ser mayor a 2MB.");
+                return;
+            }
+
+            $('#md_guardar').modal({backdrop: 'static', keyboard: false})  ;
+            current_progress = 0;
+            var interval = setInterval(function () {
+                current_progress += 10;
+                $(".dynamic")
+                        .css("width", current_progress + "%")
+                        .attr("aria-valuenow", current_progress)
+                        .text(current_progress + "% Completado");
+                if (current_progress >= 100) {
+                    clearInterval(interval);
+                }
+                if (current_progress === 100) {
+                    $('#md_guardar').modal('hide');
+                }
+            }, 1000);
+            var formData = new FormData(this);
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/convocatorias/crear",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_guardar').modal('hide');
+                    if (response === "") {
+                        $('#confirmacionAlmacenamientoConvocatoria').modal({backdrop: 'static', keyboard: false})  ;
+                    } else {
+                        bootstrap_alert_convocatoria.warning(response);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_convocatoria.warning("Error al almacenar la convocatoria.");
+                    $('#md_guardar').modal('hide');
+                }});
+        });
+    });    
+    
     function obtenerProgramasCursados() {
         var nucleoBasicoConocimiento = $('#nucleoBasicoConocimientoPrograma').val();
         $.ajax({
@@ -1101,6 +1300,95 @@
                     }
                 }});
         }
+    }
+
+    function buscarDepartamentos(idPais) {
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/hojasVida/departamentosPais/" + idPais,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response !== "") {
+                    $('#departamento').find('option').remove();
+                    $('#ciudad').find('option').remove();
+                    $('#departamento').append('<option></option>');
+                    var departamentos = JSON.parse(response);
+                    for (var i = 0; i < departamentos.length; i++) {
+                        $('#departamento').append('<option value=' + departamentos[i].id + '>' + departamentos[i].nombre + '</option>');
+                    }
+                    
+                    if(departamentos.length == 1) {
+                        $('#departamento').val(departamentos[0].id).trigger('change.select2');
+                    }
+                }
+            }});
+    }
+
+    function buscarCiudades(codigoDepartamento) {
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/hojasVida/ciudadesDepartamento/" + codigoDepartamento,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response !== "") {
+                    $('#ciudad').find('option').remove();
+                    $('#ciudad').append('<option></option>');
+                    var ciudades = JSON.parse(response);
+                    for (var i = 0; i < ciudades.length; i++) {
+                        $('#ciudad').append('<option value=' + ciudades[i].id + '>' + ciudades[i].nombre + '</option>');
+                    }
+                    if(ciudades.length == 1) {
+                        $('#ciudad').val(ciudades[0].id).trigger('change.select2');
+                    }                    
+                }
+            }});
+    }
+
+    function mostrarCampo(campoHojaVida) {
+       $('#divFecha').hide();
+       $('#divLugar').hide();
+       $('#divSelect').hide();
+       $('#divRadio').hide();
+       $('#divSexo').hide();
+       $('#divTexto').hide(); 
+        
+       if(campoHojaVida == PE_TIPO_ID || campoHojaVida == PE_NACIONALIDAD || campoHojaVida == PE_GRUPO_ETNICO || 
+          campoHojaVida == PE_DISCAPACIDAD || campoHojaVida == PE_ACTIVIDAD_ECONOMICA || campoHojaVida == PE_TIPO_VINCULACION) {
+           $('#divSelect').show();
+           $('#divTipoIdentificacion').hide();
+           $('#divNacionalidad').hide();
+           $('#divGrupoEtnico').hide();
+           $('#divDiscapacidad').hide();
+           $('#divActividadEconomica').hide();
+           $('#divTipoVinculacion').hide();
+           if(campoHojaVida == PE_TIPO_ID) {
+             $('#divTipoIdentificacion').show();
+           } else if(campoHojaVida == PE_NACIONALIDAD) {
+             $('#divNacionalidad').show();
+           } else if(campoHojaVida == PE_GRUPO_ETNICO) {
+             $('#divGrupoEtnico').show();
+           } else if(campoHojaVida == PE_DISCAPACIDAD) {
+             $('#divDiscapacidad').show();
+           } else if(campoHojaVida == PE_ACTIVIDAD_ECONOMICA) {
+             $('#divActividadEconomica').show();
+           } else if(campoHojaVida == PE_TIPO_VINCULACION) {
+             $('#divTipoVinculacion').show();
+           }
+       } else if(campoHojaVida == PE_LUGAR_EXPEDICION || campoHojaVida == PE_CIUDAD_RESIDENCIA || campoHojaVida == PE_LUGAR_NACIMIENTO) {
+           $('#divLugar').show(); 
+       } else if(campoHojaVida == PE_FECHA_EXPEDICION || campoHojaVida == PE_FECHA_NACIMIENTO) {
+           $('#divFecha').show(); 
+       } else if(campoHojaVida == PE_EGRESADO_UDEA || campoHojaVida == PE_GRUPO_ETNICO || campoHojaVida == PE_DISPONE_RUT ||
+           campoHojaVida == PE_DISPONIBILIDAD_VIAJAR || campoHojaVida == PE_EMPLEADO_UDEA) {
+           $('#divRadio').show(); 
+       } else if(campoHojaVida == PE_SEXO) {
+           $('#divSexo').show(); 
+       } else if(campoHojaVida == PE_NUMERO_ID || campoHojaVida == PE_LIBRETA_MILITAR || campoHojaVida == PE_APELLIDOS ||
+                 campoHojaVida == PE_NOMBRES || campoHojaVida == PE_DIRECCION) {
+           $('#divTexto').show(); 
+       }
     }
 
     bootstrap_alert_convocatoria = {};
@@ -1500,11 +1788,60 @@
         };
 
         self.adicionarCriterioHabilitante = function () {
-            var campoHojaVidaCriterio = $('#campoHojaVidaCriterioHabilitante').val();
+            var campoHojaVida = $('#campoHojaVidaCriterioHabilitante').val();
             var nombreCampoHojaVidaCriterio = $('#campoHojaVidaCriterioHabilitante option:selected').text();
-            var valorCriterio = $('#valorCriterioHabilitante').val();
+            var valorCriterio = "";
+            var textoCriterio = "";
 
-            if (campoHojaVidaCriterio === "") {
+            if(campoHojaVida == PE_TIPO_ID || campoHojaVida == PE_NACIONALIDAD || campoHojaVida == PE_GRUPO_ETNICO || 
+               campoHojaVida == PE_DISCAPACIDAD || campoHojaVida == PE_ACTIVIDAD_ECONOMICA || campoHojaVida == PE_TIPO_VINCULACION) {
+                if(campoHojaVida == PE_TIPO_ID) {
+                  valorCriterio = $('#tipoIdentificacion').val();
+                  textoCriterio = $('#tipoIdentificacion option:selected').text();
+                } else if(campoHojaVida == PE_NACIONALIDAD) {
+                  valorCriterio = $('#nacionalidad').val();
+                  textoCriterio = $('#nacionalidad option:selected').text();
+                } else if(campoHojaVida == PE_GRUPO_ETNICO) {
+                  valorCriterio = $('#grupoEtnico').val();
+                  textoCriterio = $('#grupoEtnico option:selected').text();
+                } else if(campoHojaVida == PE_DISCAPACIDAD) {
+                  valorCriterio = $('#discapacidad').val();
+                  textoCriterio = $('#discapacidad option:selected').text();
+                } else if(campoHojaVida == PE_ACTIVIDAD_ECONOMICA) {
+                  valorCriterio = $('#actividadEconomica').val();
+                  textoCriterio = $('#actividadEconomica option:selected').text();
+                } else if(campoHojaVida == PE_TIPO_VINCULACION) {
+                  valorCriterio = $('#tipoVinculacion').val();
+                  textoCriterio = $('#tipoVinculacion option:selected').text();
+                }
+            } else if(campoHojaVida == PE_LUGAR_EXPEDICION || campoHojaVida == PE_CIUDAD_RESIDENCIA || campoHojaVida == PE_LUGAR_NACIMIENTO) {
+                valorCriterio = $('#lugar').val();
+                textoCriterio = $('#nombreLugar').val();
+            } else if(campoHojaVida == PE_FECHA_EXPEDICION || campoHojaVida == PE_FECHA_NACIMIENTO) {
+                valorCriterio = $('#fecha').val();
+                textoCriterio = $('#fecha').val();
+            } else if(campoHojaVida == PE_EGRESADO_UDEA || campoHojaVida == PE_DISPONE_RUT ||
+                campoHojaVida == PE_DISPONIBILIDAD_VIAJAR || campoHojaVida == PE_EMPLEADO_UDEA) {
+                valorCriterio = $('#radio').val();
+                if(valorCriterio == "true") {
+                  textoCriterio = "Sí"; 
+                } else {
+                  textoCriterio = "No"; 
+                }
+            } else if(campoHojaVida == PE_SEXO) {
+                valorCriterio = $('#sexo').val();
+                if(valorCriterio == "1") {
+                  textoCriterio = "Masculino";
+                } else {
+                  textoCriterio = "Femenino";
+                }
+            } else if(campoHojaVida == PE_NUMERO_ID || campoHojaVida == PE_LIBRETA_MILITAR || campoHojaVida == PE_APELLIDOS ||
+                      campoHojaVida == PE_NOMBRES || campoHojaVida == PE_DIRECCION) {
+                valorCriterio = $('#texto').val();
+                textoCriterio = $('#texto').val();
+            }
+
+            if (campoHojaVida === "") {
                 bootstrap_alert_criterio_habilitante.warning('Debe seleccionar el campo de la hoja de vida');
                 return false;
             }
@@ -1516,9 +1853,10 @@
                 self.criteriosHabilitantes.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.criteriosHabilitantes().length),
-                    campoHojaVida: ko.observable(campoHojaVidaCriterio),
+                    campoHojaVida: ko.observable(campoHojaVida),
                     nombreCampoHojaVida: ko.observable(nombreCampoHojaVidaCriterio),
-                    valor: ko.observable(valorCriterio)
+                    valor: ko.observable(valorCriterio),
+                    texto: ko.observable(textoCriterio)
                 });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
@@ -1529,9 +1867,10 @@
                         break;
                     }
                 }
-                self.criteriosHabilitantes()[indice].campoHojaVida(campoHojaVidaCriterio);
+                self.criteriosHabilitantes()[indice].campoHojaVida(campoHojaVida);
                 self.criteriosHabilitantes()[indice].nombreCampoHojaVida(nombreCampoHojaVidaCriterio);
                 self.criteriosHabilitantes()[indice].valor(valorCriterio);
+                self.criteriosHabilitantes()[indice].texto(textoCriterio);
             }
             $('#md_criterio_habilitante').modal('hide');
         };
@@ -1541,16 +1880,115 @@
         };
 
         self.editarCriterioHabilitante = function (criterio) {
+
+            $('#divFecha').hide();
+            $('#divLugar').hide();
+            $('#divSelect').hide();
+            $('#divRadio').hide();
+            $('#divSexo').hide();
+            $('#divTexto').hide(); 
+        
             $('#campoHojaVidaCriterioHabilitante').val(criterio.campoHojaVida()).trigger('change');
-            $('#valorCriterioHabilitante').val(criterio.valor()).trigger('change');
             $('#consecutivo').val(criterio.consecutivo());
+            
+            var campoHojaVida = criterio.campoHojaVida();
+            if(campoHojaVida == PE_TIPO_ID || campoHojaVida == PE_NACIONALIDAD || campoHojaVida == PE_GRUPO_ETNICO || 
+               campoHojaVida == PE_DISCAPACIDAD || campoHojaVida == PE_ACTIVIDAD_ECONOMICA || campoHojaVida == PE_TIPO_VINCULACION) {
+                $('#divSelect').show();
+                $('#divTipoIdentificacion').hide();
+                $('#divNacionalidad').hide();
+                $('#divGrupoEtnico').hide();
+                $('#divDiscapacidad').hide();
+                $('#divActividadEconomica').hide();
+                $('#divTipoVinculacion').hide();
+                if(campoHojaVida == PE_TIPO_ID) {
+                  $('#divTipoIdentificacion').show();
+                  $('#tipoIdentificacion').val(criterio.valor()).trigger('change');
+                } else if(campoHojaVida == PE_NACIONALIDAD) {
+                  $('#divNacionalidad').show();
+                  $('#nacionalidad').val(criterio.valor()).trigger('change');
+                } else if(campoHojaVida == PE_GRUPO_ETNICO) {
+                  $('#divGrupoEtnico').show();
+                  $('#grupoEtnico').val(criterio.valor()).trigger('change');
+                } else if(campoHojaVida == PE_DISCAPACIDAD) {
+                  $('#divDiscapacidad').show();
+                  $('#discapacidad').val(criterio.valor()).trigger('change');
+                } else if(campoHojaVida == PE_ACTIVIDAD_ECONOMICA) {
+                  $('#divActividadEconomica').show();
+                  $('#actividadEconomica').val(criterio.valor()).trigger('change');
+                } else if(campoHojaVida == PE_TIPO_VINCULACION) {
+                  $('#divTipoVinculacion').show();
+                  $('#tipoVinculacion').val(criterio.valor()).trigger('change');
+                }
+            } else if(campoHojaVida == PE_LUGAR_EXPEDICION || campoHojaVida == PE_CIUDAD_RESIDENCIA || campoHojaVida == PE_LUGAR_NACIMIENTO) {
+                $('#divLugar').show(); 
+                $('#nombreLugar').val(criterio.texto());
+                
+            } else if(campoHojaVida == PE_FECHA_EXPEDICION || campoHojaVida == PE_FECHA_NACIMIENTO) {
+                $('#divFecha').show(); 
+                $('#fecha').val(criterio.valor());
+            } else if(campoHojaVida == PE_EGRESADO_UDEA || campoHojaVida == PE_DISPONE_RUT ||
+                campoHojaVida == PE_DISPONIBILIDAD_VIAJAR || campoHojaVida == PE_EMPLEADO_UDEA) {
+                $('#divRadio').show();
+                if(criterio.valor() == "true") {
+                  $('#btnRadioSi').removeClass('notActive').addClass('active');  
+                  $('#btnRadioNo').removeClass('active').addClass('notActive');
+                } else {
+                  $('#btnRadioNo').removeClass('notActive').addClass('active');  
+                  $('#btnRadioSi').removeClass('active').addClass('notActive');  
+                }
+            } else if(campoHojaVida == PE_SEXO) {
+                $('#divSexo').show(); 
+                if(criterio.valor() == "1") {
+                  $('#btnSexoSi').removeClass('notActive').addClass('active');  
+                  $('#btnSexoNo').removeClass('active').addClass('notActive');
+                } else {
+                  $('#btnSexoNo').removeClass('notActive').addClass('active');  
+                  $('#btnSexoSi').removeClass('active').addClass('notActive');  
+                }
+            } else if(campoHojaVida == PE_NUMERO_ID || campoHojaVida == PE_LIBRETA_MILITAR || campoHojaVida == PE_APELLIDOS ||
+                      campoHojaVida == PE_NOMBRES || campoHojaVida == PE_DIRECCION) {
+                $('#divTexto').show(); 
+                $('#texto').val(criterio.valor());
+            }
+            
             bootstrap_alert_criterio_habilitante.removeWarning();
             $('#md_criterio_habilitante').modal({backdrop: 'static', keyboard: false})  ;
         };
     };
 
     function verDocumentoConvocatoria() {
-        window.location.href = "${pageContext.request.contextPath}/convocatorias/documento/" + $('#id').val();
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/convocatorias/documento/" + $('#id').val(),
+            processData: false,
+            contentType: false,
+            success: function (response) {
+               if(response != "") {
+                 window.location.href = "${pageContext.request.contextPath}/convocatorias/documento/" + $('#id').val();
+               }
+            },
+            error:function (xhr, ajaxOptions, thrownError) {
+
+            } 
+        });  
+    }
+
+    function verDocumentoResultado() {
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/convocatorias/resultado/" + $('#id').val(),
+            processData: false,
+            contentType: false,
+            success: function (response) {
+               if(response != "") {
+                 window.location.href = "${pageContext.request.contextPath}/convocatorias/resultado/" + $('#id').val();
+               }
+            },
+            error:function (xhr, ajaxOptions, thrownError) {
+
+            } 
+        });  
     }
 
     function nuevaAdenda() {
@@ -1608,8 +2046,27 @@
 
     function nuevoCriterioHabilitante() {
         $('#campoHojaVidaCriterioHabilitante').val("").trigger('change');
-        $('#valorCriterioHabilitante').val("").trigger('change');
+        $('#tipoIdentificacion').val("").trigger('change');
+        $('#nacionalidad').val("").trigger('change');
+        $('#grupoEtnico').val("").trigger('change');
+        $('#discapacidad').val("").trigger('change');
+        $('#actividadEconomica').val("").trigger('change');
+        $('#tipoVinculacion').val("").trigger('change');
+        $('#nombreLugar').val("");
+        $('#lugar').val("");
+        $('#fecha').val("");
+        $('#btnRadioSi').removeClass('active').addClass('notActive');  
+        $('#btnRadioNo').removeClass('active').addClass('notActive');  
+        $('#btnSexoSi').removeClass('active').addClass('notActive');  
+        $('#btnSexoNo').removeClass('active').addClass('notActive');  
+        $('#texto').val("");
         $('#consecutivo').val("");
+        $('#divFecha').hide();
+        $('#divLugar').hide();
+        $('#divSelect').hide();
+        $('#divRadio').hide();
+        $('#divSexo').hide();
+        $('#divTexto').show(); 
         bootstrap_alert_criterio_habilitante.removeWarning();
         $('#md_criterio_habilitante').modal({backdrop: 'static', keyboard: false})  ;
     }
@@ -1651,6 +2108,26 @@
         }
     }
 
+    function mostrarUbicacionModal(nombreCampo, campo) {
+        nombreCampoCiudad = nombreCampo;
+        campoCiudad = campo;
+        $('#ubicacionModal').modal({backdrop: 'static', keyboard: false})  ;
+    }
+
+    function seleccionarUbicacion() {
+        var pais = $('#pais option:selected').text().toUpperCase();
+        var dep = $('#departamento option:selected').text().toUpperCase();
+        var ciu = $('#ciudad option:selected').text().toUpperCase();
+        $('#' + campoCiudad).val($('#ciudad').val());
+        if(dep != "SIN ESPECIFICAR") {
+           $('#' + nombreCampoCiudad).val(pais + " - " + dep + " - " + ciu);
+        }
+        else {
+           $('#' + nombreCampoCiudad).val(pais + " - " + ciu); 
+        }
+        $('#ubicacionModal').modal('hide');
+    }
+    
     var adendas = [];
     var anyosExperiencias = [];
     var idiomas = [];

@@ -28,6 +28,7 @@ public class Convocatoria {
     private String nombre;
     private String descripcion;
     private Documento documento;
+    private Documento resultado;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaPublicacionResultados;
     private String fechaPublicacionResultadosFormateada;
@@ -424,5 +425,19 @@ public class Convocatoria {
      */
     public void setCriteriosHabilitantes(List<CriterioHabilitanteConvocatoria> criteriosHabilitantes) {
         this.criteriosHabilitantes = criteriosHabilitantes;
+    }
+
+    /**
+     * @return the resultado
+     */
+    public Documento getResultado() {
+        return resultado;
+    }
+
+    /**
+     * @param resultado the resultado to set
+     */
+    public void setResultado(Documento resultado) {
+        this.resultado = resultado;
     }
 }

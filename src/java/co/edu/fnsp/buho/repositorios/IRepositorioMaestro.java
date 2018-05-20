@@ -61,4 +61,11 @@ public interface IRepositorioMaestro {
     List<Maestro> obtenerInstitucionesEducativasColombianas();
     List<Programa> obtenerProgramasNucleoBasicoConocimiento(int nucleoBasicoConocimiento);
     int ingresarInstitucion(Institucion institucion);
+    Maestro obtenerMunicipio(String codigoMunicipio);
+    Maestro obtenerActividadEconomica(int id);
+    Maestro obtenerTipoVinculacionUdeA(int id);
+    Maestro obtenerPais(int id);
+    Maestro obtenerGrupoEtnico(int id);
+    Maestro obtenerDiscapacidad(int id);
+    Maestro obtenerTipoIdentificacion(String id);
 }

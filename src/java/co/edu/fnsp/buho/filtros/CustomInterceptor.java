@@ -32,17 +32,6 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
 
                 boolean existe = false;
                 String requestURI = request.getRequestURI().toLowerCase();
-                if(requestURI.contains("/usuarios/privilegios")) {
-                    requestURI = "/usuarios/index";
-                }
-                else if(requestURI.contains("/privilegios/editar") ||
-                   requestURI.contains("/privilegios/eliminar")) {
-                    requestURI = "/privilegios/index";
-                }
-                else if(requestURI.contains("/convocatorias/editar") ||
-                   requestURI.contains("/convocatorias/eliminar")) {
-                   requestURI = "/convocatorias/index";
-                }
                 DetalleUsuario usuario = (DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 for (OpcionMenu opcionMenu : usuario.getOpcionesMenu()) {
                     existe = false;

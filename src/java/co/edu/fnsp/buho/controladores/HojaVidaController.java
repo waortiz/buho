@@ -30,8 +30,6 @@ import co.edu.fnsp.buho.servicios.IServicioMaestro;
 import co.edu.fnsp.buho.utilidades.Util;
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -745,7 +743,7 @@ public class HojaVidaController {
 
         List<Maestro> paises = servicioMaestro.obtenerPaises();
         List<Maestro> tiposIdentificacion = servicioMaestro.obtenerTiposIdentificacion();
-        List<Maestro> gruposEtnico = servicioMaestro.obtenerGruposEtnicos();
+        List<Maestro> gruposEtnicos = servicioMaestro.obtenerGruposEtnicos();
         List<Maestro> discapacidades = servicioMaestro.obtenerDiscapacidades();
         List<Maestro> actividadesEconomicas = servicioMaestro.obtenerActividadesEconomicas();
         List<Maestro> tiposVinculacion = servicioMaestro.obtenerTiposVinculacionUdeA();
@@ -772,7 +770,7 @@ public class HojaVidaController {
 
         model.addAttribute("paises", paises);
         model.addAttribute("tiposIdentificacion", tiposIdentificacion);
-        model.addAttribute("gruposEtnico", gruposEtnico);
+        model.addAttribute("gruposEtnicos", gruposEtnicos);
         model.addAttribute("discapacidades", discapacidades);
         model.addAttribute("actividadesEconomicas", actividadesEconomicas);
         model.addAttribute("tiposVinculacion", tiposVinculacion);

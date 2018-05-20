@@ -478,7 +478,7 @@
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
                                 <form:select path="grupoEtnico" class="js-select-basic-single js-states form-control" data-validation="required" data-validation-error-msg="Debe seleccionar el grupo étnico que pertenece">
                                     <form:option value=""></form:option>
-                                    <form:options items="${gruposEtnico}" itemLabel="nombre" itemValue="id"/>
+                                    <form:options items="${gruposEtnicos}" itemLabel="nombre" itemValue="id"/>
                                 </form:select>
                         </div>
                     </div>

@@ -15,13 +15,10 @@ import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
 import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
 import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
 import co.edu.fnsp.buho.utilidades.Util;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -48,6 +45,9 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     private SimpleJdbcCall ingresarDocumentoConvocatoria;
     private SimpleJdbcCall actualizarDocumentoConvocatoria;
     private SimpleJdbcCall obtenerDocumentoConvocatoria;
+    private SimpleJdbcCall obtenerResultadoConvocatoria;
+    private SimpleJdbcCall ingresarResultadoConvocatoria;
+    private SimpleJdbcCall actualizarResultadoConvocatoria;
 
     private SimpleJdbcCall ingresarAdenda;
     private SimpleJdbcCall eliminarAdenda;
@@ -98,6 +98,9 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         this.obtenerDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoConvocatoria");
         this.ingresarDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoConvocatoria");
         this.actualizarDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoConvocatoria");
+        this.obtenerResultadoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerResultadoConvocatoria");
+        this.ingresarResultadoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarResultadoConvocatoria");
+        this.actualizarResultadoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarResultadoConvocatoria");
 
         this.ingresarAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarAdenda");
         this.eliminarAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarAdenda");
@@ -138,48 +141,29 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
         parametros.addValue("varNombre", convocatoria.getNombre());
         parametros.addValue("varDescripcion", convocatoria.getDescripcion());
-        try {
-            parametros.addValue("varTipoConvocatoria", Util.obtenerEntero(convocatoria.getTipoConvocatoria()));
-        } catch (ParseException ex) {
-            Logger.getLogger(RepositorioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        parametros.addValue("varTipoConvocatoria", Util.obtenerEntero(convocatoria.getTipoConvocatoria()));
         parametros.addValue("varFechaFin", convocatoria.getFechaFin());
         parametros.addValue("varFechaInicio", convocatoria.getFechaInicio());
         parametros.addValue("varFechaResultados", convocatoria.getFechaPublicacionResultados());
         parametros.addValue("varCurso", convocatoria.getNombreCurso());
-        if (convocatoria.getTotalHorasSemestreCurso() != null
-                && convocatoria.getTotalHorasSemestreCurso().length() > 0) {
-            try {
-                parametros.addValue("varNumeroHoras", Util.obtenerEntero(convocatoria.getTotalHorasSemestreCurso()));
-            } catch (ParseException ex) {
-                Logger.getLogger(RepositorioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        if (convocatoria.getTotalHorasSemestreCurso() != null && convocatoria.getTotalHorasSemestreCurso().length() > 0) {
+            parametros.addValue("varNumeroHoras", Util.obtenerEntero(convocatoria.getTotalHorasSemestreCurso()));
         } else {
             parametros.addValue("varNumeroHoras", 0);
         }
-        if (convocatoria.getIdProgramaCurso() != null
-                && convocatoria.getIdProgramaCurso().length() > 0) {
-            try {
-                parametros.addValue("varPrograma", Util.obtenerEntero(convocatoria.getIdProgramaCurso()));
-            } catch (ParseException ex) {
-                Logger.getLogger(RepositorioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        if (convocatoria.getIdProgramaCurso() != null && convocatoria.getIdProgramaCurso().length() > 0) {
+            parametros.addValue("varPrograma", Util.obtenerEntero(convocatoria.getIdProgramaCurso()));
         } else {
             parametros.addValue("varPrograma", null);
         }
-        if (convocatoria.getAnyosMinimosExperiencia() != null
-                && convocatoria.getAnyosMinimosExperiencia().length() > 0) {
-            try {
-                parametros.addValue("varanyosminimosexperiencia", Util.obtenerEntero(convocatoria.getAnyosMinimosExperiencia()));
-            } catch (ParseException ex) {
-                Logger.getLogger(RepositorioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        if (convocatoria.getAnyosMinimosExperiencia() != null && convocatoria.getAnyosMinimosExperiencia().length() > 0) {
+            parametros.addValue("varanyosminimosexperiencia", Util.obtenerEntero(convocatoria.getAnyosMinimosExperiencia()));
         } else {
             parametros.addValue("varanyosminimosexperiencia", null);
         }
         parametros.addValue("varPersonaRegistra", idUsuario);
-        Map resultado = ingresarConvocatoria.execute(parametros);
-        int idConvocatoria = (int) resultado.get("varIdConvocatoria");
+        Map resultadoIngresoConvocatoria = ingresarConvocatoria.execute(parametros);
+        int idConvocatoria = (int) resultadoIngresoConvocatoria.get("varIdConvocatoria");
 
         MapSqlParameterSource parametrosIngresoAdenda = new MapSqlParameterSource();
         parametrosIngresoAdenda.addValue("varIdConvocatoria", idConvocatoria);
@@ -257,6 +241,16 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             parametrosIngresoDocumentoConvocatoria.addValue("varContenido", documento.getContenido());
             ingresarDocumentoConvocatoria.execute(parametrosIngresoDocumentoConvocatoria);
         }
+
+        Documento resultado = convocatoria.getResultado();
+        if (resultado != null) {
+            MapSqlParameterSource parametrosIngresoResultadoConvocatoria = new MapSqlParameterSource();
+            parametrosIngresoResultadoConvocatoria.addValue("varIdConvocatoria", idConvocatoria);
+            parametrosIngresoResultadoConvocatoria.addValue("varNombre", resultado.getNombre());
+            parametrosIngresoResultadoConvocatoria.addValue("varTipoContenido", resultado.getTipoContenido());
+            parametrosIngresoResultadoConvocatoria.addValue("varContenido", resultado.getContenido());
+            ingresarResultadoConvocatoria.execute(parametrosIngresoResultadoConvocatoria);
+        }
     }
 
     @Override
@@ -270,33 +264,18 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         parametros.addValue("varFechaInicio", convocatoria.getFechaInicio());
         parametros.addValue("varFechaResultados", convocatoria.getFechaPublicacionResultados());
         parametros.addValue("varCurso", convocatoria.getNombreCurso());
-        if (convocatoria.getTotalHorasSemestreCurso() != null
-                && convocatoria.getTotalHorasSemestreCurso().length() > 0) {
-            try {
-                parametros.addValue("varNumeroHoras", Util.obtenerEntero(convocatoria.getTotalHorasSemestreCurso()));
-            } catch (ParseException ex) {
-                Logger.getLogger(RepositorioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        if (convocatoria.getTotalHorasSemestreCurso() != null && convocatoria.getTotalHorasSemestreCurso().length() > 0) {
+            parametros.addValue("varNumeroHoras", Util.obtenerEntero(convocatoria.getTotalHorasSemestreCurso()));
         } else {
             parametros.addValue("varNumeroHoras", 0);
         }
-        if (convocatoria.getIdProgramaCurso() != null
-                && convocatoria.getIdProgramaCurso().length() > 0) {
-            try {
-                parametros.addValue("varPrograma", Util.obtenerEntero(convocatoria.getIdProgramaCurso()));
-            } catch (ParseException ex) {
-                Logger.getLogger(RepositorioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        if (convocatoria.getIdProgramaCurso() != null && convocatoria.getIdProgramaCurso().length() > 0) {
+            parametros.addValue("varPrograma", Util.obtenerEntero(convocatoria.getIdProgramaCurso()));
         } else {
             parametros.addValue("varPrograma", null);
         }
-        if (convocatoria.getAnyosMinimosExperiencia() != null
-                && convocatoria.getAnyosMinimosExperiencia().length() > 0) {
-            try {
-                parametros.addValue("varanyosminimosexperiencia", Util.obtenerEntero(convocatoria.getAnyosMinimosExperiencia()));
-            } catch (ParseException ex) {
-                Logger.getLogger(RepositorioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        if (convocatoria.getAnyosMinimosExperiencia() != null && convocatoria.getAnyosMinimosExperiencia().length() > 0) {
+            parametros.addValue("varanyosminimosexperiencia", Util.obtenerEntero(convocatoria.getAnyosMinimosExperiencia()));
         } else {
             parametros.addValue("varanyosminimosexperiencia", null);
         }
@@ -311,6 +290,16 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             parametrosActualizacionDocumentoConvocatoria.addValue("varTipoContenido", documento.getTipoContenido());
             parametrosActualizacionDocumentoConvocatoria.addValue("varContenido", documento.getContenido());
             actualizarDocumentoConvocatoria.execute(parametrosActualizacionDocumentoConvocatoria);
+        }
+
+        Documento resultado = convocatoria.getResultado();
+        if (resultado != null) {
+            MapSqlParameterSource parametrosActualizacionResultadoConvocatoria = new MapSqlParameterSource();
+            parametrosActualizacionResultadoConvocatoria.addValue("varIdConvocatoria", convocatoria.getId());
+            parametrosActualizacionResultadoConvocatoria.addValue("varNombre", resultado.getNombre());
+            parametrosActualizacionResultadoConvocatoria.addValue("varTipoContenido", resultado.getTipoContenido());
+            parametrosActualizacionResultadoConvocatoria.addValue("varContenido", resultado.getContenido());
+            actualizarResultadoConvocatoria.execute(parametrosActualizacionResultadoConvocatoria);
         }
 
         actualizarAdendas(convocatoria.getId(), idUsuario, convocatoria.getAdendas());
@@ -375,6 +364,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
 
         Map resultadoCriteriosHabilitantes = obtenerCriteriosHabilitantesConvocatoria.execute(parametros);
         List<CriterioHabilitanteConvocatoria> criteriosHabilitantes = (List<CriterioHabilitanteConvocatoria>) resultadoCriteriosHabilitantes.get("criteriosHabilitantes");
+
         convocatoria.setCriteriosHabilitantes(criteriosHabilitantes);
 
         return convocatoria;
@@ -723,6 +713,24 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
                 ingresarCriterioHabilitanteConvocatoria.execute(parametrosIngresoCriterio);
             }
         }
+    }
+
+    @Override
+    public Documento obtenerResultadoConvocatoria(int idConvocatoria) {
+        Documento documento = null;
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdConvocatoria", idConvocatoria);
+
+        Map resultado = obtenerResultadoConvocatoria.execute(parametros);
+
+        if (resultado.get("varNombre") != null) {
+            documento = new Documento();
+            documento.setNombre((String) resultado.get("varNombre"));
+            documento.setTipoContenido((String) resultado.get("varTipoContenido"));
+            documento.setContenido((byte[]) resultado.get("varContenido"));
+        }
+
+        return documento;
     }
 
 }

@@ -29,12 +29,12 @@
                         <div class="tab-pane fade in active" id="tabvige">
                             <div class="form-group" style="margin-top: 10px;">
                                 <div id="addscroll">
-                                    <table class="table tabla table-hover" id="tbconvo">
+                                    <table class="table tabla table-hover" id="tbConvocatorias">
                                         <thead>
                                             <tr>
-                                                <td><input type="text" id="innom" class="form-control input-sm" placeholder="Buscar nombre de convocatoria"></td>
-                                                <td><input type="text" id="infechfin" class="form-control input-sm fecha" placeholder="Buscar fecha de finalización"></td>
-                                                <td><input type="text" id="infechpos" class="form-control input-sm" placeholder="Buscar fecha de postulación"></td>
+                                                <td><input type="text" id="nombreConvocatoriaVigente" class="form-control input-sm" placeholder="Buscar nombre de convocatoria"></td>
+                                                <td><input type="text" id="fechaFinConvocatoriaVigente" class="form-control input-sm fecha" placeholder="Buscar fecha de finalización"></td>
+                                                <td><input type="text" id="fechaPostulacionConvocatoriaVigente" class="form-control input-sm" placeholder="Buscar fecha de postulación"></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -52,15 +52,10 @@
                                             <c:forEach var="convocatoria" items="${convocatoriasVigentes}">   
                                                 <tr>
                                                     <td>${convocatoria.getNombre()}</td>               
-                                                    <td>${convocatoria.getFechaFinFormateada()}</td>
-                                                    <td>${convocatoria.getFechaPostulacionFormateada()}</td>
+                                                    <td style="text-align: center">${convocatoria.getFechaFinFormateada()}</td>
+                                                    <td style="text-align: center">${convocatoria.getFechaPostulacionFormateada()}</td>
                                                     <td style="text-align: center">
-                                                        <c:if test = "${convocatoria.isTieneDocumento()}">
-                                                            <a href="#" title="Ver documento" onclick="verDocumento(${convocatoria.getId()})"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
-                                                        </c:if>
-                                                        <c:if test = "${!convocatoria.isTieneDocumento()}">
-                                                            <a href="#" title="No tiene documento"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
-                                                        </c:if>
+                                                        <a href="#" title="Ver documento" onclick="verDocumentoConvocatoria(${convocatoria.getId()})"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                                                     </td>
                                                     <td>
                                                         <div class="input-group">
@@ -90,11 +85,11 @@
                         </div>
                         <div class="tab-pane fade" id="tabcer">
                             <div class="form-group" style="margin-top: 10px;">
-                                <table class="table tabla table-hover" id="tblcerradas">
+                                <table class="table tabla table-hover" id="tbCerradas">
                                     <thead>
                                         <tr>
-                                            <td><input type="text" id="intnom" class="form-control input-sm" placeholder="Buscar nombre de convocatoria"></td>
-                                            <td><input type="text" id="intdes" class="form-control input-sm" placeholder="Buscar la descripci&oacute;n"></td>
+                                            <td><input type="text" id="nombreConvocatoriaCerrada" class="form-control input-sm" placeholder="Buscar nombre de convocatoria"></td>
+                                            <td><input type="text" id="descripcionConvocatoriaCerrada" class="form-control input-sm fecha" placeholder="Buscar la descripci&oacute;n"></td>
                                         </tr>
                                         <tr>
                                             <th>Nombre</th>
@@ -107,8 +102,8 @@
                                                 <tr>
                                                     <td>${convocatoria.getNombreTipoConvocatoria()}</td>
                                                     <td>${convocatoria.getNombre()}</td>               
-                                                    <td>
-                                                        <a href="#" target="_black" title="Ver documento" style="margin-left: 30px;" class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"> </i></a>
+                                                    <td style="text-align: center">
+                                                        <a href="#" onclick="verDocumentoResultado(${convocatoria.getId()})" target="_black" title="Ver documento" style="margin-left: 30px;" class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"> </i></a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -279,7 +274,33 @@
     var DOCENCIA_REGIONES = "4";
 
     $(document).ready(function () {
-        var table = $('#tbconvo').DataTable({
+        var tbConvocatorias = $('#tbConvocatorias').DataTable({
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"}
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        });
+
+        var tbCerradas = $('#tbCerradas').DataTable({
             "language": {
                 "sProcessing": "Procesando...",
                 "sLengthMenu": "Mostrar _MENU_ registros",
@@ -331,21 +352,34 @@
             }
         });
 
-        $('#innom').on('keyup', function () {
-            table
+        $('#nombreConvocatoriaVigente').on('keyup', function () {
+            tbConvocatorias
                     .columns(0)
                     .search(this.value)
                     .draw();
         });
-        $('#infechfin').on('keyup', function () {
-            table
+        $('#fechaFinConvocatoriaVigente').on('keyup', function () {
+            tbConvocatorias
                     .columns(1)
                     .search(this.value)
                     .draw();
         });
-        $('#infechpos').on('keyup', function () {
-            table
+        $('#fechaPostulacionConvocatoriaVigente').on('keyup', function () {
+            tbConvocatorias
                     .columns(2)
+                    .search(this.value)
+                    .draw();
+        });
+
+        $('#nombreConvocatoriaCerrada').on('keyup', function () {
+            tbCerradas
+                    .columns(0)
+                    .search(this.value)
+                    .draw();
+        });
+        $('#descripcionConvocatoriaCerrada').on('keyup', function () {
+            tbCerradas
+                    .columns(1)
                     .search(this.value)
                     .draw();
         });
@@ -414,7 +448,7 @@
     function mostrarConvocatoria(idConvocatoria) {
         $.ajax({
             type: "GET",
-            url: "${pageContext.request.contextPath}/convocatorias/" + idConvocatoria,
+            url: "${pageContext.request.contextPath}/convocatorias/ver/" + idConvocatoria,
             processData: false,
             contentType: false,
             success: function (response) {
@@ -466,18 +500,58 @@
             }});
     }
 
-    function verDocumentoConvocatoria() {
-        if ($('#tieneDocumento').val() === "true") {
-            window.location.href = "${pageContext.request.contextPath}/convocatorias/documento/" + $('#idConvocatoria').val();
+    function verDocumentoConvocatoria(idConvocatoria) {
+        if(idConvocatoria == undefined || idConvocatoria == null) {
+          idConvocatoria = $('#idConvocatoria').val();  
         }
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/convocatorias/documento/" + idConvocatoria,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+               if(response != "") {
+                 window.location.href = "${pageContext.request.contextPath}/convocatorias/documento/" + idConvocatoria;
+               }
+            },
+            error:function (xhr, ajaxOptions, thrownError) {
+
+            } 
+        });  
     }
 
-    function verDocumento(idConvocatoria) {
-        window.location.href = "${pageContext.request.contextPath}/convocatorias/documento/" + idConvocatoria;
+    function verDocumentoResultado(idConvocatoria) {
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/convocatorias/resultado/" + idConvocatoria,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+               if(response != "") {
+                 window.location.href = "${pageContext.request.contextPath}/convocatorias/resultado/" + idConvocatoria;
+               }
+            },
+            error:function (xhr, ajaxOptions, thrownError) {
+
+            } 
+        });  
     }
 
     function verDocumentoAdenda(idAdenda) {
-        window.location.href = "${pageContext.request.contextPath}/convocatorias/adenda/documento/" + idAdenda;
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/convocatorias/resultado/adenda/documento/" + idAdenda,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+               if(response != "") {
+                 window.location.href = "${pageContext.request.contextPath}/convocatorias/adenda/documento/" + idAdenda;
+               }
+            },
+            error:function (xhr, ajaxOptions, thrownError) {
+
+            } 
+        });  
     }
 
     bootstrap_alert_convocatoria = function () { };

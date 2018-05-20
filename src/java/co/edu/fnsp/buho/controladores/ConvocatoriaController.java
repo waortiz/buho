@@ -21,7 +21,6 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
-import java.util.logging.Level;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -113,8 +112,20 @@ public class ConvocatoriaController {
         List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
         List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
         List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
+        List<Maestro> paises = servicioMaestro.obtenerPaises();
+        List<Maestro> tiposIdentificacion = servicioMaestro.obtenerTiposIdentificacion();
+        List<Maestro> gruposEtnicos = servicioMaestro.obtenerGruposEtnicos();
+        List<Maestro> discapacidades = servicioMaestro.obtenerDiscapacidades();
+        List<Maestro> actividadesEconomicas = servicioMaestro.obtenerActividadesEconomicas();
+        List<Maestro> tiposVinculacion = servicioMaestro.obtenerTiposVinculacionUdeA();
         List<CampoHojaVida> camposHojaVida = servicioMaestro.obtenerCamposHojaVida();
 
+        model.addAttribute("paises", paises);
+        model.addAttribute("tiposIdentificacion", tiposIdentificacion);
+        model.addAttribute("gruposEtnicos", gruposEtnicos);
+        model.addAttribute("discapacidades", discapacidades);
+        model.addAttribute("actividadesEconomicas", actividadesEconomicas);
+        model.addAttribute("tiposVinculacion", tiposVinculacion);
         model.addAttribute("tiposConvocatoria", tiposConvocatoria);
         model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
         model.addAttribute("tiposAdenda", tiposAdenda);
@@ -152,6 +163,14 @@ public class ConvocatoriaController {
                 documento.setNombre(convocatoria.getDocumento().getOriginalFilename());
                 documento.setTipoContenido(convocatoria.getDocumento().getContentType());
                 convocatoriaIngresar.setDocumento(documento);
+            }
+            Documento resultado = null;
+            if (convocatoria.getResultado() != null && convocatoria.getResultado().getBytes().length > 0) {
+                resultado = new Documento();
+                resultado.setContenido(convocatoria.getResultado().getBytes());
+                resultado.setNombre(convocatoria.getResultado().getOriginalFilename());
+                resultado.setTipoContenido(convocatoria.getResultado().getContentType());
+                convocatoriaIngresar.setResultado(resultado);
             }
             for (co.edu.fnsp.buho.entidadesVista.Adenda adenda : convocatoria.getAdendas()) {
                 Adenda nuevaAdenda = new Adenda();
@@ -202,6 +221,12 @@ public class ConvocatoriaController {
         List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
         List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
         List<CampoHojaVida> camposHojaVida = servicioMaestro.obtenerCamposHojaVida();
+        List<Maestro> paises = servicioMaestro.obtenerPaises();
+        List<Maestro> tiposIdentificacion = servicioMaestro.obtenerTiposIdentificacion();
+        List<Maestro> gruposEtnicos = servicioMaestro.obtenerGruposEtnicos();
+        List<Maestro> discapacidades = servicioMaestro.obtenerDiscapacidades();
+        List<Maestro> actividadesEconomicas = servicioMaestro.obtenerActividadesEconomicas();
+        List<Maestro> tiposVinculacion = servicioMaestro.obtenerTiposVinculacionUdeA();
 
         model.addAttribute("tiposConvocatoria", tiposConvocatoria);
         model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
@@ -213,6 +238,12 @@ public class ConvocatoriaController {
         model.addAttribute("nivelesFormacion", nivelesFormacion);
         model.addAttribute("tiposCapacitacion", tiposCapacitacion);
         model.addAttribute("camposHojaVida", camposHojaVida);
+        model.addAttribute("paises", paises);
+        model.addAttribute("tiposIdentificacion", tiposIdentificacion);
+        model.addAttribute("gruposEtnicos", gruposEtnicos);
+        model.addAttribute("discapacidades", discapacidades);
+        model.addAttribute("actividadesEconomicas", actividadesEconomicas);
+        model.addAttribute("tiposVinculacion", tiposVinculacion);
 
         if (convocatoria.getAdendas().size() > 0) {
             model.addAttribute("adendasJSON", Util.obtenerAdendasJSON(convocatoria.getAdendas()));
@@ -302,6 +333,21 @@ public class ConvocatoriaController {
         }
     }
 
+    @RequestMapping(value = "/resultado/{idConvocatoria}", method = RequestMethod.GET)
+    public void obtenerResultadoConvocatoria(@PathVariable("idConvocatoria") int idConvocatoria, HttpServletResponse response) throws IOException {
+        Documento documento = servicioConvocatoria.obtenerResultadoConvocatoria(idConvocatoria);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+
     @RequestMapping(value = "/adenda/documento/{idAdenda}", method = RequestMethod.GET)
     public void obtenerDocumentoAdendaConvocatoria(@PathVariable("idAdenda") int idAdenda, HttpServletResponse response) throws IOException {
         Documento documento = servicioConvocatoria.obtenerDocumentoAdenda(idAdenda);
@@ -346,18 +392,10 @@ public class ConvocatoriaController {
         Integer idTipoCapacitacion = null;
         Integer idNucleoBasicoConocimiento = null;
         if (tipoCapacitacion != null && tipoCapacitacion.length() > 0) {
-            try {
-                idTipoCapacitacion = Util.obtenerEntero(tipoCapacitacion);
-            } catch (ParseException ex) {
-                java.util.logging.Logger.getLogger(HojaVidaController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            idTipoCapacitacion = Util.obtenerEntero(tipoCapacitacion);
         }
         if (nucleoBasicoConocimiento != null && nucleoBasicoConocimiento.length() > 0) {
-            try {
-                idNucleoBasicoConocimiento = Util.obtenerEntero(nucleoBasicoConocimiento);
-            } catch (ParseException ex) {
-                java.util.logging.Logger.getLogger(HojaVidaController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            idNucleoBasicoConocimiento = Util.obtenerEntero(nucleoBasicoConocimiento);
         }
         List<Maestro> capacitaciones = servicioMaestro.obtenerCapacitaciones(idTipoCapacitacion, idNucleoBasicoConocimiento);
         Gson gson = new Gson();

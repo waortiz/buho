@@ -36,6 +36,8 @@ import static java.util.Calendar.YEAR;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -63,9 +65,13 @@ public class Util {
         return "";
     }
 
-    public static Date obtenerFecha(String fecha) throws ParseException {
+    public static Date obtenerFecha(String fecha) {
         if (fecha != null && !"".equalsIgnoreCase(fecha)) {
-            return simpleDateFormat.parse(fecha);
+            try {
+                return simpleDateFormat.parse(fecha);
+            } catch (ParseException ex) {
+                Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return null;
@@ -79,18 +85,24 @@ public class Util {
         return "";
     }
 
-    public static long obtenerNumero(String numero) throws ParseException {
-        return (long) decimalFormat.parse(numero);
+    public static long obtenerNumero(String numero) {
+        try {
+            return (long) decimalFormat.parse(numero);
+        } catch (ParseException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return 0;
     }
 
-    public static int obtenerEntero(String numero) throws ParseException {
+    public static int obtenerEntero(String numero) {
         if (numero == null || numero.length() == 0) {
             return 0;
         }
         return Integer.parseInt(numero);
     }
 
-    public static double obtenerNumeroDoble(String numero) throws ParseException {
+    public static double obtenerNumeroDoble(String numero) {
         return Double.parseDouble(numero);
     }
 
@@ -744,6 +756,7 @@ public class Util {
                         + "campoHojaVida:ko.observable(" + criterioHabilitante.getCampoHojaVida() + "),"
                         + "nombreCampoHojaVida:ko.observable('" + criterioHabilitante.getNombreCampoHojaVida() + "'),"
                         + "valor:ko.observable('" + criterioHabilitante.getValor() + "'),"
+                        + "texto:ko.observable('" + criterioHabilitante.getTexto() + "'),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < criteriosHabilitantes.size() - 1) {

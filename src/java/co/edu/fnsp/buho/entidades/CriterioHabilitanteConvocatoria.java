@@ -14,6 +14,7 @@ public class CriterioHabilitanteConvocatoria {
     private int campoHojaVida;
     private String nombreCampoHojaVida;
     private String valor;
+    private String texto;
 
     /**
      * @return the id
@@ -69,6 +70,20 @@ public class CriterioHabilitanteConvocatoria {
      */
     public void setValor(String valor) {
         this.valor = valor;
+    }
+
+    /**
+     * @return the texto
+     */
+    public String getTexto() {
+        return texto;
+    }
+
+    /**
+     * @param texto the texto to set
+     */
+    public void setTexto(String texto) {
+        this.texto = texto;
     }
     
 }

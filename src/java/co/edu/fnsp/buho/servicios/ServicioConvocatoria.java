@@ -6,7 +6,9 @@
 package co.edu.fnsp.buho.servicios;
 
 import co.edu.fnsp.buho.entidades.AnyosExperiencia;
+import co.edu.fnsp.buho.entidades.CampoHojaVidaEnum;
 import co.edu.fnsp.buho.entidades.Convocatoria;
+import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
 import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.EducacionContinua;
 import co.edu.fnsp.buho.entidades.EducacionContinuaConvocatoria;
@@ -16,17 +18,16 @@ import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
 import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
+import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
 import co.edu.fnsp.buho.entidades.TipoCertificacionEnum;
 import co.edu.fnsp.buho.excepciones.CriteriosHabilitacionException;
 import co.edu.fnsp.buho.repositorios.IRepositorioConvocatoria;
 import co.edu.fnsp.buho.repositorios.IRepositorioHojaVida;
+import co.edu.fnsp.buho.repositorios.IRepositorioMaestro;
 import co.edu.fnsp.buho.utilidades.Util;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,9 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
     @Autowired
     private IRepositorioHojaVida repositorioHojaVida;
 
+    @Autowired
+    private IRepositorioMaestro repositorioMaestro;
+
     @Override
     public void ingresarConvocatoria(long idUsuario, Convocatoria convocatoria) {
         repositorioConvocatoria.ingresarConvocatoria(idUsuario, convocatoria);
@@ -50,7 +54,59 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
 
     @Override
     public Convocatoria obtenerConvocatoria(int idConvocatoria) {
-        return repositorioConvocatoria.obtenerConvocatoria(idConvocatoria);
+        Convocatoria convocatoria = repositorioConvocatoria.obtenerConvocatoria(idConvocatoria);
+        Maestro maestro = null;
+        for (CriterioHabilitanteConvocatoria criterioHabilitanteConvocatoria : convocatoria.getCriteriosHabilitantes()) {
+            criterioHabilitanteConvocatoria.setTexto(criterioHabilitanteConvocatoria.getValor());
+            if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_ACTIVIDAD_ECONOMICA.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_TIPO_VINCULACION.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_NACIONALIDAD.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_GRUPO_ETNICO.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DISCAPACIDAD.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_TIPO_ID.campoHojaVida()) {
+
+                if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_ACTIVIDAD_ECONOMICA.campoHojaVida()) {
+                    maestro = repositorioMaestro.obtenerActividadEconomica(Util.obtenerEntero(criterioHabilitanteConvocatoria.getValor()));
+                } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_TIPO_VINCULACION.campoHojaVida()) {
+                    maestro = repositorioMaestro.obtenerTipoVinculacionUdeA(Util.obtenerEntero(criterioHabilitanteConvocatoria.getValor()));
+                } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_NACIONALIDAD.campoHojaVida()) {
+                    maestro = repositorioMaestro.obtenerPais(Util.obtenerEntero(criterioHabilitanteConvocatoria.getValor()));
+                } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_GRUPO_ETNICO.campoHojaVida()) {
+                    maestro = repositorioMaestro.obtenerGrupoEtnico(Util.obtenerEntero(criterioHabilitanteConvocatoria.getValor()));
+                } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DISCAPACIDAD.campoHojaVida()) {
+                    maestro = repositorioMaestro.obtenerDiscapacidad(Util.obtenerEntero(criterioHabilitanteConvocatoria.getValor()));
+                } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_TIPO_ID.campoHojaVida()) {
+                    maestro = repositorioMaestro.obtenerTipoIdentificacion(criterioHabilitanteConvocatoria.getValor());
+                }
+                if (maestro != null) {
+                    criterioHabilitanteConvocatoria.setTexto(maestro.getNombre());
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_LUGAR_EXPEDICION.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_CIUDAD_RESIDENCIA.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_LUGAR_NACIMIENTO.campoHojaVida()) {
+                maestro = repositorioMaestro.obtenerMunicipio(criterioHabilitanteConvocatoria.getValor());
+                if (maestro != null) {
+                    criterioHabilitanteConvocatoria.setTexto(maestro.getNombre());
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_EGRESADO_UDEA.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DISPONE_RUT.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DISPONIBILIDAD_VIAJAR.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_EMPLEADO_UDEA.campoHojaVida()) {
+                if (Boolean.parseBoolean(criterioHabilitanteConvocatoria.getValor())) {
+                    criterioHabilitanteConvocatoria.setTexto("Sí");
+                } else {
+                    criterioHabilitanteConvocatoria.setTexto("No");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_SEXO.campoHojaVida()) {
+                if (criterioHabilitanteConvocatoria.getValor().equalsIgnoreCase("1")) {
+                    criterioHabilitanteConvocatoria.setTexto("Masculino");
+                } else {
+                    criterioHabilitanteConvocatoria.setTexto("Femenino");
+                }
+            }
+        }
+
+        return convocatoria;
     }
 
     @Override
@@ -67,7 +123,7 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
     public List<ListadoConvocatoria> obtenerConvocatoriasVigentes(long idPersona) {
         return repositorioConvocatoria.obtenerConvocatoriasVigentes(idPersona);
     }
-    
+
     @Override
     public void actualizarConvocatoria(long idUsuario, Convocatoria convocatoria) {
         repositorioConvocatoria.actualizarConvocatoria(idUsuario, convocatoria);
@@ -89,23 +145,21 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
         Convocatoria convocatoria = repositorioConvocatoria.obtenerConvocatoria(idConvocatoria);
         HojaVida hojaVida = repositorioHojaVida.obtenerHojaVida(idPersona);
 
+        StringBuilder errores = new StringBuilder();
+
         //Validar tiempo mínimo experiencia
         if (convocatoria.getAnyosMinimosExperiencia() != null && convocatoria.getAnyosMinimosExperiencia().length() > 0) {
-            try {
-                int anyosMinimosExperiencia = Util.obtenerEntero(convocatoria.getAnyosMinimosExperiencia());
-                int anyosExperiencia = 0;
-                for (ExperienciaLaboral experienciaLaboral : hojaVida.getExperienciasLaborales()) {
-                    Date fechaRetiro = new Date();
-                    if (experienciaLaboral.getFechaRetiro() != null) {
-                        fechaRetiro = experienciaLaboral.getFechaRetiro();
-                    }
-                    anyosExperiencia = Util.getAnyos(experienciaLaboral.getFechaIngreso(), fechaRetiro) + anyosExperiencia;
+            int anyosMinimosExperiencia = Util.obtenerEntero(convocatoria.getAnyosMinimosExperiencia());
+            int anyosExperiencia = 0;
+            for (ExperienciaLaboral experienciaLaboral : hojaVida.getExperienciasLaborales()) {
+                Date fechaRetiro = new Date();
+                if (experienciaLaboral.getFechaRetiro() != null) {
+                    fechaRetiro = experienciaLaboral.getFechaRetiro();
                 }
-                if (anyosExperiencia < anyosMinimosExperiencia) {
-                    throw new CriteriosHabilitacionException("No cumple el tiempo mínimo de experiencia");
-                }
-            } catch (ParseException ex) {
-                Logger.getLogger(ServicioConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
+                anyosExperiencia = Util.getAnyos(experienciaLaboral.getFechaIngreso(), fechaRetiro) + anyosExperiencia;
+            }
+            if (anyosExperiencia < anyosMinimosExperiencia) {
+                errores.append("No cumple el tiempo mínimo de experiencia.\n");
             }
         }
 
@@ -122,7 +176,7 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
                 }
             }
             if (anyosExperiencia < anyoExperiencia.getAnyos()) {
-                throw new CriteriosHabilitacionException("No cumple los años de experiencia");
+                errores.append("No cumple los años de experiencia.\n");
             }
         }
 
@@ -142,7 +196,7 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
                 }
             }
             if (puntaje < idiomaConvocatoria.getPuntajeMinimoCertificacion()) {
-                throw new CriteriosHabilitacionException("No cumple los idiomas");
+                errores.append("No cumple los idiomas.\n");
             }
         }
 
@@ -157,7 +211,7 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
                 }
             }
             if (!existe) {
-                throw new CriteriosHabilitacionException("No cumple la formación");
+                errores.append("No cumple la formación.\n");
             }
         }
 
@@ -171,8 +225,101 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
                 }
             }
             if (!existe) {
-                throw new CriteriosHabilitacionException("No cumple la educación continua");
+                errores.append("No cumple la educación continua.\n");
             }
+        }
+
+        //Validar Otros Criterios
+        for (CriterioHabilitanteConvocatoria criterioHabilitanteConvocatoria : convocatoria.getCriteriosHabilitantes()) {
+            if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_ACTIVIDAD_ECONOMICA.campoHojaVida()) {
+                if (hojaVida.getActividadEconomica() == null || !hojaVida.getActividadEconomica().equalsIgnoreCase(criterioHabilitanteConvocatoria.getValor())) {
+                    errores.append("No cumple la actividad económica.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_APELLIDOS.campoHojaVida()) {
+                if (hojaVida.getApellidos() == null || !hojaVida.getApellidos().toLowerCase().contains(criterioHabilitanteConvocatoria.getValor().toLowerCase())) {
+                    errores.append("No cumple los apellido.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_NOMBRES.campoHojaVida()) {
+                if (hojaVida.getNombres() == null || !hojaVida.getNombres().toLowerCase().contains(criterioHabilitanteConvocatoria.getValor().toLowerCase())) {
+                    errores.append("No cumple el nombre.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_CIUDAD_RESIDENCIA.campoHojaVida()) {
+                if (hojaVida.getCiudadResidencia() == null || !hojaVida.getCiudadResidencia().equalsIgnoreCase(criterioHabilitanteConvocatoria.getValor())) {
+                    errores.append("No cumple la ciudad de residencia.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DIRECCION.campoHojaVida()) {
+                if (hojaVida.getDireccion() == null || !hojaVida.getDireccion().toLowerCase().contains(criterioHabilitanteConvocatoria.getValor().toLowerCase())) {
+                    errores.append("No cumple la dirección.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DISCAPACIDAD.campoHojaVida()) {
+                if (hojaVida.getDiscapacidad() == null || !hojaVida.getDiscapacidad().equalsIgnoreCase(criterioHabilitanteConvocatoria.getValor())) {
+                    errores.append("No cumple la discapacidad.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DISPONE_RUT.campoHojaVida()) {
+                if (hojaVida.isDisponeRUT() != Boolean.getBoolean(criterioHabilitanteConvocatoria.getValor())) {
+                    errores.append("No cumple el RUT.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DISPONIBILIDAD_VIAJAR.campoHojaVida()) {
+                if (hojaVida.isDisponibilidadViajar() != Boolean.getBoolean(criterioHabilitanteConvocatoria.getValor())) {
+                    errores.append("No cumple la disponibilida de viajar.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_EGRESADO_UDEA.campoHojaVida()) {
+                if (hojaVida.isEgresadoUDEA() != Boolean.getBoolean(criterioHabilitanteConvocatoria.getValor())) {
+                    errores.append("No cumple egresado de la U. de A.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_EMPLEADO_UDEA.campoHojaVida()) {
+                if (hojaVida.isEmpleadoUDEA() != Boolean.getBoolean(criterioHabilitanteConvocatoria.getValor())) {
+                    errores.append("No cumple empleado U. de A.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_FECHA_EXPEDICION.campoHojaVida()) {
+                if (hojaVida.getFechaExpedicion().compareTo(Util.obtenerFecha(criterioHabilitanteConvocatoria.getValor())) <= 0) {
+                    errores.append("No cumple la fecha de expedición.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_FECHA_NACIMIENTO.campoHojaVida()) {
+                if (hojaVida.getFechaNacimiento().compareTo(Util.obtenerFecha(criterioHabilitanteConvocatoria.getValor())) <= 0) {
+                    errores.append("No cumple la fecha de nacimiento.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_GRUPO_ETNICO.campoHojaVida()) {
+                if (hojaVida.getGrupoEtnico() == null || !hojaVida.getGrupoEtnico().equalsIgnoreCase(criterioHabilitanteConvocatoria.getValor())) {
+                    errores.append("No cumple el grupo étnico.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_LIBRETA_MILITAR.campoHojaVida()) {
+                if (hojaVida.getLibretaMilitar() == null || !hojaVida.getLibretaMilitar().toLowerCase().contains(criterioHabilitanteConvocatoria.getValor().toLowerCase())) {
+                    errores.append("No cumple la libreta militar.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_LUGAR_EXPEDICION.campoHojaVida()) {
+                if (hojaVida.getLugarExpedicion() == null || !hojaVida.getLugarExpedicion().equalsIgnoreCase(criterioHabilitanteConvocatoria.getValor())) {
+                    errores.append("No cumple el lugar de nacimiento.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_LUGAR_NACIMIENTO.campoHojaVida()) {
+                if (hojaVida.getLugarNacimiento() == null || !hojaVida.getLugarNacimiento().equalsIgnoreCase(criterioHabilitanteConvocatoria.getValor())) {
+                    errores.append("No cumple lugar de nacimiento.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_NACIONALIDAD.campoHojaVida()) {
+                if (hojaVida.getNacionalidad() == null || !hojaVida.getNacionalidad().equalsIgnoreCase(criterioHabilitanteConvocatoria.getValor())) {
+                    errores.append("No cumple la nacionalidad.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_SEXO.campoHojaVida()) {
+                if (hojaVida.getSexo() == null || !hojaVida.getSexo().equalsIgnoreCase(criterioHabilitanteConvocatoria.getValor())) {
+                    errores.append("No cumple el sexo.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_TIPO_ID.campoHojaVida()) {
+                if (!hojaVida.getTipoIdentificacion().equalsIgnoreCase(criterioHabilitanteConvocatoria.getValor())) {
+                    errores.append("No cumple el tipo de identificación.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_TIPO_VINCULACION.campoHojaVida()) {
+                if (hojaVida.getTipoVinculacion() == null || !hojaVida.getTipoVinculacion().equalsIgnoreCase(criterioHabilitanteConvocatoria.getValor())) {
+                    errores.append("No cumple el tipo de vinculación.\n");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_NUMERO_ID.campoHojaVida()) {
+                if (hojaVida.getNumeroIdentificacion() == null || !hojaVida.getNumeroIdentificacion().toLowerCase().contains(criterioHabilitanteConvocatoria.getValor().toLowerCase())) {
+                    errores.append("No cumple el número de identificación.\n");
+                }
+            }
+        }
+
+        if (errores.length() > 0) {
+            throw new CriteriosHabilitacionException(errores.toString());
         }
 
         repositorioConvocatoria.postularConvocatoria(idPersona, idConvocatoria);
@@ -181,5 +328,10 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
     @Override
     public void retirarPostulacion(long idPersona, int idConvocatoria) {
         repositorioConvocatoria.retirarPostulacion(idPersona, idConvocatoria);
+    }
+
+    @Override
+    public Documento obtenerResultadoConvocatoria(int idConvocatoria) {
+        return repositorioConvocatoria.obtenerResultadoConvocatoria(idConvocatoria);
     }
 }

@@ -54,30 +54,32 @@
         <script type="text/javascript" src='<c:url value="/resources/js/moment-with-locales.js" />'></script>
     </head>
     <body class="sidenav-toggled">
-        <div id="contenedorA">
-            <header id="header">
-                <div id='cssmenu'>
-                    <ul>
-                        <li>
-                            <span class="imagenMenu">
-                                <img src='<c:url value="/resources/imagenes/logoUdeaLateral2.png" />'>
-                            </span> 
-                        </li>
-                        <li>
-                            <a href='${pageContext.request.contextPath}/index'>
-                                <i class="fa fa-home fa-1x"></i>
-                                Inicio
-                            </a>
-                        </li>
-                        <tiles:insertAttribute name="menu" />
-                    </ul>
+        <div id="contenedorPpal">
+            <div id="barranav">
+                <div id="contenedorA">
+                    <div id='cssmenu'>
+                        <ul>
+                            <li>
+                                <span class="imagenMenu">
+                                    <img src='<c:url value="/resources/imagenes/logoUdeaLateral2.png" />'>
+                                </span> 
+                            </li>
+                            <li>
+                                <a href='${pageContext.request.contextPath}/index'>
+                                    <i class="fa fa-home fa-1x"></i>
+                                    Inicio
+                                </a>
+                            </li>
+                            <tiles:insertAttribute name="menu" />
+                        </ul>
+                    </div>
+                </div>
+                <div id="contenedorB">
+                    <div id='cssmenu'>
+                        <tiles:insertAttribute name="usuario" />
+                    </div>
                 </div>
             </div>
-            <div id="contenedorB">
-                <div id='cssmenu'>
-                    <tiles:insertAttribute name="usuario" />
-                </div>
-            </div>  
             <br>
             <br>                
             <tiles:insertAttribute name="body" />

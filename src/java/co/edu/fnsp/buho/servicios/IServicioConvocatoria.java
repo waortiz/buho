@@ -35,4 +35,6 @@ public interface IServicioConvocatoria {
     void retirarPostulacion(long idPersona, int idConvocatoria);
 
     List<ListadoConvocatoria> obtenerConvocatoriasVigentes(long idPersona);
+
+    Documento obtenerResultadoConvocatoria(int idConvocatoria);
 }
