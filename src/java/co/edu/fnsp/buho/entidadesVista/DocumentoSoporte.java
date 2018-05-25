@@ -16,7 +16,7 @@ public class DocumentoSoporte {
     private String tipoDocumento;
     private String nombreTipoDocumento;
     private boolean tieneDocumento;
-    private MultipartFile documento;
+    private Object documento;
 
     /**
      * @return the id
@@ -77,14 +77,14 @@ public class DocumentoSoporte {
     /**
      * @return the documento
      */
-    public MultipartFile getDocumento() {
+    public Object getDocumento() {
         return documento;
     }
 
     /**
      * @param documento the documento to set
      */
-    public void setDocumento(MultipartFile documento) {
+    public void setDocumento(Object documento) {
         this.documento = documento;
     }
 }

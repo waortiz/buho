@@ -12,6 +12,7 @@ package co.edu.fnsp.buho.entidades;
 public class Articulo {
     
     private int id;
+    private int consecutivo;
     private String nombre;
     private String nombreRevista;
     private int tipoAutor;
@@ -146,5 +147,19 @@ public class Articulo {
      */
     public void setNombreNucleoBasicoConocimiento(String nombreNucleoBasicoConocimiento) {
         this.nombreNucleoBasicoConocimiento = nombreNucleoBasicoConocimiento;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
     }
 }

@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class ExperienciaDocencia {
     private int id;
+    private int consecutivo;
     private boolean trabajoActual;
     private boolean fnsp;
     private int institucion;
@@ -102,6 +103,20 @@ public class ExperienciaDocencia {
      */
     public void setCursosExperienciaDocencia(List<CursoExperienciaDocencia> cursosExperienciaDocencia) {
         this.cursosExperienciaDocencia = cursosExperienciaDocencia;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
     }
     
 }

@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class CursoExperienciaDocencia {
     private int id;
+    private int idExperienciaDocencia;
     private String nombreCurso;
     private String nucleoBasicoConocimiento;
     private String nombreNucleoBasicoConocimiento;
@@ -22,7 +23,7 @@ public class CursoExperienciaDocencia {
     private String nombreNivelEstudio;
     private String numeroHoras;
     private String anyo;
-    private MultipartFile certificado;
+    private Object certificado;
 
     /**
      * @return the id
@@ -167,15 +168,29 @@ public class CursoExperienciaDocencia {
     /**
      * @return the certificado
      */
-    public MultipartFile getCertificado() {
+    public Object getCertificado() {
         return certificado;
     }
 
     /**
      * @param certificado the certificado to set
      */
-    public void setCertificado(MultipartFile certificado) {
+    public void setCertificado(Object certificado) {
         this.certificado = certificado;
+    }
+
+    /**
+     * @return the idExperienciaDocencia
+     */
+    public int getIdExperienciaDocencia() {
+        return idExperienciaDocencia;
+    }
+
+    /**
+     * @param idExperienciaDocencia the idExperienciaDocencia to set
+     */
+    public void setIdExperienciaDocencia(int idExperienciaDocencia) {
+        this.idExperienciaDocencia = idExperienciaDocencia;
     }
     
 }

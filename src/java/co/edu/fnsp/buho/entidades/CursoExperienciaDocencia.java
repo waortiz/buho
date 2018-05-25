@@ -11,6 +11,8 @@ package co.edu.fnsp.buho.entidades;
  */
 public class CursoExperienciaDocencia {
     private int id;
+    private int idExperienciaDocencia;
+    private int consecutivo;
     private String nombreCurso;
     private int nucleoBasicoConocimiento;
     private String nombreNucleoBasicoConocimiento;
@@ -174,6 +176,34 @@ public class CursoExperienciaDocencia {
      */
     public void setCertificado(Documento certificado) {
         this.certificado = certificado;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
+    }
+
+    /**
+     * @return the idExperienciaDocencia
+     */
+    public int getIdExperienciaDocencia() {
+        return idExperienciaDocencia;
+    }
+
+    /**
+     * @param idExperienciaDocencia the idExperienciaDocencia to set
+     */
+    public void setIdExperienciaDocencia(int idExperienciaDocencia) {
+        this.idExperienciaDocencia = idExperienciaDocencia;
     }
     
 }

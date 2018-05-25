@@ -12,6 +12,7 @@ package co.edu.fnsp.buho.entidades;
  */
 public class Telefono {
     private int id;
+    private int consecutivo;
     private int tipo;
     private String nombreTipo;
     private String numero;
@@ -70,5 +71,19 @@ public class Telefono {
      */
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
     }
 }

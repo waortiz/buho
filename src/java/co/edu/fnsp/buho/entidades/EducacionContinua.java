@@ -13,6 +13,7 @@ package co.edu.fnsp.buho.entidades;
 public class EducacionContinua {
 
     private int id;
+    private int consecutivo;
     private int tipoCapacitacion;
     private String nombreTipoCapacitacion;
     private int institucion;
@@ -176,6 +177,20 @@ public class EducacionContinua {
      */
     public void setCertificado(Documento certificado) {
         this.certificado = certificado;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
     }
 
 }

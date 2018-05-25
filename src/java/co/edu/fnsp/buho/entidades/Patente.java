@@ -13,9 +13,11 @@ import java.util.Date;
  */
 public class Patente {
     private int id;
+    private int consecutivo;
     private String nombreTipo;
     private int tipo;
     private Date fecha;
+    private String fechaFormateada;
     private boolean propiedadCompartida;
     private int clase;
     private String descripcion;
@@ -131,6 +133,34 @@ public class Patente {
      */
     public void setDocumento(Documento documento) {
         this.documento = documento;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
+    }
+
+    /**
+     * @return the fechaFormateada
+     */
+    public String getFechaFormateada() {
+        return fechaFormateada;
+    }
+
+    /**
+     * @param fechaFormateada the fechaFormateada to set
+     */
+    public void setFechaFormateada(String fechaFormateada) {
+        this.fechaFormateada = fechaFormateada;
     }
     
 }

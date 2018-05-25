@@ -17,7 +17,7 @@ public class Distincion {
     private String institucionOtorga;
     private String descripcion;
     private String fechaDistincion;
-    private MultipartFile certificado;
+    private Object certificado;
     
     /**
      * @return the id
@@ -78,14 +78,14 @@ public class Distincion {
     /**
      * @return the certificado
      */
-    public MultipartFile getCertificado() {
+    public Object getCertificado() {
         return certificado;
     }
 
     /**
      * @param certificado the certificado to set
      */
-    public void setCertificado(MultipartFile certificado) {
+    public void setCertificado(Object certificado) {
         this.certificado = certificado;
     }
     

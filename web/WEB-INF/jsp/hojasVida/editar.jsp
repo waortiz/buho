@@ -12,7 +12,7 @@
                     <span class="nav-link-text">Información personal</span>
                 </a>
             </li>
-            <li class="nav-item" id="perfil" data-toggle="tooltip" data-placement="right" title="" data-original-title="Perfil">
+            <li class="nav-item" id="perfillaboral" data-toggle="tooltip" data-placement="right" title="" data-original-title="Perfil">
                 <a class="nav-link" >
                     <i  class="fa fa-address-book-o" style="font-size:36px;"></i>
                     <span class="nav-link-text">Perfil</span>
@@ -110,7 +110,7 @@
                             <label for="">Copia c&eacute;dula</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe cargar la copia de cedula">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                             <div class="form-inline">
-                                <input type="file" accept=".pdf,.png,.jpg,.jpeg" name="copiaDocumentoIdentificacion" id="copiaDocumentoIdentificacion" class="form-control" style="width: 80%">
+                                <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" name="copiaDocumentoIdentificacion" id="copiaDocumentoIdentificacion" class="form-control" style="width: 80%"></span><label class="lblnombre" id="nombreCopiaDocumentoIdentificacion">${hojaVida.getNombreCopiaDocumentoIdentificacion()}</label>
                                 <c:if test = "${!hojaVida.isCopiaDocumentoIdentificacionValidado()}">
                                     <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
                                     </c:if>    
@@ -287,9 +287,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-7">
-                        <div class="form-group form-inline">
+                        <div class="form-group">
                             <label>Copia libreta militar</label>
-                            <input type="file" accept=".pdf,.png,.jpg,.jpeg" name="copiaLibretaMilitar" id="copiaLibretaMilitar" class="form-control" style="width: 80%">
+                            <div class="form-inline">
+                            <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" name="copiaLibretaMilitar" id="copiaLibretaMilitar" class="form-control" style="width: 80%"></span><label class="lblnombre" id="nombreCopiaLibretaMilitar">${hojaVida.getNombreCopiaLibretaMilitar()}</label>
                             <c:if test = "${!hojaVida.isCopiaLibretaMilitarValidado()}">
                                 <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
                                 </c:if>    
@@ -299,6 +300,7 @@
                                 <c:if test = "${hojaVida.isTieneCopiaLibretaMilitar()}">
                                 <button class="btn btn-success btn-xs" type="button" onclick="verCopiaLibretaMilitar()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
                                 </c:if>                              
+                            </div>            
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -524,10 +526,11 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="form-group form-inline">
+                        <div class="form-group">
                             <label for="">Documento de soporte RUT</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe cargar el documento de RUT">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <input type="file" accept=".pdf,.png,.jpg,.jpeg" name="documentoRUT" id="documentoRUT" class="form-control" style="width: 80%">
+                            <div class="form-inline">
+                            <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" name="documentoRUT" id="documentoRUT" class="form-control" style="width: 80%"></span><label class="lblnombre" id="nombreDocumentoRUT">${hojaVida.getNombreDocumentoRUT()}</label>
                             <c:if test = "${!hojaVida.isDocumentoRUTValidado()}">
                                 <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
                                 </c:if>    
@@ -537,6 +540,7 @@
                                 <c:if test = "${hojaVida.isTieneDocumentoRUT()}">
                                 <button class="btn btn-success btn-xs" type="button" onclick="verCopiaRUT()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
                                 </c:if>                              
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -614,6 +618,8 @@
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                         <div class="table-responsive">
+                            <br>
+                            <div id="alert_telefonos"></div>
                             <table class="table tabla table-hover tableestilo" id="tbtel">
                                 <thead>
                                     <tr>
@@ -626,17 +632,13 @@
                                     <tr class="table-row">
                                         <td style="width: 30%">
                                             <span data-bind="text: nombreTipo" ></span>
-                                            <input type="hidden" class="form-control" data-bind="value: tipo, attr: { 'name': 'telefonos[' + $index() + '].tipo'  }">
                                         </td>
                                         <td style="width: 20%">
                                             <span data-bind="text: numero" ></span>
-                                            <input type="hidden" class="form-control" data-bind="value: numero, attr: { 'name': 'telefonos[' + $index() + '].numero'  }">
                                         </td>
                                         <td style='white-space: nowrap' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarTelefono"><span class='glyphicon glyphicon-edit'></span></button>
                                             <button class='btn btn-danger btn-xs' type='button' data-bind="click: $root.eliminarTelefono"><span class='glyphicon glyphicon-remove'></span></button>
-                                            <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'telefonos[' + $index() + '].consecutivo'  }" />
-                                            <input type="hidden" data-bind="value: id, attr: { 'name': 'telefonos[' + $index() + '].id'  }" />
                                         </td>
                                     </tr>
                                 </tbody>                                                                             
@@ -648,8 +650,9 @@
                         <button  type="button" class="btn btn-success btn-sm" onclick="nuevoCorreoElectronico()">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button> 
-
                         <div class="table-responsive">
+                            <br>
+                            <div id="alert_correos_electronicos"></div>
                             <table class="table tabla table-hover tableestilo" id="tbemail">
                                 <thead>
                                     <tr>
@@ -661,13 +664,10 @@
                                     <tr class="table-row">
                                         <td style="width: 80%">
                                             <span data-bind="text: correoElectronico" ></span>
-                                            <input type="hidden" class="form-control" data-bind="value: correoElectronico, attr: { 'name': 'correosElectronicos[' + $index() + '].correoElectronico'  }">
                                         </td>
                                         <td style='white-space: nowrap' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCorreoElectronico"><span class='glyphicon glyphicon-edit'></span></button>
                                             <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarCorreoElectronico"><span class='glyphicon glyphicon-remove'></span></button>
-                                            <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'correosElectronicos[' + $index() + '].consecutivo'  }" />
-                                            <input type="hidden" data-bind="value: id, attr: { 'name': 'correosElectronicos[' + $index() + '].id'  }" />
                                         </td>
                                     </tr>
                                 </tbody>                                      
@@ -680,6 +680,8 @@
                             <span class="glyphicon glyphicon-plus"></span>
                         </button> 
                         <div class="table-responsive">
+                            <br>
+                            <div id="alert_cuentas_bancarias"></div>
                             <table class="table tabla table-hover tableestilo" id="tbcuentabanca">
                                 <thead>
                                     <tr>
@@ -693,21 +695,16 @@
                                     <tr class="table-row">
                                         <td style="width: 30%">
                                             <span data-bind="text: nombreTipo" ></span>
-                                            <input type="hidden" class="form-control" data-bind="value: tipo, attr: { 'name': 'cuentasBancarias[' + $index() + '].tipo'  }">
                                         </td>
                                         <td style="width: 20%">
                                             <span data-bind="text: numero" ></span>
-                                            <input type="hidden" class="form-control" data-bind="value: numero, attr: { 'name': 'cuentasBancarias[' + $index() + '].numero'  }">
                                         </td>
                                         <td style="width: 20%">
                                             <span data-bind="text: entidad" ></span>
-                                            <input type="hidden" class="form-control" data-bind="value: entidad, attr: { 'name': 'cuentasBancarias[' + $index() + '].entidad'  }">
                                         </td>
                                         <td style='white-space: nowrap' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCuentaBancaria"><span class='glyphicon glyphicon-edit'></span></button>
                                             <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarCuentaBancaria"><span class='glyphicon glyphicon-remove'></span></button>
-                                            <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'cuentasBancarias[' + $index() + '].consecutivo'  }" />
-                                            <input type="hidden" data-bind="value: id, attr: { 'name': 'cuentasBancarias[' + $index() + '].id'  }" />
                                         </td>
                                     </tr>
                                 </tbody>                                              
@@ -833,6 +830,8 @@
                         </div>
                     </div>
                 </div>
+                <button class="btn btn-success" style="float: right; margin-bottom:20px;" type="submit">Guardar</button>
+
             </div>
             <div id="formperfilsopor" style="display: none;">
                 <div class="row">   
@@ -856,6 +855,8 @@
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                         <div class="table-responsive">
+                            <br>
+                            <div id="alert_documentos_soporte"></div>
                             <table class="table tabla table-hover tableestilo" id="tbdocad">
                                 <thead>
                                     <tr>
@@ -868,16 +869,13 @@
                                     <tr class="table-row">
                                         <td style="width: 40%">
                                             <span data-bind="text: nombreTipoDocumento" ></span>
-                                            <input type="hidden" class="form-control" data-bind="value: tipoDocumento, attr: { 'name': 'documentosSoporte[' + $index() + '].tipoDocumento'  }">
                                         </td>
                                         <td style="width: 50%" align="center">
-                                            <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoSoporte, visible: tieneDocumento" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                            <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoSoporte" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
                                         </td>
                                         <td style='white-space: nowrap' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarDocumentoSoporte"><i class='fa fa-pencil' aria-hidden='true'></i></button>
                                             <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarDocumentoSoporte"><span class='glyphicon glyphicon-remove'></span></button>
-                                            <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'documentosSoporte[' + $index() + '].consecutivo'  }" />
-                                            <input type="hidden" data-bind="value: id, attr: { 'name': 'documentosSoporte[' + $index() + '].id'  }" />
                                         </td>
                                     </tr>
                                 </tbody>                                           
@@ -913,7 +911,7 @@
                                         <div class="form-group">
                                             <label for="">Documento de soporte</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar un archivo de soporte ">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <div id="documentosSoporte"></div>
+                                            <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="documentoSoporte" id="documentoSoporte" />
                                         </div>
                                     </div>
                                 </div>
@@ -925,6 +923,7 @@
                         </div>
                     </div>
                 </div>
+                <button class="btn btn-success" style="float: right; margin-bottom:20px;" type="submit">Guardar</button>
             </div>
             <div id="formacademico" style="display: none;"> 
                 <div class="row">   
@@ -939,6 +938,8 @@
                             <span class="glyphicon glyphicon-plus"></span>   
                         </button>
                         <div class="table-responsive">
+                            <br>
+                            <div id="alert_educaciones_basicas"></div>
                             <table class="table tabla table-hover tableestilo">
                                 <thead>
                                     <tr>
@@ -954,30 +955,22 @@
                                     <tr class="table-row">
                                         <td style="width: 20%">
                                             <span data-bind="text: nombreNivel" ></span>
-                                            <input type="hidden" class="form-control" data-bind="value: nivel, attr: { 'name': 'educacionesBasicas[' + $index() + '].nivel'  }">
                                         </td>
                                         <td style="width: 20%">
                                             <span data-bind="text: institucion" ></span>
-                                            <input type="hidden" class="form-control" data-bind="value: institucion, attr: { 'name': 'educacionesBasicas[' + $index() + '].institucion'  }">
                                         </td>
                                         <td style="width: 20%">
                                             <span data-bind="text: titulo" ></span>
-                                            <input type="hidden" class="form-control" data-bind="value: titulo, attr: { 'name': 'educacionesBasicas[' + $index() + '].titulo'  }">
                                         </td>
                                         <td style="width: 20%">
                                             <span data-bind="text: anyoFinalizacion" ></span>
-                                            <input type="hidden" class="form-control" data-bind="value: anyoFinalizacion, attr: { 'name': 'educacionesBasicas[' + $index() + '].anyoFinalizacion'  }">
                                         </td>
                                         <td style="width: 10%" align="center">
-                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionBasica, visible: tieneCertificado" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionBasica" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
                                         </td>
                                         <td style='white-space: nowrap; width: 10%' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarEducacionBasica"><i class='fa fa-pencil' aria-hidden='true'></i></button>
                                             <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarEducacionBasica"><span class='glyphicon glyphicon-remove'></span></button>
-                                            <input type="hidden" data-bind="value: anyoInicio, attr: { 'name': 'educacionesBasicas[' + $index() + '].anyoInicio'  }" />
-                                            <input type="hidden" data-bind="value: graduado, attr: { 'name': 'educacionesBasicas[' + $index() + '].graduado'  }" />
-                                            <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'educacionesBasicas[' + $index() + '].consecutivo'  }" />
-                                            <input type="hidden" data-bind="value: id, attr: { 'name': 'educacionesBasicas[' + $index() + '].id'  }" />
                                         </td>
                                     </tr>
                                 </tbody>                           
@@ -1050,7 +1043,7 @@
                                             <div class="form-group form-inline">
                                                 <label for="certificadoEducacionBasica">Certificado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado del estudio">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a> <br>
-                                                <div id="certificadosEducacionesBasicas"></div>
+                                                <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoEducacionBasica" id="certificadoEducacionBasica" />
                                             </div>
                                         </div>
                                     </div>
@@ -1070,6 +1063,8 @@
                             <span class="glyphicon glyphicon-plus"></span>   
                         </button>
                         <div class="table-responsive">
+                            <br>
+                            <div id="alert_educaciones_superiores"></div>
                             <table class="table tabla table-hover tableestilo">
                                 <thead>
                                     <tr>
@@ -1085,33 +1080,22 @@
                                     <tr class="table-row">
                                         <td style="width: 20%">
                                             <span data-bind="text: nombreNivel" ></span>
-                                            <input type="hidden" class="form-control" data-bind="value: nivel, attr: { 'name': 'educacionesSuperiores[' + $index() + '].nivel'  }">
                                         </td>
                                         <td style="width: 25%">
                                             <span data-bind="text: nombreInstitucion" ></span>
                                         </td>
                                         <td style="width: 25%">
                                             <span data-bind="text: nombrePrograma" ></span>
-                                            <input type="hidden" class="form-control" data-bind="value: programa, attr: { 'name': 'educacionesSuperiores[' + $index() + '].programa'  }">
-                                            <input type="hidden" class="form-control" data-bind="value: titulo, attr: { 'name': 'educacionesSuperiores[' + $index() + '].titulo'  }">
-                                            <input type="hidden" class="form-control" data-bind="value: anyoFinalizacion, attr: { 'name': 'educacionesSuperiores[' + $index() + '].anyoFinalizacion'  }">
-                                            <input type="hidden" class="form-control" data-bind="value: fechaTitulo, attr: { 'name': 'educacionesSuperiores[' + $index() + '].fechaTitulo'  }">
                                         </td>
                                         <td style="width: 10%" align="center">
-                                            <a href='#' title='Ver certificado homologado' data-bind="click: $root.verCertificadoHomologadoEducacionSuperior, visible: tieneCertificadoHomologado" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                            <a href='#' title='Ver certificado homologado' data-bind="click: $root.verCertificadoHomologadoEducacionSuperior" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
                                         </td>
                                         <td style="width: 10%" align="center">
-                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionSuperior, visible: tieneCertificado" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionSuperior" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
                                         </td>
                                         <td style='white-space: nowrap; width: 10%' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarEducacionSuperior"><i class='fa fa-pencil' aria-hidden='true'></i></button>
                                             <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarEducacionSuperior"><span class='glyphicon glyphicon-remove'></span></button>
-                                            <input type="hidden" data-bind="value: anyoInicio, attr: { 'name': 'educacionesSuperiores[' + $index() + '].anyoInicio'  }" />
-                                            <input type="hidden" data-bind="value: graduado, attr: { 'name': 'educacionesSuperiores[' + $index() + '].graduado'  }" />
-                                            <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'educacionesSuperiores[' + $index() + '].consecutivo'  }" />
-                                            <input type="hidden" data-bind="value: id, attr: { 'name': 'educacionesSuperiores[' + $index() + '].id'  }" />
-                                            <input type="hidden" data-bind="value: tituloExterior, attr: { 'name': 'educacionesSuperiores[' + $index() + '].tituloExterior'  }" />
-                                            <input type="hidden" data-bind="value: paisTituloExterior, attr: { 'name': 'educacionesSuperiores[' + $index() + '].paisTituloExterior'  }" />
                                         </td>
                                     </tr>
                                 </tbody>                           
@@ -1158,7 +1142,7 @@
                                             <div class="form-group form-inline" id="certhomo" style="display: none;">
                                                 <label>Certificado de homologaci&oacute;n del t&iacute;tulo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado de homologaci&oacute;n">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                                <div id="certificadosHomologadosEducacionesSuperiores"></div>
+                                                <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoHomologadoEducacionSuperior" id="certificadoHomologadoEducacionSuperior" />
                                             </div>
                                         </div>
                                     </div>
@@ -1248,7 +1232,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header mhsuccess">
                                                     <button type="button" class="close" onclick="cerrarVentanaProgramaExtranjero();">&times;</button>
-                                                    <h4 class="modal-title">Programa</h4>
+                                                    <h4 class="modal-title">Nuevo Programa</h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div id="alert_programa_extranjero"></div>
@@ -1368,7 +1352,7 @@
                                             <div class="form-group form-inline">
                                                 <label for="certificado">Certificado de acta de grado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado del estudio">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>  
-                                                <div id="certificadosEducacionesSuperiores"></div>
+                                                <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoEducacionSuperior" id="certificadoEducacionSuperior" />
                                             </div>
                                         </div>
                                     </div>
@@ -1387,6 +1371,8 @@
                         <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoIdioma();" >
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>                  
+                        <br>
+                        <div id="alert_idiomas"></div>
                         <table class="table tabla table-hover tableestilo">
                             <thead>
                                 <tr>
@@ -1403,35 +1389,25 @@
                                 <tr class="table-row">
                                     <td style="width: 15%">
                                         <span data-bind="text: nombreIdioma" ></span>
-                                        <input type="hidden" class="form-control" data-bind="value: idioma, attr: { 'name': 'idiomas[' + $index() + '].idioma'  }">
                                     </td>
                                     <td style="width: 15%">
                                         <span data-bind="text: nombreNivelLectura" ></span>
-                                        <input type="hidden" class="form-control" data-bind="value: nivelLectura, attr: { 'name': 'idiomas[' + $index() + '].nivelLectura'  }">
                                     </td>
                                     <td style="width: 15%">
                                         <span data-bind="text: nombreNivelEscucha" ></span>
-                                        <input type="hidden" class="form-control" data-bind="value: nivelEscucha, attr: { 'name': 'idiomas[' + $index() + '].nivelEscucha'  }">
                                     </td>
                                     <td style="width: 15%">
                                         <span data-bind="text: nombreNivelEscritura" ></span>
-                                        <input type="hidden" class="form-control" data-bind="value: nivelEscritura, attr: { 'name': 'idiomas[' + $index() + '].nivelEscritura'  }">
                                     </td>
                                     <td style="width: 15%">
                                         <span data-bind="text: nombreNivelConversacion" ></span>
-                                        <input type="hidden" class="form-control" data-bind="value: nivelConversacion, attr: { 'name': 'idiomas[' + $index() + '].nivelConversacion'  }">
                                     </td>
                                     <td style="width: 15%" align="center">
-                                        <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoIdioma, visible: tieneCertificado" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                        <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoIdioma" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
                                     </td>
                                     <td style='white-space: nowrap' align="center">
                                         <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarIdioma"><i class='fa fa-pencil' aria-hidden='true'></i></button>
                                         <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarIdioma"><span class='glyphicon glyphicon-remove'></span></button>
-                                        <input type="hidden" data-bind="value: tipoCertificacion, attr: { 'name': 'idiomas[' + $index() + '].tipoCertificacion'  }" />
-                                        <input type="hidden" data-bind="value: otraCertificacion, attr: { 'name': 'idiomas[' + $index() + '].otraCertificacion'  }" />
-                                        <input type="hidden" data-bind="value: puntajeCertificacion, attr: { 'name': 'idiomas[' + $index() + '].puntajeCertificacion'  }" />
-                                        <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'idiomas[' + $index() + '].consecutivo'  }" />
-                                        <input type="hidden" data-bind="value: id, attr: { 'name': 'idiomas[' + $index() + '].id'  }" />
                                     </td>
                                 </tr>
                             </tbody>                                   
@@ -1548,7 +1524,7 @@
                                             <div class="form-group form-inline">
                                                 <label for="certificadoIdioma">Certificado</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado que pertenece">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                                <div id="certificadosIdiomas"></div>
+                                                <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoIdioma" id="certificadoIdioma" />
                                             </div>
                                         </div>
                                     </div>
@@ -1575,6 +1551,8 @@
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>               
                         <div class="table-responsive">
+                            <br>
+                            <div id="alert_educaciones_continuas"></div>
                             <table class="table tabla table-hover tableestilo" id="tbcapaci">
                                 <thead>
                                     <tr>
@@ -1590,30 +1568,22 @@
                                     <tr class="table-row">
                                         <td style="width: 20%">
                                             <span data-bind="text: nombreTipoCapacitacion" ></span>
-                                            <input type="hidden" data-bind="value: tipoCapacitacion, attr: { 'name': 'educacionesContinuas[' + $index() + '].tipoCapacitacion'  }">
                                         </td>
                                         <td style="width: 20%">
                                             <span data-bind="text: nombreCapacitacion" ></span>
-                                            <input type="hidden" data-bind="value: nombreCapacitacion, attr: { 'name': 'educacionesContinuas[' + $index() + '].nombreCapacitacion'  }">
                                         </td>
                                         <td style="width: 20%">
                                             <span data-bind="text: nombreInstitucion" ></span>
-                                            <input type="hidden" class="form-control" data-bind="value: institucion, attr: { 'name': 'educacionesContinuas[' + $index() + '].institucion'  }">
                                         </td>
                                         <td style="width: 20%">
                                             <span data-bind="text: numeroHoras" ></span>
-                                            <input type="hidden" data-bind="value: numeroHoras, attr: { 'name': 'educacionesContinuas[' + $index() + '].numeroHoras'  }">
                                         </td>
                                         <td style="width: 10%" align="center">
-                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionContinua, visible: tieneCertificado" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionContinua" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
                                         </td>
                                         <td style='white-space: nowrap; width: 10%' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarEducacionContinua"><i class='fa fa-pencil' aria-hidden='true'></i></button>
                                             <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarEducacionContinua"><span class='glyphicon glyphicon-remove'></span></button>
-                                            <input type="hidden" data-bind="value: anyo, attr: { 'name': 'educacionesContinuas[' + $index() + '].anyo'  }">
-                                            <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'educacionesContinuas[' + $index() + '].consecutivo'  }" />
-                                            <input type="hidden" data-bind="value: id, attr: { 'name': 'educacionesContinuas[' + $index() + '].id'  }" />
-                                            <input type="hidden" data-bind="value: nucleoBasicoConocimiento, attr: { 'name': 'educacionesContinuas[' + $index() + '].nucleoBasicoConocimiento'  }" />
                                         </td>
                                     </tr>
                                 </tbody>                           
@@ -1699,7 +1669,7 @@
                                         <div class="form-group">
                                             <label for="certificadoEducacionContinua">Certificado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado del estudio">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <div id="certificadosEducacionesContinuas"></div>
+                                            <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoEducacionContinua" id="certificadoEducacionContinua" />
                                         </div>
                                     </div>
                                 </div>
@@ -1749,6 +1719,8 @@
                 <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevaExperienciaLaboral();" ><span class="glyphicon glyphicon-plus"></span></button>
                 <br>	
                 <div class="table-responsive">
+                    <br>
+                    <div id="alert_experiencias_laborales"></div>
                     <table class="table tabla table-hover tableestilo">
                         <thead>
                             <tr>
@@ -1766,30 +1738,16 @@
                                 </td>
                                 <td style="width: 30%">
                                     <span data-bind="text: nombreEmpresa" ></span>
-                                    <input type="hidden" class="form-control" data-bind="value: nombreEmpresa, attr: { 'name': 'experienciasLaborales[' + $index() + '].nombreEmpresa'  }">
                                 </td>
                                 <td style="width: 20%">
                                     <span data-bind="text: cargo" ></span>
-                                    <input type="hidden" class="form-control" data-bind="value: cargo, attr: { 'name': 'experienciasLaborales[' + $index() + '].cargo'  }">
                                 </td>
                                 <td style="width: 10%" align="center">
-                                    <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoExperienciaLaboral, visible: tieneCertificado" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                    <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoExperienciaLaboral" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
                                 </td>
                                 <td style='white-space: nowrap; width: 10%' align="center">
                                     <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarExperienciaLaboral"><i class='fa fa-pencil' aria-hidden='true'></i></button>
                                     <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarExperienciaLaboral"><span class='glyphicon glyphicon-remove'></span></button>
-                                    <input type="hidden" data-bind="value: tipoExperiencia, attr: { 'name': 'experienciasLaborales[' + $index() + '].tipoExperiencia'  }" />
-                                    <input type="hidden" data-bind="value: trabajoActual, attr: { 'name': 'experienciasLaborales[' + $index() + '].trabajoActual'  }" />
-                                    <input type="hidden" data-bind="value: fnsp, attr: { 'name': 'experienciasLaborales[' + $index() + '].fnsp'  }" />
-                                    <input type="hidden" data-bind="value: fechaIngreso, attr: { 'name': 'experienciasLaborales[' + $index() + '].fechaIngreso'  }" />
-                                    <input type="hidden" data-bind="value: fechaRetiro, attr: { 'name': 'experienciasLaborales[' + $index() + '].fechaRetiro'  }" />
-                                    <input type="hidden" data-bind="value: nucleoBasicoConocimiento, attr: { 'name': 'experienciasLaborales[' + $index() + '].nucleoBasicoConocimiento'  }" />
-                                    <input type="hidden" data-bind="value: tipoEmpresa, attr: { 'name': 'experienciasLaborales[' + $index() + '].tipoEmpresa'  }" />
-                                    <input type="hidden" data-bind="value: naturalezaCargo, attr: { 'name': 'experienciasLaborales[' + $index() + '].naturalezaCargo'  }" />
-                                    <input type="hidden" data-bind="value: actividadEconomica, attr: { 'name': 'experienciasLaborales[' + $index() + '].actividadEconomica'  }" />
-                                    <input type="hidden" data-bind="value: tipoContrato, attr: { 'name': 'experienciasLaborales[' + $index() + '].tipoContrato'  }" />
-                                    <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'experienciasLaborales[' + $index() + '].consecutivo'  }" />
-                                    <input type="hidden" data-bind="value: id, attr: { 'name': 'experienciasLaborales[' + $index() + '].id'  }" />
                                 </td>
                             </tr>
                         </tbody>                          
@@ -1942,7 +1900,7 @@
                                         <div class="form-group">
                                             <label for="certificadoExperienciaLaboral">Certificado de soporte</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <div id="certificadosExperienciasLaborales"></div>
+                                            <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoExperienciaLaboral" id="certificadoExperienciaLaboral" />
                                         </div>
                                     </div>
                                 </div>
@@ -1960,6 +1918,8 @@
                 <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevaExperienciaDocencia();" ><span class="glyphicon glyphicon-plus"></span></button>
                 <br>
                 <div class="table-responsive">
+                    <br>
+                    <div id="alert_experiencias_docencia"></div>
                     <table class="table tabla table-hover tableestilo">
                         <thead>
                             <tr>
@@ -1975,11 +1935,6 @@
                                 <td style='white-space: nowrap; width: 10%' align="center">
                                     <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarExperienciaDocencia"><i class='fa fa-pencil' aria-hidden='true'></i></button>
                                     <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarExperienciaDocencia"><span class='glyphicon glyphicon-remove'></span></button>
-                                    <input type="hidden" data-bind="value: trabajoActual, attr: { 'name': 'experienciasDocencia[' + $index() + '].trabajoActual'  }" />
-                                    <input type="hidden" data-bind="value: institucion, attr: { 'name': 'experienciasDocencia[' + $index() + '].institucion'  }" />
-                                    <input type="hidden" data-bind="value: fnsp, attr: { 'name': 'experienciasDocencia[' + $index() + '].fnsp'  }" />
-                                    <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'experienciasDocencia[' + $index() + '].consecutivo'  }" />
-                                    <input type="hidden" data-bind="value: id, attr: { 'name': 'experienciasDocencia[' + $index() + '].id'  }" />
                                 </td>
                             </tr>
                         </tbody>                          
@@ -2041,6 +1996,8 @@
                                 <div class="row">
                                     <div class="col-md-12">                                           
                                         <div class="table-responsive">
+                                            <br>
+                                            <div id="alert_cursos_experiencia_docencia"></div>
                                             <table class="table tabla table-hover tableestilo">
                                                 <thead>
                                                     <tr>
@@ -2062,7 +2019,7 @@
                                                             <span data-bind="text: nombreNucleoBasicoConocimiento" ></span>
                                                         </td>
                                                         <td style="width: 20%">
-                                                            <span data-bind="text: nombreNivelEstudio" ></span>
+                                                            <span data-bind="text: nombreNivelEstudio"></span>
                                                         </td>
                                                         <td style="width: 10%">
                                                             <span data-bind="text: nombreModalidad" ></span>
@@ -2071,7 +2028,7 @@
                                                             <span data-bind="text: numeroHoras" ></span>
                                                         </td>
                                                         <td style="width: 10%" align="center">
-                                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoCursoExperienciaDocencia, visible: tieneCertificado" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoCursoExperienciaDocencia" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
                                                         </td>
                                                         <td style='white-space: nowrap; width: 10%' align="center">
                                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCursoExperienciaDocencia"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -2161,7 +2118,7 @@
                                         <div class="form-group form-inline">
                                             <label>Documento de soporte/Certificado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado del curso">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                            <div id="certificadosCursosExperienciaDocencia"></div>
+                                            <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoCursoExperienciaDocencia" id="certificadoCursoExperienciaDocencia" />
                                         </div>
                                     </div>
                                 </div>
@@ -2249,6 +2206,8 @@
                         <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoArticulo();"><span class="glyphicon glyphicon-plus"></span></button>
                         <br />
                         <div class="table-responsive">
+                            <br>
+                            <div id="alert_articulos"></div>
                             <table class="table tabla table-hover tableestilo" id="tbearticulo">
                                 <thead>
                                     <tr>
@@ -2272,14 +2231,6 @@
                                         <td style='white-space: nowrap; width: 10%' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarArticulo"><i class='fa fa-pencil' aria-hidden='true'></i></button>
                                             <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarArticulo"><span class='glyphicon glyphicon-remove'></span></button>
-                                            <input type="hidden" data-bind="value: nombre, attr: { 'name': 'articulos[' + $index() + '].nombre'  }" />
-                                            <input type="hidden" data-bind="value: nombreRevista, attr: { 'name': 'articulos[' + $index() + '].nombreRevista'  }" />
-                                            <input type="hidden" data-bind="value: tipoAutor, attr: { 'name': 'articulos[' + $index() + '].tipoAutor'  }" />
-                                            <input type="hidden" data-bind="value: url, attr: { 'name': 'articulos[' + $index() + '].url'  }" />
-                                            <input type="hidden" data-bind="value: anyo, attr: { 'name': 'articulos[' + $index() + '].anyo'  }" />
-                                            <input type="hidden" data-bind="value: nucleoBasicoConocimiento, attr: { 'name': 'articulos[' + $index() + '].nucleoBasicoConocimiento'  }" />
-                                            <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'articulos[' + $index() + '].consecutivo'  }" />
-                                            <input type="hidden" data-bind="value: id, attr: { 'name': 'articulos[' + $index() + '].id'  }" />
                                         </td>
                                     </tr>
                                 </tbody>                                     
@@ -2368,6 +2319,8 @@
                     <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevaPatente();" ><span class="glyphicon glyphicon-plus"></span></button>
                     <br>
                     <div class="table-responsive">
+                        <br>
+                        <div id="alert_patentes"></div>
                          <table class="table tabla table-hover tableestilo" id="tbpatente">
                              <thead>
                                  <tr>
@@ -2390,18 +2343,11 @@
                                         <span data-bind="text: nombrePropiedadCompartida" ></span>
                                     </td>
                                     <td style="width: 10%" align="center">
-                                        <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoPatente, visible: tieneDocumento" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                        <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoPatente" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
                                     </td>
                                     <td style='white-space: nowrap; width: 10%' align="center">
                                         <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarPatente"><i class='fa fa-pencil' aria-hidden='true'></i></button>
                                         <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarPatente"><span class='glyphicon glyphicon-remove'></span></button>
-                                        <input type="hidden" data-bind="value: fecha, attr: { 'name': 'patentes[' + $index() + '].fecha'  }" />
-                                        <input type="hidden" data-bind="value: tipo, attr: { 'name': 'patentes[' + $index() + '].tipo'  }" />
-                                        <input type="hidden" data-bind="value: propiedadCompartida, attr: { 'name': 'patentes[' + $index() + '].propiedadCompartida'  }" />
-                                        <input type="hidden" data-bind="value: clase, attr: { 'name': 'patentes[' + $index() + '].clase'  }" />
-                                        <input type="hidden" data-bind="value: descripcion, attr: { 'name': 'patentes[' + $index() + '].descripcion'  }" />
-                                        <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'patentes[' + $index() + '].consecutivo'  }" />
-                                        <input type="hidden" data-bind="value: id, attr: { 'name': 'patentes[' + $index() + '].id'  }" />
                                     </td>
                                 </tr>
                             </tbody>                                     
@@ -2475,7 +2421,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group form-inline">
                                                 <label>Documento del soporte</label>
-                                                <div id="documentosPatentes"></div>
+                                                <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="documentoPatente" id="documentoPatente" />
                                             </div>
                                         </div>
                                     </div>
@@ -2494,6 +2440,8 @@
                          <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoProductoConocimiento();" ><span class="glyphicon glyphicon-plus"></span></button>
                          <br>
                          <div class="table-responsive">
+                             <br>
+                             <div id="alert_productos_conocimiento"></div>
                              <table class="table tabla table-hover tableestilo" id="tbprodcono">
                                  <thead>
                                      <tr>
@@ -2516,17 +2464,11 @@
                                              <span data-bind="text: descripcion" ></span>
                                          </td>
                                          <td style="width: 10%" align="center">
-                                             <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoProductoConocimiento, visible: tieneDocumento" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                             <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoProductoConocimiento" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
                                          </td>
                                          <td style='white-space: nowrap; width: 10%' align="center">
                                              <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarProductoConocimiento"><i class='fa fa-pencil' aria-hidden='true'></i></button>
                                              <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarProductoConocimiento"><span class='glyphicon glyphicon-remove'></span></button>
-                                             <input type="hidden" data-bind="value: tipo, attr: { 'name': 'productosConocimiento[' + $index() + '].tipo'  }" />
-                                             <input type="hidden" data-bind="value: nucleoBasicoConocimiento, attr: { 'name': 'productosConocimiento[' + $index() + '].nucleoBasicoConocimiento'  }" />
-                                             <input type="hidden" data-bind="value: url, attr: { 'name': 'productosConocimiento[' + $index() + '].url'  }" />
-                                             <input type="hidden" data-bind="value: descripcion, attr: { 'name': 'productosConocimiento[' + $index() + '].descripcion'  }" />
-                                             <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'productosConocimiento[' + $index() + '].consecutivo'  }" />
-                                             <input type="hidden" data-bind="value: id, attr: { 'name': 'productosConocimiento[' + $index() + '].id'  }" />
                                          </td>
                                      </tr>
                                  </tbody>                                     
@@ -2589,7 +2531,7 @@
                                          <div class="form-group form-inline">
                                              <label>Documento del soporte</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el documento de soporte del producto del conocimiento">
                                              <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                             <div id="documentosProductosConocimiento"></div>
+                                             <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="documentoProductoConocimiento" id="documentoProductoConocimiento" />
                                          </div>
                                      </div>
                                  </div>
@@ -2601,6 +2543,7 @@
                         </div>
                     </div>
                 </div>
+                <button class="btn btn-success" style="float: right; margin-bottom:20px;" type="submit">Guardar</button>        
             </div>                        
             <div id="formdistin" style="display: none;">
                 <div class="row">   
@@ -2614,6 +2557,8 @@
                     <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevaDistincion();" ><span class="glyphicon glyphicon-plus"></span></button>
                     <br>
                     <div class="table-responsive">
+                        <br>
+                        <div id="alert_distinciones"></div>
                         <table class="table tabla table-hover tableestilo" id="tbdistin" style="width: 100%;">
                             <thead>
                                 <tr>
@@ -2628,24 +2573,19 @@
                                 <tr class="table-row">
                                     <td style="width: 25%">
                                         <span data-bind="text: institucionOtorga" ></span>
-                                        <input type="hidden" data-bind="value: institucionOtorga, attr: { 'name': 'distinciones[' + $index() + '].institucionOtorga'  }">
                                     </td>
                                     <td style="width: 25%">
                                         <span data-bind="text: descripcion" ></span>
-                                        <input type="hidden" data-bind="value: descripcion, attr: { 'name': 'distinciones[' + $index() + '].descripcion'  }">
                                     </td>
                                     <td style="width: 20%">
                                         <span data-bind="text: fechaDistincion" ></span>
-                                        <input type="hidden" class="form-control" data-bind="value: fechaDistincion, attr: { 'name': 'distinciones[' + $index() + '].fechaDistincion'  }">
                                     </td>
                                     <td style="width: 20%" align="center">
-                                        <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoDistincion, visible: tieneCertificado" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                        <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoDistincion" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
                                     </td>
                                     <td style='white-space: nowrap; width: 10%' align="center">
                                         <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarDistincion"><i class='fa fa-pencil' aria-hidden='true'></i></button>
                                         <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarDistincion"><span class='glyphicon glyphicon-remove'></span></button>
-                                        <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'distinciones[' + $index() + '].consecutivo'  }" />
-                                        <input type="hidden" data-bind="value: id, attr: { 'name': 'distinciones[' + $index() + '].id'  }" />
                                     </td>
                                 </tr>
                             </tbody>                               
@@ -2697,6 +2637,7 @@
                                             <label for="certificadoDistincion">Certificado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el certificado">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                                             <div id="certificadosDistinciones"></div>
+                                            <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoDistincion" id="certificadoDistincion" />
                                         </div>
                                     </div>
                                 </div>
@@ -2741,7 +2682,6 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-success" style="float: right; margin-bottom:20px;" type="submit">Guardar</button>
             <input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <form:hidden path="idPersona" />
             <input type="hidden" id="tab" name="tab" />
@@ -2802,14 +2742,6 @@
         scrollToTopOnError: false // Set this property to true on longer forms
     });
     
-    function recargarPagina() {
-        if($('#tab').val() != "") {
-            window.location.href = "${pageContext.request.contextPath}/hojasVida/editar/" + $('#tab').val();
-        } else {
-            window.location.href = "${pageContext.request.contextPath}/hojasVida/editar";
-        }
-    }
-    
     $(document).ready(function () {
         $('#personal').click(function () {
             $('#formpersonal').css("display", "block");
@@ -2822,7 +2754,7 @@
             $('#tab').val("personal");
         });
         
-        $('#perfil').click(function () {
+        $('#perfillaboral').click(function () {
             $('#formperfilsopor').css("display", "block");
             $('#formpersonal').css("display", "none");
             $('#formacademico').css("display", "none");
@@ -2830,7 +2762,7 @@
             $('#formexperiencia').css("display", "none");
             $('#forminves').css("display", "none");
             $('#formdistin').css("display", "none");
-            $('#tab').val("perfil");
+            $('#tab').val("perfillaboral");
         });
         
         $('#academico').click(function () {
@@ -3339,6 +3271,18 @@
            $('#tipoInvestigador').prop('disabled', true);
         }
         
+        $('#copiaDocumentoIdentificacion').change(function () {
+           $('#nombreCopiaDocumentoIdentificacion').text($("#copiaDocumentoIdentificacion")[0].files[0].name); 
+        });
+        
+        $('#copiaLibretaMilitar').change(function () {
+           $('#nombreCopiaLibretaMilitar').text($("#copiaLibretaMilitar")[0].files[0].name); 
+        });
+
+        $('#documentoRUT').change(function () {
+           $('#nombreDocumentoRUT').text($("#documentoRUT")[0].files[0].name); 
+        });
+
         <c:if test = "${tab != null}">
         $('#${tab}').click();
         </c:if>
@@ -3535,7 +3479,10 @@
                 bootstrap_alert_correo_electronico.warning('Debe ingresar un correo electrónico válido');
                 return false;
             }
+            var formData = new FormData();
             if ($('#consecutivo').val() === "") {
+                formData.append("id", 0);
+                formData.append("consecutivo", self.correosElectronicos().length);
                 self.correosElectronicos.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.correosElectronicos().length),
@@ -3550,19 +3497,76 @@
                         break;
                     }
                 }
+                formData.append("id", self.correosElectronicos()[indice].id());
+                formData.append("consecutivo", consecutivo);
                 self.correosElectronicos()[indice].correoElectronico(correoElectronico);
             }
-            $('#md_correo_electronico').modal('hide');
+            
+            formData.append("correoElectronico", correoElectronico);
+            
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/correoElectronico",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_correo_electronico').modal('hide');
+                    bootstrap_alert_correos_electronicos.success('Correo electrónico almacenado correctamente.');
+                    if (response !== "") {
+                        self.correosElectronicos.removeAll();
+                        var correosElectronicos = JSON.parse(response);
+                        for (var i = 0; i < correosElectronicos.length; i++) {
+                            self.correosElectronicos.push(
+                                {
+                                    id: ko.observable(correosElectronicos[i].id),
+                                    consecutivo: ko.observable(correosElectronicos[i].consecutivo),
+                                    correoElectronico: ko.observable(correosElectronicos[i].correoElectronico)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_correos_electronicos.warning("Error al almacenar el correo electrónico.");
+                }});
         };
 
         self.eliminarCorreoElectronico = function (correoElectronico) {
             self.correosElectronicos.remove(correoElectronico);
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/eliminarCorreoElectronico/" + correoElectronico.id(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_correos_electronicos.success("Correo electrónico eliminado exitosamente.");
+                    self.correosElectronicos.removeAll();
+                    var correosElectronicos = JSON.parse(response);
+                    for (var i = 0; i < correosElectronicos.length; i++) {
+                        self.correosElectronicos.push(
+                            {
+                                id: ko.observable(correosElectronicos[i].id),
+                                consecutivo: ko.observable(correosElectronicos[i].consecutivo),
+                                correoElectronico: ko.observable(correosElectronicos[i].correoElectronico)
+                            }
+                         );
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_correos_electronicos.warning("Error al eliminar el correo electrónico.");
+                }});
         };
 
         self.editarCorreoElectronico = function (correoElectronico) {
             $('#correoElectronico').val(correoElectronico.correoElectronico());
             $('#consecutivo').val(correoElectronico.consecutivo());
             bootstrap_alert_correo_electronico.removeWarning();
+            bootstrap_alert_correos_electronicos.removeWarning();
             $('#md_correo_electronico').modal({backdrop: 'static', keyboard: false})  ;
         };
 
@@ -3584,8 +3588,10 @@
                 bootstrap_alert_cuenta_bancaria.warning('Debe ingresar la entidad cuenta bancaria');
                 return false;
             }
-
+            var formData = new FormData();
             if ($('#consecutivo').val() === "") {
+                formData.append("id", 0);
+                formData.append("consecutivo", self.cuentasBancarias().length);
                 self.cuentasBancarias.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.cuentasBancarias().length),
@@ -3603,16 +3609,81 @@
                         break;
                     }
                 }
+                formData.append("id", self.cuentasBancarias()[indice].id());
+                formData.append("consecutivo", consecutivo);
                 self.cuentasBancarias()[indice].tipo(tipoCuentaBancaria);
                 self.cuentasBancarias()[indice].nombreTipo(nombreTipoCuentaBancaria);
                 self.cuentasBancarias()[indice].numero(numeroCuentaBancaria);
                 self.cuentasBancarias()[indice].entidad(entidadCuentaBancaria);
             }
-            $('#md_cuenta_bancaria').modal('hide');
+            formData.append("tipo", tipoCuentaBancaria);
+            formData.append("numero", numeroCuentaBancaria);
+            formData.append("entidad", entidadCuentaBancaria);
+
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/cuentaBancaria",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_cuenta_bancaria').modal('hide');
+                    bootstrap_alert_cuentas_bancarias.success('Cuenta bancaria almacenada correctamente.');
+                    if (response !== "") {
+                        self.cuentasBancarias.removeAll();
+                        var cuentasBancarias = JSON.parse(response);
+                        for (var i = 0; i < cuentasBancarias.length; i++) {
+                            self.cuentasBancarias.push(
+                                {
+                                    id: ko.observable(cuentasBancarias[i].id),
+                                    consecutivo: ko.observable(cuentasBancarias[i].consecutivo),
+                                    tipo: ko.observable(cuentasBancarias[i].tipo),
+                                    nombreTipo: ko.observable(cuentasBancarias[i].nombreTipo),
+                                    numero: ko.observable(cuentasBancarias[i].numero),
+                                    entidad: ko.observable(cuentasBancarias[i].entidad)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_cuentas_bancarias.warning("Error al almacenar la cuenta bancaria.");
+                }});
         };
 
         self.eliminarCuentaBancaria = function (cuentaBancaria) {
             self.cuentasBancarias.remove(cuentaBancaria);
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/eliminarCuentaBancaria/" + cuentaBancaria.id(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_cuentas_bancarias.success('Cuenta bancaria eliminada correctamente.');
+                    if (response !== "") {
+                        self.cuentasBancarias.removeAll();
+                        var cuentasBancarias = JSON.parse(response);
+                        for (var i = 0; i < cuentasBancarias.length; i++) {
+                            self.cuentasBancarias.push(
+                                {
+                                    id: ko.observable(cuentasBancarias[i].id),
+                                    consecutivo: ko.observable(cuentasBancarias[i].consecutivo),
+                                    tipo: ko.observable(cuentasBancarias[i].tipo),
+                                    nombreTipo: ko.observable(cuentasBancarias[i].nombreTipo),
+                                    numero: ko.observable(cuentasBancarias[i].numero),
+                                    entidad: ko.observable(cuentasBancarias[i].entidad)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_cuentas_bancarias.warning("Error al eliminar el cuenta bancaria.");
+                }});
         };
 
         self.editarCuentaBancaria = function (cuentaBancaria) {
@@ -3622,6 +3693,7 @@
             $('#entidadCuentaBancaria').val(cuentaBancaria.entidad());
             $('#consecutivo').val(cuentaBancaria.consecutivo());
             bootstrap_alert_cuenta_bancaria.removeWarning();
+            bootstrap_alert_cuentas_bancarias.removeWarning();
             $('#md_cuenta_bancaria').modal({backdrop: 'static', keyboard: false})  ;
         };
 
@@ -3638,8 +3710,10 @@
                 bootstrap_alert_telefono.warning('Debe ingresar el número de teléfono');
                 return false;
             }
-
+            var formData = new FormData();
             if ($('#consecutivo').val() === "") {
+                formData.append("id", 0);
+                formData.append("consecutivo", self.telefonos().length);
                 self.telefonos.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.telefonos().length),
@@ -3656,15 +3730,77 @@
                         break;
                     }
                 }
+                formData.append("id", self.telefonos()[indice].id());
+                formData.append("consecutivo", consecutivo);
                 self.telefonos()[indice].tipo(tipoTelefono);
                 self.telefonos()[indice].nombreTipo(nombreTipoTelefono);
                 self.telefonos()[indice].numero(numeroTelefono);
             }
-            $('#md_telefono').modal('hide');
+            formData.append("tipo", tipoTelefono);
+            formData.append("numero", numeroTelefono);
+
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/telefono",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_telefono').modal('hide');
+                    bootstrap_alert_telefonos.success('Teléfono almacenado correctamente.');
+                    if (response !== "") {
+                        self.telefonos.removeAll();
+                        var telefonos = JSON.parse(response);
+                        for (var i = 0; i < telefonos.length; i++) {
+                            self.telefonos.push(
+                                {
+                                    id: ko.observable(telefonos[i].id),
+                                    consecutivo: ko.observable(telefonos[i].consecutivo),
+                                    tipo: ko.observable(telefonos[i].tipo),
+                                    nombreTipo: ko.observable(telefonos[i].nombreTipo),
+                                    numero: ko.observable(telefonos[i].numero)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_telefonos.warning("Error al almacenar teléfono.");
+                }});
         };
 
         self.eliminarTelefono = function (telefono) {
             self.telefonos.remove(telefono);
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/eliminarTelefono/" + telefono.id(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_telefonos.success('Teléfono eliminado correctamente.');
+                    if (response !== "") {
+                        self.telefonos.removeAll();
+                        var telefonos = JSON.parse(response);
+                        for (var i = 0; i < telefonos.length; i++) {
+                            self.telefonos.push(
+                                {
+                                    id: ko.observable(telefonos[i].id),
+                                    consecutivo: ko.observable(telefonos[i].consecutivo),
+                                    tipo: ko.observable(telefonos[i].tipo),
+                                    nombreTipo: ko.observable(telefonos[i].nombreTipo),
+                                    numero: ko.observable(telefonos[i].numero)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_telefonos.warning("Error al eliminar el teléfono.");
+                }});
         };
 
         self.editarTelefono = function (telefono) {
@@ -3684,24 +3820,20 @@
                 bootstrap_alert_documento_soporte.warning('Debe ingresar el tipo de documento');
                 return false;
             }
+            var formData = new FormData();
             if ($('#consecutivo').val() === "") {
-                if ($('input:file[name="documentosSoporte[' + self.documentosSoporte().length + '].documento"]').val() === "") {
+                if ($('#documentoSoporte').val() === "") {
                     bootstrap_alert_documento_soporte.warning('Debe ingresar el documento');
                     return false;
                 }
-                if ($('input:file[name="documentosSoporte[' + self.documentosSoporte().length + '].documento"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#documentoSoporte')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_documento_soporte.warning('El documento no debe ser mayor a 2MB');
                     return false;
                 }
                 
-                self.documentosSoporte.push({
-                    id: ko.observable(0),
-                    consecutivo: ko.observable(self.documentosSoporte().length),
-                    tipoDocumento: ko.observable(tipoDocumento),
-                    nombreTipoDocumento: ko.observable(nombreTipoDocumento),
-                    documento: ko.observable(''),
-                    tieneDocumento: ko.observable(false)
-                });
+                formData.append("id", 0);
+                formData.append("consecutivo", self.documentosSoporte().length);
+        
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -3711,40 +3843,89 @@
                         break;
                     }
                 }
-                if (self.documentosSoporte()[indice].id === 0 && 
-                    $('input:file[name="documentosSoporte[' + indice + '].documento"]').val() === "") {
-                    bootstrap_alert_documento_soporte.warning('Debe ingresar el documento');
-                    return false;
-                }
-                if ($('input:file[name="documentosSoporte[' + indice + '].documento"]').val() !== "" &&
-                    $('input:file[name="documentosSoporte[' + indice + '].documento"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#documentoSoporte').val() !== "" &&
+                    $('#documentoSoporte')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_documento_soporte.warning('El documento no debe ser mayor a 2MB');
                     return false;
                 }
                 self.documentosSoporte()[indice].tipoDocumento(tipoDocumento);
                 self.documentosSoporte()[indice].nombreTipoDocumento(nombreTipoDocumento);
-                self.documentosSoporte()[indice].documento('');
-                if ($('input:file[name="documentosSoporte[' + indice + '].documento"]').val() !== "") {
-                    self.documentosSoporte()[indice].tieneDocumento(false);
-                }
+                formData.append("id", self.documentosSoporte()[indice].id());
+                formData.append("consecutivo", consecutivo);
             }
-            $('#md_documento_soporte').modal('hide');
+            formData.append("tipoDocumento", tipoDocumento);
+            if ($('#documentoSoporte').val() !== "") {
+                formData.append("documento", $('#documentoSoporte')[0].files[0]);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/documentoSoporte",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_documento_soporte').modal('hide');
+                    bootstrap_alert_documentos_soporte.success('Documento almacenado correctamente');
+                    if (response !== "") {
+                        self.documentosSoporte.removeAll();
+                        var documentosSoporte = JSON.parse(response);
+                        for (var i = 0; i < documentosSoporte.length; i++) {
+                            self.documentosSoporte.push(
+                                {
+                                    id: ko.observable(documentosSoporte[i].id),
+                                    consecutivo: ko.observable(documentosSoporte[i].consecutivo),
+                                    tipoDocumento: ko.observable(documentosSoporte[i].tipoDocumento),
+                                    nombreTipoDocumento: ko.observable(documentosSoporte[i].nombreTipoDocumento)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_documento_soporte.warning("Error al almacenar el documento.");
+                }});
         };
 
         self.eliminarDocumentoSoporte = function (documentoSoporte) {
-            $('input:file[name="documentosSoporte[' + documentoSoporte.consecutivo() + '].documento"]').remove();
             self.documentosSoporte.remove(documentoSoporte);
-            for(i = documentoSoporte.consecutivo(); i < hojaVidaModel.documentosSoporte().length; i++) {
-               $('input:file[name="documentosSoporte[' + (i + 1) + '].documento"]').attr('name', 'documentosSoporte[' + i + '].documento'); 
-                hojaVidaModel.documentosSoporte()[i].consecutivo(i);
-            }
+            
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/eliminarDocumentoSoporte/" + documentoSoporte.id(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_documentos_soporte.success("Documento eliminado exitosamente.");
+                    if (response !== "") {
+                        self.documentosSoporte.removeAll();
+                        var documentosSoporte = JSON.parse(response);
+                        for (var i = 0; i < documentosSoporte.length; i++) {
+                            self.documentosSoporte.push(
+                                {
+                                    id: ko.observable(documentosSoporte[i].id),
+                                    consecutivo: ko.observable(documentosSoporte[i].consecutivo),
+                                    tipoDocumento: ko.observable(documentosSoporte[i].tipoDocumento),
+                                    nombreTipoDocumento: ko.observable(documentosSoporte[i].nombreTipoDocumento)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_documentos_soporte.warning("Error al eliminar el documento.");
+                }});
         };
 
         self.editarDocumentoSoporte = function (documentoSoporte) {
-            ocultarDocumentosSoportes();
             $('#tipoDocumento').val(documentoSoporte.tipoDocumento()).trigger('change');
             $('#consecutivo').val(documentoSoporte.consecutivo());
-            $('input:file[name="documentosSoporte[' + documentoSoporte.consecutivo() + '].documento"]').show();
+            $('#documentoSoporte').val('');
+            bootstrap_alert_documentos_soporte.removeWarning();
             bootstrap_alert_documento_soporte.removeWarning();
             $('#md_documento_soporte').modal({backdrop: 'static', keyboard: false})  ;
         };
@@ -3815,15 +3996,18 @@
                 bootstrap_alert_idioma.warning('Debe ingresar el puntaje de certificación');
                 return false;
             }
+            var formData = new FormData();
             if ($('#consecutivo').val() === "") {
-                if ($('input:file[name="idiomas[' + self.idiomas().length + '].certificado"]').val() === "") {
+                if ($('#certificadoIdioma').val() === "") {
                     bootstrap_alert_idioma.warning('Debe ingresar el certificado');
                     return false;
                 }
-                if ($('input:file[name="idiomas[' + self.idiomas().length + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#certificadoIdioma')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_idioma.warning('El certificado no debe ser mayor a 2MB');
                     return false;
                 }                
+                formData.append("id", 0);
+                formData.append("consecutivo", self.idiomas().length);
                 self.idiomas.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.idiomas().length),
@@ -3840,9 +4024,7 @@
                     otraCertificacion: ko.observable(otraCertificacion),
                     tipoCertificacion: ko.observable(tipoCertificacion),
                     nombreTipoCertificacion: ko.observable(nombreTipoCertificacion),
-                    puntajeCertificacion: ko.observable(puntajeCertificacion),
-                    certificado: ko.observable(''),
-                    tieneCertificado: ko.observable(false)
+                    puntajeCertificacion: ko.observable(puntajeCertificacion)
                 });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
@@ -3853,11 +4035,13 @@
                         break;
                     }
                 }
-                if ($('input:file[name="idiomas[' + indice + '].certificado"]').val() != "" && 
-                    $('input:file[name="idiomas[' + indice + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#certificadoIdioma').val() != "" && 
+                    $('#certificadoIdioma')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_idioma.warning('El certificado no debe ser mayor a 2MB');
                     return false;
                 }
+                formData.append("id", self.idiomas()[indice].id());
+                formData.append("consecutivo", consecutivo);
                 self.idiomas()[indice].idioma(idioma);
                 self.idiomas()[indice].nombreIdioma(nombreIdioma);
                 self.idiomas()[indice].nivelConversacion(nivelConversacion);
@@ -3872,22 +4056,105 @@
                 self.idiomas()[indice].tipoCertificacion(tipoCertificacion);
                 self.idiomas()[indice].nombreTipoCertificacion(nombreTipoCertificacion);
                 self.idiomas()[indice].puntajeCertificacion(puntajeCertificacion);
-                self.idiomas()[indice].certificado('');
             }
-            $('#md_idioma').modal('hide');
+            if ($('#certificadoIdioma').val() !== "") {
+                formData.append("certificado", $('#certificadoIdioma')[0].files[0]);
+            }
+            formData.append("idioma",idioma);
+            formData.append("nivelConversacion",nivelConversacion);
+            formData.append("nivelEscritura",nivelEscritura);
+            formData.append("nivelEscucha",nivelEscucha);
+            formData.append("nivelLectura",nivelLectura);
+            formData.append("otraCertificacion",otraCertificacion);
+            formData.append("tipoCertificacion",tipoCertificacion);
+            formData.append("puntajeCertificacion",puntajeCertificacion);
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/idioma",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_idioma').modal('hide');
+                    bootstrap_alert_idiomas.success('Idioma almacenado correctamente');
+                    if (response !== "") {
+                        self.idiomas.removeAll();
+                        var idiomas = JSON.parse(response);
+                        for (var i = 0; i < idiomas.length; i++) {
+                            self.idiomas.push(
+                                {
+                                    id: ko.observable(idiomas[i].id),
+                                    consecutivo: ko.observable(idiomas[i].consecutivo),
+                                    idioma: ko.observable(idiomas[i].idioma),
+                                    nombreIdioma: ko.observable(idiomas[i].nombreIdioma),
+                                    nivelConversacion: ko.observable(idiomas[i].nivelConversacion),
+                                    nombreNivelConversacion: ko.observable(idiomas[i].nombreNivelConversacion),
+                                    nivelEscritura: ko.observable(idiomas[i].nivelEscritura),
+                                    nombreNivelEscritura: ko.observable(idiomas[i].nombreNivelEscritura),
+                                    nivelEscucha: ko.observable(idiomas[i].nivelEscucha),
+                                    nombreNivelEscucha: ko.observable(idiomas[i].nombreNivelEscucha),
+                                    nivelLectura: ko.observable(idiomas[i].nivelLectura),
+                                    nombreNivelLectura: ko.observable(idiomas[i].nombreNivelLectura),
+                                    otraCertificacion: ko.observable(idiomas[i].otraCertificacion),
+                                    tipoCertificacion: ko.observable(idiomas[i].tipoCertificacion),
+                                    nombreTipoCertificacion: ko.observable(idiomas[i].nombreTipoCertificacion),
+                                    puntajeCertificacion: ko.observable(idiomas[i].puntajeCertificacion)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_idiomas.warning("Error al almacenar el idioma.");
+                }});
         };
 
         self.eliminarIdioma = function (idioma) {
-            $('input:file[name="idiomas[' + idioma.consecutivo() + '].certificado"]').remove();
             self.idiomas.remove(idioma);
-            for(i = idioma.consecutivo(); i < hojaVidaModel.idiomas().length; i++) {
-               $('input:file[name="idiomas[' + (i + 1) + '].certificado"]').attr('name', 'idiomas[' + i + '].certificado'); 
-                hojaVidaModel.idiomas()[i].consecutivo(i);
-            }
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/eliminarIdioma/" + idioma.id(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_idiomas.success("Idioma eliminado exitosamente.");
+                    if (response !== "") {
+                        self.idiomas.removeAll();
+                        var idiomas = JSON.parse(response);
+                        for (var i = 0; i < idiomas.length; i++) {
+                            self.idiomas.push(
+                                {
+                                    id: ko.observable(idiomas[i].id),
+                                    consecutivo: ko.observable(idiomas[i].consecutivo),
+                                    idioma: ko.observable(idiomas[i].idioma),
+                                    nombreIdioma: ko.observable(idiomas[i].nombreIdioma),
+                                    nivelConversacion: ko.observable(idiomas[i].nivelConversacion),
+                                    nombreNivelConversacion: ko.observable(idiomas[i].nombreNivelConversacion),
+                                    nivelEscritura: ko.observable(idiomas[i].nivelEscritura),
+                                    nombreNivelEscritura: ko.observable(idiomas[i].nombreNivelEscritura),
+                                    nivelEscucha: ko.observable(idiomas[i].nivelEscucha),
+                                    nombreNivelEscucha: ko.observable(idiomas[i].nombreNivelEscucha),
+                                    nivelLectura: ko.observable(idiomas[i].nivelLectura),
+                                    nombreNivelLectura: ko.observable(idiomas[i].nombreNivelLectura),
+                                    otraCertificacion: ko.observable(idiomas[i].otraCertificacion),
+                                    tipoCertificacion: ko.observable(idiomas[i].tipoCertificacion),
+                                    nombreTipoCertificacion: ko.observable(idiomas[i].nombreTipoCertificacion),
+                                    puntajeCertificacion: ko.observable(idiomas[i].puntajeCertificacion)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_idiomas.warning("Error al eliminar el idioma.");
+                }});
         };
 
         self.editarIdioma = function (idioma) {
-            ocultarCertificadosIdiomas();
             $('#idioma').val(idioma.idioma()).trigger('change');
             $('#nivelConversacionIdioma').val(idioma.nivelConversacion()).trigger('change');
             $('#nivelEscrituraIdioma').val(idioma.nivelEscritura()).trigger('change');
@@ -3902,8 +4169,9 @@
             }            
             $('#puntajeCertificacionIdioma').val(idioma.puntajeCertificacion());
             $('#consecutivo').val(idioma.consecutivo());
-            $('input:file[name="idiomas[' + idioma.consecutivo() + '].certificado"]').show();
+            $('#certificadoIdioma').show();
             bootstrap_alert_idioma.removeWarning();
+            bootstrap_alert_idiomas.removeWarning();
             $('#md_idioma').modal({backdrop: 'static', keyboard: false})  ;
         };
 
@@ -3949,16 +4217,19 @@
                 bootstrap_alert_educacion_basica.warning('Debe ingresar el año de finalización');
                 return false;
             }
+            
+            var formData = new FormData();
             if ($('#consecutivo').val() === "") {
-                if ($('input:file[name="educacionesBasicas[' + self.educacionesBasicas().length + '].certificado"]').val() === "") {
+                if ($('#certificadoEducacionBasica').val() === "") {
                     bootstrap_alert_educacion_basica.warning('Debe ingresar el certificado');
                     return false;
                 }
-                if ($('input:file[name="educacionesBasicas[' + self.educacionesBasicas().length + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#certificadoEducacionBasica')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_educacion_basica.warning('El certificado no debe ser mayor a 2MB');
                     return false;
                 }                
-                
+                formData.append("id", 0);
+                formData.append("consecutivo", self.educacionesBasicas().length);
                 self.educacionesBasicas.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.educacionesBasicas().length),
@@ -3968,9 +4239,7 @@
                     anyoInicio: ko.observable(anyoInicioEducacionBasica),
                     anyoFinalizacion: ko.observable(anyoFinalizacionEducacionBasica),
                     titulo: ko.observable(tituloEducacionBasica),
-                    graduado: ko.observable(graduadoEducacionBasica),
-                    certificado: ko.observable(''),
-                    tieneCertificado: ko.observable(false)
+                    graduado: ko.observable(graduadoEducacionBasica)
                 });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
@@ -3981,11 +4250,14 @@
                         break;
                     }
                 }
-                if ($('input:file[name="educacionesBasicas[' + indice + '].certificado"]').val() != "" && 
-                    $('input:file[name="educacionesBasicas[' + indice + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#certificadoEducacionBasica').val() != "" && 
+                    $('#certificadoEducacionBasica')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_educacion_basica.warning('El documento no debe ser mayor a 2MB');
                     return false;
                 }                
+                formData.append("id", self.educacionesBasicas()[indice].id());
+                formData.append("consecutivo", consecutivo);
+
                 self.educacionesBasicas()[indice].institucion(institucionEducacionBasica);
                 self.educacionesBasicas()[indice].nivel(nivelEstudioEducacionBasica);
                 self.educacionesBasicas()[indice].nombreNivel(nombreNivelEducacionBasica);
@@ -3993,23 +4265,93 @@
                 self.educacionesBasicas()[indice].anyoFinalizacion(anyoFinalizacionEducacionBasica);
                 self.educacionesBasicas()[indice].titulo(tituloEducacionBasica);
                 self.educacionesBasicas()[indice].graduado(graduadoEducacionBasica);
-                self.educacionesBasicas()[indice].certificado('');
             }
-            $('#md_educacion_basica').modal('hide');
+            
+            formData.append("institucion", institucionEducacionBasica);
+            formData.append("nivel", nivelEstudioEducacionBasica);
+            formData.append("anyoInicio", anyoInicioEducacionBasica);
+            formData.append("anyoFinalizacion", anyoFinalizacionEducacionBasica);
+            formData.append("titulo", tituloEducacionBasica);
+            formData.append("graduado", graduadoEducacionBasica);
+            if ($('#certificadoEducacionBasica').val() !== "") {
+                formData.append("certificado", $('#certificadoEducacionBasica')[0].files[0]);
+            }
+            
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/educacionBasica",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_educacion_basica').modal('hide');
+                    bootstrap_alert_educaciones_basicas.success('Educación básica almacenada correctamente.');
+                    if (response !== "") {
+                        self.educacionesBasicas.removeAll();
+                        var educacionesBasicas = JSON.parse(response);
+                        for (var i = 0; i < educacionesBasicas.length; i++) {
+                            self.educacionesBasicas.push(
+                                {
+                                    id: ko.observable(educacionesBasicas[i].id),
+                                    consecutivo: ko.observable(educacionesBasicas[i].consecutivo),
+                                    institucion: ko.observable(educacionesBasicas[i].institucion),
+                                    nivel: ko.observable(educacionesBasicas[i].nivel),
+                                    nombreNivel: ko.observable(educacionesBasicas[i].nombreNivel),
+                                    anyoInicio: ko.observable(educacionesBasicas[i].anyoInicio),
+                                    anyoFinalizacion: ko.observable(educacionesBasicas[i].anyoFinalizacion),
+                                    titulo: ko.observable(educacionesBasicas[i].titulo),
+                                    graduado: ko.observable(educacionesBasicas[i].graduado)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_educaciones_basicas.warning("Error al almacenar la educación básica.");
+                }});
         };
 
         self.eliminarEducacionBasica = function (educacionBasica) {
-            $('input:file[name="educacionesBasicas[' + educacionBasica.consecutivo() + '].certificado"]').remove();
             self.educacionesBasicas.remove(educacionBasica);
-            for(i = educacionBasica.consecutivo(); i < hojaVidaModel.educacionesBasicas().length; i++) {
-               $('input:file[name="educacionesBasicas[' + (i + 1) + '].certificado"]').attr('name', 'educacionesBasicas[' + i + '].certificado'); 
-                hojaVidaModel.educacionesBasicas()[i].consecutivo(i);
-            }
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/eliminarEducacionBasica/" + educacionBasica.id(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_educaciones_basicas.success('Educación básica eliminada correctamente.');
+                    if (response !== "") {
+                        self.educacionesBasicas.removeAll();
+                        var educacionesBasicas = JSON.parse(response);
+                        for (var i = 0; i < educacionesBasicas.length; i++) {
+                            self.educacionesBasicas.push(
+                                {
+                                    id: ko.observable(educacionesBasicas[i].id),
+                                    consecutivo: ko.observable(educacionesBasicas[i].consecutivo),
+                                    institucion: ko.observable(educacionesBasicas[i].institucion),
+                                    nivel: ko.observable(educacionesBasicas[i].nivel),
+                                    nombreNivel: ko.observable(educacionesBasicas[i].nombreNivel),
+                                    anyoInicio: ko.observable(educacionesBasicas[i].anyoInicio),
+                                    anyoFinalizacion: ko.observable(educacionesBasicas[i].anyoFinalizacion),
+                                    titulo: ko.observable(educacionesBasicas[i].titulo),
+                                    graduado: ko.observable(educacionesBasicas[i].graduado),
+                                    certificado: ko.observable(''),
+                                    tieneCertificado: ko.observable(educacionesBasicas[i].tieneCertificado)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_educaciones_basicas.warning("Error al eliminar la educación básica.");
+                }});
         };
 
         self.editarEducacionBasica = function (educacionBasica) {
-            ocultarCertificadosEducacionesBasicas();
-            
             $('#nivelEstudioEducacionBasica').val(educacionBasica.nivel()).trigger('change');
             $('#institucionEducacionBasica').val(educacionBasica.institucion());
             $('#anyoInicioEducacionBasica').val(educacionBasica.anyoInicio());
@@ -4031,8 +4373,9 @@
               $('#divOtroCertificacionIdioma').css("display","none");
             }            
             $('#consecutivo').val(educacionBasica.consecutivo());
-            $('input:file[name="educacionesBasicas[' + educacionBasica.consecutivo() + '].certificado"]').show();
+            $('#certificadoEducacionBasica').val('');
             bootstrap_alert_educacion_basica.removeWarning();
+            bootstrap_alert_educaciones_basicas.removeWarning();
             $('#md_educacion_basica').modal({backdrop: 'static', keyboard: false})  ;
         };
 
@@ -4081,11 +4424,11 @@
                     return false;
                 }
                 if ($('#consecutivo').val() === "") {    
-                    if ($('input:file[name="educacionesSuperiores[' + self.educacionesSuperiores().length + '].certificadoHomologado"]').val() === "") {
+                    if ($('#certificadoHomologadoEducacionSuperior').val() === "") {
                         bootstrap_alert_educacion_superior.warning('Debe ingresar el certificado homologado del título');
                         return false;
                     }
-                    if ($('input:file[name="educacionesSuperiores[' + self.educacionesSuperiores().length + '].certificadoHomologado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    if ($('#certificadoHomologadoEducacionSuperior')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                         bootstrap_alert_educacion_superior.warning('El certificado homologado no debe ser mayor a 2MB');
                         return false;
                     }                
@@ -4111,15 +4454,18 @@
                 bootstrap_alert_educacion_superior.warning('Debe ingresar la fecha del título');
                 return false;
             }
+            var formData = new FormData();
             if ($('#consecutivo').val() === "") {
-                if ($('input:file[name="educacionesSuperiores[' + self.educacionesSuperiores().length + '].certificado"]').val() === "") {
+                if ($('#certificadoEducacionSuperior').val() === "") {
                     bootstrap_alert_educacion_superior.warning('Debe ingresar el certificado');
                     return false;
                 }
-                if ($('input:file[name="educacionesSuperiores[' + self.educacionesSuperiores().length + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#certificadoEducacionSuperior')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_educacion_superior.warning('El certificado no debe ser mayor a 2MB');
                     return false;
                 }             
+                formData.append("id", 0);
+                formData.append("consecutivo", self.educacionesSuperiores().length);
                 self.educacionesSuperiores.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.educacionesSuperiores().length),
@@ -4139,10 +4485,7 @@
                     titulo: ko.observable(tituloEducacionSuperior),
                     graduado: ko.observable(graduadoEducacionSuperior),
                     fechaTitulo: ko.observable(fechaTituloEducacionSuperior),
-                    certificadoHomologado: ko.observable(''),
-                    tieneCertificadoHomologado: ko.observable(false),
-                    certificado: ko.observable(''),
-                    tieneCertificado: ko.observable(false)
+                    tieneCertificadoHomologado: ko.observable(false)
                 });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
@@ -4154,25 +4497,26 @@
                     }
                 }
                 if(tituloExteriorEducacionSuperior && self.educacionesSuperiores()[indice].tituloExterior() === false) {
-                    if($('input:file[name="educacionesSuperiores[' + indice + '].certificadoHomologado"]').val() === "") {
+                    if($('#certificadoHomologadoEducacionSuperior').val() === "") {
                         bootstrap_alert_educacion_superior.warning('Debe ingresar el certificado homologado del título');
                         return false;
                     }
-                    if ($('input:file[name="educacionesSuperiores[' + indice + '].certificadoHomologado"]').val() != "" && 
-                        $('input:file[name="educacionesSuperiores[' + indice + '].certificadoHomologado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                    if ($('#certificadoHomologadoEducacionSuperior').val() != "" && 
+                        $('#certificadoHomologadoEducacionSuperior')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                         bootstrap_alert_educacion_superior.warning('El certificado homologado no debe ser mayor a 2MB');
                         return false;
                     }                    
                 }
-                if ($('input:file[name="educacionesSuperiores[' + indice + '].certificado"]').val() != "" && 
-                    $('input:file[name="educacionesSuperiores[' + indice + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#certificadoEducacionSuperior').val() != "" && 
+                    $('#certificadoEducacionSuperior')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_educacion_superior.warning('El certificado no debe ser mayor a 2MB');
                     return false;
                 }                    
+                formData.append("id", self.educacionesSuperiores()[indice].id());
+                formData.append("consecutivo", consecutivo);
                 self.educacionesSuperiores()[indice].institucion(institucionEducacionSuperior);
                 self.educacionesSuperiores()[indice].nombreInstitucion(nombreInstitucionEducacionSuperior);
                 self.educacionesSuperiores()[indice].tituloExterior(tituloExteriorEducacionSuperior);
-                self.educacionesSuperiores()[indice].nombreInstitucion(nombreInstitucionEducacionSuperior);
                 self.educacionesSuperiores()[indice].paisTituloExterior(paisTituloExteriorEducacionSuperior);
                 self.educacionesSuperiores()[indice].nombrePaisTituloExterior(nombrePaisTituloExteriorEducacionSuperior);
                 self.educacionesSuperiores()[indice].nivel(nivelEstudioEducacionSuperior);
@@ -4186,27 +4530,121 @@
                 self.educacionesSuperiores()[indice].titulo(tituloEducacionSuperior);
                 self.educacionesSuperiores()[indice].graduado(graduadoEducacionSuperior);
                 self.educacionesSuperiores()[indice].fechaTitulo(fechaTituloEducacionSuperior);
-                self.educacionesSuperiores()[indice].certificado('');
-                self.educacionesSuperiores()[indice].certificadoHomologado('');
             }
-            establecerEgresadoUdeA();
-            $('#md_educacion_superior').modal('hide');
+            
+            formData.append("institucion",institucionEducacionSuperior);
+            formData.append("tituloExterior",tituloExteriorEducacionSuperior);
+            formData.append("paisTituloExterior",paisTituloExteriorEducacionSuperior);
+            formData.append("nivel",nivelEstudioEducacionSuperior);
+            formData.append("programa",programaCursadoEducacionSuperior);
+            formData.append("nucleoBasicoConocimiento",nucleoBasicoConocimientoEducacionSuperior);
+            formData.append("anyoInicio",anyoInicioEducacionSuperior);
+            formData.append("anyoFinalizacion",anyoFinalizacionEducacionSuperior);
+            formData.append("titulo",tituloEducacionSuperior);
+            formData.append("graduado",graduadoEducacionSuperior);
+            formData.append("fechaTitulo",fechaTituloEducacionSuperior);
+            if ($('#certificadoHomologadoEducacionSuperior').val() != "") {
+                formData.append("certificadoHomologado", $('#certificadoHomologadoEducacionSuperior')[0].files[0]);
+            }
+            if ($('#certificadoEducacionSuperior').val() !== "") {
+                formData.append("certificado", $('#certificadoEducacionSuperior')[0].files[0]);
+            }
+            
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/educacionSuperior",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_educacion_superior').modal('hide');
+                    bootstrap_alert_educaciones_superiores.success('Educación superior almacenada correctamente.');
+                    if (response !== "") {
+                        self.educacionesSuperiores.removeAll();
+                        var educacionesSuperiores = JSON.parse(response);
+                        for (var i = 0; i < educacionesSuperiores.length; i++) {
+                            self.educacionesSuperiores.push(
+                                {
+                                    id: ko.observable(educacionesSuperiores[i].id),
+                                    consecutivo: ko.observable(educacionesSuperiores[i].consecutivo),
+                                    paisTituloExterior: ko.observable(educacionesSuperiores[i].paisTituloExterior),
+                                    nombrePaisTituloExterior: ko.observable(educacionesSuperiores[i].nombrePaisTituloExterior),
+                                    institucion: ko.observable(educacionesSuperiores[i].institucion),
+                                    nombreInstitucion: ko.observable(educacionesSuperiores[i].nombreInstitucion),
+                                    tituloExterior: ko.observable(educacionesSuperiores[i].tituloExterior),
+                                    programa: ko.observable(educacionesSuperiores[i].programa),
+                                    nombrePrograma: ko.observable(educacionesSuperiores[i].nombrePrograma),
+                                    nucleoBasicoConocimiento: ko.observable(educacionesSuperiores[i].nucleoBasicoConocimiento),
+                                    nombreNucleoBasicoConocimiento: ko.observable(educacionesSuperiores[i].nombreNucleoBasicoConocimiento),
+                                    nivel: ko.observable(educacionesSuperiores[i].nivel),
+                                    nombreNivel: ko.observable(educacionesSuperiores[i].nombreNivel),
+                                    anyoInicio: ko.observable(educacionesSuperiores[i].anyoInicio),
+                                    anyoFinalizacion: ko.observable(educacionesSuperiores[i].anyoFinalizacion),
+                                    titulo: ko.observable(educacionesSuperiores[i].titulo),
+                                    graduado: ko.observable(educacionesSuperiores[i].graduado),
+                                    fechaTitulo: ko.observable(educacionesSuperiores[i].fechaTituloFormateada),
+                                    tieneCertificadoHomologado: ko.observable(educacionesSuperiores[i].tieneCertificadoHomologado)
+                                }
+                             );
+                        }
+                    }
+                    establecerEgresadoUdeA();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_educaciones_superiores.warning("Error al almacenar la educación superior.");
+                }});            
         };
 
         self.eliminarEducacionSuperior = function (educacionSuperior) {
-            $('input:file[name="educacionesSuperiores[' + educacionSuperior.consecutivo() + '].certificado"]').remove();
-            $('input:file[name="educacionesSuperiores[' + educacionSuperior.consecutivo() + '].certificadoHomologado"]').remove();
             self.educacionesSuperiores.remove(educacionSuperior);
-            for(i = educacionSuperior.consecutivo(); i < hojaVidaModel.educacionesSuperiores().length; i++) {
-               $('input:file[name="educacionesSuperiores[' + (i + 1) + '].certificado"]').attr('name', 'educacionesSuperiores[' + i + '].certificado'); 
-               $('input:file[name="educacionesSuperiores[' + (i + 1) + '].certificadoHomologado"]').attr('name', 'educacionesSuperiores[' + i + '].certificadoHomologado'); 
-                hojaVidaModel.educacionesSuperiores()[i].consecutivo(i);
-            }
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/eliminarEducacionSuperior/" + educacionSuperior.id(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_educaciones_superiores.success('Educación superior eliminada correctamente.');
+                    if (response !== "") {
+                        self.educacionesSuperiores.removeAll();
+                        var educacionesSuperiores = JSON.parse(response);
+                        for (var i = 0; i < educacionesSuperiores.length; i++) {
+                            self.educacionesSuperiores.push(
+                                {
+                                    id: ko.observable(educacionesSuperiores[i].id),
+                                    consecutivo: ko.observable(educacionesSuperiores[i].consecutivo),
+                                    paisTituloExterior: ko.observable(educacionesSuperiores[i].paisTituloExterior),
+                                    nombrePaisTituloExterior: ko.observable(educacionesSuperiores[i].nombrePaisTituloExterior),
+                                    institucion: ko.observable(educacionesSuperiores[i].institucion),
+                                    nombreInstitucion: ko.observable(educacionesSuperiores[i].nombreInstitucion),
+                                    tituloExterior: ko.observable(educacionesSuperiores[i].tituloExterior),
+                                    programa: ko.observable(educacionesSuperiores[i].programa),
+                                    nombrePrograma: ko.observable(educacionesSuperiores[i].nombrePrograma),
+                                    nucleoBasicoConocimiento: ko.observable(educacionesSuperiores[i].nucleoBasicoConocimiento),
+                                    nombreNucleoBasicoConocimiento: ko.observable(educacionesSuperiores[i].nombreNucleoBasicoConocimiento),
+                                    nivel: ko.observable(educacionesSuperiores[i].nivel),
+                                    nombreNivel: ko.observable(educacionesSuperiores[i].nombreNivel),
+                                    anyoInicio: ko.observable(educacionesSuperiores[i].anyoInicio),
+                                    anyoFinalizacion: ko.observable(educacionesSuperiores[i].anyoFinalizacion),
+                                    titulo: ko.observable(educacionesSuperiores[i].titulo),
+                                    graduado: ko.observable(educacionesSuperiores[i].graduado),
+                                    fechaTitulo: ko.observable(educacionesSuperiores[i].fechaTituloFormateada),
+                                    tieneCertificadoHomologado: ko.observable(educacionesSuperiores[i].tieneCertificadoHomologado)
+                                }
+                             );
+                        }
+                    }
+                    establecerEgresadoUdeA();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_educaciones_superiores.warning("Error al eliminar la educación superior.");
+                }});
         };
 
         self.editarEducacionSuperior = function (educacionSuperior) {
-            ocultarCertificadosEducacionesSuperiores();
-
             $('#nivelEstudioEducacionSuperior').val(educacionSuperior.nivel()).trigger('change');
             $('#tituloExteriorEducacionSuperior').val(educacionSuperior.tituloExterior());
             $('#paisTituloExteriorEducacionSuperior').val(educacionSuperior.paisTituloExterior()).trigger('change');
@@ -4256,9 +4694,10 @@
               $('#paisTituloExteriorEducacionSuperior').css("display","none");
             }
             $('#consecutivo').val(educacionSuperior.consecutivo());
-            $('input:file[name="educacionesSuperiores[' + educacionSuperior.consecutivo() + '].certificado"]').show();
-            $('input:file[name="educacionesSuperiores[' + educacionSuperior.consecutivo() + '].certificadoHomologado"]').show();
+            $('#certificadoEducacionSuperior').val("");
+            $('#certificadoHomologadoEducacionSuperior').val("");
             bootstrap_alert_educacion_superior.removeWarning();
+            bootstrap_alert_educaciones_superiores.removeWarning();
             $('#md_educacion_superior').modal({backdrop: 'static', keyboard: false})  ;
         };
 
@@ -4331,15 +4770,19 @@
                 bootstrap_alert_educacion_continua.warning('Debe ingresar el año');
                 return false;
             }
+            var formData = new FormData();
+            
             if ($('#consecutivo').val() === "") {
-                if ($('input:file[name="educacionesContinuas[' + self.educacionesContinuas().length + '].certificado"]').val() === "") {
+                if ($('#certificadoEducacionContinua').val() === "") {
                     bootstrap_alert_educacion_continua.warning('Debe ingresar el certificado');
                     return false;
                 }
-                if ($('input:file[name="educacionesContinuas[' + self.educacionesContinuas().length + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#certificadoEducacionContinua')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_educacion_continua.warning('El certificado no debe ser mayor a 2MB');
                     return false;
                 }             
+                formData.append("id", 0);
+                formData.append("consecutivo", self.educacionesContinuas().length);
                 self.educacionesContinuas.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.educacionesContinuas().length),
@@ -4351,9 +4794,7 @@
                     nucleoBasicoConocimiento: ko.observable(nucleoBasicoConocimientoEducacionContinua),
                     nombreNucleoBasicoConocimiento: ko.observable(nombreNucleoBasicoConocimientoEducacionContinua),
                     numeroHoras: ko.observable(numeroHorasEducacionContinua),
-                    anyo: ko.observable(anyoEducacionContinua),
-                    certificado: ko.observable(''),
-                    tieneCertificado: ko.observable(false)
+                    anyo: ko.observable(anyoEducacionContinua)
                 });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
@@ -4364,11 +4805,13 @@
                         break;
                     }
                 }
-                if ($('input:file[name="educacionesContinuas[' + indice + '].certificado"]').val() != "" && 
-                    $('input:file[name="educacionesContinuas[' + indice + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#certificadoEducacionContinua').val() != "" && 
+                    $('#certificadoEducacionContinua')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_educacion_continua.warning('El certificado no debe ser mayor a 2MB');
                     return false;
                 }                    
+                formData.append("id", self.educacionesContinuas()[i].id());
+                formData.append("consecutivo", consecutivo);
                 self.educacionesContinuas()[indice].tipoCapacitacion(tipoCapacitacionEducacionContinua);
                 self.educacionesContinuas()[indice].nombreTipoCapacitacion(nombreTipoCapacitacionEducacionContinua);
                 self.educacionesContinuas()[indice].institucion(institucionEducacionContinua);
@@ -4378,23 +4821,95 @@
                 self.educacionesContinuas()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoEducacionContinua);
                 self.educacionesContinuas()[indice].nombreNucleoBasicoConocimiento(nombreNucleoBasicoConocimientoEducacionContinua);
                 self.educacionesContinuas()[indice].anyo(anyoEducacionContinua);
-                self.educacionesContinuas()[indice].certificado('');
             }
-            $('#md_educacion_continua').modal('hide');
+
+            formData.append("tipoCapacitacion", tipoCapacitacionEducacionContinua);
+            formData.append("institucion", institucionEducacionContinua);
+            formData.append("nombreCapacitacion", nombreCapacitacionEducacionContinua);
+            formData.append("numeroHoras", numeroHorasEducacionContinua);
+            formData.append("nucleoBasicoConocimiento", nucleoBasicoConocimientoEducacionContinua);
+            formData.append("anyo", anyoEducacionContinua);
+            if ($('#certificadoEducacionContinua').val() !== "") {
+                formData.append("certificado", $('#certificadoEducacionContinua')[0].files[0]);
+            }
+        
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/educacionContinua",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_educacion_continua').modal('hide');
+                    bootstrap_alert_educaciones_continuas.success('Educación no formal almacenada correctamente.');
+                    if (response !== "") {
+                        self.educacionesContinuas.removeAll();
+                        var educacionesContinuas = JSON.parse(response);
+                        for (var i = 0; i < educacionesContinuas.length; i++) {
+                            self.educacionesContinuas.push(
+                                {
+                                    id: ko.observable(educacionesContinuas[i].id),
+                                    consecutivo: ko.observable(educacionesContinuas[i].consecutivo),
+                                    tipoCapacitacion: ko.observable(educacionesContinuas[i].tipoCapacitacion),
+                                    nombreTipoCapacitacion: ko.observable(educacionesContinuas[i].nombreTipoCapacitacion),
+                                    institucion: ko.observable(educacionesContinuas[i].institucion),
+                                    nombreInstitucion: ko.observable(educacionesContinuas[i].nombreInstitucion),
+                                    nombreCapacitacion: ko.observable(educacionesContinuas[i].nombreCapacitacion),
+                                    nucleoBasicoConocimiento: ko.observable(educacionesContinuas[i].nucleoBasicoConocimiento),
+                                    nombreNucleoBasicoConocimiento: ko.observable(educacionesContinuas[i].nombreNucleoBasicoConocimiento),
+                                    numeroHoras: ko.observable(educacionesContinuas[i].numeroHoras),
+                                    anyo: ko.observable(educacionesContinuas[i].anyo)
+                                }
+                             );
+                        }
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_educaciones_continuas.warning("Error al almacenar la educación no formal.");
+                }});            
         };
 
         self.eliminarEducacionContinua = function (educacionContinua) {
-            $('input:file[name="educacionesContinuas[' + educacionContinua.consecutivo() + '].certificado"]').remove();
             self.educacionesContinuas.remove(educacionContinua);
-            for(i = educacionContinua.consecutivo(); i < hojaVidaModel.educacionesContinuas().length; i++) {
-                $('input:file[name="educacionesContinuas[' + (i + 1) + '].certificado"]').attr('name', 'educacionesContinuas[' + i + '].certificado'); 
-                hojaVidaModel.educacionesContinuas()[i].consecutivo(i);
-            }
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/eliminarEducacionContinua/" + educacionContinua.id(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_educaciones_continuas.success('Educación no formal eliminada correctamente.');
+                    if (response !== "") {
+                        self.educacionesContinuas.removeAll();
+                        var educacionesContinuas = JSON.parse(response);
+                        for (var i = 0; i < educacionesContinuas.length; i++) {
+                            self.educacionesContinuas.push(
+                                {
+                                    id: ko.observable(educacionesContinuas[i].id),
+                                    consecutivo: ko.observable(educacionesContinuas[i].consecutivo),
+                                    tipoCapacitacion: ko.observable(educacionesContinuas[i].tipoCapacitacion),
+                                    nombreTipoCapacitacion: ko.observable(educacionesContinuas[i].nombreTipoCapacitacion),
+                                    institucion: ko.observable(educacionesContinuas[i].institucion),
+                                    nombreInstitucion: ko.observable(educacionesContinuas[i].nombreInstitucion),
+                                    nombreCapacitacion: ko.observable(educacionesContinuas[i].nombreCapacitacion),
+                                    nucleoBasicoConocimiento: ko.observable(educacionesContinuas[i].nucleoBasicoConocimiento),
+                                    nombreNucleoBasicoConocimiento: ko.observable(educacionesContinuas[i].nombreNucleoBasicoConocimiento),
+                                    numeroHoras: ko.observable(educacionesContinuas[i].numeroHoras),
+                                    anyo: ko.observable(educacionesContinuas[i].anyo)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_educaciones_continuas.warning("Error al eliminar la educación no formal.");
+                }});
         };
 
         self.editarEducacionContinua = function (educacionContinua) {
-            ocultarCertificadosEducacionesContinuas();
-
             $('#tipoCapacitacionEducacionContinua').val(educacionContinua.tipoCapacitacion()).trigger('change');
             $('#institucionEducacionContinua').val(educacionContinua.institucion()).trigger('change');
             $('#nombreCapacitacionEducacionContinua').val(educacionContinua.nombreCapacitacion());
@@ -4403,8 +4918,9 @@
             $('#nombreNucleoBasicoConocimientoEducacionContinua').val(educacionContinua.nombreNucleoBasicoConocimiento());
             $('#anyoEducacionContinua').val(educacionContinua.anyo()).trigger('change');
             $('#consecutivo').val(educacionContinua.consecutivo());
-            $('input:file[name="educacionesContinuas[' + educacionContinua.consecutivo() + '].certificado"]').show();
+            $('#certificadoEducacionContinua').show();
             bootstrap_alert_educacion_continua.removeWarning();
+            bootstrap_alert_educaciones_continuas.removeWarning();
             $('#md_educacion_continua').modal({backdrop: 'static', keyboard: false})  ;
         };
 
@@ -4442,23 +4958,25 @@
                 bootstrap_alert_distincion.warning('Debe ingresar la descripción');
                 return false;
             }
+            var formData = new FormData();
+            
             if ($('#consecutivo').val() === "") {
-                if ($('input:file[name="distinciones[' + self.distinciones().length + '].certificado"]').val() === "") {
+                if ($('#certificadoDistincion').val() === "") {
                     bootstrap_alert_distincion.warning('Debe ingresar el certificado');
                     return false;
                 }
-                if ($('input:file[name="distinciones[' + self.distinciones().length + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#certificadoDistincion')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_distincion.warning('El certificado no debe ser mayor a 2MB');
                     return false;
                 }             
+                formData.append("id", 0);
+                formData.append("consecutivo", self.distinciones().length);
                 self.distinciones.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.distinciones().length),
                     fechaDistincion: ko.observable(fechaDistincion),
                     institucionOtorga: ko.observable(institucionOtorgaDistincion),
-                    descripcion: ko.observable(descripcionDistincion),
-                    certificado: ko.observable(''),
-                    tieneCertificado: ko.observable(false)
+                    descripcion: ko.observable(descripcionDistincion)
                 });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
@@ -4469,37 +4987,96 @@
                         break;
                     }
                 }
-                if ($('input:file[name="distinciones[' + indice + '].certificado"]').val() != "" && 
-                    $('input:file[name="distinciones[' + indice + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#certificadoDistincion').val() != "" && 
+                    $('#certificadoDistincion')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_distincion.warning('El certificado no debe ser mayor a 2MB');
                     return false;
                 }                    
+                formData.append("id", self.distinciones()[i].id());
+                formData.append("consecutivo", consecutivo);
                 self.distinciones()[indice].fechaDistincion(fechaDistincion);
                 self.distinciones()[indice].institucionOtorga(institucionOtorgaDistincion);
                 self.distinciones()[indice].descripcion(descripcionDistincion);
-                self.distinciones()[indice].certificado('');
             }
-            $('#md_distincion').modal('hide');
+            formData.append("fechaDistincion",fechaDistincion);
+            formData.append("institucionOtorga",institucionOtorgaDistincion);
+            formData.append("descripcion",descripcionDistincion);
+            if ($('#certificadoDistincion').val() !== "") {
+                formData.append("certificado", $('#certificadoDistincion')[0].files[0]);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/distincion",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_distincion').modal('hide');
+                    bootstrap_alert_distinciones.success('Distinción almacenada correctamente.');
+                    if (response !== "") {
+                        self.distinciones.removeAll();
+                        var distinciones = JSON.parse(response);
+                        for (var i = 0; i < distinciones.length; i++) {
+                            self.distinciones.push(
+                                {
+                                    id: ko.observable(distinciones[i].id),
+                                    consecutivo: ko.observable(distinciones[i].consecutivo),
+                                    fechaDistincion: ko.observable(distinciones[i].fechaDistincionFormateada),
+                                    institucionOtorga: ko.observable(distinciones[i].institucionOtorga),
+                                    descripcion: ko.observable(distinciones[i].descripcion)
+                                }
+                             );
+                        }
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_distinciones.warning("Error al almacenar la distinción.");
+                }});            
         };
 
         self.eliminarDistincion = function (distincion) {
-            $('input:file[name="distinciones[' + distincion.consecutivo() + '].certificado"]').remove();
             self.distinciones.remove(distincion);
-            for(i = distincion.consecutivo(); i < self.distinciones().length; i++) {
-               $('input:file[name="distinciones[' + (i + 1) + '].certificado"]').attr('name', 'distinciones[' + i + '].certificado'); 
-                self.distinciones()[i].consecutivo(i);
-            }
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/eliminarDistincion/" + distincion.id(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_distinciones.success('Distinción eliminada correctamente.');
+                    if (response !== "") {
+                        self.distinciones.removeAll();
+                        var distinciones = JSON.parse(response);
+                        for (var i = 0; i < distinciones.length; i++) {
+                            self.distinciones.push(
+                                {
+                                    id: ko.observable(distinciones[i].id),
+                                    consecutivo: ko.observable(distinciones[i].consecutivo),
+                                    fechaDistincion: ko.observable(distinciones[i].fechaDistincionFormateada),
+                                    institucionOtorga: ko.observable(distinciones[i].institucionOtorga),
+                                    descripcion: ko.observable(distinciones[i].descripcion)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_distinciones.warning("Error al eliminar la distinción.");
+                }});
         };
 
         self.editarDistincion = function (distincion) {
-            ocultarCertificadosDistinciones();
-
             $('#fechaDistincion').val(distincion.fechaDistincion());
             $('#institucionOtorgaDistincion').val(distincion.institucionOtorga());
             $('#descripcionDistincion').val(distincion.descripcion());
             $('#consecutivo').val(distincion.consecutivo());
-            $('input:file[name="distinciones[' + distincion.consecutivo() + '].certificado"]').show();
+            $('#certificadoDistincion').val('');
             bootstrap_alert_distincion.removeWarning();
+            bootstrap_alert_distinciones.removeWarning();
             $('#md_distincion').modal({backdrop: 'static', keyboard: false})  ;
         };
 
@@ -4579,16 +5156,18 @@
                 bootstrap_alert_experiencia_laboral.warning('Debe seleccionar la naturaleza del cargo');
                 return false;
             }
-            
+            var formData = new FormData();
             if ($('#consecutivo').val() === "") {
-                if ($('input:file[name="experienciasLaborales[' + self.experienciasLaborales().length + '].certificado"]').val() === "") {
+                if ($('#certificadoExperienciaLaboral').val() === "") {
                     bootstrap_alert_experiencia_laboral.warning('Debe ingresar el certificado');
                     return false;
                 }
-                if ($('input:file[name="experienciasLaborales[' + self.experienciasLaborales().length + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#certificadoExperienciaLaboral')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_experiencia_laboral.warning('El certificado no debe ser mayor a 2MB');
                     return false;
                 }             
+                formData.append("id", 0);
+                formData.append("consecutivo", self.experienciasLaborales().length);
                 self.experienciasLaborales.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.experienciasLaborales().length),
@@ -4609,9 +5188,7 @@
                     nombreTipoContrato: ko.observable(nombreTipoContratoExperienciaLaboral),
                     cargo: ko.observable(cargoExperienciaLaboral),
                     naturalezaCargo: ko.observable(naturalezaCargoExperienciaLaboral),
-                    nombreNaturalezaCargo: ko.observable(nombreNaturalezaCargoExperienciaLaboral),
-                    certificado: ko.observable(''),
-                    tieneCertificado: ko.observable(false)
+                    nombreNaturalezaCargo: ko.observable(nombreNaturalezaCargoExperienciaLaboral)
                 });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
@@ -4622,46 +5199,125 @@
                         break;
                     }
                 }
-                if ($('input:file[name="experienciasLaborales[' + indice + '].certificado"]').val() != "" && 
-                    $('input:file[name="experienciasLaborales[' + indice + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#certificadoExperienciaLaboral').val() != "" && 
+                    $('#certificadoExperienciaLaboral')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_experiencia_laboral.warning('El certificado no debe ser mayor a 2MB');
                     return false;
                 }                    
-                self.experienciasLaborales()[indice].tipoExperiencia(tipoExperienciaLaboral);
-                self.experienciasLaborales()[indice].nombreTipoExperiencia(nombreTipoExperienciaLaboral);
-                self.experienciasLaborales()[indice].trabajoActual(trabajoActualExperienciaLaboral);
-                self.experienciasLaborales()[indice].fnsp(experienciaLaboralFNSP);
-                self.experienciasLaborales()[indice].fechaIngreso(fechaIngresoExperienciaLaboral);
-                self.experienciasLaborales()[indice].fechaRetiro(fechaRetiroExperienciaLaboral);
-                self.experienciasLaborales()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoExperienciaLaboral);
-                self.experienciasLaborales()[indice].nombreNucleoBasicoConocimiento(nombreNucleoBasicoConocimientoExperienciaLaboral);
-                self.experienciasLaborales()[indice].tipoEmpresa(tipoEmpresaExperienciaLaboral);
-                self.experienciasLaborales()[indice].nombreTipoEmpresa(nombreTipoEmpresaExperienciaLaboral);
-                self.experienciasLaborales()[indice].nombreEmpresa(nombreEmpresaExperienciaLaboral);
-                self.experienciasLaborales()[indice].actividadEconomica(actividadEconomicaExperienciaLaboral);
-                self.experienciasLaborales()[indice].nombreActividadEconomica(nombreActividadEconomicaExperienciaLaboral);
-                self.experienciasLaborales()[indice].tipoContrato(tipoContratoExperienciaLaboral);
-                self.experienciasLaborales()[indice].nombreTipoContrato(nombreTipoContratoExperienciaLaboral);
-                self.experienciasLaborales()[indice].cargo(cargoExperienciaLaboral);
-                self.experienciasLaborales()[indice].naturalezaCargo(naturalezaCargoExperienciaLaboral);
-                self.experienciasLaborales()[indice].nombreNaturalezaCargo(nombreNaturalezaCargoExperienciaLaboral);
-                self.experienciasLaborales()[indice].certificado('');
+                formData.append("id", self.experienciasLaborales()[i].id());
+                formData.append("consecutivo", consecutivo);
             }
-            $('#md_experiencia_laboral').modal('hide');
+            formData.append("tipoExperiencia",tipoExperienciaLaboral);
+            formData.append("trabajoActual",trabajoActualExperienciaLaboral);
+            formData.append("fnsp",experienciaLaboralFNSP);
+            formData.append("fechaIngreso",fechaIngresoExperienciaLaboral);
+            formData.append("fechaRetiro",fechaRetiroExperienciaLaboral);
+            formData.append("nucleoBasicoConocimiento",nucleoBasicoConocimientoExperienciaLaboral);
+            formData.append("tipoEmpresa",tipoEmpresaExperienciaLaboral);
+            formData.append("nombreEmpresa",nombreEmpresaExperienciaLaboral);
+            formData.append("actividadEconomica",actividadEconomicaExperienciaLaboral);
+            formData.append("tipoContrato",tipoContratoExperienciaLaboral);
+            formData.append("cargo",cargoExperienciaLaboral);
+            formData.append("naturalezaCargo",naturalezaCargoExperienciaLaboral);
+            if ($('#certificadoExperienciaLaboral').val() !== "") {
+                formData.append("certificado", $('#certificadoExperienciaLaboral')[0].files[0]);
+            }
+            
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/experienciaLaboral",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_experiencia_laboral').modal('hide');
+                    bootstrap_alert_experiencias_laborales.success('Experiencia laboral almacenada correctamente.');
+                    if (response !== "") {
+                        self.experienciasLaborales.removeAll();
+                        var experienciasLaborales = JSON.parse(response);
+                        for (var i = 0; i < experienciasLaborales.length; i++) {
+                            self.experienciasLaborales.push(
+                                {
+                                    id: ko.observable(experienciasLaborales[i].id),
+                                    consecutivo: ko.observable(experienciasLaborales[i].consecutivo),
+                                    tipoExperiencia: ko.observable(experienciasLaborales[i].tipoExperiencia),
+                                    nombreTipoExperiencia: ko.observable(experienciasLaborales[i].nombreTipoExperiencia),
+                                    trabajoActual: ko.observable(experienciasLaborales[i].trabajoActual),
+                                    fnsp: ko.observable(experienciasLaborales[i].fnsp),
+                                    fechaIngreso: ko.observable(experienciasLaborales[i].fechaIngresoFormateada),
+                                    fechaRetiro: ko.observable(experienciasLaborales[i].fechaRetiroFormateada),
+                                    nucleoBasicoConocimiento: ko.observable(experienciasLaborales[i].nucleoBasicoConocimiento),
+                                    nombreNucleoBasicoConocimiento: ko.observable(experienciasLaborales[i].nombreNucleoBasicoConocimiento),
+                                    tipoEmpresa: ko.observable(experienciasLaborales[i].tipoEmpresa),
+                                    nombreTipoEmpresa: ko.observable(experienciasLaborales[i].nombreTipoEmpresa),
+                                    nombreEmpresa: ko.observable(experienciasLaborales[i].nombreEmpresa),
+                                    actividadEconomica: ko.observable(experienciasLaborales[i].actividadEconomica),
+                                    nombreActividadEconomica: ko.observable(experienciasLaborales[i].nombreActividadEconomica),
+                                    tipoContrato: ko.observable(experienciasLaborales[i].tipoContrato),
+                                    nombreTipoContrato: ko.observable(experienciasLaborales[i].nombreTipoContrato),
+                                    cargo: ko.observable(experienciasLaborales[i].cargo),
+                                    naturalezaCargo: ko.observable(experienciasLaborales[i].naturalezaCargo),
+                                    nombreNaturalezaCargo: ko.observable(experienciasLaborales[i].nombreNaturalezaCargo)
+                                }
+                             );
+                        }
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_experiencias_laborales.warning("Error al almacenar la experiencia laboral.");
+                }});
         };
 
         self.eliminarExperienciaLaboral = function (experienciaLaboral) {
-            $('input:file[name="experienciasLaborales[' + experienciaLaboral.consecutivo() + '].certificado"]').remove();
             self.experienciasLaborales.remove(experienciaLaboral);
-            for(i = experienciaLaboral.consecutivo(); i < self.experienciasLaborales().length; i++) {
-               $('input:file[name="experienciasLaborales[' + (i + 1) + '].certificado"]').attr('name', 'experienciasLaborales[' + i + '].certificado'); 
-                self.experienciasLaborales()[i].consecutivo(i);
-            }
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/eliminarExperienciaLaboral/" + experienciaLaboral.id(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_experiencias_laborales.success('Experiencia laboral eliminada correctamente.');
+                    if (response !== "") {
+                        self.experienciasLaborales.removeAll();
+                        var experienciasLaborales = JSON.parse(response);
+                        for (var i = 0; i < experienciasLaborales.length; i++) {
+                            self.experienciasLaborales.push(
+                                {
+                                    id: ko.observable(experienciasLaborales[i].id),
+                                    consecutivo: ko.observable(experienciasLaborales[i].consecutivo),
+                                    tipoExperiencia: ko.observable(experienciasLaborales[i].tipoExperiencia),
+                                    nombreTipoExperiencia: ko.observable(experienciasLaborales[i].nombreTipoExperiencia),
+                                    trabajoActual: ko.observable(experienciasLaborales[i].trabajoActual),
+                                    fnsp: ko.observable(experienciasLaborales[i].fnsp),
+                                    fechaIngreso: ko.observable(experienciasLaborales[i].fechaIngresoFormateada),
+                                    fechaRetiro: ko.observable(experienciasLaborales[i].fechaRetiroFormateada),
+                                    nucleoBasicoConocimiento: ko.observable(experienciasLaborales[i].nucleoBasicoConocimiento),
+                                    nombreNucleoBasicoConocimiento: ko.observable(experienciasLaborales[i].nombreNucleoBasicoConocimiento),
+                                    tipoEmpresa: ko.observable(experienciasLaborales[i].tipoEmpresa),
+                                    nombreTipoEmpresa: ko.observable(experienciasLaborales[i].nombreTipoEmpresa),
+                                    nombreEmpresa: ko.observable(experienciasLaborales[i].nombreEmpresa),
+                                    actividadEconomica: ko.observable(experienciasLaborales[i].actividadEconomica),
+                                    nombreActividadEconomica: ko.observable(experienciasLaborales[i].nombreActividadEconomica),
+                                    tipoContrato: ko.observable(experienciasLaborales[i].tipoContrato),
+                                    nombreTipoContrato: ko.observable(experienciasLaborales[i].nombreTipoContrato),
+                                    cargo: ko.observable(experienciasLaborales[i].cargo),
+                                    naturalezaCargo: ko.observable(experienciasLaborales[i].naturalezaCargo),
+                                    nombreNaturalezaCargo: ko.observable(experienciasLaborales[i].nombreNaturalezaCargo)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_experiencias_laborales.warning("Error al eliminar la experiencia laboral.");
+                }});
         };
 
         self.editarExperienciaLaboral = function (experienciaLaboral) {
-            ocultarCertificadosExperienciaLaboral();
-
             $('#tipoExperienciaLaboral').val(experienciaLaboral.tipoExperiencia()).trigger('change');
             $('#trabajoActualExperienciaLaboral').val(experienciaLaboral.trabajoActual());
             if(experienciaLaboral.trabajoActual()) {
@@ -4699,8 +5355,9 @@
             $('#cargoExperienciaLaboral').val(experienciaLaboral.cargo());
             $('#naturalezaCargoExperienciaLaboral').val(experienciaLaboral.naturalezaCargo()).trigger('change');
             $('#consecutivo').val(experienciaLaboral.consecutivo());
-            $('input:file[name="experienciasLaborales[' + experienciaLaboral.consecutivo() + '].certificado"]').show();
+            $('#certificadoExperienciaLaboral').val('');
             bootstrap_alert_experiencia_laboral.removeWarning();
+            bootstrap_alert_experiencias_laborales.removeWarning();
             $('#md_experiencia_laboral').modal({backdrop: 'static', keyboard: false})  ;
         };
 
@@ -4730,15 +5387,10 @@
                 bootstrap_alert_experiencia_docencia.warning('Debe seleccionar la institución');
                 return false;
             }
+            var formData = new FormData();
             if (self.consecutivoExperienciaDocencia() === self.experienciasDocencia().length) {
-                self.experienciasDocencia.push({
-                    id: ko.observable(0),
-                    consecutivo: ko.observable(self.experienciasDocencia().length),
-                    trabajoActual: ko.observable(trabajoActualDocencia),
-                    fnsp: ko.observable(experienciaDocenciaFNSP),
-                    institucion: ko.observable(institucionExperienciaDocencia),
-                    nombreInstitucion: ko.observable(nombreInstitucionExperienciaDocencia)
-                });
+                formData.append("id", 0);
+                formData.append("consecutivo", self.experienciasDocencia().length);
             } else {
                 var indice = 0;
                 for (i = 0; i < self.experienciasDocencia().length; i++) {
@@ -4747,41 +5399,115 @@
                         break;
                     }
                 }
-                self.experienciasDocencia()[indice].trabajoActual(trabajoActualDocencia);
-                self.experienciasDocencia()[indice].fnsp(experienciaDocenciaFNSP);
-                self.experienciasDocencia()[indice].institucion(institucionExperienciaDocencia);
-                self.experienciasDocencia()[indice].nombreInstitucion(nombreInstitucionExperienciaDocencia);
+                formData.append("id", self.experienciasDocencia()[i].id());
+                formData.append("consecutivo", self.consecutivoExperienciaDocencia());
             }
-            $('#md_experiencia_docencia').modal('hide');
+
+            formData.append("trabajoActual",trabajoActualDocencia);
+            formData.append("fnsp",experienciaDocenciaFNSP);
+            formData.append("institucion",institucionExperienciaDocencia);
+
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/experienciaDocencia",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_experiencia_docencia').modal('hide');
+                    bootstrap_alert_experiencias_docencia.success('Experiencia en docencia almacenada correctamente.');
+                    if (response !== "") {
+                        self.experienciasDocencia.removeAll();
+                        var datos = JSON.parse(response);
+                        var idExperienciaDocencia = datos.id;
+                        var experienciasDocencia = datos.experienciasDocencia;
+                        for (var i = 0; i < experienciasDocencia.length; i++) {
+                            if(idExperienciaDocencia == experienciasDocencia[i].id) {
+                              self.consecutivoExperienciaDocencia(experienciasDocencia[i].consecutivo);
+                            }
+                            self.experienciasDocencia.push(
+                                {
+                                    id: ko.observable(experienciasDocencia[i].id),
+                                    consecutivo: ko.observable(experienciasDocencia[i].consecutivo),
+                                    trabajoActual: ko.observable(experienciasDocencia[i].trabajoActual),
+                                    fnsp: ko.observable(experienciasDocencia[i].fnsp),
+                                    institucion: ko.observable(experienciasDocencia[i].institucion),
+                                    nombreInstitucion: ko.observable(experienciasDocencia[i].nombreInstitucion),
+                                    cursosExperienciaDocencia: ko.observableArray([])
+                                }
+                             );
+                            for(var j = 0; j < experienciasDocencia[i].cursosExperienciaDocencia.length; j++) {
+                                self.experienciasDocencia()[i].cursosExperienciaDocencia.push({
+                                    id: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].id),
+                                    consecutivo: ko.observable(j),
+                                    nombreCurso: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCurso),
+                                    nucleoBasicoConocimiento: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nucleoBasicoConocimiento),
+                                    nombreNucleoBasicoConocimiento: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNucleoBasicoConocimiento),
+                                    modalidad: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].modalidad),
+                                    nombreModalidad: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreModalidad),
+                                    nivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nivelEstudio),
+                                    nombreNivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNivelEstudio),
+                                    numeroHoras: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].numeroHoras),
+                                    anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo)
+                                });
+                            }
+                        }
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_experiencias_docencia.warning("Error al almacenar la experiencia en docencia.");
+                }});
         };
 
         self.eliminarExperienciaDocencia = function (experienciaDocencia) {
-            for(i = 0; i < experienciaDocencia.cursosExperienciaDocencia().length; i++) {
-               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].id"]').remove();
-               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].consecutivo"]').remove();
-               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].nucleoBasicoConocimiento"]').remove();
-               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].nombreCurso"]').remove();
-               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].modalidad"]').remove();
-               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].nivelEstudio"]').remove();
-               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].numeroHoras"]').remove();
-               $('input[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].anyo"]').remove();
-               $('input:file[name="experienciasDocencia[' + experienciaDocencia.consecutivo() + '].cursosExperienciaDocencia[' + i + '].certificado"]').remove();
-            }            
             self.experienciasDocencia.remove(experienciaDocencia);
-            for(i = experienciaDocencia.consecutivo(); i < self.experienciasDocencia().length; i++) {
-                for(j = 0; j < self.experienciasDocencia()[i].cursosExperienciaDocencia().length; j++) {
-                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].id"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].id'); 
-                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].consecutivo"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].consecutivo'); 
-                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].nucleoBasicoConocimiento"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nucleoBasicoConocimiento'); 
-                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].nombreCurso"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nombreCurso'); 
-                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].modalidad"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].modalidad'); 
-                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].nivelEstudio"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nivelEstudio'); 
-                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].numeroHoras"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].numeroHoras'); 
-                   $('input[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].anyo"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].anyo'); 
-                   $('input:file[name="experienciasDocencia[' + (i + 1) + '].cursosExperienciaDocencia[' + j + '].certificado"]').attr('name', 'experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].certificado'); 
-                }
-                self.experienciasDocencia()[i].consecutivo(i);
-            }
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/eliminarExperienciaDocencia/" + experienciaDocencia.id(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_experiencias_docencia.success('Experiencia en docencia eliminada correctamente.');
+                    if (response !== "") {
+                        self.experienciasDocencia.removeAll();
+                        var experienciasDocencia = JSON.parse(response);
+                        for (var i = 0; i < experienciasDocencia.length; i++) {
+                            self.experienciasDocencia.push(
+                                {
+                                    id: ko.observable(experienciasDocencia[i].id),
+                                    consecutivo: ko.observable(experienciasDocencia[i].consecutivo),
+                                    trabajoActual: ko.observable(experienciasDocencia[i].trabajoActual),
+                                    fnsp: ko.observable(experienciasDocencia[i].fnsp),
+                                    institucion: ko.observable(experienciasDocencia[i].institucion),
+                                    nombreInstitucion: ko.observable(experienciasDocencia[i].nombreInstitucion),
+                                    cursosExperienciaDocencia: ko.observableArray([])
+                                }
+                             );
+                            for(var j = 0; j < experienciasDocencia[i].cursosExperienciaDocencia.length; j++) {
+                                self.experienciasDocencia()[i].cursosExperienciaDocencia.push({
+                                    id: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].id),
+                                    consecutivo: ko.observable(j),
+                                    nombreCurso: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCurso),
+                                    nucleoBasicoConocimiento: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nucleoBasicoConocimiento),
+                                    nombreNucleoBasicoConocimiento: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNucleoBasicoConocimiento),
+                                    modalidad: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].modalidad),
+                                    nombreModalidad: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreModalidad),
+                                    nivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nivelEstudio),
+                                    nombreNivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNivelEstudio),
+                                    numeroHoras: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].numeroHoras),
+                                    anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo)
+                                });
+                            }
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_experiencias_docencia.warning("Error al eliminar la experiencia en docencia.");
+                }});
         };
 
         self.editarExperienciaDocencia = function (experienciaDocencia) {
@@ -4804,8 +5530,12 @@
               $('#institucionExperienciaDocencia').prop('disabled', false);
             }
             $('#institucionExperienciaDocencia').val(experienciaDocencia.institucion()).trigger('change');
+            $('#certificadoCursoExperienciaDocencia').val('');
             self.consecutivoExperienciaDocencia(experienciaDocencia.consecutivo());
             bootstrap_alert_experiencia_docencia.removeWarning();
+            bootstrap_alert_experiencias_docencia.removeWarning();
+            bootstrap_alert_cursos_experiencia_docencia.removeWarning();
+            bootstrap_alert_curso_experiencia_docencia.removeWarning();
             $('#md_experiencia_docencia').modal({backdrop: 'static', keyboard: false})  ;
         };
 
@@ -4843,55 +5573,19 @@
                 bootstrap_alert_curso_experiencia_docencia.warning('Debe seleccionar el año del curso');
                 return false;
             }
-          
+            var formData = new FormData();
             if ($('#consecutivo').val() === "") {
-                if(self.experienciasDocencia().length === self.consecutivoExperienciaDocencia()) {
-                   self.experienciasDocencia.push({
-                        id: ko.observable(0),
-                        consecutivo: ko.observable(self.experienciasDocencia().length),
-                        trabajoActual: ko.observable(false),
-                        fnsp: ko.observable(false),
-                        institucion: ko.observable(''),
-                        nombreInstitucion: ko.observable(''),
-                        cursosExperienciaDocencia: ko.observableArray([])
-                    });
-                }
                 var consecutivo = self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length;  
-                if ($('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]').val() === "") {
+                if ($('#certificadoCursoExperienciaDocencia').val() === "") {
                     bootstrap_alert_curso_experiencia_docencia.warning('Debe ingresar el certificado');
                     return false;
                 }
-                if ($('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#certificadoCursoExperienciaDocencia')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_curso_experiencia_docencia.warning('El certificado no debe ser mayor a 2MB');
                     return false;
                 }             
-               
-                id = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].id" />');
-                consecutivo = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].consecutivo" />');
-                nucleoBasicoConocimiento = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].nucleoBasicoConocimiento" />');
-                nombreCurso = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].nombreCurso" />');
-                modalidad = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].modalidad" />');
-                nivelEstudio = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].nivelEstudio" />');
-                numeroHoras = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].numeroHoras" />');
-                anyo = $('<input type="hidden" name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + hojaVidaModel.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].anyo" />');
-
-                $('#certificadosCursosExperienciaDocencia').append(id);
-                $('#certificadosCursosExperienciaDocencia').append(consecutivo);
-                $('#certificadosCursosExperienciaDocencia').append(nucleoBasicoConocimiento);
-                $('#certificadosCursosExperienciaDocencia').append(nombreCurso);
-                $('#certificadosCursosExperienciaDocencia').append(modalidad);
-                $('#certificadosCursosExperienciaDocencia').append(nivelEstudio);
-                $('#certificadosCursosExperienciaDocencia').append(numeroHoras);
-                $('#certificadosCursosExperienciaDocencia').append(anyo);
-                
-                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].id"]').val(0);
-                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].consecutivo"]').val(self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length);
-                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].nucleoBasicoConocimiento"]').val(nucleoBasicoConocimientoCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].nombreCurso"]').val(nombreCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].modalidad"]').val(modalidadCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].nivelEstudio"]').val(nivelEstudioCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].numeroHoras"]').val(numeroHorasCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length + '].anyo"]').val(anyoCursoExperienciaDocencia);
+                formData.append("id", 0);
+                formData.append("consecutivo", self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length);
                                 
                 self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia.push({
                     id: ko.observable(0),
@@ -4904,9 +5598,7 @@
                     nivelEstudio: ko.observable(nivelEstudioCursoExperienciaDocencia),
                     nombreNivelEstudio: ko.observable(nombreNivelEstudioCursoExperienciaDocencia),
                     numeroHoras: ko.observable(numeroHorasCursoExperienciaDocencia),
-                    anyo: ko.observable(anyoCursoExperienciaDocencia),
-                    certificado: ko.observable(''),
-                    tieneCertificado: ko.observable(false)
+                    anyo: ko.observable(anyoCursoExperienciaDocencia)
                 });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
@@ -4917,19 +5609,14 @@
                         break;
                     }
                 }
-                if ($('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].certificado"]').val() != "" &&
-                    $('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].certificado"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#certificadoCursoExperienciaDocencia').val() != "" &&
+                    $('#certificadoCursoExperienciaDocencia')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_curso_experiencia_docencia.warning('El certificado no debe ser mayor a 2MB');
                     return false;
                 }             
-
-                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].nucleoBasicoConocimiento"]').val(nucleoBasicoConocimientoCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].nombreCurso"]').val(nombreCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].modalidad"]').val(modalidadCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].nivelEstudio"]').val(nivelEstudioCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].numeroHoras"]').val(numeroHorasCursoExperienciaDocencia);
-                $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + indice + '].anyo"]').val(anyoCursoExperienciaDocencia);
-                
+                formData.append("id", self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].id());
+                formData.append("consecutivo", consecutivo);
+               
                 self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nombreCurso(nombreCursoExperienciaDocencia);
                 self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoCursoExperienciaDocencia);
                 self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nombreNucleoBasicoConocimiento(nombreNucleoBasicoConocimientoCursoExperienciaDocencia);
@@ -4939,38 +5626,117 @@
                 self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nombreNivelEstudio(nombreNivelEstudioCursoExperienciaDocencia);
                 self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].numeroHoras(numeroHorasCursoExperienciaDocencia);
                 self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].anyo(anyoCursoExperienciaDocencia);
-                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].certificado('');
             }
-            $('#md_curso_experiencia_docencia').modal('hide');
+            if ($('#certificadoCursoExperienciaDocencia').val() != "") {
+               formData.append("certificado", $('#certificadoCursoExperienciaDocencia')[0].files[0]); 
+            }
+            formData.append("idExperienciaDocencia", self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].id());
+            formData.append("nombreCurso", nombreCursoExperienciaDocencia);
+            formData.append("nucleoBasicoConocimiento", nucleoBasicoConocimientoCursoExperienciaDocencia);
+            formData.append("modalidad", modalidadCursoExperienciaDocencia);
+            formData.append("nivelEstudio",nivelEstudioCursoExperienciaDocencia);
+            formData.append("numeroHoras",numeroHorasCursoExperienciaDocencia);
+            formData.append("anyo", anyoCursoExperienciaDocencia);
+                        
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/cursoExperienciaDocencia",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_curso_experiencia_docencia').modal('hide');
+                    bootstrap_alert_cursos_experiencia_docencia.success('Curso almacenado correctamente.');
+                    if (response !== "") {
+                        self.experienciasDocencia.removeAll();
+                        var experienciasDocencia = JSON.parse(response);
+                        for (var i = 0; i < experienciasDocencia.length; i++) {
+                            self.experienciasDocencia.push(
+                                {
+                                    id: ko.observable(experienciasDocencia[i].id),
+                                    consecutivo: ko.observable(experienciasDocencia[i].consecutivo),
+                                    trabajoActual: ko.observable(experienciasDocencia[i].trabajoActual),
+                                    fnsp: ko.observable(experienciasDocencia[i].fnsp),
+                                    institucion: ko.observable(experienciasDocencia[i].institucion),
+                                    nombreInstitucion: ko.observable(experienciasDocencia[i].nombreInstitucion),
+                                    cursosExperienciaDocencia: ko.observableArray([])
+                                }
+                             );
+                            for(var j = 0; j < experienciasDocencia[i].cursosExperienciaDocencia.length; j++) {
+                                self.experienciasDocencia()[i].cursosExperienciaDocencia.push({
+                                    id: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].id),
+                                    consecutivo: ko.observable(j),
+                                    nombreCurso: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCurso),
+                                    nucleoBasicoConocimiento: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nucleoBasicoConocimiento),
+                                    nombreNucleoBasicoConocimiento: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNucleoBasicoConocimiento),
+                                    modalidad: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].modalidad),
+                                    nombreModalidad: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreModalidad),
+                                    nivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nivelEstudio),
+                                    nombreNivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNivelEstudio),
+                                    numeroHoras: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].numeroHoras),
+                                    anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo)
+                                });
+                            }
+                        }
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_cursos_experiencia_docencia.warning("Error al almacenar el curso.");
+                }});
         };
 
         self.eliminarCursoExperienciaDocencia = function (cursoExperienciaDocencia) {
-            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].id"]').remove();
-            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].consecutivo"]').remove();
-            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].nucleoBasicoConocimiento"]').remove();
-            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].nombreCurso"]').remove();
-            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].modalidad"]').remove();
-            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].nivelEstudio"]').remove();
-            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].numeroHoras"]').remove();
-            $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].anyo"]').remove();
-            $('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].certificado"]').remove();
             self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia.remove(cursoExperienciaDocencia);
-            for(i = cursoExperienciaDocencia.consecutivo(); i < self.cursosExperienciaDocencia().length; i++) {
-               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].id"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].id'); 
-               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].consecutivo"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].consecutivo'); 
-               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].nucleoBasicoConocimiento"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].nucleoBasicoConocimiento'); 
-               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].nombreCurso"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].nombreCurso'); 
-               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].modalidad"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].modalidad'); 
-               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].nivelEstudio"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].nivelEstudio'); 
-               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].numeroHoras"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].numeroHoras'); 
-               $('input[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].anyo"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].anyo'); 
-               $('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + (i + 1) + '].certificado"]').attr('name', 'experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + i + '].certificado'); 
-               self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[i].consecutivo(i);
-            }
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/eliminarCursoExperienciaDocencia/" + cursoExperienciaDocencia.id(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_cursos_experiencia_docencia.success('Curso eliminado correctamente.');
+                    if (response !== "") {
+                        self.experienciasDocencia.removeAll();
+                        var experienciasDocencia = JSON.parse(response);
+                        for (var i = 0; i < experienciasDocencia.length; i++) {
+                            self.experienciasDocencia.push(
+                                {
+                                    id: ko.observable(experienciasDocencia[i].id),
+                                    consecutivo: ko.observable(experienciasDocencia[i].consecutivo),
+                                    trabajoActual: ko.observable(experienciasDocencia[i].trabajoActual),
+                                    fnsp: ko.observable(experienciasDocencia[i].fnsp),
+                                    institucion: ko.observable(experienciasDocencia[i].institucion),
+                                    nombreInstitucion: ko.observable(experienciasDocencia[i].nombreInstitucion),
+                                    cursosExperienciaDocencia: ko.observableArray([])
+                                }
+                             );
+                            for(var j = 0; j < experienciasDocencia[i].cursosExperienciaDocencia.length; j++) {
+                                self.experienciasDocencia()[i].cursosExperienciaDocencia.push({
+                                    id: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].id),
+                                    consecutivo: ko.observable(j),
+                                    nombreCurso: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCurso),
+                                    nucleoBasicoConocimiento: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nucleoBasicoConocimiento),
+                                    nombreNucleoBasicoConocimiento: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNucleoBasicoConocimiento),
+                                    modalidad: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].modalidad),
+                                    nombreModalidad: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreModalidad),
+                                    nivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nivelEstudio),
+                                    nombreNivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNivelEstudio),
+                                    numeroHoras: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].numeroHoras),
+                                    anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo)
+                                });
+                            }
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_cursos_experiencia_docencia.warning("Error al eliminar el curso.");
+                }});
         };
 
         self.editarCursoExperienciaDocencia = function (cursoExperienciaDocencia) {
-            ocultarCertificadosCursoExperienciaDocencia();
             $('#nombreCursoExperienciaDocencia').val(cursoExperienciaDocencia.nombreCurso());
             $('#nucleoBasicoConocimientoCursoExperienciaDocencia').val(cursoExperienciaDocencia.nucleoBasicoConocimiento());
             $('#nombreNucleoBasicoConocimientoCursoExperienciaDocencia').val(cursoExperienciaDocencia.nombreNucleoBasicoConocimiento());
@@ -4979,8 +5745,9 @@
             $('#numeroHorasCursoExperienciaDocencia').val(cursoExperienciaDocencia.numeroHoras());
             $('#anyoCursoExperienciaDocencia').val(cursoExperienciaDocencia.anyo());
             $('#consecutivo').val(cursoExperienciaDocencia.consecutivo());
-            $('input:file[name="experienciasDocencia[' + self.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + cursoExperienciaDocencia.consecutivo() + '].certificado"]').show();
+            $('#certificadoCursoExperienciaDocencia').val('');
             bootstrap_alert_curso_experiencia_docencia.removeWarning();
+            bootstrap_alert_cursos_experiencia_docencia.removeWarning();
             $('#md_curso_experiencia_docencia').modal({backdrop: 'static', keyboard: false})  ;
         };
 
@@ -5033,8 +5800,10 @@
                 bootstrap_alert_articulo.warning('Debe ingresar la URL del artículo');
                 return false;
             }
-            
+            var formData = new FormData();
             if ($('#consecutivo').val() === "") {
+                formData.append("id", 0);
+                formData.append("consecutivo", self.articulos().length);
                 self.articulos.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.articulos().length),
@@ -5054,6 +5823,8 @@
                         break;
                     }
                 }
+                formData.append("id", self.articulos()[indice].id());
+                formData.append("consecutivo", consecutivo);
                 self.articulos()[indice].nombre(nombreArticulo);
                 self.articulos()[indice].tipoAutor(tipoAutorArticulo);
                 self.articulos()[indice].nombreRevista(nombreRevistaArticulo);
@@ -5061,11 +5832,82 @@
                 self.articulos()[indice].url(urlArticulo);
                 self.articulos()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoArticulo);
             }
-            $('#md_articulo').modal('hide');
+            
+            formData.append("nombre", nombreArticulo);
+            formData.append("tipoAutor", tipoAutorArticulo);
+            formData.append("nombreRevista", nombreRevistaArticulo);
+            formData.append("anyo", anyoArticulo);
+            formData.append("nucleoBasicoConocimiento", nucleoBasicoConocimientoArticulo);
+            formData.append("url", urlArticulo);
+            
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/articulo",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_articulo').modal('hide');
+                    bootstrap_alert_articulos.success('Artículo almacenado correctamente.');
+                    if (response !== "") {
+                        self.articulos.removeAll();
+                        var articulos = JSON.parse(response);
+                        for (var i = 0; i < articulos.length; i++) {
+                            self.articulos.push(
+                                {
+                                    id: ko.observable(articulos[i].id),
+                                    consecutivo: ko.observable(articulos[i].consecutivo),
+                                    nombre: ko.observable(articulos[i].nombre),
+                                    tipoAutor: ko.observable(articulos[i].tipoAutor),
+                                    nombreRevista: ko.observable(articulos[i].nombreRevista),
+                                    anyo: ko.observable(articulos[i].anyo),
+                                    nucleoBasicoConocimiento: ko.observable(articulos[i].nucleoBasicoConocimiento),
+                                    url: ko.observable(articulos[i].url)
+                                }
+                             );
+                        }
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_articulos.warning("Error al almacenar el artículo.");
+                }});
         };
 
         self.eliminarArticulo = function (articulo) {
             self.articulos.remove(articulo);
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/eliminarArticulo/" + articulo.id(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_articulos.success('Artículo eliminado correctamente.');
+                    if (response !== "") {
+                        self.articulos.removeAll();
+                        var articulos = JSON.parse(response);
+                        for (var i = 0; i < articulos.length; i++) {
+                            self.articulos.push(
+                                {
+                                    id: ko.observable(articulos[i].id),
+                                    consecutivo: ko.observable(articulos[i].consecutivo),
+                                    nombre: ko.observable(articulos[i].nombre),
+                                    tipoAutor: ko.observable(articulos[i].tipoAutor),
+                                    nombreRevista: ko.observable(articulos[i].nombreRevista),
+                                    anyo: ko.observable(articulos[i].anyo),
+                                    nucleoBasicoConocimiento: ko.observable(articulos[i].nucleoBasicoConocimiento),
+                                    url: ko.observable(articulos[i].url)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_articulos.warning("Error al eliminar el artículo.");
+                }});
         };
 
         self.editarArticulo = function (articulo) {
@@ -5077,6 +5919,7 @@
             $('#nucleoBasicoConocimientoArticulo').val(articulo.nucleoBasicoConocimiento()).trigger('change');
             $('#consecutivo').val(articulo.consecutivo());
             bootstrap_alert_articulo.removeWarning();
+            bootstrap_alert_articulos.removeWarning();
             $('#md_articulo').modal({backdrop: 'static', keyboard: false})  ;
         };
 
@@ -5108,15 +5951,18 @@
             if(propiedadCompartidaPatente) {
                nombrePropiedadCompartidaPatente = "Si";  
             }
+            var formData = new FormData();
             if ($('#consecutivo').val() === "") {
-                if ($('input:file[name="patentes[' + self.patentes().length + '].documento"]').val() === "") {
+                if ($('#documentoPatente').val() === "") {
                     bootstrap_alert_patente.warning('Debe ingresar el documento');
                     return false;
                 }
-                if ($('input:file[name="patentes[' + self.patentes().length + '].documento"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#documentoPatente')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_patente.warning('El documento no debe ser mayor a 2MB');
                     return false;
                 }
+                formData.append("id", 0);
+                formData.append("consecutivo", self.patentes().length);
                 
                 self.patentes.push({
                     id: ko.observable(0),
@@ -5127,9 +5973,7 @@
                     propiedadCompartida: ko.observable(propiedadCompartidaPatente),
                     nombrePropiedadCompartida: ko.observable(nombrePropiedadCompartidaPatente),
                     clase: ko.observable(clasePatente),
-                    descripcion: ko.observable(descripcionPatente),
-                    documento: ko.observable(''),
-                    tieneDocumento: ko.observable(false)
+                    descripcion: ko.observable(descripcionPatente)
                 });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
@@ -5140,11 +5984,13 @@
                         break;
                     }
                 }
-                if ($('input:file[name="patentes[' + indice + '].documento"]').val() != "" && 
-                    $('input:file[name="patentes[' + indice + '].documento"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#documentoPatente').val() != "" && 
+                    $('#documentoPatente')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_patente.warning('El documento no debe ser mayor a 2MB');
                     return false;
                 }
+                formData.append("id", self.patentes()[indice].id());
+                formData.append("consecutivo", consecutivo);
                 
                 self.patentes()[indice].fecha(fechaPatente);
                 self.patentes()[indice].nombreTipo(nombreTipoPatente);
@@ -5153,22 +5999,92 @@
                 self.patentes()[indice].nombrePropiedadCompartida(nombrePropiedadCompartidaPatente);
                 self.patentes()[indice].clase(clasePatente);
                 self.patentes()[indice].descripcion(descripcionPatente);
-                self.patentes()[indice].documento('');
             }
-            $('#md_patente').modal('hide');
+            if ($('#documentoPatente').val() != "") {
+               formData.append("documento", $('#documentoPatente')[0].files[0]); 
+            }
+            formData.append("fecha", fechaPatente);
+            formData.append("tipo", tipoPatente);
+            formData.append("propiedadCompartida", propiedadCompartidaPatente);
+            formData.append("clase", clasePatente);
+            formData.append("descripcion", descripcionPatente);
+
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/patente",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_patente').modal('hide');
+                    bootstrap_alert_patentes.success('Patente almacenada correctamente.');
+                    if (response !== "") {
+                        self.patentes.removeAll();
+                        var patentes = JSON.parse(response);
+                        for (var i = 0; i < patentes.length; i++) {
+                            self.patentes.push(
+                                {
+                                    id: ko.observable(patentes[i].id),
+                                    consecutivo: ko.observable(patentes[i].consecutivo),
+                                    fecha: ko.observable(patentes[i].fechaFormateada),
+                                    tipo: ko.observable(patentes[i].tipo),
+                                    nombreTipo: ko.observable(patentes[i].nombreTipo),
+                                    propiedadCompartida: ko.observable(patentes[i].propiedadCompartida),
+                                    nombrePropiedadCompartida: ko.observable(patentes[i].nombrePropiedadCompartida), 
+                                    clase: ko.observable(patentes[i].clase),
+                                    nombreClase: ko.observable(patentes[i].nombreClase),
+                                    descripcion: ko.observable(patentes[i].descripcion)
+                                }
+                             );
+                        }
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_patentes.warning("Error al almacenar la patente.");
+                }});
+        
         };
 
         self.eliminarPatente = function (patente) {
-            $('input:file[name="patentes[' + patente.consecutivo() + '].documento"]').remove();
             self.patentes.remove(patente);
-            for(i = patente.consecutivo(); i < self.patentes().length; i++) {
-               $('input:file[name="patentes[' + (i + 1) + '].documento"]').attr('name', 'patentes[' + i + '].documento'); 
-                self.patentes()[i].consecutivo(i);
-            }
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/eliminarPatente/" + patente.id(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_patentes.success('Patente eliminada correctamente.');
+                    if (response !== "") {
+                        self.patentes.removeAll();
+                        var patentes = JSON.parse(response);
+                        for (var i = 0; i < patentes.length; i++) {
+                            self.patentes.push(
+                                {
+                                    id: ko.observable(patentes[i].id),
+                                    consecutivo: ko.observable(patentes[i].consecutivo),
+                                    fecha: ko.observable(patentes[i].fechaFormateada),
+                                    tipo: ko.observable(patentes[i].tipo),
+                                    nombreTipo: ko.observable(patentes[i].nombreTipo),
+                                    propiedadCompartida: ko.observable(patentes[i].propiedadCompartida),
+                                    nombrePropiedadCompartida: ko.observable(patentes[i].nombrePropiedadCompartida), 
+                                    clase: ko.observable(patentes[i].clase),
+                                    nombreClase: ko.observable(patentes[i].nombreClase),
+                                    descripcion: ko.observable(patentes[i].descripcion)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_patentes.warning("Error al eliminar el patente.");
+                }});
         };
 
         self.editarPatente = function (patente) {
-            ocultarDocumentosPatentes();
             $('#fechaPatente').val(patente.fecha());
             $('#tipoPatente').val(patente.tipo()).trigger('change');
             $('#propiedadCompartidaPatente').val(patente.propiedadCompartida());
@@ -5182,8 +6098,9 @@
               $('#btnPropiedadCompartidaPatenteSi').removeClass('active').addClass('notActive');  
             }
             $('#consecutivo').val(patente.consecutivo());
-            $('input:file[name="patentes[' + patente.consecutivo() + '].documento"]').show();
+            $('#documentoPatente').val('');
             bootstrap_alert_patente.removeWarning();
+            bootstrap_alert_patentes.removeWarning();
             $('#md_patente').modal({backdrop: 'static', keyboard: false})  ;
         };
 
@@ -5227,15 +6144,18 @@
                 bootstrap_alert_producto_conocimiento.warning('Debe ingresar la descripción');
                 return false;
             }
+            var formData = new FormData();
             if ($('#consecutivo').val() === "") {
-                if ($('input:file[name="productosConocimiento[' + self.productosConocimiento().length + '].documento"]').val() === "") {
+                if ($('#documentoProductoConocimiento').val() === "") {
                     bootstrap_alert_producto_conocimiento.warning('Debe ingresar el documento');
                     return false;
                 }
-                if ($('input:file[name="productosConocimiento[' + self.productosConocimiento().length + '].documento"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#documentoProductoConocimiento')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_producto_conocimiento.warning('El documento no debe ser mayor a 2MB');
                     return false;
                 }
+                formData.append("id", 0);
+                formData.append("consecutivo", self.productosConocimiento().length);
                 self.productosConocimiento.push({
                     id: ko.observable(0),
                     consecutivo: ko.observable(self.productosConocimiento().length),
@@ -5256,40 +6176,106 @@
                         break;
                     }
                 }
-                if ($('input:file[name="productosConocimiento[' + indice + '].documento"]').val() != "" && 
-                    $('input:file[name="productosConocimiento[' + indice + '].documento"]')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
+                if ($('#documentoProductoConocimiento').val() != "" && 
+                    $('#documentoProductoConocimiento')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_producto_conocimiento.warning('El documento no debe ser mayor a 2MB');
                     return false;
                 }
+                formData.append("id", self.productosConocimiento()[indice].id());
+                formData.append("consecutivo", consecutivo);
                 
                 self.productosConocimiento()[indice].nombreTipo(nombreTipoProductoConocimiento);
                 self.productosConocimiento()[indice].tipo(tipoProductoConocimiento);
                 self.productosConocimiento()[indice].nucleoBasicoConocimiento(nucleoBasicoProductoConocimiento);
                 self.productosConocimiento()[indice].url(urlProductoConocimiento);
                 self.productosConocimiento()[indice].descripcion(descripcionProductoConocimiento);
-                self.productosConocimiento()[indice].documento('');
             }
-            $('#md_producto_conocimiento').modal('hide');
+
+            if ($('#documentoProductoConocimiento').val() != "") {
+               formData.append("documento", $('#documentoProductoConocimiento')[0].files[0]); 
+            }
+            formData.append("tipo", tipoProductoConocimiento);
+            formData.append("nucleoBasicoConocimiento", nucleoBasicoProductoConocimiento);
+            formData.append("url", urlProductoConocimiento);
+            formData.append("descripcion", descripcionProductoConocimiento);
+        
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/productoConocimiento",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    $('#md_producto_conocimiento').modal('hide');
+                    bootstrap_alert_productos_conocimiento.success('Producto de conocimiento almacenado correctamente.');
+                    if (response !== "") {
+                        self.productosConocimiento.removeAll();
+                        var productosConocimiento = JSON.parse(response);
+                        for (var i = 0; i < productosConocimiento.length; i++) {
+                            self.productosConocimiento.push(
+                                {
+                                    id: ko.observable(productosConocimiento[i].id),
+                                    consecutivo: ko.observable(productosConocimiento[i].consecutivo),
+                                    tipo: ko.observable(productosConocimiento[i].tipo),
+                                    nombreTipo: ko.observable(productosConocimiento[i].nombreTipo),
+                                    nucleoBasicoConocimiento: ko.observable(productosConocimiento[i].nucleoBasicoConocimiento),
+                                    url: ko.observable(productosConocimiento[i].url),
+                                    descripcion: ko.observable(productosConocimiento[i].descripcion)
+                                }
+                             );
+                        }
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_productos_conocimiento.warning("Error al almacenar el producto de conocimiento.");
+                }});
         };
 
         self.eliminarProductoConocimiento = function (productoConocimiento) {
-            $('input:file[name="productosConocimiento[' + productoConocimiento.consecutivo() + '].documento"]').remove();
             self.productosConocimiento.remove(productoConocimiento);
-            for(i = productosConocimiento.consecutivo(); i < self.productosConocimiento().length; i++) {
-               $('input:file[name="productosConocimiento[' + (i + 1) + '].documento"]').attr('name', 'productosConocimiento[' + i + '].documento'); 
-                self.productosConocimiento()[i].consecutivo(i);
-            }
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/eliminarProductoConocimiento/" + productoConocimiento.id(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_productos_conocimiento.success('Producto de conocimiento eliminada correctamente.');
+                    if (response !== "") {
+                        self.productosConocimiento.removeAll();
+                        var productosConocimiento = JSON.parse(response);
+                        for (var i = 0; i < productosConocimiento.length; i++) {
+                            self.productosConocimiento.push(
+                                {
+                                    id: ko.observable(productosConocimiento[i].id),
+                                    consecutivo: ko.observable(productosConocimiento[i].consecutivo),
+                                    tipo: ko.observable(productosConocimiento[i].tipo),
+                                    nombreTipo: ko.observable(productosConocimiento[i].nombreTipo),
+                                    nucleoBasicoConocimiento: ko.observable(productosConocimiento[i].nucleoBasicoConocimiento),
+                                    url: ko.observable(productosConocimiento[i].url),
+                                    descripcion: ko.observable(productosConocimiento[i].descripcion)
+                                }
+                             );
+                        }
+                    } 
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_productos_conocimiento.warning("Error al eliminar el producto de conocimiento.");
+                }});
         };
 
         self.editarProductoConocimiento = function (productoConocimiento) {
-            ocultarDocumentosProductosConocimiento();
             $('#tipoProductoConocimiento').val(productoConocimiento.tipo()).trigger('change');
             $('#nucleoBasicoProductoConocimiento').val(productoConocimiento.nucleoBasicoConocimiento()).trigger('change');
             $('#urlProductoConocimiento').val(productoConocimiento.url());
             $('#descripcionProductoConocimiento').val(productoConocimiento.descripcion());    
             $('#consecutivo').val(productoConocimiento.consecutivo());
-            $('input:file[name="productosConocimiento[' + productoConocimiento.consecutivo() + '].documento"]').show();
+            $('#documentoProductoConocimiento').val('');
             bootstrap_alert_producto_conocimiento.removeWarning();
+            bootstrap_alert_productos_conocimiento.removeWarning();
             $('#md_producto_conocimiento').modal({backdrop: 'static', keyboard: false})  ;
         };
 
@@ -5323,6 +6309,7 @@
         $('#correoElectronico').val("");
         $('#consecutivo').val("");
         bootstrap_alert_correo_electronico.removeWarning();
+        bootstrap_alert_correos_electronicos.removeWarning();
         $('#md_correo_electronico').modal({backdrop: 'static', keyboard: false})  ;
     }
 
@@ -5331,6 +6318,7 @@
         $('#numeroTelefono').val("");
         $('#consecutivo').val("");
         bootstrap_alert_telefono.removeWarning();
+        bootstrap_alert_telefonos.removeWarning();
         $('#md_telefono').modal({backdrop: 'static', keyboard: false})  ;
     }
 
@@ -5340,21 +6328,16 @@
         $('#entidadCuentaBancaria').val("");
         $('#consecutivo').val("");
         bootstrap_alert_cuenta_bancaria.removeWarning();
+        bootstrap_alert_cuentas_bancarias.removeWarning();
         $('#md_cuenta_bancaria').modal({backdrop: 'static', keyboard: false})  ;
     }
 
     function nuevoDocumentoSoporte() {
         $('#tipoDocumento').val("").trigger('change');
         $('#consecutivo').val("");
-        ocultarDocumentosSoportes();
-        var fileInput = $('input:file[name="documentosSoporte[' + hojaVidaModel.documentosSoporte().length + '].documento"]');
-        if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" class="form-control" name="documentosSoporte[' + (self.documentosSoporte().length) + '].documento" />');
-            $('#documentosSoporte').append(fileInput);
-        } else {
-            fileInput.show();
-        }
+        $('#documentoSoporte').val("");
         bootstrap_alert_documento_soporte.removeWarning();
+        bootstrap_alert_documentos_soporte.removeWarning();
         $('#md_documento_soporte').modal({backdrop: 'static', keyboard: false})  ;
     }
 
@@ -5368,15 +6351,9 @@
         $('#tipoCertificacionIdioma').val("").trigger('change');
         $('#puntajeCertificacionIdioma').val("");
         $('#consecutivo').val("");
-        ocultarCertificadosIdiomas();
-        var fileInput = $('input:file[name="idiomas[' + hojaVidaModel.idiomas().length + '].certificado"]');
-        if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="idiomas[' + (self.idiomas().length) + '].certificado" />');
-            $('#certificadosIdiomas').append(fileInput);
-        } else {
-            fileInput.show();
-        }
+        $('#certificadoIdioma').val('');
         bootstrap_alert_idioma.removeWarning();
+        bootstrap_alert_idiomas.removeWarning();
         $('#md_idioma').modal({backdrop: 'static', keyboard: false})  ;
     }
         
@@ -5390,15 +6367,9 @@
         $('#btnGraduadoSiEducacionBasica').removeClass('active').addClass('notActive');  
         $('#btnGraduadoNoEducacionBasica').removeClass('active').addClass('notActive');  
         $('#consecutivo').val("");
-        ocultarCertificadosEducacionesBasicas();
-        var fileInput = $('input:file[name="educacionesBasicas[' + hojaVidaModel.educacionesBasicas().length + '].certificado"]');
-        if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesBasicas[' + (self.educacionesBasicas().length) + '].certificado" />');
-            $('#certificadosEducacionesBasicas').append(fileInput);
-        } else {
-            fileInput.show();
-        }
+        $('#certificadoEducacionBasica').val('');
         bootstrap_alert_educacion_basica.removeWarning();
+        bootstrap_alert_educaciones_basicas.removeWarning();
         $('#md_educacion_basica').modal({backdrop: 'static', keyboard: false})  ;
     }
     
@@ -5435,22 +6406,10 @@
         $('#fechaTituloEducacionSuperior').prop('disabled','disabled');
                 
         $('#consecutivo').val("");
-        ocultarCertificadosEducacionesSuperiores();
-        var fileInput = $('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificado"]');
-        if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesSuperiores[' + (self.educacionesSuperiores().length) + '].certificado" />');
-            $('#certificadosEducacionesSuperiores').append(fileInput);
-        } else {
-            fileInput.show();
-        }
-        fileInput = $('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificadoHomologado"]');
-        if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesSuperiores[' + (self.educacionesSuperiores().length) + '].certificadoHomologado" />');
-            $('#certificadosHomologadosEducacionesSuperiores').append(fileInput);
-        } else {
-            fileInput.show();
-        }
+        $('#certificadoEducacionSuperior').val("");
+        $('#certificadosHomologadoEducacionSuperior').val("");
         bootstrap_alert_educacion_superior.removeWarning();
+        bootstrap_alert_educaciones_superiores.removeWarning();
         $('#md_educacion_superior').modal({backdrop: 'static', keyboard: false})  ;
     }    
 
@@ -5479,13 +6438,11 @@
         $('#nucleoBasicoConocimientoProgramaExtranjero').val("");
         $('#nombreNucleoBasicoConocimientoProgramaExtranjero').val("");
         $('#tituloProgramaExtranjero').val("");                    
-
         $('#md_programa_extranjero').modal({backdrop: 'static', keyboard: false})  ;
     }
     
     function nuevaInstitucionExtranjero() {
         $('#institucionEducativaExtranjero').val("");
-
         $('#md_institucion_extranjero').modal({backdrop: 'static', keyboard: false})  ;
     }
     
@@ -5498,15 +6455,9 @@
         $('#nombreNucleoBasicoConocimientoEducacionContinua').val("");
         $('#anyoEducacionContinua').val("");
         $('#consecutivo').val("");
-        ocultarCertificadosEducacionesContinuas();
-        var fileInput = $('input:file[name="educacionesContinuas[' + hojaVidaModel.educacionesContinuas().length + '].certificado"]');
-        if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesContinuas[' + (self.educacionesContinuas().length) + '].certificado" />');
-            $('#certificadosEducacionesContinuas').append(fileInput);
-        } else {
-            fileInput.show();
-        }
+        $('#certificadoEducacionContinua').val('');
         bootstrap_alert_educacion_continua.removeWarning();
+        bootstrap_alert_educaciones_continuas.removeWarning();
         $('#md_educacion_continua').modal({backdrop: 'static', keyboard: false})  ;
     }    
 
@@ -5515,15 +6466,9 @@
         $('#institucionOtorgaDistincion').val("");
         $('#fechaDistincion').val("");
         $('#consecutivo').val("");
-        ocultarCertificadosDistinciones();
-        var fileInput = $('input:file[name="distinciones[' + hojaVidaModel.distinciones().length + '].certificado"]');
-        if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="distinciones[' + (self.distinciones().length) + '].certificado" />');
-            $('#certificadosDistinciones').append(fileInput);
-        } else {
-            fileInput.show();
-        }
+        $('#certificadoDistincion').val('');
         bootstrap_alert_distincion.removeWarning();
+        bootstrap_alert_distinciones.removeWarning();
         $('#md_distincion').modal({backdrop: 'static', keyboard: false})  ;
     } 
 
@@ -5547,15 +6492,9 @@
         $('#cargoExperienciaLaboral').val("");
         $('#naturalezaCargoExperienciaLaboral').val("").trigger('change');
         $('#consecutivo').val("");
-        ocultarCertificadosExperienciaLaboral();
-        var fileInput = $('input:file[name="experienciasLaborales[' + hojaVidaModel.experienciasLaborales().length + '].certificado"]');
-        if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="experienciasLaborales[' + (self.experienciasLaborales().length) + '].certificado" />');
-            $('#certificadosExperienciasLaborales').append(fileInput);
-        } else {
-            fileInput.show();
-        }
+        $('#certificadoExperienciaLaboral').val('');
         bootstrap_alert_experiencia_laboral.removeWarning();
+        bootstrap_alert_experiencias_laborales.removeWarning();
         $('#md_experiencia_laboral').modal({backdrop: 'static', keyboard: false})  ;
     } 
 
@@ -5569,6 +6508,10 @@
         $('#institucionExperienciaDocencia').val("").trigger('change');
         hojaVidaModel.consecutivoExperienciaDocencia(hojaVidaModel.experienciasDocencia().length);
         bootstrap_alert_experiencia_docencia.removeWarning();
+        bootstrap_alert_experiencias_docencia.removeWarning();
+        bootstrap_alert_cursos_experiencia_docencia.removeWarning();
+        bootstrap_alert_curso_experiencia_docencia.removeWarning();
+
         $('#md_experiencia_docencia').modal({backdrop: 'static', keyboard: false})  ;
     } 
 
@@ -5580,21 +6523,81 @@
         $('#nivelEstudioCursoExperienciaDocencia').val("").trigger('change');
         $('#numeroHorasCursoExperienciaDocencia').val("");
         $('#anyoCursoExperienciaDocencia').val("");
-        ocultarCertificadosCursoExperienciaDocencia();
-        var consecutivo = 0;
-        if(hojaVidaModel.experienciasDocencia().length > hojaVidaModel.consecutivoExperienciaDocencia()) {
-           consecutivo = hojaVidaModel.experienciasDocencia()[hojaVidaModel.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length;
-        }
-        var fileInput = $('input:file[name="experienciasDocencia[' + hojaVidaModel.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]');
-        if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="experienciasDocencia[' + hojaVidaModel.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado" />');
-            $('#certificadosCursosExperienciaDocencia').append(fileInput);
-        } else {
-            fileInput.show();
-        }
+        $('#certificadoCursoExperienciaDocencia').val('');
         $('#consecutivo').val("");
         bootstrap_alert_curso_experiencia_docencia.removeWarning();
-        $('#md_curso_experiencia_docencia').modal({backdrop: 'static', keyboard: false})  ;
+        bootstrap_alert_cursos_experiencia_docencia.removeWarning();
+
+        if (hojaVidaModel.consecutivoExperienciaDocencia() === hojaVidaModel.experienciasDocencia().length) {
+            var trabajoActualDocencia = strToBool($('#trabajoActualDocencia').val());
+            var experienciaDocenciaFNSP = strToBool($('#experienciaDocenciaFNSP').val());
+            var institucionExperienciaDocencia = $('#institucionExperienciaDocencia').val();
+            if (institucionExperienciaDocencia === "") {
+                bootstrap_alert_experiencia_docencia.warning('Debe seleccionar la institución');
+                return false;
+            }
+            var formData = new FormData();
+            formData.append("id", 0);
+            formData.append("consecutivo", self.experienciasDocencia().length);
+            formData.append("trabajoActual",trabajoActualDocencia);
+            formData.append("fnsp",experienciaDocenciaFNSP);
+            formData.append("institucion",institucionExperienciaDocencia);
+
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/experienciaDocencia",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    if (response !== "") {
+                        hojaVidaModel.experienciasDocencia.removeAll();
+                        var datos = JSON.parse(response);
+                        var idExperienciaDocencia = datos.id;
+                        var experienciasDocencia = datos.experienciasDocencia;
+                        for (var i = 0; i < experienciasDocencia.length; i++) {
+                            if(idExperienciaDocencia == experienciasDocencia[i].id) {
+                              hojaVidaModel.consecutivoExperienciaDocencia(experienciasDocencia[i].consecutivo);
+                            }
+                            hojaVidaModel.experienciasDocencia.push(
+                                {
+                                    id: ko.observable(experienciasDocencia[i].id),
+                                    consecutivo: ko.observable(experienciasDocencia[i].consecutivo),
+                                    trabajoActual: ko.observable(experienciasDocencia[i].trabajoActual),
+                                    fnsp: ko.observable(experienciasDocencia[i].fnsp),
+                                    institucion: ko.observable(experienciasDocencia[i].institucion),
+                                    nombreInstitucion: ko.observable(experienciasDocencia[i].nombreInstitucion),
+                                    cursosExperienciaDocencia: ko.observableArray([])
+                                }
+                             );
+                            for(var j = 0; j < experienciasDocencia[i].cursosExperienciaDocencia.length; j++) {
+                                hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia.push({
+                                    id: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].id),
+                                    consecutivo: ko.observable(j),
+                                    nombreCurso: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCurso),
+                                    nucleoBasicoConocimiento: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nucleoBasicoConocimiento),
+                                    nombreNucleoBasicoConocimiento: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNucleoBasicoConocimiento),
+                                    modalidad: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].modalidad),
+                                    nombreModalidad: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreModalidad),
+                                    nivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nivelEstudio),
+                                    nombreNivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNivelEstudio),
+                                    numeroHoras: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].numeroHoras),
+                                    anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo)
+                                });
+                            }
+                        }
+                    }
+                    $('#md_curso_experiencia_docencia').modal({backdrop: 'static', keyboard: false})  ;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_experiencias_docencia.warning("Error al almacenar la experiencia en docencia.");
+                }});
+        } else {
+            $('#md_curso_experiencia_docencia').modal({backdrop: 'static', keyboard: false})  ;
+        }
     } 
 
     function nuevoArticulo() {
@@ -5607,6 +6610,7 @@
         $('#nombreNucleoBasicoConocimientoArticulo').val("");
         $('#consecutivo').val("");
         bootstrap_alert_articulo.removeWarning();
+        bootstrap_alert_articulos.removeWarning();
         $('#md_articulo').modal({backdrop: 'static', keyboard: false})  ;
     } 
 
@@ -5619,16 +6623,9 @@
         $('#btnPropiedadCompartidaPatenteSi').removeClass('active').addClass('notActive');  
         $('#btnPropiedadCompartidaPatenteNo').removeClass('active').addClass('notActive');
         $('#consecutivo').val("");
-        
-        ocultarDocumentosPatentes();
-        var fileInput = $('input:file[name="patentes[' + hojaVidaModel.patentes().length + '].documento"]');
-        if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="patentes[' + (self.patentes().length) + '].documento" />');
-            $('#documentosPatentes').append(fileInput);
-        } else {
-            fileInput.show();
-        }
+        $('#documentoPatente').val('');
         bootstrap_alert_patente.removeWarning();
+        bootstrap_alert_patentes.removeWarning();
         $('#md_patente').modal({backdrop: 'static', keyboard: false})  ;
     }
 
@@ -5639,47 +6636,25 @@
         $('#urlProductoConocimiento').val("");
         $('#descripcionProductoConocimiento').val("");            
         $('#consecutivo').val("");
-        
-        ocultarDocumentosProductosConocimiento();
-        var fileInput = $('input:file[name="productosConocimiento[' + hojaVidaModel.productosConocimiento().length + '].documento"]');
-        if (!fileInput.attr('id')) {
-            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="productosConocimiento[' + (self.productosConocimiento().length) + '].documento" />');
-            $('#documentosProductosConocimiento').append(fileInput);
-        } else {
-            fileInput.show();
-        }
+        $('#documentoProductosConocimiento').val('');
         bootstrap_alert_producto_conocimiento.removeWarning();
+        bootstrap_alert_productos_conocimiento.removeWarning();
         $('#md_producto_conocimiento').modal({backdrop: 'static', keyboard: false})  ;
     }
 
     function cerrarVentanaDocumentoSoporte() {
-        if ($('input:file[name="documentosSoporte[' + hojaVidaModel.documentosSoporte().length + '].documento"]')) {
-            $('input:file[name="documentosSoporte[' + hojaVidaModel.documentosSoporte().length + '].documento"]').remove();
-        }
         $('#md_documento_soporte').modal('hide');
     }
     
     function cerrarVentanaIdioma() {
-        if ($('input:file[name="idiomas[' + hojaVidaModel.idiomas().length + '].certificado"]')) {
-            $('input:file[name="idiomas[' + hojaVidaModel.idiomas().length + '].certificado"]').remove();
-        }
         $('#md_idioma').modal('hide');
     }
         
     function cerrarVentanaEducacionBasica() {
-        if ($('input:file[name="educacionesBasicas[' + hojaVidaModel.educacionesBasicas().length + '].certificado"]')) {
-            $('input:file[name="educacionesBasicas[' + hojaVidaModel.educacionesBasicas().length + '].certificado"]').remove();
-        }
         $('#md_educacion_basica').modal('hide');
     }
 
     function cerrarVentanaEducacionSuperior() {
-        if ($('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificado"]')) {
-            $('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificado"]').remove();
-        }
-        if ($('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificadoHomologado"]')) {
-            $('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificadoHomologado"]').remove();
-        }
         $('#md_educacion_superior').modal('hide');
     }
     
@@ -5696,42 +6671,22 @@
     }
     
     function cerrarVentanaEducacionContinua() {
-        if ($('input:file[name="educacionesContinuas[' + hojaVidaModel.educacionesContinuas().length + '].certificado"]')) {
-            $('input:file[name="educacionesContinuas[' + hojaVidaModel.educacionesContinuas().length + '].certificado"]').remove();
-        }
         $('#md_educacion_continua').modal('hide');
     }
     
     function cerrarVentanaDistincion() {
-        if ($('input:file[name="distinciones[' + hojaVidaModel.distinciones().length + '].certificado"]')) {
-            $('input:file[name="distinciones[' + hojaVidaModel.distinciones().length + '].certificado"]').remove();
-        }
         $('#md_distincion').modal('hide');
     }
    
     function cerrarVentanaExperienciaLaboral() {
-        if ($('input:file[name="experienciasLaborales[' + hojaVidaModel.experienciasLaborales().length + '].certificado"]')) {
-            $('input:file[name="experienciasLaborales[' + hojaVidaModel.experienciasLaborales().length + '].certificado"]').remove();
-        }
         $('#md_experiencia_laboral').modal('hide');
     }
     
     function cerrarVentanaExperienciaDocencia() {
-        if(hojaVidaModel.experienciasDocencia().length > hojaVidaModel.consecutivoExperienciaDocencia() &&
-           hojaVidaModel.experienciasDocencia()[hojaVidaModel.consecutivoExperienciaDocencia()].id === 0) {
-           hojaVidaModel.experienciasDocencia().remove(hojaVidaModel.experienciasDocencia()[hojaVidaModel.consecutivoExperienciaDocencia()]);
-        }
         $('#md_experiencia_docencia').modal('hide');
     }
 
     function cerrarVentanaCursoExperienciaDocencia() {
-        var consecutivo = 0;
-        if(hojaVidaModel.experienciasDocencia().length > hojaVidaModel.consecutivoExperienciaDocencia()) {
-          consecutivo = hojaVidaModel.experienciasDocencia()[hojaVidaModel.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length;
-        }
-        if ($('input:file[name="experienciasDocencia[' + hojaVidaModel.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]')) {
-           $('input:file[name="experienciasDocencia[' + hojaVidaModel.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]').remove();
-        }
         $('#md_curso_experiencia_docencia').modal('hide');
     }
 
@@ -5740,131 +6695,12 @@
     }
     
     function cerrarVentanaPatente() {
-        if ($('input:file[name="patentes[' + hojaVidaModel.patentes().length + '].documento"]')) {
-            $('input:file[name="patentes[' + hojaVidaModel.patentes().length + '].documento"]').remove();
-        }
         $('#md_patente').modal('hide');
     }
     
     function cerrarVentanaProductoConocimiento() {
-        if ($('input:file[name="productosConocimiento[' + hojaVidaModel.productosConocimiento().length + '].documento"]')) {
-            $('input:file[name="productosConocimiento[' + hojaVidaModel.productosConocimiento().length + '].documento"]').remove();
-        }
         $('#md_producto_conocimiento').modal('hide');
     }
-    
-    function ocultarDocumentosSoportes() {
-        for (var i = 0; i < hojaVidaModel.documentosSoporte().length; i++) {
-            $('input:file[name="documentosSoporte[' + i + '].documento"]').hide();
-        }
-        var fileInput = $('input:file[name="documentosSoporte[' + hojaVidaModel.documentosSoporte().length + '].documento"]');
-        if (fileInput.attr('id')) {
-            fileInput.hide();
-        }
-    }
-
-    function ocultarCertificadosIdiomas() {
-        for (var i = 0; i < hojaVidaModel.idiomas().length; i++) {
-            $('input:file[name="idiomas[' + i + '].certificado"]').hide();
-        }
-        var fileInput = $('input:file[name="idiomas[' + hojaVidaModel.idiomas().length + '].certificado"]');
-        if (fileInput.attr('id')) {
-            fileInput.hide();
-        }
-    }
-    
-    function ocultarCertificadosEducacionesBasicas() {
-        for (var i = 0; i < hojaVidaModel.educacionesBasicas().length; i++) {
-            $('input:file[name="educacionesBasicas[' + i + '].certificado"]').hide();
-        }
-        var fileInput = $('input:file[name="educacionesBasicas[' + hojaVidaModel.educacionesBasicas().length + '].certificado"]');
-        if (fileInput.attr('id')) {
-            fileInput.hide();
-        }
-    }
-    
-    function ocultarCertificadosEducacionesSuperiores() {
-        for (var i = 0; i < hojaVidaModel.educacionesSuperiores().length; i++) {
-            $('input:file[name="educacionesSuperiores[' + i + '].certificado"]').hide();
-            $('input:file[name="educacionesSuperiores[' + i + '].certificadoHomologado"]').hide();
-        }
-        var fileInput = $('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificado"]');
-        if (fileInput.attr('id')) {
-            fileInput.hide();
-        }
-        fileInput = $('input:file[name="educacionesSuperiores[' + hojaVidaModel.educacionesSuperiores().length + '].certificadoHomologado"]');
-        if (fileInput.attr('id')) {
-            fileInput.hide();
-        }
-    }
-    
-    function ocultarCertificadosEducacionesContinuas() {
-        for (var i = 0; i < hojaVidaModel.educacionesContinuas().length; i++) {
-            $('input:file[name="educacionesContinuas[' + i + '].certificado"]').hide();
-        }
-        var fileInput = $('input:file[name="educacionesContinuas[' + hojaVidaModel.educacionesContinuas().length + '].certificado"]');
-        if (fileInput.attr('id')) {
-            fileInput.hide();
-        }
-    }
-
-    function ocultarCertificadosDistinciones() {
-        for (var i = 0; i < hojaVidaModel.distinciones().length; i++) {
-            $('input:file[name="distinciones[' + i + '].certificado"]').hide();
-        }
-        var fileInput = $('input:file[name="distinciones[' + hojaVidaModel.distinciones().length + '].certificado"]');
-        if (fileInput.attr('id')) {
-            fileInput.hide();
-        }
-    }
-
-    function ocultarCertificadosExperienciaLaboral() {
-        for (var i = 0; i < hojaVidaModel.experienciasLaborales().length; i++) {
-            $('input:file[name="experienciasLaborales[' + i + '].certificado"]').hide();
-        }
-        var fileInput = $('input:file[name="experienciasLaborales[' + hojaVidaModel.experienciasLaborales().length + '].certificado"]');
-        if (fileInput.attr('id')) {
-            fileInput.hide();
-        }
-    }
-
-    function ocultarCertificadosCursoExperienciaDocencia() {
-        if(hojaVidaModel.experienciasDocencia().length > 0) {
-            for (var i = 0; i < hojaVidaModel.experienciasDocencia().length; i++) {
-                for (var j = 0; j < hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia().length; j++) {
-                   $('input:file[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].certificado"]').hide();
-                }    
-            }
-        }
-        var consecutivo = 0;
-        if(hojaVidaModel.experienciasDocencia().length > hojaVidaModel.consecutivoExperienciaDocencia()) {
-          consecutivo = hojaVidaModel.experienciasDocencia()[hojaVidaModel.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length;
-        }
-        var fileInput = $('input:file[name="experienciasDocencia[' + hojaVidaModel.consecutivoExperienciaDocencia() + '].cursosExperienciaDocencia[' + consecutivo + '].certificado"]');
-        if (fileInput.attr('id')) {
-            fileInput.hide();
-        }
-    }
-    
-    function ocultarDocumentosPatentes() {
-        for (var i = 0; i < hojaVidaModel.patentes().length; i++) {
-            $('input:file[name="patentes[' + i + '].documento"]').hide();
-        }
-        var fileInput = $('input:file[name="patentes[' + hojaVidaModel.patentes().length + '].documento"]');
-        if (fileInput.attr('id')) {
-            fileInput.hide();
-        }
-    }    
-
-    function ocultarDocumentosProductosConocimiento() {
-        for (var i = 0; i < hojaVidaModel.productosConocimiento().length; i++) {
-            $('input:file[name="productosConocimiento[' + i + '].documento"]').hide();
-        }
-        var fileInput = $('input:file[name="productosConocimiento[' + hojaVidaModel.productosConocimiento().length + '].documento"]');
-        if (fileInput.attr('id')) {
-            fileInput.hide();
-        }
-    }   
 
     $('#hojaVida').submit(function (evt) {
         evt.preventDefault();
@@ -5910,7 +6746,46 @@
                $('#md_guardar').modal('hide');
             }
             }, 1000);
-        var formData = new FormData(this);
+        var formData = new FormData();
+        formData.append("idPersona", $("#idPersona").val());
+        formData.append("actividadEconomica", $("#actividadEconomica").val());
+        formData.append("apellidos", $("#apellidos").val());
+        formData.append("ciudadResidencia", $("#ciudadResidencia").val());
+        formData.append("direccion", $("#direccion").val());
+        formData.append("discapacidad", $("#discapacidad").val());
+        formData.append("disponeRUT", $("#disponeRUT").val());
+        formData.append("empleadoUDEA", $("#empleadoUDEA").val());
+        formData.append("disponibilidadViajar", $("#disponibilidadViajar").val());
+        formData.append("distritoClase", $("#distritoClase").val());
+        formData.append("egresadoUDEA", $("#egresadoUDEA").val());
+        formData.append("fechaExpedicion", $("#fechaExpedicion").val());
+        formData.append("fechaNacimiento", $("#fechaNacimiento").val());
+        formData.append("grupoEtnico", $("#grupoEtnico").val());
+        formData.append("libretaMilitar", $("#libretaMilitar").val());
+        formData.append("lugarExpedicion", $("#lugarExpedicion").val());
+        formData.append("lugarNacimiento", $("#lugarNacimiento").val());
+        formData.append("nacionalidad", $("#nacionalidad").val());
+        formData.append("nombres", $("#nombres").val());
+        formData.append("numeroIdentificacion", $("#numeroIdentificacion").val());
+        formData.append("sexo", $("#sexo").val());
+        formData.append("tipoIdentificacion", $("#tipoIdentificacion").val());
+        formData.append("tipoVinculacion", $("#tipoVinculacion").val());
+        formData.append("perfil", $("#perfil").val());
+        formData.append("investigadorReconocidoColciencias", $("#investigadorReconocidoColciencias").val());
+        formData.append("urlCVLAC", $("#urlCVLAC").val());
+        formData.append("tipoInvestigador", $("#tipoInvestigador").val());
+        formData.append("codigoORCID", $("#codigoORCID").val());
+        formData.append("identificadorScopus", $("#identificadorScopus").val());
+        formData.append("researcherId", $("#researcherId").val());
+        if ($('#copiaDocumentoIdentificacion').val() !== "") {
+           formData.append("copiaDocumentoIdentificacion", $('#copiaDocumentoIdentificacion')[0].files[0]);
+        }
+        if ($('#copiaLibretaMilitar').val() !== "") {
+            formData.append("copiaLibretaMilitar", $('#copiaLibretaMilitar')[0].files[0]);
+        }
+        if ($('#documentoRUT').val() !== "") {
+            formData.append("documentoRUT", $('#documentoRUT')[0].files[0]);
+        }
         $.ajax({
             type: "POST",
             url: "${pageContext.request.contextPath}/hojasVida/editar",
@@ -5922,10 +6797,10 @@
             },
             success: function (response) {
                 $('#md_guardar').modal('hide');
-                if (response === "") {
-                    recargarPagina();
-                } else {
+                if (response !== "") {
                     bootstrap_alert_hoja_vida.warning(response);
+                } else {
+                    bootstrap_alert_hoja_vida.success("Hoja de vida actualizada exitosamente.");
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -6072,12 +6947,34 @@
         $('#alert_telefono').html('');
     };
 
+    bootstrap_alert_telefonos = {};
+    bootstrap_alert_telefonos.warning = function (message) {
+        $('#alert_telefonos').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_telefonos.removeWarning = function () {
+        $('#alert_telefonos').html('');
+    };
+    bootstrap_alert_telefonos.success = function (message) {
+        $('#alert_telefonos').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+
     bootstrap_alert_cuenta_bancaria = {};
     bootstrap_alert_cuenta_bancaria.warning = function (message) {
         $('#alert_cuenta_bancaria').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
     bootstrap_alert_cuenta_bancaria.removeWarning = function () {
         $('#alert_cuenta_bancaria').html('');
+    };
+
+    bootstrap_alert_cuentas_bancarias = {};
+    bootstrap_alert_cuentas_bancarias.warning = function (message) {
+        $('#alert_cuentas_bancarias').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_cuentas_bancarias.removeWarning = function () {
+        $('#alert_cuentas_bancarias').html('');
+    };
+    bootstrap_alert_cuentas_bancarias.success = function (message) {
+        $('#alert_cuentas_bancarias').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
 
     bootstrap_alert_correo_electronico = {};
@@ -6088,12 +6985,34 @@
         $('#alert_correo_electronico').html('');
     };
 
+    bootstrap_alert_correos_electronicos = {};
+    bootstrap_alert_correos_electronicos.warning = function (message) {
+        $('#alert_correos_electronicos').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_correos_electronicos.removeWarning = function () {
+        $('#alert_correos_electronicos').html('');
+    };
+    bootstrap_alert_correos_electronicos.success = function (message) {
+        $('#alert_correos_electronicos').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+
     bootstrap_alert_documento_soporte = {};
     bootstrap_alert_documento_soporte.warning = function (message) {
         $('#alert_documento_soporte').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
     bootstrap_alert_documento_soporte.removeWarning = function () {
         $('#alert_documento_soporte').html('');
+    };
+
+    bootstrap_alert_documentos_soporte = {};
+    bootstrap_alert_documentos_soporte.warning = function (message) {
+        $('#alert_documentos_soporte').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_documentos_soporte.removeWarning = function () {
+        $('#alert_documentos_soporte').html('');
+    };
+    bootstrap_alert_documentos_soporte.success = function (message) {
+        $('#alert_documentos_soporte').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
 
     bootstrap_alert_idioma = {};
@@ -6104,12 +7023,34 @@
         $('#alert_idioma').html('');
     };
 
+    bootstrap_alert_idiomas = {};
+    bootstrap_alert_idiomas.warning = function (message) {
+        $('#alert_idiomas').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_idiomas.removeWarning = function () {
+        $('#alert_idiomas').html('');
+    };
+    bootstrap_alert_idiomas.success = function (message) {
+        $('#alert_idiomas').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+
     bootstrap_alert_educacion_basica = {};
     bootstrap_alert_educacion_basica.warning = function (message) {
         $('#alert_educacion_basica').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
     bootstrap_alert_educacion_basica.removeWarning = function () {
         $('#alert_educacion_basica').html('');
+    };
+
+    bootstrap_alert_educaciones_basicas = {};
+    bootstrap_alert_educaciones_basicas.warning = function (message) {
+        $('#alert_educaciones_basicas').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_educaciones_basicas.removeWarning = function () {
+        $('#alert_educaciones_basicas').html('');
+    };
+    bootstrap_alert_educaciones_basicas.success = function (message) {
+        $('#alert_educaciones_basicas').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
 
     bootstrap_alert_educacion_superior = {};
@@ -6120,12 +7061,34 @@
         $('#alert_educacion_superior').html('');
     };
 
+    bootstrap_alert_educaciones_superiores = {};
+    bootstrap_alert_educaciones_superiores.warning = function (message) {
+        $('#alert_educaciones_superiores').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_educaciones_superiores.removeWarning = function () {
+        $('#alert_educaciones_superiores').html('');
+    };
+    bootstrap_alert_educaciones_superiores.success = function (message) {
+        $('#alert_educaciones_superiores').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+
     bootstrap_alert_programa_extranjero = {};
     bootstrap_alert_programa_extranjero.warning = function (message) {
         $('#alert_programa_extranjero').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
     bootstrap_alert_programa_extranjero.removeWarning = function () {
         $('#alert_programa_extranjero').html('');
+    };
+
+    bootstrap_alert_programas_extranjero = {};
+    bootstrap_alert_programas_extranjero.warning = function (message) {
+        $('#alert_programas_extranjero').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_programas_extranjero.removeWarning = function () {
+        $('#alert_programas_extranjero').html('');
+    };
+    bootstrap_alert_programas_extranjero.success = function (message) {
+        $('#alert_programas_extranjero').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
 
     bootstrap_alert_educacion_continua = {};
@@ -6136,6 +7099,17 @@
         $('#alert_educacion_continua').html('');
     };
 
+    bootstrap_alert_educaciones_continuas = {};
+    bootstrap_alert_educaciones_continuas.warning = function (message) {
+        $('#alert_educaciones_continuas').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_educaciones_continuas.removeWarning = function () {
+        $('#alert_educaciones_continuas').html('');
+    };
+    bootstrap_alert_educaciones_continuas.success = function (message) {
+        $('#alert_educaciones_continuas').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+
     bootstrap_alert_distincion = {};
     bootstrap_alert_distincion.warning = function (message) {
         $('#alert_distincion').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
@@ -6144,12 +7118,34 @@
         $('#alert_distincion').html('');
     };
     
+    bootstrap_alert_distinciones = {};
+    bootstrap_alert_distinciones.warning = function (message) {
+        $('#alert_distinciones').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_distinciones.removeWarning = function () {
+        $('#alert_distinciones').html('');
+    };
+    bootstrap_alert_distinciones.success = function (message) {
+        $('#alert_distinciones').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+
     bootstrap_alert_experiencia_laboral = {};
     bootstrap_alert_experiencia_laboral.warning = function (message) {
         $('#alert_experiencia_laboral').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
     bootstrap_alert_experiencia_laboral.removeWarning = function () {
         $('#alert_experiencia_laboral').html('');
+    };
+
+    bootstrap_alert_experiencias_laborales = {};
+    bootstrap_alert_experiencias_laborales.warning = function (message) {
+        $('#alert_experiencias_laborales').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_experiencias_laborales.removeWarning = function () {
+        $('#alert_experiencias_laborales').html('');
+    };
+    bootstrap_alert_experiencias_laborales.success = function (message) {
+        $('#alert_experiencias_laborales').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
 
     bootstrap_alert_experiencia_docencia = {};
@@ -6160,12 +7156,34 @@
         $('#alert_experiencia_docencia').html('');
     };
     
+    bootstrap_alert_experiencias_docencia = {};
+    bootstrap_alert_experiencias_docencia.warning = function (message) {
+        $('#alert_experiencias_docencia').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_experiencias_docencia.removeWarning = function () {
+        $('#alert_experiencias_docencia').html('');
+    };
+    bootstrap_alert_experiencias_docencia.success = function (message) {
+        $('#alert_experiencias_docencia').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+
     bootstrap_alert_curso_experiencia_docencia = {};
     bootstrap_alert_curso_experiencia_docencia.warning = function (message) {
         $('#alert_curso_experiencia_docencia').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
     bootstrap_alert_curso_experiencia_docencia.removeWarning = function () {
         $('#alert_curso_experiencia_docencia').html('');
+    };
+
+    bootstrap_alert_cursos_experiencia_docencia = {};
+    bootstrap_alert_cursos_experiencia_docencia.warning = function (message) {
+        $('#alert_cursos_experiencia_docencia').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_cursos_experiencia_docencia.removeWarning = function () {
+        $('#alert_cursos_experiencia_docencia').html('');
+    };
+    bootstrap_alert_cursos_experiencia_docencia.success = function (message) {
+        $('#alert_cursos_experiencia_docencia').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
 
     bootstrap_alert_articulo = {};
@@ -6176,12 +7194,34 @@
         $('#alert_articulo').html('');
     };
 
+    bootstrap_alert_articulos = {};
+    bootstrap_alert_articulos.warning = function (message) {
+        $('#alert_articulos').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_articulos.removeWarning = function () {
+        $('#alert_articulos').html('');
+    };
+    bootstrap_alert_articulos.success = function (message) {
+        $('#alert_articulos').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+
     bootstrap_alert_patente = {};
     bootstrap_alert_patente.warning = function (message) {
         $('#alert_patente').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
     bootstrap_alert_patente.removeWarning = function () {
         $('#alert_patente').html('');
+    };
+
+    bootstrap_alert_patentes = {};
+    bootstrap_alert_patentes.warning = function (message) {
+        $('#alert_patentes').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_patentes.removeWarning = function () {
+        $('#alert_patentes').html('');
+    };
+    bootstrap_alert_patentes.success = function (message) {
+        $('#alert_patentes').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
 
     bootstrap_alert_producto_conocimiento = {};
@@ -6192,6 +7232,17 @@
         $('#alert_producto_conocimiento').html('');
     };
     
+    bootstrap_alert_productos_conocimiento = {};
+    bootstrap_alert_productos_conocimiento.warning = function (message) {
+        $('#alert_productos_conocimiento').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_productos_conocimiento.removeWarning = function () {
+        $('#alert_productos_conocimiento').html('');
+    };
+    bootstrap_alert_productos_conocimiento.success = function (message) {
+        $('#alert_productos_conocimiento').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+
     var correosElectronicos = [];
     var cuentasBancarias = [];
     var telefonos = [];
@@ -6218,63 +7269,24 @@
     </c:if>
     <c:if test = "${documentosSoporteJSON != null}">
     documentosSoporte = ${documentosSoporteJSON};
-    for (var i = 0; i < documentosSoporte.length; i++) {
-        var fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="documentosSoporte[' + i + '].documento" />');
-        $('#documentosSoporte').append(fileInput);
-        $('input:file[name="documentosSoporte[' + i + '].documento"]').hide();
-    }
     </c:if>
     <c:if test = "${idiomasJSON != null}">
     idiomas = ${idiomasJSON};
-    for (var i = 0; i < idiomas.length; i++) {
-        var fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="idiomas[' + i + '].certificado" />');
-        $('#certificadosIdiomas').append(fileInput);
-        $('input:file[name="idiomas[' + i + '].certificado"]').hide();
-    }
     </c:if>
     <c:if test = "${educacionesBasicasJSON != null}">
     educacionesBasicas = ${educacionesBasicasJSON};
-    for (var i = 0; i < educacionesBasicas.length; i++) {
-        var fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesBasicas[' + i + '].certificado" />');
-        $('#certificadosEducacionesBasicas').append(fileInput);
-        $('input:file[name="educacionesBasicas[' + i + '].certificado"]').hide();
-    }
     </c:if>
     <c:if test = "${educacionesSuperioresJSON != null}">
     educacionesSuperiores = ${educacionesSuperioresJSON};
-    for (var i = 0; i < educacionesSuperiores.length; i++) {
-        var fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesSuperiores[' + i + '].certificadoHomologado" />');
-        $('#certificadosHomologadosEducacionesSuperiores').append(fileInput);
-        $('input:file[name="educacionesSuperiores[' + i + '].certificadoHomologado"]').hide();
-
-        fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesSuperiores[' + i + '].certificado" />');
-        $('#certificadosEducacionesSuperiores').append(fileInput);
-        $('input:file[name="educacionesSuperiores[' + i + '].certificado"]').hide();
-    }
     </c:if>
     <c:if test = "${educacionesContinuasJSON != null}">
     educacionesContinuas = ${educacionesContinuasJSON};
-    for (var i = 0; i < educacionesContinuas.length; i++) {
-        fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="educacionesContinuas[' + i + '].certificado" />');
-        $('#certificadosEducacionesContinuas').append(fileInput);
-        $('input:file[name="educacionesContinuas[' + i + '].certificado"]').hide();
-    }    
     </c:if>        
     <c:if test = "${distincionesJSON != null}">
     distinciones = ${distincionesJSON};
-    for (var i = 0; i < distinciones.length; i++) {
-        fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="distinciones[' + i + '].certificado" />');
-        $('#certificadosDistinciones').append(fileInput);
-        $('input:file[name="distinciones[' + i + '].certificado"]').hide();
-    }    
     </c:if>
     <c:if test = "${experienciasLaboralesJSON != null}">
     experienciasLaborales = ${experienciasLaboralesJSON};
-    for (var i = 0; i < experienciasLaborales.length; i++) {
-        fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="experienciasLaborales[' + i + '].certificado" />');
-        $('#certificadosExperienciasLaborales').append(fileInput);
-        $('input:file[name="experienciasLaborales[' + i + '].certificado"]').hide();
-    }    
     </c:if>
     <c:if test = "${experienciasDocenciaJSON != null}">
     experienciasDocencia = ${experienciasDocenciaJSON};
@@ -6284,19 +7296,9 @@
     </c:if>        
     <c:if test = "${patentesJSON != null}">
     patentes = ${patentesJSON};
-    for (var i = 0; i < patentes.length; i++) {
-        fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="patentes[' + i + '].documento" />');
-        $('#documentosPatentes').append(fileInput);
-        $('input:file[name="patentes[' + i + '].documento"]').hide();
-    }    
     </c:if>
     <c:if test = "${productosConocimientoJSON != null}">
     productosConocimiento = ${productosConocimientoJSON};
-    for (var i = 0; i < productosConocimiento.length; i++) {
-        fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="productosConocimiento[' + i + '].documento" />');
-        $('#documentosProductosConocimiento').append(fileInput);
-        $('input:file[name="productosConocimiento[' + i + '].documento"]').hide();
-    }    
     </c:if>
     var hojaVidaModel = new HojaVidaModel(correosElectronicos, 
         cuentasBancarias, 
@@ -6314,39 +7316,5 @@
         productosConocimiento);
     ko.applyBindings(hojaVidaModel);
 
-    for (var i = 0; i < hojaVidaModel.experienciasDocencia().length; i++) {
-        for (var j = 0; j < hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia().length; j++) {
-            fileInput = $('<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].certificado" />');
-            $('#certificadosCursosExperienciaDocencia').append(fileInput);
-            $('input:file[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].certificado"]').hide();
-
-            id = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].id" />');
-            consecutivo = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].consecutivo" />');
-            nucleoBasicoConocimiento = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nucleoBasicoConocimiento" />');
-            nombreCurso = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nombreCurso" />');
-            modalidad = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].modalidad" />');
-            nivelEstudio = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nivelEstudio" />');
-            numeroHoras = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].numeroHoras" />');
-            anyo = $('<input type="hidden" name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].anyo" />');
-
-            $('#certificadosCursosExperienciaDocencia').append(id);
-            $('#certificadosCursosExperienciaDocencia').append(consecutivo);
-            $('#certificadosCursosExperienciaDocencia').append(nucleoBasicoConocimiento);
-            $('#certificadosCursosExperienciaDocencia').append(nombreCurso);
-            $('#certificadosCursosExperienciaDocencia').append(modalidad);
-            $('#certificadosCursosExperienciaDocencia').append(nivelEstudio);
-            $('#certificadosCursosExperienciaDocencia').append(numeroHoras);
-            $('#certificadosCursosExperienciaDocencia').append(anyo);
-
-            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].id"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].id());
-            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].consecutivo"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].consecutivo());
-            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nucleoBasicoConocimiento"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].nucleoBasicoConocimiento());
-            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nombreCurso"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].nombreCurso());
-            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].modalidad"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].modalidad());
-            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].nivelEstudio"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].nivelEstudio());
-            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].numeroHoras"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].numeroHoras());
-            $('input[name="experienciasDocencia[' + i + '].cursosExperienciaDocencia[' + j + '].anyo"]').val(hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia()[j].anyo());
-        }
-    } 
     establecerEgresadoUdeA();
 </script>

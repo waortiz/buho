@@ -7,6 +7,8 @@ package co.edu.fnsp.buho.controladores;
 
 import co.edu.fnsp.buho.entidades.Articulo;
 import co.edu.fnsp.buho.entidades.Ciudad;
+import co.edu.fnsp.buho.entidades.CorreoElectronico;
+import co.edu.fnsp.buho.entidades.CuentaBancaria;
 import co.edu.fnsp.buho.entidades.CursoExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.DetalleUsuario;
 import co.edu.fnsp.buho.entidades.Distincion;
@@ -24,6 +26,7 @@ import co.edu.fnsp.buho.entidades.Institucion;
 import co.edu.fnsp.buho.entidades.Patente;
 import co.edu.fnsp.buho.entidades.ProductoConocimiento;
 import co.edu.fnsp.buho.entidades.Programa;
+import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.Terminos;
 import co.edu.fnsp.buho.servicios.IServicioHojaVida;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
@@ -45,6 +48,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -93,8 +97,6 @@ public class HojaVidaController {
             hojaVidaIngresar.setActividadEconomica(hojaVida.getActividadEconomica());
             hojaVidaIngresar.setApellidos(hojaVida.getApellidos());
             hojaVidaIngresar.setCiudadResidencia(hojaVida.getCiudadResidencia());
-            hojaVidaIngresar.setCorreosElectronicos(hojaVida.getCorreosElectronicos());
-            hojaVidaIngresar.setCuentasBancarias(hojaVida.getCuentasBancarias());
             hojaVidaIngresar.setDireccion(hojaVida.getDireccion());
             hojaVidaIngresar.setDiscapacidad(hojaVida.getDiscapacidad());
             hojaVidaIngresar.setDisponeRUT(hojaVida.isDisponeRUT());
@@ -112,11 +114,9 @@ public class HojaVidaController {
             hojaVidaIngresar.setNombres(hojaVida.getNombres());
             hojaVidaIngresar.setNumeroIdentificacion(hojaVida.getNumeroIdentificacion());
             hojaVidaIngresar.setSexo(hojaVida.getSexo());
-            hojaVidaIngresar.setTelefonos(hojaVida.getTelefonos());
             hojaVidaIngresar.setTipoIdentificacion(hojaVida.getTipoIdentificacion());
             hojaVidaIngresar.setTipoVinculacion(hojaVida.getTipoVinculacion());
             hojaVidaIngresar.setPerfil(hojaVida.getPerfil());
-
             hojaVidaIngresar.setInvestigadorReconocidoColciencias(hojaVida.isInvestigadorReconocidoColciencias());
             hojaVidaIngresar.setUrlCVLAC(hojaVida.getUrlCVLAC());
             if (hojaVida.getTipoInvestigador() != null && !"".equals(hojaVida.getTipoInvestigador())) {
@@ -147,225 +147,6 @@ public class HojaVidaController {
                 documento.setNombre(hojaVida.getCopiaLibretaMilitar().getOriginalFilename());
                 documento.setTipoContenido(hojaVida.getCopiaLibretaMilitar().getContentType());
                 hojaVidaIngresar.setCopiaLibretaMilitar(documento);
-            }
-            for (co.edu.fnsp.buho.entidadesVista.DocumentoSoporte documentoSoporte : hojaVida.getDocumentosSoporte()) {
-                DocumentoSoporte nuevoDocumentoSoporte = new DocumentoSoporte();
-                nuevoDocumentoSoporte.setId(documentoSoporte.getId());
-                nuevoDocumentoSoporte.setTipoDocumento(Util.obtenerEntero(documentoSoporte.getTipoDocumento()));
-                if (documentoSoporte.getDocumento() != null && documentoSoporte.getDocumento().getBytes().length > 0) {
-                    documento = new Documento();
-                    documento.setContenido(documentoSoporte.getDocumento().getBytes());
-                    documento.setNombre(documentoSoporte.getDocumento().getOriginalFilename());
-                    documento.setTipoContenido(documentoSoporte.getDocumento().getContentType());
-                    nuevoDocumentoSoporte.setDocumento(documento);
-                }
-                hojaVidaIngresar.getDocumentosSoporte().add(nuevoDocumentoSoporte);
-            }
-            hojaVidaIngresar.setTelefonos(hojaVida.getTelefonos());
-            hojaVidaIngresar.setCuentasBancarias(hojaVida.getCuentasBancarias());
-            hojaVidaIngresar.setCorreosElectronicos(hojaVida.getCorreosElectronicos());
-
-            for (co.edu.fnsp.buho.entidadesVista.Idioma idioma : hojaVida.getIdiomas()) {
-                Idioma nuevoIdioma = new Idioma();
-                nuevoIdioma.setId(idioma.getId());
-                nuevoIdioma.setIdioma(Util.obtenerEntero(idioma.getIdioma()));
-                nuevoIdioma.setNivelConversacion(idioma.getNivelConversacion());
-                nuevoIdioma.setNivelLectura(idioma.getNivelLectura());
-                nuevoIdioma.setNivelEscritura(idioma.getNivelEscritura());
-                nuevoIdioma.setNivelEscucha(idioma.getNivelEscucha());
-                nuevoIdioma.setOtraCertificacion(idioma.getOtraCertificacion());
-                nuevoIdioma.setTipoCertificacion(idioma.getTipoCertificacion());
-                nuevoIdioma.setPuntajeCertificacion(Util.obtenerNumeroDoble(idioma.getPuntajeCertificacion()));
-
-                if (idioma.getCertificado() != null && idioma.getCertificado().getBytes().length > 0) {
-                    documento = new Documento();
-                    documento.setContenido(idioma.getCertificado().getBytes());
-                    documento.setNombre(idioma.getCertificado().getOriginalFilename());
-                    documento.setTipoContenido(idioma.getCertificado().getContentType());
-                    nuevoIdioma.setCertificado(documento);
-                }
-                hojaVidaIngresar.getIdiomas().add(nuevoIdioma);
-            }
-
-            for (co.edu.fnsp.buho.entidadesVista.EducacionBasica educacionBasica : hojaVida.getEducacionesBasicas()) {
-                EducacionBasica nuevaEducacionBasica = new EducacionBasica();
-                nuevaEducacionBasica.setId(educacionBasica.getId());
-                nuevaEducacionBasica.setInstitucion(educacionBasica.getInstitucion());
-                if (!"".equals(educacionBasica.getAnyoFinalizacion())) {
-                    nuevaEducacionBasica.setAnyoFinalizacion(Util.obtenerEntero(educacionBasica.getAnyoFinalizacion()));
-                }
-                nuevaEducacionBasica.setAnyoInicio(Util.obtenerEntero(educacionBasica.getAnyoInicio()));
-                nuevaEducacionBasica.setNivel(Util.obtenerEntero(educacionBasica.getNivel()));
-                nuevaEducacionBasica.setGraduado(educacionBasica.isGraduado());
-                nuevaEducacionBasica.setTitulo(educacionBasica.getTitulo());
-                if (educacionBasica.getCertificado() != null && educacionBasica.getCertificado().getBytes().length > 0) {
-                    documento = new Documento();
-                    documento.setContenido(educacionBasica.getCertificado().getBytes());
-                    documento.setNombre(educacionBasica.getCertificado().getOriginalFilename());
-                    documento.setTipoContenido(educacionBasica.getCertificado().getContentType());
-                    nuevaEducacionBasica.setCertificado(documento);
-                }
-                hojaVidaIngresar.getEducacionesBasicas().add(nuevaEducacionBasica);
-            }
-
-            for (co.edu.fnsp.buho.entidadesVista.EducacionSuperior educacionSuperior : hojaVida.getEducacionesSuperiores()) {
-                EducacionSuperior nuevaEducacionSuperior = new EducacionSuperior();
-                nuevaEducacionSuperior.setId(educacionSuperior.getId());
-                nuevaEducacionSuperior.setTituloExterior(educacionSuperior.isTituloExterior());
-                if (educacionSuperior.isTituloExterior()) {
-                    nuevaEducacionSuperior.setPaisTituloExterior(Util.obtenerEntero(educacionSuperior.getPaisTituloExterior()));
-                    if (educacionSuperior.getCertificadoHomologado() != null && educacionSuperior.getCertificadoHomologado().getBytes().length > 0) {
-                        documento = new Documento();
-                        documento.setContenido(educacionSuperior.getCertificadoHomologado().getBytes());
-                        documento.setNombre(educacionSuperior.getCertificadoHomologado().getOriginalFilename());
-                        documento.setTipoContenido(educacionSuperior.getCertificadoHomologado().getContentType());
-                        nuevaEducacionSuperior.setCertificadoHomologado(documento);
-                    }
-                }
-                nuevaEducacionSuperior.setTitulo(educacionSuperior.getTitulo());
-                nuevaEducacionSuperior.setPrograma(Util.obtenerEntero(educacionSuperior.getPrograma()));
-                nuevaEducacionSuperior.setFechaTitulo(Util.obtenerFecha(educacionSuperior.getFechaTitulo()));
-                if (!"".equals(educacionSuperior.getAnyoFinalizacion())) {
-                    nuevaEducacionSuperior.setAnyoFinalizacion(Util.obtenerEntero(educacionSuperior.getAnyoFinalizacion()));
-                }
-                nuevaEducacionSuperior.setAnyoInicio(Util.obtenerEntero(educacionSuperior.getAnyoInicio()));
-                nuevaEducacionSuperior.setNivel(Util.obtenerEntero(educacionSuperior.getNivel()));
-                nuevaEducacionSuperior.setGraduado(educacionSuperior.isGraduado());
-                if (educacionSuperior.getCertificado() != null && educacionSuperior.getCertificado().getBytes().length > 0) {
-                    documento = new Documento();
-                    documento.setContenido(educacionSuperior.getCertificado().getBytes());
-                    documento.setNombre(educacionSuperior.getCertificado().getOriginalFilename());
-                    documento.setTipoContenido(educacionSuperior.getCertificado().getContentType());
-                    nuevaEducacionSuperior.setCertificado(documento);
-                }
-                hojaVidaIngresar.getEducacionesSuperiores().add(nuevaEducacionSuperior);
-            }
-
-            for (co.edu.fnsp.buho.entidadesVista.EducacionContinua educacionContinua : hojaVida.getEducacionesContinuas()) {
-                EducacionContinua nuevaEducacionContinua = new EducacionContinua();
-                nuevaEducacionContinua.setId(educacionContinua.getId());
-                nuevaEducacionContinua.setTipoCapacitacion(Util.obtenerEntero(educacionContinua.getTipoCapacitacion()));
-                nuevaEducacionContinua.setInstitucion(Util.obtenerEntero(educacionContinua.getInstitucion()));
-                nuevaEducacionContinua.setNombreCapacitacion(educacionContinua.getNombreCapacitacion());
-                nuevaEducacionContinua.setNucleoBasicoConocimiento(Util.obtenerEntero(educacionContinua.getNucleoBasicoConocimiento()));
-                nuevaEducacionContinua.setNumeroHoras(Util.obtenerEntero(educacionContinua.getNumeroHoras()));
-                nuevaEducacionContinua.setAnyo(Util.obtenerEntero(educacionContinua.getAnyo()));
-                if (educacionContinua.getCertificado() != null && educacionContinua.getCertificado().getBytes().length > 0) {
-                    documento = new Documento();
-                    documento.setContenido(educacionContinua.getCertificado().getBytes());
-                    documento.setNombre(educacionContinua.getCertificado().getOriginalFilename());
-                    documento.setTipoContenido(educacionContinua.getCertificado().getContentType());
-                    nuevaEducacionContinua.setCertificado(documento);
-                }
-                hojaVidaIngresar.getEducacionesContinuas().add(nuevaEducacionContinua);
-            }
-
-            for (co.edu.fnsp.buho.entidadesVista.Distincion distincion : hojaVida.getDistinciones()) {
-                Distincion nuevaDistincion = new Distincion();
-                nuevaDistincion.setId(distincion.getId());
-                nuevaDistincion.setDescripcion(distincion.getDescripcion());
-                nuevaDistincion.setFechaDistincion(Util.obtenerFecha(distincion.getFechaDistincion()));
-                nuevaDistincion.setInstitucionOtorga(distincion.getInstitucionOtorga());
-                if (distincion.getCertificado() != null && distincion.getCertificado().getBytes().length > 0) {
-                    documento = new Documento();
-                    documento.setContenido(distincion.getCertificado().getBytes());
-                    documento.setNombre(distincion.getCertificado().getOriginalFilename());
-                    documento.setTipoContenido(distincion.getCertificado().getContentType());
-                    nuevaDistincion.setCertificado(documento);
-                }
-                hojaVidaIngresar.getDistinciones().add(nuevaDistincion);
-            }
-
-            for (co.edu.fnsp.buho.entidadesVista.ExperienciaLaboral experienciaLaboral : hojaVida.getExperienciasLaborales()) {
-                ExperienciaLaboral nuevaExperienciaLaboral = new ExperienciaLaboral();
-                nuevaExperienciaLaboral.setId(experienciaLaboral.getId());
-                nuevaExperienciaLaboral.setActividadEconomica(Util.obtenerEntero(experienciaLaboral.getActividadEconomica()));
-                nuevaExperienciaLaboral.setNucleoBasicoConocimiento(Util.obtenerEntero(experienciaLaboral.getNucleoBasicoConocimiento()));
-                nuevaExperienciaLaboral.setCargo(experienciaLaboral.getCargo());
-                nuevaExperienciaLaboral.setNaturalezaCargo(Util.obtenerEntero(experienciaLaboral.getNaturalezaCargo()));
-                nuevaExperienciaLaboral.setTipoContrato(Util.obtenerEntero(experienciaLaboral.getTipoContrato()));
-                nuevaExperienciaLaboral.setTipoEmpresa(Util.obtenerEntero(experienciaLaboral.getTipoEmpresa()));
-                nuevaExperienciaLaboral.setTipoExperiencia(Util.obtenerEntero(experienciaLaboral.getTipoExperiencia()));
-                nuevaExperienciaLaboral.setFnsp(experienciaLaboral.isFnsp());
-                nuevaExperienciaLaboral.setTrabajoActual(experienciaLaboral.isTrabajoActual());
-                nuevaExperienciaLaboral.setFechaIngreso(Util.obtenerFecha(experienciaLaboral.getFechaIngreso()));
-                nuevaExperienciaLaboral.setFechaRetiro(Util.obtenerFecha(experienciaLaboral.getFechaRetiro()));
-                nuevaExperienciaLaboral.setNombreEmpresa(experienciaLaboral.getNombreEmpresa());
-
-                if (experienciaLaboral.getCertificado() != null && experienciaLaboral.getCertificado().getBytes().length > 0) {
-                    documento = new Documento();
-                    documento.setContenido(experienciaLaboral.getCertificado().getBytes());
-                    documento.setNombre(experienciaLaboral.getCertificado().getOriginalFilename());
-                    documento.setTipoContenido(experienciaLaboral.getCertificado().getContentType());
-                    nuevaExperienciaLaboral.setCertificado(documento);
-                }
-                hojaVidaIngresar.getExperienciasLaborales().add(nuevaExperienciaLaboral);
-            }
-
-            for (co.edu.fnsp.buho.entidadesVista.ExperienciaDocencia experienciaDocencia : hojaVida.getExperienciasDocencia()) {
-                ExperienciaDocencia nuevaExperienciaDocencia = new ExperienciaDocencia();
-                nuevaExperienciaDocencia.setId(experienciaDocencia.getId());
-                nuevaExperienciaDocencia.setFnsp(experienciaDocencia.isFnsp());
-                nuevaExperienciaDocencia.setTrabajoActual(experienciaDocencia.isTrabajoActual());
-                nuevaExperienciaDocencia.setInstitucion(Util.obtenerEntero(experienciaDocencia.getInstitucion()));
-                for (co.edu.fnsp.buho.entidadesVista.CursoExperienciaDocencia cursoExperienciaDocencia : experienciaDocencia.getCursosExperienciaDocencia()) {
-                    CursoExperienciaDocencia nuevoCursoExperienciaDocencia = new CursoExperienciaDocencia();
-                    nuevoCursoExperienciaDocencia.setId(cursoExperienciaDocencia.getId());
-                    nuevoCursoExperienciaDocencia.setAnyo(Util.obtenerEntero(cursoExperienciaDocencia.getAnyo()));
-                    nuevoCursoExperienciaDocencia.setNucleoBasicoConocimiento(Util.obtenerEntero(cursoExperienciaDocencia.getNucleoBasicoConocimiento()));
-                    nuevoCursoExperienciaDocencia.setModalidad(Util.obtenerEntero(cursoExperienciaDocencia.getModalidad()));
-                    nuevoCursoExperienciaDocencia.setNivelEstudio(Util.obtenerEntero(cursoExperienciaDocencia.getNivelEstudio()));
-                    nuevoCursoExperienciaDocencia.setNumeroHoras(Util.obtenerEntero(cursoExperienciaDocencia.getNumeroHoras()));
-                    nuevoCursoExperienciaDocencia.setNombreCurso(cursoExperienciaDocencia.getNombreCurso());
-                    if (cursoExperienciaDocencia.getCertificado() != null && cursoExperienciaDocencia.getCertificado().getBytes().length > 0) {
-                        documento = new Documento();
-                        documento.setContenido(cursoExperienciaDocencia.getCertificado().getBytes());
-                        documento.setNombre(cursoExperienciaDocencia.getCertificado().getOriginalFilename());
-                        documento.setTipoContenido(cursoExperienciaDocencia.getCertificado().getContentType());
-                        nuevoCursoExperienciaDocencia.setCertificado(documento);
-                    }
-                    nuevaExperienciaDocencia.getCursosExperienciaDocencia().add(nuevoCursoExperienciaDocencia);
-                }
-                hojaVidaIngresar.getExperienciasDocencia().add(nuevaExperienciaDocencia);
-            }
-
-            for (Articulo articulo : hojaVida.getArticulos()) {
-                hojaVidaIngresar.getArticulos().add(articulo);
-            }
-
-            for (co.edu.fnsp.buho.entidadesVista.Patente patente : hojaVida.getPatentes()) {
-                Patente nuevaPatente = new Patente();
-                nuevaPatente.setId(patente.getId());
-                nuevaPatente.setDescripcion(patente.getDescripcion());
-                nuevaPatente.setClase(patente.getClase());
-                nuevaPatente.setTipo(patente.getTipo());
-                nuevaPatente.setFecha(Util.obtenerFecha(patente.getFecha()));
-                nuevaPatente.setPropiedadCompartida(patente.isPropiedadCompartida());
-                if (patente.getDocumento() != null && patente.getDocumento().getBytes().length > 0) {
-                    documento = new Documento();
-                    documento.setContenido(patente.getDocumento().getBytes());
-                    documento.setNombre(patente.getDocumento().getOriginalFilename());
-                    documento.setTipoContenido(patente.getDocumento().getContentType());
-                    nuevaPatente.setDocumento(documento);
-                }
-                hojaVidaIngresar.getPatentes().add(nuevaPatente);
-            }
-
-            for (co.edu.fnsp.buho.entidadesVista.ProductoConocimiento productoConocimiento : hojaVida.getProductosConocimiento()) {
-                ProductoConocimiento nuevoProductoConocimiento = new ProductoConocimiento();
-                nuevoProductoConocimiento.setId(productoConocimiento.getId());
-                nuevoProductoConocimiento.setDescripcion(productoConocimiento.getDescripcion());
-                nuevoProductoConocimiento.setNucleoBasicoConocimiento(productoConocimiento.getNucleoBasicoConocimiento());
-                nuevoProductoConocimiento.setTipo(productoConocimiento.getTipo());
-                nuevoProductoConocimiento.setUrl(productoConocimiento.getUrl());
-                if (productoConocimiento.getDocumento() != null && productoConocimiento.getDocumento().getBytes().length > 0) {
-                    documento = new Documento();
-                    documento.setContenido(productoConocimiento.getDocumento().getBytes());
-                    documento.setNombre(productoConocimiento.getDocumento().getOriginalFilename());
-                    documento.setTipoContenido(productoConocimiento.getDocumento().getContentType());
-                    nuevoProductoConocimiento.setDocumento(documento);
-                }
-                hojaVidaIngresar.getProductosConocimiento().add(nuevoProductoConocimiento);
             }
 
             long idUsuario = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario();
@@ -403,10 +184,10 @@ public class HojaVidaController {
         if (tab != null && tab.length() > 0) {
             model.addAttribute("tab", tab);
         }
-        
+
         return "hojasVida/editar";
     }
-    
+
     @RequestMapping(value = "/editar", method = RequestMethod.GET)
     public String editarHojaVidaUsuarioActual(Model model) {
         long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
@@ -416,7 +197,7 @@ public class HojaVidaController {
         }
 
         establecerHojaVida(model);
-        
+
         return "hojasVida/editar";
     }
 
@@ -686,7 +467,7 @@ public class HojaVidaController {
         }
     }
 
-   @RequestMapping(value = "/institucion", method = RequestMethod.POST)
+    @RequestMapping(value = "/institucion", method = RequestMethod.POST)
     public @ResponseBody
     String ingresarInstitucionPrograma(@ModelAttribute Institucion institucion, Model model) throws ParseException, IOException {
         try {
@@ -698,7 +479,7 @@ public class HojaVidaController {
             return "";
         }
     }
-    
+
     @RequestMapping(value = "/ciudad", method = RequestMethod.POST)
     public @ResponseBody
     String ingresarCiudad(@ModelAttribute Ciudad ciudad, Model model) throws ParseException, IOException {
@@ -739,7 +520,7 @@ public class HojaVidaController {
     }
 
     private void establecerHojaVida(Model model) {
-       long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+        long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
 
         List<Maestro> paises = servicioMaestro.obtenerPaises();
         List<Maestro> tiposIdentificacion = servicioMaestro.obtenerTiposIdentificacion();
@@ -843,4 +624,804 @@ public class HojaVidaController {
         model.addAttribute("hojaVida", hojaVida);
 
     }
+
+    @RequestMapping(value = {"/documentoSoporte"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarDocumentoSoporte(@ModelAttribute(value = "documentoSoporte") co.edu.fnsp.buho.entidadesVista.DocumentoSoporte documentoSoporte, Model model) throws Exception {
+        String json = "";
+        try {
+            DocumentoSoporte nuevoDocumentoSoporte = new DocumentoSoporte();
+            nuevoDocumentoSoporte.setId(documentoSoporte.getId());
+            nuevoDocumentoSoporte.setTipoDocumento(Util.obtenerEntero(documentoSoporte.getTipoDocumento()));
+            if (documentoSoporte.getDocumento() != null) {
+                MultipartFile multipartFile = (MultipartFile) documentoSoporte.getDocumento();
+                if (multipartFile.getBytes().length > 0) {
+                    Documento documento = new Documento();
+                    documento.setContenido(multipartFile.getBytes());
+                    documento.setNombre(multipartFile.getOriginalFilename());
+                    documento.setTipoContenido(multipartFile.getContentType());
+                    nuevoDocumentoSoporte.setDocumento(documento);
+                }
+            }
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.guardarDocumentoSoporte(idPersona, nuevoDocumentoSoporte);
+            List<DocumentoSoporte> documentosSoporte = servicioHojaVida.obtenerDocumentosSoporte(idPersona);
+            Util.establecerConsecutivoDocumentoSoporte(documentosSoporte);
+            Gson gson = new Gson();
+            json = gson.toJson(documentosSoporte);
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarDocumentoSoporte/{idDocumentoSoporte}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarDocumentoSoporte(@PathVariable("idDocumentoSoporte") int idDocumentoSoporte, Model model) {
+        String json = "";
+        try {
+            servicioHojaVida.eliminarDocumentoSoporte(idDocumentoSoporte);
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<DocumentoSoporte> documentosSoporte = servicioHojaVida.obtenerDocumentosSoporte(idPersona);
+            Util.establecerConsecutivoDocumentoSoporte(documentosSoporte);
+            Gson gson = new Gson();
+            json = gson.toJson(documentosSoporte);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/educacionBasica"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarEducacionBasica(@ModelAttribute(value = "educacionBasica") co.edu.fnsp.buho.entidadesVista.EducacionBasica educacionBasica, Model model) throws Exception {
+        String json = "";
+        try {
+            EducacionBasica nuevaEducacionBasica = new EducacionBasica();
+            nuevaEducacionBasica.setId(educacionBasica.getId());
+            nuevaEducacionBasica.setInstitucion(educacionBasica.getInstitucion());
+            if (!"".equals(educacionBasica.getAnyoFinalizacion())) {
+                nuevaEducacionBasica.setAnyoFinalizacion(Util.obtenerEntero(educacionBasica.getAnyoFinalizacion()));
+            }
+            nuevaEducacionBasica.setAnyoInicio(Util.obtenerEntero(educacionBasica.getAnyoInicio()));
+            nuevaEducacionBasica.setNivel(Util.obtenerEntero(educacionBasica.getNivel()));
+            nuevaEducacionBasica.setGraduado(educacionBasica.isGraduado());
+            nuevaEducacionBasica.setTitulo(educacionBasica.getTitulo());
+            if (educacionBasica.getCertificado() != null) {
+                MultipartFile multipartFile = (MultipartFile) educacionBasica.getCertificado();
+                if (multipartFile.getBytes().length > 0) {
+                    Documento documento = new Documento();
+                    documento.setContenido(multipartFile.getBytes());
+                    documento.setNombre(multipartFile.getOriginalFilename());
+                    documento.setTipoContenido(multipartFile.getContentType());
+                    nuevaEducacionBasica.setCertificado(documento);
+                }
+            }
+
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.guardarEducacionBasica(idPersona, nuevaEducacionBasica);
+            List<EducacionBasica> educacionesBasicas = servicioHojaVida.obtenerEducacionesBasicas(idPersona);
+            Util.establecerConsecutivoEducacionBasica(educacionesBasicas);
+            Gson gson = new Gson();
+            json = gson.toJson(educacionesBasicas);
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarEducacionBasica/{idEducacionBasica}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarEducacionBasica(@PathVariable("idEducacionBasica") int idEducacionBasica, Model model) {
+        String json = "";
+        try {
+            servicioHojaVida.eliminarEducacionBasica(idEducacionBasica);
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<EducacionBasica> educacionesBasicas = servicioHojaVida.obtenerEducacionesBasicas(idPersona);
+            Util.establecerConsecutivoEducacionBasica(educacionesBasicas);
+            Gson gson = new Gson();
+            json = gson.toJson(educacionesBasicas);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/educacionSuperior"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarEducacionSuperior(@ModelAttribute(value = "educacionSuperior") co.edu.fnsp.buho.entidadesVista.EducacionSuperior educacionSuperior, Model model) throws Exception {
+        String json = "";
+        try {
+            EducacionSuperior nuevaEducacionSuperior = new EducacionSuperior();
+            nuevaEducacionSuperior.setId(educacionSuperior.getId());
+            nuevaEducacionSuperior.setTituloExterior(educacionSuperior.isTituloExterior());
+            if (educacionSuperior.isTituloExterior()) {
+                nuevaEducacionSuperior.setPaisTituloExterior(Util.obtenerEntero(educacionSuperior.getPaisTituloExterior()));
+                if (educacionSuperior.getCertificadoHomologado() != null) {
+                    MultipartFile multipartFile = (MultipartFile) educacionSuperior.getCertificado();
+                    if (multipartFile.getBytes().length > 0) {
+                        Documento documento = new Documento();
+                        documento.setContenido(multipartFile.getBytes());
+                        documento.setNombre(multipartFile.getOriginalFilename());
+                        documento.setTipoContenido(multipartFile.getContentType());
+                        nuevaEducacionSuperior.setCertificadoHomologado(documento);
+                    }
+                }
+            }
+            nuevaEducacionSuperior.setTitulo(educacionSuperior.getTitulo());
+            nuevaEducacionSuperior.setPrograma(Util.obtenerEntero(educacionSuperior.getPrograma()));
+            nuevaEducacionSuperior.setFechaTitulo(Util.obtenerFecha(educacionSuperior.getFechaTitulo()));
+            if (!"".equals(educacionSuperior.getAnyoFinalizacion())) {
+                nuevaEducacionSuperior.setAnyoFinalizacion(Util.obtenerEntero(educacionSuperior.getAnyoFinalizacion()));
+            }
+            nuevaEducacionSuperior.setAnyoInicio(Util.obtenerEntero(educacionSuperior.getAnyoInicio()));
+            nuevaEducacionSuperior.setNivel(Util.obtenerEntero(educacionSuperior.getNivel()));
+            nuevaEducacionSuperior.setGraduado(educacionSuperior.isGraduado());
+            if (educacionSuperior.getCertificado() != null) {
+                MultipartFile multipartFile = (MultipartFile) educacionSuperior.getCertificado();
+                if (multipartFile.getBytes().length > 0) {
+                    Documento documento = new Documento();
+                    documento.setContenido(multipartFile.getBytes());
+                    documento.setNombre(multipartFile.getOriginalFilename());
+                    documento.setTipoContenido(multipartFile.getContentType());
+                    nuevaEducacionSuperior.setCertificado(documento);
+                }
+            }
+
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.guardarEducacionSuperior(idPersona, nuevaEducacionSuperior);
+            List<EducacionSuperior> educacionesSuperiores = servicioHojaVida.obtenerEducacionesSuperiores(idPersona);
+            Util.establecerConsecutivoEducacionSuperior(educacionesSuperiores);
+            Gson gson = new Gson();
+            json = gson.toJson(educacionesSuperiores);
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarEducacionSuperior/{idEducacionSuperior}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarEducacionSuperior(@PathVariable("idEducacionSuperior") int idEducacionSuperior, Model model) {
+        String json = "";
+        try {
+            servicioHojaVida.eliminarEducacionSuperior(idEducacionSuperior);
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<EducacionSuperior> educacionesSuperiores = servicioHojaVida.obtenerEducacionesSuperiores(idPersona);
+            Util.establecerConsecutivoEducacionSuperior(educacionesSuperiores);
+            Gson gson = new Gson();
+            json = gson.toJson(educacionesSuperiores);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/correoElectronico"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarCorreoElectronico(@ModelAttribute(value = "correoElectronico") CorreoElectronico correoElectronico, Model model) throws Exception {
+        String json = "";
+        try {
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.guardarCorreoElectronico(idPersona, correoElectronico);
+            List<CorreoElectronico> correosElectronicos = servicioHojaVida.obtenerCorreosElectronicos(idPersona);
+            Util.establecerConsecutivoCorreoElectronico(correosElectronicos);
+            Gson gson = new Gson();
+            json = gson.toJson(correosElectronicos);
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarCorreoElectronico/{idCorreoElectronico}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarCorreoElectronico(@PathVariable("idCorreoElectronico") int idCorreoElectronico, Model model) {
+        String json = "";
+        try {
+            servicioHojaVida.eliminarCorreoElectronico(idCorreoElectronico);
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<CorreoElectronico> correosElectronicos = servicioHojaVida.obtenerCorreosElectronicos(idPersona);
+            Util.establecerConsecutivoCorreoElectronico(correosElectronicos);
+            Gson gson = new Gson();
+            json = gson.toJson(correosElectronicos);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/telefono"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarTelefono(@ModelAttribute(value = "telefono") Telefono telefono, Model model) throws Exception {
+        String json = "";
+        try {
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.guardarTelefono(idPersona, telefono);
+            List<Telefono> telefonos = servicioHojaVida.obtenerTelefonos(idPersona);
+            Util.establecerConsecutivoTelefono(telefonos);
+            Gson gson = new Gson();
+            json = gson.toJson(telefonos);
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarTelefono/{idTelefono}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarTelefono(@PathVariable("idTelefono") int idTelefono, Model model) {
+        String json = "";
+        try {
+            servicioHojaVida.eliminarTelefono(idTelefono);
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<Telefono> telefonos = servicioHojaVida.obtenerTelefonos(idPersona);
+            Util.establecerConsecutivoTelefono(telefonos);
+            Gson gson = new Gson();
+            json = gson.toJson(telefonos);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/cuentaBancaria"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarCuentaBancaria(@ModelAttribute(value = "cuentaBancaria") CuentaBancaria cuentaBancaria, Model model) throws Exception {
+        String json = "";
+        try {
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.guardarCuentaBancaria(idPersona, cuentaBancaria);
+            List<CuentaBancaria> cuentasBancarias = servicioHojaVida.obtenerCuentasBancarias(idPersona);
+            Util.establecerConsecutivoCuentaBancaria(cuentasBancarias);
+            Gson gson = new Gson();
+            json = gson.toJson(cuentasBancarias);
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarCuentaBancaria/{idCuentaBancaria}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarCuentaBancaria(@PathVariable("idCuentaBancaria") int idCuentaBancaria, Model model) {
+        String json = "";
+        try {
+            servicioHojaVida.eliminarCuentaBancaria(idCuentaBancaria);
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<CuentaBancaria> cuentasBancarias = servicioHojaVida.obtenerCuentasBancarias(idPersona);
+            Util.establecerConsecutivoCuentaBancaria(cuentasBancarias);
+            Gson gson = new Gson();
+            json = gson.toJson(cuentasBancarias);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/educacionContinua"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarEducacionContinua(@ModelAttribute(value = "educacionContinua") co.edu.fnsp.buho.entidadesVista.EducacionContinua educacionContinua, Model model) throws Exception {
+        String json = "";
+        try {
+            EducacionContinua nuevaEducacionContinua = new EducacionContinua();
+            nuevaEducacionContinua.setId(educacionContinua.getId());
+            nuevaEducacionContinua.setTipoCapacitacion(Util.obtenerEntero(educacionContinua.getTipoCapacitacion()));
+            nuevaEducacionContinua.setInstitucion(Util.obtenerEntero(educacionContinua.getInstitucion()));
+            nuevaEducacionContinua.setNombreCapacitacion(educacionContinua.getNombreCapacitacion());
+            nuevaEducacionContinua.setNucleoBasicoConocimiento(Util.obtenerEntero(educacionContinua.getNucleoBasicoConocimiento()));
+            nuevaEducacionContinua.setNumeroHoras(Util.obtenerEntero(educacionContinua.getNumeroHoras()));
+            nuevaEducacionContinua.setAnyo(Util.obtenerEntero(educacionContinua.getAnyo()));
+            if (educacionContinua.getCertificado() != null) {
+                MultipartFile multipartFile = (MultipartFile) educacionContinua.getCertificado();
+                if (multipartFile.getBytes().length > 0) {
+                    Documento documento = new Documento();
+                    documento.setContenido(multipartFile.getBytes());
+                    documento.setNombre(multipartFile.getOriginalFilename());
+                    documento.setTipoContenido(multipartFile.getContentType());
+                    nuevaEducacionContinua.setCertificado(documento);
+                }
+            }
+
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.guardarEducacionContinua(idPersona, nuevaEducacionContinua);
+            List<EducacionContinua> educacionesContinuas = servicioHojaVida.obtenerEducacionesContinuas(idPersona);
+            Util.establecerConsecutivoEducacionContinua(educacionesContinuas);
+            Gson gson = new Gson();
+            json = gson.toJson(educacionesContinuas);
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarEducacionContinua/{idEducacionContinua}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarEducacionContinua(@PathVariable("idEducacionContinua") int idEducacionContinua, Model model) {
+        String json = "";
+        try {
+            servicioHojaVida.eliminarEducacionContinua(idEducacionContinua);
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<EducacionContinua> educacionesContinuas = servicioHojaVida.obtenerEducacionesContinuas(idPersona);
+            Util.establecerConsecutivoEducacionContinua(educacionesContinuas);
+            Gson gson = new Gson();
+            json = gson.toJson(educacionesContinuas);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/idioma"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarIdioma(@ModelAttribute(value = "idioma") co.edu.fnsp.buho.entidadesVista.Idioma idioma, Model model) throws Exception {
+        String json = "";
+        try {
+            Idioma nuevoIdioma = new Idioma();
+            nuevoIdioma.setId(idioma.getId());
+            nuevoIdioma.setIdioma(Util.obtenerEntero(idioma.getIdioma()));
+            nuevoIdioma.setNivelConversacion(idioma.getNivelConversacion());
+            nuevoIdioma.setNivelLectura(idioma.getNivelLectura());
+            nuevoIdioma.setNivelEscritura(idioma.getNivelEscritura());
+            nuevoIdioma.setNivelEscucha(idioma.getNivelEscucha());
+            nuevoIdioma.setOtraCertificacion(idioma.getOtraCertificacion());
+            nuevoIdioma.setTipoCertificacion(idioma.getTipoCertificacion());
+            nuevoIdioma.setPuntajeCertificacion(Util.obtenerNumeroDoble(idioma.getPuntajeCertificacion()));
+            if (idioma.getCertificado() != null) {
+                MultipartFile multipartFile = (MultipartFile) idioma.getCertificado();
+                if (multipartFile.getBytes().length > 0) {
+                    Documento documento = new Documento();
+                    documento.setContenido(multipartFile.getBytes());
+                    documento.setNombre(multipartFile.getOriginalFilename());
+                    documento.setTipoContenido(multipartFile.getContentType());
+                    nuevoIdioma.setCertificado(documento);
+                }
+            }
+
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.guardarIdioma(idPersona, nuevoIdioma);
+            List<Idioma> idiomas = servicioHojaVida.obtenerIdiomas(idPersona);
+            Util.establecerConsecutivoIdioma(idiomas);
+            Gson gson = new Gson();
+            json = gson.toJson(idiomas);
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarIdioma/{idIdioma}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarIdioma(@PathVariable("idIdioma") int idIdioma, Model model) {
+        String json = "";
+        try {
+            servicioHojaVida.eliminarIdioma(idIdioma);
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<Idioma> idiomas = servicioHojaVida.obtenerIdiomas(idPersona);
+            Util.establecerConsecutivoIdioma(idiomas);
+            Gson gson = new Gson();
+            json = gson.toJson(idiomas);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/distincion"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarDistincion(@ModelAttribute(value = "distincion") co.edu.fnsp.buho.entidadesVista.Distincion distincion, Model model) throws Exception {
+        String json = "";
+        try {
+            Distincion nuevaDistincion = new Distincion();
+            nuevaDistincion.setId(distincion.getId());
+            nuevaDistincion.setDescripcion(distincion.getDescripcion());
+            nuevaDistincion.setFechaDistincion(Util.obtenerFecha(distincion.getFechaDistincion()));
+            nuevaDistincion.setInstitucionOtorga(distincion.getInstitucionOtorga());
+            if (distincion.getCertificado() != null) {
+                MultipartFile multipartFile = (MultipartFile) distincion.getCertificado();
+                if (multipartFile.getBytes().length > 0) {
+                    Documento documento = new Documento();
+                    documento.setContenido(multipartFile.getBytes());
+                    documento.setNombre(multipartFile.getOriginalFilename());
+                    documento.setTipoContenido(multipartFile.getContentType());
+                    nuevaDistincion.setCertificado(documento);
+                }
+            }
+
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.guardarDistincion(idPersona, nuevaDistincion);
+            List<Distincion> distincions = servicioHojaVida.obtenerDistinciones(idPersona);
+            Util.establecerConsecutivoDistincion(distincions);
+            Gson gson = new Gson();
+            json = gson.toJson(distincions);
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarDistincion/{idDistincion}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarDistincion(@PathVariable("idDistincion") int idDistincion, Model model) {
+        String json = "";
+        try {
+            servicioHojaVida.eliminarDistincion(idDistincion);
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<Distincion> distincions = servicioHojaVida.obtenerDistinciones(idPersona);
+            Util.establecerConsecutivoDistincion(distincions);
+            Gson gson = new Gson();
+            json = gson.toJson(distincions);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/experienciaLaboral"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarExperienciaLaboral(@ModelAttribute(value = "experienciaLaboral") co.edu.fnsp.buho.entidadesVista.ExperienciaLaboral experienciaLaboral, Model model) throws Exception {
+        String json = "";
+        try {
+            ExperienciaLaboral nuevaExperienciaLaboral = new ExperienciaLaboral();
+            nuevaExperienciaLaboral.setId(experienciaLaboral.getId());
+            nuevaExperienciaLaboral.setActividadEconomica(Util.obtenerEntero(experienciaLaboral.getActividadEconomica()));
+            nuevaExperienciaLaboral.setNucleoBasicoConocimiento(Util.obtenerEntero(experienciaLaboral.getNucleoBasicoConocimiento()));
+            nuevaExperienciaLaboral.setCargo(experienciaLaboral.getCargo());
+            nuevaExperienciaLaboral.setNaturalezaCargo(Util.obtenerEntero(experienciaLaboral.getNaturalezaCargo()));
+            nuevaExperienciaLaboral.setTipoContrato(Util.obtenerEntero(experienciaLaboral.getTipoContrato()));
+            nuevaExperienciaLaboral.setTipoEmpresa(Util.obtenerEntero(experienciaLaboral.getTipoEmpresa()));
+            nuevaExperienciaLaboral.setTipoExperiencia(Util.obtenerEntero(experienciaLaboral.getTipoExperiencia()));
+            nuevaExperienciaLaboral.setFnsp(experienciaLaboral.isFnsp());
+            nuevaExperienciaLaboral.setTrabajoActual(experienciaLaboral.isTrabajoActual());
+            nuevaExperienciaLaboral.setFechaIngreso(Util.obtenerFecha(experienciaLaboral.getFechaIngreso()));
+            nuevaExperienciaLaboral.setFechaRetiro(Util.obtenerFecha(experienciaLaboral.getFechaRetiro()));
+            nuevaExperienciaLaboral.setNombreEmpresa(experienciaLaboral.getNombreEmpresa());
+            if (experienciaLaboral.getCertificado() != null) {
+                MultipartFile multipartFile = (MultipartFile) experienciaLaboral.getCertificado();
+                if (multipartFile.getBytes().length > 0) {
+                    Documento documento = new Documento();
+                    documento.setContenido(multipartFile.getBytes());
+                    documento.setNombre(multipartFile.getOriginalFilename());
+                    documento.setTipoContenido(multipartFile.getContentType());
+                    nuevaExperienciaLaboral.setCertificado(documento);
+                }
+            }
+
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.guardarExperienciaLaboral(idPersona, nuevaExperienciaLaboral);
+            List<ExperienciaLaboral> experienciasLaborales = servicioHojaVida.obtenerExperienciasLaborales(idPersona);
+            Util.establecerConsecutivoExperienciaLaboral(experienciasLaborales);
+            Gson gson = new Gson();
+            json = gson.toJson(experienciasLaborales);
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarExperienciaLaboral/{idExperienciaLaboral}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarExperienciaLaboral(@PathVariable("idExperienciaLaboral") int idExperienciaLaboral, Model model) {
+        String json = "";
+        try {
+            servicioHojaVida.eliminarExperienciaLaboral(idExperienciaLaboral);
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<ExperienciaLaboral> experienciasLaborales = servicioHojaVida.obtenerExperienciasLaborales(idPersona);
+            Util.establecerConsecutivoExperienciaLaboral(experienciasLaborales);
+            Gson gson = new Gson();
+            json = gson.toJson(experienciasLaborales);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/experienciaDocencia"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarExperienciaDocencia(@ModelAttribute(value = "experienciaDocencia") co.edu.fnsp.buho.entidadesVista.ExperienciaDocencia experienciaDocencia, Model model) throws Exception {
+        String json = "";
+        try {
+            ExperienciaDocencia nuevaExperienciaDocencia = new ExperienciaDocencia();
+            nuevaExperienciaDocencia.setId(experienciaDocencia.getId());
+            nuevaExperienciaDocencia.setFnsp(experienciaDocencia.isFnsp());
+            nuevaExperienciaDocencia.setTrabajoActual(experienciaDocencia.isTrabajoActual());
+            nuevaExperienciaDocencia.setInstitucion(Util.obtenerEntero(experienciaDocencia.getInstitucion()));
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            int id = servicioHojaVida.guardarExperienciaDocencia(idPersona, nuevaExperienciaDocencia);
+            List<ExperienciaDocencia> experienciasDocencia = servicioHojaVida.obtenerExperienciasDocencia(idPersona);
+            Util.establecerConsecutivoExperienciaDocencia(experienciasDocencia);
+            Gson gson = new Gson();
+            json = gson.toJson(experienciasDocencia);
+            json = "{\"id\":" + id + ",\"experienciasDocencia\":" + json + "}";
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarExperienciaDocencia/{idExperienciaDocencia}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarExperienciaDocencia(@PathVariable("idExperienciaDocencia") int idExperienciaDocencia, Model model) {
+        String json = "";
+        try {
+            servicioHojaVida.eliminarExperienciaDocencia(idExperienciaDocencia);
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<ExperienciaDocencia> experienciasDocencia = servicioHojaVida.obtenerExperienciasDocencia(idPersona);
+            Util.establecerConsecutivoExperienciaDocencia(experienciasDocencia);
+            Gson gson = new Gson();
+            json = gson.toJson(experienciasDocencia);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/cursoExperienciaDocencia"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarCursoExperienciaDocencia(@ModelAttribute(value = "cursoExperienciaDocencia") co.edu.fnsp.buho.entidadesVista.CursoExperienciaDocencia cursoExperienciaDocencia, Model model) throws Exception {
+        String json = "";
+        try {
+            CursoExperienciaDocencia nuevoCursoExperienciaDocencia = new CursoExperienciaDocencia();
+            nuevoCursoExperienciaDocencia.setId(cursoExperienciaDocencia.getId());
+            nuevoCursoExperienciaDocencia.setIdExperienciaDocencia(cursoExperienciaDocencia.getIdExperienciaDocencia());
+            nuevoCursoExperienciaDocencia.setAnyo(Util.obtenerEntero(cursoExperienciaDocencia.getAnyo()));
+            nuevoCursoExperienciaDocencia.setNucleoBasicoConocimiento(Util.obtenerEntero(cursoExperienciaDocencia.getNucleoBasicoConocimiento()));
+            nuevoCursoExperienciaDocencia.setModalidad(Util.obtenerEntero(cursoExperienciaDocencia.getModalidad()));
+            nuevoCursoExperienciaDocencia.setNivelEstudio(Util.obtenerEntero(cursoExperienciaDocencia.getNivelEstudio()));
+            nuevoCursoExperienciaDocencia.setNumeroHoras(Util.obtenerEntero(cursoExperienciaDocencia.getNumeroHoras()));
+            nuevoCursoExperienciaDocencia.setNombreCurso(cursoExperienciaDocencia.getNombreCurso());
+            if (cursoExperienciaDocencia.getCertificado() != null) {
+                MultipartFile multipartFile = (MultipartFile) cursoExperienciaDocencia.getCertificado();
+                if (multipartFile.getBytes().length > 0) {
+                    Documento documento = new Documento();
+                    documento.setContenido(multipartFile.getBytes());
+                    documento.setNombre(multipartFile.getOriginalFilename());
+                    documento.setTipoContenido(multipartFile.getContentType());
+                    nuevoCursoExperienciaDocencia.setCertificado(documento);
+                }
+            }
+
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.guardarCursoExperienciaDocencia(idPersona, nuevoCursoExperienciaDocencia);
+            List<ExperienciaDocencia> experienciasDocencia = servicioHojaVida.obtenerExperienciasDocencia(idPersona);
+            Util.establecerConsecutivoExperienciaDocencia(experienciasDocencia);
+            Gson gson = new Gson();
+            json = gson.toJson(experienciasDocencia);
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarCursoExperienciaDocencia/{idCursoExperienciaDocencia}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarCursoExperienciaDocencia(@PathVariable("idCursoExperienciaDocencia") int idCursoExperienciaDocencia, Model model) {
+        String json = "";
+        try {
+            servicioHojaVida.eliminarCursoExperienciaDocencia(idCursoExperienciaDocencia);
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<ExperienciaDocencia> experienciasDocencia = servicioHojaVida.obtenerExperienciasDocencia(idPersona);
+            Util.establecerConsecutivoExperienciaDocencia(experienciasDocencia);
+            Gson gson = new Gson();
+            json = gson.toJson(experienciasDocencia);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/articulo"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarArticulo(@ModelAttribute(value = "articulo") Articulo articulo, Model model) throws Exception {
+        String json = "";
+        try {
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.guardarArticulo(idPersona, articulo);
+            List<Articulo> telefonos = servicioHojaVida.obtenerArticulos(idPersona);
+            Util.establecerConsecutivoArticulo(telefonos);
+            Gson gson = new Gson();
+            json = gson.toJson(telefonos);
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarArticulo/{idArticulo}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarArticulo(@PathVariable("idArticulo") int idArticulo, Model model) {
+        String json = "";
+        try {
+            servicioHojaVida.eliminarArticulo(idArticulo);
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<Articulo> telefonos = servicioHojaVida.obtenerArticulos(idPersona);
+            Util.establecerConsecutivoArticulo(telefonos);
+            Gson gson = new Gson();
+            json = gson.toJson(telefonos);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/patente"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarPatente(@ModelAttribute(value = "patente") co.edu.fnsp.buho.entidadesVista.Patente patente, Model model) throws Exception {
+        String json = "";
+        try {
+
+            Patente nuevaPatente = new Patente();
+            nuevaPatente.setId(patente.getId());
+            nuevaPatente.setDescripcion(patente.getDescripcion());
+            nuevaPatente.setClase(patente.getClase());
+            nuevaPatente.setTipo(patente.getTipo());
+            nuevaPatente.setFecha(Util.obtenerFecha(patente.getFecha()));
+            nuevaPatente.setPropiedadCompartida(patente.isPropiedadCompartida());
+            if (patente.getDocumento() != null) {
+                MultipartFile multipartFile = (MultipartFile) patente.getDocumento();
+                if (multipartFile.getBytes().length > 0) {
+                    Documento documento = new Documento();
+                    documento.setContenido(multipartFile.getBytes());
+                    documento.setNombre(multipartFile.getOriginalFilename());
+                    documento.setTipoContenido(multipartFile.getContentType());
+                    nuevaPatente.setDocumento(documento);
+                }
+            }
+
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.guardarPatente(idPersona, nuevaPatente);
+            List<Patente> patentes = servicioHojaVida.obtenerPatentes(idPersona);
+            Util.establecerConsecutivoPatente(patentes);
+            Gson gson = new Gson();
+            json = gson.toJson(patentes);
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarPatente/{idPatente}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarPatente(@PathVariable("idPatente") int idPatente, Model model) {
+        String json = "";
+        try {
+            servicioHojaVida.eliminarPatente(idPatente);
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<Patente> patentes = servicioHojaVida.obtenerPatentes(idPersona);
+            Util.establecerConsecutivoPatente(patentes);
+            Gson gson = new Gson();
+            json = gson.toJson(patentes);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/productoConocimiento"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarProductoConocimiento(@ModelAttribute(value = "productoConocimiento") co.edu.fnsp.buho.entidadesVista.ProductoConocimiento productoConocimiento, Model model) throws Exception {
+        String json = "";
+        try {
+
+            ProductoConocimiento nuevoProductoConocimiento = new ProductoConocimiento();
+            nuevoProductoConocimiento.setId(productoConocimiento.getId());
+            nuevoProductoConocimiento.setDescripcion(productoConocimiento.getDescripcion());
+            nuevoProductoConocimiento.setNucleoBasicoConocimiento(productoConocimiento.getNucleoBasicoConocimiento());
+            nuevoProductoConocimiento.setTipo(productoConocimiento.getTipo());
+            nuevoProductoConocimiento.setUrl(productoConocimiento.getUrl());
+            if (productoConocimiento.getDocumento() != null) {
+                MultipartFile multipartFile = (MultipartFile) productoConocimiento.getDocumento();
+                if (multipartFile.getBytes().length > 0) {
+                    Documento documento = new Documento();
+                    documento.setContenido(multipartFile.getBytes());
+                    documento.setNombre(multipartFile.getOriginalFilename());
+                    documento.setTipoContenido(multipartFile.getContentType());
+                    nuevoProductoConocimiento.setDocumento(documento);
+                }
+            }
+
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.guardarProductoConocimiento(idPersona, nuevoProductoConocimiento);
+            List<ProductoConocimiento> productoConocimientos = servicioHojaVida.obtenerProductoConocimientos(idPersona);
+            Util.establecerConsecutivoProductoConocimiento(productoConocimientos);
+            Gson gson = new Gson();
+            json = gson.toJson(productoConocimientos);
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarProductoConocimiento/{idProductoConocimiento}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarProductoConocimiento(@PathVariable("idProductoConocimiento") int idProductoConocimiento, Model model) {
+        String json = "";
+        try {
+            servicioHojaVida.eliminarProductoConocimiento(idProductoConocimiento);
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<ProductoConocimiento> productoConocimientos = servicioHojaVida.obtenerProductoConocimientos(idPersona);
+            Util.establecerConsecutivoProductoConocimiento(productoConocimientos);
+            Gson gson = new Gson();
+            json = gson.toJson(productoConocimientos);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
 }

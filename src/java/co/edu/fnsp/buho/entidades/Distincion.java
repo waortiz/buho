@@ -13,9 +13,11 @@ import java.util.Date;
  */
 public class Distincion {
     private int id;
+    private int consecutivo;
     private String institucionOtorga;
     private String descripcion;
     private Date fechaDistincion;
+    private String fechaDistincionFormateada;
     private Documento certificado;
 
     /**
@@ -86,6 +88,34 @@ public class Distincion {
      */
     public void setCertificado(Documento certificado) {
         this.certificado = certificado;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
+    }
+
+    /**
+     * @return the fechaDistincionFormateada
+     */
+    public String getFechaDistincionFormateada() {
+        return fechaDistincionFormateada;
+    }
+
+    /**
+     * @param fechaDistincionFormateada the fechaDistincionFormateada to set
+     */
+    public void setFechaDistincionFormateada(String fechaDistincionFormateada) {
+        this.fechaDistincionFormateada = fechaDistincionFormateada;
     }
     
 }

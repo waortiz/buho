@@ -13,12 +13,15 @@ import java.util.Date;
  */
 public class ExperienciaLaboral {
     private int id;
+    private int consecutivo;
     private int tipoExperiencia;
     private String nombreTipoExperiencia;
     private boolean trabajoActual;
     private boolean fnsp;
     private Date fechaIngreso;
     private Date fechaRetiro;
+    private String fechaIngresoFormateada;
+    private String fechaRetiroFormateada;
     private int nucleoBasicoConocimiento;
     private String nombreNucleoBasicoConocimiento;
     private int tipoEmpresa;
@@ -311,6 +314,48 @@ public class ExperienciaLaboral {
      */
     public void setNombreActividadEconomica(String nombreActividadEconomica) {
         this.nombreActividadEconomica = nombreActividadEconomica;
+    }   
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
     }
     
+    
+    /**
+     * @return the fechaIngresoFormateada
+     */
+    public String getFechaIngresoFormateada() {
+        return fechaIngresoFormateada;
+    }
+
+    /**
+     * @param fechaIngresoFormateada the fechaIngresoFormateada to set
+     */
+    public void setFechaIngresoFormateada(String fechaIngresoFormateada) {
+        this.fechaIngresoFormateada = fechaIngresoFormateada;
+    }
+
+    /**
+     * @return the fechaRetiroFormateada
+     */
+    public String getFechaRetiroFormateada() {
+        return fechaRetiroFormateada;
+    }
+
+    /**
+     * @param fechaRetiroFormateada the fechaRetiroFormateada to set
+     */
+    public void setFechaRetiroFormateada(String fechaRetiroFormateada) {
+        this.fechaRetiroFormateada = fechaRetiroFormateada;
+    }
 }

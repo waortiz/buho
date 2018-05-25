@@ -91,7 +91,7 @@ public class Util {
         } catch (ParseException ex) {
             Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return 0;
     }
 
@@ -156,7 +156,7 @@ public class Util {
         return json;
     }
 
-    public static Object obtenerTelefonosJSON(List<Telefono> telefonos) {
+    public static String obtenerTelefonosJSON(List<Telefono> telefonos) {
         String json = "";
 
         if (telefonos.size() > 0) {
@@ -182,7 +182,7 @@ public class Util {
         return json;
     }
 
-    public static Object obtenerCuentasBancariasJSON(List<CuentaBancaria> cuentasBancarias) {
+    public static String obtenerCuentasBancariasJSON(List<CuentaBancaria> cuentasBancarias) {
         String json = "";
 
         if (cuentasBancarias.size() > 0) {
@@ -209,7 +209,7 @@ public class Util {
         return json;
     }
 
-    public static Object obtenerCorreosElectronicosJSON(List<CorreoElectronico> correosElectronicos) {
+    public static String obtenerCorreosElectronicosJSON(List<CorreoElectronico> correosElectronicos) {
         String json = "";
 
         if (correosElectronicos.size() > 0) {
@@ -768,5 +768,108 @@ public class Util {
         }
 
         return json;
+    }
+
+    public static void establecerConsecutivoDocumentoSoporte(List<DocumentoSoporte> documentosSoporte) {
+        for (int i = 0; i < documentosSoporte.size(); i++) {
+            DocumentoSoporte documentoSoporte = documentosSoporte.get(i);
+            documentoSoporte.setConsecutivo(i);
+        }
+    }
+
+    public static void establecerConsecutivoEducacionBasica(List<EducacionBasica> educacionesBasicas) {
+        for (int i = 0; i < educacionesBasicas.size(); i++) {
+            EducacionBasica educacionBasica = educacionesBasicas.get(i);
+            educacionBasica.setConsecutivo(i);
+        }
+    }
+
+    public static void establecerConsecutivoEducacionSuperior(List<EducacionSuperior> educacionesSuperiores) {
+        for (int i = 0; i < educacionesSuperiores.size(); i++) {
+            EducacionSuperior educacionSuperior = educacionesSuperiores.get(i);
+            educacionSuperior.setConsecutivo(i);
+        }
+    }
+
+    public static void establecerConsecutivoCorreoElectronico(List<CorreoElectronico> correosElectronicos) {
+        for (int i = 0; i < correosElectronicos.size(); i++) {
+            CorreoElectronico correoElectronico = correosElectronicos.get(i);
+            correoElectronico.setConsecutivo(i);
+        }
+    }
+
+    public static void establecerConsecutivoCuentaBancaria(List<CuentaBancaria> cuentasBancarias) {
+        for (int i = 0; i < cuentasBancarias.size(); i++) {
+            CuentaBancaria cuentaBancaria = cuentasBancarias.get(i);
+            cuentaBancaria.setConsecutivo(i);
+        }
+    }
+
+    public static void establecerConsecutivoIdioma(List<Idioma> idiomas) {
+        for (int i = 0; i < idiomas.size(); i++) {
+            Idioma idioma = idiomas.get(i);
+            idioma.setConsecutivo(i);
+        }
+    }
+
+    public static void establecerConsecutivoEducacionContinua(List<EducacionContinua> educacionesContinuas) {
+        for (int i = 0; i < educacionesContinuas.size(); i++) {
+            EducacionContinua educacionContinua = educacionesContinuas.get(i);
+            educacionContinua.setConsecutivo(i);
+        }
+    }
+    
+    public static void establecerConsecutivoPatente(List<Patente> patentes) {
+        for (int i = 0; i < patentes.size(); i++) {
+            Patente patente = patentes.get(i);
+            patente.setConsecutivo(i);
+        }
+    }
+    
+    public static void establecerConsecutivoExperienciaLaboral(List<ExperienciaLaboral> experienciasLaborales) {
+        for (int i = 0; i < experienciasLaborales.size(); i++) {
+            ExperienciaLaboral experienciaLaboral = experienciasLaborales.get(i);
+            experienciaLaboral.setConsecutivo(i);
+        }
+    }
+
+    public static void establecerConsecutivoExperienciaDocencia(List<ExperienciaDocencia> experienciasDocencia) {
+        for (int i = 0; i < experienciasDocencia.size(); i++) {
+            ExperienciaDocencia experienciaDocencia = experienciasDocencia.get(i);
+            experienciaDocencia.setConsecutivo(i);
+            for (int j = 0; j < experienciaDocencia.getCursosExperienciaDocencia().size(); j++) {
+                CursoExperienciaDocencia cursoExperienciaDocencia = experienciaDocencia.getCursosExperienciaDocencia().get(j);
+                cursoExperienciaDocencia.setConsecutivo(j);
+            }
+
+        }
+    }
+    
+    public static void establecerConsecutivoDistincion(List<Distincion> distinciones) {
+        for (int i = 0; i < distinciones.size(); i++) {
+            Distincion distincion = distinciones.get(i);
+            distincion.setConsecutivo(i);
+        }
+    }
+    
+    public static void establecerConsecutivoArticulo(List<Articulo> articulos) {
+        for (int i = 0; i < articulos.size(); i++) {
+            Articulo articulo = articulos.get(i);
+            articulo.setConsecutivo(i);
+        }
+    }
+
+    public static void establecerConsecutivoTelefono(List<Telefono> telefonos) {
+        for (int i = 0; i < telefonos.size(); i++) {
+            Telefono telefono = telefonos.get(i);
+            telefono.setConsecutivo(i);
+        }
+    }
+
+    public static void establecerConsecutivoProductoConocimiento(List<ProductoConocimiento> productoConocimientos) {
+        for (int i = 0; i < productoConocimientos.size(); i++) {
+            ProductoConocimiento productoConocimiento = productoConocimientos.get(i);
+            productoConocimiento.setConsecutivo(i);
+        }
     }
 }

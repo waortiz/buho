@@ -11,6 +11,7 @@ package co.edu.fnsp.buho.entidades;
  */
 public class ProductoConocimiento {
     private int id;
+    private int consecutivo;
     private String nombreTipo;
     private int tipo;
     private int nucleoBasicoConocimiento;
@@ -114,6 +115,20 @@ public class ProductoConocimiento {
      */
     public void setDocumento(Documento documento) {
         this.documento = documento;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
     }
     
 }

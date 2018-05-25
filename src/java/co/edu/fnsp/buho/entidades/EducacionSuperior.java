@@ -12,7 +12,6 @@ import java.util.Date;
  * @author William
  */
 public class EducacionSuperior {
-
     private int id;
     private int nivel;
     private String nombreNivel;
@@ -30,6 +29,8 @@ public class EducacionSuperior {
     private String titulo;
     private boolean graduado;
     private Date fechaTitulo;
+    private String fechaTituloFormateada;
+    private int consecutivo;
     private Documento certificado;
     private Documento certificadoHomologado;
     
@@ -298,4 +299,33 @@ public class EducacionSuperior {
     public void setNombrePrograma(String nombrePrograma) {
         this.nombrePrograma = nombrePrograma;
     }
+        
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
+    }
+
+    /**
+     * @return the fechaTituloFormateada
+     */
+    public String getFechaTituloFormateada() {
+        return fechaTituloFormateada;
+    }
+
+    /**
+     * @param fechaTituloFormateada the fechaTituloFormateada to set
+     */
+    public void setFechaTituloFormateada(String fechaTituloFormateada) {
+        this.fechaTituloFormateada = fechaTituloFormateada;
+    }
+
 }

@@ -19,6 +19,7 @@ public class EducacionBasica {
     private Integer anyoFinalizacion;
     private String titulo;
     private boolean graduado;
+    private int consecutivo;
     private Documento certificado;
     
     /**
@@ -145,5 +146,19 @@ public class EducacionBasica {
      */
     public void setInstitucion(String institucion) {
         this.institucion = institucion;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
     }
 }

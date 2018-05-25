@@ -11,6 +11,7 @@ package co.edu.fnsp.buho.entidades;
  */
 public class Idioma {
     private int id;
+    private int consecutivo;
     private int idioma;
     private String nombreIdioma;
     private String nivelConversacion;
@@ -249,5 +250,19 @@ public class Idioma {
      */
     public void setCertificado(Documento certificado) {
         this.certificado = certificado;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
     }
 }

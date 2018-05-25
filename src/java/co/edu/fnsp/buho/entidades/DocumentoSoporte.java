@@ -12,6 +12,7 @@ package co.edu.fnsp.buho.entidades;
 public class DocumentoSoporte {
     private int id;
     private int tipoDocumento;
+    private int consecutivo;
     private String nombreTipoDocumento;
     private Documento documento;
 
@@ -69,5 +70,19 @@ public class DocumentoSoporte {
      */
     public void setDocumento(Documento documento) {
         this.documento = documento;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
     }
 }

@@ -19,7 +19,7 @@ public class Patente {
     private boolean propiedadCompartida;
     private int clase;
     private String descripcion;
-    private MultipartFile documento;
+    private Object documento;
 
     /**
      * @return the id
@@ -122,14 +122,14 @@ public class Patente {
     /**
      * @return the documento
      */
-    public MultipartFile getDocumento() {
+    public Object getDocumento() {
         return documento;
     }
 
     /**
      * @param documento the documento to set
      */
-    public void setDocumento(MultipartFile documento) {
+    public void setDocumento(Object documento) {
         this.documento = documento;
     }
     

@@ -27,7 +27,7 @@ public class Idioma {
     private String nombreTipoCertificacion;
     private String otraCertificacion;
     private String puntajeCertificacion;
-    private MultipartFile certificado;
+    private Object certificado;
 
 
     /**
@@ -243,14 +243,14 @@ public class Idioma {
     /**
      * @return the certificado
      */
-    public MultipartFile getCertificado() {
+    public Object getCertificado() {
         return certificado;
     }
 
     /**
      * @param certificado the certificado to set
      */
-    public void setCertificado(MultipartFile certificado) {
+    public void setCertificado(Object certificado) {
         this.certificado = certificado;
     }
 }

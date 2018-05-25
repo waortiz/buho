@@ -11,6 +11,7 @@ import co.edu.fnsp.buho.entidades.Institucion;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Programa;
 import co.edu.fnsp.buho.repositorios.IRepositorioMaestro;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -228,7 +229,21 @@ public class ServicioMaestro implements IServicioMaestro {
 
     @Override
     public List<Maestro> obtenerInstitucionesEducativasExtranjeras() {
-        return repositorioMaestro.obtenerInstitucionesEducativasExtranjeras();
+        List<Maestro> instituciones = repositorioMaestro.obtenerInstitucionesEducativasExtranjeras();
+        List<Maestro> nuevasInstituciones = new ArrayList<>();
+        for(Maestro institucion : instituciones) {
+            boolean existe = false;
+            for(Maestro nuevaInstitucion : nuevasInstituciones) {
+                if(nuevaInstitucion.getNombre().equalsIgnoreCase(institucion.getNombre())) {
+                    existe = true;
+                    break;
+                }
+            }
+            if(!existe) {
+                nuevasInstituciones.add(institucion);
+            }
+        }
+        return nuevasInstituciones;
     }
 
     @Override

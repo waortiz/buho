@@ -21,7 +21,7 @@ public class EducacionBasica {
     private String anyoFinalizacion;
     private String titulo;
     private boolean graduado;
-    private MultipartFile certificado;
+    private Object certificado;
 
     /**
      * @return the id
@@ -138,14 +138,14 @@ public class EducacionBasica {
     /**
      * @return the certificado
      */
-    public MultipartFile getCertificado() {
+    public Object getCertificado() {
         return certificado;
     }
 
     /**
      * @param certificado the certificado to set
      */
-    public void setCertificado(MultipartFile certificado) {
+    public void setCertificado(Object certificado) {
         this.certificado = certificado;
     }
 }

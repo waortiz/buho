@@ -12,6 +12,7 @@ package co.edu.fnsp.buho.entidades;
  */
 public class CorreoElectronico {
     private int id;
+    private int consecutivo;
     private String correoElectronico;
     
     /**
@@ -40,5 +41,19 @@ public class CorreoElectronico {
      */
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
     }
 }

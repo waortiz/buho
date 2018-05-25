@@ -69,6 +69,9 @@ public class HojaVida {
     private String codigoORCID;
     private String identificadorScopus;
     private String researcherId;
+    private String nombreCopiaDocumentoIdentificacion;
+    private String nombreCopiaLibretaMilitar;
+    private String nombreDocumentoRUT;
     private List<Telefono> telefonos = new ArrayList<>();
     private List<CuentaBancaria> cuentasBancarias = new ArrayList<>();
     private List<CorreoElectronico> correosElectronicos = new ArrayList<>();
@@ -1009,5 +1012,47 @@ public class HojaVida {
      */
     public void setProductosConocimiento(List<ProductoConocimiento> productosConocimiento) {
         this.productosConocimiento = productosConocimiento;
+    }
+
+    /**
+     * @return the nombreCopiaDocumentoIdentificacion
+     */
+    public String getNombreCopiaDocumentoIdentificacion() {
+        return nombreCopiaDocumentoIdentificacion;
+    }
+
+    /**
+     * @param nombreCopiaDocumentoIdentificacion the nombreCopiaDocumentoIdentificacion to set
+     */
+    public void setNombreCopiaDocumentoIdentificacion(String nombreCopiaDocumentoIdentificacion) {
+        this.nombreCopiaDocumentoIdentificacion = nombreCopiaDocumentoIdentificacion;
+    }
+
+    /**
+     * @return the nombreCopiaLibretaMilitar
+     */
+    public String getNombreCopiaLibretaMilitar() {
+        return nombreCopiaLibretaMilitar;
+    }
+
+    /**
+     * @param nombreCopiaLibretaMilitar the nombreCopiaLibretaMilitar to set
+     */
+    public void setNombreCopiaLibretaMilitar(String nombreCopiaLibretaMilitar) {
+        this.nombreCopiaLibretaMilitar = nombreCopiaLibretaMilitar;
+    }
+
+    /**
+     * @return the nombreDocumentoRUT
+     */
+    public String getNombreDocumentoRUT() {
+        return nombreDocumentoRUT;
+    }
+
+    /**
+     * @param nombreDocumentoRUT the nombreDocumentoRUT to set
+     */
+    public void setNombreDocumentoRUT(String nombreDocumentoRUT) {
+        this.nombreDocumentoRUT = nombreDocumentoRUT;
     }
 }

@@ -12,6 +12,7 @@ package co.edu.fnsp.buho.entidades;
  */
 public class CuentaBancaria {
     private int id;
+    private int consecutivo;
     private String tipo;
     private String nombreTipo;
     private String numero;
@@ -85,5 +86,19 @@ public class CuentaBancaria {
      */
     public void setEntidad(String entidad) {
         this.entidad = entidad;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
     }
 }
