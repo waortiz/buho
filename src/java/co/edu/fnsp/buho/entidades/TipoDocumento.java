@@ -17,7 +17,8 @@ public enum TipoDocumento {
     CERTIFICADO_EPS(5), 
     CERTIFICADO_AFP(6), 
     CERTIFICADO_ARL(7),
-    LIBRETA_MILITAR(8);
+    LIBRETA_MILITAR(8),
+    PROPUESTA_INVESTIGACION(9);
 
     private int id;
 

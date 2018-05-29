@@ -28,6 +28,7 @@ public class HojaVida {
     private String nombreSexo;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaExpedicion;
+    private String fechaExpedicionFormateada;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaNacimiento;
     private String fechaNacimientoFormateada;
@@ -64,6 +65,7 @@ public class HojaVida {
     private String telefono;
     private boolean investigadorReconocidoColciencias;
     private String urlCVLAC;
+    private boolean urlCVLACValidada;
     private Integer tipoInvestigador;
     private String nombreTipoInvestigador;
     private String codigoORCID;
@@ -73,9 +75,13 @@ public class HojaVida {
     private String nombreCopiaLibretaMilitar;
     private String nombreDocumentoRUT;
     private List<Telefono> telefonos = new ArrayList<>();
+    private List<Investigacion> investigaciones = new ArrayList<>();
     private List<CuentaBancaria> cuentasBancarias = new ArrayList<>();
     private List<CorreoElectronico> correosElectronicos = new ArrayList<>();
     private List<DocumentoSoporte> documentosSoporte = new ArrayList<>();
+    private List<DocumentoSoporte> documentosSoporteComplementarios = new ArrayList<>();
+    private List<DocumentoSoporte> documentosSoporteComplementariosValidar = new ArrayList<>();
+    private List<DocumentoSoporte> documentosSoporteInvestigacion = new ArrayList<>();
     private List<Idioma> idiomas = new ArrayList<>();
     private List<EducacionBasica> educacionesBasicas = new ArrayList<>();
     private List<EducacionSuperior> educacionesSuperiores = new ArrayList<>();
@@ -83,6 +89,7 @@ public class HojaVida {
     private List<Distincion> distinciones = new ArrayList<>();
     private List<ExperienciaLaboral> experienciasLaborales = new ArrayList<>();
     private List<ExperienciaDocencia> experienciasDocencia = new ArrayList<>();
+    private List<CursoExperienciaDocencia> cursosExperienciaDocencia = new ArrayList<>();
     private List<Articulo> articulos = new ArrayList<>();
     private List<Patente> patentes = new ArrayList<>();
     private List<ProductoConocimiento> productosConocimiento = new ArrayList<>();
@@ -1054,5 +1061,103 @@ public class HojaVida {
      */
     public void setNombreDocumentoRUT(String nombreDocumentoRUT) {
         this.nombreDocumentoRUT = nombreDocumentoRUT;
+    }
+
+    /**
+     * @return the urlCVLACValidada
+     */
+    public boolean isUrlCVLACValidada() {
+        return urlCVLACValidada;
+    }
+
+    /**
+     * @param urlCVLACValidada the urlCVLACValidada to set
+     */
+    public void setUrlCVLACValidada(boolean urlCVLACValidada) {
+        this.urlCVLACValidada = urlCVLACValidada;
+    }
+
+    /**
+     * @return the documentosSoporteComplementarios
+     */
+    public List<DocumentoSoporte> getDocumentosSoporteComplementarios() {
+        return documentosSoporteComplementarios;
+    }
+
+    /**
+     * @param documentosSoporteComplementarios the documentosSoporteComplementarios to set
+     */
+    public void setDocumentosSoporteComplementarios(List<DocumentoSoporte> documentosSoporteComplementarios) {
+        this.documentosSoporteComplementarios = documentosSoporteComplementarios;
+    }
+
+    /**
+     * @return the documentosSoporteInvestigacion
+     */
+    public List<DocumentoSoporte> getDocumentosSoporteInvestigacion() {
+        return documentosSoporteInvestigacion;
+    }
+
+    /**
+     * @param documentosSoporteInvestigacion the documentosSoporteInvestigacion to set
+     */
+    public void setDocumentosSoporteInvestigacion(List<DocumentoSoporte> documentosSoporteInvestigacion) {
+        this.documentosSoporteInvestigacion = documentosSoporteInvestigacion;
+    }
+
+    /**
+     * @return the documentosSoporteComplementariosValidar
+     */
+    public List<DocumentoSoporte> getDocumentosSoporteComplementariosValidar() {
+        return documentosSoporteComplementariosValidar;
+    }
+
+    /**
+     * @param documentosSoporteComplementariosValidar the documentosSoporteComplementariosValidar to set
+     */
+    public void setDocumentosSoporteComplementariosValidar(List<DocumentoSoporte> documentosSoporteComplementariosValidar) {
+        this.documentosSoporteComplementariosValidar = documentosSoporteComplementariosValidar;
+    }
+
+    /**
+     * @return the cursosExperienciaDocencia
+     */
+    public List<CursoExperienciaDocencia> getCursosExperienciaDocencia() {
+        return cursosExperienciaDocencia;
+    }
+
+    /**
+     * @param cursosExperienciaDocencia the cursosExperienciaDocencia to set
+     */
+    public void setCursosExperienciaDocencia(List<CursoExperienciaDocencia> cursosExperienciaDocencia) {
+        this.cursosExperienciaDocencia = cursosExperienciaDocencia;
+    }
+
+    /**
+     * @return the fechaExpedicionFormateada
+     */
+    public String getFechaExpedicionFormateada() {
+        return fechaExpedicionFormateada;
+    }
+
+    /**
+     * @param fechaExpedicionFormateada the fechaExpedicionFormateada to set
+     */
+    public void setFechaExpedicionFormateada(String fechaExpedicionFormateada) {
+        this.fechaExpedicionFormateada = fechaExpedicionFormateada;
+    }
+    
+    /**
+    * @return the investigaciones
+    */
+    public List<Investigacion> getInvestigaciones() {
+        return investigaciones;
+    }
+
+    /**
+    * @param investigaciones the investigaciones to set
+    */
+    public void setInvestigaciones(List<Investigacion> investigaciones) {
+        this.investigaciones = investigaciones;
     }
 }

@@ -19,11 +19,15 @@ import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.Idioma;
+import co.edu.fnsp.buho.entidades.Investigacion;
 import co.edu.fnsp.buho.entidades.Patente;
 import co.edu.fnsp.buho.entidades.ProductoConocimiento;
 import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.Terminos;
+import co.edu.fnsp.buho.entidades.TipoDocumento;
+import co.edu.fnsp.buho.entidades.ValidacionDocumento;
 import co.edu.fnsp.buho.repositorios.IRepositorioHojaVida;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,6 +62,47 @@ public class ServicioHojaVida implements IServicioHojaVida {
         return repositorioHojaVida.obtenerDocumentoSoporte(idDocumentoSoporte);
     }
 
+    @Override
+    public List<DocumentoSoporte> obtenerDocumentosSoporteComplementarios(long idPersona) {
+        List<DocumentoSoporte> documentosSoporteActuales = repositorioHojaVida.obtenerDocumentosSoporte(idPersona);
+        List<DocumentoSoporte> documentosSoporte = new ArrayList<>();
+        for (DocumentoSoporte documento : documentosSoporteActuales) {
+            if (documento.getTipoDocumento() != TipoDocumento.COPIA_CEDULA.getId()
+                    && documento.getTipoDocumento() != TipoDocumento.RUT.getId()
+                    && documento.getTipoDocumento() != TipoDocumento.LIBRETA_MILITAR.getId()) {
+                documentosSoporte.add(documento);
+            }
+        }
+
+        return documentosSoporte;
+    }
+        
+    @Override
+    public List<DocumentoSoporte> obtenerDocumentosSoporteValidar(long idPersona) {
+        List<DocumentoSoporte> documentosSoporteActuales = repositorioHojaVida.obtenerDocumentosSoporte(idPersona);
+        List<DocumentoSoporte> documentosSoporte = new ArrayList<>();
+        for (DocumentoSoporte documento : documentosSoporteActuales) {
+            if (documento.getTipoDocumento() != TipoDocumento.PROPUESTA_INVESTIGACION.getId()) { 
+                documentosSoporte.add(documento);
+            }
+        }
+        
+        return documentosSoporte;
+    }
+    
+    @Override
+    public List<DocumentoSoporte> obtenerPropuestasInvestigacion(long idPersona) {
+        List<DocumentoSoporte> documentosSoporteActuales = repositorioHojaVida.obtenerDocumentosSoporte(idPersona);
+        List<DocumentoSoporte> documentosSoporte = new ArrayList<>();
+        for (DocumentoSoporte documento : documentosSoporteActuales) {
+            if (documento.getTipoDocumento() == TipoDocumento.PROPUESTA_INVESTIGACION.getId()) {
+                documentosSoporte.add(documento);
+            }
+        }
+
+        return documentosSoporte;
+    }
+    
     @Override
     public List<HojaVida> obtenerHojasVida() {
         return repositorioHojaVida.obtenerHojasVida();
@@ -145,12 +190,12 @@ public class ServicioHojaVida implements IServicioHojaVida {
 
     @Override
     public void guardarDocumentoSoporte(long idPersona, DocumentoSoporte documentoSoporte) {
-       repositorioHojaVida.guardarDocumentoSoporte(idPersona, documentoSoporte);
+        repositorioHojaVida.guardarDocumentoSoporte(idPersona, documentoSoporte);
     }
 
     @Override
     public List<DocumentoSoporte> obtenerDocumentosSoporte(long idPersona) {
-       return repositorioHojaVida.obtenerDocumentosSoporte(idPersona);
+        return repositorioHojaVida.obtenerDocumentosSoporte(idPersona);
     }
 
     @Override
@@ -172,7 +217,7 @@ public class ServicioHojaVida implements IServicioHojaVida {
     public void eliminarEducacionBasica(int idEducacionBasica) {
         repositorioHojaVida.eliminarEducacionBasica(idEducacionBasica);
     }
-    
+
     @Override
     public void guardarEducacionSuperior(long idPersona, EducacionSuperior nuevaEducacionSuperior) {
         repositorioHojaVida.guardarEducacionSuperior(idPersona, nuevaEducacionSuperior);
@@ -345,7 +390,7 @@ public class ServicioHojaVida implements IServicioHojaVida {
 
     @Override
     public void eliminarPatente(int idPatente) {
-        repositorioHojaVida.eliminarPatente( idPatente);
+        repositorioHojaVida.eliminarPatente(idPatente);
     }
 
     @Override
@@ -361,5 +406,20 @@ public class ServicioHojaVida implements IServicioHojaVida {
     @Override
     public void eliminarProductoConocimiento(int idProductoConocimiento) {
         repositorioHojaVida.eliminarProductoConocimiento(idProductoConocimiento);
+    }
+
+    @Override
+    public void validarDocumento(long idPersona, ValidacionDocumento validacionDocumento) {
+        repositorioHojaVida.validarDocumento(idPersona, validacionDocumento);
+    }
+
+    @Override
+    public Investigacion obtenerInvestigacion(long idPersona) {
+        return repositorioHojaVida.obtenerInvestigacion(idPersona);
+    }
+
+    @Override
+    public List<CursoExperienciaDocencia> obtenerCursosExperienciaDocencia(long idPersona) {
+        return repositorioHojaVida.obtenerCursosExperienciaDocencia(idPersona);
     }
 }

@@ -19,10 +19,12 @@ import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.Idioma;
+import co.edu.fnsp.buho.entidades.Investigacion;
 import co.edu.fnsp.buho.entidades.Patente;
 import co.edu.fnsp.buho.entidades.ProductoConocimiento;
 import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.Terminos;
+import co.edu.fnsp.buho.entidades.ValidacionDocumento;
 import java.util.List;
 
 /**
@@ -40,7 +42,7 @@ public interface IServicioHojaVida {
     Documento obtenerDocumentoSoporte(long idDocumentoSoporte);
 
     List<HojaVida> obtenerHojasVida();
-
+    
     void eliminarHojaVida(long idPersona);
     
     boolean existePersona(String numeroIdentificacion);
@@ -76,6 +78,8 @@ public interface IServicioHojaVida {
     void guardarDocumentoSoporte(long idPersona, DocumentoSoporte documentoSoporte);
 
     List<DocumentoSoporte> obtenerDocumentosSoporte(long idPersona);
+    
+    List<DocumentoSoporte> obtenerDocumentosSoporteComplementarios(long idPersona);
 
     void eliminarDocumentoSoporte(int idDocumentoSoporte);
 
@@ -160,4 +164,14 @@ public interface IServicioHojaVida {
     void guardarProductoConocimiento(long idPersona, ProductoConocimiento productoConocimiento);
     
     void eliminarProductoConocimiento(int idProductoConocimiento);
+
+    void validarDocumento(long idPersona, ValidacionDocumento validacionDocumento);
+
+    Investigacion obtenerInvestigacion(long idPersona);
+    
+    List<DocumentoSoporte> obtenerPropuestasInvestigacion(long idPersona);
+
+    List<DocumentoSoporte> obtenerDocumentosSoporteValidar(long idPersona);
+
+    List<CursoExperienciaDocencia> obtenerCursosExperienciaDocencia(long idPersona);
 }

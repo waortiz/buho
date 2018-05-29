@@ -243,7 +243,8 @@ public class Util {
                 DocumentoSoporte documentoSoporte = documentosSoporte.get(i);
                 json = json
                         + "{id: ko.observable(" + documentoSoporte.getId() + "),"
-                        + "tipoDocumento:ko.observable('" + documentoSoporte.getTipoDocumento() + "'),"
+                        + "tipoDocumento:ko.observable(" + documentoSoporte.getTipoDocumento() + "),"
+                        + "validado:ko.observable(" + documentoSoporte.isValidado() + "),"
                         + "nombreTipoDocumento:ko.observable('" + documentoSoporte.getNombreTipoDocumento() + "'),"
                         + "documento:ko.observable(''),"
                         + "tieneDocumento:ko.observable(true),"
@@ -284,6 +285,7 @@ public class Util {
                         + "tipoCertificacion:ko.observable(" + idioma.getTipoCertificacion() + "),"
                         + "nombreTipoCertificacion:ko.observable('" + idioma.getNombreTipoCertificacion() + "'),"
                         + "puntajeCertificacion:ko.observable(" + idioma.getPuntajeCertificacion() + "),"
+                        + "certificadoValidado:ko.observable(" + idioma.isCertificadoValidado() + "),"
                         + "certificado:ko.observable(''),"
                         + "tieneCertificado:ko.observable(true),"
                         + "consecutivo:ko.observable(" + i + ")"
@@ -345,6 +347,7 @@ public class Util {
                         + "anyoInicio:ko.observable(" + educacionBasica.getAnyoInicio() + "),"
                         + "graduado:ko.observable(" + educacionBasica.isGraduado() + "),"
                         + "anyoFinalizacion:ko.observable(" + educacionBasica.getAnyoFinalizacion() + "),"
+                        + "certificadoValidado:ko.observable(" + educacionBasica.isCertificadoValidado() + "),"
                         + "certificado:ko.observable(''),"
                         + "tieneCertificado:ko.observable(true),"
                         + "consecutivo:ko.observable(" + i + ")"
@@ -395,8 +398,10 @@ public class Util {
                         + "graduado:ko.observable(" + educacionSuperior.isGraduado() + "),"
                         + "anyoFinalizacion:ko.observable(" + educacionSuperior.getAnyoFinalizacion() + "),"
                         + "certificadoHomologado:ko.observable(''),"
+                        + "certificadoHomologadoValidado:ko.observable(" + educacionSuperior.isCertificadoHomologadoValidado() + "),"
                         + "tieneCertificadoHomologado:ko.observable(" + tieneCertificadoHomologado + "),"
                         + "certificado:ko.observable(''),"
+                        + "certificadoValidado:ko.observable(" + educacionSuperior.isCertificadoValidado() + "),"
                         + "tieneCertificado:ko.observable(true),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
@@ -430,7 +435,9 @@ public class Util {
                         + "nombreNucleoBasicoConocimiento:ko.observable('" + educacionContinua.getNombreNucleoBasicoConocimiento() + "'),"
                         + "anyo:ko.observable(" + educacionContinua.getAnyo() + "),"
                         + "numeroHoras:ko.observable(" + educacionContinua.getNumeroHoras() + "),"
+                        + "estudioExterior:ko.observable(" + educacionContinua.isEstudioExterior() + "),"
                         + "certificado:ko.observable(''),"
+                        + "certificadoValidado:ko.observable(" + educacionContinua.isCertificadoValidado() + "),"
                         + "tieneCertificado:ko.observable(true),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
@@ -460,6 +467,7 @@ public class Util {
                         + "fechaDistincion:ko.observable('" + Util.obtenerFechaFormateada(distincion.getFechaDistincion()) + "'),"
                         + "certificado:ko.observable(''),"
                         + "tieneCertificado:ko.observable(true),"
+                        + "certificadoValidado:ko.observable(" + distincion.isCertificadoValidado() + "),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
                 if (i < distinciones.size() - 1) {
@@ -502,6 +510,7 @@ public class Util {
                         + "tipoExperiencia:ko.observable(" + experienciaLaboral.getTipoExperiencia() + "),"
                         + "nombreTipoExperiencia:ko.observable('" + experienciaLaboral.getNombreTipoExperiencia() + "'),"
                         + "certificado:ko.observable(''),"
+                        + "certificadoValidado:ko.observable(" + experienciaLaboral.isCertificadoValidado() + "),"
                         + "tieneCertificado:ko.observable(true),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
@@ -539,6 +548,7 @@ public class Util {
                             + "anyo:ko.observable(" + cursoExperienciaDocencia.getAnyo() + "),"
                             + "numeroHoras:ko.observable(" + cursoExperienciaDocencia.getNumeroHoras() + "),"
                             + "certificado:ko.observable(''),"
+                            + "certificadoValidado:ko.observable(" + cursoExperienciaDocencia.isCertificadoValidado() + "),"
                             + "tieneCertificado:ko.observable(true),"
                             + "consecutivo:ko.observable(" + j + ")"
                             + "}";
@@ -581,6 +591,7 @@ public class Util {
                         + "anyo:ko.observable(" + articulo.getAnyo() + "),"
                         + "tipoAutor:ko.observable(" + articulo.getTipoAutor() + "),"
                         + "url:ko.observable('" + articulo.getUrl() + "'),"
+                        + "validado:ko.observable(" + articulo.isValidado() + "),"
                         + "nucleoBasicoConocimiento:ko.observable(" + articulo.getNucleoBasicoConocimiento() + "),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
@@ -617,6 +628,7 @@ public class Util {
                         + "clase:ko.observable(" + patente.getClase() + "),"
                         + "fecha:ko.observable('" + Util.obtenerFechaFormateada(patente.getFecha()) + "'),"
                         + "documento:ko.observable(''),"
+                        + "documentoValidado:ko.observable(" + patente.isDocumentoValidado() + "),"
                         + "tieneDocumento:ko.observable(true),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
@@ -647,6 +659,7 @@ public class Util {
                         + "url:ko.observable('" + productoConocimiento.getUrl() + "'),"
                         + "nucleoBasicoConocimiento:ko.observable('" + productoConocimiento.getNucleoBasicoConocimiento() + "'),"
                         + "documento:ko.observable(''),"
+                        + "documentoValidado:ko.observable(" + productoConocimiento.isDocumentoValidado() + "),"
                         + "tieneDocumento:ko.observable(true),"
                         + "consecutivo:ko.observable(" + i + ")"
                         + "}";
@@ -818,14 +831,14 @@ public class Util {
             educacionContinua.setConsecutivo(i);
         }
     }
-    
+
     public static void establecerConsecutivoPatente(List<Patente> patentes) {
         for (int i = 0; i < patentes.size(); i++) {
             Patente patente = patentes.get(i);
             patente.setConsecutivo(i);
         }
     }
-    
+
     public static void establecerConsecutivoExperienciaLaboral(List<ExperienciaLaboral> experienciasLaborales) {
         for (int i = 0; i < experienciasLaborales.size(); i++) {
             ExperienciaLaboral experienciaLaboral = experienciasLaborales.get(i);
@@ -844,14 +857,14 @@ public class Util {
 
         }
     }
-    
+
     public static void establecerConsecutivoDistincion(List<Distincion> distinciones) {
         for (int i = 0; i < distinciones.size(); i++) {
             Distincion distincion = distinciones.get(i);
             distincion.setConsecutivo(i);
         }
     }
-    
+
     public static void establecerConsecutivoArticulo(List<Articulo> articulos) {
         for (int i = 0; i < articulos.size(); i++) {
             Articulo articulo = articulos.get(i);

@@ -38,6 +38,10 @@
         <put-attribute name="title" value="Términos" />  
         <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/terminos.jsp" />  
     </definition>  
+    <definition name="hojasVida/validar" extends="base-definition">  
+        <put-attribute name="title" value="Términos" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/validar.jsp" />  
+    </definition>  
 
     <!-- Convocatorias Page -->
     <definition name="convocatorias/crear" extends="base-definition">  
@@ -51,6 +55,18 @@
     <definition name="convocatorias/index" extends="base-definition">  
         <put-attribute name="title" value="Consultar" />  
         <put-attribute name="body" value="/WEB-INF/jsp/convocatorias/index.jsp" />  
+    </definition>  
+    <definition name="convocatorias/postulados" extends="base-definition">  
+        <put-attribute name="title" value="Postulados" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/convocatorias/postulados.jsp" />  
+    </definition>  
+    <definition name="convocatorias/preseleccionados" extends="base-definition">  
+        <put-attribute name="title" value="Preleccionados" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/convocatorias/preseleccionados.jsp" />  
+    </definition>  
+    <definition name="convocatorias/evaluar" extends="base-definition">  
+        <put-attribute name="title" value="Evaluar" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/convocatorias/evaluar.jsp" />  
     </definition>  
                                               
     <!-- Usuario Page -->

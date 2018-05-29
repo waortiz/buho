@@ -33,6 +33,10 @@ public class EducacionSuperior {
     private int consecutivo;
     private Documento certificado;
     private Documento certificadoHomologado;
+    private boolean certificadoHomologadoValidado;
+    private boolean certificadoValidado;
+    private String nombreCertificadoHomologadoValidado;
+    private String nombreCertificadoValidado;
     
     /**
      * @return the id
@@ -326,6 +330,62 @@ public class EducacionSuperior {
      */
     public void setFechaTituloFormateada(String fechaTituloFormateada) {
         this.fechaTituloFormateada = fechaTituloFormateada;
+    }
+
+    /**
+     * @return the certificadoHomologadoValidado
+     */
+    public boolean isCertificadoHomologadoValidado() {
+        return certificadoHomologadoValidado;
+    }
+
+    /**
+     * @param certificadoHomologadoValidado the certificadoHomologadoValidado to set
+     */
+    public void setCertificadoHomologadoValidado(boolean certificadoHomologadoValidado) {
+        this.certificadoHomologadoValidado = certificadoHomologadoValidado;
+    }
+
+    /**
+     * @return the certificadoValidado
+     */
+    public boolean isCertificadoValidado() {
+        return certificadoValidado;
+    }
+
+    /**
+     * @param certificadoValidado the certificadoValidado to set
+     */
+    public void setCertificadoValidado(boolean certificadoValidado) {
+        this.certificadoValidado = certificadoValidado;
+    }
+
+    /**
+     * @return the nombreCertificadoHomologadoValidado
+     */
+    public String getNombreCertificadoHomologadoValidado() {
+        return nombreCertificadoHomologadoValidado;
+    }
+
+    /**
+     * @param nombreCertificadoHomologadoValidado the nombreCertificadoHomologadoValidado to set
+     */
+    public void setNombreCertificadoHomologadoValidado(String nombreCertificadoHomologadoValidado) {
+        this.nombreCertificadoHomologadoValidado = nombreCertificadoHomologadoValidado;
+    }
+
+    /**
+     * @return the nombreCertificadoValidado
+     */
+    public String getNombreCertificadoValidado() {
+        return nombreCertificadoValidado;
+    }
+
+    /**
+     * @param nombreCertificadoValidado the nombreCertificadoValidado to set
+     */
+    public void setNombreCertificadoValidado(String nombreCertificadoValidado) {
+        this.nombreCertificadoValidado = nombreCertificadoValidado;
     }
 
 }

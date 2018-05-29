@@ -21,6 +21,7 @@ public class EducacionContinua {
     private String nombreCapacitacion;    
     private String numeroHoras;    
     private String anyo;
+    private boolean estudioExterior;
     private Object certificado;
 
     /**
@@ -175,6 +176,20 @@ public class EducacionContinua {
      */
     public void setCertificado(Object certificado) {
         this.certificado = certificado;
+    }
+
+    /**
+     * @return the estudioExterior
+     */
+    public boolean isEstudioExterior() {
+        return estudioExterior;
+    }
+
+    /**
+     * @param estudioExterior the estudioExterior to set
+     */
+    public void setEstudioExterior(boolean estudioExterior) {
+        this.estudioExterior = estudioExterior;
     }
 
 }

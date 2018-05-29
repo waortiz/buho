@@ -22,18 +22,25 @@ import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.TipoDocumento;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
+import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.Institucion;
+import co.edu.fnsp.buho.entidades.Investigacion;
+import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
 import co.edu.fnsp.buho.entidades.Patente;
 import co.edu.fnsp.buho.entidades.ProductoConocimiento;
 import co.edu.fnsp.buho.entidades.Programa;
 import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.Terminos;
+import co.edu.fnsp.buho.entidades.TipoDocumentoValidarEnum;
+import co.edu.fnsp.buho.entidades.ValidacionDocumento;
+import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
 import co.edu.fnsp.buho.servicios.IServicioHojaVida;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
 import co.edu.fnsp.buho.utilidades.Util;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
@@ -66,9 +73,13 @@ public class HojaVidaController {
     @Autowired
     private IServicioMaestro servicioMaestro;
 
+    @Autowired
+    private IServicioConvocatoria servicioConvocatoria;
+
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(Model model) {
         List<co.edu.fnsp.buho.entidades.HojaVida> hojasVida = servicioHojaVida.obtenerHojasVida();
+
         model.addAttribute("hojasVida", hojasVida);
 
         return "hojasVida/index";
@@ -281,6 +292,20 @@ public class HojaVidaController {
         }
     }
 
+    @RequestMapping(value = "/documentoSoporteValidar/{idDocumentoSoporte}", method = RequestMethod.GET)
+    public void obtenerDocumentoSoporteValidar(@PathVariable("idDocumentoSoporte") long idDocumentoSoporte, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerDocumentoSoporte(idDocumentoSoporte);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+
     @RequestMapping(value = "/certificadoIdioma/{idIdioma}", method = RequestMethod.GET)
     public void obtenerCertificadoIdioma(@PathVariable("idIdioma") int idIdioma, HttpServletResponse response) throws IOException {
         Documento documento = servicioHojaVida.obtenerCertificadoIdioma(idIdioma);
@@ -292,6 +317,20 @@ public class HojaVidaController {
             response.setContentType(documento.getTipoContenido());
             response.setContentLength(documento.getContenido().length);
             response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+
+    @RequestMapping(value = "/certificadoIdiomaValidar/{idIdioma}", method = RequestMethod.GET)
+    public void obtenerCertificadoIdiomaValidar(@PathVariable("idIdioma") int idIdioma, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerCertificadoIdioma(idIdioma);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
             FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
         }
     }
@@ -311,6 +350,20 @@ public class HojaVidaController {
         }
     }
 
+    @RequestMapping(value = "/certificadoEducacionBasicaValidar/{idEducacionBasica}", method = RequestMethod.GET)
+    public void obtenerCertificadoEducacionBasicaValidar(@PathVariable("idEducacionBasica") int idEducacionBasica, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerCertificadoEducacionBasica(idEducacionBasica);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+
     @RequestMapping(value = "/certificadoEducacionSuperior/{idEducacionSuperior}", method = RequestMethod.GET)
     public void obtenerCertificadoEducacionSuperior(@PathVariable("idEducacionSuperior") int idEducacionSuperior, HttpServletResponse response) throws IOException {
         Documento documento = servicioHojaVida.obtenerCertificadoEducacionSuperior(idEducacionSuperior);
@@ -322,6 +375,20 @@ public class HojaVidaController {
             response.setContentType(documento.getTipoContenido());
             response.setContentLength(documento.getContenido().length);
             response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+
+    @RequestMapping(value = "/certificadoEducacionSuperiorValidar/{idEducacionSuperior}", method = RequestMethod.GET)
+    public void obtenerCertificadoEducacionSuperiorValidar(@PathVariable("idEducacionSuperior") int idEducacionSuperior, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerCertificadoEducacionSuperior(idEducacionSuperior);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
             FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
         }
     }
@@ -341,8 +408,22 @@ public class HojaVidaController {
         }
     }
 
-    @RequestMapping(value = "/certificadoEducacionContinua/{idEducacionContinua}", method = RequestMethod.GET)
-    public void obtenerCertificadoEducacionContinua(@PathVariable("idEducacionContinua") int idEducacionContinua, HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "/certificadoHomologadoEducacionSuperiorValidar/{idEducacionSuperior}", method = RequestMethod.GET)
+    public void certificadoHomologadoEducacionSuperiorValidar(@PathVariable("idEducacionSuperior") int idEducacionSuperior, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerCertificadoHomologadoEducacionSuperior(idEducacionSuperior);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+
+    @RequestMapping(value = "/certificadoEducacionContinuaValidar/{idEducacionContinua}", method = RequestMethod.GET)
+    public void obtenerCertificadoEducacionContinuaValidar(@PathVariable("idEducacionContinua") int idEducacionContinua, HttpServletResponse response) throws IOException {
         Documento documento = servicioHojaVida.obtenerCertificadoEducacionContinua(idEducacionContinua);
         if (documento != null) {
             response.reset();
@@ -351,7 +432,6 @@ public class HojaVidaController {
             response.setDateHeader("Expires", 0);
             response.setContentType(documento.getTipoContenido());
             response.setContentLength(documento.getContenido().length);
-            response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
             FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
         }
     }
@@ -371,6 +451,20 @@ public class HojaVidaController {
         }
     }
 
+    @RequestMapping(value = "/certificadoDistincionValidar/{idDistincion}", method = RequestMethod.GET)
+    public void obtenerCertificadoDistincionValidar(@PathVariable("idDistincion") int idDistincion, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerCertificadoDistincion(idDistincion);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+
     @RequestMapping(value = "/certificadoExperienciaLaboral/{idExperienciaLaboral}", method = RequestMethod.GET)
     public void obtenerCertificadoExperienciaLaboral(@PathVariable("idExperienciaLaboral") int idExperienciaLaboral, HttpServletResponse response) throws IOException {
         Documento documento = servicioHojaVida.obtenerCertificadoExperienciaLaboral(idExperienciaLaboral);
@@ -382,6 +476,20 @@ public class HojaVidaController {
             response.setContentType(documento.getTipoContenido());
             response.setContentLength(documento.getContenido().length);
             response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+
+    @RequestMapping(value = "/certificadoExperienciaLaboralValidar/{idExperienciaLaboral}", method = RequestMethod.GET)
+    public void obtenerCertificadoExperienciaLaboralValidar(@PathVariable("idExperienciaLaboral") int idExperienciaLaboral, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerCertificadoExperienciaLaboral(idExperienciaLaboral);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
             FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
         }
     }
@@ -401,6 +509,20 @@ public class HojaVidaController {
         }
     }
 
+    @RequestMapping(value = "/certificadoCursoExperienciaDocenciaValidar/{idCursoExperienciaDocencia}", method = RequestMethod.GET)
+    public void obtenerCertificadoCursoExperienciaDocenciaValidar(@PathVariable("idCursoExperienciaDocencia") int idCursoExperienciaDocencia, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerCertificadoCursoExperienciaDocencia(idCursoExperienciaDocencia);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+
     @RequestMapping(value = "/documentoPatente/{idPatente}", method = RequestMethod.GET)
     public void obtenerDocumentoPatente(@PathVariable("idPatente") int idPatente, HttpServletResponse response) throws IOException {
         Documento documento = servicioHojaVida.obtenerDocumentoPatente(idPatente);
@@ -416,6 +538,20 @@ public class HojaVidaController {
         }
     }
 
+    @RequestMapping(value = "/documentoPatenteValidar/{idPatente}", method = RequestMethod.GET)
+    public void obtenerDocumentoPatenteValidar(@PathVariable("idPatente") int idPatente, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerDocumentoPatente(idPatente);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+
     @RequestMapping(value = "/documentoProductoConocimiento/{idProductoConocimiento}", method = RequestMethod.GET)
     public void obtenerDocumentoProductoConocimiento(@PathVariable("idProductoConocimiento") int idProductoConocimiento, HttpServletResponse response) throws IOException {
         Documento documento = servicioHojaVida.obtenerDocumentoProductoConocimiento(idProductoConocimiento);
@@ -427,6 +563,20 @@ public class HojaVidaController {
             response.setContentType(documento.getTipoContenido());
             response.setContentLength(documento.getContenido().length);
             response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
+
+    @RequestMapping(value = "/documentoProductoConocimientoValidar/{idProductoConocimiento}", method = RequestMethod.GET)
+    public void obtenerDocumentoProductoConocimientoValidar(@PathVariable("idProductoConocimiento") int idProductoConocimiento, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerDocumentoProductoConocimiento(idProductoConocimiento);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
             FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
         }
     }
@@ -587,8 +737,8 @@ public class HojaVidaController {
         if (hojaVida.getCorreosElectronicos().size() > 0) {
             model.addAttribute("correosElectronicosJSON", Util.obtenerCorreosElectronicosJSON(hojaVida.getCorreosElectronicos()));
         }
-        if (hojaVida.getDocumentosSoporte().size() > 0) {
-            model.addAttribute("documentosSoporteJSON", Util.obtenerDocumentosSoporteJSON(hojaVida.getDocumentosSoporte()));
+        if (hojaVida.getDocumentosSoporteComplementarios().size() > 0) {
+            model.addAttribute("documentosSoporteJSON", Util.obtenerDocumentosSoporteJSON(hojaVida.getDocumentosSoporteComplementarios()));
         }
         if (hojaVida.getIdiomas().size() > 0) {
             model.addAttribute("idiomasJSON", Util.obtenerIdiomasJSON(hojaVida.getIdiomas()));
@@ -645,7 +795,7 @@ public class HojaVidaController {
             }
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarDocumentoSoporte(idPersona, nuevoDocumentoSoporte);
-            List<DocumentoSoporte> documentosSoporte = servicioHojaVida.obtenerDocumentosSoporte(idPersona);
+            List<DocumentoSoporte> documentosSoporte = servicioHojaVida.obtenerDocumentosSoporteComplementarios(idPersona);
             Util.establecerConsecutivoDocumentoSoporte(documentosSoporte);
             Gson gson = new Gson();
             json = gson.toJson(documentosSoporte);
@@ -665,7 +815,7 @@ public class HojaVidaController {
         try {
             servicioHojaVida.eliminarDocumentoSoporte(idDocumentoSoporte);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
-            List<DocumentoSoporte> documentosSoporte = servicioHojaVida.obtenerDocumentosSoporte(idPersona);
+            List<DocumentoSoporte> documentosSoporte = servicioHojaVida.obtenerDocumentosSoporteComplementarios(idPersona);
             Util.establecerConsecutivoDocumentoSoporte(documentosSoporte);
             Gson gson = new Gson();
             json = gson.toJson(documentosSoporte);
@@ -936,6 +1086,7 @@ public class HojaVidaController {
         try {
             EducacionContinua nuevaEducacionContinua = new EducacionContinua();
             nuevaEducacionContinua.setId(educacionContinua.getId());
+            nuevaEducacionContinua.setEstudioExterior(educacionContinua.isEstudioExterior());
             nuevaEducacionContinua.setTipoCapacitacion(Util.obtenerEntero(educacionContinua.getTipoCapacitacion()));
             nuevaEducacionContinua.setInstitucion(Util.obtenerEntero(educacionContinua.getInstitucion()));
             nuevaEducacionContinua.setNombreCapacitacion(educacionContinua.getNombreCapacitacion());
@@ -1424,4 +1575,95 @@ public class HojaVidaController {
         return json;
     }
 
+    @RequestMapping(value = "/validar", method = RequestMethod.GET)
+    public String validarDocumentos(Model model) {
+
+        List<ListadoConvocatoria> convocatorias = servicioConvocatoria.obtenerConvocatoriaValidar();
+        model.addAttribute("convocatorias", convocatorias);
+
+        return "hojasVida/validar";
+    }
+
+    @RequestMapping(value = "/personas/{idConvocatoria}", method = RequestMethod.GET)
+    public @ResponseBody
+    String obtenerPersonasConvocatoria(@ModelAttribute(value = "idConvocatoria") int idConvocatoria, Model model) {
+        List<HojaVida> hojasVida = servicioConvocatoria.obtenerPersonasConvocatoria(idConvocatoria);
+        Gson gson = new Gson();
+
+        return gson.toJson(hojasVida);
+    }
+
+    @RequestMapping(value = "/datos/{idPersona}", method = RequestMethod.GET)
+    public @ResponseBody
+    String obtenerHojaVida(@ModelAttribute(value = "idPersona") long idPersona, Model model) {
+        try {
+            HojaVida hojaVida = servicioHojaVida.obtenerHojaVida(idPersona);
+            Gson gson = new Gson();
+
+            return gson.toJson(hojaVida);
+
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+    }
+
+    @RequestMapping(value = {"/validarDocumento"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String validarDocumento(@ModelAttribute(value = "validacionDocumento") ValidacionDocumento validacionDocumento, Model model) throws Exception {
+        try {
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            servicioHojaVida.validarDocumento(idPersona, validacionDocumento);
+
+            Gson gson = new Gson();
+            if (validacionDocumento.getTipoDocumento() == TipoDocumentoValidarEnum.SOPORTE.getId()) {
+                List<DocumentoSoporte> documentosSoporte = servicioHojaVida.obtenerDocumentosSoporteValidar(validacionDocumento.getIdPersona());
+                return gson.toJson(documentosSoporte);
+            } else if (validacionDocumento.getTipoDocumento() == TipoDocumentoValidarEnum.CURSO_EXPERIENCIA_DOCENCIA.getId()) {
+                List<CursoExperienciaDocencia> cursosExperienciaDocencia = servicioHojaVida.obtenerCursosExperienciaDocencia(validacionDocumento.getIdPersona());
+                return gson.toJson(cursosExperienciaDocencia);
+            } else if (validacionDocumento.getTipoDocumento() == TipoDocumentoValidarEnum.ARTICULO.getId()) {
+                List<Articulo> articulos = servicioHojaVida.obtenerArticulos(validacionDocumento.getIdPersona());
+                return gson.toJson(articulos);
+            } else if (validacionDocumento.getTipoDocumento() == TipoDocumentoValidarEnum.DISTINCION.getId()) {
+                List<Distincion> disticiones = servicioHojaVida.obtenerDistinciones(validacionDocumento.getIdPersona());
+                return gson.toJson(disticiones);
+            } else if (validacionDocumento.getTipoDocumento() == TipoDocumentoValidarEnum.EDUCACION_BASICA.getId()) {
+                List<EducacionBasica> educacionesBasicas = servicioHojaVida.obtenerEducacionesBasicas(validacionDocumento.getIdPersona());
+                return gson.toJson(educacionesBasicas);
+            } else if (validacionDocumento.getTipoDocumento() == TipoDocumentoValidarEnum.EDUCACION_CONTINUA.getId()) {
+                List<EducacionContinua> educacionesContinuas = servicioHojaVida.obtenerEducacionesContinuas(validacionDocumento.getIdPersona());
+                return gson.toJson(educacionesContinuas);
+            } else if (validacionDocumento.getTipoDocumento() == TipoDocumentoValidarEnum.EDUCACION_SUPERIOR.getId()
+                    || validacionDocumento.getTipoDocumento() == TipoDocumentoValidarEnum.EDUCACION_HOMOLOGADO_SUPERIOR.getId()) {
+                List<EducacionSuperior> educacionesSuperiores = servicioHojaVida.obtenerEducacionesSuperiores(validacionDocumento.getIdPersona());
+                return gson.toJson(educacionesSuperiores);
+            } else if (validacionDocumento.getTipoDocumento() == TipoDocumentoValidarEnum.EXPERIENCIA_LABORAL.getId()) {
+                List<ExperienciaLaboral> experienciasLaborales = servicioHojaVida.obtenerExperienciasLaborales(validacionDocumento.getIdPersona());
+                return gson.toJson(experienciasLaborales);
+            } else if (validacionDocumento.getTipoDocumento() == TipoDocumentoValidarEnum.IDIOMA.getId()) {
+                List<Idioma> idiomas = servicioHojaVida.obtenerIdiomas(validacionDocumento.getIdPersona());
+                return gson.toJson(idiomas);
+            } else if (validacionDocumento.getTipoDocumento() == TipoDocumentoValidarEnum.PATENTE.getId()) {
+                List<Patente> patentes = servicioHojaVida.obtenerPatentes(validacionDocumento.getIdPersona());
+                return gson.toJson(patentes);
+            } else if (validacionDocumento.getTipoDocumento() == TipoDocumentoValidarEnum.PRODUCTO_CONOCIMIENTO.getId()) {
+                List<ProductoConocimiento> productosConocimiento = servicioHojaVida.obtenerProductoConocimientos(validacionDocumento.getIdPersona());
+                return gson.toJson(productosConocimiento);
+            } else if (validacionDocumento.getTipoDocumento() == TipoDocumentoValidarEnum.CVLAC.getId()) {
+                Investigacion investigacion = servicioHojaVida.obtenerInvestigacion(validacionDocumento.getIdPersona());
+                List<Investigacion> investigaciones = new ArrayList<>();
+                investigaciones.add(investigacion);
+                return gson.toJson(investigaciones);
+            } else if (validacionDocumento.getTipoDocumento() == TipoDocumentoValidarEnum.PROPUESTA_INVESTIGACION.getId()) {
+                List<DocumentoSoporte> documentosSoporte = servicioHojaVida.obtenerPropuestasInvestigacion(validacionDocumento.getIdPersona());
+                return gson.toJson(documentosSoporte);
+            }
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return "";
+    }
 }

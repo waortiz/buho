@@ -112,14 +112,16 @@
                             <div class="form-inline">
                                 <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" name="copiaDocumentoIdentificacion" id="copiaDocumentoIdentificacion" class="form-control" style="width: 80%"></span><label class="lblnombre" id="nombreCopiaDocumentoIdentificacion">${hojaVida.getNombreCopiaDocumentoIdentificacion()}</label>
                                 <c:if test = "${!hojaVida.isCopiaDocumentoIdentificacionValidado()}">
-                                    <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
-                                    </c:if>    
-                                    <c:if test = "${hojaVida.isCopiaDocumentoIdentificacionValidado()}">
-                                    <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
-                                    </c:if>                              
-                                    <c:if test = "${hojaVida.isTieneCopiaDocumentoIdentificacion()}">
-                                    <button class="btn btn-success btn-xs" type="button" onclick="verCopiaCedula()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
-                                    </c:if>                              
+                                    <button id="btnCopiaDocumentoIdentificacionNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
+                                    <button id="btnCopiaDocumentoIdentificacionValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado" style="display: none;"><span class="glyphicon glyphicon-ok"></span></button>
+                                </c:if>    
+                                <c:if test = "${hojaVida.isCopiaDocumentoIdentificacionValidado()}">
+                                    <button id="btnCopiaDocumentoIdentificacionValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
+                                    <button id="btnCopiaDocumentoIdentificacionNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado" style="display: none;"><span class='fa fa-question-circle-o'></span></button>
+                                </c:if>                              
+                                <c:if test = "${hojaVida.isTieneCopiaDocumentoIdentificacion()}">
+                                <button class="btn btn-success btn-xs" type="button" onclick="verCopiaCedula()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
+                                </c:if>                              
                             </div>
                         </div>
                     </div>
@@ -292,14 +294,16 @@
                             <div class="form-inline">
                             <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" name="copiaLibretaMilitar" id="copiaLibretaMilitar" class="form-control" style="width: 80%"></span><label class="lblnombre" id="nombreCopiaLibretaMilitar">${hojaVida.getNombreCopiaLibretaMilitar()}</label>
                             <c:if test = "${!hojaVida.isCopiaLibretaMilitarValidado()}">
-                                <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
-                                </c:if>    
-                                <c:if test = "${hojaVida.isCopiaLibretaMilitarValidado()}">
-                                <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
-                                </c:if>                            
+                                <button id="btnCopiaLibretaMilitarNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
+                                <button id="btnCopiaLibretaMilitarValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado" style="display: none;"><span class="glyphicon glyphicon-ok"></span></button>
+                            </c:if>    
+                            <c:if test = "${hojaVida.isCopiaLibretaMilitarValidado()}">
+                                <button id="btnCopiaLibretaMilitarValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
+                                <button id="btnCopiaLibretaMilitarNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado" style="display: none;"><span class='fa fa-question-circle-o'></span></button>
+                            </c:if>                            
                                 <c:if test = "${hojaVida.isTieneCopiaLibretaMilitar()}">
                                 <button class="btn btn-success btn-xs" type="button" onclick="verCopiaLibretaMilitar()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
-                                </c:if>                              
+                            </c:if>                              
                             </div>            
                         </div>
                     </div>
@@ -532,12 +536,14 @@
                             <div class="form-inline">
                             <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" name="documentoRUT" id="documentoRUT" class="form-control" style="width: 80%"></span><label class="lblnombre" id="nombreDocumentoRUT">${hojaVida.getNombreDocumentoRUT()}</label>
                             <c:if test = "${!hojaVida.isDocumentoRUTValidado()}">
-                                <button class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
-                                </c:if>    
-                                <c:if test = "${hojaVida.isDocumentoRUTValidado()}">
-                                <button class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
-                                </c:if>
-                                <c:if test = "${hojaVida.isTieneDocumentoRUT()}">
+                                <button id="btnDocumentoRUTNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
+                                <button id="btnDocumentoRUTValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado" style="display: none;"><span class="glyphicon glyphicon-ok"></span></button>
+                            </c:if>    
+                            <c:if test = "${hojaVida.isDocumentoRUTValidado()}">
+                                <button id="btnDocumentoRUTNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado" style="display: none;"><span class='fa fa-question-circle-o'></span></button>
+                                <button id="btnDocumentoRUTValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado" ><span class="glyphicon glyphicon-ok"></span></button>
+                            </c:if>
+                            <c:if test = "${hojaVida.isTieneDocumentoRUT()}">
                                 <button class="btn btn-success btn-xs" type="button" onclick="verCopiaRUT()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
                                 </c:if>                              
                             </div>
@@ -570,12 +576,12 @@
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
                             <div id="radioBtn1" class="btn-group" style="margin-left: 40px;">
                                 <c:if test = "${hojaVida.isEgresadoUDEA()}">
-                                    <a class="btn btn-primary btn-sm active" data-toggle="egresadoUDEA" data-title="true" id="btnEgresadoUdeASi">Si</a>
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="egresadoUDEA" data-title="false" id="btnEgresadoUdeANo">No</a>
+                                    <a class="btn btn-primary btn-sm active" data-toggle="egresadoUDEA" data-title="true" id="btnEgresadoUdeASi" disabled>Si</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="egresadoUDEA" data-title="false" id="btnEgresadoUdeANo" disabled>No</a>
                                 </c:if>
                                 <c:if test = "${!hojaVida.isEgresadoUDEA()}">
-                                    <a class="btn btn-primary btn-sm notActive" data-toggle="egresadoUDEA" data-title="true" id="btnEgresadoUdeASi">Si</a>
-                                    <a class="btn btn-primary btn-sm active" data-toggle="egresadoUDEA" data-title="false" id="btnEgresadoUdeANo">No</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="egresadoUDEA" data-title="true" id="btnEgresadoUdeASi" disabled>Si</a>
+                                    <a class="btn btn-primary btn-sm active" data-toggle="egresadoUDEA" data-title="false" id="btnEgresadoUdeANo" disabled>No</a>
                                 </c:if>
                             </div>
                             <form:hidden path="egresadoUDEA" />
@@ -872,6 +878,7 @@
                                         </td>
                                         <td style="width: 50%" align="center">
                                             <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoSoporte" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                            <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: validado"><i class="glyphicon glyphicon-ok"></i></a>                                            
                                         </td>
                                         <td style='white-space: nowrap' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarDocumentoSoporte"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -967,6 +974,7 @@
                                         </td>
                                         <td style="width: 10%" align="center">
                                             <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionBasica" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                            <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoValidado"><i class="glyphicon glyphicon-ok"></i></a>                                            
                                         </td>
                                         <td style='white-space: nowrap; width: 10%' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarEducacionBasica"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -1089,9 +1097,11 @@
                                         </td>
                                         <td style="width: 10%" align="center">
                                             <a href='#' title='Ver certificado homologado' data-bind="click: $root.verCertificadoHomologadoEducacionSuperior" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                            <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoHomologadoValidado"><i class="glyphicon glyphicon-ok"></i></a>
                                         </td>
                                         <td style="width: 10%" align="center">
                                             <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionSuperior" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                            <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoValidado"><i class="glyphicon glyphicon-ok"></i></a>
                                         </td>
                                         <td style='white-space: nowrap; width: 10%' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarEducacionSuperior"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -1370,10 +1380,11 @@
                         <label>Agregar estudios idiomas</label>
                         <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoIdioma();" >
                             <span class="glyphicon glyphicon-plus"></span>
-                        </button>                  
-                        <br>
-                        <div id="alert_idiomas"></div>
-                        <table class="table tabla table-hover tableestilo">
+                        </button>
+                        <div class="table-responsive">
+                            <br />
+                            <div id="alert_idiomas"></div>
+                            <table class="table tabla table-hover tableestilo">
                             <thead>
                                 <tr>
                                     <th>Idioma</th>
@@ -1404,6 +1415,7 @@
                                     </td>
                                     <td style="width: 15%" align="center">
                                         <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoIdioma" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                        <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoValidado"><i class="glyphicon glyphicon-ok"></i></a>
                                     </td>
                                     <td style='white-space: nowrap' align="center">
                                         <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarIdioma"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -1412,6 +1424,7 @@
                                 </tr>
                             </tbody>                                   
                         </table>
+                        </div>
                     </div>
                     <!--  MODAL IDIOMA -->
                     <div class="modal fade" id="md_idioma" role="dialog">
@@ -1580,6 +1593,7 @@
                                         </td>
                                         <td style="width: 10%" align="center">
                                             <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionContinua" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                            <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoValidado"><i class="glyphicon glyphicon-ok"></i></a>
                                         </td>
                                         <td style='white-space: nowrap; width: 10%' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarEducacionContinua"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -1602,7 +1616,7 @@
                             <div class="modal-body">
                                 <div id="alert_educacion_continua"></div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="tipoCapacitacionEducacionContinua">Tipo de capacitaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cuál es el tipo de capacitaci&oacute;n">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
@@ -1614,18 +1628,29 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="estudioExteriorEducacionContinua">¿Certificado extranjero?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger si el certificado es extranjero">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> <br>
+                                            <div id="radioBtn" class="btn-group" style="margin-left: 40px;">
+                                                <a class="btn btn-primary btn-sm notActive" data-toggle="estudioExteriorEducacionContinua"  data-title="true"  id="btnEstudioExteriorSiEducacionContinua">Si</a>
+                                                <a class="btn btn-primary btn-sm notActive" data-toggle="estudioExteriorEducacionContinua"  data-title="false" id="btnEstudioExteriorNoEducacionContinua">No</a>
+                                            </div>
+                                            <input type="hidden" name="estudioExteriorEducacionContinua" id="estudioExteriorEducacionContinua">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="institucionEducacionContinua">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institución que estudio">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
                                             <div class="form-inline">
-                                                <select style="width: 90%;" name="institucionEducacionContinua" id="institucionEducacionContinua" class="js-select-basic-single js-states form-control">
+                                                <select style="width: 80%;" name="institucionEducacionContinua" id="institucionEducacionContinua" class="js-select-basic-single js-states form-control">
                                                     <option></option>
-                                                    <c:forEach var="institucion" items="${institucionesEducativas}">
+                                                    <c:forEach var="institucion" items="${institucionesEducativasColombianas}">
                                                     <option value="${institucion.getId()}">${institucion.getNombre()}</option>
                                                     </c:forEach>                                                     
                                                 </select>
-                                                <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevaInstitucionExtranjero();"><span class="glyphicon glyphicon-plus"></span></button>
+                                                <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" id="btnNuevaInstitucionExtranjero" onclick="nuevaInstitucionExtranjero();"><span class="glyphicon glyphicon-plus"></span></button>
                                             </div>
                                         </div>
                                     </div>
@@ -1744,6 +1769,7 @@
                                 </td>
                                 <td style="width: 10%" align="center">
                                     <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoExperienciaLaboral" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                    <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoValidado"><i class="glyphicon glyphicon-ok"></i></a>
                                 </td>
                                 <td style='white-space: nowrap; width: 10%' align="center">
                                     <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarExperienciaLaboral"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -2029,6 +2055,7 @@
                                                         </td>
                                                         <td style="width: 10%" align="center">
                                                             <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoCursoExperienciaDocencia" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                                            <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoValidado"><i class="glyphicon glyphicon-ok"></i></a>
                                                         </td>
                                                         <td style='white-space: nowrap; width: 10%' align="center">
                                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCursoExperienciaDocencia"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -2159,7 +2186,17 @@
                         <div class="form-group">    
                             <label>Curr&iacute;culum vitae de latinoamerica y el caribe (CVLAC)</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe inidicar el Curr&iacute;culum vitae de latinoamerica y el caribe (CVLAC) ">
                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                            <form:input path="urlCVLAC" class="form-control" maxlength="500"/>
+                            <div class="form-inline">    
+                                <form:input path="urlCVLAC" class="form-control" maxlength="500" style="width:90%"/>
+                                <c:if test = "${hojaVida.isUrlCVLACValidada()}">
+                                <button id="btnUrlCVLACValidada" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
+                                <button id="btnUrlCVLACNoValidada" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado" style="display: none;"><span class='fa fa-question-circle-o'></span></button>
+                                </c:if>                              
+                                <c:if test = "${!hojaVida.isUrlCVLACValidada()}">
+                                <button id="btnUrlCVLACValidada" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado" style="display: none;"><span class="glyphicon glyphicon-ok"></span></button>
+                                <button id="btnUrlCVLACNoValidada" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
+                                </c:if>                              
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -2227,6 +2264,7 @@
                                         </td>
                                         <td style="width: 50%">
                                             <span data-bind="text: url" ></span>
+                                            <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: validado"><i class="glyphicon glyphicon-ok"></i></a>
                                         </td>
                                         <td style='white-space: nowrap; width: 10%' align="center">
                                             <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarArticulo"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -2344,6 +2382,7 @@
                                     </td>
                                     <td style="width: 10%" align="center">
                                         <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoPatente" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                        <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: documentoValidado"><i class="glyphicon glyphicon-ok"></i></a>
                                     </td>
                                     <td style='white-space: nowrap; width: 10%' align="center">
                                         <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarPatente"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -2465,6 +2504,7 @@
                                          </td>
                                          <td style="width: 10%" align="center">
                                              <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoProductoConocimiento" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                             <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: documentoValidado"><i class="glyphicon glyphicon-ok"></i></a>
                                          </td>
                                          <td style='white-space: nowrap; width: 10%' align="center">
                                              <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarProductoConocimiento"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -2582,6 +2622,7 @@
                                     </td>
                                     <td style="width: 20%" align="center">
                                         <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoDistincion" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                        <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoValidado"><i class="glyphicon glyphicon-ok"></i></a>
                                     </td>
                                     <td style='white-space: nowrap; width: 10%' align="center">
                                         <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarDistincion"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -2708,6 +2749,23 @@
                </div>
            </div>
        </div>            
+        <div id="md_guardado_exitoso" class="modal fade" role="dialog" disabled>
+           <div class="modal-dialog">
+               <div class="modal-content">
+                    <div class="modal-header mhsuccess">
+                        <button class="close" data-dismiss="modal">&times;</button>
+                        <h4><i class="fa fa-book" aria-hidden="true"></i>
+                        Actualización Hoja de Vida</h4>
+                    </div>
+                   <div class="modal-body">
+                       <span id="mensaje"></span>
+                   </div>
+                   <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                   </div>
+               </div>
+           </div>
+       </div>            
     </div>
 </div>
 <script type="text/javascript">
@@ -2730,6 +2788,11 @@
     var campoCiudad;
     var campoNucleoBasicoConocimiento;
     var campoNombreNucleoBasicoConocimiento;
+    
+    var copiaDocumentoIdentificacionCambiado = false;
+    var copiaLibretaMilitarCambiado = false;
+    var documentoRUTCambiado = false;
+    var urlCVLACCambiada = false;
     
     $('.fecha').datepicker({
         dateFormat: "dd/mm/yy",
@@ -2866,7 +2929,7 @@
           $('#paistit').css("display","block");
           $('#certhomo').css('display','block');
           $('#btnNuevoProgramaExtranjero').show();
-          buscarInstitucionesEducativasProgramaExtranjeras();
+          buscarInstitucionesEducativasExtranjeras('institucionEducativaPrograma');
         });
         
         $('#btnTituloExtranjeroNoEducacionSuperior').click(function(){
@@ -2874,7 +2937,7 @@
           $('#certhomo').css('display', 'none');
           $('#btnNuevoProgramaExtranjero').hide();
           $('#paisTituloExteriorEducacionSuperior').val('').trigger("change.select2");
-          buscarInstitucionesEducativasProgramaColombianas();
+          buscarInstitucionesEducativasColombianas('institucionEducativaPrograma');
         });  
         
         $('#btnGraduadoSiEducacionSuperior').click(function () {
@@ -2982,6 +3045,16 @@
                 bootstrap_alert_programa_extranjero.warning("Error al almacenar el programa.");
             }});
         });
+
+        $('#btnEstudioExteriorSiEducacionContinua').click(function(){
+           buscarInstitucionesEducativasExtranjeras('institucionEducacionContinua');
+          $('#btnNuevaInstitucionExtranjero').show();
+        });
+        
+        $('#btnEstudioExteriorNoEducacionContinua').click(function(){
+           buscarInstitucionesEducativasColombianas('institucionEducacionContinua');
+          $('#btnNuevaInstitucionExtranjero').hide();
+        }); 
 
         $('#btnAdicionarInstitucionExtranjero').click(function(){
           var institucion = $('#institucionEducativaExtranjero').val();
@@ -3272,15 +3345,22 @@
         }
         
         $('#copiaDocumentoIdentificacion').change(function () {
+           copiaDocumentoIdentificacionCambiado = true;
            $('#nombreCopiaDocumentoIdentificacion').text($("#copiaDocumentoIdentificacion")[0].files[0].name); 
         });
         
         $('#copiaLibretaMilitar').change(function () {
+           copiaLibretaMilitarCambiado = true;
            $('#nombreCopiaLibretaMilitar').text($("#copiaLibretaMilitar")[0].files[0].name); 
         });
 
         $('#documentoRUT').change(function () {
+           documentoRUTCambiado = true;
            $('#nombreDocumentoRUT').text($("#documentoRUT")[0].files[0].name); 
+        });
+
+        $('#urlCVLAC').change(function () {
+           urlCVLACCambiada = true;
         });
 
         <c:if test = "${tab != null}">
@@ -3393,7 +3473,7 @@
             }});
     }
 
-    function buscarInstitucionesEducativasProgramaExtranjeras() {
+    function buscarInstitucionesEducativasExtranjeras(institucionEducativa) {
         $.ajax({
             type: "GET",
             url: "${pageContext.request.contextPath}/hojasVida/institucionesEducativasExtranjeras",
@@ -3401,17 +3481,17 @@
             contentType: false,
             success: function (response) {
                 if (response !== "") {
-                    $('#institucionEducativaPrograma').find('option').remove();
-                    $('#institucionEducativaPrograma').append('<option></option>');
+                    $('#' + institucionEducativa).find('option').remove();
+                    $('#' + institucionEducativa).append('<option></option>');
                     var instituciones = JSON.parse(response);
                     for (var i = 0; i < instituciones.length; i++) {
-                        $('#institucionEducativaPrograma').append('<option value=' + instituciones[i].id + '>' + instituciones[i].nombre + '</option>');
+                        $('#' + institucionEducativa).append('<option value=' + instituciones[i].id + '>' + instituciones[i].nombre + '</option>');
                     }
                 }
             }});
     }
 
-    function buscarInstitucionesEducativasProgramaColombianas() {
+    function buscarInstitucionesEducativasColombianas(institucionEducativa) {
         $.ajax({
             type: "GET",
             url: "${pageContext.request.contextPath}/hojasVida/institucionesEducativasColombianas",
@@ -3419,11 +3499,11 @@
             contentType: false,
             success: function (response) {
                 if (response !== "") {
-                    $('#institucionEducativaPrograma').find('option').remove();
-                    $('#institucionEducativaPrograma').append('<option></option>');
+                    $('#' + institucionEducativa).find('option').remove();
+                    $('#' + institucionEducativa).append('<option></option>');
                     var instituciones = JSON.parse(response);
                     for (var i = 0; i < instituciones.length; i++) {
-                        $('#institucionEducativaPrograma').append('<option value=' + instituciones[i].id + '>' + instituciones[i].nombre + '</option>');
+                        $('#' + institucionEducativa).append('<option value=' + instituciones[i].id + '>' + instituciones[i].nombre + '</option>');
                     }
                 }
             }});
@@ -3483,11 +3563,6 @@
             if ($('#consecutivo').val() === "") {
                 formData.append("id", 0);
                 formData.append("consecutivo", self.correosElectronicos().length);
-                self.correosElectronicos.push({
-                    id: ko.observable(0),
-                    consecutivo: ko.observable(self.correosElectronicos().length),
-                    correoElectronico: ko.observable(correoElectronico)
-                });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -3499,7 +3574,6 @@
                 }
                 formData.append("id", self.correosElectronicos()[indice].id());
                 formData.append("consecutivo", consecutivo);
-                self.correosElectronicos()[indice].correoElectronico(correoElectronico);
             }
             
             formData.append("correoElectronico", correoElectronico);
@@ -3536,7 +3610,6 @@
         };
 
         self.eliminarCorreoElectronico = function (correoElectronico) {
-            self.correosElectronicos.remove(correoElectronico);
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/eliminarCorreoElectronico/" + correoElectronico.id(),
@@ -3592,14 +3665,6 @@
             if ($('#consecutivo').val() === "") {
                 formData.append("id", 0);
                 formData.append("consecutivo", self.cuentasBancarias().length);
-                self.cuentasBancarias.push({
-                    id: ko.observable(0),
-                    consecutivo: ko.observable(self.cuentasBancarias().length),
-                    tipo: ko.observable(tipoCuentaBancaria),
-                    nombreTipo: ko.observable(nombreTipoCuentaBancaria),
-                    numero: ko.observable(numeroCuentaBancaria),
-                    entidad: ko.observable(entidadCuentaBancaria)
-                });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -3611,10 +3676,6 @@
                 }
                 formData.append("id", self.cuentasBancarias()[indice].id());
                 formData.append("consecutivo", consecutivo);
-                self.cuentasBancarias()[indice].tipo(tipoCuentaBancaria);
-                self.cuentasBancarias()[indice].nombreTipo(nombreTipoCuentaBancaria);
-                self.cuentasBancarias()[indice].numero(numeroCuentaBancaria);
-                self.cuentasBancarias()[indice].entidad(entidadCuentaBancaria);
             }
             formData.append("tipo", tipoCuentaBancaria);
             formData.append("numero", numeroCuentaBancaria);
@@ -3655,7 +3716,6 @@
         };
 
         self.eliminarCuentaBancaria = function (cuentaBancaria) {
-            self.cuentasBancarias.remove(cuentaBancaria);
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/eliminarCuentaBancaria/" + cuentaBancaria.id(),
@@ -3714,13 +3774,6 @@
             if ($('#consecutivo').val() === "") {
                 formData.append("id", 0);
                 formData.append("consecutivo", self.telefonos().length);
-                self.telefonos.push({
-                    id: ko.observable(0),
-                    consecutivo: ko.observable(self.telefonos().length),
-                    tipo: ko.observable(tipoTelefono),
-                    nombreTipo: ko.observable(nombreTipoTelefono),
-                    numero: ko.observable(numeroTelefono)
-                });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -3732,9 +3785,6 @@
                 }
                 formData.append("id", self.telefonos()[indice].id());
                 formData.append("consecutivo", consecutivo);
-                self.telefonos()[indice].tipo(tipoTelefono);
-                self.telefonos()[indice].nombreTipo(nombreTipoTelefono);
-                self.telefonos()[indice].numero(numeroTelefono);
             }
             formData.append("tipo", tipoTelefono);
             formData.append("numero", numeroTelefono);
@@ -3773,7 +3823,6 @@
         };
 
         self.eliminarTelefono = function (telefono) {
-            self.telefonos.remove(telefono);
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/eliminarTelefono/" + telefono.id(),
@@ -3848,8 +3897,6 @@
                     bootstrap_alert_documento_soporte.warning('El documento no debe ser mayor a 2MB');
                     return false;
                 }
-                self.documentosSoporte()[indice].tipoDocumento(tipoDocumento);
-                self.documentosSoporte()[indice].nombreTipoDocumento(nombreTipoDocumento);
                 formData.append("id", self.documentosSoporte()[indice].id());
                 formData.append("consecutivo", consecutivo);
             }
@@ -3879,7 +3926,9 @@
                                     id: ko.observable(documentosSoporte[i].id),
                                     consecutivo: ko.observable(documentosSoporte[i].consecutivo),
                                     tipoDocumento: ko.observable(documentosSoporte[i].tipoDocumento),
-                                    nombreTipoDocumento: ko.observable(documentosSoporte[i].nombreTipoDocumento)
+                                    nombreTipoDocumento: ko.observable(documentosSoporte[i].nombreTipoDocumento),
+                                    validado: ko.observable(documentosSoporte[i].validado),
+                                    nombreValidado: ko.observable(documentosSoporte[i].nombreValidado)
                                 }
                              );
                         }
@@ -3891,8 +3940,6 @@
         };
 
         self.eliminarDocumentoSoporte = function (documentoSoporte) {
-            self.documentosSoporte.remove(documentoSoporte);
-            
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/eliminarDocumentoSoporte/" + documentoSoporte.id(),
@@ -3910,7 +3957,9 @@
                                     id: ko.observable(documentosSoporte[i].id),
                                     consecutivo: ko.observable(documentosSoporte[i].consecutivo),
                                     tipoDocumento: ko.observable(documentosSoporte[i].tipoDocumento),
-                                    nombreTipoDocumento: ko.observable(documentosSoporte[i].nombreTipoDocumento)
+                                    nombreTipoDocumento: ko.observable(documentosSoporte[i].nombreTipoDocumento),
+                                    validado: ko.observable(documentosSoporte[i].validado),
+                                    nombreValidado: ko.observable(documentosSoporte[i].nombreValidado)
                                 }
                              );
                         }
@@ -3931,7 +3980,6 @@
         };
 
         self.verDocumentoSoporte = function (documentoSoporte) {
-            
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/documentoSoporte/" + documentoSoporte.id(),
@@ -4008,24 +4056,6 @@
                 }                
                 formData.append("id", 0);
                 formData.append("consecutivo", self.idiomas().length);
-                self.idiomas.push({
-                    id: ko.observable(0),
-                    consecutivo: ko.observable(self.idiomas().length),
-                    idioma: ko.observable(idioma),
-                    nombreIdioma: ko.observable(nombreIdioma),
-                    nivelConversacion: ko.observable(nivelConversacion),
-                    nombreNivelConversacion: ko.observable(nombreNivelConversacion),
-                    nivelEscritura: ko.observable(nivelEscritura),
-                    nombreNivelEscritura: ko.observable(nombreNivelEscritura),
-                    nivelEscucha: ko.observable(nivelEscucha),
-                    nombreNivelEscucha: ko.observable(nombreNivelEscucha),
-                    nivelLectura: ko.observable(nivelLectura),
-                    nombreNivelLectura: ko.observable(nombreNivelLectura),
-                    otraCertificacion: ko.observable(otraCertificacion),
-                    tipoCertificacion: ko.observable(tipoCertificacion),
-                    nombreTipoCertificacion: ko.observable(nombreTipoCertificacion),
-                    puntajeCertificacion: ko.observable(puntajeCertificacion)
-                });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -4042,20 +4072,6 @@
                 }
                 formData.append("id", self.idiomas()[indice].id());
                 formData.append("consecutivo", consecutivo);
-                self.idiomas()[indice].idioma(idioma);
-                self.idiomas()[indice].nombreIdioma(nombreIdioma);
-                self.idiomas()[indice].nivelConversacion(nivelConversacion);
-                self.idiomas()[indice].nombreNivelConversacion(nombreNivelConversacion);
-                self.idiomas()[indice].nivelEscritura(nivelEscritura);
-                self.idiomas()[indice].nombreNivelEscritura(nombreNivelEscritura);
-                self.idiomas()[indice].nivelEscucha(nivelEscucha);
-                self.idiomas()[indice].nombreNivelEscucha(nombreNivelEscucha);
-                self.idiomas()[indice].nivelLectura(nivelLectura);
-                self.idiomas()[indice].nombreNivelLectura(nombreNivelLectura);
-                self.idiomas()[indice].otraCertificacion(otraCertificacion);
-                self.idiomas()[indice].tipoCertificacion(tipoCertificacion);
-                self.idiomas()[indice].nombreTipoCertificacion(nombreTipoCertificacion);
-                self.idiomas()[indice].puntajeCertificacion(puntajeCertificacion);
             }
             if ($('#certificadoIdioma').val() !== "") {
                 formData.append("certificado", $('#certificadoIdioma')[0].files[0]);
@@ -4101,7 +4117,9 @@
                                     otraCertificacion: ko.observable(idiomas[i].otraCertificacion),
                                     tipoCertificacion: ko.observable(idiomas[i].tipoCertificacion),
                                     nombreTipoCertificacion: ko.observable(idiomas[i].nombreTipoCertificacion),
-                                    puntajeCertificacion: ko.observable(idiomas[i].puntajeCertificacion)
+                                    puntajeCertificacion: ko.observable(idiomas[i].puntajeCertificacion),
+                                    certificadoValidado: ko.observable(idiomas[i].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(idiomas[i].nombreCertificadoValidado)
                                 }
                              );
                         }
@@ -4113,7 +4131,6 @@
         };
 
         self.eliminarIdioma = function (idioma) {
-            self.idiomas.remove(idioma);
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/eliminarIdioma/" + idioma.id(),
@@ -4143,7 +4160,9 @@
                                     otraCertificacion: ko.observable(idiomas[i].otraCertificacion),
                                     tipoCertificacion: ko.observable(idiomas[i].tipoCertificacion),
                                     nombreTipoCertificacion: ko.observable(idiomas[i].nombreTipoCertificacion),
-                                    puntajeCertificacion: ko.observable(idiomas[i].puntajeCertificacion)
+                                    puntajeCertificacion: ko.observable(idiomas[i].puntajeCertificacion),                   
+                                    certificadoValidado: ko.observable(idiomas[i].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(idiomas[i].nombreCertificadoValidado)
                                 }
                              );
                         }
@@ -4230,17 +4249,6 @@
                 }                
                 formData.append("id", 0);
                 formData.append("consecutivo", self.educacionesBasicas().length);
-                self.educacionesBasicas.push({
-                    id: ko.observable(0),
-                    consecutivo: ko.observable(self.educacionesBasicas().length),
-                    institucion: ko.observable(institucionEducacionBasica),
-                    nivel: ko.observable(nivelEstudioEducacionBasica),
-                    nombreNivel: ko.observable(nombreNivelEducacionBasica),
-                    anyoInicio: ko.observable(anyoInicioEducacionBasica),
-                    anyoFinalizacion: ko.observable(anyoFinalizacionEducacionBasica),
-                    titulo: ko.observable(tituloEducacionBasica),
-                    graduado: ko.observable(graduadoEducacionBasica)
-                });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -4257,14 +4265,6 @@
                 }                
                 formData.append("id", self.educacionesBasicas()[indice].id());
                 formData.append("consecutivo", consecutivo);
-
-                self.educacionesBasicas()[indice].institucion(institucionEducacionBasica);
-                self.educacionesBasicas()[indice].nivel(nivelEstudioEducacionBasica);
-                self.educacionesBasicas()[indice].nombreNivel(nombreNivelEducacionBasica);
-                self.educacionesBasicas()[indice].anyoInicio(anyoInicioEducacionBasica);
-                self.educacionesBasicas()[indice].anyoFinalizacion(anyoFinalizacionEducacionBasica);
-                self.educacionesBasicas()[indice].titulo(tituloEducacionBasica);
-                self.educacionesBasicas()[indice].graduado(graduadoEducacionBasica);
             }
             
             formData.append("institucion", institucionEducacionBasica);
@@ -4303,7 +4303,9 @@
                                     anyoInicio: ko.observable(educacionesBasicas[i].anyoInicio),
                                     anyoFinalizacion: ko.observable(educacionesBasicas[i].anyoFinalizacion),
                                     titulo: ko.observable(educacionesBasicas[i].titulo),
-                                    graduado: ko.observable(educacionesBasicas[i].graduado)
+                                    graduado: ko.observable(educacionesBasicas[i].graduado),
+                                    certificadoValidado: ko.observable(educacionesBasicas[i].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(educacionesBasicas[i].nombreCertificadoValidado)
                                 }
                              );
                         }
@@ -4315,7 +4317,6 @@
         };
 
         self.eliminarEducacionBasica = function (educacionBasica) {
-            self.educacionesBasicas.remove(educacionBasica);
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/eliminarEducacionBasica/" + educacionBasica.id(),
@@ -4339,8 +4340,8 @@
                                     anyoFinalizacion: ko.observable(educacionesBasicas[i].anyoFinalizacion),
                                     titulo: ko.observable(educacionesBasicas[i].titulo),
                                     graduado: ko.observable(educacionesBasicas[i].graduado),
-                                    certificado: ko.observable(''),
-                                    tieneCertificado: ko.observable(educacionesBasicas[i].tieneCertificado)
+                                    certificadoValidado: ko.observable(educacionesBasicas[i].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(educacionesBasicas[i].nombreCertificadoValidado)
                                 }
                              );
                         }
@@ -4466,27 +4467,6 @@
                 }             
                 formData.append("id", 0);
                 formData.append("consecutivo", self.educacionesSuperiores().length);
-                self.educacionesSuperiores.push({
-                    id: ko.observable(0),
-                    consecutivo: ko.observable(self.educacionesSuperiores().length),
-                    tituloExterior: ko.observable(tituloExteriorEducacionSuperior),
-                    paisTituloExterior: ko.observable(paisTituloExteriorEducacionSuperior),
-                    nombrePaisTituloExterior: ko.observable(nombrePaisTituloExteriorEducacionSuperior),
-                    institucion: ko.observable(institucionEducacionSuperior),
-                    nombreInstitucion: ko.observable(nombreInstitucionEducacionSuperior),
-                    programa: ko.observable(programaCursadoEducacionSuperior),
-                    nombrePrograma: ko.observable(nombreProgramaCursadoEducacionSuperior),
-                    nucleoBasicoConocimiento: ko.observable(nucleoBasicoConocimientoEducacionSuperior),
-                    nombreNucleoBasicoConocimiento: ko.observable(nombreNucleoBasicoConocimientoEducacionSuperior),
-                    nivel: ko.observable(nivelEstudioEducacionSuperior),
-                    nombreNivel: ko.observable(nombreNivelEducacionSuperior),
-                    anyoInicio: ko.observable(anyoInicioEducacionSuperior),
-                    anyoFinalizacion: ko.observable(anyoFinalizacionEducacionSuperior),
-                    titulo: ko.observable(tituloEducacionSuperior),
-                    graduado: ko.observable(graduadoEducacionSuperior),
-                    fechaTitulo: ko.observable(fechaTituloEducacionSuperior),
-                    tieneCertificadoHomologado: ko.observable(false)
-                });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -4514,22 +4494,6 @@
                 }                    
                 formData.append("id", self.educacionesSuperiores()[indice].id());
                 formData.append("consecutivo", consecutivo);
-                self.educacionesSuperiores()[indice].institucion(institucionEducacionSuperior);
-                self.educacionesSuperiores()[indice].nombreInstitucion(nombreInstitucionEducacionSuperior);
-                self.educacionesSuperiores()[indice].tituloExterior(tituloExteriorEducacionSuperior);
-                self.educacionesSuperiores()[indice].paisTituloExterior(paisTituloExteriorEducacionSuperior);
-                self.educacionesSuperiores()[indice].nombrePaisTituloExterior(nombrePaisTituloExteriorEducacionSuperior);
-                self.educacionesSuperiores()[indice].nivel(nivelEstudioEducacionSuperior);
-                self.educacionesSuperiores()[indice].nombreNivel(nombreNivelEducacionSuperior);
-                self.educacionesSuperiores()[indice].programa(programaCursadoEducacionSuperior);
-                self.educacionesSuperiores()[indice].nombrePrograma(nombreProgramaCursadoEducacionSuperior);
-                self.educacionesSuperiores()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoEducacionSuperior);
-                self.educacionesSuperiores()[indice].nombreNucleoBasicoConocimiento(nombreNucleoBasicoConocimientoEducacionSuperior);
-                self.educacionesSuperiores()[indice].anyoInicio(anyoInicioEducacionSuperior);
-                self.educacionesSuperiores()[indice].anyoFinalizacion(anyoFinalizacionEducacionSuperior);
-                self.educacionesSuperiores()[indice].titulo(tituloEducacionSuperior);
-                self.educacionesSuperiores()[indice].graduado(graduadoEducacionSuperior);
-                self.educacionesSuperiores()[indice].fechaTitulo(fechaTituloEducacionSuperior);
             }
             
             formData.append("institucion",institucionEducacionSuperior);
@@ -4586,7 +4550,11 @@
                                     titulo: ko.observable(educacionesSuperiores[i].titulo),
                                     graduado: ko.observable(educacionesSuperiores[i].graduado),
                                     fechaTitulo: ko.observable(educacionesSuperiores[i].fechaTituloFormateada),
-                                    tieneCertificadoHomologado: ko.observable(educacionesSuperiores[i].tieneCertificadoHomologado)
+                                    tieneCertificadoHomologado: ko.observable(educacionesSuperiores[i].tieneCertificadoHomologado),
+                                    certificadoValidado: ko.observable(educacionesSuperiores[i].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(educacionesSuperiores[i].nombreCertificadoValidado),
+                                    certificadoHomologadoValidado: ko.observable(educacionesSuperiores[i].certificadoHomologadoValidado),
+                                    nombreCertificadoHomologadoValidado: ko.observable(educacionesSuperiores[i].nombreCertificadoHomologadoValidado)
                                 }
                              );
                         }
@@ -4599,7 +4567,6 @@
         };
 
         self.eliminarEducacionSuperior = function (educacionSuperior) {
-            self.educacionesSuperiores.remove(educacionSuperior);
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/eliminarEducacionSuperior/" + educacionSuperior.id(),
@@ -4632,7 +4599,11 @@
                                     titulo: ko.observable(educacionesSuperiores[i].titulo),
                                     graduado: ko.observable(educacionesSuperiores[i].graduado),
                                     fechaTitulo: ko.observable(educacionesSuperiores[i].fechaTituloFormateada),
-                                    tieneCertificadoHomologado: ko.observable(educacionesSuperiores[i].tieneCertificadoHomologado)
+                                    tieneCertificadoHomologado: ko.observable(educacionesSuperiores[i].tieneCertificadoHomologado),
+                                    certificadoValidado: ko.observable(educacionesSuperiores[i].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(educacionesSuperiores[i].nombreCertificadoValidado),
+                                    certificadoHomologadoValidado: ko.observable(educacionesSuperiores[i].certificadoHomologadoValidado),
+                                    nombreCertificadoHomologadoValidado: ko.observable(educacionesSuperiores[i].nombreCertificadoHomologadoValidado)
                                 }
                              );
                         }
@@ -4745,6 +4716,7 @@
             var nombreCapacitacionEducacionContinua = $('#nombreCapacitacionEducacionContinua').val();
             var numeroHorasEducacionContinua = $('#numeroHorasEducacionContinua').val();
             var anyoEducacionContinua = $('#anyoEducacionContinua').val();
+            var estudioExteriorEducacionContinua = strToBool($('#estudioExteriorEducacionContinua').val());
 
             if (tipoCapacitacionEducacionContinua === "") {
                 bootstrap_alert_educacion_continua.warning('Debe seleccionar el tipo de capacitación');
@@ -4783,19 +4755,6 @@
                 }             
                 formData.append("id", 0);
                 formData.append("consecutivo", self.educacionesContinuas().length);
-                self.educacionesContinuas.push({
-                    id: ko.observable(0),
-                    consecutivo: ko.observable(self.educacionesContinuas().length),
-                    tipoCapacitacion: ko.observable(tipoCapacitacionEducacionContinua),
-                    nombreTipoCapacitacion: ko.observable(nombreTipoCapacitacionEducacionContinua),
-                    institucion: ko.observable(institucionEducacionContinua),
-                    nombreInstitucion: ko.observable(nombreInstitucionEducacionContinua),
-                    nombreCapacitacion: ko.observable(nombreCapacitacionEducacionContinua),
-                    nucleoBasicoConocimiento: ko.observable(nucleoBasicoConocimientoEducacionContinua),
-                    nombreNucleoBasicoConocimiento: ko.observable(nombreNucleoBasicoConocimientoEducacionContinua),
-                    numeroHoras: ko.observable(numeroHorasEducacionContinua),
-                    anyo: ko.observable(anyoEducacionContinua)
-                });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -4812,15 +4771,6 @@
                 }                    
                 formData.append("id", self.educacionesContinuas()[i].id());
                 formData.append("consecutivo", consecutivo);
-                self.educacionesContinuas()[indice].tipoCapacitacion(tipoCapacitacionEducacionContinua);
-                self.educacionesContinuas()[indice].nombreTipoCapacitacion(nombreTipoCapacitacionEducacionContinua);
-                self.educacionesContinuas()[indice].institucion(institucionEducacionContinua);
-                self.educacionesContinuas()[indice].nombreInstitucion(nombreInstitucionEducacionContinua);
-                self.educacionesContinuas()[indice].nombreCapacitacion(nombreCapacitacionEducacionContinua);
-                self.educacionesContinuas()[indice].numeroHoras(numeroHorasEducacionContinua);
-                self.educacionesContinuas()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoEducacionContinua);
-                self.educacionesContinuas()[indice].nombreNucleoBasicoConocimiento(nombreNucleoBasicoConocimientoEducacionContinua);
-                self.educacionesContinuas()[indice].anyo(anyoEducacionContinua);
             }
 
             formData.append("tipoCapacitacion", tipoCapacitacionEducacionContinua);
@@ -4829,6 +4779,7 @@
             formData.append("numeroHoras", numeroHorasEducacionContinua);
             formData.append("nucleoBasicoConocimiento", nucleoBasicoConocimientoEducacionContinua);
             formData.append("anyo", anyoEducacionContinua);
+            formData.append("estudioExterior", estudioExteriorEducacionContinua);
             if ($('#certificadoEducacionContinua').val() !== "") {
                 formData.append("certificado", $('#certificadoEducacionContinua')[0].files[0]);
             }
@@ -4861,7 +4812,10 @@
                                     nucleoBasicoConocimiento: ko.observable(educacionesContinuas[i].nucleoBasicoConocimiento),
                                     nombreNucleoBasicoConocimiento: ko.observable(educacionesContinuas[i].nombreNucleoBasicoConocimiento),
                                     numeroHoras: ko.observable(educacionesContinuas[i].numeroHoras),
-                                    anyo: ko.observable(educacionesContinuas[i].anyo)
+                                    estudioExterior: ko.observable(educacionesContinuas[i].estudioExterior),
+                                    anyo: ko.observable(educacionesContinuas[i].anyo),
+                                    certificadoValidado: ko.observable(educacionesContinuas[i].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(educacionesContinuas[i].nombreCertificadoValidado)
                                 }
                              );
                         }
@@ -4873,7 +4827,6 @@
         };
 
         self.eliminarEducacionContinua = function (educacionContinua) {
-            self.educacionesContinuas.remove(educacionContinua);
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/eliminarEducacionContinua/" + educacionContinua.id(),
@@ -4898,7 +4851,10 @@
                                     nucleoBasicoConocimiento: ko.observable(educacionesContinuas[i].nucleoBasicoConocimiento),
                                     nombreNucleoBasicoConocimiento: ko.observable(educacionesContinuas[i].nombreNucleoBasicoConocimiento),
                                     numeroHoras: ko.observable(educacionesContinuas[i].numeroHoras),
-                                    anyo: ko.observable(educacionesContinuas[i].anyo)
+                                    estudioExterior: ko.observable(educacionesContinuas[i].estudioExterior),
+                                    anyo: ko.observable(educacionesContinuas[i].anyo),
+                                    certificadoValidado: ko.observable(educacionesContinuas[i].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(educacionesContinuas[i].nombreCertificadoValidado)
                                 }
                              );
                         }
@@ -4919,6 +4875,15 @@
             $('#anyoEducacionContinua').val(educacionContinua.anyo()).trigger('change');
             $('#consecutivo').val(educacionContinua.consecutivo());
             $('#certificadoEducacionContinua').show();
+            if(educacionContinua.estudioExterior()) {
+              $('#btnEstudioExteriorSiEducacionContinua').removeClass('notActive').addClass('active');  
+              $('#btnEstudioExteriorNoEducacionContinua').removeClass('active').addClass('notActive');
+              $('#btnNuevaInstitucionExtranjero').show();
+            } else {
+              $('#btnEstudioExteriorSiEducacionContinua').removeClass('active').addClass('notActive');  
+              $('#btnEstudioExteriorNoEducacionContinua').removeClass('notActive').addClass('active');
+              $('#btnNuevaInstitucionExtranjero').hide();
+            }
             bootstrap_alert_educacion_continua.removeWarning();
             bootstrap_alert_educaciones_continuas.removeWarning();
             $('#md_educacion_continua').modal({backdrop: 'static', keyboard: false})  ;
@@ -4971,13 +4936,6 @@
                 }             
                 formData.append("id", 0);
                 formData.append("consecutivo", self.distinciones().length);
-                self.distinciones.push({
-                    id: ko.observable(0),
-                    consecutivo: ko.observable(self.distinciones().length),
-                    fechaDistincion: ko.observable(fechaDistincion),
-                    institucionOtorga: ko.observable(institucionOtorgaDistincion),
-                    descripcion: ko.observable(descripcionDistincion)
-                });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -4994,9 +4952,6 @@
                 }                    
                 formData.append("id", self.distinciones()[i].id());
                 formData.append("consecutivo", consecutivo);
-                self.distinciones()[indice].fechaDistincion(fechaDistincion);
-                self.distinciones()[indice].institucionOtorga(institucionOtorgaDistincion);
-                self.distinciones()[indice].descripcion(descripcionDistincion);
             }
             formData.append("fechaDistincion",fechaDistincion);
             formData.append("institucionOtorga",institucionOtorgaDistincion);
@@ -5027,7 +4982,9 @@
                                     consecutivo: ko.observable(distinciones[i].consecutivo),
                                     fechaDistincion: ko.observable(distinciones[i].fechaDistincionFormateada),
                                     institucionOtorga: ko.observable(distinciones[i].institucionOtorga),
-                                    descripcion: ko.observable(distinciones[i].descripcion)
+                                    descripcion: ko.observable(distinciones[i].descripcion),
+                                    certificadoValidado: ko.observable(distinciones[i].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(distinciones[i].nombreCertificadoValidado)
                                 }
                              );
                         }
@@ -5039,7 +4996,6 @@
         };
 
         self.eliminarDistincion = function (distincion) {
-            self.distinciones.remove(distincion);
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/eliminarDistincion/" + distincion.id(),
@@ -5058,7 +5014,9 @@
                                     consecutivo: ko.observable(distinciones[i].consecutivo),
                                     fechaDistincion: ko.observable(distinciones[i].fechaDistincionFormateada),
                                     institucionOtorga: ko.observable(distinciones[i].institucionOtorga),
-                                    descripcion: ko.observable(distinciones[i].descripcion)
+                                    descripcion: ko.observable(distinciones[i].descripcion),
+                                    certificadoValidado: ko.observable(distinciones[i].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(distinciones[i].nombreCertificadoValidado)
                                 }
                              );
                         }
@@ -5168,28 +5126,6 @@
                 }             
                 formData.append("id", 0);
                 formData.append("consecutivo", self.experienciasLaborales().length);
-                self.experienciasLaborales.push({
-                    id: ko.observable(0),
-                    consecutivo: ko.observable(self.experienciasLaborales().length),
-                    tipoExperiencia: ko.observable(tipoExperienciaLaboral),
-                    nombreTipoExperiencia: ko.observable(nombreTipoExperienciaLaboral),
-                    trabajoActual: ko.observable(trabajoActualExperienciaLaboral),
-                    fnsp: ko.observable(experienciaLaboralFNSP),
-                    fechaIngreso: ko.observable(fechaIngresoExperienciaLaboral),
-                    fechaRetiro: ko.observable(fechaRetiroExperienciaLaboral),
-                    nucleoBasicoConocimiento: ko.observable(nucleoBasicoConocimientoExperienciaLaboral),
-                    nombreNucleoBasicoConocimiento: ko.observable(nombreNucleoBasicoConocimientoExperienciaLaboral),
-                    tipoEmpresa: ko.observable(tipoEmpresaExperienciaLaboral),
-                    nombreTipoEmpresa: ko.observable(nombreTipoEmpresaExperienciaLaboral),
-                    nombreEmpresa: ko.observable(nombreEmpresaExperienciaLaboral),
-                    actividadEconomica: ko.observable(actividadEconomicaExperienciaLaboral),
-                    nombreActividadEconomica: ko.observable(nombreActividadEconomicaExperienciaLaboral),
-                    tipoContrato: ko.observable(tipoContratoExperienciaLaboral),
-                    nombreTipoContrato: ko.observable(nombreTipoContratoExperienciaLaboral),
-                    cargo: ko.observable(cargoExperienciaLaboral),
-                    naturalezaCargo: ko.observable(naturalezaCargoExperienciaLaboral),
-                    nombreNaturalezaCargo: ko.observable(nombreNaturalezaCargoExperienciaLaboral)
-                });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -5260,7 +5196,9 @@
                                     nombreTipoContrato: ko.observable(experienciasLaborales[i].nombreTipoContrato),
                                     cargo: ko.observable(experienciasLaborales[i].cargo),
                                     naturalezaCargo: ko.observable(experienciasLaborales[i].naturalezaCargo),
-                                    nombreNaturalezaCargo: ko.observable(experienciasLaborales[i].nombreNaturalezaCargo)
+                                    nombreNaturalezaCargo: ko.observable(experienciasLaborales[i].nombreNaturalezaCargo),
+                                    certificadoValidado: ko.observable(experienciasLaborales[i].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(experienciasLaborales[i].nombreCertificadoValidado)
                                 }
                              );
                         }
@@ -5272,7 +5210,6 @@
         };
 
         self.eliminarExperienciaLaboral = function (experienciaLaboral) {
-            self.experienciasLaborales.remove(experienciaLaboral);
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/eliminarExperienciaLaboral/" + experienciaLaboral.id(),
@@ -5306,7 +5243,9 @@
                                     nombreTipoContrato: ko.observable(experienciasLaborales[i].nombreTipoContrato),
                                     cargo: ko.observable(experienciasLaborales[i].cargo),
                                     naturalezaCargo: ko.observable(experienciasLaborales[i].naturalezaCargo),
-                                    nombreNaturalezaCargo: ko.observable(experienciasLaborales[i].nombreNaturalezaCargo)
+                                    nombreNaturalezaCargo: ko.observable(experienciasLaborales[i].nombreNaturalezaCargo),
+                                    certificadoValidado: ko.observable(experienciasLaborales[i].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(experienciasLaborales[i].nombreCertificadoValidado)
                                 }
                              );
                         }
@@ -5451,7 +5390,9 @@
                                     nivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nivelEstudio),
                                     nombreNivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNivelEstudio),
                                     numeroHoras: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].numeroHoras),
-                                    anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo)
+                                    anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo),
+                                    certificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificadoValidado)
                                 });
                             }
                         }
@@ -5463,7 +5404,6 @@
         };
 
         self.eliminarExperienciaDocencia = function (experienciaDocencia) {
-            self.experienciasDocencia.remove(experienciaDocencia);
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/eliminarExperienciaDocencia/" + experienciaDocencia.id(),
@@ -5499,7 +5439,9 @@
                                     nivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nivelEstudio),
                                     nombreNivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNivelEstudio),
                                     numeroHoras: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].numeroHoras),
-                                    anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo)
+                                    anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo),
+                                    certificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificadoValidado)
                                 });
                             }
                         }
@@ -5586,20 +5528,6 @@
                 }             
                 formData.append("id", 0);
                 formData.append("consecutivo", self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length);
-                                
-                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia.push({
-                    id: ko.observable(0),
-                    consecutivo: ko.observable(self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length),
-                    nombreCurso: ko.observable(nombreCursoExperienciaDocencia),
-                    nucleoBasicoConocimiento: ko.observable(nucleoBasicoConocimientoCursoExperienciaDocencia),
-                    nombreNucleoBasicoConocimiento: ko.observable(nombreNucleoBasicoConocimientoCursoExperienciaDocencia),
-                    modalidad: ko.observable(modalidadCursoExperienciaDocencia),
-                    nombreModalidad: ko.observable(nombreModalidadCursoExperienciaDocencia),
-                    nivelEstudio: ko.observable(nivelEstudioCursoExperienciaDocencia),
-                    nombreNivelEstudio: ko.observable(nombreNivelEstudioCursoExperienciaDocencia),
-                    numeroHoras: ko.observable(numeroHorasCursoExperienciaDocencia),
-                    anyo: ko.observable(anyoCursoExperienciaDocencia)
-                });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -5616,16 +5544,6 @@
                 }             
                 formData.append("id", self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].id());
                 formData.append("consecutivo", consecutivo);
-               
-                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nombreCurso(nombreCursoExperienciaDocencia);
-                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoCursoExperienciaDocencia);
-                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nombreNucleoBasicoConocimiento(nombreNucleoBasicoConocimientoCursoExperienciaDocencia);
-                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].modalidad(modalidadCursoExperienciaDocencia);
-                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nombreModalidad(nombreModalidadCursoExperienciaDocencia);
-                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nivelEstudio(nivelEstudioCursoExperienciaDocencia);
-                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].nombreNivelEstudio(nombreNivelEstudioCursoExperienciaDocencia);
-                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].numeroHoras(numeroHorasCursoExperienciaDocencia);
-                self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[indice].anyo(anyoCursoExperienciaDocencia);
             }
             if ($('#certificadoCursoExperienciaDocencia').val() != "") {
                formData.append("certificado", $('#certificadoCursoExperienciaDocencia')[0].files[0]); 
@@ -5677,7 +5595,9 @@
                                     nivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nivelEstudio),
                                     nombreNivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNivelEstudio),
                                     numeroHoras: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].numeroHoras),
-                                    anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo)
+                                    anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo),
+                                    certificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificadoValidado)
                                 });
                             }
                         }
@@ -5689,7 +5609,6 @@
         };
 
         self.eliminarCursoExperienciaDocencia = function (cursoExperienciaDocencia) {
-            self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia.remove(cursoExperienciaDocencia);
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/eliminarCursoExperienciaDocencia/" + cursoExperienciaDocencia.id(),
@@ -5725,7 +5644,9 @@
                                     nivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nivelEstudio),
                                     nombreNivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNivelEstudio),
                                     numeroHoras: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].numeroHoras),
-                                    anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo)
+                                    anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo),
+                                    certificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].certificadoValidado),
+                                    nombreCertificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificadoValidado)
                                 });
                             }
                         }
@@ -5804,16 +5725,6 @@
             if ($('#consecutivo').val() === "") {
                 formData.append("id", 0);
                 formData.append("consecutivo", self.articulos().length);
-                self.articulos.push({
-                    id: ko.observable(0),
-                    consecutivo: ko.observable(self.articulos().length),
-                    nombre: ko.observable(nombreArticulo),
-                    tipoAutor: ko.observable(tipoAutorArticulo),
-                    nombreRevista: ko.observable(nombreRevistaArticulo),
-                    anyo: ko.observable(anyoArticulo),
-                    nucleoBasicoConocimiento: ko.observable(nucleoBasicoConocimientoArticulo),
-                    url: ko.observable(urlArticulo)
-                });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -5825,12 +5736,6 @@
                 }
                 formData.append("id", self.articulos()[indice].id());
                 formData.append("consecutivo", consecutivo);
-                self.articulos()[indice].nombre(nombreArticulo);
-                self.articulos()[indice].tipoAutor(tipoAutorArticulo);
-                self.articulos()[indice].nombreRevista(nombreRevistaArticulo);
-                self.articulos()[indice].anyo(anyoArticulo);
-                self.articulos()[indice].url(urlArticulo);
-                self.articulos()[indice].nucleoBasicoConocimiento(nucleoBasicoConocimientoArticulo);
             }
             
             formData.append("nombre", nombreArticulo);
@@ -5865,7 +5770,9 @@
                                     nombreRevista: ko.observable(articulos[i].nombreRevista),
                                     anyo: ko.observable(articulos[i].anyo),
                                     nucleoBasicoConocimiento: ko.observable(articulos[i].nucleoBasicoConocimiento),
-                                    url: ko.observable(articulos[i].url)
+                                    url: ko.observable(articulos[i].url),
+                                    validado: ko.observable(articulos[i].validado),
+                                    nombreValidado: ko.observable(articulos[i].nombreValidado)
                                 }
                              );
                         }
@@ -5877,7 +5784,6 @@
         };
 
         self.eliminarArticulo = function (articulo) {
-            self.articulos.remove(articulo);
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/eliminarArticulo/" + articulo.id(),
@@ -5899,7 +5805,9 @@
                                     nombreRevista: ko.observable(articulos[i].nombreRevista),
                                     anyo: ko.observable(articulos[i].anyo),
                                     nucleoBasicoConocimiento: ko.observable(articulos[i].nucleoBasicoConocimiento),
-                                    url: ko.observable(articulos[i].url)
+                                    url: ko.observable(articulos[i].url),
+                                    validado: ko.observable(articulos[i].validado),
+                                    nombreValidado: ko.observable(articulos[i].nombreValidado)
                                 }
                              );
                         }
@@ -5963,18 +5871,6 @@
                 }
                 formData.append("id", 0);
                 formData.append("consecutivo", self.patentes().length);
-                
-                self.patentes.push({
-                    id: ko.observable(0),
-                    consecutivo: ko.observable(self.patentes().length),
-                    fecha: ko.observable(fechaPatente),
-                    nombreTipo: ko.observable(nombreTipoPatente),
-                    tipo: ko.observable(tipoPatente),
-                    propiedadCompartida: ko.observable(propiedadCompartidaPatente),
-                    nombrePropiedadCompartida: ko.observable(nombrePropiedadCompartidaPatente),
-                    clase: ko.observable(clasePatente),
-                    descripcion: ko.observable(descripcionPatente)
-                });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -5991,14 +5887,6 @@
                 }
                 formData.append("id", self.patentes()[indice].id());
                 formData.append("consecutivo", consecutivo);
-                
-                self.patentes()[indice].fecha(fechaPatente);
-                self.patentes()[indice].nombreTipo(nombreTipoPatente);
-                self.patentes()[indice].tipo(tipoPatente);
-                self.patentes()[indice].propiedadCompartida(propiedadCompartidaPatente);
-                self.patentes()[indice].nombrePropiedadCompartida(nombrePropiedadCompartidaPatente);
-                self.patentes()[indice].clase(clasePatente);
-                self.patentes()[indice].descripcion(descripcionPatente);
             }
             if ($('#documentoPatente').val() != "") {
                formData.append("documento", $('#documentoPatente')[0].files[0]); 
@@ -6036,7 +5924,9 @@
                                     nombrePropiedadCompartida: ko.observable(patentes[i].nombrePropiedadCompartida), 
                                     clase: ko.observable(patentes[i].clase),
                                     nombreClase: ko.observable(patentes[i].nombreClase),
-                                    descripcion: ko.observable(patentes[i].descripcion)
+                                    descripcion: ko.observable(patentes[i].descripcion),
+                                    documentoValidado: ko.observable(patentes[i].documentoValidado),
+                                    nombreDocumentoValidado: ko.observable(patentes[i].nombreDocumentoValidado)
                                 }
                              );
                         }
@@ -6049,7 +5939,6 @@
         };
 
         self.eliminarPatente = function (patente) {
-            self.patentes.remove(patente);
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/eliminarPatente/" + patente.id(),
@@ -6073,7 +5962,9 @@
                                     nombrePropiedadCompartida: ko.observable(patentes[i].nombrePropiedadCompartida), 
                                     clase: ko.observable(patentes[i].clase),
                                     nombreClase: ko.observable(patentes[i].nombreClase),
-                                    descripcion: ko.observable(patentes[i].descripcion)
+                                    descripcion: ko.observable(patentes[i].descripcion),
+                                    documentoValidado: ko.observable(patentes[i].documentoValidado),
+                                    nombreDocumentoValidado: ko.observable(patentes[i].nombreDocumentoValidado)
                                 }
                              );
                         }
@@ -6156,17 +6047,6 @@
                 }
                 formData.append("id", 0);
                 formData.append("consecutivo", self.productosConocimiento().length);
-                self.productosConocimiento.push({
-                    id: ko.observable(0),
-                    consecutivo: ko.observable(self.productosConocimiento().length),
-                    nombreTipo: ko.observable(nombreTipoProductoConocimiento),
-                    tipo: ko.observable(tipoProductoConocimiento),
-                    nucleoBasicoConocimiento: ko.observable(nucleoBasicoProductoConocimiento),
-                    url: ko.observable(urlProductoConocimiento),
-                    descripcion: ko.observable(descripcionProductoConocimiento),
-                    documento: ko.observable(''),
-                    tieneDocumento: ko.observable(false)
-                });
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
@@ -6183,12 +6063,6 @@
                 }
                 formData.append("id", self.productosConocimiento()[indice].id());
                 formData.append("consecutivo", consecutivo);
-                
-                self.productosConocimiento()[indice].nombreTipo(nombreTipoProductoConocimiento);
-                self.productosConocimiento()[indice].tipo(tipoProductoConocimiento);
-                self.productosConocimiento()[indice].nucleoBasicoConocimiento(nucleoBasicoProductoConocimiento);
-                self.productosConocimiento()[indice].url(urlProductoConocimiento);
-                self.productosConocimiento()[indice].descripcion(descripcionProductoConocimiento);
             }
 
             if ($('#documentoProductoConocimiento').val() != "") {
@@ -6223,7 +6097,9 @@
                                     nombreTipo: ko.observable(productosConocimiento[i].nombreTipo),
                                     nucleoBasicoConocimiento: ko.observable(productosConocimiento[i].nucleoBasicoConocimiento),
                                     url: ko.observable(productosConocimiento[i].url),
-                                    descripcion: ko.observable(productosConocimiento[i].descripcion)
+                                    descripcion: ko.observable(productosConocimiento[i].descripcion),
+                                    documentoValidado: ko.observable(productosConocimiento[i].documentoValidado),
+                                    nombreDocumentoValidado: ko.observable(productosConocimiento[i].nombreDocumentoValidado)
                                 }
                              );
                         }
@@ -6235,7 +6111,6 @@
         };
 
         self.eliminarProductoConocimiento = function (productoConocimiento) {
-            self.productosConocimiento.remove(productoConocimiento);
             $.ajax({
                 type: "GET",
                 url: "${pageContext.request.contextPath}/hojasVida/eliminarProductoConocimiento/" + productoConocimiento.id(),
@@ -6256,7 +6131,9 @@
                                     nombreTipo: ko.observable(productosConocimiento[i].nombreTipo),
                                     nucleoBasicoConocimiento: ko.observable(productosConocimiento[i].nucleoBasicoConocimiento),
                                     url: ko.observable(productosConocimiento[i].url),
-                                    descripcion: ko.observable(productosConocimiento[i].descripcion)
+                                    descripcion: ko.observable(productosConocimiento[i].descripcion),
+                                    documentoValidado: ko.observable(productosConocimiento[i].documentoValidado),
+                                    nombreDocumentoValidado: ko.observable(productosConocimiento[i].nombreDocumentoValidado)
                                 }
                              );
                         }
@@ -6456,6 +6333,10 @@
         $('#anyoEducacionContinua').val("");
         $('#consecutivo').val("");
         $('#certificadoEducacionContinua').val('');
+        $('#btnEstudioExteriorSiEducacionContinua').removeClass('active').addClass('notActive');  
+        $('#btnEstudioExteriorNoEducacionContinua').removeClass('active').addClass('notActive');
+        $('#btnNuevaInstitucionExtranjero').hide();
+        
         bootstrap_alert_educacion_continua.removeWarning();
         bootstrap_alert_educaciones_continuas.removeWarning();
         $('#md_educacion_continua').modal({backdrop: 'static', keyboard: false})  ;
@@ -6797,11 +6678,28 @@
             },
             success: function (response) {
                 $('#md_guardar').modal('hide');
-                if (response !== "") {
-                    bootstrap_alert_hoja_vida.warning(response);
+                if(response != "") {
+                    $('#mensaje').val(response);
                 } else {
-                    bootstrap_alert_hoja_vida.success("Hoja de vida actualizada exitosamente.");
+                    if(copiaDocumentoIdentificacionCambiado) {
+                      $('#btnCopiaDocumentoIdentificacionValidado').hide();  
+                      $('#btnCopiaDocumentoIdentificacionNoValidado').show();  
+                    }
+                    if(copiaLibretaMilitarCambiado) {
+                      $('#btnCopiaLibretaMilitarValidado').hide();  
+                      $('#btnCopiaLibretaMilitarNoValidado').show();  
+                    }
+                    if(documentoRUTCambiado) {
+                      $('#btnDocumentoRUTValidado').hide();  
+                      $('#btnDocumentoRUTNoValidado').show();  
+                    }
+                    if(urlCVLACCambiada) {
+                      $('#btnUrlCVLACValidada').hide();  
+                      $('#btnUrlCVLACNoValidada').show();  
+                    }
+                    $('#mensaje').text('Información de la hoja de vida actualizada exitosamente');
                 }
+                $('#md_guardado_exitoso').modal({backdrop: 'static', keyboard: false});
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 bootstrap_alert_hoja_vida.warning("Error al almacenar la hoja de vida.");

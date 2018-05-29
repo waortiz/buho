@@ -7,7 +7,11 @@ package co.edu.fnsp.buho.servicios;
 
 import co.edu.fnsp.buho.entidades.Convocatoria;
 import co.edu.fnsp.buho.entidades.Documento;
+import co.edu.fnsp.buho.entidades.Evaluacion;
+import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
+import co.edu.fnsp.buho.entidades.Maestro;
+import co.edu.fnsp.buho.entidades.Preseleccionado;
 import java.util.List;
 
 /**
@@ -37,4 +41,12 @@ public interface IServicioConvocatoria {
     List<ListadoConvocatoria> obtenerConvocatoriasVigentes(long idPersona);
 
     Documento obtenerResultadoConvocatoria(int idConvocatoria);
+
+    List<ListadoConvocatoria> obtenerConvocatoriaValidar();
+
+    List<HojaVida> obtenerPersonasConvocatoria(int idConvocatoria);
+
+    List<Preseleccionado> obtenerPreseleccionados(int idConvocatoria);
+    
+    List<Evaluacion> obtenerEvaluaciones(int idConvocatoria);
 }

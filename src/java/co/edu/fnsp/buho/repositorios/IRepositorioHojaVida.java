@@ -19,11 +19,12 @@ import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.Idioma;
+import co.edu.fnsp.buho.entidades.Investigacion;
 import co.edu.fnsp.buho.entidades.Patente;
 import co.edu.fnsp.buho.entidades.ProductoConocimiento;
 import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.Terminos;
-import java.util.ArrayList;
+import co.edu.fnsp.buho.entidades.ValidacionDocumento;
 import java.util.List;
 
 /**
@@ -162,5 +163,9 @@ public interface IRepositorioHojaVida {
     
     void eliminarProductoConocimiento(int idProductoConocimiento);
 
+    void validarDocumento(long idPersona, ValidacionDocumento validacionDocumento);
 
+    Investigacion obtenerInvestigacion(long idPersona);
+    
+    List<CursoExperienciaDocencia> obtenerCursosExperienciaDocencia(long idPersona);
 }

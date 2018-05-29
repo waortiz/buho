@@ -34,6 +34,9 @@ public class ExperienciaLaboral {
     private String cargo;
     private int naturalezaCargo;
     private String nombreNaturalezaCargo;
+    private boolean certificadoValidado;
+    private boolean extension;
+    private String nombreCertificadoValidado;
     private Documento certificado;
 
     /**
@@ -357,5 +360,47 @@ public class ExperienciaLaboral {
      */
     public void setFechaRetiroFormateada(String fechaRetiroFormateada) {
         this.fechaRetiroFormateada = fechaRetiroFormateada;
+    }
+
+    /**
+     * @return the certificadoValidado
+     */
+    public boolean isCertificadoValidado() {
+        return certificadoValidado;
+    }
+
+    /**
+     * @param certificadoValidado the certificadoValidado to set
+     */
+    public void setCertificadoValidado(boolean certificadoValidado) {
+        this.certificadoValidado = certificadoValidado;
+    }
+
+    /**
+     * @return the extension
+     */
+    public boolean isExtension() {
+        return extension;
+    }
+
+    /**
+     * @param extension the extension to set
+     */
+    public void setExtension(boolean extension) {
+        this.extension = extension;
+    }
+
+    /**
+     * @return the nombreCertificadoValidado
+     */
+    public String getNombreCertificadoValidado() {
+        return nombreCertificadoValidado;
+    }
+
+    /**
+     * @param nombreCertificadoValidado the nombreCertificadoValidado to set
+     */
+    public void setNombreCertificadoValidado(String nombreCertificadoValidado) {
+        this.nombreCertificadoValidado = nombreCertificadoValidado;
     }
 }

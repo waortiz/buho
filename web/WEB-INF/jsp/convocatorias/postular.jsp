@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header">
-                    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i>Convocatorias o invitaciones vigentes Facultad Nacional de Salud Pública</h4>
+                    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i>&nbsp;Convocatorias o invitaciones vigentes Facultad Nacional de Salud Pública</h4>
                 </div>
                 <div class="form-group">
                     <ul class="nav nav-tabs">

@@ -21,6 +21,8 @@ public class Patente {
     private boolean propiedadCompartida;
     private int clase;
     private String descripcion;
+    private boolean documentoValidado;
+    private String nombreDocumentoValidado;
     private Documento documento;
 
     /**
@@ -161,6 +163,34 @@ public class Patente {
      */
     public void setFechaFormateada(String fechaFormateada) {
         this.fechaFormateada = fechaFormateada;
+    }
+
+    /**
+     * @return the documentoValidado
+     */
+    public boolean isDocumentoValidado() {
+        return documentoValidado;
+    }
+
+    /**
+     * @param documentoValidado the documentoValidado to set
+     */
+    public void setDocumentoValidado(boolean documentoValidado) {
+        this.documentoValidado = documentoValidado;
+    }
+
+    /**
+     * @return the nombreDocumentoValidado
+     */
+    public String getNombreDocumentoValidado() {
+        return nombreDocumentoValidado;
+    }
+
+    /**
+     * @param nombreDocumentoValidado the nombreDocumentoValidado to set
+     */
+    public void setNombreDocumentoValidado(String nombreDocumentoValidado) {
+        this.nombreDocumentoValidado = nombreDocumentoValidado;
     }
     
 }

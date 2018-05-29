@@ -26,6 +26,8 @@ public class Idioma {
     private String nombreTipoCertificacion;
     private String otraCertificacion;
     private double puntajeCertificacion;
+    private boolean certificadoValidado;
+    private String nombreCertificadoValidado;
     private Documento certificado;
     
     /**
@@ -264,5 +266,33 @@ public class Idioma {
      */
     public void setConsecutivo(int consecutivo) {
         this.consecutivo = consecutivo;
+    }
+
+    /**
+     * @return the certificadoValidado
+     */
+    public boolean isCertificadoValidado() {
+        return certificadoValidado;
+    }
+
+    /**
+     * @param certificadoValidado the certificadoValidado to set
+     */
+    public void setCertificadoValidado(boolean certificadoValidado) {
+        this.certificadoValidado = certificadoValidado;
+    }
+
+    /**
+     * @return the nombreCertificadoValidado
+     */
+    public String getNombreCertificadoValidado() {
+        return nombreCertificadoValidado;
+    }
+
+    /**
+     * @param nombreCertificadoValidado the nombreCertificadoValidado to set
+     */
+    public void setNombreCertificadoValidado(String nombreCertificadoValidado) {
+        this.nombreCertificadoValidado = nombreCertificadoValidado;
     }
 }

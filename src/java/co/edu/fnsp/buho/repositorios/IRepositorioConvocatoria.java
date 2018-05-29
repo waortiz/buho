@@ -7,6 +7,7 @@ package co.edu.fnsp.buho.repositorios;
 
 import co.edu.fnsp.buho.entidades.Convocatoria;
 import co.edu.fnsp.buho.entidades.Documento;
+import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
 import java.util.List;
 
@@ -37,4 +38,8 @@ public interface IRepositorioConvocatoria {
     List<ListadoConvocatoria> obtenerConvocatoriasVigentes(long idPersona);
 
     Documento obtenerResultadoConvocatoria(int idConvocatoria);
+
+    List<ListadoConvocatoria> obtenerConvocatoriaValidar();
+
+    List<HojaVida> obtenerPersonasConvocatoria(int idConvocatoria);
 }

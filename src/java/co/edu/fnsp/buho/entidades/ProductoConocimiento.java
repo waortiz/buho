@@ -17,6 +17,8 @@ public class ProductoConocimiento {
     private int nucleoBasicoConocimiento;
     private String url;
     private String descripcion;
+    private boolean documentoValidado;
+    private String nombreDocumentoValidado;
     private Documento documento;
 
     /**
@@ -129,6 +131,34 @@ public class ProductoConocimiento {
      */
     public void setConsecutivo(int consecutivo) {
         this.consecutivo = consecutivo;
+    }
+
+    /**
+     * @return the documentoValidado
+     */
+    public boolean isDocumentoValidado() {
+        return documentoValidado;
+    }
+
+    /**
+     * @param documentoValidado the documentoValidado to set
+     */
+    public void setDocumentoValidado(boolean documentoValidado) {
+        this.documentoValidado = documentoValidado;
+    }
+
+    /**
+     * @return the nombreDocumentoValidado
+     */
+    public String getNombreDocumentoValidado() {
+        return nombreDocumentoValidado;
+    }
+
+    /**
+     * @param nombreDocumentoValidado the nombreDocumentoValidado to set
+     */
+    public void setNombreDocumentoValidado(String nombreDocumentoValidado) {
+        this.nombreDocumentoValidado = nombreDocumentoValidado;
     }
     
 }

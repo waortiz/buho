@@ -38,6 +38,8 @@
             <mvc:exclude-mapping path="/convocatorias/programasSede/**" />
             <mvc:exclude-mapping path="/convocatorias/programas/**" />
             <mvc:exclude-mapping path="/convocatorias/capacitaciones/**" />
+            <mvc:exclude-mapping path="/convocatorias/preseleccionados/**" />
+            <mvc:exclude-mapping path="/convocatorias/evaluaciones/**" />
             <mvc:exclude-mapping path="/hojasVida/editar" />
             <mvc:exclude-mapping path="/hojasVida/terminos" />
             <mvc:exclude-mapping path="/hojasVida/programa" />
@@ -48,16 +50,27 @@
             <mvc:exclude-mapping path="/hojasVida/copiaCedula/**" />
             <mvc:exclude-mapping path="/hojasVida/programasInstitucion/**" />
             <mvc:exclude-mapping path="/hojasVida/documentoProductoConocimiento/**" />
+            <mvc:exclude-mapping path="/hojasVida/documentoProductoConocimientoValidar/**" />
             <mvc:exclude-mapping path="/hojasVida/documentoPatente/**" />
+            <mvc:exclude-mapping path="/hojasVida/documentoPatenteValidar/**" />
             <mvc:exclude-mapping path="/hojasVida/certificadoCursoExperienciaDocencia/**" />
+            <mvc:exclude-mapping path="/hojasVida/certificadoCursoExperienciaDocenciaValidar/**" />
             <mvc:exclude-mapping path="/hojasVida/certificadoExperienciaLaboral/**" />
+            <mvc:exclude-mapping path="/hojasVida/certificadoExperienciaLaboralValidar/**" />
             <mvc:exclude-mapping path="/hojasVida/certificadoDistincion/**" />
+            <mvc:exclude-mapping path="/hojasVida/certificadoDistincionValidar/**" />
             <mvc:exclude-mapping path="/hojasVida/certificadoEducacionContinua/**" />
+            <mvc:exclude-mapping path="/hojasVida/certificadoEducacionContinuaValidar/**" />
             <mvc:exclude-mapping path="/hojasVida/certificadoEducacionSuperior/**" />
+            <mvc:exclude-mapping path="/hojasVida/certificadoEducacionSuperiorValidar/**" />
             <mvc:exclude-mapping path="/hojasVida/certificadoHomologadoEducacionSuperior/**" />
+            <mvc:exclude-mapping path="/hojasVida/certificadoHomologadoEducacionSuperiorValidar/**" />
             <mvc:exclude-mapping path="/hojasVida/certificadoEducacionBasica/**" />
+            <mvc:exclude-mapping path="/hojasVida/certificadoEducacionBasicaValidar/**" />
             <mvc:exclude-mapping path="/hojasVida/certificadoIdioma/**" />
+            <mvc:exclude-mapping path="/hojasVida/certificadoIdiomaValidar/**" />
             <mvc:exclude-mapping path="/hojasVida/documentoSoporte/**" />
+            <mvc:exclude-mapping path="/hojasVida/documentoSoporteValidar/**" />
             <mvc:exclude-mapping path="/hojasVida/institucionesEducativasColombianas" />
             <mvc:exclude-mapping path="/hojasVida/institucionesEducativasExtranjeras" />
             <mvc:exclude-mapping path="/hojasVida/institucion" />
@@ -91,6 +104,10 @@
             <mvc:exclude-mapping path="/hojasVida/productoConocimiento" />
             <mvc:exclude-mapping path="/hojasVida/eliminarIdioma/**" />
             <mvc:exclude-mapping path="/hojasVida/idioma" />
+            <mvc:exclude-mapping path="/hojasVida/personas/**" />
+            <mvc:exclude-mapping path="/hojasVida/datos/**" />
+            <mvc:exclude-mapping path="/hojasVida/validarDocumento" />
+            
             <ref bean="buhoInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

@@ -274,3 +274,15 @@ body {
     color: #fff;
     text-decoration: none;
 }
+
+.login {
+   font-size: 12pt;   
+}
+
+.clave {
+  font-size: 12pt;  
+}
+
+.registro {
+  font-size: 12pt;  
+}

@@ -31,6 +31,8 @@
         <script type="text/javascript" src='<c:url value="/resources/js/jquery-ui.min.js"/>'></script>
         <script type="text/javascript" src='<c:url value="/resources/js/jspdf.min.js" />'></script>
         <script type="text/javascript" src='<c:url value="/resources/js/html2canvas.min.js" />'></script>
+        <script type="text/javascript" src='<c:url value="/resources/js/knockout-3.4.2.js" />'></script>
+        <script type="text/javascript" src='<c:url value="/resources/js/knockout.mapping.js" />'></script>
         <script type="text/javascript" src='<c:url value="/resources/js/jquery.dataTables.min.js" />'></script>
         <script type="text/javascript" src='<c:url value="/resources/js/dataTables.bootstrap.min.js" />'></script>
 
@@ -48,7 +50,6 @@
         <script type="text/javascript" src='<c:url value="/resources/js/sb-admin-2.js" />'></script>
         
         <script type="text/javascript" src='<c:url value="/resources/js/jquery.form-validator.min.js" />'></script>
-        <script type="text/javascript" src='<c:url value="/resources/js/knockout-3.4.2.js" />'></script>
         <script type="text/javascript" src='<c:url value="/resources/js/funciones.js" />'></script>
         <script type="text/javascript" src='<c:url value="/resources/js/moment.js" />'></script>
         <script type="text/javascript" src='<c:url value="/resources/js/moment-with-locales.js" />'></script>

@@ -27,7 +27,7 @@
                 </div>
             </c:if>
             <form action="<c:url value='/j_spring_security_check' />" method='POST'>
-                <input type="text" placeholder="Nombre de usuario" pattern="[0-9a-zA-Z]{1,15}" name="username" required maxlength="15"/>
+                <input type="text" placeholder="Nombre de usuario" pattern="[0-9a-zA-Z]{1,15}" name="username" required maxlength="15" id="username"/>
                 <input type="password" placeholder="Contraseña" name="password" required maxlength="40"/>
                 <input type="submit" value="Ingresar"/>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -64,7 +64,7 @@
                 <input type="submit" value="Registrar"/>
             </form:form>
             <div class="cta">
-                <a href="#" class="login">Iniciar Sesión</a>
+                <a href="#" class="login" onclick="establecerUsuario();">Iniciar Sesión</a>
             </div>                    
         </div>
         <div id="divFormClave" class="form form-clave">
@@ -219,5 +219,9 @@
                     error: function (xhr, ajaxOptions, thrownError) {
                         $('#mensajeClave').html("Error al recuperar la clave");
                     }});
-            });    
+            }); 
+            
+      function establecerUsuario() {
+         $('#username').val($('#nombreUsuario').val());
+      }
     </script>

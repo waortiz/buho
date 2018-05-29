@@ -9,16 +9,20 @@ import co.edu.fnsp.buho.entidades.AnyosExperiencia;
 import co.edu.fnsp.buho.entidades.CampoHojaVidaEnum;
 import co.edu.fnsp.buho.entidades.Convocatoria;
 import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
+import co.edu.fnsp.buho.entidades.CursoExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.EducacionContinua;
 import co.edu.fnsp.buho.entidades.EducacionContinuaConvocatoria;
 import co.edu.fnsp.buho.entidades.EducacionSuperior;
+import co.edu.fnsp.buho.entidades.Evaluacion;
+import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
 import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
 import co.edu.fnsp.buho.entidades.Maestro;
+import co.edu.fnsp.buho.entidades.Preseleccionado;
 import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
 import co.edu.fnsp.buho.entidades.TipoCertificacionEnum;
 import co.edu.fnsp.buho.excepciones.CriteriosHabilitacionException;
@@ -26,6 +30,7 @@ import co.edu.fnsp.buho.repositorios.IRepositorioConvocatoria;
 import co.edu.fnsp.buho.repositorios.IRepositorioHojaVida;
 import co.edu.fnsp.buho.repositorios.IRepositorioMaestro;
 import co.edu.fnsp.buho.utilidades.Util;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -333,5 +338,160 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
     @Override
     public Documento obtenerResultadoConvocatoria(int idConvocatoria) {
         return repositorioConvocatoria.obtenerResultadoConvocatoria(idConvocatoria);
+    }
+
+    @Override
+    public List<ListadoConvocatoria> obtenerConvocatoriaValidar() {
+        return repositorioConvocatoria.obtenerConvocatoriaValidar();
+    }
+
+    @Override
+    public List<HojaVida> obtenerPersonasConvocatoria(int idConvocatoria) {
+        return repositorioConvocatoria.obtenerPersonasConvocatoria(idConvocatoria);
+    }
+
+    @Override
+    public List<Preseleccionado> obtenerPreseleccionados(int idConvocatoria) {
+        List<Preseleccionado> preselecionados = new ArrayList<>();
+        List<HojaVida> hojasVida = repositorioConvocatoria.obtenerPersonasConvocatoria(idConvocatoria);
+        for (HojaVida hojaVida : hojasVida) {
+            HojaVida hojaVidaEvaluar = repositorioHojaVida.obtenerHojaVida(hojaVida.getIdPersona());
+            int tiempoExperienciaLaboralSectorSalud = 0;
+            int tiempoExperienciaDocente = 0;
+            for (ExperienciaLaboral experienciaLaboral : hojaVidaEvaluar.getExperienciasLaborales()) {
+                if (experienciaLaboral.isCertificadoValidado() && experienciaLaboral.getNucleoBasicoConocimiento() == 52) {
+                    Date fechaRetiro = new Date();
+                    if (experienciaLaboral.getFechaRetiro() != null) {
+                        fechaRetiro = experienciaLaboral.getFechaRetiro();
+                    }
+                    tiempoExperienciaLaboralSectorSalud = Util.getAnyos(experienciaLaboral.getFechaIngreso(), fechaRetiro) + tiempoExperienciaLaboralSectorSalud;
+                }
+            }
+            for (ExperienciaDocencia experienciaDocencia : hojaVidaEvaluar.getExperienciasDocencia()) {
+                for (CursoExperienciaDocencia cursoExperienciaDocencia : experienciaDocencia.getCursosExperienciaDocencia()) {
+                    if (cursoExperienciaDocencia.isCertificadoValidado()) {
+                        tiempoExperienciaDocente = cursoExperienciaDocencia.getNumeroHoras() + tiempoExperienciaDocente;
+                    }
+                }
+            }
+            Preseleccionado preseleccionado = new Preseleccionado();
+            preseleccionado.setIdPersona(hojaVida.getIdPersona());
+            preseleccionado.setSexo(hojaVida.getNombreSexo());
+            preseleccionado.setPerfil(hojaVida.getPerfil());
+            preseleccionado.setTiempoExperienciaLaboral(tiempoExperienciaLaboralSectorSalud);
+            preseleccionado.setTiempoExperienciaDocente(tiempoExperienciaDocente);
+            preselecionados.add(preseleccionado);
+        }
+
+        return preselecionados;
+    }
+
+    @Override
+    public List<Evaluacion> obtenerEvaluaciones(int idConvocatoria) {
+        List<Evaluacion> evaluaciones = new ArrayList<>();
+        List<HojaVida> hojasVida = repositorioConvocatoria.obtenerPersonasConvocatoria(idConvocatoria);
+        for (HojaVida hojaVida : hojasVida) {
+            HojaVida hojaVidaEvaluar = repositorioHojaVida.obtenerHojaVida(hojaVida.getIdPersona());
+            int formacionAcademica = 0;
+            int capacitacionDocenciaPedagogia = 0;
+            int experienciaDocenciaInstitucionesEducacionSuperior = 0;
+            int tiempoExperienciaDocencia = 0;
+            int experienciaExtension = 0;
+            int experienciaInvestigacion = 0;
+            int experienciaProfesionalSectorSalud = 0;
+            int tiempoExperienciaLaboralSectorSalud = 0;
+
+            //1. Formación Académica
+            for (EducacionSuperior educacionSuperior : hojaVidaEvaluar.getEducacionesSuperiores()) {
+                if (educacionSuperior.isCertificadoValidado()) {
+                    if (educacionSuperior.getNivel() == 6) {
+                        if (formacionAcademica < 15) {
+                            formacionAcademica = 15;
+                        }
+                    } else if (educacionSuperior.getNivel() == 7) {
+                        if (formacionAcademica < 25) {
+                            formacionAcademica = 25;
+                        }
+                    }
+                    if (educacionSuperior.getNivel() == 8 || educacionSuperior.getNivel() == 9) {
+                        formacionAcademica = 30;
+                        break;
+                    }
+
+                    if (educacionSuperior.getNucleoBasicoConocimiento() == 17) {
+                        capacitacionDocenciaPedagogia = 10;
+                    }
+                }
+            }
+
+            //2. Capacitación docencia
+            for (EducacionContinua educacionContinua : hojaVidaEvaluar.getEducacionesContinuas()) {
+                if (educacionContinua.isCertificadoValidado()) {
+                    if (educacionContinua.getNucleoBasicoConocimiento() == 17) {
+                        capacitacionDocenciaPedagogia = 10;
+                        break;
+                    }
+                }
+            }
+
+            //3. Experiencia docencia
+            for (ExperienciaDocencia experienciaDocencia : hojaVidaEvaluar.getExperienciasDocencia()) {
+                for (CursoExperienciaDocencia cursoExperienciaDocencia : experienciaDocencia.getCursosExperienciaDocencia()) {
+                    if (cursoExperienciaDocencia.isCertificadoValidado()) {
+                        tiempoExperienciaDocencia = cursoExperienciaDocencia.getNumeroHoras() + tiempoExperienciaDocencia;
+                    }
+                }
+            }
+            if (tiempoExperienciaDocencia >= 64 && tiempoExperienciaDocencia <= 200) {
+                experienciaDocenciaInstitucionesEducacionSuperior = 20;
+            } else if (tiempoExperienciaDocencia >= 201 && tiempoExperienciaDocencia <= 500) {
+                experienciaDocenciaInstitucionesEducacionSuperior = 30;
+            }
+            if (tiempoExperienciaDocencia > 500) {
+                experienciaDocenciaInstitucionesEducacionSuperior = 40;
+            }
+
+            //Experiencia en investigación
+            if (hojaVida.isInvestigadorReconocidoColciencias() && hojaVida.isUrlCVLACValidada()) {
+                experienciaInvestigacion = 8;
+            }
+
+            //Experiencia Extensión
+            for (ExperienciaLaboral experienciaLaboral : hojaVidaEvaluar.getExperienciasLaborales()) {
+                if (experienciaLaboral.isCertificadoValidado()) {
+                    if (experienciaLaboral.getNucleoBasicoConocimiento() == 52) {
+                        Date fechaRetiro = new Date();
+                        if (experienciaLaboral.getFechaRetiro() != null) {
+                            fechaRetiro = experienciaLaboral.getFechaRetiro();
+                        }
+                        tiempoExperienciaLaboralSectorSalud = Util.getAnyos(experienciaLaboral.getFechaIngreso(), fechaRetiro) + tiempoExperienciaLaboralSectorSalud;
+                    }
+                    if (experienciaLaboral.isExtension()) {
+                        experienciaInvestigacion = 7;
+                    }
+                }
+            }
+            if (tiempoExperienciaLaboralSectorSalud >= 1 && tiempoExperienciaLaboralSectorSalud <= 3) {
+                experienciaProfesionalSectorSalud = 2;
+            }
+            if (tiempoExperienciaLaboralSectorSalud >= 4 && tiempoExperienciaLaboralSectorSalud <= 6) {
+                experienciaProfesionalSectorSalud = 3;
+            }
+            if (tiempoExperienciaLaboralSectorSalud > 6) {
+                experienciaProfesionalSectorSalud = 5;
+            }
+
+            Evaluacion evaluacion = new Evaluacion();
+            evaluacion.setIdPersona(hojaVida.getIdPersona());
+            evaluacion.setFormacionAcademica(formacionAcademica);
+            evaluacion.setCapacitacionDocenciaPedagogia(capacitacionDocenciaPedagogia);
+            evaluacion.setExperienciaDocenciaInstitucionesEducacionSuperior(experienciaDocenciaInstitucionesEducacionSuperior);
+            evaluacion.setExperienciaExtension(experienciaExtension);
+            evaluacion.setExperienciaInvestigacion(experienciaInvestigacion);
+            evaluacion.setExperienciaProfesionalSectorSalud(experienciaProfesionalSectorSalud);
+            evaluaciones.add(evaluacion);
+        }
+
+        return evaluaciones;
     }
 }

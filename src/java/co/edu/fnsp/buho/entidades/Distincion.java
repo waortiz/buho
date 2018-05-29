@@ -18,6 +18,8 @@ public class Distincion {
     private String descripcion;
     private Date fechaDistincion;
     private String fechaDistincionFormateada;
+    private boolean certificadoValidado;
+    private String nombreCertificadoValidado;
     private Documento certificado;
 
     /**
@@ -116,6 +118,34 @@ public class Distincion {
      */
     public void setFechaDistincionFormateada(String fechaDistincionFormateada) {
         this.fechaDistincionFormateada = fechaDistincionFormateada;
+    }
+
+    /**
+     * @return the certificadoValidado
+     */
+    public boolean isCertificadoValidado() {
+        return certificadoValidado;
+    }
+
+    /**
+     * @param certificadoValidado the certificadoValidado to set
+     */
+    public void setCertificadoValidado(boolean certificadoValidado) {
+        this.certificadoValidado = certificadoValidado;
+    }
+
+    /**
+     * @return the nombreCertificadoValidado
+     */
+    public String getNombreCertificadoValidado() {
+        return nombreCertificadoValidado;
+    }
+
+    /**
+     * @param nombreCertificadoValidado the nombreCertificadoValidado to set
+     */
+    public void setNombreCertificadoValidado(String nombreCertificadoValidado) {
+        this.nombreCertificadoValidado = nombreCertificadoValidado;
     }
     
 }

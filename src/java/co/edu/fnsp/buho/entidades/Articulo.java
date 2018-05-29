@@ -21,6 +21,8 @@ public class Articulo {
     private int anyo;
     private int nucleoBasicoConocimiento;
     private String nombreNucleoBasicoConocimiento;
+    private boolean validado;
+    private String nombreValidado;
     
     /**
      * @return the id
@@ -161,5 +163,33 @@ public class Articulo {
      */
     public void setConsecutivo(int consecutivo) {
         this.consecutivo = consecutivo;
+    }
+
+    /**
+     * @return the validado
+     */
+    public boolean isValidado() {
+        return validado;
+    }
+
+    /**
+     * @param validado the validado to set
+     */
+    public void setValidado(boolean validado) {
+        this.validado = validado;
+    }
+
+    /**
+     * @return the nombreValidado
+     */
+    public String getNombreValidado() {
+        return nombreValidado;
+    }
+
+    /**
+     * @param nombreValidado the nombreValidado to set
+     */
+    public void setNombreValidado(String nombreValidado) {
+        this.nombreValidado = nombreValidado;
     }
 }

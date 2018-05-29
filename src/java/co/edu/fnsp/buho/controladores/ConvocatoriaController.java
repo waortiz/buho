@@ -11,7 +11,9 @@ import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Adenda;
 import co.edu.fnsp.buho.entidades.CampoHojaVida;
 import co.edu.fnsp.buho.entidades.DetalleUsuario;
+import co.edu.fnsp.buho.entidades.Evaluacion;
 import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
+import co.edu.fnsp.buho.entidades.Preseleccionado;
 import co.edu.fnsp.buho.entidades.Programa;
 import co.edu.fnsp.buho.excepciones.CriteriosHabilitacionException;
 import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
@@ -403,6 +405,51 @@ public class ConvocatoriaController {
         return gson.toJson(capacitaciones);
     }
 
+    @RequestMapping(value = "/postulados", method = RequestMethod.GET)
+    public String verPostulados(Model model) {
+
+        List<ListadoConvocatoria> convocatorias = servicioConvocatoria.obtenerConvocatoriaValidar();
+        model.addAttribute("convocatorias", convocatorias);
+
+        return "convocatorias/postulados";
+    }
+
+    @RequestMapping(value = "/preseleccionados", method = RequestMethod.GET)
+    public String verPreseleccionados(Model model) {
+
+        List<ListadoConvocatoria> convocatorias = servicioConvocatoria.obtenerConvocatoriaValidar();
+        model.addAttribute("convocatorias", convocatorias);
+
+        return "convocatorias/preseleccionados";
+    }
+    
+    @RequestMapping(value = "/evaluar", method = RequestMethod.GET)
+    public String evaluarPreseleccionados(Model model) {
+
+        List<ListadoConvocatoria> convocatorias = servicioConvocatoria.obtenerConvocatoriaValidar();
+        model.addAttribute("convocatorias", convocatorias);
+
+        return "convocatorias/evaluar";
+    }
+
+    @RequestMapping(value = "/preseleccionados/{idConvocatoria}", method = RequestMethod.GET)
+    public @ResponseBody
+    String obtenerPreseleccionados(@ModelAttribute(value = "idConvocatoria") int idConvocatoria, Model model) {
+        List<Preseleccionado> preseleccionados = servicioConvocatoria.obtenerPreseleccionados(idConvocatoria);
+        Gson gson = new Gson();
+            
+        return gson.toJson(preseleccionados);
+    }
+
+    @RequestMapping(value = "/evaluaciones/{idConvocatoria}", method = RequestMethod.GET)
+    public @ResponseBody
+    String obtenerEvaluaciones(@ModelAttribute(value = "idConvocatoria") int idConvocatoria, Model model) {
+        List<Evaluacion> evaluaciones = servicioConvocatoria.obtenerEvaluaciones(idConvocatoria);
+        Gson gson = new Gson();
+
+        return gson.toJson(evaluaciones);
+    }
+    
     private boolean esAdministrador() {
         boolean administrador = false;
         if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof DetalleUsuario) {
@@ -445,5 +492,4 @@ public class ConvocatoriaController {
 
         return idPersona;
     }
-
 }

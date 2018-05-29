@@ -11,6 +11,7 @@ import co.edu.fnsp.buho.entidades.Adenda;
 import co.edu.fnsp.buho.entidades.AnyosExperiencia;
 import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
 import co.edu.fnsp.buho.entidades.EducacionContinuaConvocatoria;
+import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
 import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
 import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
@@ -42,12 +43,14 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     private SimpleJdbcCall obtenerConvocatoria;
     private SimpleJdbcCall obtenerConvocatoriasCerradas;
     private SimpleJdbcCall obtenerConvocatoriasVigentes;
+    private SimpleJdbcCall obtenerConvocatoriasValidar;
     private SimpleJdbcCall ingresarDocumentoConvocatoria;
     private SimpleJdbcCall actualizarDocumentoConvocatoria;
     private SimpleJdbcCall obtenerDocumentoConvocatoria;
     private SimpleJdbcCall obtenerResultadoConvocatoria;
     private SimpleJdbcCall ingresarResultadoConvocatoria;
     private SimpleJdbcCall actualizarResultadoConvocatoria;
+    private SimpleJdbcCall obtenerPersonasConvocatoria;
 
     private SimpleJdbcCall ingresarAdenda;
     private SimpleJdbcCall eliminarAdenda;
@@ -94,7 +97,9 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         this.actualizarConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarConvocatoria");
         this.obtenerConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoria");
         this.obtenerConvocatoriasCerradas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasCerradas").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(ListadoConvocatoria.class));
+        this.obtenerConvocatoriasValidar = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasValidar").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(ListadoConvocatoria.class));
         this.obtenerConvocatoriasVigentes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasVigentes").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(ListadoConvocatoria.class));
+        this.obtenerPersonasConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerPersonasConvocatoria").returningResultSet("personas", BeanPropertyRowMapper.newInstance(HojaVida.class));
         this.obtenerDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoConvocatoria");
         this.ingresarDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoConvocatoria");
         this.actualizarDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoConvocatoria");
@@ -575,6 +580,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             } else {
                 parametrosActualizacionIdioma.addValue("varId", idiomaModificado.getId());
                 parametrosActualizacionIdioma.addValue("varIdioma", idiomaModificado.getIdioma());
+                parametrosActualizacionIdioma.addValue("varPersonaRegistra", idUsuario);
                 parametrosActualizacionIdioma.addValue("varTipoCertificacion", idiomaModificado.getTipoCertificacion());
                 parametrosActualizacionIdioma.addValue("varOtraCertificacion", idiomaModificado.getOtraCertificacion());
                 parametrosActualizacionIdioma.addValue("varPuntajeMinimoCertificacion", idiomaModificado.getPuntajeMinimoCertificacion());
@@ -619,6 +625,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
                 parametrosActualizacionPrograma.addValue("varId", programaModificado.getId());
                 parametrosActualizacionPrograma.addValue("varPrograma", programaModificado.getPrograma());
                 parametrosActualizacionPrograma.addValue("varNivelFormacion", programaModificado.getNivelFormacion());
+                parametrosActualizacionPrograma.addValue("varPersonaRegistra", idUsuario);
                 actualizarProgramaConvocatoria.execute(parametrosActualizacionPrograma);
             }
         }
@@ -659,6 +666,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
                 parametrosActualizacionEducacionContinua.addValue("varTipoCapacitacion", educacionContinuaModificada.getTipoCapacitacion());
                 parametrosActualizacionEducacionContinua.addValue("varNombreCapacitacion", educacionContinuaModificada.getNombreCapacitacion());
                 parametrosActualizacionEducacionContinua.addValue("varNucleoBasicoConocimiento", educacionContinuaModificada.getNucleoBasicoConocimiento());
+                parametrosActualizacionEducacionContinua.addValue("varPersonaRegistra", idUsuario);
                 actualizarEducacionContinuaConvocatoria.execute(parametrosActualizacionEducacionContinua);
             }
         }
@@ -699,6 +707,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
                 parametrosActualizacionCriterio.addValue("varId", criterioModificado.getId());
                 parametrosActualizacionCriterio.addValue("varValor", criterioModificado.getValor());
                 parametrosActualizacionCriterio.addValue("varCampoHojaVida", criterioModificado.getCampoHojaVida());
+                parametrosActualizacionCriterio.addValue("varPersonaRegistra", idUsuario);
                 actualizarCriterioHabilitanteConvocatoria.execute(parametrosActualizacionCriterio);
             }
         }
@@ -731,6 +740,24 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         }
 
         return documento;
+    }
+
+    @Override
+    public List<ListadoConvocatoria> obtenerConvocatoriaValidar() {
+        Map resultado = obtenerConvocatoriasValidar.execute(new MapSqlParameterSource());
+        List<ListadoConvocatoria> convocatorias = (List<ListadoConvocatoria>) resultado.get("convocatorias");
+
+        return convocatorias;
+    }
+
+    @Override
+    public List<HojaVida> obtenerPersonasConvocatoria(int idConvocatoria) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdConvocatoria", idConvocatoria);
+        Map resultadoCriterios = obtenerPersonasConvocatoria.execute(parametros);
+        ArrayList<HojaVida> hojasVida = (ArrayList<HojaVida>) resultadoCriterios.get("personas");
+        
+        return hojasVida;
     }
 
 }

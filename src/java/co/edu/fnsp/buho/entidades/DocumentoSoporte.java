@@ -10,9 +10,12 @@ package co.edu.fnsp.buho.entidades;
  * @author William
  */
 public class DocumentoSoporte {
+
     private int id;
     private int tipoDocumento;
     private int consecutivo;
+    private boolean validado;
+    private String nombreValidado;
     private String nombreTipoDocumento;
     private Documento documento;
 
@@ -85,4 +88,33 @@ public class DocumentoSoporte {
     public void setConsecutivo(int consecutivo) {
         this.consecutivo = consecutivo;
     }
+    
+    /**
+    * @return the validado
+    */
+    public boolean isValidado() {
+        return validado;
+    }
+
+    /**
+     * @param validado the validado to set
+     */
+    public void setValidado(boolean validado) {
+        this.validado = validado;
+    }
+
+    /**
+     * @return the nombreValidado
+     */
+    public String getNombreValidado() {
+        return nombreValidado;
+    }
+
+    /**
+     * @param nombreValidado the nombreValidado to set
+     */
+    public void setNombreValidado(String nombreValidado) {
+        this.nombreValidado = nombreValidado;
+    }
+
 }

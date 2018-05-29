@@ -11,6 +11,7 @@ package co.edu.fnsp.buho.entidades;
  */
 public class CursoExperienciaDocencia {
     private int id;
+    private String nombreInstitucion;
     private int idExperienciaDocencia;
     private int consecutivo;
     private String nombreCurso;
@@ -22,6 +23,8 @@ public class CursoExperienciaDocencia {
     private String nombreNivelEstudio;
     private int numeroHoras;
     private int anyo;
+    private boolean certificadoValidado;
+     private String nombreCertificadoValidado;
     private Documento certificado;
 
     /**
@@ -204,6 +207,48 @@ public class CursoExperienciaDocencia {
      */
     public void setIdExperienciaDocencia(int idExperienciaDocencia) {
         this.idExperienciaDocencia = idExperienciaDocencia;
+    }
+
+    /**
+     * @return the certificadoValidado
+     */
+    public boolean isCertificadoValidado() {
+        return certificadoValidado;
+    }
+
+    /**
+     * @param certificadoValidado the certificadoValidado to set
+     */
+    public void setCertificadoValidado(boolean certificadoValidado) {
+        this.certificadoValidado = certificadoValidado;
+    }
+
+    /**
+     * @return the nombreCertificadoValidado
+     */
+    public String getNombreCertificadoValidado() {
+        return nombreCertificadoValidado;
+    }
+
+    /**
+     * @param nombreCertificadoValidado the nombreCertificadoValidado to set
+     */
+    public void setNombreCertificadoValidado(String nombreCertificadoValidado) {
+        this.nombreCertificadoValidado = nombreCertificadoValidado;
+    }
+
+    /**
+     * @return the nombreInstitucion
+     */
+    public String getNombreInstitucion() {
+        return nombreInstitucion;
+    }
+
+    /**
+     * @param nombreInstitucion the nombreInstitucion to set
+     */
+    public void setNombreInstitucion(String nombreInstitucion) {
+        this.nombreInstitucion = nombreInstitucion;
     }
     
 }
