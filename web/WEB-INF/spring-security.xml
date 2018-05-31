@@ -13,9 +13,13 @@
         <http auto-config='true' use-expressions="true" xmlns="http://www.springframework.org/schema/security">
             <intercept-url pattern="/login/cambiarClave" access="isAuthenticated()" />
             <intercept-url pattern="/hojasVida/editar" access="isAuthenticated()" />
+            <intercept-url pattern="/hojasVida/validar" access="isAuthenticated()" />
             <intercept-url pattern="/hojasVida/editar/**" access="isAuthenticated()" />
             <intercept-url pattern="/convocatorias/crear" access="isAuthenticated()" />
             <intercept-url pattern="/convocatorias/editar/**" access="isAuthenticated()" />
+            <intercept-url pattern="/convocatorias/postulados" access="isAuthenticated()" />
+            <intercept-url pattern="/convocatorias/preseleccionados" access="isAuthenticated()" />
+            <intercept-url pattern="/convocatorias/evaluar" access="isAuthenticated()" />
             <intercept-url pattern="/usuarios/editar" access="isAuthenticated()" />
             <intercept-url pattern="/usuarios/**" access="isAuthenticated()" />	
             <custom-filter position="PRE_AUTH_FILTER" ref="customPreAuthenticationFilter" />

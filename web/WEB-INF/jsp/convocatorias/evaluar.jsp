@@ -22,8 +22,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <div style="overflow-y: auto; max-height:400px;">
-                            <table class="table table-hover tableestilo" id="evaluaciones">
+                            <table class="table table-hover tableestilo" id="tblEvaluaciones">
                                 <thead>
                                     <tr>
                                         <th>N&deg;</th>
@@ -37,43 +36,12 @@
                                         <th class='opc'>Opciones</th>
                                     </tr>
                                 </thead>
-                                <tbody data-bind="foreach: { data: evaluaciones }">
-                                    <tr class="table-row">
-                                        <td style="width: 10%">
-                                            <span data-bind="text: consecutivo" ></span>
-                                        </td>
-                                        <td style="width: 10%">
-                                            <span data-bind="text: formacionAcademica" ></span>
-                                        </td>
-                                        <td style="width: 10%">
-                                            <span data-bind="text: capacitacionDocenciaPedagogia" ></span>
-                                        </td>
-                                        <td style="width: 15%">
-                                            <span data-bind="text: experienciaDocenciaInstitucionesEducacionSuperior" ></span>
-                                        </td>
-                                        <td style="width: 10%">
-                                            <span data-bind="text: experienciaInvestigacion" ></span>
-                                        </td>
-                                        <td style="width: 10%">
-                                            <span data-bind="text: experienciaExtension" ></span>
-                                        </td>
-                                        <td style="width: 15%">
-                                            <span data-bind="text: experienciaProfesionalSectorSalud" ></span>
-                                        </td>
-                                        <td style="width: 10%">
-                                            <span data-bind="text: total" ></span>
-                                        </td>
-                                        <td style='white-space: nowrap; width: 10%' align="center">
-                                            <button class='btn btn-success btn-xs btnver' type='button' data-bind="click: $root.verHojaVida">Ver</button>
-                                        </td>
-                                    </tr>
-                                </tbody>                                     
                             </table>
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="descarlist" align="center">
+                <div id="divDescargar" style="display: none;" align="center">
+                    <center><label>Descargar listado</label><button class="btn btn-success " id="btnDescargar" onclick="descargarEvaluaciones()" style="margin-left: 10px"><i class="fa fa-download"></i></button></center>
                 </div>
                 <div id="formHV" style="display: none;">
                     <div class="container">
@@ -233,7 +201,7 @@
                         </div>
                     </div>
                     <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <label>Telef&oacute;no</label>
                         <div class="table-responsive">
                         <table class="table table-hover tableestilo" id="tbtel">
@@ -254,7 +222,7 @@
                         </table>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <label>Correo electr&oacute;nico</label>
                         <div class="table-responsive">
                         <table class="table table-hover tableestilo" id="tbemail">
@@ -269,31 +237,6 @@
                                 </tr>
                             </tbody>                                      
                         </table>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label>Cuenta bancaria</label>
-                        <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbcuentabanca">
-                                <thead>
-                                    <th>Tipo de cuenta</th>
-                                    <th>N&uacute;mero de cuenta</th>
-                                    <th>Entidad</th>
-                                </thead>
-                                <tbody data-bind="foreach: { data: cuentasBancarias }">
-                                    <tr class="table-row">
-                                        <td style="width: 30%">
-                                            <span data-bind="text: nombreTipo" ></span>
-                                        </td>
-                                        <td style="width: 30%">
-                                            <span data-bind="text: numero" ></span>
-                                        </td>
-                                        <td style="width: 40%">
-                                            <span data-bind="text: entidad" ></span>
-                                        </td>
-                                    </tr>
-                                </tbody>                                              
-                            </table>
                         </div>
                     </div>
                 </div>
@@ -639,7 +582,7 @@
         </div>
   <script>
 $(document).ready(function() {
-        var evaluaciones = $('#evaluaciones1').DataTable({
+        tblEvaluaciones = $('#tblEvaluaciones').DataTable({
             "language": {
                 "sProcessing": "Procesando...",
                 "sLengthMenu": "Mostrar _MENU_ registros",
@@ -665,43 +608,133 @@ $(document).ready(function() {
             }
         });
     });       
-        
+
     function buscarEvaluaciones() {
         $('#formHV').hide();
+        $('#divDescargar').hide();
         $.ajax({
             type: "GET",
             url: "${pageContext.request.contextPath}/convocatorias/evaluaciones/" + $('#convocatoria').val(),
             processData: false,
             contentType: false,
             success: function (response) {
-                datosModel.evaluaciones.removeAll();
+                tblEvaluaciones.clear().draw();
                 if (response !== "") {
                     var evaluaciones = JSON.parse(response);
+                    if(evaluaciones.length > 0) {
+                      $('#divDescargar').show();
+                    }
                     for (var i = 0; i < evaluaciones.length; i++) {
-                         self.evaluaciones.push(
-                                {
-                                    consecutivo: ko.observable(i + 1),
-                                    idPersona: ko.observable(evaluaciones[i].idPersona),
-                                    formacionAcademica: ko.observable(evaluaciones[i].formacionAcademica),
-                                    capacitacionDocenciaPedagogia: ko.observable(evaluaciones[i].capacitacionDocenciaPedagogia),
-                                    experienciaDocenciaInstitucionesEducacionSuperior: ko.observable(evaluaciones[i].experienciaDocenciaInstitucionesEducacionSuperior),
-                                    experienciaInvestigacion: ko.observable(evaluaciones[i].experienciaInvestigacion),
-                                    experienciaExtension: ko.observable(evaluaciones[i].experienciaExtension),
-                                    experienciaProfesionalSectorSalud: ko.observable(evaluaciones[i].experienciaProfesionalSectorSalud),
-                                    total: ko.observable(evaluaciones[i].formacionAcademica + 
-                                            evaluaciones[i].capacitacionDocenciaPedagogia +
-                                            evaluaciones[i].experienciaDocenciaInstitucionesEducacionSuperior + 
-                                            evaluaciones[i].experienciaInvestigacion +
-                                            evaluaciones[i].experienciaExtension + 
-                                            evaluaciones[i].experienciaProfesionalSectorSalud)
-                                }
-                             );                        
+                       tblEvaluaciones.row.add([i + 1, 
+                           evaluaciones[i].formacionAcademica,
+                           evaluaciones[i].capacitacionDocenciaPedagogia,
+                           evaluaciones[i].experienciaDocenciaInstitucionesEducacionSuperior,
+                           evaluaciones[i].experienciaInvestigacion,
+                           evaluaciones[i].experienciaExtension,
+                           evaluaciones[i].experienciaProfesionalSectorSalud,
+                           evaluaciones[i].total,
+                           "<button class='btn btn-success btn-xs btnver' type='button' onclick='verHojaVida(" + evaluaciones[i].idPersona + ")'>Ver</button>"
+                       ]).draw(false); 
                     }
                 }
             }});
     }
-    
-    var DatosModel = function (evaluaciones, 
+
+    function descargarEvaluaciones() {
+       $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/convocatorias/decargarEvaluaciones/" + + $('#convocatoria').val(),
+            processData: false,
+            contentType: false,
+            success: function (response) {
+              if(response != "") {
+                  window.location.href = "${pageContext.request.contextPath}/convocatorias/decargarEvaluaciones/" + + $('#convocatoria').val();
+              }
+            },
+            error:function (xhr, ajaxOptions, thrownError) {
+
+            } 
+        });            
+    };
+
+    function verHojaVida(idPersona) {
+        $('#formHV').show();
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/hojasVida/datos/" + idPersona,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response !== "") {
+                    var hojaVida = JSON.parse(response);
+                    $("#numeroIdentificacion").val(hojaVida.numeroIdentificacion);
+                    $("#idPersona").val(hojaVida.idPersona);
+                    $("#tipoIdentificacion").val(hojaVida.nombreTipoIdentificacion);
+                    $("#nombres").val(hojaVida.nombres);
+                    $("#apellidos").val(hojaVida.apellidos);
+                    $("#sexo").val(hojaVida.nombreSexo);
+                    $("#fechaExpedicion").val(hojaVida.fechaExpedicionFormateada);
+                    $("#nacionalidad").val(hojaVida.nombreNacionalidad);
+                    $("#libretaMilitar").val(hojaVida.libretaMilitar);
+                    $("#distritoClase").val(hojaVida.distritoClase);
+                    $("#ciudadResidencia").val(hojaVida.nombreCiudadResidencia);
+                    $("#direccion").val(hojaVida.direccion);
+                    $("#grupoEtnico").val(hojaVida.nombreGrupoEtnico);
+                    $("#discapacidad").val(hojaVida.nombreDiscapacidad);
+                    if(hojaVida.disponeRUT) {
+                       $("#disponeRUT").val("Si");
+                    } else {
+                       $("#disponeRUT").val("No");
+                    }
+                    $("#actividadEconomica").val(hojaVida.nombreActividadEconomica);
+                    if(hojaVida.disponibilidadViajar) {
+                       $("#disponibilidadViajar").val("Si");
+                    } else {
+                       $("#disponibilidadViajar").val("No");
+                    }
+                    if(hojaVida.egresadoUDEA) {
+                       $("#egresadoUDEA").val("Si");
+                    } else {
+                       $("#egresadoUDEA").val("No");
+                    }
+                    if(hojaVida.empleadoUDEA) {
+                       $("#empleadoUDEA").val("Si");
+                    } else {
+                       $("#empleadoUDEA").val("No");
+                    }
+                    $("#tipoVinculacion").val(hojaVida.nombreTipoVinculacion);
+                    $("#lugarExpedicion").val(hojaVida.nombreLugarExpedicion);
+                    $("#perfil").val(hojaVida.perfil);
+                    if(hojaVida.investigadorReconocidoColciencias) {
+                       $("#investigadorReconocidoColciencias").val("Si");
+                    } else {
+                       $("#investigadorReconocidoColciencias").val("No");
+                    }
+                    $("#urlCVLAC").val(hojaVida.urlCVLAC);
+                    $("#codigoORCID").val(hojaVida.codigoORCID);
+                    $("#identificadorScopus").val(hojaVida.identificadorScopus);
+                    $("#researcherId").val(hojaVida.researcherId);
+                    $("#identificadorScopus").val(hojaVida.identificadorScopus);
+                    cargarDocumentosSoporte(hojaVida.documentosSoporte);
+                    cargarTelefonos(hojaVida.telefonos);
+                    cargarCuentasBancarias(hojaVida.cuentasBancarias);
+                    cargarCorreosElectronicos(hojaVida.correosElectronicos);
+                    cargarExperienciasLaborales(hojaVida.experienciasLaborales);
+                    cargarExperienciasDocencia(hojaVida.experienciasDocencia);
+                    cargarEducacionesBasicas(hojaVida.educacionesBasicas);
+                    cargarEducacionesContinuas(hojaVida.educacionesContinuas);
+                    cargarEducacionesSuperiores(hojaVida.educacionesSuperiores);
+                    cargarIdiomas(hojaVida.idiomas);
+                    cargarDistinciones(hojaVida.distinciones);
+                    cargarInvestigaciones(hojaVida.investigaciones);
+                    cargarArticulos(hojaVida.articulos);
+                    cargarPatentes(hojaVida.patentes);
+                    cargarProdcutosConocimiento(hojaVida.productosConocimiento);
+                }
+            }});
+    }
+
+    var DatosModel = function (
         correosElectronicos,
         cuentasBancarias,
         telefonos,
@@ -718,7 +751,6 @@ $(document).ready(function() {
         productosConocimiento,
         investigaciones) {
         self = this;
-        self.evaluaciones = ko.observableArray(evaluaciones);
         self.correosElectronicos = ko.observableArray(correosElectronicos);
         self.cuentasBancarias = ko.observableArray(cuentasBancarias);
         self.telefonos = ko.observableArray(telefonos);
@@ -734,83 +766,6 @@ $(document).ready(function() {
         self.patentes = ko.observableArray(patentes);
         self.productosConocimiento = ko.observableArray(productosConocimiento);
         self.investigaciones = ko.observableArray(investigaciones);
-        
-        self.verHojaVida = function (hojaVida) {
-            $('#formHV').show();
-            $.ajax({
-                type: "GET",
-                url: "${pageContext.request.contextPath}/hojasVida/datos/" + hojaVida.idPersona(),
-                processData: false,
-                contentType: false,
-                success: function (response) {
-                    if (response !== "") {
-                        var hojaVida = JSON.parse(response);
-                        $("#numeroIdentificacion").val(hojaVida.numeroIdentificacion);
-                        $("#idPersona").val(hojaVida.idPersona);
-                        $("#tipoIdentificacion").val(hojaVida.nombreTipoIdentificacion);
-                        $("#nombres").val(hojaVida.nombres);
-                        $("#apellidos").val(hojaVida.apellidos);
-                        $("#sexo").val(hojaVida.nombreSexo);
-                        $("#fechaExpedicion").val(hojaVida.fechaExpedicionFormateada);
-                        $("#nacionalidad").val(hojaVida.nombreNacionalidad);
-                        $("#libretaMilitar").val(hojaVida.libretaMilitar);
-                        $("#distritoClase").val(hojaVida.distritoClase);
-                        $("#ciudadResidencia").val(hojaVida.nombreCiudadResidencia);
-                        $("#direccion").val(hojaVida.direccion);
-                        $("#grupoEtnico").val(hojaVida.nombreGrupoEtnico);
-                        $("#discapacidad").val(hojaVida.nombreDiscapacidad);
-                        if(hojaVida.disponeRUT) {
-                           $("#disponeRUT").val("Si");
-                        } else {
-                           $("#disponeRUT").val("No");
-                        }
-                        $("#actividadEconomica").val(hojaVida.nombreActividadEconomica);
-                        if(hojaVida.disponibilidadViajar) {
-                           $("#disponibilidadViajar").val("Si");
-                        } else {
-                           $("#disponibilidadViajar").val("No");
-                        }
-                        if(hojaVida.egresadoUDEA) {
-                           $("#egresadoUDEA").val("Si");
-                        } else {
-                           $("#egresadoUDEA").val("No");
-                        }
-                        if(hojaVida.empleadoUDEA) {
-                           $("#empleadoUDEA").val("Si");
-                        } else {
-                           $("#empleadoUDEA").val("No");
-                        }
-                        $("#tipoVinculacion").val(hojaVida.nombreTipoVinculacion);
-                        $("#lugarExpedicion").val(hojaVida.nombreLugarExpedicion);
-                        $("#perfil").val(hojaVida.perfil);
-                        if(hojaVida.investigadorReconocidoColciencias) {
-                           $("#investigadorReconocidoColciencias").val("Si");
-                        } else {
-                           $("#investigadorReconocidoColciencias").val("No");
-                        }
-                        $("#urlCVLAC").val(hojaVida.urlCVLAC);
-                        $("#codigoORCID").val(hojaVida.codigoORCID);
-                        $("#identificadorScopus").val(hojaVida.identificadorScopus);
-                        $("#researcherId").val(hojaVida.researcherId);
-                        $("#identificadorScopus").val(hojaVida.identificadorScopus);
-                        cargarDocumentosSoporte(hojaVida.documentosSoporte);
-                        cargarTelefonos(hojaVida.telefonos);
-                        cargarCuentasBancarias(hojaVida.cuentasBancarias);
-                        cargarCorreosElectronicos(hojaVida.correosElectronicos);
-                        cargarExperienciasLaborales(hojaVida.experienciasLaborales);
-                        cargarExperienciasDocencia(hojaVida.experienciasDocencia);
-                        cargarEducacionesBasicas(hojaVida.educacionesBasicas);
-                        cargarEducacionesContinuas(hojaVida.educacionesContinuas);
-                        cargarEducacionesSuperiores(hojaVida.educacionesSuperiores);
-                        cargarIdiomas(hojaVida.idiomas);
-                        cargarDistinciones(hojaVida.distinciones);
-                        cargarInvestigaciones(hojaVida.investigaciones);
-                        cargarArticulos(hojaVida.articulos);
-                        cargarPatentes(hojaVida.patentes);
-                        cargarProdcutosConocimiento(hojaVida.productosConocimiento);
-                    }
-                }});
-        };
         
         self.verDocumentoSoporte = function (documentoSoporte) {
             $.ajax({
@@ -1314,7 +1269,6 @@ $(document).ready(function() {
         });  
     }    
     
-    var evaluaciones = [];
     var correosElectronicos = [];
     var cuentasBancarias = [];
     var telefonos = [];
@@ -1331,7 +1285,7 @@ $(document).ready(function() {
     var productosConocimiento = [];
     var investigaciones = [];
     
-    var datosModel = new DatosModel(evaluaciones, 
+    var datosModel = new DatosModel(
         correosElectronicos, 
         cuentasBancarias, 
         telefonos, 

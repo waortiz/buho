@@ -422,6 +422,20 @@ public class HojaVidaController {
         }
     }
 
+    @RequestMapping(value = "/certificadoEducacionContinua/{idEducacionContinua}", method = RequestMethod.GET)
+    public void obtenerCertificadoEducacionContinua(@PathVariable("idEducacionContinua") int idEducacionContinua, HttpServletResponse response) throws IOException {
+        Documento documento = servicioHojaVida.obtenerCertificadoEducacionContinua(idEducacionContinua);
+        if (documento != null) {
+            response.reset();
+            response.resetBuffer();
+            response.setHeader("Pragma", "No-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType(documento.getTipoContenido());
+            response.setContentLength(documento.getContenido().length);
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
+            FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
+        }
+    }
     @RequestMapping(value = "/certificadoEducacionContinuaValidar/{idEducacionContinua}", method = RequestMethod.GET)
     public void obtenerCertificadoEducacionContinuaValidar(@PathVariable("idEducacionContinua") int idEducacionContinua, HttpServletResponse response) throws IOException {
         Documento documento = servicioHojaVida.obtenerCertificadoEducacionContinua(idEducacionContinua);
@@ -686,6 +700,7 @@ public class HojaVidaController {
         List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
         List<Maestro> institucionesEducativas = servicioMaestro.obtenerInstitucionesEducativas();
         List<Maestro> institucionesEducativasColombianas = servicioMaestro.obtenerInstitucionesEducativasColombianas();
+        List<Maestro> institucionesEducativasExtranjeras = servicioMaestro.obtenerInstitucionesEducativasExtranjeras();
         List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
         List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
         List<Maestro> tiposInstitucion = servicioMaestro.obtenerTiposInstitucion();
@@ -713,6 +728,7 @@ public class HojaVidaController {
         model.addAttribute("nivelesFormacion", nivelesFormacion);
         model.addAttribute("institucionesEducativas", institucionesEducativas);
         model.addAttribute("institucionesEducativasColombianas", institucionesEducativasColombianas);
+        model.addAttribute("institucionesEducativasExtranjeras", institucionesEducativasExtranjeras);
         model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
         model.addAttribute("tiposCapacitacion", tiposCapacitacion);
         model.addAttribute("tiposInstitucion", tiposInstitucion);

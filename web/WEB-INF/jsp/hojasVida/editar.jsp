@@ -1644,9 +1644,15 @@
                                             <label for="institucionEducacionContinua">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institución que estudio">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
                                             <div class="form-inline">
-                                                <select style="width: 80%;" name="institucionEducacionContinua" id="institucionEducacionContinua" class="js-select-basic-single js-states form-control">
+                                                <select style="width: 80%;" name="institucionEducacionContinuaColombiana" id="institucionEducacionContinuaColombiana" class="js-select-basic-single js-states form-control">
                                                     <option></option>
                                                     <c:forEach var="institucion" items="${institucionesEducativasColombianas}">
+                                                    <option value="${institucion.getId()}">${institucion.getNombre()}</option>
+                                                    </c:forEach>                                                     
+                                                </select>
+                                                <select style="width: 80%;" name="institucionEducacionContinuaExtranjero" id="institucionEducacionContinuaExtranjero" class="js-select-basic-single js-states form-control">
+                                                    <option></option>
+                                                    <c:forEach var="institucion" items="${institucionesEducativasExtranjeras}">
                                                     <option value="${institucion.getId()}">${institucion.getNombre()}</option>
                                                     </c:forEach>                                                     
                                                 </select>
@@ -3047,49 +3053,50 @@
         });
 
         $('#btnEstudioExteriorSiEducacionContinua').click(function(){
-           buscarInstitucionesEducativasExtranjeras('institucionEducacionContinua');
+          $('#institucionEducacionContinuaExtranjero').next(".select2-container").show();
+          $('#institucionEducacionContinuaColombiana').next(".select2-container").hide();
           $('#btnNuevaInstitucionExtranjero').show();
         });
         
         $('#btnEstudioExteriorNoEducacionContinua').click(function(){
-           buscarInstitucionesEducativasColombianas('institucionEducacionContinua');
+          $('#institucionEducacionContinuaExtranjero').next(".select2-container").hide();
+          $('#institucionEducacionContinuaColombiana').next(".select2-container").show();
           $('#btnNuevaInstitucionExtranjero').hide();
         }); 
 
         $('#btnAdicionarInstitucionExtranjero').click(function(){
-          var institucion = $('#institucionEducativaExtranjero').val();
+            var institucion = $('#institucionEducativaExtranjero').val();
 
-        if (institucion === "") {
-            bootstrap_alert_institucion_extranjero.warning('Debe ingresar la institución');
-            return false;
-        }
+            if (institucion === "") {
+                bootstrap_alert_institucion_extranjero.warning('Debe ingresar la institución');
+                return false;
+            }
         
-        var formData = new FormData();
-        formData.append("nombre", institucion);
-        $.ajax({
-            type: "POST",
-            url: "${pageContext.request.contextPath}/hojasVida/institucion",
-            data: formData,
-            processData: false,
-            contentType: false,
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
-            },
-            success: function (response) {
-                if (response !== "") {
-                    var respuesta = JSON.parse(response);
-                    $('#institucionEducacionContinua').append('<option value=' + respuesta.id + '>' + institucion + '</option>');
-                    $('#institucionEducacionContinua').val(respuesta.id).trigger("change.select2");
-                    ordenarOpciones($('#institucionEducacionContinua option'));
-                    $('#md_institucion_extranjero').modal('hide');
-                } else {
+            var formData = new FormData();
+            formData.append("nombre", institucion);
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/hojasVida/institucion",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    if (response !== "") {
+                        var respuesta = JSON.parse(response);
+                        $('#institucionEducacionContinuaExtranjero').append('<option value=' + respuesta.id + '>' + institucion + '</option>');
+                        $('#institucionEducacionContinuaExtranjero').val(respuesta.id).trigger("change.select2");
+                        $('#md_institucion_extranjero').modal('hide');
+                    } else {
+                        bootstrap_alert_institucion_extranjero.warning("Error al almacenar la institución.");
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
                     bootstrap_alert_institucion_extranjero.warning("Error al almacenar la institución.");
-                }
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                bootstrap_alert_institucion_extranjero.warning("Error al almacenar la institución.");
-            }});
-        });
+                }});
+            });
 
         $('#btnAdicionarCiudadExtranjera').click(function(){
           var pais = $('#pais').val();
@@ -4709,8 +4716,8 @@
         self.adicionarEducacionContinua = function () {
             var tipoCapacitacionEducacionContinua = $('#tipoCapacitacionEducacionContinua').val();
             var nombreTipoCapacitacionEducacionContinua = $('#tipoCapacitacionEducacionContinua option:selected').text();
-            var institucionEducacionContinua = $('#institucionEducacionContinua').val();
-            var nombreInstitucionEducacionContinua = $('#institucionEducacionContinua option:selected').text();
+            var institucionEducacionContinua = $('#institucionEducacionContinuaColombiana').val();
+            var nombreInstitucionEducacionContinua = $('#institucionEducacionContinuaColombiana option:selected').text();
             var nucleoBasicoConocimientoEducacionContinua = $('#nucleoBasicoConocimientoEducacionContinua').val();
             var nombreNucleoBasicoConocimientoEducacionContinua = $('#nombreNucleoBasicoConocimientoEducacionContinua').val();
             var nombreCapacitacionEducacionContinua = $('#nombreCapacitacionEducacionContinua').val();
@@ -4722,9 +4729,18 @@
                 bootstrap_alert_educacion_continua.warning('Debe seleccionar el tipo de capacitación');
                 return false;
             }
-            if (institucionEducacionContinua === "") {
-                bootstrap_alert_educacion_continua.warning('Debe seleccionar la institución');
-                return false;
+            if(estudioExteriorEducacionContinua) {
+                institucionEducacionContinua = $('#institucionEducacionContinuaExtranjero').val();
+                nombreInstitucionEducacionContinua = $('#institucionEducacionContinuaExtranjero option:selected').text();
+                if (institucionEducacionContinua === "") {
+                    bootstrap_alert_educacion_continua.warning('Debe seleccionar la institución');
+                    return false;
+                }
+            } else {
+                if (institucionEducacionContinua === "") {
+                    bootstrap_alert_educacion_continua.warning('Debe seleccionar la institución');
+                    return false;
+                }
             }
             if (nucleoBasicoConocimientoEducacionContinua === "") {
                 bootstrap_alert_educacion_continua.warning('Debe seleccionar el área de saber');
@@ -4867,7 +4883,6 @@
 
         self.editarEducacionContinua = function (educacionContinua) {
             $('#tipoCapacitacionEducacionContinua').val(educacionContinua.tipoCapacitacion()).trigger('change');
-            $('#institucionEducacionContinua').val(educacionContinua.institucion()).trigger('change');
             $('#nombreCapacitacionEducacionContinua').val(educacionContinua.nombreCapacitacion());
             $('#numeroHorasEducacionContinua').val(educacionContinua.numeroHoras());
             $('#nucleoBasicoConocimientoEducacionContinua').val(educacionContinua.nucleoBasicoConocimiento());
@@ -4876,12 +4891,18 @@
             $('#consecutivo').val(educacionContinua.consecutivo());
             $('#certificadoEducacionContinua').show();
             if(educacionContinua.estudioExterior()) {
+              $('#institucionEducacionContinuaExtranjero').val(educacionContinua.institucion()).trigger('change');
               $('#btnEstudioExteriorSiEducacionContinua').removeClass('notActive').addClass('active');  
               $('#btnEstudioExteriorNoEducacionContinua').removeClass('active').addClass('notActive');
+              $('#institucionEducacionContinuaExtranjero').next(".select2-container").show();
+              $('#institucionEducacionContinuaColombiana').next(".select2-container").hide();
               $('#btnNuevaInstitucionExtranjero').show();
             } else {
+              $('#institucionEducacionContinuaColombiana').val(educacionContinua.institucion()).trigger('change');
               $('#btnEstudioExteriorSiEducacionContinua').removeClass('active').addClass('notActive');  
               $('#btnEstudioExteriorNoEducacionContinua').removeClass('notActive').addClass('active');
+              $('#institucionEducacionContinuaExtranjero').next(".select2-container").hide();
+              $('#institucionEducacionContinuaColombiana').next(".select2-container").show();
               $('#btnNuevaInstitucionExtranjero').hide();
             }
             bootstrap_alert_educacion_continua.removeWarning();
@@ -6325,7 +6346,10 @@
     
     function nuevaEducacionContinua() {
         $('#tipoCapacitacionEducacionContinua').val("").trigger('change');
-        $('#institucionEducacionContinua').val("").trigger('change');
+        $('#institucionEducacionContinuaExtranjero').val("").trigger('change');
+        $('#institucionEducacionContinuaColombiana').val("").trigger('change');
+        $('#institucionEducacionContinuaExtranjero').next(".select2-container").hide();
+        $('#institucionEducacionContinuaColombiana').next(".select2-container").show();
         $('#nombreCapacitacionEducacionContinua').val("");
         $('#numeroHorasEducacionContinua').val("");
         $('#nucleoBasicoConocimientoEducacionContinua').val("");

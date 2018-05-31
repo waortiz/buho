@@ -11,12 +11,14 @@ package co.edu.fnsp.buho.entidades;
  */
 public class Evaluacion {
     private long idPersona;
+    private String numeroIdentificacion;
     private int formacionAcademica;
     private int capacitacionDocenciaPedagogia;
     private int experienciaDocenciaInstitucionesEducacionSuperior;
     private int experienciaInvestigacion;
     private int experienciaExtension;
     private int experienciaProfesionalSectorSalud;
+    private int total;
 
     /**
      * @return the idPersona
@@ -115,5 +117,32 @@ public class Evaluacion {
     public void setExperienciaProfesionalSectorSalud(int experienciaProfesionalSectorSalud) {
         this.experienciaProfesionalSectorSalud = experienciaProfesionalSectorSalud;
     }
-    
+
+    /**
+     * @return the total
+     */
+    public int getTotal() {
+        return total;
+    }
+
+    /**
+     * @param total the total to set
+     */
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    /**
+     * @return the numeroIdentificacion
+     */
+    public String getNumeroIdentificacion() {
+        return numeroIdentificacion;
+    }
+
+    /**
+     * @param numeroIdentificacion the numeroIdentificacion to set
+     */
+    public void setNumeroIdentificacion(String numeroIdentificacion) {
+        this.numeroIdentificacion = numeroIdentificacion;
+    }
 }

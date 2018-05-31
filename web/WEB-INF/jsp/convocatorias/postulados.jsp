@@ -28,45 +28,23 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="hojasVida">
+                            <table class="table table-hover tableestilo" id="tblHojasVida">
                                 <thead>
                                     <tr>
                                         <th>C&eacute;dula</th>
                                         <th>Nombres</th>
                                         <th>Apellidos</th>
                                         <th>Sexo</th>
-                                        <th>Perfil</th>
+                                        <th style="width:40%">Perfil</th>
                                         <th class='opc'>Opciones</th>
                                     </tr>
                                 </thead>
-                                <tbody data-bind="foreach: { data: hojasVida }">
-                                    <tr class="table-row">
-                                        <td style="width: 10%">
-                                            <span data-bind="text: numeroIdentificacion" ></span>
-                                        </td>
-                                        <td style="width: 20%">
-                                            <span data-bind="text: nombres" ></span>
-                                        </td>
-                                        <td style="width: 20%">
-                                            <span data-bind="text: apellidos" ></span>
-                                        </td>
-                                        <td style="width: 10%">
-                                            <span data-bind="text: nombreSexo" ></span>
-                                        </td>
-                                        <td style="width: 30%">
-                                            <span data-bind="text: perfil" ></span>
-                                        </td>
-                                        <td style='white-space: nowrap; width: 10%' align="center">
-                                            <button class='btn btn-success btn-xs btnver' type='button' data-bind="click: $root.verHojaVida">Ver</button>
-                                        </td>
-                                    </tr>
-                                </tbody>                                     
                             </table>
                         </div>
                     </div>
                 </div>
                 <div class="descarlist" align="center">
-                    <center><label>Descargar listado</label><button class="btn btn-success " id="btndescargar"  style="margin-left: 10px;"><i class="fa fa-download"></i></button></center>
+
                 </div>
                 <div id="formHV" style="display: none;">
                     <div class="container">
@@ -226,7 +204,7 @@
                         </div>
                     </div>
                     <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <label>Telef&oacute;no</label>
                         <div class="table-responsive">
                         <table class="table table-hover tableestilo" id="tbtel">
@@ -247,7 +225,7 @@
                         </table>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <label>Correo electr&oacute;nico</label>
                         <div class="table-responsive">
                         <table class="table table-hover tableestilo" id="tbemail">
@@ -262,31 +240,6 @@
                                 </tr>
                             </tbody>                                      
                         </table>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label>Cuenta bancaria</label>
-                        <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbcuentabanca">
-                                <thead>
-                                    <th>Tipo de cuenta</th>
-                                    <th>N&uacute;mero de cuenta</th>
-                                    <th>Entidad</th>
-                                </thead>
-                                <tbody data-bind="foreach: { data: cuentasBancarias }">
-                                    <tr class="table-row">
-                                        <td style="width: 30%">
-                                            <span data-bind="text: nombreTipo" ></span>
-                                        </td>
-                                        <td style="width: 30%">
-                                            <span data-bind="text: numero" ></span>
-                                        </td>
-                                        <td style="width: 40%">
-                                            <span data-bind="text: entidad" ></span>
-                                        </td>
-                                    </tr>
-                                </tbody>                                              
-                            </table>
                         </div>
                     </div>
                 </div>
@@ -632,7 +585,7 @@
         </div>
   <script>
   $(document).ready(function() {
-        var hojasVida = $('#hojasVida').DataTable({
+        tblHojasVida = $('#tblHojasVida').DataTable({
             "language": {
                 "sProcessing": "Procesando...",
                 "sLengthMenu": "Mostrar _MENU_ registros",
@@ -666,65 +619,37 @@
             processData: false,
             contentType: false,
             success: function (response) {
-                datosModel.hojasVida.removeAll();
+                tblHojasVida.clear().draw();
                 if (response !== "") {
                     var hojasVida = JSON.parse(response);
                     $('#totalPostulados').val(hojasVida.length);
                     for (var i = 0; i < hojasVida.length; i++) {
-                         self.hojasVida.push(
-                                {
-                                    idPersona: ko.observable(hojasVida[i].idPersona),
-                                    numeroIdentificacion: ko.observable(hojasVida[i].numeroIdentificacion),
-                                    nombres: ko.observable(hojasVida[i].nombres),
-                                    apellidos: ko.observable(hojasVida[i].apellidos),
-                                    perfil: ko.observable(hojasVida[i].perfil),
-                                    nombreSexo: ko.observable(hojasVida[i].nombreSexo)
-                                }
-                             );                        
+                        sexo = hojasVida[i].nombreSexo;
+                        perfil = hojasVida[i].perfil;
+                        if(hojasVida[i].perfil == null) {
+                          perfil = '';	
+                        }
+                        if(hojasVida[i].nombreSexo == null) {
+                          sexo = '';	
+                        }
+                        tblHojasVida.row.add([
+                                hojasVida[i].numeroIdentificacion,
+                                hojasVida[i].nombres,
+                                hojasVida[i].apellidos,
+                                sexo,
+                                perfil,
+                                '<button class="btn btn-success btn-xs btnver" type="button" onclick=\'verHojaVida(' + hojasVida[i].idPersona + ')\'>Ver</button>'
+                            ]).draw(false); 
                     }
                 }
             }});
     }
-    
-    var DatosModel = function (hojasVida, 
-        correosElectronicos,
-        cuentasBancarias,
-        telefonos,
-        documentosSoporte, 
-        idiomas, 
-        educacionesBasicas, 
-        educacionesSuperiores, 
-        educacionesContinuas, 
-        distinciones,
-        experienciasLaborales,
-        experienciasDocencia,
-        articulos,
-        patentes,
-        productosConocimiento,
-        investigaciones) {
-        self = this;
-        self.hojasVida = ko.observableArray(hojasVida);
-        self.correosElectronicos = ko.observableArray(correosElectronicos);
-        self.cuentasBancarias = ko.observableArray(cuentasBancarias);
-        self.telefonos = ko.observableArray(telefonos);
-        self.documentosSoporte = ko.observableArray(documentosSoporte);
-        self.idiomas = ko.observableArray(idiomas);
-        self.educacionesBasicas = ko.observableArray(educacionesBasicas);
-        self.educacionesSuperiores = ko.observableArray(educacionesSuperiores);
-        self.educacionesContinuas = ko.observableArray(educacionesContinuas);
-        self.distinciones = ko.observableArray(distinciones);
-        self.experienciasLaborales = ko.observableArray(experienciasLaborales);
-        self.experienciasDocencia = ko.observableArray(experienciasDocencia);
-        self.articulos = ko.observableArray(articulos);
-        self.patentes = ko.observableArray(patentes);
-        self.productosConocimiento = ko.observableArray(productosConocimiento);
-        self.investigaciones = ko.observableArray(investigaciones);
-        
-        self.verHojaVida = function (hojaVida) {
+
+    function verHojaVida(idPersona) {
             $('#formHV').show();
             $.ajax({
                 type: "GET",
-                url: "${pageContext.request.contextPath}/hojasVida/datos/" + hojaVida.idPersona(),
+                url: "${pageContext.request.contextPath}/hojasVida/datos/" + idPersona,
                 processData: false,
                 contentType: false,
                 success: function (response) {
@@ -795,8 +720,40 @@
                         cargarProdcutosConocimiento(hojaVida.productosConocimiento);
                     }
                 }});
-        };
-        
+    }
+
+    var DatosModel = function ( 
+        correosElectronicos,
+        cuentasBancarias,
+        telefonos,
+        documentosSoporte, 
+        idiomas, 
+        educacionesBasicas, 
+        educacionesSuperiores, 
+        educacionesContinuas, 
+        distinciones,
+        experienciasLaborales,
+        experienciasDocencia,
+        articulos,
+        patentes,
+        productosConocimiento,
+        investigaciones) {
+        self = this;
+        self.correosElectronicos = ko.observableArray(correosElectronicos);
+        self.cuentasBancarias = ko.observableArray(cuentasBancarias);
+        self.telefonos = ko.observableArray(telefonos);
+        self.documentosSoporte = ko.observableArray(documentosSoporte);
+        self.idiomas = ko.observableArray(idiomas);
+        self.educacionesBasicas = ko.observableArray(educacionesBasicas);
+        self.educacionesSuperiores = ko.observableArray(educacionesSuperiores);
+        self.educacionesContinuas = ko.observableArray(educacionesContinuas);
+        self.distinciones = ko.observableArray(distinciones);
+        self.experienciasLaborales = ko.observableArray(experienciasLaborales);
+        self.experienciasDocencia = ko.observableArray(experienciasDocencia);
+        self.articulos = ko.observableArray(articulos);
+        self.patentes = ko.observableArray(patentes);
+        self.productosConocimiento = ko.observableArray(productosConocimiento);
+        self.investigaciones = ko.observableArray(investigaciones);
         self.verDocumentoSoporte = function (documentoSoporte) {
             $.ajax({
                 type: "GET",
@@ -1299,7 +1256,6 @@
         });  
     }    
     
-    var hojasVida = [];
     var correosElectronicos = [];
     var cuentasBancarias = [];
     var telefonos = [];
@@ -1316,7 +1272,7 @@
     var productosConocimiento = [];
     var investigaciones = [];
     
-    var datosModel = new DatosModel(hojasVida, 
+    var datosModel = new DatosModel(
         correosElectronicos, 
         cuentasBancarias, 
         telefonos, 

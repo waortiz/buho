@@ -18,6 +18,7 @@ import co.edu.fnsp.buho.entidades.Programa;
 import co.edu.fnsp.buho.excepciones.CriteriosHabilitacionException;
 import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
+import co.edu.fnsp.buho.utilidades.EvaluacionExcelReportView;
 import co.edu.fnsp.buho.utilidades.Util;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -37,6 +38,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -448,6 +453,12 @@ public class ConvocatoriaController {
         Gson gson = new Gson();
 
         return gson.toJson(evaluaciones);
+    }
+
+    @RequestMapping(value = "/decargarEvaluaciones/{idConvocatoria}", method = RequestMethod.GET)
+    public ModelAndView  descargarEvaluaciones(@PathVariable("idConvocatoria") int idConvocatoria, HttpServletResponse response) throws IOException {
+        List<Evaluacion> evaluaciones = servicioConvocatoria.obtenerEvaluaciones(idConvocatoria);
+        return new ModelAndView(new EvaluacionExcelReportView(), "evaluaciones", evaluaciones);
     }
     
     private boolean esAdministrador() {

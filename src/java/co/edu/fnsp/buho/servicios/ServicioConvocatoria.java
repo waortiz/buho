@@ -31,6 +31,8 @@ import co.edu.fnsp.buho.repositorios.IRepositorioHojaVida;
 import co.edu.fnsp.buho.repositorios.IRepositorioMaestro;
 import co.edu.fnsp.buho.utilidades.Util;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -467,7 +469,7 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
                         tiempoExperienciaLaboralSectorSalud = Util.getAnyos(experienciaLaboral.getFechaIngreso(), fechaRetiro) + tiempoExperienciaLaboralSectorSalud;
                     }
                     if (experienciaLaboral.isExtension()) {
-                        experienciaInvestigacion = 7;
+                        experienciaExtension = 7;
                     }
                 }
             }
@@ -483,15 +485,29 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
 
             Evaluacion evaluacion = new Evaluacion();
             evaluacion.setIdPersona(hojaVida.getIdPersona());
+            evaluacion.setNumeroIdentificacion(hojaVida.getNumeroIdentificacion());
             evaluacion.setFormacionAcademica(formacionAcademica);
             evaluacion.setCapacitacionDocenciaPedagogia(capacitacionDocenciaPedagogia);
             evaluacion.setExperienciaDocenciaInstitucionesEducacionSuperior(experienciaDocenciaInstitucionesEducacionSuperior);
-            evaluacion.setExperienciaExtension(experienciaExtension);
             evaluacion.setExperienciaInvestigacion(experienciaInvestigacion);
+            evaluacion.setExperienciaExtension(experienciaExtension);
             evaluacion.setExperienciaProfesionalSectorSalud(experienciaProfesionalSectorSalud);
+            evaluacion.setTotal(formacionAcademica
+                    + capacitacionDocenciaPedagogia
+                    + experienciaDocenciaInstitucionesEducacionSuperior
+                    + experienciaInvestigacion
+                    + experienciaExtension
+                    + experienciaProfesionalSectorSalud);
             evaluaciones.add(evaluacion);
         }
 
+        Collections.sort(evaluaciones, new Comparator<Evaluacion>() {
+            @Override
+            public int compare(Evaluacion o1, Evaluacion o2) {
+                return o2.getTotal() - o1.getTotal();
+            }
+        });
+        
         return evaluaciones;
     }
 }
