@@ -606,6 +606,10 @@
                                 <label class="lbltit5"></label><br>
                                 <input type="text" name="" style="border: 0;font-style: italic;width: 100%;" class="inplbl5">
                             </div>
+                            <div class="col-md-3" id="col6">
+                                <label class="lbltit6"></label><br>
+                                <input type="text" name="" style="border: 0;font-style: italic;width: 100%;" class="inplbl6">
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 row6" >
@@ -1142,7 +1146,7 @@
             $('.lbltit1').html("Empresa");
             $('.inplbl1').val(experienciaLaboral.nombreEmpresa());
             $('.lbltit2').html("Tipo de experiencia");
-            $('.inplbl2').val(experienciaLaboral.nombreTipoEmpresa());
+            $('.inplbl2').val(experienciaLaboral.nombreTipoExperiencia());
             $('.lbltit3').html("Cargo");
             $('.inplbl3').val(experienciaLaboral.cargo());
             $('.lbltit4').html("Fecha Ingreso/Inicio");
@@ -1150,6 +1154,8 @@
             $('.row5').css('display',"block");
             $('.lbltit5').html("Fecha Retiro/Fin");
             $('.inplbl5').val(experienciaLaboral.fechaRetiro());
+            $('.lbltit6').html("");
+            $('.inplbl6').val("");
             verDocumentoValidar(EXPERIENCIA_LABORAL,
                     experienciaLaboral.id(),
                     experienciaLaboral.certificadoValidado(),
@@ -1176,6 +1182,8 @@
             $('.row5').css('display',"block");
             $('.lbltit5').html("Número de horas");
             $('.inplbl5').val(cursoExperienciaDocencia.numeroHoras());
+            $('.lbltit6').html("Año");
+            $('.inplbl6').val(cursoExperienciaDocencia.anyo());
             verDocumentoValidar(CURSO_EXPERIENCIA_DOCENCIA,
                     cursoExperienciaDocencia.id(),
                     cursoExperienciaDocencia.certificadoValidado(),
@@ -1337,6 +1345,8 @@
             $('.inplbl2').val(articulo.nombre());
             $('.lbltit5').html("Nombre de revista");
             $('.inplbl5').val(articulo.nombreRevista());
+            $('.lbltit6').html("");
+            $('.inplbl6').val("");
             $('.row5').css('display',"block");
             verDocumentoValidar(ARTICULO,
                     articulo.id(),

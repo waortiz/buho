@@ -36,6 +36,7 @@ import co.edu.fnsp.buho.entidades.ValidacionDocumento;
 import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
 import co.edu.fnsp.buho.servicios.IServicioHojaVida;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
+import co.edu.fnsp.buho.utilidades.Mail;
 import co.edu.fnsp.buho.utilidades.Util;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -46,6 +47,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,6 +67,38 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping(value = "/hojasVida")
 public class HojaVidaController {
 
+    private @Value("${ASUNTO_SOPORTE_CAMBIADO}") String ASUNTO_SOPORTE_CAMBIADO;
+    private @Value("${CUERPO_SOPORTE_CAMBIADO}") String CUERPO_SOPORTE_CAMBIADO;
+    private @Value("${ASUNTO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO}") String ASUNTO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO;
+    private @Value("${CUERPO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO}") String CUERPO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO;
+    private @Value("${ASUNTO_RUT_CAMBIADO}") String ASUNTO_RUT_CAMBIADO;
+    private @Value("${CUERPO_RUT_CAMBIADO}") String CUERPO_RUT_CAMBIADO;
+    private @Value("${ASUNTO_LIBRETA_MILITAR_CAMBIADO}") String ASUNTO_LIBRETA_MILITAR_CAMBIADO;
+    private @Value("${CUERPO_LIBRETA_MILITAR_CAMBIADO}") String CUERPO_LIBRETA_MILITAR_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_IDIOMA_CAMBIADO}") String ASUNTO_CERTIFICADO_IDIOMA_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_IDIOMA_CAMBIADO}") String CUERPO_CERTIFICADO_IDIOMA_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO}") String ASUNTO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO}") String CUERPO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO}") String ASUNTO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO}") String CUERPO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_HOMOLOGADO_EDUCACION_SUPERIOR_CAMBIADO}") String ASUNTO_CERTIFICADO_HOMOLOGADO_EDUCACION_SUPERIOR_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_HOMOLOGADO_EDUCACION_SUPERIOR_CAMBIADO}") String CUERPO_CERTIFICADO_HOMOLOGADO_EDUCACION_SUPERIOR_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO}") String ASUNTO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO}") String CUERPO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO}") String ASUNTO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO}") String CUERPO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO}") String ASUNTO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO}") String CUERPO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_DISTINCION_CAMBIADO}") String ASUNTO_CERTIFICADO_DISTINCION_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_DISTINCION_CAMBIADO}") String CUERPO_CERTIFICADO_DISTINCION_CAMBIADO;
+    private @Value("${ASUNTO_DOCUMENTO_PATENTE_CAMBIADO}") String ASUNTO_DOCUMENTO_PATENTE_CAMBIADO;
+    private @Value("${CUERPO_DOCUMENTO_PATENTE_CAMBIADO}") String CUERPO_DOCUMENTO_PATENTE_CAMBIADO;
+    private @Value("${ASUNTO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO}") String ASUNTO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO;
+    private @Value("${CUERPO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO}") String CUERPO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO;
+    private @Value("${ASUNTO_CVLAC_CAMBIADO}") String ASUNTO_CVLAC_CAMBIADO;
+    private @Value("${CUERPO_CVLAC_CAMBIADO}") String CUERPO_CVLAC_CAMBIADO;
+    private @Value("${ASUNTO_ARTICULO_CAMBIADO}") String ASUNTO_ARTICULO_CAMBIADO;
+    private @Value("${CUERPO_ARTICULO_CAMBIADO}") String CUERPO_ARTICULO_CAMBIADO;
     private static final Logger logger = LogManager.getLogger(HojaVidaController.class.getName());
 
     @Autowired
@@ -75,6 +109,9 @@ public class HojaVidaController {
 
     @Autowired
     private IServicioConvocatoria servicioConvocatoria;
+
+    @Autowired
+    private Mail mail;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(Model model) {
@@ -161,6 +198,9 @@ public class HojaVidaController {
             }
 
             long idUsuario = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario();
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<CorreoElectronico> correosElectronicos = servicioHojaVida.obtenerCorreosElectronicos(idPersona);
+            Investigacion investigacion = servicioHojaVida.obtenerInvestigacion(idPersona);
             if (hojaVidaIngresar.getIdPersona() == 0) {
                 if (!servicioHojaVida.existePersona(hojaVidaIngresar.getNumeroIdentificacion())) {
                     servicioHojaVida.ingresarHojaVida(idUsuario, hojaVidaIngresar);
@@ -175,6 +215,19 @@ public class HojaVidaController {
                     }
                 }
                 servicioHojaVida.actualizarHojaVida(idUsuario, hojaVidaIngresar);
+            }
+
+            if (hojaVidaIngresar.getCopiaDocumentoIdentificacion() != null) {
+                this.enviarCorreoElectronicoCambioDocumento(correosElectronicos, ASUNTO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO, CUERPO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO);
+            }
+            if (hojaVidaIngresar.getDocumentoRUT() != null) {
+                this.enviarCorreoElectronicoCambioDocumento(correosElectronicos, ASUNTO_RUT_CAMBIADO, CUERPO_RUT_CAMBIADO);
+            }
+            if (hojaVidaIngresar.getCopiaLibretaMilitar() != null) {
+                this.enviarCorreoElectronicoCambioDocumento(correosElectronicos, ASUNTO_LIBRETA_MILITAR_CAMBIADO, CUERPO_LIBRETA_MILITAR_CAMBIADO);
+            }
+            if (!hojaVidaIngresar.getUrlCVLAC().equalsIgnoreCase(investigacion.getUrlCVLAC())) {
+                this.enviarCorreoElectronicoCambioDocumento(correosElectronicos, ASUNTO_CVLAC_CAMBIADO, CUERPO_CVLAC_CAMBIADO);
             }
 
             return "";
@@ -436,6 +489,7 @@ public class HojaVidaController {
             FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
         }
     }
+
     @RequestMapping(value = "/certificadoEducacionContinuaValidar/{idEducacionContinua}", method = RequestMethod.GET)
     public void obtenerCertificadoEducacionContinuaValidar(@PathVariable("idEducacionContinua") int idEducacionContinua, HttpServletResponse response) throws IOException {
         Documento documento = servicioHojaVida.obtenerCertificadoEducacionContinua(idEducacionContinua);
@@ -815,7 +869,9 @@ public class HojaVidaController {
             Util.establecerConsecutivoDocumentoSoporte(documentosSoporte);
             Gson gson = new Gson();
             json = gson.toJson(documentosSoporte);
-
+            if (nuevoDocumentoSoporte.getDocumento() != null) {
+                this.enviarCorreoElectronicoCambioDocumento(ASUNTO_SOPORTE_CAMBIADO, CUERPO_SOPORTE_CAMBIADO);
+            }
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -875,6 +931,10 @@ public class HojaVidaController {
             Util.establecerConsecutivoEducacionBasica(educacionesBasicas);
             Gson gson = new Gson();
             json = gson.toJson(educacionesBasicas);
+
+            if (nuevaEducacionBasica.getCertificado() != null) {
+                this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO, CUERPO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO);
+            }
 
         } catch (Exception exc) {
             logger.error(exc);
@@ -950,7 +1010,12 @@ public class HojaVidaController {
             Util.establecerConsecutivoEducacionSuperior(educacionesSuperiores);
             Gson gson = new Gson();
             json = gson.toJson(educacionesSuperiores);
-
+            if (nuevaEducacionSuperior.getCertificado() != null) {
+                this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO, CUERPO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO);
+            }
+            if (nuevaEducacionSuperior.getCertificadoHomologado() != null) {
+                this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CERTIFICADO_HOMOLOGADO_EDUCACION_SUPERIOR_CAMBIADO, CUERPO_CERTIFICADO_HOMOLOGADO_EDUCACION_SUPERIOR_CAMBIADO);
+            }
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1126,7 +1191,9 @@ public class HojaVidaController {
             Util.establecerConsecutivoEducacionContinua(educacionesContinuas);
             Gson gson = new Gson();
             json = gson.toJson(educacionesContinuas);
-
+            if (nuevaEducacionContinua.getCertificado() != null) {
+                this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO, CUERPO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO);
+            }
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1186,7 +1253,9 @@ public class HojaVidaController {
             Util.establecerConsecutivoIdioma(idiomas);
             Gson gson = new Gson();
             json = gson.toJson(idiomas);
-
+            if (nuevoIdioma.getCertificado() != null) {
+                this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CERTIFICADO_IDIOMA_CAMBIADO, CUERPO_CERTIFICADO_IDIOMA_CAMBIADO);
+            }
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1241,7 +1310,9 @@ public class HojaVidaController {
             Util.establecerConsecutivoDistincion(distincions);
             Gson gson = new Gson();
             json = gson.toJson(distincions);
-
+            if (nuevaDistincion.getCertificado() != null) {
+                this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CERTIFICADO_DISTINCION_CAMBIADO, CUERPO_CERTIFICADO_DISTINCION_CAMBIADO);
+            }
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1305,7 +1376,9 @@ public class HojaVidaController {
             Util.establecerConsecutivoExperienciaLaboral(experienciasLaborales);
             Gson gson = new Gson();
             json = gson.toJson(experienciasLaborales);
-
+            if (nuevaExperienciaLaboral.getCertificado() != null) {
+                this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO, CUERPO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO);
+            }
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1409,7 +1482,9 @@ public class HojaVidaController {
             Util.establecerConsecutivoExperienciaDocencia(experienciasDocencia);
             Gson gson = new Gson();
             json = gson.toJson(experienciasDocencia);
-
+            if (nuevoCursoExperienciaDocencia.getCertificado() != null) {
+                this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO, CUERPO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO);
+            }
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1443,12 +1518,20 @@ public class HojaVidaController {
         String json = "";
         try {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+            List<Articulo> articulosActuales = servicioHojaVida.obtenerArticulos(idPersona);
             servicioHojaVida.guardarArticulo(idPersona, articulo);
-            List<Articulo> telefonos = servicioHojaVida.obtenerArticulos(idPersona);
-            Util.establecerConsecutivoArticulo(telefonos);
+            List<Articulo> articulos = servicioHojaVida.obtenerArticulos(idPersona);
+            Util.establecerConsecutivoArticulo(articulos);
             Gson gson = new Gson();
-            json = gson.toJson(telefonos);
-
+            json = gson.toJson(articulos);
+            for (Articulo articuloActual : articulosActuales) {
+                if (articuloActual.getId() == articulo.getId()) {
+                    if (!articuloActual.getUrl().equalsIgnoreCase(articulo.getUrl())) {
+                        this.enviarCorreoElectronicoCambioDocumento(ASUNTO_ARTICULO_CAMBIADO, CUERPO_ARTICULO_CAMBIADO);
+                    }
+                    break;
+                }
+            }
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1506,7 +1589,9 @@ public class HojaVidaController {
             Util.establecerConsecutivoPatente(patentes);
             Gson gson = new Gson();
             json = gson.toJson(patentes);
-
+            if (nuevaPatente.getDocumento() != null) {
+                this.enviarCorreoElectronicoCambioDocumento(ASUNTO_DOCUMENTO_PATENTE_CAMBIADO, CUERPO_DOCUMENTO_PATENTE_CAMBIADO);
+            }
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1563,7 +1648,9 @@ public class HojaVidaController {
             Util.establecerConsecutivoProductoConocimiento(productoConocimientos);
             Gson gson = new Gson();
             json = gson.toJson(productoConocimientos);
-
+            if (nuevoProductoConocimiento.getDocumento() != null) {
+                this.enviarCorreoElectronicoCambioDocumento(ASUNTO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO, CUERPO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO);
+            }
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1682,4 +1769,33 @@ public class HojaVidaController {
 
         return "";
     }
+
+    private void enviarCorreoElectronicoCambioDocumento(String asunto, String cuerpo) {
+        long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+        List<CorreoElectronico> correosElectronicos = servicioHojaVida.obtenerCorreosElectronicos(idPersona);
+        for (CorreoElectronico correoElectronico : correosElectronicos) {
+            try {
+                new Thread(() -> {
+                    mail.sendMail(correoElectronico.getCorreoElectronico(), asunto, cuerpo);
+                }).start();
+            } catch (Exception exc) {
+                logger.error(exc);
+                throw exc;
+            }
+        }
+    }
+
+    private void enviarCorreoElectronicoCambioDocumento(List<CorreoElectronico> correosElectronicos, String asunto, String cuerpo) {
+        for (CorreoElectronico correoElectronico : correosElectronicos) {
+            try {
+                new Thread(() -> {
+                    mail.sendMail(correoElectronico.getCorreoElectronico(), asunto, cuerpo);
+                }).start();
+            } catch (Exception exc) {
+                logger.error(exc);
+                throw exc;
+            }
+        }
+    }
+
 }

@@ -174,4 +174,4 @@ public interface IServicioHojaVida {
     List<DocumentoSoporte> obtenerDocumentosSoporteValidar(long idPersona);
 
     List<CursoExperienciaDocencia> obtenerCursosExperienciaDocencia(long idPersona);
-}
+ }

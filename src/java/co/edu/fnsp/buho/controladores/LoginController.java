@@ -4,6 +4,7 @@ import co.edu.fnsp.buho.entidades.DetalleUsuario;
 import co.edu.fnsp.buho.entidades.Usuario;
 import co.edu.fnsp.buho.entidadesVista.CambioClave;
 import co.edu.fnsp.buho.entidadesVista.RecuperacionClave;
+import co.edu.fnsp.buho.servicios.IServicioHojaVida;
 import co.edu.fnsp.buho.servicios.IServicioSeguridad;
 import co.edu.fnsp.buho.utilidades.CookieUtil;
 import co.edu.fnsp.buho.utilidades.JwtUtil;
@@ -31,6 +32,9 @@ public class LoginController {
     @Autowired
     private IServicioSeguridad servicioSeguridad;
 
+    @Autowired
+    private IServicioHojaVida servicioHojaVida;
+    
     @Autowired
     private Mail mail;
 
@@ -74,7 +78,11 @@ public class LoginController {
         try {
             Usuario usuarioActual = servicioSeguridad.obtenerUsuario(usuario.getNombreUsuario());
             if (usuarioActual == null) {
-                servicioSeguridad.crearUsuario(usuario);
+                if (!servicioHojaVida.existePersona(usuario.getNumeroIdentificacion())) {
+                    servicioSeguridad.crearUsuario(usuario);
+                } else {
+                    return "El documento ya ha sido asignado a otra persona";
+                }
             } else {
                 mensaje = "El usuario ya existe";
             }
