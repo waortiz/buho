@@ -33,8 +33,9 @@ public class EvaluacionExcelReportView extends AbstractExcelView {
         header.createCell(3).setCellValue("Capacitación en docencia y pedagogía");
         header.createCell(4).setCellValue("Experiencia en docencia en instituciones de educación superior");
         header.createCell(5).setCellValue("Experiencia en investigación");
-        header.createCell(6).setCellValue("Experiencia profesional en el sector salud y salud pública");
-        header.createCell(7).setCellValue("Total");
+        header.createCell(6).setCellValue("Experiencia en extensión");
+        header.createCell(7).setCellValue("Experiencia profesional en el sector salud y salud pública");
+        header.createCell(8).setCellValue("Total");
 
         int rowNum = 1;
         for (Evaluacion evaluacion : evaluaciones) {
@@ -45,8 +46,9 @@ public class EvaluacionExcelReportView extends AbstractExcelView {
             row.createCell(3).setCellValue(evaluacion.getCapacitacionDocenciaPedagogia());
             row.createCell(4).setCellValue(evaluacion.getExperienciaDocenciaInstitucionesEducacionSuperior());
             row.createCell(5).setCellValue(evaluacion.getExperienciaInvestigacion());
-            row.createCell(6).setCellValue(evaluacion.getExperienciaProfesionalSectorSalud());
-            row.createCell(7).setCellValue(evaluacion.getTotal());
+            row.createCell(6).setCellValue(evaluacion.getExperienciaExtension());
+            row.createCell(7).setCellValue(evaluacion.getExperienciaProfesionalSectorSalud());
+            row.createCell(8).setCellValue(evaluacion.getTotal());
         }
     }
 

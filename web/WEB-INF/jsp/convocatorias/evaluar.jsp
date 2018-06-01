@@ -582,7 +582,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header mhsuccess">
-                        <h4>Por favor espere evaluando candidatos...</h4>
+                        <h4>Por favor espere. Evaluando candidatos...</h4>
                     </div>
                     <div class="modal-body">
                         <div class="barprogress">
@@ -591,6 +591,26 @@
 
                                 </div>
                             </div><span>Evaluando candidatos...</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>            
+        <div id="md_descargar_evaluacion" class="modal fade" role="dialog" disabled>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header mhsuccess">
+                        <h4>Por favor espere. Descargando resultados...</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="barprogress">
+                            <div class="progress" >
+                                <div  class="progress-bar progress-bar-success progress-bar-striped active dynamic2" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"><span id="current-progress"></span>
+
+                                </div>
+                            </div><span>Descargando resultados...</span>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -680,12 +700,28 @@
     }
 
     function descargarEvaluaciones() {
+        $('#md_descargar_evaluacion').modal({backdrop: 'static', keyboard: false});
+        current_progress = 0;
+        var interval = setInterval(function () {
+            current_progress += 10;
+            $(".dynamic2")
+                    .css("width", current_progress + "%")
+                    .attr("aria-valuenow", current_progress)
+                    .text(current_progress + "% Completado");
+            if (current_progress >= 100) {
+                clearInterval(interval);
+            }
+            if (current_progress === 100) {
+                $('#md_descargar_evaluacion').modal('hide');
+            }
+        }, 3000);
         $.ajax({
             type: "GET",
             url: "${pageContext.request.contextPath}/convocatorias/decargarEvaluaciones/" + +$('#convocatoria').val(),
             processData: false,
             contentType: false,
             success: function (response) {
+                $('#md_descargar_evaluacion').modal('hide');
                 if (response != "") {
                     window.location.href = "${pageContext.request.contextPath}/convocatorias/decargarEvaluaciones/" + +$('#convocatoria').val();
                 }
