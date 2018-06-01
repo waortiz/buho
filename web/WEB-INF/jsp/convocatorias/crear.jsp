@@ -775,20 +775,20 @@
                         <table class="table tabla table-hover tableestilo" id="tbadendas"> 
                             <thead>
                                 <tr>    
-                                    <th style="width: 30%">Tipo</th>
-                                    <th style="width: 20%">Descripci&oacute;n</th>
+                                    <th style="width: 20%">Tipo</th>
+                                    <th style="width: 50%">Descripci&oacute;n</th>
                                     <th style="width: 10%">Fecha</th>
-                                    <th style="width: 20%">Documento</th>
-                                    <th width="5">Opciones</th>
+                                    <th style="width: 10%">Documento</th>
+                                    <th style="width: 10%">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody data-bind="foreach: { data: adendas }">
                                 <tr class="table-row">
-                                    <td style="width: 30%">
+                                    <td style="width: 20%">
                                         <span data-bind="text: nombreTipoAdenda" ></span>
                                         <input type="hidden" class="form-control" data-bind="value: tipoAdenda, attr: { 'name': 'adendas[' + $index() + '].tipoAdenda'  }">
                                     </td>
-                                    <td style="width: 20%">
+                                    <td style="width: 50%">
                                         <span data-bind="text: descripcion" ></span>
                                         <input type="hidden" class="form-control" data-bind="value: descripcion, attr: { 'name': 'adendas[' + $index() + '].descripcion'  }">
                                     </td>
@@ -796,10 +796,10 @@
                                         <span data-bind="text: fecha" ></span>
                                         <input type="hidden" class="form-control" data-bind="value: fecha, attr: { 'name': 'adendas[' + $index() + '].fecha'  }">
                                     </td>
-                                    <td style="width: 20%">
+                                    <td style="width: 10%">
                                         <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoAdenda, visible: tieneDocumento" style='margin-left: 30px;' class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
                                     </td>
-                                    <td style='white-space: nowrap'>
+                                    <td style="width: 10%" style='white-space: nowrap'>
                                         <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarAdenda"><i class='fa fa-pencil' aria-hidden='true'></i></button>
                                         <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarAdenda"><span class='glyphicon glyphicon-remove'></span></button>
                                         <input type="hidden" data-bind="value: consecutivo, attr: { 'name': 'adendas[' + $index() + '].consecutivo'  }" />
