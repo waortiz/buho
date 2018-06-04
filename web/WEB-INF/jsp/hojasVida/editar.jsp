@@ -2353,19 +2353,23 @@
                                      <th>Tipo</th>
                                      <th>Propiedad compartida</th>
                                      <th>Descripci&oacute;n</th>
+                                     <th>Certificado</th>
                                      <th class="opc">Opciones</th>
                                  </tr>
                              </thead>
                             <tbody data-bind="foreach: { data: patentes }">
                                 <tr class="table-row">
-                                    <td style="width: 30%">
+                                    <td style="width: 10%">
                                         <span data-bind="text: fecha" ></span>
                                     </td>
-                                    <td style="width: 30%">
+                                    <td style="width: 15%">
                                         <span data-bind="text: nombreTipo" ></span>
                                     </td>
                                     <td style="width: 20%">
                                         <span data-bind="text: nombrePropiedadCompartida" ></span>
+                                    </td>
+                                    <td style="width: 35%">
+                                        <span data-bind="text: descripcion" ></span>
                                     </td>
                                     <td style="width: 10%" align="center">
                                         <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoPatente" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>

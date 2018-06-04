@@ -19,6 +19,7 @@ public class Patente {
     private Date fecha;
     private String fechaFormateada;
     private boolean propiedadCompartida;
+    private String nombrePropiedadCompartida;
     private int clase;
     private String descripcion;
     private boolean documentoValidado;
@@ -191,6 +192,20 @@ public class Patente {
      */
     public void setNombreDocumentoValidado(String nombreDocumentoValidado) {
         this.nombreDocumentoValidado = nombreDocumentoValidado;
+    }
+
+    /**
+     * @return the nombrePropiedadCompartida
+     */
+    public String getNombrePropiedadCompartida() {
+        return nombrePropiedadCompartida;
+    }
+
+    /**
+     * @param nombrePropiedadCompartida the nombrePropiedadCompartida to set
+     */
+    public void setNombrePropiedadCompartida(String nombrePropiedadCompartida) {
+        this.nombrePropiedadCompartida = nombrePropiedadCompartida;
     }
     
 }

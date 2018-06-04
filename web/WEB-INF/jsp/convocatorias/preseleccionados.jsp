@@ -43,540 +43,652 @@
         <div id="formHV" style="display: none;">
             <div class="container">
                 <legend><center><h3>Hoja de vida</h3></center></legend>
-                <legend>Informaci&oacute;n personal</legend>
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Tipo de identificaci&oacute;n</label>
-                            <input type="text" style="border: 0px;" readonly  id="nombreTipoIdentificacion">
-                        </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Informaci&oacute;n personal
                     </div>
-                    <div class="col-md-1">
-                        <div class="form-group">
-                            <label for="">Identificaci&oacute;n</label>
-                            <input type="text" style="border: 0px;" readonly  id="numeroIdentificacion">
-                            <input type="hidden" id="idPersona" name="idPersona" />
+                    <div class="panel-body" style="overflow-y: scroll;overflow-x: scroll; max-height: 500px;">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Tipo de identificaci&oacute;n</label>
+                                    <input type="text" style="border: 0px;" readonly  id="nombreTipoIdentificacion">
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="">Identificaci&oacute;n</label>
+                                    <input type="text" style="border: 0px;" readonly  id="numeroIdentificacion">
+                                    <input type="hidden" id="idPersona" name="idPersona" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Fecha de expedici&oacute;n</label>
+                                    <input type="text" style="border: 0px;" readonly  id="fechaExpedicion">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Lugar de expedici&oacute;n</label>
+                                    <input type="text" style="border: 0px;" readonly  id="lugarExpedicion">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Nombres</label>
+                                    <input type="text" style="border: 0px;" readonly  id="nombres">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Apellidos</label>
+                                    <input type="text" style="border: 0px;" readonly  id="apellidos">
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="">Sexo</label>
+                                    <input type="text" style="border: 0px;" readonly  id="sexo">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Fecha de expedici&oacute;n</label>
-                            <input type="text" style="border: 0px;" readonly  id="fechaExpedicion">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Fecha de nacimiento</label>
+                                    <input type="text" style="border: 0px;"  id="fechaNacimiento" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Lugar de nacimiento</label>
+                                    <input type="text" style="border: 0px;"  id="lugarNacimiento" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="">Nacionalidad</label>
+                                    <input type="text" style="border: 0px;"  id="nacionalidad" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Libreta Militar</label>
+                                    <input type="text" style="border: 0px;"  id="libretaMilitar" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Distrito -- Clase</label>
+                                    <input type="text" style="border: 0px;"  id="distritoClase" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="">Direcci&oacute;n</label><br>
+                                    <input type="text" style="border: 0px; width: 100%;" id="direccion" readonly>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Lugar de expedici&oacute;n</label>
-                            <input type="text" style="border: 0px;" readonly  id="lugarExpedicion">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Ciudad de residencia</label><br>
+                                    <input type="text" style="border: 0px; width: 100%;"  id="ciudadResidencia" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-2" >
+                                <div class="form-group">
+                                    <label for="">Grupo &eacute;tnico</label><br>
+                                    <input type="text" style="border: 0px; width: 100%;"  id="grupoEtnico" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="">Discapacidad</label><br>
+                                    <input type="text" style="border: 0px; width: 100%;"  id="discapacidad" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="">RUT</label><br>
+                                    <input type="text" style="border: 0px; width: 100%;"  id="rut" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="">Actividad economica del RUT</label><br>
+                                    <input type="text" style="border: 0px; width: 100%;"  id="actividadEconomica" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="">Documento de soporte RUT</label><br>
+                                    <a href='#' onclick="verCopiaRUT()" target='_black' title='Ver documento' class='btn btn-success btn-xs' type='button' style="margin-left: 70px;"><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Nombres</label>
-                            <input type="text" style="border: 0px;" readonly  id="nombres">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Disponibilidad para trabajar por fuera de Medell&iacute;n</label><br>
+                                    <input type="text" style="border: 0px; width: 100%;"  id="disponibilidadViajar" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Egresado de la U de A</label><br>
+                                    <input type="text" style="border: 0px; width: 100%;"  id="egresadoUDEA" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Empleado de la U de A</label><br>
+                                    <input type="text" style="border: 0px; width: 100%;" id="empleadoUDEA" readonly>
+                                </div>
+                            </div> 
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Tipo de vinculacion</label><br>
+                                    <input type="text" style="border: 0px; width: 100%;" id="tipoVinculacion" readonly>
+                                </div>
+                            </div>  
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Apellidos</label>
-                            <input type="text" style="border: 0px;" readonly  id="apellidos">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Perfil laboral y profesional</label>
+                                <textarea class="form-control" style="border: 0px; background: white;" id="perfil" readonly></textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div class="form-group">
-                            <label for="">Sexo</label>
-                            <input type="text" style="border: 0px;" readonly  id="sexo">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Fecha de nacimiento</label>
-                            <input type="text" style="border: 0px;"  id="fechaNacimiento" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Lugar de nacimiento</label>
-                            <input type="text" style="border: 0px;"  id="lugarNacimiento" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div class="form-group">
-                            <label for="">Nacionalidad</label>
-                            <input type="text" style="border: 0px;"  id="nacionalidad" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Libreta Militar</label>
-                            <input type="text" style="border: 0px;"  id="libretaMilitar" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Distrito -- Clase</label>
-                            <input type="text" style="border: 0px;"  id="distritoClase" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="">Direcci&oacute;n</label><br>
-                            <input type="text" style="border: 0px; width: 100%;" id="direccion" readonly>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Ciudad de residencia</label><br>
-                            <input type="text" style="border: 0px; width: 100%;"  id="ciudadResidencia" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-2" >
-                        <div class="form-group">
-                            <label for="">Grupo &eacute;tnico</label><br>
-                            <input type="text" style="border: 0px; width: 100%;"  id="grupoEtnico" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div class="form-group">
-                            <label for="">Discapacidad</label><br>
-                            <input type="text" style="border: 0px; width: 100%;"  id="discapacidad" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div class="form-group">
-                            <label for="">RUT</label><br>
-                            <input type="text" style="border: 0px; width: 100%;"  id="rut" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="">Actividad economica del RUT</label><br>
-                            <input type="text" style="border: 0px; width: 100%;"  id="actividadEconomica" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="">Documento de soporte RUT</label><br>
-                            <a href='#' onclick="verCopiaRUT()" target='_black' title='Ver documento' class='btn btn-success btn-xs' type='button' style="margin-left: 70px;"><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Disponibilidad para trabajar por fuera de Medell&iacute;n</label><br>
-                            <input type="text" style="border: 0px; width: 100%;"  id="disponibilidadViajar" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Egresado de la U de A</label><br>
-                            <input type="text" style="border: 0px; width: 100%;"  id="egresadoUDEA" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Empleado de la U de A</label><br>
-                            <input type="text" style="border: 0px; width: 100%;" id="empleadoUDEA" readonly>
-                        </div>
-                    </div> 
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Tipo de vinculacion</label><br>
-                            <input type="text" style="border: 0px; width: 100%;" id="tipoVinculacion" readonly>
-                        </div>
-                    </div>  
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Perfil laboral y profesional</label>
-                        <textarea class="form-control" style="border: 0px; background: white;" id="perfil" readonly></textarea>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Telef&oacute;no</label>
-                        <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbtel">
-                                <thead>
-                                <th>Tipo</th>
-                                <th>N&uacute;mero</th>
-                                </thead>
-                                <tbody data-bind="foreach: { data: telefonos }">
-                                    <tr class="table-row">
-                                        <td style="width: 50%">
-                                            <span data-bind="text: nombreTipo" ></span>
-                                        </td>
-                                        <td style="width: 50%">
-                                            <span data-bind="text: numero" ></span>
-                                        </td>
-                                    </tr>
-                                </tbody>                                                                             
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label>Correo electr&oacute;nico</label>
-                        <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbemail">
-                                <thead>
-                                <th>Email</th>                                       
-                                </thead>
-                                <tbody data-bind="foreach: { data: correosElectronicos }">
-                                    <tr class="table-row">
-                                        <td>
-                                            <span data-bind="text: correoElectronico" ></span>
-                                        </td>
-                                    </tr>
-                                </tbody>                                      
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-9">
-                        <label>Agregar documentos de soporte(Foto,certificados bancarios, EPS, ARL, AFP...)</label>
-                        <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbdocad">
-                                <thead>
-                                <th>Tipo de documento</th>
-                                <th>Documento de soporte</th>
-                                </thead>
-                                <tbody data-bind="foreach: { data: documentosSoporte }">
-                                    <tr class="table-row">
-                                        <td style="width: 40%">
-                                            <span data-bind="text: nombreTipoDocumento" ></span>
-                                        </td>
-                                        <td style="width: 50%" align="center">
-                                            <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoSoporte" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>                                           
-                            </table>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Telef&oacute;no</label>
+                                <div class="table-responsive">
+                                    <table class="table table-hover tableestilo" id="tbtel">
+                                        <thead>
+                                        <th>Tipo</th>
+                                        <th>N&uacute;mero</th>
+                                        </thead>
+                                        <tbody data-bind="foreach: { data: telefonos }">
+                                            <tr class="table-row">
+                                                <td style="width: 50%">
+                                                    <span data-bind="text: nombreTipo" ></span>
+                                                </td>
+                                                <td style="width: 50%">
+                                                    <span data-bind="text: numero" ></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>                                                                             
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Correo electr&oacute;nico</label>
+                                <div class="table-responsive">
+                                    <table class="table table-hover tableestilo" id="tbemail">
+                                        <thead>
+                                        <th>Email</th>                                       
+                                        </thead>
+                                        <tbody data-bind="foreach: { data: correosElectronicos }">
+                                            <tr class="table-row">
+                                                <td>
+                                                    <span data-bind="text: correoElectronico" ></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>                                      
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <legend>Aspectos acad&eacute;micos</legend>
-                    <div class="col-md-12">
-                        <label>Estudios educaci&oacute;n b&aacute;sica&nbsp;</label>
-                        <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbestedbas">
-                                <thead>
-                                    <tr>
-                                        <th>Nivel de estudio</th>
-                                        <th>Instituci&oacute;n</th>
-                                        <th>T&iacute;tulo</th>
-                                        <th>A&ntilde;o de t&iacute;tulo</th>
-                                        <th>Certificado</th>
-                                    </tr> 
-                                </thead>
-                                <tbody data-bind="foreach: { data: educacionesBasicas }">
-                                    <tr class="table-row">
-                                        <td style="width: 20%">
-                                            <span data-bind="text: nombreNivel" ></span>
-                                        </td>
-                                        <td style="width: 30%">
-                                            <span data-bind="text: institucion" ></span>
-                                        </td>
-                                        <td style="width: 20%">
-                                            <span data-bind="text: titulo" ></span>
-                                        </td>
-                                        <td style="width: 20%">
-                                            <span data-bind="text: anyoFinalizacion" ></span>
-                                        </td>
-                                        <td style="width: 10%" align="center">
-                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionBasica" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>                           
-                            </table>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Documentos de soporte (foto,certificados bancarios, EPS, ARL y AFP entre otros)
+                    </div>
+                    <div class="panel-body" style="overflow-y: scroll;overflow-x: scroll; max-height: 200px;">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="table-responsive">
+                                    <table class="table table-hover tableestilo" id="tbdocad">
+                                        <thead>
+                                        <th>Tipo de documento</th>
+                                        <th>Documento de soporte</th>
+                                        </thead>
+                                        <tbody data-bind="foreach: { data: documentosSoporte }">
+                                            <tr class="table-row">
+                                                <td style="width: 40%">
+                                                    <span data-bind="text: nombreTipoDocumento" ></span>
+                                                </td>
+                                                <td style="width: 50%" align="center">
+                                                    <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoSoporte" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>                                           
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Estudios educaci&oacute;n superior</label>
-                        <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbestedbas">
-                                <thead>
-                                    <tr>
-                                        <th>Nivel de estudio</th>
-                                        <th>Instituci&oacute;n</th>
-                                        <th>Programa cursado</th>
-                                        <th>Fecha de titulo</th>
-                                        <th class="cer" align="center">Certificado homologación</th>
-                                        <th class="cer" align="center">Certificado</th>
-                                    </tr> 
-                                </thead>
-                                <tbody data-bind="foreach: { data: educacionesSuperiores }">
-                                    <tr class="table-row">
-                                        <td style="width: 10%">
-                                            <span data-bind="text: nombreNivel" ></span>
-                                        </td>
-                                        <td style="width: 30%">
-                                            <span data-bind="text: nombreInstitucion" ></span>
-                                        </td>
-                                        <td style="width: 30%">
-                                            <span data-bind="text: nombrePrograma" ></span>
-                                        </td>
-                                        <td style="width: 10%">
-                                            <span data-bind="text: fechaTitulo" ></span>
-                                        </td>
-                                        <td style="width: 10%" align="center">
-                                            <a href='#' title='Ver certificado homologado' data-bind="click: $root.verCertificadoHomologadoEducacionSuperior" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                        </td>
-                                        <td style="width: 10%" align="center">
-                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionSuperior" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>                           
-                            </table>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Aspectos acad&eacute;micos
+                    </div>
+                    <div class="panel-body" style="overflow-y: scroll;overflow-x: scroll; max-height: 500px;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Estudios educaci&oacute;n b&aacute;sica&nbsp;</label>
+                                <div class="table-responsive">
+                                    <table class="table table-hover tableestilo" id="tbestedbas">
+                                        <thead>
+                                            <tr>
+                                                <th>Nivel de estudio</th>
+                                                <th>Instituci&oacute;n</th>
+                                                <th>T&iacute;tulo</th>
+                                                <th>A&ntilde;o de t&iacute;tulo</th>
+                                                <th>Certificado</th>
+                                            </tr> 
+                                        </thead>
+                                        <tbody data-bind="foreach: { data: educacionesBasicas }">
+                                            <tr class="table-row">
+                                                <td style="width: 20%">
+                                                    <span data-bind="text: nombreNivel" ></span>
+                                                </td>
+                                                <td style="width: 30%">
+                                                    <span data-bind="text: institucion" ></span>
+                                                </td>
+                                                <td style="width: 20%">
+                                                    <span data-bind="text: titulo" ></span>
+                                                </td>
+                                                <td style="width: 20%">
+                                                    <span data-bind="text: anyoFinalizacion" ></span>
+                                                </td>
+                                                <td style="width: 10%" align="center">
+                                                    <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionBasica" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>                           
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Estudios educaci&oacute;n superior</label>
+                                <div class="table-responsive">
+                                    <table class="table table-hover tableestilo" id="tbestedbas">
+                                        <thead>
+                                            <tr>
+                                                <th>Nivel de estudio</th>
+                                                <th>Instituci&oacute;n</th>
+                                                <th>Programa cursado</th>
+                                                <th>Fecha de titulo</th>
+                                                <th class="cer" align="center">Certificado homologación</th>
+                                                <th class="cer" align="center">Certificado</th>
+                                            </tr> 
+                                        </thead>
+                                        <tbody data-bind="foreach: { data: educacionesSuperiores }">
+                                            <tr class="table-row">
+                                                <td style="width: 10%">
+                                                    <span data-bind="text: nombreNivel" ></span>
+                                                </td>
+                                                <td style="width: 30%">
+                                                    <span data-bind="text: nombreInstitucion" ></span>
+                                                </td>
+                                                <td style="width: 30%">
+                                                    <span data-bind="text: nombrePrograma" ></span>
+                                                </td>
+                                                <td style="width: 10%">
+                                                    <span data-bind="text: fechaTitulo" ></span>
+                                                </td>
+                                                <td style="width: 10%" align="center">
+                                                    <a href='#' title='Ver certificado homologado' data-bind="click: $root.verCertificadoHomologadoEducacionSuperior" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                                </td>
+                                                <td style="width: 10%" align="center">
+                                                    <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionSuperior" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>                           
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Estudios idiomas</label>
+                                <div class="table-responsive">
+                                    <table class="table table-hover tableestilo" id="tbestedbas">
+                                        <thead>
+                                            <tr>
+                                                <th>Idioma</th>
+                                                <th>Lectura</th>
+                                                <th>Escucha</th>
+                                                <th>Escritura</th>
+                                                <th>Habla</th>
+                                                <th>Certificado</th>
+                                            </tr> 
+                                        </thead>
+                                        <tbody data-bind="foreach: { data: idiomas }">
+                                            <tr class="table-row">
+                                                <td style="width: 25%">
+                                                    <span data-bind="text: nombreIdioma" ></span>
+                                                </td>
+                                                <td style="width: 15%">
+                                                    <span data-bind="text: nombreNivelLectura" ></span>
+                                                </td>
+                                                <td style="width: 15%">
+                                                    <span data-bind="text: nombreNivelEscucha" ></span>
+                                                </td>
+                                                <td style="width: 15%">
+                                                    <span data-bind="text: nombreNivelEscritura" ></span>
+                                                </td>
+                                                <td style="width: 15%">
+                                                    <span data-bind="text: nombreNivelConversacion" ></span>
+                                                </td>
+                                                <td style="width: 15%" align="center">
+                                                    <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoIdioma" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>                                   
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Estudios idiomas</label>
-                        <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbestedbas">
-                                <thead>
-                                    <tr>
-                                        <th>Idioma</th>
-                                        <th>Lectura</th>
-                                        <th>Escucha</th>
-                                        <th>Escritura</th>
-                                        <th>Habla</th>
-                                        <th>Certificado</th>
-                                    </tr> 
-                                </thead>
-                                <tbody data-bind="foreach: { data: idiomas }">
-                                    <tr class="table-row">
-                                        <td style="width: 25%">
-                                            <span data-bind="text: nombreIdioma" ></span>
-                                        </td>
-                                        <td style="width: 15%">
-                                            <span data-bind="text: nombreNivelLectura" ></span>
-                                        </td>
-                                        <td style="width: 15%">
-                                            <span data-bind="text: nombreNivelEscucha" ></span>
-                                        </td>
-                                        <td style="width: 15%">
-                                            <span data-bind="text: nombreNivelEscritura" ></span>
-                                        </td>
-                                        <td style="width: 15%">
-                                            <span data-bind="text: nombreNivelConversacion" ></span>
-                                        </td>
-                                        <td style="width: 15%" align="center">
-                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoIdioma" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>                                   
-                            </table>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Educaci&oacute;n no formal
+                    </div>
+                    <div class="panel-body" style="overflow-y: scroll;overflow-x: scroll; max-height: 200px;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Estudios educaci&oacute;n no formal</label>           
+                                <div class="table-responsive">
+                                    <table class="table table-hover tableestilo" id="tbcapaci">
+                                        <thead>
+                                            <tr>
+                                                <th>Tipo de capacitaci&oacute;n</th>
+                                                <th>Nombre de capacitaci&oacute;n</th>
+                                                <th>Instituci&oacute;n</th>
+                                                <th>N&uacute;mero de horas</th>
+                                                <th>Certificado</th>
+                                            </tr> 
+                                        </thead>
+                                        <tbody data-bind="foreach: { data: educacionesContinuas }">
+                                            <tr class="table-row">
+                                                <td style="width: 20%">
+                                                    <span data-bind="text: nombreTipoCapacitacion" ></span>
+                                                </td>
+                                                <td style="width: 30%">
+                                                    <span data-bind="text: nombreCapacitacion" ></span>
+                                                </td>
+                                                <td style="width: 20%">
+                                                    <span data-bind="text: nombreInstitucion" ></span>
+                                                </td>
+                                                <td style="width: 20%">
+                                                    <span data-bind="text: numeroHoras" ></span>
+                                                </td>
+                                                <td style="width: 10%" align="center">
+                                                    <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionContinua" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>                           
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <legend>Educaci&oacute;n no formal</legend>
-                    <div class="col-md-12">
-                        <label>Estudios educaci&oacute;n no formal</label>           
-                        <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbcapaci">
-                                <thead>
-                                    <tr>
-                                        <th>Tipo de capacitaci&oacute;n</th>
-                                        <th>Nombre de capacitaci&oacute;n</th>
-                                        <th>Instituci&oacute;n</th>
-                                        <th>N&uacute;mero de horas</th>
-                                        <th>Certificado</th>
-                                    </tr> 
-                                </thead>
-                                <tbody data-bind="foreach: { data: educacionesContinuas }">
-                                    <tr class="table-row">
-                                        <td style="width: 20%">
-                                            <span data-bind="text: nombreTipoCapacitacion" ></span>
-                                        </td>
-                                        <td style="width: 30%">
-                                            <span data-bind="text: nombreCapacitacion" ></span>
-                                        </td>
-                                        <td style="width: 20%">
-                                            <span data-bind="text: nombreInstitucion" ></span>
-                                        </td>
-                                        <td style="width: 20%">
-                                            <span data-bind="text: numeroHoras" ></span>
-                                        </td>
-                                        <td style="width: 10%" align="center">
-                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionContinua" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>                           
-                            </table>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Experiencia laboral
+                    </div>
+                    <div class="panel-body" style="overflow-y: scroll;overflow-x: scroll; max-height: 400px;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Experiencia laboral</label>
+                                <div class="table-responsive">
+                                    <table class="table table-hover tableestilo" id="tbexplab">
+                                        <thead>
+                                            <tr>
+                                                <th>&Aacute;rea</th>
+                                                <th>Empresa/Instituci&oacute;n</th>
+                                                <th>Cargo</th>
+                                                <th>Certificado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: { data: experienciasLaborales }">
+                                            <tr class="table-row">
+                                                <td style="width: 30%">
+                                                    <span data-bind="text: nombreNucleoBasicoConocimiento" ></span>
+                                                </td>
+                                                <td style="width: 30%">
+                                                    <span data-bind="text: nombreEmpresa" ></span>
+                                                </td>
+                                                <td style="width: 30%">
+                                                    <span data-bind="text: cargo" ></span>
+                                                </td>
+                                                <td style="width: 10%" align="center">
+                                                    <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoExperienciaLaboral" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>                          
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Experiencia docencia</label>
+                                <div class="table-responsive">
+                                    <table class="table table-hover tableestilo" id="tbexpdoc">
+                                        <thead>
+                                            <tr>
+                                                <th>Instituci&oacute;n</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: { data: experienciasDocencia }">
+                                            <tr class="table-row">
+                                                <td>
+                                                    <span data-bind="text: nombreInstitucion" ></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>                          
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <legend>Experiencia laboral</legend>
-                    <div class="col-md-12">
-                        <label>Experiencia laboral</label>
-                        <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbexplab">
-                                <thead>
-                                    <tr>
-                                        <th>&Aacute;rea</th>
-                                        <th>Empresa/Instituci&oacute;n</th>
-                                        <th>Cargo</th>
-                                        <th>Certificado</th>
-                                    </tr>
-                                </thead>
-                                <tbody data-bind="foreach: { data: experienciasLaborales }">
-                                    <tr class="table-row">
-                                        <td style="width: 30%">
-                                            <span data-bind="text: nombreNucleoBasicoConocimiento" ></span>
-                                        </td>
-                                        <td style="width: 30%">
-                                            <span data-bind="text: nombreEmpresa" ></span>
-                                        </td>
-                                        <td style="width: 30%">
-                                            <span data-bind="text: cargo" ></span>
-                                        </td>
-                                        <td style="width: 10%" align="center">
-                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoExperienciaLaboral" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>                          
-                            </table>
-                        </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Investigaci&oacute;n e innovaci&oacute;n
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Experiencia docencia</label>
-                        <div class="table-responsive">
-                            <table class="table table-hover" id="tbexpdoc">
-                                <thead>
-                                    <tr>
-                                        <th>Instituci&oacute;n</th>
-                                    </tr>
-                                </thead>
-                                <tbody data-bind="foreach: { data: experienciasDocencia }">
-                                    <tr class="table-row">
-                                        <td>
-                                            <span data-bind="text: nombreInstitucion" ></span>
-                                        </td>
-                                    </tr>
-                                </tbody>                          
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <legend>Investigaci&oacute;n</legend>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Investigador reconocido por Colciencias</label>
-                            <input type="text" style="border: 0px; width: 100%;" id="investigadorReconocidoColciencias" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Curriculum vitae de latinoamerica y el caribe (CVLAC)</label>
-                            <input type="text" style="border: 0px; width: 100%;" id="urlCVLAC" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Tipo de investigador</label>
-                            <input type="text" style="border: 0px; width: 100%;" id="tipoInvestigador" readonly>
-                        </div>
-                    </div>  
+                    <div class="panel-body" style="overflow-y: scroll;overflow-x: scroll; max-height: 500px;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Investigador reconocido por Colciencias</label>
+                                    <input type="text" style="border: 0px; width: 100%;" id="investigadorReconocidoColciencias" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Curriculum vitae de latinoamerica y el caribe (CVLAC)</label>
+                                    <input type="text" style="border: 0px; width: 100%;" id="urlCVLAC" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Tipo de investigador</label>
+                                    <input type="text" style="border: 0px; width: 100%;" id="tipoInvestigador" readonly>
+                                </div>
+                            </div>  
 
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Código ORCID</label>
+                                    <input type="text" style="border: 0px; width: 100%;" id="codigoORCID" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Identificador Scopus</label>
+                                    <input type="text" style="border: 0px; width: 100%;" id="identificadorScopus" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Researcher Id</label>
+                                    <input type="text" style="border: 0px; width: 100%;" id="researcherId" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <legend style="margin-bottom: -10px;">Artículos y publicaciones relevantes</legend>
+                                <div class="table-responsive">
+                                    <table class="table table-hover tableestilo" id="tbearticulo">
+                                        <thead>
+                                            <tr>
+                                                <th>T&iacute;tulo</th>
+                                                <th>Revista</th>
+                                                <th>Enlace</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: { data: articulos }">
+                                            <tr class="table-row">
+                                                <td style="width: 20%">
+                                                    <span data-bind="text: nombre" ></span>
+                                                </td>
+                                                <td style="width: 30%">
+                                                    <span data-bind="text: nombreRevista" ></span>
+                                                </td>
+                                                <td style="width: 50%">
+                                                    <span data-bind="text: url" ></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>                                     
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                            <legend style="margin-bottom: -10px;">Patentes</legend>
+                            <div class="table-responsive">
+                            <table class="table tabla table-hover tableestilo" id="tbpatente">
+                             <thead>
+                                 <tr>
+                                     <th>Fecha</th>
+                                     <th>Tipo</th>
+                                     <th>Propiedad compartida</th>
+                                     <th>Descripci&oacute;n</th>
+                                     <th>Documento</th>
+                                 </tr>
+                             </thead>
+                            <tbody data-bind="foreach: { data: patentes }">
+                                <tr class="table-row">
+                                    <td style="width: 10%">
+                                        <span data-bind="text: fecha" ></span>
+                                    </td>
+                                    <td style="width: 15%">
+                                        <span data-bind="text: nombreTipo" ></span>
+                                    </td>
+                                    <td style="width: 20%">
+                                        <span data-bind="text: nombrePropiedadCompartida" ></span>
+                                    </td>
+                                    <td style="width: 45%">
+                                        <span data-bind="text: descripcion" ></span>
+                                    </td>
+                                    <td style="width: 10%" align="center">
+                                        <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoPatente" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>                                     
+                         </table>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                             <legend style="margin-bottom: -10px;">Productos de conocimiento</legend>
+                             <div class="table-responsive">
+                             <table class="table tabla table-hover tableestilo" id="tbprodcono">
+                                 <thead>
+                                     <tr>
+                                         <th>Tipo</th>
+                                         <th>Cita</th>
+                                         <th>Descripci&oacute;n</th>
+                                         <th class="cer">Documento</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody data-bind="foreach: { data: productosConocimiento }">
+                                     <tr class="table-row">
+                                         <td style="width: 30%">
+                                             <span data-bind="text: nombreTipo" ></span>
+                                         </td>
+                                         <td style="width: 30%">
+                                             <span data-bind="text: url" ></span>
+                                         </td>
+                                         <td style="width: 30%">
+                                             <span data-bind="text: descripcion" ></span>
+                                         </td>
+                                         <td style="width: 10%" align="center">
+                                             <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoProductoConocimiento" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                         </td>
+                                     </tr>
+                                 </tbody>                                     
+                             </table>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Código ORCID</label>
-                            <input type="text" style="border: 0px; width: 100%;" id="codigoORCID" readonly>
+                <div class="panel panel-success">
+                        <div class="panel-heading">
+                            Distinciones, premios y reconocimientos
+                        </div>
+                        <div class="panel-body" style="overflow-y: scroll;overflow-x: scroll; max-height: 200px;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover tableestilo" id="tbdistin" style="width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Instituci&oacute;n otorga</th>
+                                                    <th>Descripci&oacute;n</th>
+                                                    <th>Fecha de distinci&oacute;n</th>
+                                                    <th>Certificado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach: { data: distinciones }">
+                                                <tr class="table-row">
+                                                    <td style="width: 25%">
+                                                        <span data-bind="text: institucionOtorga" ></span>
+                                                    </td>
+                                                    <td style="width: 35%">
+                                                        <span data-bind="text: descripcion" ></span>
+                                                    </td>
+                                                    <td style="width: 20%">
+                                                        <span data-bind="text: fechaDistincion" ></span>
+                                                    </td>
+                                                    <td style="width: 20%" align="center">
+                                                        <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoDistincion" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>                               
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Identificador Scopus</label>
-                            <input type="text" style="border: 0px; width: 100%;" id="identificadorScopus" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Researcher Id</label>
-                            <input type="text" style="border: 0px; width: 100%;" id="researcherId" readonly>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <legend style="margin-bottom: -10px;">Articulos y publicaciones relevantes</legend>
-                        <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbearticulo">
-                                <thead>
-                                    <tr>
-                                        <th>T&iacute;tulo</th>
-                                        <th>Revista</th>
-                                        <th>Enlace</th>
-                                    </tr>
-                                </thead>
-                                <tbody data-bind="foreach: { data: articulos }">
-                                    <tr class="table-row">
-                                        <td style="width: 20%">
-                                            <span data-bind="text: nombre" ></span>
-                                        </td>
-                                        <td style="width: 30%">
-                                            <span data-bind="text: nombreRevista" ></span>
-                                        </td>
-                                        <td style="width: 50%">
-                                            <span data-bind="text: url" ></span>
-                                        </td>
-                                    </tr>
-                                </tbody>                                     
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <legend>Distinciones, premios y reconocimientos</legend>
-                        <div class="table-responsive">
-                            <table class="table table-hover tableestilo" id="tbdistin" style="width: 100%;">
-                                <thead>
-                                    <tr>
-                                        <th>Instituci&oacute;n otorga</th>
-                                        <th>Descripci&oacute;n</th>
-                                        <th>Fecha de distinci&oacute;n</th>
-                                        <th>Certificado</th>
-                                    </tr>
-                                </thead>
-                                <tbody data-bind="foreach: { data: distinciones }">
-                                    <tr class="table-row">
-                                        <td style="width: 25%">
-                                            <span data-bind="text: institucionOtorga" ></span>
-                                        </td>
-                                        <td style="width: 35%">
-                                            <span data-bind="text: descripcion" ></span>
-                                        </td>
-                                        <td style="width: 20%">
-                                            <span data-bind="text: fechaDistincion" ></span>
-                                        </td>
-                                        <td style="width: 20%" align="center">
-                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoDistincion" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>                               
-                            </table>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -809,7 +921,7 @@
                     cargarInvestigaciones(hojaVida.investigaciones);
                     cargarArticulos(hojaVida.articulos);
                     cargarPatentes(hojaVida.patentes);
-                    cargarProdcutosConocimiento(hojaVida.productosConocimiento);
+                    cargarProductosConocimiento(hojaVida.productosConocimiento);
                 }
             }});
     }
@@ -1313,7 +1425,7 @@
         }
     }
 
-    function cargarProdcutosConocimiento(productosConocimiento) {
+    function cargarProductosConocimiento(productosConocimiento) {
         datosModel.productosConocimiento.removeAll();
         for (var i = 0; i < productosConocimiento.length; i++) {
             datosModel.productosConocimiento.push(
