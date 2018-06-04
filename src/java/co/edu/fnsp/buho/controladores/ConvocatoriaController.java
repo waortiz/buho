@@ -12,6 +12,7 @@ import co.edu.fnsp.buho.entidades.Adenda;
 import co.edu.fnsp.buho.entidades.CampoHojaVida;
 import co.edu.fnsp.buho.entidades.DetalleUsuario;
 import co.edu.fnsp.buho.entidades.Evaluacion;
+import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
 import co.edu.fnsp.buho.entidades.Preseleccionado;
 import co.edu.fnsp.buho.entidades.Programa;
@@ -19,6 +20,8 @@ import co.edu.fnsp.buho.excepciones.CriteriosHabilitacionException;
 import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
 import co.edu.fnsp.buho.utilidades.EvaluacionExcelReportView;
+import co.edu.fnsp.buho.utilidades.PostuladosExcelReportView;
+import co.edu.fnsp.buho.utilidades.PreseleccionadosExcelReportView;
 import co.edu.fnsp.buho.utilidades.Util;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -38,9 +41,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -437,6 +437,16 @@ public class ConvocatoriaController {
         return "convocatorias/evaluar";
     }
 
+
+    @RequestMapping(value = "/postulados/{idConvocatoria}", method = RequestMethod.GET)
+    public @ResponseBody
+    String obtenerPostuladosConvocatoria(@ModelAttribute(value = "idConvocatoria") int idConvocatoria, Model model) {
+        List<HojaVida> hojasVida = servicioConvocatoria.obtenerPersonasConvocatoria(idConvocatoria);
+        Gson gson = new Gson();
+
+        return gson.toJson(hojasVida);
+    }
+
     @RequestMapping(value = "/preseleccionados/{idConvocatoria}", method = RequestMethod.GET)
     public @ResponseBody
     String obtenerPreseleccionados(@ModelAttribute(value = "idConvocatoria") int idConvocatoria, Model model) {
@@ -455,7 +465,19 @@ public class ConvocatoriaController {
         return gson.toJson(evaluaciones);
     }
 
-    @RequestMapping(value = "/decargarEvaluaciones/{idConvocatoria}", method = RequestMethod.GET)
+    @RequestMapping(value = "/descargarPostulados/{idConvocatoria}", method = RequestMethod.GET)
+    public ModelAndView  descargarPostulados(@PathVariable("idConvocatoria") int idConvocatoria, HttpServletResponse response) throws IOException {
+        List<HojaVida> hojasVida = servicioConvocatoria.obtenerPersonasConvocatoria(idConvocatoria);
+        return new ModelAndView(new PostuladosExcelReportView(), "postulados", hojasVida);
+    }
+
+    @RequestMapping(value = "/descargarPreseleccionados/{idConvocatoria}", method = RequestMethod.GET)
+    public ModelAndView descargarPreseleccionados(@PathVariable("idConvocatoria") int idConvocatoria, HttpServletResponse response) throws IOException {
+        List<Preseleccionado> preseleccionados = servicioConvocatoria.obtenerPreseleccionados(idConvocatoria);
+        return new ModelAndView(new PreseleccionadosExcelReportView(), "preseleccionados", preseleccionados);
+    }
+    
+    @RequestMapping(value = "/descargarEvaluaciones/{idConvocatoria}", method = RequestMethod.GET)
     public ModelAndView  descargarEvaluaciones(@PathVariable("idConvocatoria") int idConvocatoria, HttpServletResponse response) throws IOException {
         List<Evaluacion> evaluaciones = servicioConvocatoria.obtenerEvaluaciones(idConvocatoria);
         return new ModelAndView(new EvaluacionExcelReportView(), "evaluaciones", evaluaciones);

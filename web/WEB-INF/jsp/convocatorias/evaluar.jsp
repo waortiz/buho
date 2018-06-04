@@ -318,7 +318,7 @@
                                 </thead>
                                 <tbody data-bind="foreach: { data: educacionesSuperiores }">
                                     <tr class="table-row">
-                                        <td style="width: 20%">
+                                        <td style="width: 10%">
                                             <span data-bind="text: nombreNivel" ></span>
                                         </td>
                                         <td style="width: 30%">
@@ -326,6 +326,9 @@
                                         </td>
                                         <td style="width: 30%">
                                             <span data-bind="text: nombrePrograma" ></span>
+                                        </td>
+                                        <td style="width: 10%">
+                                            <span data-bind="text: fechaTitulo" ></span>
                                         </td>
                                         <td style="width: 10%" align="center">
                                             <a href='#' title='Ver certificado homologado' data-bind="click: $root.verCertificadoHomologadoEducacionSuperior" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
@@ -348,6 +351,7 @@
                                     <tr>
                                         <th>Idioma</th>
                                         <th>Lectura</th>
+                                        <th>Escucha</th>
                                         <th>Escritura</th>
                                         <th>Habla</th>
                                         <th>Certificado</th>
@@ -717,13 +721,13 @@
         }, 3000);
         $.ajax({
             type: "GET",
-            url: "${pageContext.request.contextPath}/convocatorias/decargarEvaluaciones/" + +$('#convocatoria').val(),
+            url: "${pageContext.request.contextPath}/convocatorias/descargarEvaluaciones/" + $('#convocatoria').val(),
             processData: false,
             contentType: false,
             success: function (response) {
                 $('#md_descargar_evaluacion').modal('hide');
                 if (response != "") {
-                    window.location.href = "${pageContext.request.contextPath}/convocatorias/decargarEvaluaciones/" + +$('#convocatoria').val();
+                    window.location.href = "${pageContext.request.contextPath}/convocatorias/descargarEvaluaciones/" + $('#convocatoria').val();
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -731,7 +735,6 @@
             }
         });
     }
-    ;
 
     function verHojaVida(idPersona) {
         $('#formHV').show();

@@ -19,6 +19,7 @@ public class ExperienciaDocencia {
     private boolean fnsp;
     private int institucion;
     private String nombreInstitucion;
+    private boolean exterior;
     private List<CursoExperienciaDocencia> cursosExperienciaDocencia = new ArrayList<>();
 
     /**
@@ -117,6 +118,20 @@ public class ExperienciaDocencia {
      */
     public void setConsecutivo(int consecutivo) {
         this.consecutivo = consecutivo;
+    }
+
+    /**
+     * @return the exterior
+     */
+    public boolean isExterior() {
+        return exterior;
+    }
+
+    /**
+     * @param exterior the exterior to set
+     */
+    public void setExterior(boolean exterior) {
+        this.exterior = exterior;
     }
     
 }

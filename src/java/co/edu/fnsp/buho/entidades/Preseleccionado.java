@@ -11,6 +11,7 @@ package co.edu.fnsp.buho.entidades;
  */
 public class Preseleccionado {
     private long idPersona;
+    private String numeroIdentificacion;
     private int tiempoExperienciaDocente;
     private int tiempoExperienciaLaboral;
     private String sexo;
@@ -84,6 +85,20 @@ public class Preseleccionado {
      */
     public void setPerfil(String perfil) {
         this.perfil = perfil;
+    }
+
+    /**
+     * @return the numeroIdentificacion
+     */
+    public String getNumeroIdentificacion() {
+        return numeroIdentificacion;
+    }
+
+    /**
+     * @param numeroIdentificacion the numeroIdentificacion to set
+     */
+    public void setNumeroIdentificacion(String numeroIdentificacion) {
+        this.numeroIdentificacion = numeroIdentificacion;
     }
     
 }

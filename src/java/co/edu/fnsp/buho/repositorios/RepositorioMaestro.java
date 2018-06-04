@@ -43,7 +43,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     private SimpleJdbcCall obtenerGrupoEtnico;
     private SimpleJdbcCall obtenerIdiomas;
     private SimpleJdbcCall obtenerInstitucionesEducativas;
-    private SimpleJdbcCall obtenerInstitucionesEducativasExtranjeras;
+    private SimpleJdbcCall obtenerInstitucionesEducativasExterior;
     private SimpleJdbcCall obtenerInstitucionesEducativasColombianas;
     private SimpleJdbcCall obtenerMunicipios;
     private SimpleJdbcCall obtenerMunicipio;
@@ -102,7 +102,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         this.obtenerGrupoEtnico = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerGrupoEtnico");
         this.obtenerIdiomas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerIdiomas").returningResultSet("idiomas", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerInstitucionesEducativas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerInstitucionesEducativas").returningResultSet("institucionesEducativas", BeanPropertyRowMapper.newInstance(Maestro.class));
-        this.obtenerInstitucionesEducativasExtranjeras = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerInstitucionesEducativasExtranjeras").returningResultSet("institucionesEducativas", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerInstitucionesEducativasExterior = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerInstitucionesEducativasExterior").returningResultSet("institucionesEducativas", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerInstitucionesEducativasColombianas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerInstitucionesEducativasColombianas").returningResultSet("institucionesEducativas", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerMunicipios = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerMunicipios").returningResultSet("municipios", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerMunicipio = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerMunicipio");
@@ -515,8 +515,8 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     }
 
     @Override
-    public List<Maestro> obtenerInstitucionesEducativasExtranjeras() {
-        Map resultado = obtenerInstitucionesEducativasExtranjeras.execute(new HashMap<>());
+    public List<Maestro> obtenerInstitucionesEducativasExterior() {
+        Map resultado = obtenerInstitucionesEducativasExterior.execute(new HashMap<>());
         List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("institucionesEducativas");
 
         return coleccion;

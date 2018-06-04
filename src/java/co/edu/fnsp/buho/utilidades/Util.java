@@ -559,6 +559,7 @@ public class Util {
                 json = json
                         + "{id: ko.observable(" + experienciaDocencia.getId() + "),"
                         + "fnsp:ko.observable(" + experienciaDocencia.isFnsp() + "),"
+                        + "exterior:ko.observable(" + experienciaDocencia.isExterior()+ "),"
                         + "trabajoActual:ko.observable(" + experienciaDocencia.isTrabajoActual() + "),"
                         + "institucion:ko.observable(" + experienciaDocencia.getInstitucion() + "),"
                         + "nombreInstitucion:ko.observable('" + experienciaDocencia.getNombreInstitucion() + "'),"

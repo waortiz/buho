@@ -18,6 +18,7 @@ public class ExperienciaDocencia {
     private boolean fnsp;
     private String institucion;
     private String nombreInstitucion;
+    private boolean exterior;
     private List<CursoExperienciaDocencia> cursosExperienciaDocencia = new ArrayList<>();
 
     /**
@@ -102,6 +103,20 @@ public class ExperienciaDocencia {
      */
     public void setCursosExperienciaDocencia(List<CursoExperienciaDocencia> cursosExperienciaDocencia) {
         this.cursosExperienciaDocencia = cursosExperienciaDocencia;
+    }
+
+    /**
+     * @return the exterior
+     */
+    public boolean isExterior() {
+        return exterior;
+    }
+
+    /**
+     * @param exterior the exterior to set
+     */
+    public void setExterior(boolean exterior) {
+        this.exterior = exterior;
     }
     
 }

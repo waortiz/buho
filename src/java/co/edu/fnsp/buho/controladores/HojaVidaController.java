@@ -67,38 +67,70 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping(value = "/hojasVida")
 public class HojaVidaController {
 
-    private @Value("${ASUNTO_SOPORTE_CAMBIADO}") String ASUNTO_SOPORTE_CAMBIADO;
-    private @Value("${CUERPO_SOPORTE_CAMBIADO}") String CUERPO_SOPORTE_CAMBIADO;
-    private @Value("${ASUNTO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO}") String ASUNTO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO;
-    private @Value("${CUERPO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO}") String CUERPO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO;
-    private @Value("${ASUNTO_RUT_CAMBIADO}") String ASUNTO_RUT_CAMBIADO;
-    private @Value("${CUERPO_RUT_CAMBIADO}") String CUERPO_RUT_CAMBIADO;
-    private @Value("${ASUNTO_LIBRETA_MILITAR_CAMBIADO}") String ASUNTO_LIBRETA_MILITAR_CAMBIADO;
-    private @Value("${CUERPO_LIBRETA_MILITAR_CAMBIADO}") String CUERPO_LIBRETA_MILITAR_CAMBIADO;
-    private @Value("${ASUNTO_CERTIFICADO_IDIOMA_CAMBIADO}") String ASUNTO_CERTIFICADO_IDIOMA_CAMBIADO;
-    private @Value("${CUERPO_CERTIFICADO_IDIOMA_CAMBIADO}") String CUERPO_CERTIFICADO_IDIOMA_CAMBIADO;
-    private @Value("${ASUNTO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO}") String ASUNTO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO;
-    private @Value("${CUERPO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO}") String CUERPO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO;
-    private @Value("${ASUNTO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO}") String ASUNTO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO;
-    private @Value("${CUERPO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO}") String CUERPO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO;
-    private @Value("${ASUNTO_CERTIFICADO_HOMOLOGADO_EDUCACION_SUPERIOR_CAMBIADO}") String ASUNTO_CERTIFICADO_HOMOLOGADO_EDUCACION_SUPERIOR_CAMBIADO;
-    private @Value("${CUERPO_CERTIFICADO_HOMOLOGADO_EDUCACION_SUPERIOR_CAMBIADO}") String CUERPO_CERTIFICADO_HOMOLOGADO_EDUCACION_SUPERIOR_CAMBIADO;
-    private @Value("${ASUNTO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO}") String ASUNTO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO;
-    private @Value("${CUERPO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO}") String CUERPO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO;
-    private @Value("${ASUNTO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO}") String ASUNTO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO;
-    private @Value("${CUERPO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO}") String CUERPO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO;
-    private @Value("${ASUNTO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO}") String ASUNTO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO;
-    private @Value("${CUERPO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO}") String CUERPO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO;
-    private @Value("${ASUNTO_CERTIFICADO_DISTINCION_CAMBIADO}") String ASUNTO_CERTIFICADO_DISTINCION_CAMBIADO;
-    private @Value("${CUERPO_CERTIFICADO_DISTINCION_CAMBIADO}") String CUERPO_CERTIFICADO_DISTINCION_CAMBIADO;
-    private @Value("${ASUNTO_DOCUMENTO_PATENTE_CAMBIADO}") String ASUNTO_DOCUMENTO_PATENTE_CAMBIADO;
-    private @Value("${CUERPO_DOCUMENTO_PATENTE_CAMBIADO}") String CUERPO_DOCUMENTO_PATENTE_CAMBIADO;
-    private @Value("${ASUNTO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO}") String ASUNTO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO;
-    private @Value("${CUERPO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO}") String CUERPO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO;
-    private @Value("${ASUNTO_CVLAC_CAMBIADO}") String ASUNTO_CVLAC_CAMBIADO;
-    private @Value("${CUERPO_CVLAC_CAMBIADO}") String CUERPO_CVLAC_CAMBIADO;
-    private @Value("${ASUNTO_ARTICULO_CAMBIADO}") String ASUNTO_ARTICULO_CAMBIADO;
-    private @Value("${CUERPO_ARTICULO_CAMBIADO}") String CUERPO_ARTICULO_CAMBIADO;
+    private @Value("${ASUNTO_SOPORTE_CAMBIADO}")
+    String ASUNTO_SOPORTE_CAMBIADO;
+    private @Value("${CUERPO_SOPORTE_CAMBIADO}")
+    String CUERPO_SOPORTE_CAMBIADO;
+    private @Value("${ASUNTO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO}")
+    String ASUNTO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO;
+    private @Value("${CUERPO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO}")
+    String CUERPO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO;
+    private @Value("${ASUNTO_RUT_CAMBIADO}")
+    String ASUNTO_RUT_CAMBIADO;
+    private @Value("${CUERPO_RUT_CAMBIADO}")
+    String CUERPO_RUT_CAMBIADO;
+    private @Value("${ASUNTO_LIBRETA_MILITAR_CAMBIADO}")
+    String ASUNTO_LIBRETA_MILITAR_CAMBIADO;
+    private @Value("${CUERPO_LIBRETA_MILITAR_CAMBIADO}")
+    String CUERPO_LIBRETA_MILITAR_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_IDIOMA_CAMBIADO}")
+    String ASUNTO_CERTIFICADO_IDIOMA_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_IDIOMA_CAMBIADO}")
+    String CUERPO_CERTIFICADO_IDIOMA_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO}")
+    String ASUNTO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO}")
+    String CUERPO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO}")
+    String ASUNTO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO}")
+    String CUERPO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_HOMOLOGADO_EDUCACION_SUPERIOR_CAMBIADO}")
+    String ASUNTO_CERTIFICADO_HOMOLOGADO_EDUCACION_SUPERIOR_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_HOMOLOGADO_EDUCACION_SUPERIOR_CAMBIADO}")
+    String CUERPO_CERTIFICADO_HOMOLOGADO_EDUCACION_SUPERIOR_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO}")
+    String ASUNTO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO}")
+    String CUERPO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO}")
+    String ASUNTO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO}")
+    String CUERPO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO}")
+    String ASUNTO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO}")
+    String CUERPO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO;
+    private @Value("${ASUNTO_CERTIFICADO_DISTINCION_CAMBIADO}")
+    String ASUNTO_CERTIFICADO_DISTINCION_CAMBIADO;
+    private @Value("${CUERPO_CERTIFICADO_DISTINCION_CAMBIADO}")
+    String CUERPO_CERTIFICADO_DISTINCION_CAMBIADO;
+    private @Value("${ASUNTO_DOCUMENTO_PATENTE_CAMBIADO}")
+    String ASUNTO_DOCUMENTO_PATENTE_CAMBIADO;
+    private @Value("${CUERPO_DOCUMENTO_PATENTE_CAMBIADO}")
+    String CUERPO_DOCUMENTO_PATENTE_CAMBIADO;
+    private @Value("${ASUNTO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO}")
+    String ASUNTO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO;
+    private @Value("${CUERPO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO}")
+    String CUERPO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO;
+    private @Value("${ASUNTO_CVLAC_CAMBIADO}")
+    String ASUNTO_CVLAC_CAMBIADO;
+    private @Value("${CUERPO_CVLAC_CAMBIADO}")
+    String CUERPO_CVLAC_CAMBIADO;
+    private @Value("${ASUNTO_ARTICULO_CAMBIADO}")
+    String ASUNTO_ARTICULO_CAMBIADO;
+    private @Value("${CUERPO_ARTICULO_CAMBIADO}")
+    String CUERPO_ARTICULO_CAMBIADO;
     private static final Logger logger = LogManager.getLogger(HojaVidaController.class.getName());
 
     @Autowired
@@ -711,11 +743,11 @@ public class HojaVidaController {
         }
     }
 
-    @RequestMapping(value = "/institucionesEducativasExtranjeras", method = RequestMethod.GET)
+    @RequestMapping(value = "/institucionesEducativasExterior", method = RequestMethod.GET)
     public @ResponseBody
-    String obtenerInstitucionesEducativasExtranjeras(Model model) throws ParseException, IOException {
+    String obtenerInstitucionesEducativasExterior(Model model) throws ParseException, IOException {
         try {
-            List<Maestro> maestros = servicioMaestro.obtenerInstitucionesEducativasExtranjeras();
+            List<Maestro> maestros = servicioMaestro.obtenerInstitucionesEducativasExterior();
             Gson gson = new Gson();
             return gson.toJson(maestros);
         } catch (Exception exc) {
@@ -738,111 +770,114 @@ public class HojaVidaController {
     }
 
     private void establecerHojaVida(Model model) {
-        long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+        try {
+            long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
 
-        List<Maestro> paises = servicioMaestro.obtenerPaises();
-        List<Maestro> tiposIdentificacion = servicioMaestro.obtenerTiposIdentificacion();
-        List<Maestro> gruposEtnicos = servicioMaestro.obtenerGruposEtnicos();
-        List<Maestro> discapacidades = servicioMaestro.obtenerDiscapacidades();
-        List<Maestro> actividadesEconomicas = servicioMaestro.obtenerActividadesEconomicas();
-        List<Maestro> tiposVinculacion = servicioMaestro.obtenerTiposVinculacionUdeA();
-        List<Maestro> tiposTelefono = servicioMaestro.obtenerTiposTelefono();
-        List<Maestro> tiposDocumento = servicioMaestro.obtenerTiposDocumento();
-        List<Maestro> nivelesIdioma = servicioMaestro.obtenerNivelesIdioma();
-        List<Maestro> idiomas = servicioMaestro.obtenerIdiomas();
-        List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
-        List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
-        List<Maestro> institucionesEducativas = servicioMaestro.obtenerInstitucionesEducativas();
-        List<Maestro> institucionesEducativasColombianas = servicioMaestro.obtenerInstitucionesEducativasColombianas();
-        List<Maestro> institucionesEducativasExtranjeras = servicioMaestro.obtenerInstitucionesEducativasExtranjeras();
-        List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
-        List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
-        List<Maestro> tiposInstitucion = servicioMaestro.obtenerTiposInstitucion();
-        List<Maestro> tiposContrato = servicioMaestro.obtenerTiposContrato();
-        List<Maestro> tiposExperiencia = servicioMaestro.obtenerTiposExperiencia();
-        List<Maestro> naturalezasCargo = servicioMaestro.obtenerNaturalezasCargo();
-        List<Maestro> modalidadesCurso = servicioMaestro.obtenerModalidadesCurso();
-        List<Maestro> tiposInvestigador = servicioMaestro.obtenerTiposInvestigador();
-        List<Maestro> tiposAutorArticulo = servicioMaestro.obtenerTiposAutorArticulo();
-        List<Maestro> tiposPatente = servicioMaestro.obtenerTiposPatente();
-        List<Maestro> tiposProductosConocimiento = servicioMaestro.obtenerTiposProductosConocimiento();
-        List<Maestro> clasesPatente = servicioMaestro.obtenerClasesPatente();
+            List<Maestro> paises = servicioMaestro.obtenerPaises();
+            List<Maestro> tiposIdentificacion = servicioMaestro.obtenerTiposIdentificacion();
+            List<Maestro> gruposEtnicos = servicioMaestro.obtenerGruposEtnicos();
+            List<Maestro> discapacidades = servicioMaestro.obtenerDiscapacidades();
+            List<Maestro> actividadesEconomicas = servicioMaestro.obtenerActividadesEconomicas();
+            List<Maestro> tiposVinculacion = servicioMaestro.obtenerTiposVinculacionUdeA();
+            List<Maestro> tiposTelefono = servicioMaestro.obtenerTiposTelefono();
+            List<Maestro> tiposDocumento = servicioMaestro.obtenerTiposDocumento();
+            List<Maestro> nivelesIdioma = servicioMaestro.obtenerNivelesIdioma();
+            List<Maestro> idiomas = servicioMaestro.obtenerIdiomas();
+            List<Maestro> tiposCertificacion = servicioMaestro.obtenerTiposCertificacionIdioma();
+            List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
+            List<Maestro> institucionesEducativas = servicioMaestro.obtenerInstitucionesEducativas();
+            List<Maestro> institucionesEducativasColombianas = servicioMaestro.obtenerInstitucionesEducativasColombianas();
+            List<Maestro> institucionesEducativasExterior = servicioMaestro.obtenerInstitucionesEducativasExterior();
+            List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
+            List<Maestro> tiposCapacitacion = servicioMaestro.obtenerTiposCapacitacion();
+            List<Maestro> tiposInstitucion = servicioMaestro.obtenerTiposInstitucion();
+            List<Maestro> tiposContrato = servicioMaestro.obtenerTiposContrato();
+            List<Maestro> tiposExperiencia = servicioMaestro.obtenerTiposExperiencia();
+            List<Maestro> naturalezasCargo = servicioMaestro.obtenerNaturalezasCargo();
+            List<Maestro> modalidadesCurso = servicioMaestro.obtenerModalidadesCurso();
+            List<Maestro> tiposInvestigador = servicioMaestro.obtenerTiposInvestigador();
+            List<Maestro> tiposAutorArticulo = servicioMaestro.obtenerTiposAutorArticulo();
+            List<Maestro> tiposPatente = servicioMaestro.obtenerTiposPatente();
+            List<Maestro> tiposProductosConocimiento = servicioMaestro.obtenerTiposProductosConocimiento();
+            List<Maestro> clasesPatente = servicioMaestro.obtenerClasesPatente();
 
-        model.addAttribute("paises", paises);
-        model.addAttribute("tiposIdentificacion", tiposIdentificacion);
-        model.addAttribute("gruposEtnicos", gruposEtnicos);
-        model.addAttribute("discapacidades", discapacidades);
-        model.addAttribute("actividadesEconomicas", actividadesEconomicas);
-        model.addAttribute("tiposVinculacion", tiposVinculacion);
-        model.addAttribute("tiposTelefono", tiposTelefono);
-        model.addAttribute("tiposDocumento", tiposDocumento);
-        model.addAttribute("nivelesIdioma", nivelesIdioma);
-        model.addAttribute("idiomas", idiomas);
-        model.addAttribute("tiposCertificacion", tiposCertificacion);
-        model.addAttribute("nivelesFormacion", nivelesFormacion);
-        model.addAttribute("institucionesEducativas", institucionesEducativas);
-        model.addAttribute("institucionesEducativasColombianas", institucionesEducativasColombianas);
-        model.addAttribute("institucionesEducativasExtranjeras", institucionesEducativasExtranjeras);
-        model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
-        model.addAttribute("tiposCapacitacion", tiposCapacitacion);
-        model.addAttribute("tiposInstitucion", tiposInstitucion);
-        model.addAttribute("tiposContrato", tiposContrato);
-        model.addAttribute("tiposExperiencia", tiposExperiencia);
-        model.addAttribute("naturalezasCargo", naturalezasCargo);
-        model.addAttribute("modalidadesCurso", modalidadesCurso);
-        model.addAttribute("tiposInvestigador", tiposInvestigador);
-        model.addAttribute("tiposAutorArticulo", tiposAutorArticulo);
-        model.addAttribute("tiposPatente", tiposPatente);
-        model.addAttribute("tiposProductosConocimiento", tiposProductosConocimiento);
-        model.addAttribute("clasesPatente", clasesPatente);
+            model.addAttribute("paises", paises);
+            model.addAttribute("tiposIdentificacion", tiposIdentificacion);
+            model.addAttribute("gruposEtnicos", gruposEtnicos);
+            model.addAttribute("discapacidades", discapacidades);
+            model.addAttribute("actividadesEconomicas", actividadesEconomicas);
+            model.addAttribute("tiposVinculacion", tiposVinculacion);
+            model.addAttribute("tiposTelefono", tiposTelefono);
+            model.addAttribute("tiposDocumento", tiposDocumento);
+            model.addAttribute("nivelesIdioma", nivelesIdioma);
+            model.addAttribute("idiomas", idiomas);
+            model.addAttribute("tiposCertificacion", tiposCertificacion);
+            model.addAttribute("nivelesFormacion", nivelesFormacion);
+            model.addAttribute("institucionesEducativas", institucionesEducativas);
+            model.addAttribute("institucionesEducativasColombianas", institucionesEducativasColombianas);
+            model.addAttribute("institucionesEducativasExterior", institucionesEducativasExterior);
+            model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
+            model.addAttribute("tiposCapacitacion", tiposCapacitacion);
+            model.addAttribute("tiposInstitucion", tiposInstitucion);
+            model.addAttribute("tiposContrato", tiposContrato);
+            model.addAttribute("tiposExperiencia", tiposExperiencia);
+            model.addAttribute("naturalezasCargo", naturalezasCargo);
+            model.addAttribute("modalidadesCurso", modalidadesCurso);
+            model.addAttribute("tiposInvestigador", tiposInvestigador);
+            model.addAttribute("tiposAutorArticulo", tiposAutorArticulo);
+            model.addAttribute("tiposPatente", tiposPatente);
+            model.addAttribute("tiposProductosConocimiento", tiposProductosConocimiento);
+            model.addAttribute("clasesPatente", clasesPatente);
 
-        co.edu.fnsp.buho.entidades.HojaVida hojaVida = servicioHojaVida.obtenerHojaVida(idPersona);
+            co.edu.fnsp.buho.entidades.HojaVida hojaVida = servicioHojaVida.obtenerHojaVida(idPersona);
 
-        if (hojaVida.getTelefonos().size() > 0) {
-            model.addAttribute("telefonosJSON", Util.obtenerTelefonosJSON(hojaVida.getTelefonos()));
-        }
-        if (hojaVida.getCuentasBancarias().size() > 0) {
-            model.addAttribute("cuentasBancariasJSON", Util.obtenerCuentasBancariasJSON(hojaVida.getCuentasBancarias()));
-        }
-        if (hojaVida.getCorreosElectronicos().size() > 0) {
-            model.addAttribute("correosElectronicosJSON", Util.obtenerCorreosElectronicosJSON(hojaVida.getCorreosElectronicos()));
-        }
-        if (hojaVida.getDocumentosSoporteComplementarios().size() > 0) {
-            model.addAttribute("documentosSoporteJSON", Util.obtenerDocumentosSoporteJSON(hojaVida.getDocumentosSoporteComplementarios()));
-        }
-        if (hojaVida.getIdiomas().size() > 0) {
-            model.addAttribute("idiomasJSON", Util.obtenerIdiomasJSON(hojaVida.getIdiomas()));
-        }
-        if (hojaVida.getEducacionesBasicas().size() > 0) {
-            model.addAttribute("educacionesBasicasJSON", Util.obtenerEducacionesBasicasJSON(hojaVida.getEducacionesBasicas()));
-        }
-        if (hojaVida.getEducacionesSuperiores().size() > 0) {
-            model.addAttribute("educacionesSuperioresJSON", Util.obtenerEducacionesSuperioresJSON(hojaVida.getEducacionesSuperiores()));
-        }
-        if (hojaVida.getEducacionesContinuas().size() > 0) {
-            model.addAttribute("educacionesContinuasJSON", Util.obtenerEducacionesContinuasJSON(hojaVida.getEducacionesContinuas()));
-        }
-        if (hojaVida.getDistinciones().size() > 0) {
-            model.addAttribute("distincionesJSON", Util.obtenerDistincionesJSON(hojaVida.getDistinciones()));
-        }
-        if (hojaVida.getExperienciasLaborales().size() > 0) {
-            model.addAttribute("experienciasLaboralesJSON", Util.obtenerExperienciasLaboralesJSON(hojaVida.getExperienciasLaborales()));
-        }
-        if (hojaVida.getExperienciasDocencia().size() > 0) {
-            model.addAttribute("experienciasDocenciaJSON", Util.obtenerExperienciasDocenciaJSON(hojaVida.getExperienciasDocencia()));
-        }
-        if (hojaVida.getArticulos().size() > 0) {
-            model.addAttribute("articulosJSON", Util.obtenerArticulosJSON(hojaVida.getArticulos()));
-        }
-        if (hojaVida.getPatentes().size() > 0) {
-            model.addAttribute("patentesJSON", Util.obtenerPatentesJSON(hojaVida.getPatentes()));
-        }
-        if (hojaVida.getProductosConocimiento().size() > 0) {
-            model.addAttribute("productosConocimientoJSON", Util.obtenerProductosConocimientoJSON(hojaVida.getProductosConocimiento()));
-        }
+            if (hojaVida.getTelefonos().size() > 0) {
+                model.addAttribute("telefonosJSON", Util.obtenerTelefonosJSON(hojaVida.getTelefonos()));
+            }
+            if (hojaVida.getCuentasBancarias().size() > 0) {
+                model.addAttribute("cuentasBancariasJSON", Util.obtenerCuentasBancariasJSON(hojaVida.getCuentasBancarias()));
+            }
+            if (hojaVida.getCorreosElectronicos().size() > 0) {
+                model.addAttribute("correosElectronicosJSON", Util.obtenerCorreosElectronicosJSON(hojaVida.getCorreosElectronicos()));
+            }
+            if (hojaVida.getDocumentosSoporteComplementarios().size() > 0) {
+                model.addAttribute("documentosSoporteJSON", Util.obtenerDocumentosSoporteJSON(hojaVida.getDocumentosSoporteComplementarios()));
+            }
+            if (hojaVida.getIdiomas().size() > 0) {
+                model.addAttribute("idiomasJSON", Util.obtenerIdiomasJSON(hojaVida.getIdiomas()));
+            }
+            if (hojaVida.getEducacionesBasicas().size() > 0) {
+                model.addAttribute("educacionesBasicasJSON", Util.obtenerEducacionesBasicasJSON(hojaVida.getEducacionesBasicas()));
+            }
+            if (hojaVida.getEducacionesSuperiores().size() > 0) {
+                model.addAttribute("educacionesSuperioresJSON", Util.obtenerEducacionesSuperioresJSON(hojaVida.getEducacionesSuperiores()));
+            }
+            if (hojaVida.getEducacionesContinuas().size() > 0) {
+                model.addAttribute("educacionesContinuasJSON", Util.obtenerEducacionesContinuasJSON(hojaVida.getEducacionesContinuas()));
+            }
+            if (hojaVida.getDistinciones().size() > 0) {
+                model.addAttribute("distincionesJSON", Util.obtenerDistincionesJSON(hojaVida.getDistinciones()));
+            }
+            if (hojaVida.getExperienciasLaborales().size() > 0) {
+                model.addAttribute("experienciasLaboralesJSON", Util.obtenerExperienciasLaboralesJSON(hojaVida.getExperienciasLaborales()));
+            }
+            if (hojaVida.getExperienciasDocencia().size() > 0) {
+                model.addAttribute("experienciasDocenciaJSON", Util.obtenerExperienciasDocenciaJSON(hojaVida.getExperienciasDocencia()));
+            }
+            if (hojaVida.getArticulos().size() > 0) {
+                model.addAttribute("articulosJSON", Util.obtenerArticulosJSON(hojaVida.getArticulos()));
+            }
+            if (hojaVida.getPatentes().size() > 0) {
+                model.addAttribute("patentesJSON", Util.obtenerPatentesJSON(hojaVida.getPatentes()));
+            }
+            if (hojaVida.getProductosConocimiento().size() > 0) {
+                model.addAttribute("productosConocimientoJSON", Util.obtenerProductosConocimientoJSON(hojaVida.getProductosConocimiento()));
+            }
 
-        model.addAttribute("hojaVida", hojaVida);
-
+            model.addAttribute("hojaVida", hojaVida);
+        } catch (Exception exc) {
+            logger.error(exc);
+        }
     }
 
     @RequestMapping(value = {"/documentoSoporte"}, method = RequestMethod.POST)
@@ -1414,6 +1449,7 @@ public class HojaVidaController {
             ExperienciaDocencia nuevaExperienciaDocencia = new ExperienciaDocencia();
             nuevaExperienciaDocencia.setId(experienciaDocencia.getId());
             nuevaExperienciaDocencia.setFnsp(experienciaDocencia.isFnsp());
+            nuevaExperienciaDocencia.setExterior(experienciaDocencia.isExterior());
             nuevaExperienciaDocencia.setTrabajoActual(experienciaDocencia.isTrabajoActual());
             nuevaExperienciaDocencia.setInstitucion(Util.obtenerEntero(experienciaDocencia.getInstitucion()));
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();

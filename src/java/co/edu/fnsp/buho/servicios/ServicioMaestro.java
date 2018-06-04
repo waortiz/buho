@@ -228,8 +228,8 @@ public class ServicioMaestro implements IServicioMaestro {
     }
 
     @Override
-    public List<Maestro> obtenerInstitucionesEducativasExtranjeras() {
-        List<Maestro> instituciones = repositorioMaestro.obtenerInstitucionesEducativasExtranjeras();
+    public List<Maestro> obtenerInstitucionesEducativasExterior() {
+        List<Maestro> instituciones = repositorioMaestro.obtenerInstitucionesEducativasExterior();
         List<Maestro> nuevasInstituciones = new ArrayList<>();
         for(Maestro institucion : instituciones) {
             boolean existe = false;

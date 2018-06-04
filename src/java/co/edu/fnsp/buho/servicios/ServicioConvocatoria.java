@@ -378,6 +378,7 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
             }
             Preseleccionado preseleccionado = new Preseleccionado();
             preseleccionado.setIdPersona(hojaVida.getIdPersona());
+            preseleccionado.setNumeroIdentificacion(hojaVida.getNumeroIdentificacion());
             preseleccionado.setSexo(hojaVida.getNombreSexo());
             preseleccionado.setPerfil(hojaVida.getPerfil());
             preseleccionado.setTiempoExperienciaLaboral(tiempoExperienciaLaboralSectorSalud);

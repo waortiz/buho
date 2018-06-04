@@ -38,9 +38,12 @@
             <mvc:exclude-mapping path="/convocatorias/programasSede/**" />
             <mvc:exclude-mapping path="/convocatorias/programas/**" />
             <mvc:exclude-mapping path="/convocatorias/capacitaciones/**" />
+            <mvc:exclude-mapping path="/convocatorias/postulados/**" />
+            <mvc:exclude-mapping path="/convocatorias/descargarPostulados/**" />
             <mvc:exclude-mapping path="/convocatorias/preseleccionados/**" />
+            <mvc:exclude-mapping path="/convocatorias/descargarPreseleccionados/**" />
             <mvc:exclude-mapping path="/convocatorias/evaluaciones/**" />
-            <mvc:exclude-mapping path="/convocatorias/decargarEvaluaciones/**" />
+            <mvc:exclude-mapping path="/convocatorias/descargarEvaluaciones/**" />
             <mvc:exclude-mapping path="/hojasVida/editar" />
             <mvc:exclude-mapping path="/hojasVida/terminos" />
             <mvc:exclude-mapping path="/hojasVida/programa" />

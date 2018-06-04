@@ -574,6 +574,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
             parametrosIngresoExperienciaDocencia.addValue("varTrabajoActual", experienciaDocencia.isTrabajoActual());
             parametrosIngresoExperienciaDocencia.addValue("varFnsp", experienciaDocencia.isFnsp());
             parametrosIngresoExperienciaDocencia.addValue("varInstitucion", experienciaDocencia.getInstitucion());
+            parametrosIngresoExperienciaDocencia.addValue("varExterior", experienciaDocencia.isExterior());
             Map resultadoIngresoExperienciaDocencia = ingresarExperienciaDocencia.execute(parametrosIngresoExperienciaDocencia);
             int idExperienciaDocencia = (int) resultadoIngresoExperienciaDocencia.get("varId");
             for (CursoExperienciaDocencia cursoExperienciaDocencia : experienciaDocencia.getCursosExperienciaDocencia()) {
@@ -1895,6 +1896,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
             parametrosIngresoExperienciaDocencia.addValue("varTrabajoActual", experienciaDocencia.isTrabajoActual());
             parametrosIngresoExperienciaDocencia.addValue("varFnsp", experienciaDocencia.isFnsp());
             parametrosIngresoExperienciaDocencia.addValue("varInstitucion", experienciaDocencia.getInstitucion());
+            parametrosIngresoExperienciaDocencia.addValue("varExterior", experienciaDocencia.isExterior());
             Map resultadoIngresoExperienciaDocencia = ingresarExperienciaDocencia.execute(parametrosIngresoExperienciaDocencia);
             idExperienciaDocencia = (int) resultadoIngresoExperienciaDocencia.get("varId");
         } else {
@@ -1903,6 +1905,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
             parametrosActualizacionExperienciaDocencia.addValue("varTrabajoActual", experienciaDocencia.isTrabajoActual());
             parametrosActualizacionExperienciaDocencia.addValue("varFnsp", experienciaDocencia.isFnsp());
             parametrosActualizacionExperienciaDocencia.addValue("varInstitucion", experienciaDocencia.getInstitucion());
+            parametrosActualizacionExperienciaDocencia.addValue("varExterior", experienciaDocencia.isExterior());
             actualizarExperienciaDocencia.execute(parametrosActualizacionExperienciaDocencia);
         }
 

@@ -83,7 +83,8 @@
                     </table>
                 </div>
             </div>
-        </div>            
+        </div>   
+        <div style="overflow-y: auto; max-height:750px;">
         <div class="row">
             <div class="col-md-12">
                 <legend><h4>Soportes Personales y de afiliaci&oacute;n</h4></legend>
@@ -545,6 +546,7 @@
                     </div>    
                 </div>
             </div>
+        </div>
         </div>
         </div>
         <div class="modal fade" id="md_validar_soporte" role="dialog">

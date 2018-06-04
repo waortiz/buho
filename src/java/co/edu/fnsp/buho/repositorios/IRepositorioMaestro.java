@@ -57,7 +57,7 @@ public interface IRepositorioMaestro {
     List<CampoHojaVida> obtenerCamposHojaVida();
     int ingresarProgramaInstitucion(Programa programa);
     Ciudad ingresarCiudad(Ciudad ciudad);
-    List<Maestro> obtenerInstitucionesEducativasExtranjeras();
+    List<Maestro> obtenerInstitucionesEducativasExterior();
     List<Maestro> obtenerInstitucionesEducativasColombianas();
     List<Programa> obtenerProgramasNucleoBasicoConocimiento(int nucleoBasicoConocimiento);
     int ingresarInstitucion(Institucion institucion);

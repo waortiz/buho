@@ -1125,11 +1125,11 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Titulo extranjero?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger estas en estudio">
+                                                <label>Título extranjero?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger estas en estudio">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a> <br>
                                                 <div id="radioBtn" class="btn-group" style="margin-left: 40px;">
-                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="tituloExteriorEducacionSuperior"  data-title="true"  id="btnTituloExtranjeroSiEducacionSuperior">Si</a>
-                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="tituloExteriorEducacionSuperior"  data-title="false" id="btnTituloExtranjeroNoEducacionSuperior">No</a>
+                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="tituloExteriorEducacionSuperior"  data-title="true"  id="btnTituloExteriorSiEducacionSuperior">Si</a>
+                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="tituloExteriorEducacionSuperior"  data-title="false" id="btnTituloExteriorNoEducacionSuperior">No</a>
                                                 </div>
                                                 <input type="hidden" name="tituloExteriorEducacionSuperior" id="tituloExteriorEducacionSuperior">
                                             </div>
@@ -1191,11 +1191,17 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="institucionEducativaPrograma">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institución que estudio">
+                                                                <label for="institucionEducativaProgramaColombiana">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institución que estudio">
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                                <select style="width: 100%;" name="institucionEducativaPrograma" id="institucionEducativaPrograma" class="js-select-basic-single js-states form-control">
+                                                                <select style="width: 100%;" name="institucionEducativaProgramaColombiana" id="institucionEducativaProgramaColombiana" class="js-select-basic-single js-states form-control">
                                                                     <option value=""></option>
                                                                     <c:forEach var="institucionEducativa" items="${institucionesEducativasColombianas}">
+                                                                        <option value="${institucionEducativa.getId()}">${institucionEducativa.getNombre()}</option>
+                                                                    </c:forEach>                                                                  
+                                                                </select>
+                                                                <select style="width: 100%;" name="institucionEducativaProgramaExterior" id="institucionEducativaProgramaExterior" class="js-select-basic-single js-states form-control">
+                                                                    <option value=""></option>
+                                                                    <c:forEach var="institucionEducativa" items="${institucionesEducativasExterior}">
                                                                         <option value="${institucionEducativa.getId()}">${institucionEducativa.getNombre()}</option>
                                                                     </c:forEach>                                                                  
                                                                 </select>
@@ -1208,7 +1214,7 @@
                                                                 <select style="width: 88%;" name="programaCursado" id="programaCursado" class="js-select-basic-single js-states form-control">
                                                                 <option value=""></option>
                                                                 </select>
-                                                                <button id="btnNuevoProgramaExtranjero" style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoProgramaExtranjero();"><span class="glyphicon glyphicon-plus"></span></button>
+                                                                <button id="btnNuevoProgramaExterior" style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" onclick="nuevoProgramaExterior();"><span class="glyphicon glyphicon-plus"></span></button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1237,30 +1243,30 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal fade" id="md_programa_extranjero" role="dialog">
+                                    <div class="modal fade" id="md_programa_exterior" role="dialog">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
                                                 <div class="modal-header mhsuccess">
-                                                    <button type="button" class="close" onclick="cerrarVentanaProgramaExtranjero();">&times;</button>
+                                                    <button type="button" class="close" onclick="cerrarVentanaProgramaExterior();">&times;</button>
                                                     <h4 class="modal-title">Nuevo Programa</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div id="alert_programa_extranjero"></div>
+                                                    <div id="alert_programa_exterior"></div>
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="institucionEducativaProgramaExtranjero">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institución que estudio">
+                                                                <label for="nombreInstitucionEducativaProgramaExterior">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institución que estudio">
                                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                                <input type="text" name="institucionEducativaProgramaExtranjero" id="institucionEducativaProgramaExtranjero" class="form-control" maxlength="150" >
+                                                                <input type="text" name="nombreInstitucionEducativaProgramaExterior" id="nombreInstitucionEducativaProgramaExterior" class="form-control" maxlength="150" >
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group form-inline">
                                                                 <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                                    <input type="text" name="nombreNucleoBasicoConocimientoProgramaExtranjero" id="nombreNucleoBasicoConocimientoProgramaExtranjero" class="form-control" style="width: 85%;" readonly>
-                                                                    <input type="hidden" name="nucleoBasicoConocimientoProgramaExtranjero" id="nucleoBasicoConocimientoProgramaExtranjero" />
-                                                                    <button type="button" class="btn btn-success btn-sm" onclick="mostrarNucleoBasicoConocimiento('nucleoBasicoConocimientoProgramaExtranjero','nombreNucleoBasicoConocimientoProgramaExtranjero')"  style="margin-left: 10px;"><span class="glyphicon glyphicon-search"></span></button>
+                                                                    <input type="text" name="nombreNucleoBasicoConocimientoProgramaExterior" id="nombreNucleoBasicoConocimientoProgramaExterior" class="form-control" style="width: 85%;" readonly>
+                                                                    <input type="hidden" name="nucleoBasicoConocimientoProgramaExterior" id="nucleoBasicoConocimientoProgramaExterior" />
+                                                                    <button type="button" class="btn btn-success btn-sm" onclick="mostrarNucleoBasicoConocimiento('nucleoBasicoConocimientoProgramaExterior','nombreNucleoBasicoConocimientoProgramaExterior')"  style="margin-left: 10px;"><span class="glyphicon glyphicon-search"></span></button>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -1268,23 +1274,23 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="programaCursadoExtranjero">Programa cursado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa cursado">
+                                                                <label for="programaCursadoExterior">Programa cursado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa cursado">
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                                <input type="text" name="programaCursadoExtranjero" id="programaCursadoExtranjero" class="form-control" maxlength="250" >
+                                                                <input type="text" name="programaCursadoExterior" id="programaCursadoExterior" class="form-control" maxlength="250" >
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="tituloProgramaExtranjero">T&iacute;tulo obtenido</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de título obtenido">
+                                                                <label for="tituloProgramaExterior">T&iacute;tulo obtenido</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de título obtenido">
                                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                                <input type="text" class="form-control" name="tituloProgramaExtranjero" id="tituloProgramaExtranjero" maxlength="250" >
+                                                                <input type="text" class="form-control" name="tituloProgramaExterior" id="tituloProgramaExterior" maxlength="250" >
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-success" id="btnAdicionarProgramaExtranjero">Agregar</button>
-                                                    <button type="button" class="btn btn-success" onclick="cerrarVentanaProgramaExtranjero();">Cancelar</button>
+                                                    <button type="button" class="btn btn-success" id="btnAdicionarProgramaExterior">Agregar</button>
+                                                    <button type="button" class="btn btn-success" onclick="cerrarVentanaProgramaExterior();">Cancelar</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -1388,10 +1394,10 @@
                             <thead>
                                 <tr>
                                     <th>Idioma</th>
-                                    <th>Lectura</th>
                                     <th>Escucha</th>
-                                    <th>Escritura</th>
                                     <th>Conversación</th>
+                                    <th>Lectura</th>
+                                    <th>Escritura</th>
                                     <th class="cer" align="center">Certificado</th>
                                     <th class="opc" align="center">Opciones</th>
                                 </tr>        
@@ -1402,16 +1408,16 @@
                                         <span data-bind="text: nombreIdioma" ></span>
                                     </td>
                                     <td style="width: 15%">
-                                        <span data-bind="text: nombreNivelLectura" ></span>
-                                    </td>
-                                    <td style="width: 15%">
                                         <span data-bind="text: nombreNivelEscucha" ></span>
                                     </td>
                                     <td style="width: 15%">
-                                        <span data-bind="text: nombreNivelEscritura" ></span>
+                                        <span data-bind="text: nombreNivelConversacion" ></span>
                                     </td>
                                     <td style="width: 15%">
-                                        <span data-bind="text: nombreNivelConversacion" ></span>
+                                        <span data-bind="text: nombreNivelLectura" ></span>
+                                    </td>
+                                    <td style="width: 15%">
+                                        <span data-bind="text: nombreNivelEscritura" ></span>
                                     </td>
                                     <td style="width: 15%" align="center">
                                         <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoIdioma" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
@@ -1437,72 +1443,54 @@
                                 </div>
                                 <div class="modal-body">
                                     <div id="alert_idioma"></div>
-                                    <div class="row" >
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="idioma">Idioma</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar su idioma">
+                                    <table class="table table-bordered" style="border:1px;border-color: black;">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" style="width: 253px;">
+                                                    <label for="idioma">Idioma</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar su idioma">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
-                                                <select style="width: 100%;" name="idioma" id="idioma" class="js-select-basic-single js-states form-control">
-                                                    <option></option>
-                                                    <c:forEach var="idioma" items="${idiomas}">
-                                                        <option value="${idioma.getId()}">${idioma.getNombre()}</option>
-                                                    </c:forEach>     
-                                                </select>
-                                            </div>
-                                        </div>                  
-                                    </div>
-                                    <div class="row" >
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="nivelEscuchaIdioma">Nivel de escucha</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el nivel de escritura">
-                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
-                                                <select style="width: 100%;" name="nivelEscuchaIdioma" id="nivelEscuchaIdioma" class="js-select-basic-single js-states form-control">
-                                                    <option></option>
-                                                    <c:forEach var="nivel" items="${nivelesIdioma}">
-                                                        <option value="${nivel.getId()}">${nivel.getNombre()}</option>
-                                                    </c:forEach> 
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="nivelConversacionIdioma">Nivel de conversación</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el nivel de habla">
-                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a> <br> 
-                                                <select style="width: 100%;" name="nivelConversacionIdioma" id="nivelConversacionIdioma" class="js-select-basic-single js-states form-control">
-                                                    <option></option>
-                                                    <c:forEach var="nivel" items="${nivelesIdioma}">
-                                                        <option value="${nivel.getId()}">${nivel.getNombre()}</option>
-                                                    </c:forEach> 
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row" >
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="nivelLecturaIdioma">Nivel de lectura</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cial es el nivel de lectura">
-                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
-                                                <select style="width: 100%;" name="nivelLecturaIdioma" id="nivelLecturaIdioma" class="js-select-basic-single js-states form-control">
-                                                    <option></option>
-                                                    <c:forEach var="nivel" items="${nivelesIdioma}">
-                                                        <option value="${nivel.getId()}">${nivel.getNombre()}</option>
-                                                    </c:forEach> 
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="nivelEscrituraIdioma">Nivel de escritura</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es el nivel de escritura">
-                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
-                                                <select style="width: 100%;" name="nivelEscrituraIdioma" id="nivelEscrituraIdioma" class="js-select-basic-single js-states form-control">
-                                                    <option></option>
-                                                    <c:forEach var="nivel" items="${nivelesIdioma}">
-                                                        <option value="${nivel.getId()}">${nivel.getNombre()}</option>
-                                                    </c:forEach> 
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                    <select style="width: 100%;" name="idioma" id="idioma" class="js-select-basic-single js-states form-control">
+                                                        <option></option>
+                                                        <c:forEach var="idioma" items="${idiomas}">
+                                                            <option value="${idioma.getId()}">${idioma.getNombre()}</option>
+                                                        </c:forEach>     
+                                                    </select>
+                                                </th>
+                                                <th colspan="3">Nivel</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Alto</th>
+                                                <th>Medio</th>
+                                                <th>Bajo</th>
+                                            </tr>
+                                        </thead> 
+                                        <tbody>
+                                            <tr>
+                                                <th>Escucha</th>
+                                                <td><input type="radio" name="nivelEscuchaIdioma" id="nivelEscuchaIdiomaA" value="A"></td>
+                                                <td><input type="radio" name="nivelEscuchaIdioma" id="nivelEscuchaIdiomaM" value="M"></td>
+                                                <td><input type="radio" name="nivelEscuchaIdioma" id="nivelEscuchaIdiomaB" value="B"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Conversaci&oacute;n</th>
+                                                <td><input type="radio" name="nivelConversacionIdioma" id="nivelConversacionIdiomaA" value="A"></td>
+                                                <td><input type="radio" name="nivelConversacionIdioma" id="nivelConversacionIdiomaM" value="M"></td>
+                                                <td><input type="radio" name="nivelConversacionIdioma" id="nivelConversacionIdiomaB" value="B"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Lectura</th>
+                                                <td><input type="radio" name="nivelLecturaIdioma" id="nivelLecturaIdiomaA" value="A"></td>
+                                                <td><input type="radio" name="nivelLecturaIdioma" id="nivelLecturaIdiomaM" value="M"></td>
+                                                <td><input type="radio" name="nivelLecturaIdioma" id="nivelLecturaIdiomaB" value="B"></td>   
+                                            </tr>
+                                            <tr>
+                                                <th>Escritura</th>
+                                                <td><input type="radio" name="nivelEscrituraIdioma" id="nivelEscrituraIdiomaA" value="A"></td>
+                                                <td><input type="radio" name="nivelEscrituraIdioma" id="nivelEscrituraIdiomaM" value="M"></td>
+                                                <td><input type="radio" name="nivelEscrituraIdioma" id="nivelEscrituraIdiomaB" value="B"></td>   
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -1650,13 +1638,13 @@
                                                     <option value="${institucion.getId()}">${institucion.getNombre()}</option>
                                                     </c:forEach>                                                     
                                                 </select>
-                                                <select style="width: 80%;" name="institucionEducacionContinuaExtranjero" id="institucionEducacionContinuaExtranjero" class="js-select-basic-single js-states form-control">
+                                                <select style="width: 80%;" name="institucionEducacionContinuaExterior" id="institucionEducacionContinuaExterior" class="js-select-basic-single js-states form-control">
                                                     <option></option>
-                                                    <c:forEach var="institucion" items="${institucionesEducativasExtranjeras}">
+                                                    <c:forEach var="institucion" items="${institucionesEducativasExterior}">
                                                     <option value="${institucion.getId()}">${institucion.getNombre()}</option>
                                                     </c:forEach>                                                     
                                                 </select>
-                                                <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" id="btnNuevaInstitucionExtranjero" onclick="nuevaInstitucionExtranjero();"><span class="glyphicon glyphicon-plus"></span></button>
+                                                <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" id="btnNuevaInstitucionExteriorEducacionContinua" onclick="nuevaInstitucionExteriorEducacionContinua();"><span class="glyphicon glyphicon-plus"></span></button>
                                             </div>
                                         </div>
                                     </div>
@@ -1712,33 +1700,6 @@
                         </div>
                     </div><!--fin modal aspectos academicos modal estudios educacion continua -->
                 </div>
-                <div class="modal fade" id="md_institucion_extranjero" role="dialog">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header mhsuccess">
-                                <button type="button" class="close" onclick="cerrarVentanaInstitucionExtranjero();">&times;</button>
-                                <h4 class="modal-title">Institución</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div id="alert_institucion_extranjero"></div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="institucionEducativaExtranjero">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institución que estudió">
-                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <input type="text" name="institucionEducativaExtranjero" id="institucionEducativaExtranjero" class="form-control" maxlength="150" >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success" id="btnAdicionarInstitucionExtranjero">Agregar</button>
-                                <button type="button" class="btn btn-success" onclick="cerrarVentanaInstitucionExtranjero();">Cancelar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>                                    
-                
             </div>
             <div id="formexperiencia" style="display: none;">
                 <div class="row">   
@@ -1983,7 +1944,7 @@
                             <div class="modal-body" style="font-size: 16px;">
                                 <div class="row">
                                     <div id="alert_experiencia_docencia"></div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="trabajoActualDocencia">¿En su trabajo actual?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger que si estas trabajando actual">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
@@ -1996,7 +1957,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="experienciaDocenciaFNSP">En la Facultad Nacional Salud p&uacute;blica?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger que estas trabajando en la Facultad nacional salud pública">
+                                            <label for="experienciaDocenciaFNSP">¿En la Facultad Nacional Salud p&uacute;blica?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger que estas trabajando en la Facultad nacional salud pública">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> <br>
                                             <div id="radioBtn" class="btn-group">
                                                 <a class="btn btn-primary btn-sm notActive" data-toggle="experienciaDocenciaFNSP"  data-title="true" id="btnExperienciaDocenciaFNSPSi" >Si</a>
@@ -2005,17 +1966,37 @@
                                             <input type="hidden" name="experienciaDocenciaFNSP" id="experienciaDocenciaFNSP" value="false">
                                         </div>
                                     </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="experienciaDocenciaExterior">¿En exterior?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar si la experiencia es en el exterior">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> <br>
+                                            <div id="radioBtn" class="btn-group">
+                                                <a class="btn btn-primary btn-sm notActive" data-toggle="experienciaDocenciaExterior"  data-title="true" id="btnExperienciaDocenciaExteriorSi" >Si</a>
+                                                <a class="btn btn-primary btn-sm notActive" data-toggle="experienciaDocenciaExterior"  data-title="false" id="btnExperienciaDocenciaExteriorNo" >No</a>
+                                            </div>
+                                            <input type="hidden" name="experienciaDocenciaExterior" id="experienciaDocenciaExterior" value="false">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label>Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de su institución">
                                         <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                        <select style="width: 100%;" name="institucionExperienciaDocencia" id="institucionExperienciaDocencia" class="js-select-basic-single js-states form-control">
-                                            <option></option>
-                                            <c:forEach var="institucion" items="${institucionesEducativasColombianas}">
-                                            <option value="${institucion.getId()}">${institucion.getNombre()}</option>
-                                            </c:forEach>                                            
-                                        </select>
+                                        <div class="form-inline">
+                                            <select style="width: 80%;" name="institucionExperienciaDocenciaColombiana" id="institucionExperienciaDocenciaColombiana" class="js-select-basic-single js-states form-control">
+                                                <option></option>
+                                                <c:forEach var="institucion" items="${institucionesEducativasColombianas}">
+                                                <option value="${institucion.getId()}">${institucion.getNombre()}</option>
+                                                </c:forEach>                                            
+                                            </select>
+                                            <select style="width: 80%;" name="institucionExperienciaDocenciaExterior" id="institucionExperienciaDocenciaExterior" class="js-select-basic-single js-states form-control">
+                                                <option></option>
+                                                <c:forEach var="institucion" items="${institucionesEducativasExterior}">
+                                                <option value="${institucion.getId()}">${institucion.getNombre()}</option>
+                                                </c:forEach>                                            
+                                            </select>
+                                            <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" id="btnNuevaInstitucionExteriorExperienciaDocencia" onclick="nuevaInstitucionExteriorExperienciaDocencia();"><span class="glyphicon glyphicon-plus"></span></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -2729,6 +2710,32 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="md_institucion_exterior" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header mhsuccess">
+                            <button type="button" class="close" onclick="cerrarVentanaInstitucionExterior();">&times;</button>
+                            <h4 class="modal-title">Institución</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="alert_institucion_exterior"></div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="institucionEducativaExterior">Instituci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar cual es la institución que estudió">
+                                        <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                        <input type="text" name="institucionEducativaExterior" id="institucionEducativaExterior" class="form-control" maxlength="150" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" id="btnAdicionarInstitucionExterior">Agregar</button>
+                            <button type="button" class="btn btn-success" onclick="cerrarVentanaInstitucionExterior();">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>                                    
             <input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <form:hidden path="idPersona" />
             <input type="hidden" id="tab" name="tab" />
@@ -2931,19 +2938,21 @@
           $('#anyoFinalizacionEducacionBasica').val("");
         });
         
-        $('#btnTituloExtranjeroSiEducacionSuperior').click(function(){
+        $('#btnTituloExteriorSiEducacionSuperior').click(function(){
           $('#paistit').css("display","block");
           $('#certhomo').css('display','block');
-          $('#btnNuevoProgramaExtranjero').show();
-          buscarInstitucionesEducativasExtranjeras('institucionEducativaPrograma');
+          $('#btnNuevoProgramaExterior').show();
+          $('#institucionEducativaProgramaExterior').next(".select2-container").show();
+          $('#institucionEducativaProgramaColombiana').next(".select2-container").hide();
         });
         
-        $('#btnTituloExtranjeroNoEducacionSuperior').click(function(){
+        $('#btnTituloExteriorNoEducacionSuperior').click(function(){
           $('#paistit').css("display", "none");
           $('#certhomo').css('display', 'none');
-          $('#btnNuevoProgramaExtranjero').hide();
+          $('#btnNuevoProgramaExterior').hide();
           $('#paisTituloExteriorEducacionSuperior').val('').trigger("change.select2");
-          buscarInstitucionesEducativasColombianas('institucionEducativaPrograma');
+          $('#institucionEducativaProgramaExterior').next(".select2-container").hide();
+          $('#institucionEducativaProgramaColombiana').next(".select2-container").show();
         });  
         
         $('#btnGraduadoSiEducacionSuperior').click(function () {
@@ -2959,8 +2968,12 @@
         });
         
         $('#btnAdicionarPrograma').click(function(){
-          var institucion = $('#institucionEducativaPrograma').val();
-          var nombreInstitucion = $('#institucionEducativaPrograma option:selected').text();
+          var institucion = $('#institucionEducativaProgramaColombiana').val();
+          var nombreInstitucion = $('#institucionEducativaProgramaColombiana option:selected').text();
+          if(strToBool($('#tituloExteriorEducacionSuperior').val())) {
+            institucion = $('#institucionEducativaProgramaExterior').val();
+            nombreInstitucion = $('#institucionEducativaProgramaExterior option:selected').text();
+          }
           var programaCursado = $('#programaCursado').val();
           var nombreProgramaCursado = $('#programaCursado option:selected').text();
           var nucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoPrograma').val();
@@ -2979,38 +2992,39 @@
 
           $('#nucleoBasicoConocimientoPrograma').val("");
           $('#nombreNucleoBasicoConocimientoPrograma').val("");
-          $('#institucionEducativaPrograma').val("").trigger("change.select2");
+          $('#institucionEducativaProgramaColombiana').val("").trigger("change.select2");
+          $('#institucionEducativaProgramaExterior').val("").trigger("change.select2");
           $('#programaCursado').val("").trigger("change.select2");
           $('#tituloPrograma').val("");
           
           $('#md_programa').modal('hide');
         });
         
-        $('#btnAdicionarProgramaExtranjero').click(function(){
-          var institucion = $('#institucionEducativaProgramaExtranjero').val();
-          var programaCursado = $('#programaCursadoExtranjero').val();
-          var nucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoProgramaExtranjero').val();
-          var nombreNucleoBasicoConocimientoPrograma = $('#nombreNucleoBasicoConocimientoProgramaExtranjero').val();
-          var tituloPrograma = $('#tituloProgramaExtranjero').val();
+        $('#btnAdicionarProgramaExterior').click(function(){
+          var institucion = $('#nombreInstitucionEducativaProgramaExterior').val();
+          var programaCursado = $('#programaCursadoExterior').val();
+          var nucleoBasicoConocimientoPrograma = $('#nucleoBasicoConocimientoProgramaExterior').val();
+          var nombreNucleoBasicoConocimientoPrograma = $('#nombreNucleoBasicoConocimientoProgramaExterior').val();
+          var tituloPrograma = $('#tituloProgramaExterior').val();
           var nivel = $('#nivelEstudioEducacionSuperior').val();
 
         if (institucion === "") {
-            bootstrap_alert_programa_extranjero.warning('Debe ingresar la institución');
+            bootstrap_alert_programa_exterior.warning('Debe ingresar la institución');
             return false;
         }
         
         if (programaCursado === "") {
-            bootstrap_alert_programa_extranjero.warning('Debe ingresar el programa cursado');
+            bootstrap_alert_programa_exterior.warning('Debe ingresar el programa cursado');
             return false;
         }
 
         if (nucleoBasicoConocimientoPrograma === "") {
-            bootstrap_alert_programa_extranjero.warning('Debe ingresar núcleo básico de conocimiento');
+            bootstrap_alert_programa_exterior.warning('Debe ingresar núcleo básico de conocimiento');
             return false;
         }
 
         if (tituloPrograma === "") {
-            bootstrap_alert_programa_extranjero.warning('Debe ingresar el título');
+            bootstrap_alert_programa_exterior.warning('Debe ingresar el título');
             return false;
         }
 
@@ -3041,34 +3055,33 @@
                     $('#nombreNucleoBasicoConocimientoEducacionSuperior').val(nombreNucleoBasicoConocimientoPrograma);
                     $('#tituloEducacionSuperior').val(tituloPrograma);
                     $('#formprograma').show();
-                    $('#md_programa_extranjero').modal('hide');
+                    $('#md_programa_exterior').modal('hide');
                     $('#md_programa').modal('hide');
                 } else {
-                    bootstrap_alert_programa_extranjero.warning("Error al almacenar el programa.");
+                    bootstrap_alert_programa_exterior.warning("Error al almacenar el programa.");
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
-                bootstrap_alert_programa_extranjero.warning("Error al almacenar el programa.");
+                bootstrap_alert_programa_exterior.warning("Error al almacenar el programa.");
             }});
         });
 
         $('#btnEstudioExteriorSiEducacionContinua').click(function(){
-          $('#institucionEducacionContinuaExtranjero').next(".select2-container").show();
+          $('#institucionEducacionContinuaExterior').next(".select2-container").show();
           $('#institucionEducacionContinuaColombiana').next(".select2-container").hide();
-          $('#btnNuevaInstitucionExtranjero').show();
+          $('#btnNuevaInstitucionExteriorEducacionContinua').show();
         });
         
         $('#btnEstudioExteriorNoEducacionContinua').click(function(){
-          $('#institucionEducacionContinuaExtranjero').next(".select2-container").hide();
+          $('#institucionEducacionContinuaExterior').next(".select2-container").hide();
           $('#institucionEducacionContinuaColombiana').next(".select2-container").show();
-          $('#btnNuevaInstitucionExtranjero').hide();
+          $('#btnNuevaInstitucionExteriorEducacionContinua').hide();
         }); 
 
-        $('#btnAdicionarInstitucionExtranjero').click(function(){
-            var institucion = $('#institucionEducativaExtranjero').val();
-
+        $('#btnAdicionarInstitucionExterior').click(function(){
+            var institucion = $('#institucionEducativaExterior').val();
             if (institucion === "") {
-                bootstrap_alert_institucion_extranjero.warning('Debe ingresar la institución');
+                bootstrap_alert_institucion_exterior.warning('Debe ingresar la institución');
                 return false;
             }
         
@@ -3086,17 +3099,17 @@
                 success: function (response) {
                     if (response !== "") {
                         var respuesta = JSON.parse(response);
-                        $('#institucionEducacionContinuaExtranjero').append('<option value=' + respuesta.id + '>' + institucion + '</option>');
-                        $('#institucionEducacionContinuaExtranjero').val(respuesta.id).trigger("change.select2");
-                        $('#md_institucion_extranjero').modal('hide');
+                        $('#' + institucionEducacionExterior).append('<option value=' + respuesta.id + '>' + institucion + '</option>');
+                        $('#' + institucionEducacionExterior).val(respuesta.id).trigger("change.select2");
+                        $('#md_institucion_exterior').modal('hide');
                     } else {
-                        bootstrap_alert_institucion_extranjero.warning("Error al almacenar la institución.");
+                        bootstrap_alert_institucion_exterior.warning("Error al almacenar la institución.");
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                    bootstrap_alert_institucion_extranjero.warning("Error al almacenar la institución.");
+                    bootstrap_alert_institucion_exterior.warning("Error al almacenar la institución.");
                 }});
-            });
+        });
 
         $('#btnAdicionarCiudadExtranjera').click(function(){
           var pais = $('#pais').val();
@@ -3147,12 +3160,30 @@
         });
         
         $('#btnExperienciaDocenciaFNSPSi').click(function () {
-            $('#institucionExperienciaDocencia').val(ID_UNIVERSIDAD_ANTIOQUIA_MEDELLIN).trigger('change.select2');
-            $('#institucionExperienciaDocencia').prop('disabled', 'disabled');
+            $('#institucionExperienciaDocenciaExterior').next(".select2-container").hide();
+            $('#institucionExperienciaDocenciaColombiana').next(".select2-container").show();
+            $('#institucionExperienciaDocenciaColombiana').val(ID_UNIVERSIDAD_ANTIOQUIA_MEDELLIN).trigger('change.select2');
+            $('#institucionExperienciaDocenciaColombiana').prop('disabled', 'disabled');
         });
         $('#btnExperienciaDocenciaFNSPNo').click(function () {
-            $('#institucionExperienciaDocencia').val("").trigger('change.select2');
-            $('#institucionExperienciaDocencia').prop('disabled', false);
+            $('#institucionExperienciaDocenciaColombiana').val("").trigger('change.select2');
+            $('#institucionExperienciaDocenciaColombiana').prop('disabled', false);
+        });
+        $('#btnExperienciaDocenciaExteriorSi').click(function () {
+            $('#institucionExperienciaDocenciaExterior').next(".select2-container").show();
+            $('#institucionExperienciaDocenciaColombiana').next(".select2-container").hide();
+            $('#btnNuevaInstitucionExperienciaDocenciaExterior').show();
+            $('#institucionExperienciaDocenciaColombiana').val("").trigger('change.select2');
+            $('#institucionExperienciaDocenciaColombiana').prop('disabled', false);
+            $('#btnExperienciaDocenciaFNSPNo').removeClass('notActive').addClass('active');  
+            $('#btnExperienciaDocenciaFNSPSi').removeClass('active').addClass('notActive'); 
+            $('#experienciaDocenciaFNSP').val("false");
+            $('#btnNuevaInstitucionExteriorExperienciaDocencia').show();
+        });
+        $('#btnExperienciaDocenciaExteriorNo').click(function () {
+            $('#institucionExperienciaDocenciaExterior').next(".select2-container").hide();
+            $('#institucionExperienciaDocenciaColombiana').next(".select2-container").show();
+            $('#btnNuevaInstitucionExteriorExperienciaDocencia').hide();
         });
         $('#btnTrabajoActualExperienciaLaboralSi').click(function () {
             $('#fechaRetiroExperienciaLaboral').prop('disabled', 'disabled');
@@ -3325,8 +3356,11 @@
                 $('#radrural').prop('checked', false);
             }
         });
-        $('#institucionEducativaPrograma').change(function () {
-           obtenerProgramasCursados();
+        $('#institucionEducativaProgramaColombiana').change(function () {
+           obtenerProgramasCursados($('#institucionEducativaProgramaColombiana').val());
+        });
+        $('#institucionEducativaProgramaExterior').change(function () {
+           obtenerProgramasCursados($('#institucionEducativaProgramaExterior').val());
         });
         
         $('#programaCursado').change(function () {
@@ -3476,42 +3510,6 @@
                     if(ciudades.length == 1) {
                         $('#ciudad').val(ciudades[0].id).trigger('change.select2');
                     }                    
-                }
-            }});
-    }
-
-    function buscarInstitucionesEducativasExtranjeras(institucionEducativa) {
-        $.ajax({
-            type: "GET",
-            url: "${pageContext.request.contextPath}/hojasVida/institucionesEducativasExtranjeras",
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                if (response !== "") {
-                    $('#' + institucionEducativa).find('option').remove();
-                    $('#' + institucionEducativa).append('<option></option>');
-                    var instituciones = JSON.parse(response);
-                    for (var i = 0; i < instituciones.length; i++) {
-                        $('#' + institucionEducativa).append('<option value=' + instituciones[i].id + '>' + instituciones[i].nombre + '</option>');
-                    }
-                }
-            }});
-    }
-
-    function buscarInstitucionesEducativasColombianas(institucionEducativa) {
-        $.ajax({
-            type: "GET",
-            url: "${pageContext.request.contextPath}/hojasVida/institucionesEducativasColombianas",
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                if (response !== "") {
-                    $('#' + institucionEducativa).find('option').remove();
-                    $('#' + institucionEducativa).append('<option></option>');
-                    var instituciones = JSON.parse(response);
-                    for (var i = 0; i < instituciones.length; i++) {
-                        $('#' + institucionEducativa).append('<option value=' + instituciones[i].id + '>' + instituciones[i].nombre + '</option>');
-                    }
                 }
             }});
     }
@@ -4006,14 +4004,62 @@
         self.adicionarIdioma = function () {
             var idioma = $('#idioma').val();
             var nombreIdioma = $('#idioma option:selected').text();
-            var nivelConversacion = $('#nivelConversacionIdioma').val();
-            var nombreNivelConversacion = $('#nivelConversacionIdioma option:selected').text();
-            var nivelEscritura = $('#nivelEscrituraIdioma').val();
-            var nombreNivelEscritura = $('#nivelEscrituraIdioma option:selected').text();
-            var nivelEscucha = $('#nivelEscuchaIdioma').val();
-            var nombreNivelEscucha = $('#nivelEscuchaIdioma option:selected').text();
-            var nivelLectura = $('#nivelLecturaIdioma').val();
-            var nombreNivelLectura = $('#nivelLecturaIdioma option:selected').text();
+            var nivelConversacion = "";
+            var nombreNivelConversacion = "";
+            var nivelEscritura = "";
+            var nombreNivelEscritura = "";
+            var nivelEscucha = "";
+            var nombreNivelEscucha = "";
+            var nivelLectura = "";
+            var nombreNivelLectura = "";
+            if($('#nivelConversacionIdiomaA').is(":checked")) {
+              nivelConversacion = "A";
+              nombreNivelConversacion = "Alto";
+            }
+            else if($('#nivelConversacionIdiomaB').is(":checked")) {
+              nivelConversacion = "B";
+              nombreNivelConversacion = "Bajo";
+            }
+            else if($('#nivelConversacionIdiomaM').is(":checked")) {
+              nivelConversacion = "M";
+              nombreNivelConversacion = "Medio";
+            }
+            if($('#nivelEscrituraIdiomaA').is(":checked")) {
+              nivelEscritura = "A";
+              nombreNivelEscritura = "Alto";
+            }
+            else if($('#nivelEscrituraIdiomaB').is(":checked")) {
+              nivelEscritura = "B";
+              nombreNivelEscritura = "Bajo";
+            }
+            else if($('#nivelEscrituraIdiomaM').is(":checked")) {
+              nivelEscritura = "M";
+              nombreNivelEscritura = "Medio";
+            }
+            if($('#nivelEscuchaIdiomaA').is(":checked")) {
+              nivelEscucha = "A";
+              nombreNivelEscucha = "Alto";
+            }
+            else if($('#nivelEscuchaIdiomaB').is(":checked")) {
+              nivelEscucha = "B";
+              nombreNivelEscucha = "Bajo";
+            }
+            else if($('#nivelEscuchaIdiomaM').is(":checked")) {
+              nivelEscucha = "M";
+              nombreNivelEscucha = "Medio";
+            }
+            if($('#nivelLecturaIdiomaA').is(":checked")) {
+              nivelLectura = "A";
+              nombreNivelLectura = "Alto";
+            }
+            else if($('#nivelLecturaIdiomaB').is(":checked")) {
+              nivelLectura = "B";
+              nombreNivelLectura = "Bajo";
+            }
+            else if($('#nivelLecturaIdiomaM').is(":checked")) {
+              nivelLectura = "M";
+              nombreNivelLectura = "Medio";
+            }
             var otraCertificacion = $('#otraCertificacionIdioma').val();
             var tipoCertificacion = $('#tipoCertificacionIdioma').val();
             var nombreTipoCertificacion = $('#tipoCertificacionIdioma option:selected').text();
@@ -4182,10 +4228,10 @@
 
         self.editarIdioma = function (idioma) {
             $('#idioma').val(idioma.idioma()).trigger('change');
-            $('#nivelConversacionIdioma').val(idioma.nivelConversacion()).trigger('change');
-            $('#nivelEscrituraIdioma').val(idioma.nivelEscritura()).trigger('change');
-            $('#nivelEscuchaIdioma').val(idioma.nivelEscucha()).trigger('change');
-            $('#nivelLecturaIdioma').val(idioma.nivelLectura()).trigger('change');
+            $('#nivelConversacionIdioma' + idioma.nivelConversacion()).prop("checked", true); 
+            $('#nivelEscrituraIdioma' + idioma.nivelEscritura()).prop("checked", true); 
+            $('#nivelEscuchaIdioma' + idioma.nivelEscucha()).prop("checked", true); 
+            $('#nivelLecturaIdioma' + idioma.nivelLectura()).prop("checked", true); 
             $('#otraCertificacionIdioma').val(idioma.otraCertificacion());
             $('#tipoCertificacionIdioma').val(idioma.tipoCertificacion()).trigger('change');
             if($('#tipoCertificacionIdioma').val() === TIPO_CERTIFICACION_OTRO) {
@@ -4630,11 +4676,11 @@
             if(educacionSuperior.tituloExterior()) {
                 $('#paistit').css("display","block");
                 $('#certhomo').css('display','block');
-                $('#btnNuevoProgramaExtranjero').show();
+                $('#btnNuevoProgramaExterior').show();
             } else {
                 $('#paistit').css("display","none");
                 $('#certhomo').css('display','none');
-                $('#btnNuevoProgramaExtranjero').hide();
+                $('#btnNuevoProgramaExterior').hide();
             }
             
             $('#formprograma').css("display","block");
@@ -4663,12 +4709,12 @@
               $('#fechaTituloEducacionSuperior').prop('disabled','disabled');
             }
             if(educacionSuperior.tituloExterior()) {
-              $('#btnTituloExtranjeroSiEducacionSuperior').removeClass('notActive').addClass('active');  
-              $('#btnTituloExtranjeroNoEducacionSuperior').removeClass('active').addClass('notActive');
+              $('#btnTituloExteriorSiEducacionSuperior').removeClass('notActive').addClass('active');  
+              $('#btnTituloExteriorNoEducacionSuperior').removeClass('active').addClass('notActive');
               $('#paisTituloExteriorEducacionSuperior').css("display","block");
             } else {
-              $('#btnTituloExtranjeroNoEducacionSuperior').removeClass('notActive').addClass('active');  
-              $('#btnTituloExtranjeroSiEducacionSuperior').removeClass('active').addClass('notActive');  
+              $('#btnTituloExteriorNoEducacionSuperior').removeClass('notActive').addClass('active');  
+              $('#btnTituloExteriorSiEducacionSuperior').removeClass('active').addClass('notActive');  
               $('#paisTituloExteriorEducacionSuperior').css("display","none");
             }
             $('#consecutivo').val(educacionSuperior.consecutivo());
@@ -4730,8 +4776,8 @@
                 return false;
             }
             if(estudioExteriorEducacionContinua) {
-                institucionEducacionContinua = $('#institucionEducacionContinuaExtranjero').val();
-                nombreInstitucionEducacionContinua = $('#institucionEducacionContinuaExtranjero option:selected').text();
+                institucionEducacionContinua = $('#institucionEducacionContinuaExterior').val();
+                nombreInstitucionEducacionContinua = $('#institucionEducacionContinuaExterior option:selected').text();
                 if (institucionEducacionContinua === "") {
                     bootstrap_alert_educacion_continua.warning('Debe seleccionar la institución');
                     return false;
@@ -4891,19 +4937,19 @@
             $('#consecutivo').val(educacionContinua.consecutivo());
             $('#certificadoEducacionContinua').show();
             if(educacionContinua.estudioExterior()) {
-              $('#institucionEducacionContinuaExtranjero').val(educacionContinua.institucion()).trigger('change');
+              $('#institucionEducacionContinuaExterior').val(educacionContinua.institucion()).trigger('change');
               $('#btnEstudioExteriorSiEducacionContinua').removeClass('notActive').addClass('active');  
               $('#btnEstudioExteriorNoEducacionContinua').removeClass('active').addClass('notActive');
-              $('#institucionEducacionContinuaExtranjero').next(".select2-container").show();
+              $('#institucionEducacionContinuaExterior').next(".select2-container").show();
               $('#institucionEducacionContinuaColombiana').next(".select2-container").hide();
-              $('#btnNuevaInstitucionExtranjero').show();
+              $('#btnNuevaInstitucionExteriorEducacionContinua').show();
             } else {
               $('#institucionEducacionContinuaColombiana').val(educacionContinua.institucion()).trigger('change');
               $('#btnEstudioExteriorSiEducacionContinua').removeClass('active').addClass('notActive');  
               $('#btnEstudioExteriorNoEducacionContinua').removeClass('notActive').addClass('active');
-              $('#institucionEducacionContinuaExtranjero').next(".select2-container").hide();
+              $('#institucionEducacionContinuaExterior').next(".select2-container").hide();
               $('#institucionEducacionContinuaColombiana').next(".select2-container").show();
-              $('#btnNuevaInstitucionExtranjero').hide();
+              $('#btnNuevaInstitucionExteriorEducacionContinua').hide();
             }
             bootstrap_alert_educacion_continua.removeWarning();
             bootstrap_alert_educaciones_continuas.removeWarning();
@@ -5341,8 +5387,13 @@
         self.adicionarExperienciaDocencia = function () {
             var trabajoActualDocencia = strToBool($('#trabajoActualDocencia').val());
             var experienciaDocenciaFNSP = strToBool($('#experienciaDocenciaFNSP').val());
-            var institucionExperienciaDocencia = $('#institucionExperienciaDocencia').val();
-            var nombreInstitucionExperienciaDocencia = $('#institucionExperienciaDocencia option:selected').text();
+            var experienciaDocenciaExterior = strToBool($('#experienciaDocenciaExterior').val());
+            var institucionExperienciaDocencia = $('#institucionExperienciaDocenciaColombiana').val();
+            var nombreInstitucionExperienciaDocencia = $('#institucionExperienciaDocenciaColombiana option:selected').text();
+            if(experienciaDocenciaExterior) {
+                institucionExperienciaDocencia = $('#institucionExperienciaDocenciaExterior').val();
+                nombreInstitucionExperienciaDocencia = $('#institucionExperienciaDocenciaExterior option:selected').text();
+            }
             if (institucionExperienciaDocencia === "") {
                 bootstrap_alert_experiencia_docencia.warning('Debe seleccionar la institución');
                 return false;
@@ -5363,9 +5414,10 @@
                 formData.append("consecutivo", self.consecutivoExperienciaDocencia());
             }
 
-            formData.append("trabajoActual",trabajoActualDocencia);
-            formData.append("fnsp",experienciaDocenciaFNSP);
-            formData.append("institucion",institucionExperienciaDocencia);
+            formData.append("trabajoActual", trabajoActualDocencia);
+            formData.append("fnsp", experienciaDocenciaFNSP);
+            formData.append("exterior", experienciaDocenciaExterior);
+            formData.append("institucion", institucionExperienciaDocencia);
 
             $.ajax({
                 type: "POST",
@@ -5394,6 +5446,7 @@
                                     consecutivo: ko.observable(experienciasDocencia[i].consecutivo),
                                     trabajoActual: ko.observable(experienciasDocencia[i].trabajoActual),
                                     fnsp: ko.observable(experienciasDocencia[i].fnsp),
+                                    exterior: ko.observable(experienciasDocencia[i].exterior),
                                     institucion: ko.observable(experienciasDocencia[i].institucion),
                                     nombreInstitucion: ko.observable(experienciasDocencia[i].nombreInstitucion),
                                     cursosExperienciaDocencia: ko.observableArray([])
@@ -5443,6 +5496,7 @@
                                     consecutivo: ko.observable(experienciasDocencia[i].consecutivo),
                                     trabajoActual: ko.observable(experienciasDocencia[i].trabajoActual),
                                     fnsp: ko.observable(experienciasDocencia[i].fnsp),
+                                    exterior: ko.observable(experienciasDocencia[i].exterior),
                                     institucion: ko.observable(experienciasDocencia[i].institucion),
                                     nombreInstitucion: ko.observable(experienciasDocencia[i].nombreInstitucion),
                                     cursosExperienciaDocencia: ko.observableArray([])
@@ -5486,13 +5540,27 @@
             if(experienciaDocencia.fnsp()) {
               $('#btnExperienciaDocenciaFNSPSi').removeClass('notActive').addClass('active');  
               $('#btnExperienciaDocenciaFNSPNo').removeClass('active').addClass('notActive');
-              $('#institucionExperienciaDocencia').prop('disabled', 'disabled');
+              $('#institucionExperienciaDocenciaColombiana').prop('disabled', 'disabled');
             } else {
               $('#btnExperienciaDocenciaFNSPNo').removeClass('notActive').addClass('active');  
               $('#btnExperienciaDocenciaFNSPSi').removeClass('active').addClass('notActive');  
-              $('#institucionExperienciaDocencia').prop('disabled', false);
+              $('#institucionExperienciaDocenciaColombiana').prop('disabled', false);
             }
-            $('#institucionExperienciaDocencia').val(experienciaDocencia.institucion()).trigger('change');
+            if(experienciaDocencia.exterior()) {
+                $('#btnExperienciaDocenciaExteriorSi').removeClass('notActive').addClass('active');  
+                $('#btnExperienciaDocenciaExteriorNo').removeClass('active').addClass('notActive');
+                $('#institucionExperienciaDocenciaExterior').val(experienciaDocencia.institucion()).trigger('change');
+                $('#institucionExperienciaDocenciaExterior').next(".select2-container").show();
+                $('#institucionExperienciaDocenciaColombiana').next(".select2-container").hide();
+                $('#btnNuevaInstitucionExteriorExperienciaDocencia').show();
+            } else {
+                $('#btnExperienciaDocenciaExteriorNo').removeClass('notActive').addClass('active');  
+                $('#btnExperienciaDocenciaExteriorSi').removeClass('active').addClass('notActive');  
+                $('#institucionExperienciaDocenciaColombiana').val(experienciaDocencia.institucion()).trigger('change');
+                $('#institucionExperienciaDocenciaExterior').next(".select2-container").hide();
+                $('#institucionExperienciaDocenciaColombiana').next(".select2-container").show();
+                $('#btnNuevaInstitucionExteriorExperienciaDocencia').hide();
+            }
             $('#certificadoCursoExperienciaDocencia').val('');
             self.consecutivoExperienciaDocencia(experienciaDocencia.consecutivo());
             bootstrap_alert_experiencia_docencia.removeWarning();
@@ -5599,6 +5667,7 @@
                                     consecutivo: ko.observable(experienciasDocencia[i].consecutivo),
                                     trabajoActual: ko.observable(experienciasDocencia[i].trabajoActual),
                                     fnsp: ko.observable(experienciasDocencia[i].fnsp),
+                                    exterior: ko.observable(experienciasDocencia[i].exterior),
                                     institucion: ko.observable(experienciasDocencia[i].institucion),
                                     nombreInstitucion: ko.observable(experienciasDocencia[i].nombreInstitucion),
                                     cursosExperienciaDocencia: ko.observableArray([])
@@ -5648,6 +5717,7 @@
                                     consecutivo: ko.observable(experienciasDocencia[i].consecutivo),
                                     trabajoActual: ko.observable(experienciasDocencia[i].trabajoActual),
                                     fnsp: ko.observable(experienciasDocencia[i].fnsp),
+                                    exterior: ko.observable(experienciasDocencia[i].exterior),
                                     institucion: ko.observable(experienciasDocencia[i].institucion),
                                     nombreInstitucion: ko.observable(experienciasDocencia[i].nombreInstitucion),
                                     cursosExperienciaDocencia: ko.observableArray([])
@@ -6241,10 +6311,18 @@
 
     function nuevoIdioma() {
         $('#idioma').val("").trigger('change');
-        $('#nivelConversacionIdioma').val("").trigger('change');
-        $('#nivelEscrituraIdioma').val("").trigger('change');
-        $('#nivelEscuchaIdioma').val("").trigger('change');
-        $('#nivelLecturaIdioma').val("").trigger('change');
+        $('#nivelConversacionIdiomaA').prop("checked", false); 
+        $('#nivelEscrituraIdiomaA').prop("checked", false); 
+        $('#nivelEscuchaIdiomaA').prop("checked", false); 
+        $('#nivelLecturaIdiomaA').prop("checked", false); 
+        $('#nivelConversacionIdiomaM').prop("checked", false); 
+        $('#nivelEscrituraIdiomaM').prop("checked", false); 
+        $('#nivelEscuchaIdiomaM').prop("checked", false); 
+        $('#nivelLecturaIdiomaM').prop("checked", false); 
+        $('#nivelConversacionIdiomaB').prop("checked", false); 
+        $('#nivelEscrituraIdiomaB').prop("checked", false); 
+        $('#nivelEscuchaIdiomaB').prop("checked", false); 
+        $('#nivelLecturaIdiomaB').prop("checked", false); 
         $('#otraCertificacionIdioma').val("");
         $('#tipoCertificacionIdioma').val("").trigger('change');
         $('#puntajeCertificacionIdioma').val("");
@@ -6289,13 +6367,14 @@
         
         $('#nucleoBasicoConocimientoPrograma').val("");
         $('#nombreNucleoBasicoConocimientoPrograma').val("");
-        $('#institucionEducativaPrograma').val("").trigger("change.select2");
+        $('#institucionEducativaProgramaColombiana').val("").trigger("change.select2");
+        $('#institucionEducativaProgramaExterior').val("").trigger("change.select2");
         $('#programaCursado').val("");
         $('#tituloPrograma').val("");        
-        $('#btnNuevoProgramaExtranjero').hide();
+        $('#btnNuevoProgramaExterior').hide();
         
-        $('#btnTituloExtranjeroSiEducacionSuperior').removeClass('active').addClass('notActive');  
-        $('#btnTituloExtranjeroNoEducacionSuperior').removeClass('active').addClass('notActive');  
+        $('#btnTituloExteriorSiEducacionSuperior').removeClass('active').addClass('notActive');  
+        $('#btnTituloExteriorNoEducacionSuperior').removeClass('active').addClass('notActive');  
         $('#paisTituloExteriorEducacionSuperior').css("display","none");
          
         $('#btnGraduadoSiEducacionSuperior').removeClass('active').addClass('notActive');  
@@ -6321,7 +6400,8 @@
         
         $('#nucleoBasicoConocimientoPrograma').val("");
         $('#nombreNucleoBasicoConocimientoPrograma').val("");
-        $('#institucionEducativaPrograma').val("").trigger("change.select2");
+        $('#institucionEducativaProgramaColombiana').val("").trigger("change.select2");
+        $('#institucionEducativaProgramaExterior').val("").trigger("change.select2");
         $('#programaCursado').val("").trigger("change.select2");
         $('#tituloPrograma').val("");
         $('#btnProgramaActivo').removeClass('active').addClass('notActive');  
@@ -6330,25 +6410,32 @@
         $('#md_programa').modal({backdrop: 'static', keyboard: false})  ;
     }
     
-    function nuevoProgramaExtranjero() {
-        $('#institucionEducativaProgramaExtranjero').val("");
-        $('#programaCursadoExtranjero').val("");
-        $('#nucleoBasicoConocimientoProgramaExtranjero').val("");
-        $('#nombreNucleoBasicoConocimientoProgramaExtranjero').val("");
-        $('#tituloProgramaExtranjero').val("");                    
-        $('#md_programa_extranjero').modal({backdrop: 'static', keyboard: false})  ;
+    function nuevoProgramaExterior() {
+        $('#nombreInstitucionEducativaProgramaExterior').val("");
+        $('#programaCursadoExterior').val("");
+        $('#nucleoBasicoConocimientoProgramaExterior').val("");
+        $('#nombreNucleoBasicoConocimientoProgramaExterior').val("");
+        $('#tituloProgramaExterior').val("");                    
+        $('#md_programa_exterior').modal({backdrop: 'static', keyboard: false})  ;
     }
     
-    function nuevaInstitucionExtranjero() {
-        $('#institucionEducativaExtranjero').val("");
-        $('#md_institucion_extranjero').modal({backdrop: 'static', keyboard: false})  ;
+    function nuevaInstitucionExteriorExperienciaDocencia() {
+        institucionEducacionExterior = "institucionExperienciaDocenciaExterior"
+        $('#institucionEducativaExterior').val("");
+        $('#md_institucion_exterior').modal({backdrop: 'static', keyboard: false})  ;
     }
     
+    function nuevaInstitucionExteriorEducacionContinua() {
+        institucionEducacionExterior = "institucionEducacionContinuaExterior"
+        $('#institucionEducativaExterior').val("");
+        $('#md_institucion_exterior').modal({backdrop: 'static', keyboard: false})  ;
+    }
+
     function nuevaEducacionContinua() {
         $('#tipoCapacitacionEducacionContinua').val("").trigger('change');
-        $('#institucionEducacionContinuaExtranjero').val("").trigger('change');
+        $('#institucionEducacionContinuaExterior').val("").trigger('change');
         $('#institucionEducacionContinuaColombiana').val("").trigger('change');
-        $('#institucionEducacionContinuaExtranjero').next(".select2-container").hide();
+        $('#institucionEducacionContinuaExterior').next(".select2-container").hide();
         $('#institucionEducacionContinuaColombiana').next(".select2-container").show();
         $('#nombreCapacitacionEducacionContinua').val("");
         $('#numeroHorasEducacionContinua').val("");
@@ -6359,7 +6446,7 @@
         $('#certificadoEducacionContinua').val('');
         $('#btnEstudioExteriorSiEducacionContinua').removeClass('active').addClass('notActive');  
         $('#btnEstudioExteriorNoEducacionContinua').removeClass('active').addClass('notActive');
-        $('#btnNuevaInstitucionExtranjero').hide();
+        $('#btnNuevaInstitucionExteriorEducacionContinua').hide();
         
         bootstrap_alert_educacion_continua.removeWarning();
         bootstrap_alert_educaciones_continuas.removeWarning();
@@ -6410,7 +6497,14 @@
         $('#experienciaDocenciaFNSP').val("false");
         $('#btnExperienciaDocenciaFNSPSi').removeClass('active').addClass('notActive');
         $('#btnExperienciaDocenciaFNSPNo').removeClass('active').addClass('notActive');
-        $('#institucionExperienciaDocencia').val("").trigger('change');
+        $('#btnExperienciaDocenciaExteriorSi').removeClass('active').addClass('notActive');  
+        $('#btnExperienciaDocenciaExteriorNo').removeClass('active').addClass('notActive');
+        $('#institucionExperienciaDocenciaColombiana').val("").trigger('change');
+        $('#institucionExperienciaDocenciaExterior').val("").trigger('change');
+        $('#institucionExperienciaDocenciaExterior').next(".select2-container").hide();
+        $('#institucionExperienciaDocenciaColombiana').next(".select2-container").show();
+        $('#btnNuevaInstitucionExteriorExperienciaDocencia').hide();
+        
         hojaVidaModel.consecutivoExperienciaDocencia(hojaVidaModel.experienciasDocencia().length);
         bootstrap_alert_experiencia_docencia.removeWarning();
         bootstrap_alert_experiencias_docencia.removeWarning();
@@ -6436,7 +6530,11 @@
         if (hojaVidaModel.consecutivoExperienciaDocencia() === hojaVidaModel.experienciasDocencia().length) {
             var trabajoActualDocencia = strToBool($('#trabajoActualDocencia').val());
             var experienciaDocenciaFNSP = strToBool($('#experienciaDocenciaFNSP').val());
-            var institucionExperienciaDocencia = $('#institucionExperienciaDocencia').val();
+            var institucionExperienciaDocencia = $('#institucionExperienciaDocenciaColombiana').val();
+            var experienciaDocenciaExterior = strToBool($('#experienciaDocenciaExterior').val());
+            if(experienciaDocenciaExterior) {
+                institucionExperienciaDocencia = $('#institucionExperienciaDocenciaExterior').val();
+            }
             if (institucionExperienciaDocencia === "") {
                 bootstrap_alert_experiencia_docencia.warning('Debe seleccionar la institución');
                 return false;
@@ -6446,6 +6544,7 @@
             formData.append("consecutivo", self.experienciasDocencia().length);
             formData.append("trabajoActual",trabajoActualDocencia);
             formData.append("fnsp",experienciaDocenciaFNSP);
+            formData.append("exterior",experienciaDocenciaExterior);
             formData.append("institucion",institucionExperienciaDocencia);
 
             $.ajax({
@@ -6473,6 +6572,7 @@
                                     consecutivo: ko.observable(experienciasDocencia[i].consecutivo),
                                     trabajoActual: ko.observable(experienciasDocencia[i].trabajoActual),
                                     fnsp: ko.observable(experienciasDocencia[i].fnsp),
+                                    exterior: ko.observable(experienciasDocencia[i].exterior),
                                     institucion: ko.observable(experienciasDocencia[i].institucion),
                                     nombreInstitucion: ko.observable(experienciasDocencia[i].nombreInstitucion),
                                     cursosExperienciaDocencia: ko.observableArray([])
@@ -6567,12 +6667,12 @@
         $('#md_programa').modal('hide');
     }
     
-    function cerrarVentanaProgramaExtranjero() {
-        $('#md_programa_extranjero').modal('hide');
+    function cerrarVentanaProgramaExterior() {
+        $('#md_programa_exterior').modal('hide');
     }
 
-    function cerrarVentanaInstitucionExtranjero() {
-        $('#md_institucion_extranjero').modal('hide');
+    function cerrarVentanaInstitucionExterior() {
+        $('#md_institucion_exterior').modal('hide');
     }
     
     function cerrarVentanaEducacionContinua() {
@@ -6731,9 +6831,8 @@
             }});
     });
 
-    function obtenerProgramasCursados() {
+    function obtenerProgramasCursados(institucion) {
         $('#tituloPrograma').val('');
-        var institucion = $('#institucionEducativaPrograma').val();
         var nivel = $('#nivelEstudioEducacionSuperior').val();
         if(institucion != "") {
         $.ajax({
@@ -6834,12 +6933,12 @@
         }
     }
 
-    bootstrap_alert_institucion_extranjero = {};
-    bootstrap_alert_institucion_extranjero.warning = function (message) {
-        $('#alert_institucion_extranjero').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    bootstrap_alert_institucion_exterior = {};
+    bootstrap_alert_institucion_exterior.warning = function (message) {
+        $('#alert_institucion_exterior').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
-    bootstrap_alert_institucion_extranjero.removeWarning = function () {
-        $('#alert_institucion_extranjero').html('');
+    bootstrap_alert_institucion_exterior.removeWarning = function () {
+        $('#alert_institucion_exterior').html('');
     };
 
     bootstrap_alert_ciudad_extranjera = {};
@@ -6994,23 +7093,23 @@
         $('#alert_educaciones_superiores').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
 
-    bootstrap_alert_programa_extranjero = {};
-    bootstrap_alert_programa_extranjero.warning = function (message) {
-        $('#alert_programa_extranjero').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    bootstrap_alert_programa_exterior = {};
+    bootstrap_alert_programa_exterior.warning = function (message) {
+        $('#alert_programa_exterior').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
-    bootstrap_alert_programa_extranjero.removeWarning = function () {
-        $('#alert_programa_extranjero').html('');
+    bootstrap_alert_programa_exterior.removeWarning = function () {
+        $('#alert_programa_exterior').html('');
     };
 
-    bootstrap_alert_programas_extranjero = {};
-    bootstrap_alert_programas_extranjero.warning = function (message) {
-        $('#alert_programas_extranjero').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    bootstrap_alert_programas_exterior = {};
+    bootstrap_alert_programas_exterior.warning = function (message) {
+        $('#alert_programas_exterior').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
-    bootstrap_alert_programas_extranjero.removeWarning = function () {
-        $('#alert_programas_extranjero').html('');
+    bootstrap_alert_programas_exterior.removeWarning = function () {
+        $('#alert_programas_exterior').html('');
     };
-    bootstrap_alert_programas_extranjero.success = function (message) {
-        $('#alert_programas_extranjero').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    bootstrap_alert_programas_exterior.success = function (message) {
+        $('#alert_programas_exterior').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
 
     bootstrap_alert_educacion_continua = {};

@@ -5,10 +5,16 @@
 <div id="contenido">
     <div class="container"> 
         <div id="alert_placeholder_convocatoria"></div>
+        <div class="alert alert-success" role="alert" style="margin-bottom: 0px !important">
+            <strong>Bienvenido(a),</strong> si desea postular su hoja de vida a una convocatoria, inscripción o invitación debe presionar clic sobre el botón 
+            <a class="btn btn-primary btn-sm active" data-target="#" data-title="si">SI</a> de la columna "Aplicar" e inmediatamente su hoja de vida será postulada a la convocatoria seleccionada, para aplicar su hoja de vida debe estar 
+            <strong>actualizada</strong> y debe cumplir con los 
+            <strong>criterios habilitantes</strong>.
+        </div>        
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header">
-                    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i>&nbsp;Convocatorias o invitaciones vigentes Facultad Nacional de Salud Pública</h4>
+                    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i>&nbsp;Convocatorias, inscripciones e invitaciones Facultad Nacional de Salud Pública</h4>
                 </div>
                 <div class="form-group">
                     <ul class="nav nav-tabs">
@@ -241,9 +247,9 @@
                         <table class="table tabla table-hover tableestilo" id="adendas">
                             <thead> 
                                 <tr>
-                                    <th>Tipo de Adenda</th>
-                                    <th>Adenda</th>
-                                    <th>Documento</th>
+                                    <th style="width:200">Tipo de Adenda</th>
+                                    <th style="width:700">Adenda</th>
+                                    <th style="width:50">Documento</th>
                                 </tr>
                             </thead>
                         </table>
