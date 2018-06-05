@@ -1188,6 +1188,12 @@
                                                     <h4 class="modal-title">Programa</h4>
                                                 </div>
                                                 <div class="modal-body">
+                                                    <div class="alert alert-success" role="alert" id="divProgramaExterior">
+                                                       <strong>Nuevo programa,</strong> si su programa no esta disponible en la lista y desea agregarlo debe presionar  clic sobre el botón 
+                                                                           <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" data-target="#">
+                                                            <span class="glyphicon glyphicon-plus"></span>   
+                                                       </button>
+                                                    </div>                                                    
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
@@ -1603,6 +1609,12 @@
                             </div>
                             <div class="modal-body">
                                 <div id="alert_educacion_continua"></div>
+                                <div class="alert alert-success" role="alert" id="divMensajeInstitucionExteriorEducacionContinua">
+                                    <strong>Nueva Institución,</strong> si su institución educativa no esta disponible en la lista y desea agregarla debe presionar clic sobre el botón 
+                                                        <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" data-target="#">
+                                         <span class="glyphicon glyphicon-plus"></span>   
+                                    </button>
+                                </div>                                
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -1944,6 +1956,12 @@
                             <div class="modal-body" style="font-size: 16px;">
                                 <div class="row">
                                     <div id="alert_experiencia_docencia"></div>
+                                    <div class="alert alert-success" role="alert" id="divMensajeInstitucionExteriorExperienciaDocencia">
+                                        <strong>Nueva Institución,</strong> si su institución educativa no esta disponible en la lista y desea agregarla debe presionar clic sobre el botón 
+                                                            <button style="margin-left: 10px;" type="button" class="btn btn-success btn-sm" data-target="#">
+                                             <span class="glyphicon glyphicon-plus"></span>   
+                                        </button>
+                                    </div>                                
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="trabajoActualDocencia">¿En su trabajo actual?</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe escoger que si estas trabajando actual">
@@ -2946,6 +2964,7 @@
           $('#paistit').css("display","block");
           $('#certhomo').css('display','block');
           $('#btnNuevoProgramaExterior').show();
+          $('#divProgramaExterior').show();
           $('#institucionEducativaProgramaExterior').next(".select2-container").show();
           $('#institucionEducativaProgramaColombiana').next(".select2-container").hide();
         });
@@ -2954,6 +2973,7 @@
           $('#paistit').css("display", "none");
           $('#certhomo').css('display', 'none');
           $('#btnNuevoProgramaExterior').hide();
+          $('#divProgramaExterior').hide();
           $('#paisTituloExteriorEducacionSuperior').val('').trigger("change.select2");
           $('#institucionEducativaProgramaExterior').next(".select2-container").hide();
           $('#institucionEducativaProgramaColombiana').next(".select2-container").show();
@@ -3074,12 +3094,14 @@
           $('#institucionEducacionContinuaExterior').next(".select2-container").show();
           $('#institucionEducacionContinuaColombiana').next(".select2-container").hide();
           $('#btnNuevaInstitucionExteriorEducacionContinua').show();
+          $('#divMensajeInstitucionExteriorEducacionContinua').show();
         });
         
         $('#btnEstudioExteriorNoEducacionContinua').click(function(){
           $('#institucionEducacionContinuaExterior').next(".select2-container").hide();
           $('#institucionEducacionContinuaColombiana').next(".select2-container").show();
           $('#btnNuevaInstitucionExteriorEducacionContinua').hide();
+          $('#divMensajeInstitucionExteriorEducacionContinua').hide();
         }); 
 
         $('#btnAdicionarInstitucionExterior').click(function(){
@@ -3183,11 +3205,13 @@
             $('#btnExperienciaDocenciaFNSPSi').removeClass('active').addClass('notActive'); 
             $('#experienciaDocenciaFNSP').val("false");
             $('#btnNuevaInstitucionExteriorExperienciaDocencia').show();
+            $('#divMensajeInstitucionExteriorExperienciaDocencia').show();
         });
         $('#btnExperienciaDocenciaExteriorNo').click(function () {
             $('#institucionExperienciaDocenciaExterior').next(".select2-container").hide();
             $('#institucionExperienciaDocenciaColombiana').next(".select2-container").show();
             $('#btnNuevaInstitucionExteriorExperienciaDocencia').hide();
+            $('#divMensajeInstitucionExteriorExperienciaDocencia').hide();
         });
         $('#btnTrabajoActualExperienciaLaboralSi').click(function () {
             $('#fechaRetiroExperienciaLaboral').prop('disabled', 'disabled');
@@ -4681,10 +4705,12 @@
                 $('#paistit').css("display","block");
                 $('#certhomo').css('display','block');
                 $('#btnNuevoProgramaExterior').show();
+                $('#divProgramaExterior').show();
             } else {
                 $('#paistit').css("display","none");
                 $('#certhomo').css('display','none');
                 $('#btnNuevoProgramaExterior').hide();
+                $('#divProgramaExterior').hide();
             }
             
             $('#formprograma').css("display","block");
@@ -4947,6 +4973,7 @@
               $('#institucionEducacionContinuaExterior').next(".select2-container").show();
               $('#institucionEducacionContinuaColombiana').next(".select2-container").hide();
               $('#btnNuevaInstitucionExteriorEducacionContinua').show();
+              $('#divMensajeInstitucionExteriorEducacionContinua').show();
             } else {
               $('#institucionEducacionContinuaColombiana').val(educacionContinua.institucion()).trigger('change');
               $('#btnEstudioExteriorSiEducacionContinua').removeClass('active').addClass('notActive');  
@@ -4954,6 +4981,7 @@
               $('#institucionEducacionContinuaExterior').next(".select2-container").hide();
               $('#institucionEducacionContinuaColombiana').next(".select2-container").show();
               $('#btnNuevaInstitucionExteriorEducacionContinua').hide();
+              $('#divMensajeInstitucionExteriorEducacionContinua').hide();
             }
             bootstrap_alert_educacion_continua.removeWarning();
             bootstrap_alert_educaciones_continuas.removeWarning();
@@ -5557,6 +5585,7 @@
                 $('#institucionExperienciaDocenciaExterior').next(".select2-container").show();
                 $('#institucionExperienciaDocenciaColombiana').next(".select2-container").hide();
                 $('#btnNuevaInstitucionExteriorExperienciaDocencia').show();
+                $('#divMensajeInstitucionExteriorExperienciaDocencia').show();
             } else {
                 $('#btnExperienciaDocenciaExteriorNo').removeClass('notActive').addClass('active');  
                 $('#btnExperienciaDocenciaExteriorSi').removeClass('active').addClass('notActive');  
@@ -5564,6 +5593,7 @@
                 $('#institucionExperienciaDocenciaExterior').next(".select2-container").hide();
                 $('#institucionExperienciaDocenciaColombiana').next(".select2-container").show();
                 $('#btnNuevaInstitucionExteriorExperienciaDocencia').hide();
+                $('#divMensajeInstitucionExteriorExperienciaDocencia').hide();
             }
             $('#certificadoCursoExperienciaDocencia').val('');
             self.consecutivoExperienciaDocencia(experienciaDocencia.consecutivo());
@@ -6376,6 +6406,7 @@
         $('#programaCursado').val("");
         $('#tituloPrograma').val("");        
         $('#btnNuevoProgramaExterior').hide();
+        $('#divProgramaExterior').hide();
         
         $('#btnTituloExteriorSiEducacionSuperior').removeClass('active').addClass('notActive');  
         $('#btnTituloExteriorNoEducacionSuperior').removeClass('active').addClass('notActive');  
@@ -6451,6 +6482,7 @@
         $('#btnEstudioExteriorSiEducacionContinua').removeClass('active').addClass('notActive');  
         $('#btnEstudioExteriorNoEducacionContinua').removeClass('active').addClass('notActive');
         $('#btnNuevaInstitucionExteriorEducacionContinua').hide();
+        $('#divMensajeInstitucionExteriorEducacionContinua').hide();
         
         bootstrap_alert_educacion_continua.removeWarning();
         bootstrap_alert_educaciones_continuas.removeWarning();
@@ -6508,6 +6540,7 @@
         $('#institucionExperienciaDocenciaExterior').next(".select2-container").hide();
         $('#institucionExperienciaDocenciaColombiana').next(".select2-container").show();
         $('#btnNuevaInstitucionExteriorExperienciaDocencia').hide();
+        $('#divMensajeInstitucionExteriorExperienciaDocencia').hide();
         
         hojaVidaModel.consecutivoExperienciaDocencia(hojaVidaModel.experienciasDocencia().length);
         bootstrap_alert_experiencia_docencia.removeWarning();
