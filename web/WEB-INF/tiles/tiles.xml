@@ -39,8 +39,20 @@
         <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/terminos.jsp" />  
     </definition>  
     <definition name="hojasVida/validar" extends="base-definition">  
-        <put-attribute name="title" value="Términos" />  
+        <put-attribute name="title" value="Validar" />  
         <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/validar.jsp" />  
+    </definition>  
+    <definition name="hojasVida/consulta" extends="base-definition">  
+        <put-attribute name="title" value="Consulta" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/consulta.jsp" />  
+    </definition>  
+    <definition name="hojasVida/educacionBasica" extends="base-definition">  
+        <put-attribute name="title" value="Educación Básica" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/educacionBasica.jsp" />  
+    </definition>  
+    <definition name="hojasVida/educacionSuperior" extends="base-definition">  
+        <put-attribute name="title" value="Educación Superior" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/educacionSuperior.jsp" />  
     </definition>  
 
     <!-- Convocatorias Page -->

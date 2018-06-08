@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.fnsp.buho.utilidades;
+package co.edu.fnsp.buho.excel;
 
-import co.edu.fnsp.buho.entidades.Evaluacion;
 import co.edu.fnsp.buho.entidades.HojaVida;
 import java.util.List;
 import java.util.Map;

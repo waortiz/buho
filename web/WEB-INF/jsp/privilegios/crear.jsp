@@ -7,6 +7,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
 
+<div id="contenido">         
 <div class="container">
     <form:form method="POST" action="${pageContext.request.contextPath}/privilegios/crear" modelAttribute="privilegio">
         <br />
@@ -72,7 +73,7 @@
         </div>   
     </form:form>
 </div>
-
+</div>
 <script>
     $.validate({
         validateOnBlur: false, // disable validation when input looses focus

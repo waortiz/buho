@@ -25,6 +25,7 @@
         <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/jquery.datetimepicker.min.css"/>'> 
         <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/jquery-ui.min.css"/>'>
         <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/select2.min.css"/>'>
+        <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/fileinput.min.css"/>'>
         
         <!-- jQuery -->
         <script type="text/javascript" src='<c:url value="/resources/js/jquery-3.2.1.min.js" />'></script> 
@@ -53,6 +54,7 @@
         <script type="text/javascript" src='<c:url value="/resources/js/funciones.js" />'></script>
         <script type="text/javascript" src='<c:url value="/resources/js/moment.js" />'></script>
         <script type="text/javascript" src='<c:url value="/resources/js/moment-with-locales.js" />'></script>
+        <script type="text/javascript" src='<c:url value="/resources/js/fileinput.js" />'></script>
     </head>
     <body class="sidenav-toggled">
         <div id="contenedorPpal">
@@ -81,8 +83,6 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <br>                
             <tiles:insertAttribute name="body" />
 
             <tiles:insertAttribute name="footer" />

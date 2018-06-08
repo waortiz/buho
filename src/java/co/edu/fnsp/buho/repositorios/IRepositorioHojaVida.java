@@ -6,6 +6,9 @@
 package co.edu.fnsp.buho.repositorios;
 
 import co.edu.fnsp.buho.entidades.Articulo;
+import co.edu.fnsp.buho.entidades.ConsultaHojaVida;
+import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionBasica;
+import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionSuperior;
 import co.edu.fnsp.buho.entidades.CorreoElectronico;
 import co.edu.fnsp.buho.entidades.CuentaBancaria;
 import co.edu.fnsp.buho.entidades.CursoExperienciaDocencia;
@@ -18,6 +21,9 @@ import co.edu.fnsp.buho.entidades.EducacionSuperior;
 import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.HojaVida;
+import co.edu.fnsp.buho.entidades.HojaVidaConsulta;
+import co.edu.fnsp.buho.entidades.HojaVidaEducacionBasica;
+import co.edu.fnsp.buho.entidades.HojaVidaEducacionSuperior;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.Investigacion;
 import co.edu.fnsp.buho.entidades.Patente;
@@ -37,7 +43,7 @@ public interface IRepositorioHojaVida {
 
     long ingresarHojaVida(long idUsuario, HojaVida hojaVida);
     
-    List<HojaVida> obtenerHojasVida();
+    List<HojaVidaConsulta> obtenerHojasVida();
 
     void eliminarHojaVida(long idPersona);
 
@@ -168,4 +174,10 @@ public interface IRepositorioHojaVida {
     Investigacion obtenerInvestigacion(long idPersona);
     
     List<CursoExperienciaDocencia> obtenerCursosExperienciaDocencia(long idPersona);
+
+    List<HojaVidaConsulta> obtenerHojasVida(ConsultaHojaVida consultaHojaVida);
+
+    List<HojaVidaEducacionBasica> obtenerHojaVidaEducacionBasica(ConsultaHojaVidaEducacionBasica consultaHojaVidaEducacionBasica);
+
+    List<HojaVidaEducacionSuperior> obtenerHojaVidaEducacionSuperior(ConsultaHojaVidaEducacionSuperior consultaHojaVidaEducacionSuperior);
 }

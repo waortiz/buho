@@ -15,7 +15,7 @@ public class Programa {
     private String titulo;
     private int nucleoBasicoConocimiento;
     private String nombreNucleoBasicoConocimiento;
-    private String institucion;
+    private int institucion;
     private int nivel;
     
     /**
@@ -77,14 +77,14 @@ public class Programa {
     /**
      * @return the institucion
      */
-    public String getInstitucion() {
+    public int getInstitucion() {
         return institucion;
     }
 
     /**
      * @param institucion the institucion to set
      */
-    public void setInstitucion(String institucion) {
+    public void setInstitucion(int institucion) {
         this.institucion = institucion;
     }
 

@@ -470,13 +470,8 @@ public class RepositorioMaestro implements IRepositorioMaestro {
 
     @Override
     public int ingresarProgramaInstitucion(Programa programa) {
-        MapSqlParameterSource parametrosIngresoInstitucion = new MapSqlParameterSource();
-        parametrosIngresoInstitucion.addValue("varNombre", programa.getInstitucion());
-        Map resultadoIngresoInstitucion = ingresarInstitucion.execute(parametrosIngresoInstitucion);
-        int idInstitucion = (int) resultadoIngresoInstitucion.get("varId");
-
         MapSqlParameterSource parametrosIngresoPrograma = new MapSqlParameterSource();
-        parametrosIngresoPrograma.addValue("varinstitucion", idInstitucion);
+        parametrosIngresoPrograma.addValue("varinstitucion", programa.getInstitucion());
         parametrosIngresoPrograma.addValue("varnucleobasicoconocimiento", programa.getNucleoBasicoConocimiento());
         parametrosIngresoPrograma.addValue("varnombre", programa.getNombre());
         parametrosIngresoPrograma.addValue("vartitulo", programa.getTitulo());

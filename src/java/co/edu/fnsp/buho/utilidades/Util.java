@@ -85,21 +85,22 @@ public class Util {
         return "";
     }
 
-    public static long obtenerNumero(String numero) {
-        try {
-            return (long) decimalFormat.parse(numero);
-        } catch (ParseException ex) {
-            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return 0;
-    }
-
     public static int obtenerEntero(String numero) {
         if (numero == null || numero.length() == 0) {
             return 0;
         }
         return Integer.parseInt(numero);
+    }
+
+    public static long obtenerEnteroLargo(String numero) {
+        if (numero == null || numero.length() == 0) {
+            return 0;
+        }
+        return Long.parseLong(numero);
+    }
+    
+    public static Object obtenerBooleano(String valor) {
+        return Boolean.parseBoolean(valor);
     }
 
     public static double obtenerNumeroDoble(String numero) {

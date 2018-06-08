@@ -8,7 +8,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
 
-<div class="container">
+<div id="contenido">
+    <div class="container">
     <form:form>
         <table class='table tabla table-hover' style='font-size:12px;' id="usuarios"> 
             <thead>
@@ -47,6 +48,7 @@
                 </tbody>
         </table> 
     </form:form>
+    </div>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {

@@ -53,7 +53,7 @@
                     <i class="fa fa-pencil-square-o"></i>
                    Adendas</a></li>
                 </ul>
-            </div>            
+            </div>
             <div id="formdatosgen">
                 <legend>Convocatoria</legend>
                 <div class="row">
@@ -233,15 +233,7 @@
                 </div>
             </div>
             <div id="formcrithab" style="display: none;" >
-                <div class="row">   
-                    <div class="col-md-1" style="margin-bottom: 20px;">
-                        <button type="button" class="btn btn-success">Criterios habilitantes</button>
-                    </div>
-                </div>
                 <legend>Criterios Habilitantes</legend>
-                <div class="row">
-
-                </div>
                 <div class="row">  
                     <div class="col-md-2" >
                         <div class="form-group">
@@ -1146,40 +1138,65 @@
                 $('#divOtroCertificacionIdioma').css("display", "none");
             }
         });
-        $('#btndatosgen').click(function () {
-            $('#formdatosgen').css('display', 'block');
-            $('#formcrithab').css('display', 'none');
-            $('#formcriteva').css('display', 'none');
-            $('#formadendas').css('display', 'none');
-            $('#formresultado').css('display', 'none');
+        $('#btndatosgen').click(function(){
+          $('#formdatosgen').css('display','block');
+          $('#formcrithab').css('display','none');
+          $('#formcriteva').css('display','none');
+          $('#formadendas').css('display','none');
+          $('#formresultado').css('display','none');
+          $('#liconvoca').css('display','block');
+          $('#licrihab').css('display','none');
+          $('#licrieva').css('display','none');
+          $('#liresul').css('display','none');
+          $('#liadendas').css('display','none');
         });
-        $('#btncrithab').click(function () {
-            $('#formdatosgen').css('display', 'none');
-            $('#formcrithab').css('display', 'block');
-            $('#formcriteva').css('display', 'none');
-            $('#formadendas').css('display', 'none');
-            $('#formresultado').css('display', 'none');
+        $('#btncrithab').click(function(){
+          $('#formdatosgen').css('display','none');
+          $('#formcrithab').css('display','block');
+          $('#formcriteva').css('display','none');
+          $('#formadendas').css('display','none');
+          $('#formresultado').css('display','none');
+          $('#liconvoca').css('display','none');
+          $('#licrihab').css('display','block');
+          $('#licrieva').css('display','none');
+          $('#liresul').css('display','none');
+          $('#liadendas').css('display','none');
         });
-        $('#btncriteva').click(function () {
-            $('#formdatosgen').css('display', 'none');
-            $('#formcrithab').css('display', 'none');
-            $('#formcriteva').css('display', 'block');
-            $('#formadendas').css('display', 'none');
-            $('#formresultado').css('display', 'none');
+        $('#btncriteva').click(function(){
+          $('#formdatosgen').css('display','none');
+          $('#formcrithab').css('display','none');
+          $('#formcriteva').css('display','block');
+          $('#formadendas').css('display','none');
+          $('#formresultado').css('display','none');
+          $('#liconvoca').css('display','none');
+          $('#licrihab').css('display','none');
+          $('#licrieva').css('display','block');
+          $('#liresul').css('display','none');
+          $('#liadendas').css('display','none');
         });
-        $('#btnadendas').click(function () {
-            $('#formdatosgen').css('display', 'none');
-            $('#formcrithab').css('display', 'none');
-            $('#formcriteva').css('display', 'none');
-            $('#formadendas').css('display', 'block');
-            $('#formresultado').css('display', 'none');
+        $('#btnadendas').click(function(){
+          $('#formdatosgen').css('display','none');
+          $('#formcrithab').css('display','none');
+          $('#formcriteva').css('display','none');
+          $('#formadendas').css('display','block');
+          $('#formresultado').css('display','none');
+          $('#liconvoca').css('display','none');
+          $('#licrihab').css('display','none');
+          $('#licrieva').css('display','none');
+          $('#liresul').css('display','none');
+          $('#liadendas').css('display','block');
         });
-        $('#btnresultado').click(function () {
-            $('#formdatosgen').css('display', 'none');
-            $('#formcrithab').css('display', 'none');
-            $('#formcriteva').css('display', 'none');
-            $('#formadendas').css('display', 'none');
-            $('#formresultado').css('display', 'block');
+        $('#btnresultado').click(function(){
+            $('#formresultado').css('display','block');
+            $('#formdatosgen').css('display','none');
+            $('#formcrithab').css('display','none');
+            $('#formcriteva').css('display','none');
+            $('#formadendas').css('display','none');
+            $('#liconvoca').css('display','none');
+            $('#licrihab').css('display','none');
+            $('#licrieva').css('display','none');
+            $('#liresul').css('display','block');
+            $('#liadendas').css('display','none');
         });
     
         $('#anyosMinimosExperiencia').keyup(function () {

@@ -7,6 +7,9 @@ package co.edu.fnsp.buho.controladores;
 
 import co.edu.fnsp.buho.entidades.Articulo;
 import co.edu.fnsp.buho.entidades.Ciudad;
+import co.edu.fnsp.buho.entidades.ConsultaHojaVida;
+import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionBasica;
+import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionSuperior;
 import co.edu.fnsp.buho.entidades.CorreoElectronico;
 import co.edu.fnsp.buho.entidades.CuentaBancaria;
 import co.edu.fnsp.buho.entidades.CursoExperienciaDocencia;
@@ -23,6 +26,9 @@ import co.edu.fnsp.buho.entidades.TipoDocumento;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.HojaVida;
+import co.edu.fnsp.buho.entidades.HojaVidaConsulta;
+import co.edu.fnsp.buho.entidades.HojaVidaEducacionBasica;
+import co.edu.fnsp.buho.entidades.HojaVidaEducacionSuperior;
 import co.edu.fnsp.buho.entidades.Institucion;
 import co.edu.fnsp.buho.entidades.Investigacion;
 import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
@@ -33,6 +39,8 @@ import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.Terminos;
 import co.edu.fnsp.buho.entidades.TipoDocumentoValidarEnum;
 import co.edu.fnsp.buho.entidades.ValidacionDocumento;
+import co.edu.fnsp.buho.excel.HojaVidaEducacionBasicaExcelReportView;
+import co.edu.fnsp.buho.excel.HojaVidaEducacionSuperiorExcelReportView;
 import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
 import co.edu.fnsp.buho.servicios.IServicioHojaVida;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
@@ -58,6 +66,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -145,13 +154,76 @@ public class HojaVidaController {
     @Autowired
     private Mail mail;
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index(Model model) {
-        List<co.edu.fnsp.buho.entidades.HojaVida> hojasVida = servicioHojaVida.obtenerHojasVida();
+    @RequestMapping(value = "/consulta", method = RequestMethod.GET)
+    public String obtenerHojasVida(Model model) {
+        List<HojaVidaConsulta> hojasVida = servicioHojaVida.obtenerHojasVida();
 
         model.addAttribute("hojasVida", hojasVida);
 
-        return "hojasVida/index";
+        return "hojasVida/consulta";
+    }
+
+    @RequestMapping(value = "/consultarHojasVida", method = RequestMethod.POST)
+    public @ResponseBody String obtenerHojasVida(@ModelAttribute ConsultaHojaVida consultaHojaVida, Model model) {
+        List<HojaVidaConsulta> hojasVida = servicioHojaVida.obtenerHojasVida(consultaHojaVida);
+
+        Gson gson = new Gson();
+
+        return gson.toJson(hojasVida);
+    }
+
+    @RequestMapping(value = "/educacionBasica", method = RequestMethod.GET)
+    public String obtenerHojasVidaEducacionBasica(Model model) {
+        List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
+
+        model.addAttribute("nivelesEstudio", nivelesFormacion);
+
+        return "hojasVida/educacionBasica";
+    }
+
+    @RequestMapping(value = "/consultarHojasVidaEducacionBasica", method = RequestMethod.POST)
+    public @ResponseBody String obtenerHojasVidaEducacionBasica(@ModelAttribute ConsultaHojaVidaEducacionBasica consultaHojaVidaEducacionBasica, Model model) {
+        List<HojaVidaEducacionBasica> hojasVida = servicioHojaVida.obtenerHojaVidaEducacionBasica(consultaHojaVidaEducacionBasica);
+
+        Gson gson = new Gson();
+
+        return gson.toJson(hojasVida);
+    }
+    
+    @RequestMapping(value = "/descargarHojasVidaEducacionBasica", method = RequestMethod.GET)
+    public ModelAndView descargarHojasVidaEducacionBasica(@ModelAttribute ConsultaHojaVidaEducacionBasica consultaHojaVidaEducacionBasica, Model model) {
+        List<HojaVidaEducacionBasica> hojasVida = servicioHojaVida.obtenerHojaVidaEducacionBasica(consultaHojaVidaEducacionBasica);
+
+       return new ModelAndView(new HojaVidaEducacionBasicaExcelReportView(), "hojasVida", hojasVida);
+    }
+
+    @RequestMapping(value = "/educacionSuperior", method = RequestMethod.GET)
+    public String obtenerHojasVidaEducacionSuperior(Model model) {
+        List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
+        List<Maestro> instituciones = servicioMaestro.obtenerInstitucionesEducativas();
+        List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
+
+        model.addAttribute("nivelesEstudio", nivelesFormacion);
+        model.addAttribute("instituciones", instituciones);
+        model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
+
+        return "hojasVida/educacionSuperior";
+    }
+
+    @RequestMapping(value = "/consultarHojasVidaEducacionSuperior", method = RequestMethod.POST)
+    public @ResponseBody String obtenerHojasVidaEducacionSuperior(@ModelAttribute ConsultaHojaVidaEducacionSuperior consultaHojaVidaEducacionSuperior, Model model) {
+        List<HojaVidaEducacionSuperior> hojasVida = servicioHojaVida.obtenerHojaVidaEducacionSuperior(consultaHojaVidaEducacionSuperior);
+
+        Gson gson = new Gson();
+
+        return gson.toJson(hojasVida);
+    }
+    
+    @RequestMapping(value = "/descargarHojasVidaEducacionSuperior", method = RequestMethod.GET)
+    public ModelAndView descargarHojasVidaEducacionSuperior(@ModelAttribute ConsultaHojaVidaEducacionSuperior consultaHojaVidaEducacionSuperior, Model model) {
+        List<HojaVidaEducacionSuperior> hojasVida = servicioHojaVida.obtenerHojaVidaEducacionSuperior(consultaHojaVidaEducacionSuperior);
+
+       return new ModelAndView(new HojaVidaEducacionSuperiorExcelReportView(), "hojasVida", hojasVida);
     }
 
     @RequestMapping(value = "/terminos", method = RequestMethod.POST)

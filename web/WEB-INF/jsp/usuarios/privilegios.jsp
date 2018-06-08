@@ -7,7 +7,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
 
-<div class="container">
+<div id="contenido">
+    <div class="container">
     <form:form method="POST" action="${pageContext.request.contextPath}/usuarios/privilegios" modelAttribute="privilegiosUsuario">
         <br />
         <div id="alert_placeholder_privilegio"></div>
@@ -70,6 +71,7 @@
             <input type="submit" value="Actualizar privilegios" class="btn btn-success" style="margin-top: 30px;float: right;" />
         </div>   
     </form:form>
+</div>
 </div>
 <script>
     $.validate({

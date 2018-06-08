@@ -378,7 +378,7 @@ body.sidenav-toggled .navbar-sidenav .nav-link-text {
 #cssmenu ul ul li a {
     border-bottom: 1px solid rgba(150, 150, 150, 0.15);
     padding: 11px 15px;
-    width: 250px;
+    width: 270px;
     font-size: 14px;
     text-decoration: none;
     color: rgba(0,94,44,1); /*Color Submenu Reposo */
@@ -816,3 +816,87 @@ table
     margin-left: 5pt;
 }    
     
+#addscrolly
+{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 200px;
+}
+
+#addscrollgigante
+{
+  overflow-y: scroll;
+  max-height: 750px;
+}
+
+@media (min-width:992px){
+  .modal-reporPS2
+{
+  width: 892px !important;
+}
+}
+@media (min-width:1170px){
+  .modal-reporPS2
+{
+  width: 1070px !important;
+}
+}
+@media (min-width:1024px){
+  .modal-reporPS2
+{
+  width: 950px !important;
+}
+
+
+}
+@media (min-width:1280px){
+  .modal-reporPS2
+{
+  width: 1180px !important;
+}
+}
+@media (min-width:1366px){
+  .modal-reporPS2
+{
+  width: 1266px !important;
+}
+}
+@media (min-width:1400px){
+ .modal-reporPS2
+{
+  width: 1300px !important;
+}
+}
+@media (min-width:1600px){
+  .modal-reporPS2
+{
+  width: 1350px !important;
+}
+}
+
+@media (min-width:1800px){
+  .modal-reporPS2
+{
+  width: 1300px !important;
+}
+}
+@media (min-width:1920px){
+  .modal-reporPS2
+{
+  width: 1300px !important;
+  
+}
+}
+
+@media (min-width:2880px){
+  .modal-reporPS2
+{
+  width: 2780 !important;
+}
+}
+@media (min-width:2990px){
+  .modal-reporPS2
+{
+  width: 1300px !important;
+}
+}

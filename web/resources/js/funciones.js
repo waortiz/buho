@@ -81,6 +81,14 @@ function strToBool(s)
     return regex.test(s);
 }
 
+function getValue(value) {
+    if( value === null || value === undefined) {
+        return '';
+    }
+    
+    return value;
+}
+
 function ordenarOpciones(options) {
     var arr = options.map(function (_, o) {
         return {

@@ -6,6 +6,9 @@
 package co.edu.fnsp.buho.servicios;
 
 import co.edu.fnsp.buho.entidades.Articulo;
+import co.edu.fnsp.buho.entidades.ConsultaHojaVida;
+import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionBasica;
+import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionSuperior;
 import co.edu.fnsp.buho.entidades.CorreoElectronico;
 import co.edu.fnsp.buho.entidades.CuentaBancaria;
 import co.edu.fnsp.buho.entidades.CursoExperienciaDocencia;
@@ -18,6 +21,9 @@ import co.edu.fnsp.buho.entidades.EducacionSuperior;
 import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.HojaVida;
+import co.edu.fnsp.buho.entidades.HojaVidaConsulta;
+import co.edu.fnsp.buho.entidades.HojaVidaEducacionBasica;
+import co.edu.fnsp.buho.entidades.HojaVidaEducacionSuperior;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.Investigacion;
 import co.edu.fnsp.buho.entidades.Patente;
@@ -104,8 +110,13 @@ public class ServicioHojaVida implements IServicioHojaVida {
     }
     
     @Override
-    public List<HojaVida> obtenerHojasVida() {
+    public List<HojaVidaConsulta> obtenerHojasVida() {
         return repositorioHojaVida.obtenerHojasVida();
+    }
+
+    @Override
+    public List<HojaVidaConsulta> obtenerHojasVida(ConsultaHojaVida consultaHojaVida) {
+        return repositorioHojaVida.obtenerHojasVida(consultaHojaVida);
     }
 
     @Override
@@ -421,5 +432,15 @@ public class ServicioHojaVida implements IServicioHojaVida {
     @Override
     public List<CursoExperienciaDocencia> obtenerCursosExperienciaDocencia(long idPersona) {
         return repositorioHojaVida.obtenerCursosExperienciaDocencia(idPersona);
+    }
+
+    @Override
+    public List<HojaVidaEducacionBasica> obtenerHojaVidaEducacionBasica(ConsultaHojaVidaEducacionBasica consultaHojaVidaEducacionBasica) {
+        return repositorioHojaVida.obtenerHojaVidaEducacionBasica(consultaHojaVidaEducacionBasica);
+    }
+
+    @Override
+    public List<HojaVidaEducacionSuperior> obtenerHojaVidaEducacionSuperior(ConsultaHojaVidaEducacionSuperior consultaHojaVidaEducacionSuperior) {
+        return repositorioHojaVida.obtenerHojaVidaEducacionSuperior(consultaHojaVidaEducacionSuperior);
     }
 }

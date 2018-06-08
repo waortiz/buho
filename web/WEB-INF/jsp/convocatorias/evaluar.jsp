@@ -55,7 +55,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="">Tipo de identificaci&oacute;n</label>
-                                    <input type="text" style="border: 0px;" readonly  id="nombreTipoIdentificacion">
+                                    <input type="text" style="border: 0px;" readonly  id="tipoIdentificacion">
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -156,7 +156,7 @@
                             <div class="col-md-1">
                                 <div class="form-group">
                                     <label for="">RUT</label><br>
-                                    <input type="text" style="border: 0px; width: 100%;"  id="rut" readonly>
+                                    <input type="text" style="border: 0px; width: 100%;"  id="disponeRUT" readonly>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -865,6 +865,8 @@
                     $("#apellidos").val(hojaVida.apellidos);
                     $("#sexo").val(hojaVida.nombreSexo);
                     $("#fechaExpedicion").val(hojaVida.fechaExpedicionFormateada);
+                    $("#fechaNacimiento").val(hojaVida.fechaNacimientoFormateada);
+                    $("#lugarNacimiento").val(hojaVida.nombreLugarNacimiento);
                     $("#nacionalidad").val(hojaVida.nombreNacionalidad);
                     $("#libretaMilitar").val(hojaVida.libretaMilitar);
                     $("#distritoClase").val(hojaVida.distritoClase);

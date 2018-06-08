@@ -58,7 +58,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="">Tipo de identificaci&oacute;n</label>
-                                    <input type="text" style="border: 0px;" readonly  id="nombreTipoIdentificacion">
+                                    <input type="text" style="border: 0px;" readonly  id="tipoIdentificacion">
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -159,7 +159,7 @@
                             <div class="col-md-1">
                                 <div class="form-group">
                                     <label for="">RUT</label><br>
-                                    <input type="text" style="border: 0px; width: 100%;"  id="rut" readonly>
+                                    <input type="text" style="border: 0px; width: 100%;"  id="disponeRUT" readonly>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -588,69 +588,69 @@
                             <div class="col-md-12">
                             <legend style="margin-bottom: -10px;">Patentes</legend>
                             <div class="table-responsive">
-                            <table class="table tabla table-hover tableestilo" id="tbpatente">
-                             <thead>
-                                 <tr>
-                                     <th>Fecha</th>
-                                     <th>Tipo</th>
-                                     <th>Propiedad compartida</th>
-                                     <th>Descripci&oacute;n</th>
-                                     <th>Documento</th>
-                                 </tr>
-                             </thead>
-                            <tbody data-bind="foreach: { data: patentes }">
-                                <tr class="table-row">
-                                    <td style="width: 10%">
-                                        <span data-bind="text: fecha" ></span>
-                                    </td>
-                                    <td style="width: 15%">
-                                        <span data-bind="text: nombreTipo" ></span>
-                                    </td>
-                                    <td style="width: 20%">
-                                        <span data-bind="text: nombrePropiedadCompartida" ></span>
-                                    </td>
-                                    <td style="width: 45%">
-                                        <span data-bind="text: descripcion" ></span>
-                                    </td>
-                                    <td style="width: 10%" align="center">
-                                        <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoPatente" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                    </td>
-                                </tr>
-                            </tbody>                                     
-                         </table>
-                            </div>
+                                <table class="table tabla table-hover tableestilo" id="tbpatente">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Tipo</th>
+                                            <th>Propiedad compartida</th>
+                                            <th>Descripci&oacute;n</th>
+                                            <th>Documento</th>
+                                        </tr>
+                                    </thead>
+                                   <tbody data-bind="foreach: { data: patentes }">
+                                       <tr class="table-row">
+                                           <td style="width: 10%">
+                                               <span data-bind="text: fecha" ></span>
+                                           </td>
+                                           <td style="width: 15%">
+                                               <span data-bind="text: nombreTipo" ></span>
+                                           </td>
+                                           <td style="width: 20%">
+                                               <span data-bind="text: nombrePropiedadCompartida" ></span>
+                                           </td>
+                                           <td style="width: 45%">
+                                               <span data-bind="text: descripcion" ></span>
+                                           </td>
+                                           <td style="width: 10%" align="center">
+                                               <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoPatente" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                           </td>
+                                       </tr>
+                                   </tbody>                                     
+                             </table>
+                         </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                              <legend style="margin-bottom: -10px;">Productos de conocimiento</legend>
                              <div class="table-responsive">
-                             <table class="table tabla table-hover tableestilo" id="tbprodcono">
-                                 <thead>
-                                     <tr>
-                                         <th>Tipo</th>
-                                         <th>Cita</th>
-                                         <th>Descripci&oacute;n</th>
-                                         <th class="cer">Documento</th>
-                                     </tr>
-                                 </thead>
-                                 <tbody data-bind="foreach: { data: productosConocimiento }">
-                                     <tr class="table-row">
-                                         <td style="width: 30%">
-                                             <span data-bind="text: nombreTipo" ></span>
-                                         </td>
-                                         <td style="width: 30%">
-                                             <span data-bind="text: url" ></span>
-                                         </td>
-                                         <td style="width: 30%">
-                                             <span data-bind="text: descripcion" ></span>
-                                         </td>
-                                         <td style="width: 10%" align="center">
-                                             <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoProductoConocimiento" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                         </td>
-                                     </tr>
-                                 </tbody>                                     
-                             </table>
+                                <table class="table tabla table-hover tableestilo" id="tbprodcono">
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo</th>
+                                            <th>Cita</th>
+                                            <th>Descripci&oacute;n</th>
+                                            <th class="cer">Documento</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: { data: productosConocimiento }">
+                                        <tr class="table-row">
+                                            <td style="width: 30%">
+                                                <span data-bind="text: nombreTipo" ></span>
+                                            </td>
+                                            <td style="width: 30%">
+                                                <span data-bind="text: url" ></span>
+                                            </td>
+                                            <td style="width: 30%">
+                                                <span data-bind="text: descripcion" ></span>
+                                            </td>
+                                            <td style="width: 10%" align="center">
+                                                <a href='#' title='Ver documento' data-bind="click: $root.verDocumentoProductoConocimiento" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>                                     
+                                </table>
                             </div>
                             </div>
                         </div>
@@ -852,8 +852,7 @@
 
                 }
             });
-        }
-        ;
+        };
 
         function verHojaVida(idPersona) {
             $('#formHV').show();
@@ -872,6 +871,8 @@
                         $("#apellidos").val(hojaVida.apellidos);
                         $("#sexo").val(hojaVida.nombreSexo);
                         $("#fechaExpedicion").val(hojaVida.fechaExpedicionFormateada);
+                        $("#fechaNacimiento").val(hojaVida.fechaNacimientoFormateada);
+                        $("#lugarNacimiento").val(hojaVida.nombreLugarNacimiento);
                         $("#nacionalidad").val(hojaVida.nombreNacionalidad);
                         $("#libretaMilitar").val(hojaVida.libretaMilitar);
                         $("#distritoClase").val(hojaVida.distritoClase);
