@@ -711,6 +711,7 @@ public class Util {
                         + "nivelFormacion:ko.observable(" + programa.getNivelFormacion() + "),"
                         + "nombreNivelFormacion:ko.observable('" + programa.getNombreNivelFormacion() + "'),"
                         + "nucleoBasicoConocimiento:ko.observable(" + programa.getNucleoBasicoConocimiento() + "),"
+                        + "nombreNucleoBasicoConocimiento:ko.observable('" + programa.getNombreNucleoBasicoConocimiento() + "'),"
                         + "programa:ko.observable('" + programa.getPrograma() + "'),"
                         + "nombrePrograma:ko.observable('" + programa.getNombrePrograma() + "'),"
                         + "consecutivo:ko.observable(" + i + ")"
@@ -781,70 +782,70 @@ public class Util {
         return json;
     }
 
-    public static void establecerConsecutivoDocumentoSoporte(List<DocumentoSoporte> documentosSoporte) {
+    public static void establecerConsecutivoDocumentosSoporte(List<DocumentoSoporte> documentosSoporte) {
         for (int i = 0; i < documentosSoporte.size(); i++) {
             DocumentoSoporte documentoSoporte = documentosSoporte.get(i);
             documentoSoporte.setConsecutivo(i);
         }
     }
 
-    public static void establecerConsecutivoEducacionBasica(List<EducacionBasica> educacionesBasicas) {
+    public static void establecerConsecutivoEducacionesBasicas(List<EducacionBasica> educacionesBasicas) {
         for (int i = 0; i < educacionesBasicas.size(); i++) {
             EducacionBasica educacionBasica = educacionesBasicas.get(i);
             educacionBasica.setConsecutivo(i);
         }
     }
 
-    public static void establecerConsecutivoEducacionSuperior(List<EducacionSuperior> educacionesSuperiores) {
+    public static void establecerConsecutivoEducacionesSuperiores(List<EducacionSuperior> educacionesSuperiores) {
         for (int i = 0; i < educacionesSuperiores.size(); i++) {
             EducacionSuperior educacionSuperior = educacionesSuperiores.get(i);
             educacionSuperior.setConsecutivo(i);
         }
     }
 
-    public static void establecerConsecutivoCorreoElectronico(List<CorreoElectronico> correosElectronicos) {
+    public static void establecerConsecutivoCorreosElectronicos(List<CorreoElectronico> correosElectronicos) {
         for (int i = 0; i < correosElectronicos.size(); i++) {
             CorreoElectronico correoElectronico = correosElectronicos.get(i);
             correoElectronico.setConsecutivo(i);
         }
     }
 
-    public static void establecerConsecutivoCuentaBancaria(List<CuentaBancaria> cuentasBancarias) {
+    public static void establecerConsecutivoCuentasBancarias(List<CuentaBancaria> cuentasBancarias) {
         for (int i = 0; i < cuentasBancarias.size(); i++) {
             CuentaBancaria cuentaBancaria = cuentasBancarias.get(i);
             cuentaBancaria.setConsecutivo(i);
         }
     }
 
-    public static void establecerConsecutivoIdioma(List<Idioma> idiomas) {
+    public static void establecerConsecutivoIdiomas(List<Idioma> idiomas) {
         for (int i = 0; i < idiomas.size(); i++) {
             Idioma idioma = idiomas.get(i);
             idioma.setConsecutivo(i);
         }
     }
 
-    public static void establecerConsecutivoEducacionContinua(List<EducacionContinua> educacionesContinuas) {
+    public static void establecerConsecutivoEducacionesContinuas(List<EducacionContinua> educacionesContinuas) {
         for (int i = 0; i < educacionesContinuas.size(); i++) {
             EducacionContinua educacionContinua = educacionesContinuas.get(i);
             educacionContinua.setConsecutivo(i);
         }
     }
 
-    public static void establecerConsecutivoPatente(List<Patente> patentes) {
+    public static void establecerConsecutivoPatentes(List<Patente> patentes) {
         for (int i = 0; i < patentes.size(); i++) {
             Patente patente = patentes.get(i);
             patente.setConsecutivo(i);
         }
     }
 
-    public static void establecerConsecutivoExperienciaLaboral(List<ExperienciaLaboral> experienciasLaborales) {
+    public static void establecerConsecutivoExperienciasLaborales(List<ExperienciaLaboral> experienciasLaborales) {
         for (int i = 0; i < experienciasLaborales.size(); i++) {
             ExperienciaLaboral experienciaLaboral = experienciasLaborales.get(i);
             experienciaLaboral.setConsecutivo(i);
         }
     }
 
-    public static void establecerConsecutivoExperienciaDocencia(List<ExperienciaDocencia> experienciasDocencia) {
+    public static void establecerConsecutivoExperienciasDocencia(List<ExperienciaDocencia> experienciasDocencia) {
         for (int i = 0; i < experienciasDocencia.size(); i++) {
             ExperienciaDocencia experienciaDocencia = experienciasDocencia.get(i);
             experienciaDocencia.setConsecutivo(i);
@@ -856,31 +857,73 @@ public class Util {
         }
     }
 
-    public static void establecerConsecutivoDistincion(List<Distincion> distinciones) {
+    public static void establecerConsecutivoDistinciones(List<Distincion> distinciones) {
         for (int i = 0; i < distinciones.size(); i++) {
             Distincion distincion = distinciones.get(i);
             distincion.setConsecutivo(i);
         }
     }
 
-    public static void establecerConsecutivoArticulo(List<Articulo> articulos) {
+    public static void establecerConsecutivoArticulos(List<Articulo> articulos) {
         for (int i = 0; i < articulos.size(); i++) {
             Articulo articulo = articulos.get(i);
             articulo.setConsecutivo(i);
         }
     }
 
-    public static void establecerConsecutivoTelefono(List<Telefono> telefonos) {
+    public static void establecerConsecutivoTelefonos(List<Telefono> telefonos) {
         for (int i = 0; i < telefonos.size(); i++) {
             Telefono telefono = telefonos.get(i);
             telefono.setConsecutivo(i);
         }
     }
 
-    public static void establecerConsecutivoProductoConocimiento(List<ProductoConocimiento> productoConocimientos) {
+    public static void establecerConsecutivoProductosConocimiento(List<ProductoConocimiento> productoConocimientos) {
         for (int i = 0; i < productoConocimientos.size(); i++) {
             ProductoConocimiento productoConocimiento = productoConocimientos.get(i);
             productoConocimiento.setConsecutivo(i);
+        }
+    }
+
+    public static void establecerConsecutivoAdendas(List<Adenda> adendas) {
+        for (int i = 0; i < adendas.size(); i++) {
+            Adenda adenda = adendas.get(i);
+            adenda.setConsecutivo(i);
+        }
+    }
+
+    public static void establecerConsecutivoAnyosExperiencias(List<AnyosExperiencia> anyosExperiencias) {
+        for (int i = 0; i < anyosExperiencias.size(); i++) {
+            AnyosExperiencia anyosExperiencia = anyosExperiencias.get(i);
+            anyosExperiencia.setConsecutivo(i);
+        }
+    }
+
+    public static void establecerConsecutivoIdiomasConvocatoria(List<IdiomaConvocatoria> idiomasConvocatoria) {
+        for (int i = 0; i < idiomasConvocatoria.size(); i++) {
+            IdiomaConvocatoria idiomaConvocatoria = idiomasConvocatoria.get(i);
+            idiomaConvocatoria.setConsecutivo(i);
+        }
+    }
+    
+    public static void establecerConsecutivoProgramasConvocatoria(List<ProgramaConvocatoria> programasConvocatoria) {
+        for (int i = 0; i < programasConvocatoria.size(); i++) {
+            ProgramaConvocatoria programaConvocatoria = programasConvocatoria.get(i);
+            programaConvocatoria.setConsecutivo(i);
+        }
+    }
+
+    public static void establecerConsecutivoEducacionesContinuasConvocatoria(List<EducacionContinuaConvocatoria> educacionesContinuasConvocatoria) {
+        for (int i = 0; i < educacionesContinuasConvocatoria.size(); i++) {
+            EducacionContinuaConvocatoria educacionContinuaConvocatoria = educacionesContinuasConvocatoria.get(i);
+            educacionContinuaConvocatoria.setConsecutivo(i);
+        }
+    }
+
+    public static void establecerConsecutivoCriteriosHabilitantesConvocatoria(List<CriterioHabilitanteConvocatoria> criteriosHabilitantesConvocatoria) {
+        for (int i = 0; i < criteriosHabilitantesConvocatoria.size(); i++) {
+            CriterioHabilitanteConvocatoria criterioHabilitanteConvocatoria = criteriosHabilitantesConvocatoria.get(i);
+            criterioHabilitanteConvocatoria.setConsecutivo(i);
         }
     }
 }

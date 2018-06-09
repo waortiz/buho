@@ -11,6 +11,8 @@ package co.edu.fnsp.buho.entidades;
  */
 public class IdiomaConvocatoria {
     private int id;
+    private int idConvocatoria;
+    private int consecutivo;
     private int idioma;
     private String nombreIdioma;
     private int tipoCertificacion;
@@ -30,6 +32,34 @@ public class IdiomaConvocatoria {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the idConvocatoria
+     */
+    public int getIdConvocatoria() {
+        return idConvocatoria;
+    }
+
+    /**
+     * @param idConvocatoria the idConvocatoria to set
+     */
+    public void setIdConvocatoria(int idConvocatoria) {
+        this.idConvocatoria = idConvocatoria;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
     }
 
     /**

@@ -301,25 +301,16 @@ public class HojaVidaController {
                 hojaVidaIngresar.setCopiaLibretaMilitar(documento);
             }
 
-            long idUsuario = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario();
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
-            List<CorreoElectronico> correosElectronicos = servicioHojaVida.obtenerCorreosElectronicos(idPersona);
-            Investigacion investigacion = servicioHojaVida.obtenerInvestigacion(idPersona);
-            if (hojaVidaIngresar.getIdPersona() == 0) {
-                if (!servicioHojaVida.existePersona(hojaVidaIngresar.getNumeroIdentificacion())) {
-                    servicioHojaVida.ingresarHojaVida(idUsuario, hojaVidaIngresar);
-                } else {
+            String numeroIdentificacion = servicioHojaVida.obtenerNumeroIdentificacionPersona(hojaVidaIngresar.getIdPersona());
+            if (!numeroIdentificacion.equalsIgnoreCase(hojaVidaIngresar.getNumeroIdentificacion())) {
+                if (servicioHojaVida.existePersona(hojaVidaIngresar.getNumeroIdentificacion())) {
                     return "El documento ya ha sido asignado a otra persona";
                 }
-            } else {
-                String numeroIdentificacion = servicioHojaVida.obtenerNumeroIdentificacionPersona(hojaVidaIngresar.getIdPersona());
-                if (!numeroIdentificacion.equalsIgnoreCase(hojaVidaIngresar.getNumeroIdentificacion())) {
-                    if (servicioHojaVida.existePersona(hojaVidaIngresar.getNumeroIdentificacion())) {
-                        return "El documento ya ha sido asignado a otra persona";
-                    }
-                }
-                servicioHojaVida.actualizarHojaVida(idUsuario, hojaVidaIngresar);
             }
+            Investigacion investigacion = servicioHojaVida.obtenerInvestigacion(idPersona);
+            List<CorreoElectronico> correosElectronicos = servicioHojaVida.obtenerCorreosElectronicos(idPersona);
+            servicioHojaVida.actualizarHojaVida(hojaVidaIngresar);
 
             if (hojaVidaIngresar.getCopiaDocumentoIdentificacion() != null) {
                 this.enviarCorreoElectronicoCambioDocumento(correosElectronicos, ASUNTO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO, CUERPO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO);
@@ -973,7 +964,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarDocumentoSoporte(idPersona, nuevoDocumentoSoporte);
             List<DocumentoSoporte> documentosSoporte = servicioHojaVida.obtenerDocumentosSoporteComplementarios(idPersona);
-            Util.establecerConsecutivoDocumentoSoporte(documentosSoporte);
+            Util.establecerConsecutivoDocumentosSoporte(documentosSoporte);
             Gson gson = new Gson();
             json = gson.toJson(documentosSoporte);
             if (nuevoDocumentoSoporte.getDocumento() != null) {
@@ -995,7 +986,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarDocumentoSoporte(idDocumentoSoporte);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<DocumentoSoporte> documentosSoporte = servicioHojaVida.obtenerDocumentosSoporteComplementarios(idPersona);
-            Util.establecerConsecutivoDocumentoSoporte(documentosSoporte);
+            Util.establecerConsecutivoDocumentosSoporte(documentosSoporte);
             Gson gson = new Gson();
             json = gson.toJson(documentosSoporte);
         } catch (Exception exc) {
@@ -1035,7 +1026,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarEducacionBasica(idPersona, nuevaEducacionBasica);
             List<EducacionBasica> educacionesBasicas = servicioHojaVida.obtenerEducacionesBasicas(idPersona);
-            Util.establecerConsecutivoEducacionBasica(educacionesBasicas);
+            Util.establecerConsecutivoEducacionesBasicas(educacionesBasicas);
             Gson gson = new Gson();
             json = gson.toJson(educacionesBasicas);
 
@@ -1059,7 +1050,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarEducacionBasica(idEducacionBasica);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<EducacionBasica> educacionesBasicas = servicioHojaVida.obtenerEducacionesBasicas(idPersona);
-            Util.establecerConsecutivoEducacionBasica(educacionesBasicas);
+            Util.establecerConsecutivoEducacionesBasicas(educacionesBasicas);
             Gson gson = new Gson();
             json = gson.toJson(educacionesBasicas);
         } catch (Exception exc) {
@@ -1114,7 +1105,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarEducacionSuperior(idPersona, nuevaEducacionSuperior);
             List<EducacionSuperior> educacionesSuperiores = servicioHojaVida.obtenerEducacionesSuperiores(idPersona);
-            Util.establecerConsecutivoEducacionSuperior(educacionesSuperiores);
+            Util.establecerConsecutivoEducacionesSuperiores(educacionesSuperiores);
             Gson gson = new Gson();
             json = gson.toJson(educacionesSuperiores);
             if (nuevaEducacionSuperior.getCertificado() != null) {
@@ -1139,7 +1130,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarEducacionSuperior(idEducacionSuperior);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<EducacionSuperior> educacionesSuperiores = servicioHojaVida.obtenerEducacionesSuperiores(idPersona);
-            Util.establecerConsecutivoEducacionSuperior(educacionesSuperiores);
+            Util.establecerConsecutivoEducacionesSuperiores(educacionesSuperiores);
             Gson gson = new Gson();
             json = gson.toJson(educacionesSuperiores);
         } catch (Exception exc) {
@@ -1158,7 +1149,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarCorreoElectronico(idPersona, correoElectronico);
             List<CorreoElectronico> correosElectronicos = servicioHojaVida.obtenerCorreosElectronicos(idPersona);
-            Util.establecerConsecutivoCorreoElectronico(correosElectronicos);
+            Util.establecerConsecutivoCorreosElectronicos(correosElectronicos);
             Gson gson = new Gson();
             json = gson.toJson(correosElectronicos);
 
@@ -1178,7 +1169,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarCorreoElectronico(idCorreoElectronico);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<CorreoElectronico> correosElectronicos = servicioHojaVida.obtenerCorreosElectronicos(idPersona);
-            Util.establecerConsecutivoCorreoElectronico(correosElectronicos);
+            Util.establecerConsecutivoCorreosElectronicos(correosElectronicos);
             Gson gson = new Gson();
             json = gson.toJson(correosElectronicos);
         } catch (Exception exc) {
@@ -1197,7 +1188,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarTelefono(idPersona, telefono);
             List<Telefono> telefonos = servicioHojaVida.obtenerTelefonos(idPersona);
-            Util.establecerConsecutivoTelefono(telefonos);
+            Util.establecerConsecutivoTelefonos(telefonos);
             Gson gson = new Gson();
             json = gson.toJson(telefonos);
 
@@ -1217,7 +1208,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarTelefono(idTelefono);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<Telefono> telefonos = servicioHojaVida.obtenerTelefonos(idPersona);
-            Util.establecerConsecutivoTelefono(telefonos);
+            Util.establecerConsecutivoTelefonos(telefonos);
             Gson gson = new Gson();
             json = gson.toJson(telefonos);
         } catch (Exception exc) {
@@ -1236,7 +1227,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarCuentaBancaria(idPersona, cuentaBancaria);
             List<CuentaBancaria> cuentasBancarias = servicioHojaVida.obtenerCuentasBancarias(idPersona);
-            Util.establecerConsecutivoCuentaBancaria(cuentasBancarias);
+            Util.establecerConsecutivoCuentasBancarias(cuentasBancarias);
             Gson gson = new Gson();
             json = gson.toJson(cuentasBancarias);
 
@@ -1256,7 +1247,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarCuentaBancaria(idCuentaBancaria);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<CuentaBancaria> cuentasBancarias = servicioHojaVida.obtenerCuentasBancarias(idPersona);
-            Util.establecerConsecutivoCuentaBancaria(cuentasBancarias);
+            Util.establecerConsecutivoCuentasBancarias(cuentasBancarias);
             Gson gson = new Gson();
             json = gson.toJson(cuentasBancarias);
         } catch (Exception exc) {
@@ -1295,7 +1286,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarEducacionContinua(idPersona, nuevaEducacionContinua);
             List<EducacionContinua> educacionesContinuas = servicioHojaVida.obtenerEducacionesContinuas(idPersona);
-            Util.establecerConsecutivoEducacionContinua(educacionesContinuas);
+            Util.establecerConsecutivoEducacionesContinuas(educacionesContinuas);
             Gson gson = new Gson();
             json = gson.toJson(educacionesContinuas);
             if (nuevaEducacionContinua.getCertificado() != null) {
@@ -1317,7 +1308,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarEducacionContinua(idEducacionContinua);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<EducacionContinua> educacionesContinuas = servicioHojaVida.obtenerEducacionesContinuas(idPersona);
-            Util.establecerConsecutivoEducacionContinua(educacionesContinuas);
+            Util.establecerConsecutivoEducacionesContinuas(educacionesContinuas);
             Gson gson = new Gson();
             json = gson.toJson(educacionesContinuas);
         } catch (Exception exc) {
@@ -1357,7 +1348,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarIdioma(idPersona, nuevoIdioma);
             List<Idioma> idiomas = servicioHojaVida.obtenerIdiomas(idPersona);
-            Util.establecerConsecutivoIdioma(idiomas);
+            Util.establecerConsecutivoIdiomas(idiomas);
             Gson gson = new Gson();
             json = gson.toJson(idiomas);
             if (nuevoIdioma.getCertificado() != null) {
@@ -1379,7 +1370,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarIdioma(idIdioma);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<Idioma> idiomas = servicioHojaVida.obtenerIdiomas(idPersona);
-            Util.establecerConsecutivoIdioma(idiomas);
+            Util.establecerConsecutivoIdiomas(idiomas);
             Gson gson = new Gson();
             json = gson.toJson(idiomas);
         } catch (Exception exc) {
@@ -1414,7 +1405,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarDistincion(idPersona, nuevaDistincion);
             List<Distincion> distincions = servicioHojaVida.obtenerDistinciones(idPersona);
-            Util.establecerConsecutivoDistincion(distincions);
+            Util.establecerConsecutivoDistinciones(distincions);
             Gson gson = new Gson();
             json = gson.toJson(distincions);
             if (nuevaDistincion.getCertificado() != null) {
@@ -1436,7 +1427,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarDistincion(idDistincion);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<Distincion> distincions = servicioHojaVida.obtenerDistinciones(idPersona);
-            Util.establecerConsecutivoDistincion(distincions);
+            Util.establecerConsecutivoDistinciones(distincions);
             Gson gson = new Gson();
             json = gson.toJson(distincions);
         } catch (Exception exc) {
@@ -1480,7 +1471,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarExperienciaLaboral(idPersona, nuevaExperienciaLaboral);
             List<ExperienciaLaboral> experienciasLaborales = servicioHojaVida.obtenerExperienciasLaborales(idPersona);
-            Util.establecerConsecutivoExperienciaLaboral(experienciasLaborales);
+            Util.establecerConsecutivoExperienciasLaborales(experienciasLaborales);
             Gson gson = new Gson();
             json = gson.toJson(experienciasLaborales);
             if (nuevaExperienciaLaboral.getCertificado() != null) {
@@ -1502,7 +1493,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarExperienciaLaboral(idExperienciaLaboral);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<ExperienciaLaboral> experienciasLaborales = servicioHojaVida.obtenerExperienciasLaborales(idPersona);
-            Util.establecerConsecutivoExperienciaLaboral(experienciasLaborales);
+            Util.establecerConsecutivoExperienciasLaborales(experienciasLaborales);
             Gson gson = new Gson();
             json = gson.toJson(experienciasLaborales);
         } catch (Exception exc) {
@@ -1527,7 +1518,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             int id = servicioHojaVida.guardarExperienciaDocencia(idPersona, nuevaExperienciaDocencia);
             List<ExperienciaDocencia> experienciasDocencia = servicioHojaVida.obtenerExperienciasDocencia(idPersona);
-            Util.establecerConsecutivoExperienciaDocencia(experienciasDocencia);
+            Util.establecerConsecutivoExperienciasDocencia(experienciasDocencia);
             Gson gson = new Gson();
             json = gson.toJson(experienciasDocencia);
             json = "{\"id\":" + id + ",\"experienciasDocencia\":" + json + "}";
@@ -1548,7 +1539,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarExperienciaDocencia(idExperienciaDocencia);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<ExperienciaDocencia> experienciasDocencia = servicioHojaVida.obtenerExperienciasDocencia(idPersona);
-            Util.establecerConsecutivoExperienciaDocencia(experienciasDocencia);
+            Util.establecerConsecutivoExperienciasDocencia(experienciasDocencia);
             Gson gson = new Gson();
             json = gson.toJson(experienciasDocencia);
         } catch (Exception exc) {
@@ -1587,7 +1578,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarCursoExperienciaDocencia(idPersona, nuevoCursoExperienciaDocencia);
             List<ExperienciaDocencia> experienciasDocencia = servicioHojaVida.obtenerExperienciasDocencia(idPersona);
-            Util.establecerConsecutivoExperienciaDocencia(experienciasDocencia);
+            Util.establecerConsecutivoExperienciasDocencia(experienciasDocencia);
             Gson gson = new Gson();
             json = gson.toJson(experienciasDocencia);
             if (nuevoCursoExperienciaDocencia.getCertificado() != null) {
@@ -1609,7 +1600,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarCursoExperienciaDocencia(idCursoExperienciaDocencia);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<ExperienciaDocencia> experienciasDocencia = servicioHojaVida.obtenerExperienciasDocencia(idPersona);
-            Util.establecerConsecutivoExperienciaDocencia(experienciasDocencia);
+            Util.establecerConsecutivoExperienciasDocencia(experienciasDocencia);
             Gson gson = new Gson();
             json = gson.toJson(experienciasDocencia);
         } catch (Exception exc) {
@@ -1629,7 +1620,7 @@ public class HojaVidaController {
             List<Articulo> articulosActuales = servicioHojaVida.obtenerArticulos(idPersona);
             servicioHojaVida.guardarArticulo(idPersona, articulo);
             List<Articulo> articulos = servicioHojaVida.obtenerArticulos(idPersona);
-            Util.establecerConsecutivoArticulo(articulos);
+            Util.establecerConsecutivoArticulos(articulos);
             Gson gson = new Gson();
             json = gson.toJson(articulos);
             for (Articulo articuloActual : articulosActuales) {
@@ -1655,10 +1646,10 @@ public class HojaVidaController {
         try {
             servicioHojaVida.eliminarArticulo(idArticulo);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
-            List<Articulo> telefonos = servicioHojaVida.obtenerArticulos(idPersona);
-            Util.establecerConsecutivoArticulo(telefonos);
+            List<Articulo> articulos = servicioHojaVida.obtenerArticulos(idPersona);
+            Util.establecerConsecutivoArticulos(articulos);
             Gson gson = new Gson();
-            json = gson.toJson(telefonos);
+            json = gson.toJson(articulos);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1694,7 +1685,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarPatente(idPersona, nuevaPatente);
             List<Patente> patentes = servicioHojaVida.obtenerPatentes(idPersona);
-            Util.establecerConsecutivoPatente(patentes);
+            Util.establecerConsecutivoPatentes(patentes);
             Gson gson = new Gson();
             json = gson.toJson(patentes);
             if (nuevaPatente.getDocumento() != null) {
@@ -1716,7 +1707,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarPatente(idPatente);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<Patente> patentes = servicioHojaVida.obtenerPatentes(idPersona);
-            Util.establecerConsecutivoPatente(patentes);
+            Util.establecerConsecutivoPatentes(patentes);
             Gson gson = new Gson();
             json = gson.toJson(patentes);
         } catch (Exception exc) {
@@ -1753,7 +1744,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarProductoConocimiento(idPersona, nuevoProductoConocimiento);
             List<ProductoConocimiento> productoConocimientos = servicioHojaVida.obtenerProductoConocimientos(idPersona);
-            Util.establecerConsecutivoProductoConocimiento(productoConocimientos);
+            Util.establecerConsecutivoProductosConocimiento(productoConocimientos);
             Gson gson = new Gson();
             json = gson.toJson(productoConocimientos);
             if (nuevoProductoConocimiento.getDocumento() != null) {
@@ -1775,7 +1766,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarProductoConocimiento(idProductoConocimiento);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<ProductoConocimiento> productoConocimientos = servicioHojaVida.obtenerProductoConocimientos(idPersona);
-            Util.establecerConsecutivoProductoConocimiento(productoConocimientos);
+            Util.establecerConsecutivoProductosConocimiento(productoConocimientos);
             Gson gson = new Gson();
             json = gson.toJson(productoConocimientos);
         } catch (Exception exc) {

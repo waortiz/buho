@@ -39,9 +39,9 @@ import java.util.List;
  */
 public interface IRepositorioHojaVida {
     
-    void actualizarHojaVida(long idUsuario, HojaVida hojaVida);
+    void actualizarHojaVida(HojaVida hojaVida);
 
-    long ingresarHojaVida(long idUsuario, HojaVida hojaVida);
+    long ingresarHojaVida(HojaVida hojaVida);
     
     List<HojaVidaConsulta> obtenerHojasVida();
 

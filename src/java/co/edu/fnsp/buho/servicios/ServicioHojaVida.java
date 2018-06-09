@@ -49,13 +49,13 @@ public class ServicioHojaVida implements IServicioHojaVida {
     private IRepositorioHojaVida repositorioHojaVida;
 
     @Override
-    public void ingresarHojaVida(long idUsuario, HojaVida hojaVida) {
-        repositorioHojaVida.ingresarHojaVida(idUsuario, hojaVida);
+    public void ingresarHojaVida(HojaVida hojaVida) {
+        repositorioHojaVida.ingresarHojaVida(hojaVida);
     }
 
     @Override
-    public void actualizarHojaVida(long idUsuario, HojaVida hojaVida) {
-        repositorioHojaVida.actualizarHojaVida(idUsuario, hojaVida);
+    public void actualizarHojaVida(HojaVida hojaVida) {
+        repositorioHojaVida.actualizarHojaVida(hojaVida);
     }
 
     @Override

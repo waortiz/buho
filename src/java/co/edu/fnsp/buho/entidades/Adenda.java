@@ -13,10 +13,12 @@ import java.util.Date;
  */
 public class Adenda {
     private int id;
+    private int consecutivo;
     private int tipoAdenda;
     private String nombreTipoAdenda;
     private String descripcion;
     private Date fecha;
+    private String fechaFormateada;
     private boolean tieneDocumento;
     private Documento documento;
 
@@ -32,6 +34,20 @@ public class Adenda {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
     }
     
     /**
@@ -74,6 +90,20 @@ public class Adenda {
      */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    /**
+     * @return the fechaFormateada
+     */
+    public String getFechaFormateada() {
+        return fechaFormateada;
+    }
+
+    /**
+     * @param fechaFormateada the fechaFormateada to set
+     */
+    public void setFechaFormateada(String fechaFormateada) {
+        this.fechaFormateada = fechaFormateada;
     }
 
     /**

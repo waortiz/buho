@@ -11,11 +11,14 @@ package co.edu.fnsp.buho.entidades;
  */
 public class ProgramaConvocatoria {
     private int id;
+    private int consecutivo;
+    private int idConvocatoria;
     private int programa;
     private String nombrePrograma;
     private int nivelFormacion;
     private String nombreNivelFormacion;
     private int nucleoBasicoConocimiento;
+    private String nombreNucleoBasicoConocimiento;
 
     /**
      * @return the id
@@ -29,6 +32,34 @@ public class ProgramaConvocatoria {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the idConvocatoria
+     */
+    public int getIdConvocatoria() {
+        return idConvocatoria;
+    }
+
+    /**
+     * @param idConvocatoria the idConvocatoria to set
+     */
+    public void setIdConvocatoria(int idConvocatoria) {
+        this.idConvocatoria = idConvocatoria;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
     }
 
     /**
@@ -99,5 +130,19 @@ public class ProgramaConvocatoria {
      */
     public void setNucleoBasicoConocimiento(int nucleoBasicoConocimiento) {
         this.nucleoBasicoConocimiento = nucleoBasicoConocimiento;
+    }
+
+    /**
+     * @return the nombreNucleoBasicoConocimiento
+     */
+    public String getNombreNucleoBasicoConocimiento() {
+        return nombreNucleoBasicoConocimiento;
+    }
+
+    /**
+     * @param nombreNucleoBasicoConocimiento the nombreNucleoBasicoConocimiento to set
+     */
+    public void setNombreNucleoBasicoConocimiento(String nombreNucleoBasicoConocimiento) {
+        this.nombreNucleoBasicoConocimiento = nombreNucleoBasicoConocimiento;
     }
 }

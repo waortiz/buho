@@ -319,7 +319,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     }
 
     @Override
-    public long ingresarHojaVida(long idUsuario, HojaVida hojaVida) {
+    public long ingresarHojaVida(HojaVida hojaVida) {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
 
         parametros.addValue("varNumeroId", hojaVida.getNumeroIdentificacion());
@@ -667,7 +667,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     }
 
     @Override
-    public void actualizarHojaVida(long idUsuario, HojaVida hojaVida) {
+    public void actualizarHojaVida(HojaVida hojaVida) {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
         parametros.addValue("varIdPersona", hojaVida.getIdPersona());
         parametros.addValue("varNumeroId", hojaVida.getNumeroIdentificacion());

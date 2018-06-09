@@ -142,7 +142,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     }
 
     @Override
-    public void ingresarConvocatoria(long idUsuario, Convocatoria convocatoria) {
+    public int ingresarConvocatoria(long idPersona, Convocatoria convocatoria) {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
         parametros.addValue("varNombre", convocatoria.getNombre());
         parametros.addValue("varDescripcion", convocatoria.getDescripcion());
@@ -166,77 +166,9 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         } else {
             parametros.addValue("varanyosminimosexperiencia", null);
         }
-        parametros.addValue("varPersonaRegistra", idUsuario);
+        parametros.addValue("varPersonaRegistra", idPersona);
         Map resultadoIngresoConvocatoria = ingresarConvocatoria.execute(parametros);
         int idConvocatoria = (int) resultadoIngresoConvocatoria.get("varIdConvocatoria");
-
-        MapSqlParameterSource parametrosIngresoAdenda = new MapSqlParameterSource();
-        parametrosIngresoAdenda.addValue("varIdConvocatoria", idConvocatoria);
-        parametrosIngresoAdenda.addValue("varPersonaRegistra", idUsuario);
-        for (Adenda adenda : convocatoria.getAdendas()) {
-            parametrosIngresoAdenda.addValue("varDescripcion", adenda.getDescripcion());
-            parametrosIngresoAdenda.addValue("varTipoAdenda", adenda.getTipoAdenda());
-            parametrosIngresoAdenda.addValue("varFecha", adenda.getFecha());
-            Map resultadoAdenda = ingresarAdenda.execute(parametrosIngresoAdenda);
-            int idAdenda = (int) resultadoAdenda.get("varIdAdenda");
-            Documento documento = adenda.getDocumento();
-            if (documento != null) {
-                MapSqlParameterSource parametrosIngresoDocumentoAdenda = new MapSqlParameterSource();
-                parametrosIngresoDocumentoAdenda.addValue("varIdAdenda", idAdenda);
-                parametrosIngresoDocumentoAdenda.addValue("varNombre", documento.getNombre());
-                parametrosIngresoDocumentoAdenda.addValue("varTipoContenido", documento.getTipoContenido());
-                parametrosIngresoDocumentoAdenda.addValue("varContenido", documento.getContenido());
-                ingresarDocumentoAdenda.execute(parametrosIngresoDocumentoAdenda);
-            }
-        }
-
-        MapSqlParameterSource parametrosIngresoAnyosExperiencia = new MapSqlParameterSource();
-        parametrosIngresoAnyosExperiencia.addValue("varIdConvocatoria", idConvocatoria);
-        for (AnyosExperiencia anyosExperiencia : convocatoria.getAnyosExperiencias()) {
-            parametrosIngresoAnyosExperiencia.addValue("varNucleoBasicoConocimiento", anyosExperiencia.getNucleoBasicoConocimiento());
-            parametrosIngresoAnyosExperiencia.addValue("varAnyos", anyosExperiencia.getAnyos());
-            ingresarAnyosExperiencia.execute(parametrosIngresoAnyosExperiencia);
-        }
-
-        MapSqlParameterSource parametrosIngresoIdioma = new MapSqlParameterSource();
-        parametrosIngresoIdioma.addValue("varIdConvocatoria", idConvocatoria);
-        for (IdiomaConvocatoria idioma : convocatoria.getIdiomas()) {
-            parametrosIngresoIdioma.addValue("varIdioma", idioma.getIdioma());
-            parametrosIngresoIdioma.addValue("varPersonaRegistra", idUsuario);
-            parametrosIngresoIdioma.addValue("varTipoCertificacion", idioma.getTipoCertificacion());
-            parametrosIngresoIdioma.addValue("varOtraCertificacion", idioma.getOtraCertificacion());
-            parametrosIngresoIdioma.addValue("varPuntajeMinimoCertificacion", idioma.getPuntajeMinimoCertificacion());
-            ingresarIdiomaConvocatoria.execute(parametrosIngresoIdioma);
-        }
-
-        MapSqlParameterSource parametrosIngresoPrograma = new MapSqlParameterSource();
-        parametrosIngresoPrograma.addValue("varIdConvocatoria", idConvocatoria);
-        for (ProgramaConvocatoria programa : convocatoria.getProgramas()) {
-            parametrosIngresoPrograma.addValue("varPrograma", programa.getPrograma());
-            parametrosIngresoPrograma.addValue("varPersonaRegistra", idUsuario);
-            parametrosIngresoPrograma.addValue("varNivelFormacion", programa.getNivelFormacion());
-            ingresarProgramaConvocatoria.execute(parametrosIngresoPrograma);
-        }
-
-        MapSqlParameterSource parametrosIngresoCriterio = new MapSqlParameterSource();
-        parametrosIngresoCriterio.addValue("varIdConvocatoria", idConvocatoria);
-        for (CriterioHabilitanteConvocatoria criterio : convocatoria.getCriteriosHabilitantes()) {
-            parametrosIngresoCriterio.addValue("varCampoHojaVida", criterio.getCampoHojaVida());
-            parametrosIngresoCriterio.addValue("varValor", criterio.getValor());
-            parametrosIngresoCriterio.addValue("varPersonaRegistra", idUsuario);
-            ingresarCriterioHabilitanteConvocatoria.execute(parametrosIngresoCriterio);
-        }
-
-        MapSqlParameterSource parametrosIngresoEducacionContinua = new MapSqlParameterSource();
-        parametrosIngresoEducacionContinua.addValue("varIdConvocatoria", idConvocatoria);
-        for (EducacionContinuaConvocatoria educacionContinua : convocatoria.getEducacionesContinuas()) {
-            parametrosIngresoEducacionContinua.addValue("varTipoCapacitacion", educacionContinua.getTipoCapacitacion());
-            parametrosIngresoEducacionContinua.addValue("varNombreCapacitacion", educacionContinua.getNombreCapacitacion());
-            parametrosIngresoEducacionContinua.addValue("varNucleoBasicoConocimiento", educacionContinua.getNucleoBasicoConocimiento());
-            parametrosIngresoEducacionContinua.addValue("varPersonaRegistra", idUsuario);
-            ingresarEducacionContinuaConvocatoria.execute(parametrosIngresoEducacionContinua);
-        }
-
         Documento documento = convocatoria.getDocumento();
         if (documento != null) {
             MapSqlParameterSource parametrosIngresoDocumentoConvocatoria = new MapSqlParameterSource();
@@ -256,12 +188,14 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             parametrosIngresoResultadoConvocatoria.addValue("varContenido", resultado.getContenido());
             ingresarResultadoConvocatoria.execute(parametrosIngresoResultadoConvocatoria);
         }
+
+        return idConvocatoria;
     }
 
     @Override
-    public void actualizarConvocatoria(long idUsuario, Convocatoria convocatoria) {
+    public void actualizarConvocatoria(Convocatoria convocatoria) {
         MapSqlParameterSource parametros = new MapSqlParameterSource();
-        parametros.addValue("varidConvocatoria", convocatoria.getId());
+        parametros.addValue("varIdConvocatoria", convocatoria.getId());
         parametros.addValue("varNombre", convocatoria.getNombre());
         parametros.addValue("varDescripcion", convocatoria.getDescripcion());
         parametros.addValue("varTipoConvocatoria", convocatoria.getTipoConvocatoria());
@@ -306,13 +240,6 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             parametrosActualizacionResultadoConvocatoria.addValue("varContenido", resultado.getContenido());
             actualizarResultadoConvocatoria.execute(parametrosActualizacionResultadoConvocatoria);
         }
-
-        actualizarAdendas(convocatoria.getId(), idUsuario, convocatoria.getAdendas());
-        actualizarAnyosExperiencias(convocatoria.getId(), convocatoria.getAnyosExperiencias());
-        actualizarIdiomas(convocatoria.getId(), idUsuario, convocatoria.getIdiomas());
-        actualizarProgramas(convocatoria.getId(), idUsuario, convocatoria.getProgramas());
-        actualizarEducacionesContinuas(convocatoria.getId(), idUsuario, convocatoria.getEducacionesContinuas());
-        actualizarCriterios(convocatoria.getId(), idUsuario, convocatoria.getCriteriosHabilitantes());
     }
 
     @Override
@@ -347,29 +274,22 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             convocatoria.setAnyosMinimosExperiencia(((Integer) resultado.get("varanyosminimosexperiencia")).toString());
         }
 
-        Map resultadoAdendas = obtenerAdendas.execute(parametros);
-        List<Adenda> adendas = (List<Adenda>) resultadoAdendas.get("adendas");
+        List<Adenda> adendas = this.obtenerAdendas(idConvocatoria);
         convocatoria.setAdendas(adendas);
 
-        Map resultadoAnyosExperiencias = obtenerAnyosExperiencias.execute(parametros);
-        List<AnyosExperiencia> anyosExperiencias = (List<AnyosExperiencia>) resultadoAnyosExperiencias.get("anyosExperiencias");
+        List<AnyosExperiencia> anyosExperiencias = this.obtenerAnyosExperiencias(idConvocatoria);
         convocatoria.setAnyosExperiencias(anyosExperiencias);
 
-        Map resultadoIdiomas = obtenerIdiomasConvocatoria.execute(parametros);
-        List<IdiomaConvocatoria> idiomas = (List<IdiomaConvocatoria>) resultadoIdiomas.get("idiomasConvocatoria");
+        List<IdiomaConvocatoria> idiomas = this.obtenerIdiomas(idConvocatoria);
         convocatoria.setIdiomas(idiomas);
 
-        Map resultadoProgramas = obtenerProgramasConvocatoria.execute(parametros);
-        List<ProgramaConvocatoria> programas = (List<ProgramaConvocatoria>) resultadoProgramas.get("programasConvocatoria");
+        List<ProgramaConvocatoria> programas = this.obtenerProgramas(idConvocatoria);
         convocatoria.setProgramas(programas);
 
-        Map resultadoEducacionesContinuas = obtenerEducacionesContinuasConvocatoria.execute(parametros);
-        List<EducacionContinuaConvocatoria> educacionesContinuas = (List<EducacionContinuaConvocatoria>) resultadoEducacionesContinuas.get("educacionesContinuas");
+        List<EducacionContinuaConvocatoria> educacionesContinuas = this.obtenerEducacionesContinuas(idConvocatoria);
         convocatoria.setEducacionesContinuas(educacionesContinuas);
 
-        Map resultadoCriteriosHabilitantes = obtenerCriteriosHabilitantesConvocatoria.execute(parametros);
-        List<CriterioHabilitanteConvocatoria> criteriosHabilitantes = (List<CriterioHabilitanteConvocatoria>) resultadoCriteriosHabilitantes.get("criteriosHabilitantes");
-
+        List<CriterioHabilitanteConvocatoria> criteriosHabilitantes = this.obtenerCriteriosHabilitantes(idConvocatoria);
         convocatoria.setCriteriosHabilitantes(criteriosHabilitantes);
 
         return convocatoria;
@@ -444,64 +364,59 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         return convocatorias;
     }
 
-    private void actualizarAdendas(int idConvocatoria, long idUsuario, List<Adenda> adendas) {
-        MapSqlParameterSource parametrosConsultaAdenda = new MapSqlParameterSource();
-        parametrosConsultaAdenda.addValue("varIdConvocatoria", idConvocatoria);
-        Map resultadoAdendas = obtenerAdendas.execute(parametrosConsultaAdenda);
-        ArrayList<Adenda> adendasActuales = (ArrayList<Adenda>) resultadoAdendas.get("adendas");
+    @Override
+    public void guardarAdenda(int idConvocatoria, long idPersona, Adenda adenda) {
+        if (adenda.getId() == 0) {
+            MapSqlParameterSource parametrosIngresoAdenda = new MapSqlParameterSource();
+            parametrosIngresoAdenda.addValue("varIdConvocatoria", idConvocatoria);
+            parametrosIngresoAdenda.addValue("varPersonaRegistra", idPersona);
+            parametrosIngresoAdenda.addValue("varDescripcion", adenda.getDescripcion());
+            parametrosIngresoAdenda.addValue("varTipoAdenda", adenda.getTipoAdenda());
+            parametrosIngresoAdenda.addValue("varFecha", adenda.getFecha());
+            Map resultadoIngresoAdenda = ingresarAdenda.execute(parametrosIngresoAdenda);
+            int idAdenda = (int) resultadoIngresoAdenda.get("varIdAdenda");
+            Documento documento = adenda.getDocumento();
+            if (documento != null) {
+                MapSqlParameterSource parametrosIngresoDocumentoAdenda = new MapSqlParameterSource();
+                parametrosIngresoDocumentoAdenda.addValue("varIdAdenda", idAdenda);
+                parametrosIngresoDocumentoAdenda.addValue("varNombre", documento.getNombre());
+                parametrosIngresoDocumentoAdenda.addValue("varTipoContenido", documento.getTipoContenido());
+                parametrosIngresoDocumentoAdenda.addValue("varContenido", documento.getContenido());
+                ingresarDocumentoAdenda.execute(parametrosIngresoDocumentoAdenda);
+            }
+        } else {
+            MapSqlParameterSource parametrosActualizacionAdenda = new MapSqlParameterSource();
+            parametrosActualizacionAdenda.addValue("varIdAdenda", adenda.getId());
+            parametrosActualizacionAdenda.addValue("varDescripcion", adenda.getDescripcion());
+            parametrosActualizacionAdenda.addValue("varTipoAdenda", adenda.getTipoAdenda());
+            parametrosActualizacionAdenda.addValue("varFecha", adenda.getFecha());
+            actualizarAdenda.execute(parametrosActualizacionAdenda);
+            Documento documento = adenda.getDocumento();
+            if (documento != null) {
+                MapSqlParameterSource parametrosActualizarDocumentoAdenda = new MapSqlParameterSource();
+                parametrosActualizarDocumentoAdenda.addValue("varIdAdenda", adenda.getId());
+                parametrosActualizarDocumentoAdenda.addValue("varNombre", documento.getNombre());
+                parametrosActualizarDocumentoAdenda.addValue("varTipoContenido", documento.getTipoContenido());
+                parametrosActualizarDocumentoAdenda.addValue("varContenido", documento.getContenido());
+                actualizarDocumentoAdenda.execute(parametrosActualizarDocumentoAdenda);
+            }
+        }
+    }
 
+    @Override
+    public void eliminarAdenda(int idAdenda) {
         MapSqlParameterSource parametrosEliminacionAdenda = new MapSqlParameterSource();
-        MapSqlParameterSource parametrosActualizacionAdenda = new MapSqlParameterSource();
-        for (Adenda adendaActual : adendasActuales) {
-            Adenda adendaModificado = null;
-            for (Adenda adenda : adendas) {
-                if (adenda.getId() == adendaActual.getId()) {
-                    adendaModificado = adenda;
-                    break;
-                }
-            }
-            if (adendaModificado == null) {
-                parametrosEliminacionAdenda.addValue("varIdAdenda", adendaActual.getId());
-                eliminarAdenda.execute(parametrosEliminacionAdenda);
-            } else {
-                parametrosActualizacionAdenda.addValue("varIdAdenda", adendaModificado.getId());
-                parametrosActualizacionAdenda.addValue("varDescripcion", adendaModificado.getDescripcion());
-                parametrosActualizacionAdenda.addValue("varTipoAdenda", adendaModificado.getTipoAdenda());
-                parametrosActualizacionAdenda.addValue("varFecha", adendaModificado.getFecha());
-                actualizarAdenda.execute(parametrosActualizacionAdenda);
-                Documento documento = adendaModificado.getDocumento();
-                if (documento != null) {
-                    MapSqlParameterSource parametrosActualizarDocumentoAdenda = new MapSqlParameterSource();
-                    parametrosActualizarDocumentoAdenda.addValue("varIdAdenda", adendaModificado.getId());
-                    parametrosActualizarDocumentoAdenda.addValue("varNombre", documento.getNombre());
-                    parametrosActualizarDocumentoAdenda.addValue("varTipoContenido", documento.getTipoContenido());
-                    parametrosActualizarDocumentoAdenda.addValue("varContenido", documento.getContenido());
-                    actualizarDocumentoAdenda.execute(parametrosActualizarDocumentoAdenda);
-                }
-            }
-        }
+        parametrosEliminacionAdenda.addValue("varIdAdenda", idAdenda);
+        eliminarAdenda.execute(parametrosEliminacionAdenda);
+    }
 
-        MapSqlParameterSource parametrosIngresoAdenda = new MapSqlParameterSource();
-        parametrosIngresoAdenda.addValue("varIdConvocatoria", idConvocatoria);
-        for (Adenda adenda : adendas) {
-            if (adenda.getId() == 0) {
-                parametrosIngresoAdenda.addValue("varPersonaRegistra", idUsuario);
-                parametrosIngresoAdenda.addValue("varDescripcion", adenda.getDescripcion());
-                parametrosIngresoAdenda.addValue("varTipoAdenda", adenda.getTipoAdenda());
-                parametrosIngresoAdenda.addValue("varFecha", adenda.getFecha());
-                Map resultadoIngresoAdenda = ingresarAdenda.execute(parametrosIngresoAdenda);
-                int idAdenda = (int) resultadoIngresoAdenda.get("varIdAdenda");
-                Documento documento = adenda.getDocumento();
-                if (documento != null) {
-                    MapSqlParameterSource parametrosIngresoDocumentoAdenda = new MapSqlParameterSource();
-                    parametrosIngresoDocumentoAdenda.addValue("varIdAdenda", idAdenda);
-                    parametrosIngresoDocumentoAdenda.addValue("varNombre", documento.getNombre());
-                    parametrosIngresoDocumentoAdenda.addValue("varTipoContenido", documento.getTipoContenido());
-                    parametrosIngresoDocumentoAdenda.addValue("varContenido", documento.getContenido());
-                    ingresarDocumentoAdenda.execute(parametrosIngresoDocumentoAdenda);
-                }
-            }
-        }
+    @Override
+    public List<Adenda> obtenerAdendas(int idConvocatoria) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdConvocatoria", idConvocatoria);
+        Map resultadoAdendas = obtenerAdendas.execute(parametros);
+        List<Adenda> adendas = (List<Adenda>) resultadoAdendas.get("adendas");
+        return adendas;
     }
 
     @Override
@@ -520,208 +435,188 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         retirarPostulacionConvocatoria.execute(parametrosRetirarPostulacionConvocatoria);
     }
 
-    private void actualizarAnyosExperiencias(int idConvocatoria, List<AnyosExperiencia> anyosExperiencias) {
-        MapSqlParameterSource parametrosConsultaAnyosExperiencias = new MapSqlParameterSource();
-        parametrosConsultaAnyosExperiencias.addValue("varIdConvocatoria", idConvocatoria);
-        Map resultadoAnyosExperiencias = obtenerAnyosExperiencias.execute(parametrosConsultaAnyosExperiencias);
-        ArrayList<AnyosExperiencia> anyosExperienciasActuales = (ArrayList<AnyosExperiencia>) resultadoAnyosExperiencias.get("anyosExperiencias");
+    @Override
+    public void guardarAnyosExperiencia(int idConvocatoria, AnyosExperiencia anyosExperiencia) {
+        if (anyosExperiencia.getId() == 0) {
+            MapSqlParameterSource parametrosIngresoAnyosExperiencia = new MapSqlParameterSource();
+            parametrosIngresoAnyosExperiencia.addValue("varIdConvocatoria", idConvocatoria);
+            parametrosIngresoAnyosExperiencia.addValue("varNucleoBasicoConocimiento", anyosExperiencia.getNucleoBasicoConocimiento());
+            parametrosIngresoAnyosExperiencia.addValue("varAnyos", anyosExperiencia.getAnyos());
+            ingresarAnyosExperiencia.execute(parametrosIngresoAnyosExperiencia);
+        } else {
+            MapSqlParameterSource parametrosActualizacionAnyosExperiencia = new MapSqlParameterSource();
+            parametrosActualizacionAnyosExperiencia.addValue("varId", anyosExperiencia.getId());
+            parametrosActualizacionAnyosExperiencia.addValue("varNucleoBasicoConocimiento", anyosExperiencia.getNucleoBasicoConocimiento());
+            parametrosActualizacionAnyosExperiencia.addValue("varAnyos", anyosExperiencia.getAnyos());
+            actualizarAnyosExperiencia.execute(parametrosActualizacionAnyosExperiencia);
+        }
+    }
 
+    @Override
+    public void eliminarAnyosExperiencia(int idAnyosExperiencia) {
         MapSqlParameterSource parametrosEliminacionAnyosExperiencia = new MapSqlParameterSource();
-        MapSqlParameterSource parametrosActualizacionAnyosExperiencia = new MapSqlParameterSource();
-        for (AnyosExperiencia anyosExperienciaActual : anyosExperienciasActuales) {
-            AnyosExperiencia anyosExperienciaModificado = null;
-            for (AnyosExperiencia anyosExperiencia : anyosExperiencias) {
-                if (anyosExperiencia.getId() == anyosExperienciaActual.getId()) {
-                    anyosExperienciaModificado = anyosExperiencia;
-                    break;
-                }
-            }
-            if (anyosExperienciaModificado == null) {
-                parametrosEliminacionAnyosExperiencia.addValue("varId", anyosExperienciaActual.getId());
-                eliminarAnyosExperiencia.execute(parametrosEliminacionAnyosExperiencia);
-            } else {
-                parametrosActualizacionAnyosExperiencia.addValue("varId", anyosExperienciaModificado.getId());
-                parametrosActualizacionAnyosExperiencia.addValue("varNucleoBasicoConocimiento", anyosExperienciaModificado.getNucleoBasicoConocimiento());
-                parametrosActualizacionAnyosExperiencia.addValue("varAnyos", anyosExperienciaModificado.getAnyos());
-                actualizarAnyosExperiencia.execute(parametrosActualizacionAnyosExperiencia);
-            }
-        }
+        parametrosEliminacionAnyosExperiencia.addValue("varId", idAnyosExperiencia);
+        eliminarAnyosExperiencia.execute(parametrosEliminacionAnyosExperiencia);
+    }
 
-        MapSqlParameterSource parametrosIngresoAnyosExperiencia = new MapSqlParameterSource();
-        parametrosIngresoAnyosExperiencia.addValue("varIdConvocatoria", idConvocatoria);
-        for (AnyosExperiencia anyosExperiencia : anyosExperiencias) {
-            if (anyosExperiencia.getId() == 0) {
-                parametrosIngresoAnyosExperiencia.addValue("varNucleoBasicoConocimiento", anyosExperiencia.getNucleoBasicoConocimiento());
-                parametrosIngresoAnyosExperiencia.addValue("varAnyos", anyosExperiencia.getAnyos());
-                ingresarAnyosExperiencia.execute(parametrosIngresoAnyosExperiencia);
-            }
+    @Override
+    public List<AnyosExperiencia> obtenerAnyosExperiencias(int idConvocatoria) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdConvocatoria", idConvocatoria);
+        Map resultadoAnyosExperiencias = obtenerAnyosExperiencias.execute(parametros);
+        List<AnyosExperiencia> anyosExperiencias = (List<AnyosExperiencia>) resultadoAnyosExperiencias.get("anyosExperiencias");
+        return anyosExperiencias;
+    }
+
+    @Override
+    public void guardarIdioma(int idConvocatoria, long idPersona, IdiomaConvocatoria idioma) {
+        if (idioma.getId() == 0) {
+            MapSqlParameterSource parametrosIngresoIdioma = new MapSqlParameterSource();
+            parametrosIngresoIdioma.addValue("varIdConvocatoria", idConvocatoria);
+            parametrosIngresoIdioma.addValue("varIdioma", idioma.getIdioma());
+            parametrosIngresoIdioma.addValue("varPersonaRegistra", idPersona);
+            parametrosIngresoIdioma.addValue("varTipoCertificacion", idioma.getTipoCertificacion());
+            parametrosIngresoIdioma.addValue("varOtraCertificacion", idioma.getOtraCertificacion());
+            parametrosIngresoIdioma.addValue("varPuntajeMinimoCertificacion", idioma.getPuntajeMinimoCertificacion());
+            ingresarIdiomaConvocatoria.execute(parametrosIngresoIdioma);
+        } else {
+
+            MapSqlParameterSource parametrosActualizacionIdioma = new MapSqlParameterSource();
+            parametrosActualizacionIdioma.addValue("varId", idioma.getId());
+            parametrosActualizacionIdioma.addValue("varIdioma", idioma.getIdioma());
+            parametrosActualizacionIdioma.addValue("varPersonaRegistra", idPersona);
+            parametrosActualizacionIdioma.addValue("varTipoCertificacion", idioma.getTipoCertificacion());
+            parametrosActualizacionIdioma.addValue("varOtraCertificacion", idioma.getOtraCertificacion());
+            parametrosActualizacionIdioma.addValue("varPuntajeMinimoCertificacion", idioma.getPuntajeMinimoCertificacion());
+            actualizarIdiomaConvocatoria.execute(parametrosActualizacionIdioma);
         }
     }
 
-    private void actualizarIdiomas(long idConvocatoria, long idUsuario, List<IdiomaConvocatoria> idiomas) {
-        MapSqlParameterSource parametrosConsultaIdioma = new MapSqlParameterSource();
-        parametrosConsultaIdioma.addValue("varIdConvocatoria", idConvocatoria);
-        Map resultadoIdiomas = obtenerIdiomasConvocatoria.execute(parametrosConsultaIdioma);
-        ArrayList<IdiomaConvocatoria> idiomasActuales = (ArrayList<IdiomaConvocatoria>) resultadoIdiomas.get("idiomasConvocatoria");
+    @Override
+    public List<IdiomaConvocatoria> obtenerIdiomas(int idConvocatoria) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdConvocatoria", idConvocatoria);
+        Map resultadoIdiomas = obtenerIdiomasConvocatoria.execute(parametros);
+        List<IdiomaConvocatoria> idiomas = (List<IdiomaConvocatoria>) resultadoIdiomas.get("idiomasConvocatoria");
+        return idiomas;
+    }
 
+
+    @Override
+    public void eliminarIdioma(int idIdioma) {
         MapSqlParameterSource parametrosEliminacionIdioma = new MapSqlParameterSource();
-        MapSqlParameterSource parametrosActualizacionIdioma = new MapSqlParameterSource();
-        for (IdiomaConvocatoria idiomaActual : idiomasActuales) {
-            IdiomaConvocatoria idiomaModificado = null;
-            for (IdiomaConvocatoria idioma : idiomas) {
-                if (idioma.getId() == idiomaActual.getId()) {
-                    idiomaModificado = idioma;
-                    break;
-                }
-            }
-            if (idiomaModificado == null) {
-                parametrosEliminacionIdioma.addValue("varId", idiomaActual.getId());
-                eliminarIdiomaConvocatoria.execute(parametrosEliminacionIdioma);
-            } else {
-                parametrosActualizacionIdioma.addValue("varId", idiomaModificado.getId());
-                parametrosActualizacionIdioma.addValue("varIdioma", idiomaModificado.getIdioma());
-                parametrosActualizacionIdioma.addValue("varPersonaRegistra", idUsuario);
-                parametrosActualizacionIdioma.addValue("varTipoCertificacion", idiomaModificado.getTipoCertificacion());
-                parametrosActualizacionIdioma.addValue("varOtraCertificacion", idiomaModificado.getOtraCertificacion());
-                parametrosActualizacionIdioma.addValue("varPuntajeMinimoCertificacion", idiomaModificado.getPuntajeMinimoCertificacion());
-                actualizarIdiomaConvocatoria.execute(parametrosActualizacionIdioma);
-            }
-        }
+        parametrosEliminacionIdioma.addValue("varId", idIdioma);
+        eliminarIdiomaConvocatoria.execute(parametrosEliminacionIdioma);
+    }
 
-        MapSqlParameterSource parametrosIngresoIdioma = new MapSqlParameterSource();
-        parametrosIngresoIdioma.addValue("varIdConvocatoria", idConvocatoria);
-        for (IdiomaConvocatoria idioma : idiomas) {
-            if (idioma.getId() == 0) {
-                parametrosIngresoIdioma.addValue("varIdioma", idioma.getIdioma());
-                parametrosIngresoIdioma.addValue("varPersonaRegistra", idUsuario);
-                parametrosIngresoIdioma.addValue("varTipoCertificacion", idioma.getTipoCertificacion());
-                parametrosIngresoIdioma.addValue("varOtraCertificacion", idioma.getOtraCertificacion());
-                parametrosIngresoIdioma.addValue("varPuntajeMinimoCertificacion", idioma.getPuntajeMinimoCertificacion());
-                ingresarIdiomaConvocatoria.execute(parametrosIngresoIdioma);
-            }
+    @Override
+    public void guardarPrograma(int idConvocatoria, long idPersona, ProgramaConvocatoria programa) {
+        if (programa.getId() == 0) {
+            MapSqlParameterSource parametrosIngresoPrograma = new MapSqlParameterSource();
+            parametrosIngresoPrograma.addValue("varIdConvocatoria", idConvocatoria);
+            parametrosIngresoPrograma.addValue("varPrograma", programa.getPrograma());
+            parametrosIngresoPrograma.addValue("varPersonaRegistra", idPersona);
+            parametrosIngresoPrograma.addValue("varNivelFormacion", programa.getNivelFormacion());
+            ingresarProgramaConvocatoria.execute(parametrosIngresoPrograma);
+        } else {
+            MapSqlParameterSource parametrosActualizacionPrograma = new MapSqlParameterSource();
+            parametrosActualizacionPrograma.addValue("varId", programa.getId());
+            parametrosActualizacionPrograma.addValue("varPrograma", programa.getPrograma());
+            parametrosActualizacionPrograma.addValue("varNivelFormacion", programa.getNivelFormacion());
+            parametrosActualizacionPrograma.addValue("varPersonaRegistra", idPersona);
+            actualizarProgramaConvocatoria.execute(parametrosActualizacionPrograma);
         }
     }
 
-    private void actualizarProgramas(long idConvocatoria, long idUsuario, List<ProgramaConvocatoria> programas) {
-        MapSqlParameterSource parametrosConsultaPrograma = new MapSqlParameterSource();
-        parametrosConsultaPrograma.addValue("varIdConvocatoria", idConvocatoria);
-        Map resultadoProgramas = obtenerProgramasConvocatoria.execute(parametrosConsultaPrograma);
-        ArrayList<ProgramaConvocatoria> programasActuales = (ArrayList<ProgramaConvocatoria>) resultadoProgramas.get("programasConvocatoria");
+    @Override
+    public List<ProgramaConvocatoria> obtenerProgramas(int idConvocatoria) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdConvocatoria", idConvocatoria);
+        Map resultadoProgramas = obtenerProgramasConvocatoria.execute(parametros);
+        List<ProgramaConvocatoria> programas = (List<ProgramaConvocatoria>) resultadoProgramas.get("programasConvocatoria");
+        return programas;
+    }
+
+
+    @Override
+    public void eliminarPrograma(int idPrograma) {
 
         MapSqlParameterSource parametrosEliminacionPrograma = new MapSqlParameterSource();
-        MapSqlParameterSource parametrosActualizacionPrograma = new MapSqlParameterSource();
-        for (ProgramaConvocatoria programaActual : programasActuales) {
-            ProgramaConvocatoria programaModificado = null;
-            for (ProgramaConvocatoria programa : programas) {
-                if (programa.getId() == programaActual.getId()) {
-                    programaModificado = programa;
-                    break;
-                }
-            }
-            if (programaModificado == null) {
-                parametrosEliminacionPrograma.addValue("varId", programaActual.getId());
-                eliminarProgramaConvocatoria.execute(parametrosEliminacionPrograma);
-            } else {
-                parametrosActualizacionPrograma.addValue("varId", programaModificado.getId());
-                parametrosActualizacionPrograma.addValue("varPrograma", programaModificado.getPrograma());
-                parametrosActualizacionPrograma.addValue("varNivelFormacion", programaModificado.getNivelFormacion());
-                parametrosActualizacionPrograma.addValue("varPersonaRegistra", idUsuario);
-                actualizarProgramaConvocatoria.execute(parametrosActualizacionPrograma);
-            }
-        }
+        parametrosEliminacionPrograma.addValue("varId", idPrograma);
+        eliminarProgramaConvocatoria.execute(parametrosEliminacionPrograma);
+    }
 
-        MapSqlParameterSource parametrosIngresoPrograma = new MapSqlParameterSource();
-        parametrosIngresoPrograma.addValue("varIdConvocatoria", idConvocatoria);
-        for (ProgramaConvocatoria programa : programas) {
-            if (programa.getId() == 0) {
-                parametrosIngresoPrograma.addValue("varPrograma", programa.getPrograma());
-                parametrosIngresoPrograma.addValue("varPersonaRegistra", idUsuario);
-                parametrosIngresoPrograma.addValue("varNivelFormacion", programa.getNivelFormacion());
-                ingresarProgramaConvocatoria.execute(parametrosIngresoPrograma);
-            }
+    @Override
+    public void guardarEducacionContinua(int idConvocatoria, long idPersona, EducacionContinuaConvocatoria educacionContinua) {
+        if (educacionContinua.getId() == 0) {
+            MapSqlParameterSource parametrosIngresoEducacionContinua = new MapSqlParameterSource();
+            parametrosIngresoEducacionContinua.addValue("varIdConvocatoria", idConvocatoria);
+            parametrosIngresoEducacionContinua.addValue("varTipoCapacitacion", educacionContinua.getTipoCapacitacion());
+            parametrosIngresoEducacionContinua.addValue("varNombreCapacitacion", educacionContinua.getNombreCapacitacion());
+            parametrosIngresoEducacionContinua.addValue("varNucleoBasicoConocimiento", educacionContinua.getNucleoBasicoConocimiento());
+            parametrosIngresoEducacionContinua.addValue("varPersonaRegistra", idPersona);
+            ingresarEducacionContinuaConvocatoria.execute(parametrosIngresoEducacionContinua);
+        } else {
+            MapSqlParameterSource parametrosActualizacionEducacionContinua = new MapSqlParameterSource();
+            parametrosActualizacionEducacionContinua.addValue("varId", educacionContinua.getId());
+            parametrosActualizacionEducacionContinua.addValue("varTipoCapacitacion", educacionContinua.getTipoCapacitacion());
+            parametrosActualizacionEducacionContinua.addValue("varNombreCapacitacion", educacionContinua.getNombreCapacitacion());
+            parametrosActualizacionEducacionContinua.addValue("varNucleoBasicoConocimiento", educacionContinua.getNucleoBasicoConocimiento());
+            parametrosActualizacionEducacionContinua.addValue("varPersonaRegistra", idPersona);
+            actualizarEducacionContinuaConvocatoria.execute(parametrosActualizacionEducacionContinua);
         }
     }
 
-    private void actualizarEducacionesContinuas(long idConvocatoria, long idUsuario, List<EducacionContinuaConvocatoria> educacionesContinuas) {
-        MapSqlParameterSource parametrosConsultaEducacionContinua = new MapSqlParameterSource();
-        parametrosConsultaEducacionContinua.addValue("varIdConvocatoria", idConvocatoria);
-        Map resultadoEducacionContinuas = obtenerEducacionesContinuasConvocatoria.execute(parametrosConsultaEducacionContinua);
-        ArrayList<EducacionContinuaConvocatoria> educacionesContinuasActuales = (ArrayList<EducacionContinuaConvocatoria>) resultadoEducacionContinuas.get("educacionesContinuas");
-
+    @Override
+    public void eliminarEducacionContinua(int idEducacionContinuaConvocatoria) {
         MapSqlParameterSource parametrosEliminacionEducacionContinua = new MapSqlParameterSource();
-        MapSqlParameterSource parametrosActualizacionEducacionContinua = new MapSqlParameterSource();
-        for (EducacionContinuaConvocatoria educacionContinuaActual : educacionesContinuasActuales) {
-            EducacionContinuaConvocatoria educacionContinuaModificada = null;
-            for (EducacionContinuaConvocatoria educacionContinua : educacionesContinuas) {
-                if (educacionContinua.getId() == educacionContinuaActual.getId()) {
-                    educacionContinuaModificada = educacionContinua;
-                    break;
-                }
-            }
-            if (educacionContinuaModificada == null) {
-                parametrosEliminacionEducacionContinua.addValue("varId", educacionContinuaActual.getId());
-                eliminarEducacionContinuaConvocatoria.execute(parametrosEliminacionEducacionContinua);
-            } else {
-                parametrosActualizacionEducacionContinua.addValue("varId", educacionContinuaModificada.getId());
-                parametrosActualizacionEducacionContinua.addValue("varTipoCapacitacion", educacionContinuaModificada.getTipoCapacitacion());
-                parametrosActualizacionEducacionContinua.addValue("varNombreCapacitacion", educacionContinuaModificada.getNombreCapacitacion());
-                parametrosActualizacionEducacionContinua.addValue("varNucleoBasicoConocimiento", educacionContinuaModificada.getNucleoBasicoConocimiento());
-                parametrosActualizacionEducacionContinua.addValue("varPersonaRegistra", idUsuario);
-                actualizarEducacionContinuaConvocatoria.execute(parametrosActualizacionEducacionContinua);
-            }
-        }
+        parametrosEliminacionEducacionContinua.addValue("varId", idEducacionContinuaConvocatoria);
+        eliminarEducacionContinuaConvocatoria.execute(parametrosEliminacionEducacionContinua);
+    }
 
-        MapSqlParameterSource parametrosIngresoEducacionContinua = new MapSqlParameterSource();
-        parametrosIngresoEducacionContinua.addValue("varIdConvocatoria", idConvocatoria);
-        for (EducacionContinuaConvocatoria educacionContinua : educacionesContinuas) {
-            if (educacionContinua.getId() == 0) {
-                parametrosIngresoEducacionContinua.addValue("varTipoCapacitacion", educacionContinua.getTipoCapacitacion());
-                parametrosIngresoEducacionContinua.addValue("varNombreCapacitacion", educacionContinua.getNombreCapacitacion());
-                parametrosIngresoEducacionContinua.addValue("varNucleoBasicoConocimiento", educacionContinua.getNucleoBasicoConocimiento());
-                parametrosIngresoEducacionContinua.addValue("varPersonaRegistra", idUsuario);
-                ingresarEducacionContinuaConvocatoria.execute(parametrosIngresoEducacionContinua);
-            }
+    @Override
+    public List<EducacionContinuaConvocatoria> obtenerEducacionesContinuas(int idConvocatoria) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdConvocatoria", idConvocatoria);
+        Map resultadoEducacionesContinuas = obtenerEducacionesContinuasConvocatoria.execute(parametros);
+        List<EducacionContinuaConvocatoria> educacionesContinuas = (List<EducacionContinuaConvocatoria>) resultadoEducacionesContinuas.get("educacionesContinuas");
+        return educacionesContinuas;
+    }
+
+    @Override
+    public void guardarCriterioHabilitante(int idConvocatoria, long idPersona, CriterioHabilitanteConvocatoria criterioHabilitante) {
+        if (criterioHabilitante.getId() == 0) {
+            MapSqlParameterSource parametrosIngresoCriterio = new MapSqlParameterSource();
+            parametrosIngresoCriterio.addValue("varIdConvocatoria", idConvocatoria);
+            parametrosIngresoCriterio.addValue("varValor", criterioHabilitante.getValor());
+            parametrosIngresoCriterio.addValue("varCampoHojaVida", criterioHabilitante.getCampoHojaVida());
+            parametrosIngresoCriterio.addValue("varPersonaRegistra", idPersona);
+            ingresarCriterioHabilitanteConvocatoria.execute(parametrosIngresoCriterio);
+        } else {
+            MapSqlParameterSource parametrosActualizacionCriterio = new MapSqlParameterSource();
+            parametrosActualizacionCriterio.addValue("varId", criterioHabilitante.getId());
+            parametrosActualizacionCriterio.addValue("varValor", criterioHabilitante.getValor());
+            parametrosActualizacionCriterio.addValue("varCampoHojaVida", criterioHabilitante.getCampoHojaVida());
+            parametrosActualizacionCriterio.addValue("varPersonaRegistra", idPersona);
+            actualizarCriterioHabilitanteConvocatoria.execute(parametrosActualizacionCriterio);
         }
     }
 
-    private void actualizarCriterios(long idConvocatoria, long idUsuario, List<CriterioHabilitanteConvocatoria> criterios) {
-        MapSqlParameterSource parametrosConsultaCriterio = new MapSqlParameterSource();
-        parametrosConsultaCriterio.addValue("varIdConvocatoria", idConvocatoria);
-        Map resultadoCriterios = obtenerCriteriosHabilitantesConvocatoria.execute(parametrosConsultaCriterio);
-        ArrayList<CriterioHabilitanteConvocatoria> criteriosActuales = (ArrayList<CriterioHabilitanteConvocatoria>) resultadoCriterios.get("criteriosHabilitantes");
-
+    @Override
+    public void eliminarCriterioHabilitante(int idCriterioHabilitante) {
         MapSqlParameterSource parametrosEliminacionCriterio = new MapSqlParameterSource();
-        MapSqlParameterSource parametrosActualizacionCriterio = new MapSqlParameterSource();
-        for (CriterioHabilitanteConvocatoria criterioActual : criteriosActuales) {
-            CriterioHabilitanteConvocatoria criterioModificado = null;
-            for (CriterioHabilitanteConvocatoria criterio : criterios) {
-                if (criterio.getId() == criterioActual.getId()) {
-                    criterioModificado = criterio;
-                    break;
-                }
-            }
-            if (criterioModificado == null) {
-                parametrosEliminacionCriterio.addValue("varId", criterioActual.getId());
-                eliminarCriterioHabilitanteConvocatoria.execute(parametrosEliminacionCriterio);
-            } else {
-                parametrosActualizacionCriterio.addValue("varId", criterioModificado.getId());
-                parametrosActualizacionCriterio.addValue("varValor", criterioModificado.getValor());
-                parametrosActualizacionCriterio.addValue("varCampoHojaVida", criterioModificado.getCampoHojaVida());
-                parametrosActualizacionCriterio.addValue("varPersonaRegistra", idUsuario);
-                actualizarCriterioHabilitanteConvocatoria.execute(parametrosActualizacionCriterio);
-            }
-        }
+        parametrosEliminacionCriterio.addValue("varId", idCriterioHabilitante);
+        eliminarCriterioHabilitanteConvocatoria.execute(parametrosEliminacionCriterio);
+    }
 
-        MapSqlParameterSource parametrosIngresoCriterio = new MapSqlParameterSource();
-        parametrosIngresoCriterio.addValue("varIdConvocatoria", idConvocatoria);
-        for (CriterioHabilitanteConvocatoria criterio : criterios) {
-            if (criterio.getId() == 0) {
-                parametrosIngresoCriterio.addValue("varValor", criterio.getValor());
-                parametrosIngresoCriterio.addValue("varCampoHojaVida", criterio.getCampoHojaVida());
-                parametrosIngresoCriterio.addValue("varPersonaRegistra", idUsuario);
-                ingresarCriterioHabilitanteConvocatoria.execute(parametrosIngresoCriterio);
-            }
-        }
+    @Override
+    public List<CriterioHabilitanteConvocatoria> obtenerCriteriosHabilitantes(int idConvocatoria) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdConvocatoria", idConvocatoria);
+        Map resultadoCriteriosHabilitantes = obtenerCriteriosHabilitantesConvocatoria.execute(parametros);
+        List<CriterioHabilitanteConvocatoria> criteriosHabilitantes = (List<CriterioHabilitanteConvocatoria>) resultadoCriteriosHabilitantes.get("criteriosHabilitantes");
+        
+        return criteriosHabilitantes;
     }
 
     @Override
@@ -756,7 +651,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         parametros.addValue("varIdConvocatoria", idConvocatoria);
         Map resultadoCriterios = obtenerPersonasConvocatoria.execute(parametros);
         ArrayList<HojaVida> hojasVida = (ArrayList<HojaVida>) resultadoCriterios.get("personas");
-        
+
         return hojasVida;
     }
 

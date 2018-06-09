@@ -20,6 +20,7 @@ public class ListadoConvocatoria {
     private Date fechaPostulacion;
     private String fechaPostulacionFormateada;
     private String nombre;
+    private String descripcion;
     private boolean tieneDocumento;
     private boolean tieneResultado;
     private boolean postulado;
@@ -176,6 +177,20 @@ public class ListadoConvocatoria {
      */
     public void setTieneResultado(boolean tieneResultado) {
         this.tieneResultado = tieneResultado;
+    }
+
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
     
 }

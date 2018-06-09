@@ -39,9 +39,9 @@ import java.util.List;
  */
 public interface IServicioHojaVida {
         
-    void ingresarHojaVida(long idUsuario, HojaVida hojaVidaIngresar);
+    void ingresarHojaVida(HojaVida hojaVida);
 
-    void actualizarHojaVida(long idUsuario, HojaVida hojaVidaIngresar);
+    void actualizarHojaVida(HojaVida hojaVida);
 
     Documento obtenerDocumentoSoporte(long idPersona, int idTipoDocumento);
     

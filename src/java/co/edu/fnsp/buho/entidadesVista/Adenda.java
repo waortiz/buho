@@ -5,7 +5,6 @@
  */
 package co.edu.fnsp.buho.entidadesVista;
 
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -13,10 +12,11 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class Adenda {
     private int id;
+    private int idConvocatoria;
     private String tipoAdenda;
     private String descripcion;
     private String fecha;
-    private MultipartFile documento;
+    private Object documento;
 
     /**
      * @return the id
@@ -32,20 +32,6 @@ public class Adenda {
         this.id = id;
     }
     
-
-    /**
-     * @return the documento
-     */
-    public MultipartFile getDocumento() {
-        return documento;
-    }
-
-    /**
-     * @param documento the documento to set
-     */
-    public void setDocumento(MultipartFile documento) {
-        this.documento = documento;
-    }
 
     /**
      * @return the tipoAdenda
@@ -87,5 +73,33 @@ public class Adenda {
      */
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    /**
+     * @return the idConvocatoria
+     */
+    public int getIdConvocatoria() {
+        return idConvocatoria;
+    }
+
+    /**
+     * @param idConvocatoria the idConvocatoria to set
+     */
+    public void setIdConvocatoria(int idConvocatoria) {
+        this.idConvocatoria = idConvocatoria;
+    }
+
+    /**
+     * @return the documento
+     */
+    public Object getDocumento() {
+        return documento;
+    }
+
+    /**
+     * @param documento the documento to set
+     */
+    public void setDocumento(Object documento) {
+        this.documento = documento;
     }
 }

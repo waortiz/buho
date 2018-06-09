@@ -5,6 +5,7 @@
  */
 package co.edu.fnsp.buho.servicios;
 
+import co.edu.fnsp.buho.entidades.Adenda;
 import co.edu.fnsp.buho.entidades.AnyosExperiencia;
 import co.edu.fnsp.buho.entidades.CampoHojaVidaEnum;
 import co.edu.fnsp.buho.entidades.Convocatoria;
@@ -55,64 +56,15 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
     private IRepositorioMaestro repositorioMaestro;
 
     @Override
-    public void ingresarConvocatoria(long idUsuario, Convocatoria convocatoria) {
-        repositorioConvocatoria.ingresarConvocatoria(idUsuario, convocatoria);
+    public int ingresarConvocatoria(long idPersona, Convocatoria convocatoria) {
+        return repositorioConvocatoria.ingresarConvocatoria(idPersona, convocatoria);
     }
 
     @Override
     public Convocatoria obtenerConvocatoria(int idConvocatoria) {
         Convocatoria convocatoria = repositorioConvocatoria.obtenerConvocatoria(idConvocatoria);
-        Maestro maestro = null;
-        for (CriterioHabilitanteConvocatoria criterioHabilitanteConvocatoria : convocatoria.getCriteriosHabilitantes()) {
-            criterioHabilitanteConvocatoria.setTexto(criterioHabilitanteConvocatoria.getValor());
-            if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_ACTIVIDAD_ECONOMICA.campoHojaVida()
-                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_TIPO_VINCULACION.campoHojaVida()
-                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_NACIONALIDAD.campoHojaVida()
-                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_GRUPO_ETNICO.campoHojaVida()
-                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DISCAPACIDAD.campoHojaVida()
-                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_TIPO_ID.campoHojaVida()) {
-
-                if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_ACTIVIDAD_ECONOMICA.campoHojaVida()) {
-                    maestro = repositorioMaestro.obtenerActividadEconomica(Util.obtenerEntero(criterioHabilitanteConvocatoria.getValor()));
-                } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_TIPO_VINCULACION.campoHojaVida()) {
-                    maestro = repositorioMaestro.obtenerTipoVinculacionUdeA(Util.obtenerEntero(criterioHabilitanteConvocatoria.getValor()));
-                } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_NACIONALIDAD.campoHojaVida()) {
-                    maestro = repositorioMaestro.obtenerPais(Util.obtenerEntero(criterioHabilitanteConvocatoria.getValor()));
-                } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_GRUPO_ETNICO.campoHojaVida()) {
-                    maestro = repositorioMaestro.obtenerGrupoEtnico(Util.obtenerEntero(criterioHabilitanteConvocatoria.getValor()));
-                } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DISCAPACIDAD.campoHojaVida()) {
-                    maestro = repositorioMaestro.obtenerDiscapacidad(Util.obtenerEntero(criterioHabilitanteConvocatoria.getValor()));
-                } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_TIPO_ID.campoHojaVida()) {
-                    maestro = repositorioMaestro.obtenerTipoIdentificacion(criterioHabilitanteConvocatoria.getValor());
-                }
-                if (maestro != null) {
-                    criterioHabilitanteConvocatoria.setTexto(maestro.getNombre());
-                }
-            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_LUGAR_EXPEDICION.campoHojaVida()
-                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_CIUDAD_RESIDENCIA.campoHojaVida()
-                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_LUGAR_NACIMIENTO.campoHojaVida()) {
-                maestro = repositorioMaestro.obtenerMunicipio(criterioHabilitanteConvocatoria.getValor());
-                if (maestro != null) {
-                    criterioHabilitanteConvocatoria.setTexto(maestro.getNombre());
-                }
-            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_EGRESADO_UDEA.campoHojaVida()
-                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DISPONE_RUT.campoHojaVida()
-                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DISPONIBILIDAD_VIAJAR.campoHojaVida()
-                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_EMPLEADO_UDEA.campoHojaVida()) {
-                if (Boolean.parseBoolean(criterioHabilitanteConvocatoria.getValor())) {
-                    criterioHabilitanteConvocatoria.setTexto("Sí");
-                } else {
-                    criterioHabilitanteConvocatoria.setTexto("No");
-                }
-            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_SEXO.campoHojaVida()) {
-                if (criterioHabilitanteConvocatoria.getValor().equalsIgnoreCase("1")) {
-                    criterioHabilitanteConvocatoria.setTexto("Masculino");
-                } else {
-                    criterioHabilitanteConvocatoria.setTexto("Femenino");
-                }
-            }
-        }
-
+        this.estableverTextoCriteriosHabilitantes(convocatoria.getCriteriosHabilitantes());
+        
         return convocatoria;
     }
 
@@ -132,8 +84,8 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
     }
 
     @Override
-    public void actualizarConvocatoria(long idUsuario, Convocatoria convocatoria) {
-        repositorioConvocatoria.actualizarConvocatoria(idUsuario, convocatoria);
+    public void actualizarConvocatoria(Convocatoria convocatoria) {
+        repositorioConvocatoria.actualizarConvocatoria(convocatoria);
     }
 
     @Override
@@ -148,7 +100,7 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
 
     @Override
     public void postularConvocatoria(long idPersona, int idConvocatoria)
-            throws Exception {
+            throws CriteriosHabilitacionException {
         Convocatoria convocatoria = repositorioConvocatoria.obtenerConvocatoria(idConvocatoria);
         HojaVida hojaVida = repositorioHojaVida.obtenerHojaVida(idPersona);
 
@@ -510,5 +462,152 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
         });
         
         return evaluaciones;
+    }
+
+    @Override
+    public void guardarAdenda(int idConvocatoria, long idPersona, Adenda adenda) {
+        repositorioConvocatoria.guardarAdenda(idConvocatoria, idPersona, adenda);
+    }
+
+    @Override
+    public List<Adenda> obtenerAdendas(int idConvocatoria) {
+        return repositorioConvocatoria.obtenerAdendas(idConvocatoria);
+    }
+
+    @Override
+    public void eliminarAdenda(int idAdenda) {
+        repositorioConvocatoria.eliminarAdenda(idAdenda);
+    }
+
+    @Override
+    public void guardarAnyosExperiencia(int idConvocatoria, AnyosExperiencia anyosExperiencia) {
+        repositorioConvocatoria.guardarAnyosExperiencia(idConvocatoria, anyosExperiencia);
+    }
+
+    @Override
+    public List<AnyosExperiencia> obtenerAnyosExperiencias(int idConvocatoria) {
+        return repositorioConvocatoria.obtenerAnyosExperiencias(idConvocatoria);
+    }
+
+    @Override
+    public void eliminarAnyosExperiencia(int idAnyosExperiencia) {
+        repositorioConvocatoria.eliminarAnyosExperiencia(idAnyosExperiencia);
+    }
+
+    @Override
+    public void guardarIdioma(int idConvocatoria, long idPersona, IdiomaConvocatoria idiomaConvocatoria) {
+        repositorioConvocatoria.guardarIdioma(idConvocatoria, idPersona, idiomaConvocatoria);
+    }
+
+    @Override
+    public List<IdiomaConvocatoria> obtenerIdiomas(int idConvocatoria) {
+        return repositorioConvocatoria.obtenerIdiomas(idConvocatoria);
+    }
+
+    @Override
+    public void eliminarIdioma(int idIdioma) {
+        repositorioConvocatoria.eliminarIdioma(idIdioma);
+    }
+
+    @Override
+    public void guardarPrograma(int idConvocatoria, long idPersona, ProgramaConvocatoria programaConvocatoria) {
+        repositorioConvocatoria.guardarPrograma(idConvocatoria, idPersona, programaConvocatoria);
+    }
+
+    @Override
+    public List<ProgramaConvocatoria> obtenerProgramas(int idConvocatoria) {
+        return repositorioConvocatoria.obtenerProgramas(idConvocatoria);
+    }
+
+    @Override
+    public void eliminarPrograma(int idPrograma) {
+        repositorioConvocatoria.eliminarPrograma(idPrograma);
+    }
+
+    @Override
+    public void guardarEducacionContinua(int idConvocatoria, long idPersona, EducacionContinuaConvocatoria educacionContinuaConvocatoria) {
+        repositorioConvocatoria.guardarEducacionContinua(idConvocatoria, idPersona, educacionContinuaConvocatoria);
+    }
+
+    @Override
+    public List<EducacionContinuaConvocatoria> obtenerEducacionesContinuas(int idConvocatoria) {
+        return repositorioConvocatoria.obtenerEducacionesContinuas(idConvocatoria);
+    }
+
+    @Override
+    public void eliminarEducacionContinua(int idEducacionContinua) {
+        repositorioConvocatoria.eliminarEducacionContinua(idEducacionContinua);
+    }
+
+    @Override
+    public void guardarCriterioHabilitante(int idConvocatoria, long idPersona, CriterioHabilitanteConvocatoria criterioHabilitanteConvocatoria) {
+        repositorioConvocatoria.guardarCriterioHabilitante(idConvocatoria, idPersona, criterioHabilitanteConvocatoria);
+    }
+
+    @Override
+    public List<CriterioHabilitanteConvocatoria> obtenerCriteriosHabilitantes(int idConvocatoria) {
+        List<CriterioHabilitanteConvocatoria> criteriosHabilitantes = repositorioConvocatoria.obtenerCriteriosHabilitantes(idConvocatoria);
+        this.estableverTextoCriteriosHabilitantes(criteriosHabilitantes);
+        
+        return criteriosHabilitantes;
+    }
+
+    @Override
+    public void eliminarCriterioHabilitante(int idCriterioHabilitante) {
+        repositorioConvocatoria.eliminarCriterioHabilitante(idCriterioHabilitante);
+    }
+    
+    private void estableverTextoCriteriosHabilitantes(List<CriterioHabilitanteConvocatoria> criteriosHabilitantes) {
+        Maestro maestro = null;
+        for (CriterioHabilitanteConvocatoria criterioHabilitanteConvocatoria : criteriosHabilitantes) {
+            criterioHabilitanteConvocatoria.setTexto(criterioHabilitanteConvocatoria.getValor());
+            if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_ACTIVIDAD_ECONOMICA.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_TIPO_VINCULACION.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_NACIONALIDAD.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_GRUPO_ETNICO.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DISCAPACIDAD.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_TIPO_ID.campoHojaVida()) {
+
+                if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_ACTIVIDAD_ECONOMICA.campoHojaVida()) {
+                    maestro = repositorioMaestro.obtenerActividadEconomica(Util.obtenerEntero(criterioHabilitanteConvocatoria.getValor()));
+                } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_TIPO_VINCULACION.campoHojaVida()) {
+                    maestro = repositorioMaestro.obtenerTipoVinculacionUdeA(Util.obtenerEntero(criterioHabilitanteConvocatoria.getValor()));
+                } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_NACIONALIDAD.campoHojaVida()) {
+                    maestro = repositorioMaestro.obtenerPais(Util.obtenerEntero(criterioHabilitanteConvocatoria.getValor()));
+                } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_GRUPO_ETNICO.campoHojaVida()) {
+                    maestro = repositorioMaestro.obtenerGrupoEtnico(Util.obtenerEntero(criterioHabilitanteConvocatoria.getValor()));
+                } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DISCAPACIDAD.campoHojaVida()) {
+                    maestro = repositorioMaestro.obtenerDiscapacidad(Util.obtenerEntero(criterioHabilitanteConvocatoria.getValor()));
+                } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_TIPO_ID.campoHojaVida()) {
+                    maestro = repositorioMaestro.obtenerTipoIdentificacion(criterioHabilitanteConvocatoria.getValor());
+                }
+                if (maestro != null) {
+                    criterioHabilitanteConvocatoria.setTexto(maestro.getNombre());
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_LUGAR_EXPEDICION.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_CIUDAD_RESIDENCIA.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_LUGAR_NACIMIENTO.campoHojaVida()) {
+                maestro = repositorioMaestro.obtenerMunicipio(criterioHabilitanteConvocatoria.getValor());
+                if (maestro != null) {
+                    criterioHabilitanteConvocatoria.setTexto(maestro.getNombre());
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_EGRESADO_UDEA.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DISPONE_RUT.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_DISPONIBILIDAD_VIAJAR.campoHojaVida()
+                    || criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_EMPLEADO_UDEA.campoHojaVida()) {
+                if (Boolean.parseBoolean(criterioHabilitanteConvocatoria.getValor())) {
+                    criterioHabilitanteConvocatoria.setTexto("Sí");
+                } else {
+                    criterioHabilitanteConvocatoria.setTexto("No");
+                }
+            } else if (criterioHabilitanteConvocatoria.getCampoHojaVida() == CampoHojaVidaEnum.PE_SEXO.campoHojaVida()) {
+                if (criterioHabilitanteConvocatoria.getValor().equalsIgnoreCase("1")) {
+                    criterioHabilitanteConvocatoria.setTexto("Masculino");
+                } else {
+                    criterioHabilitanteConvocatoria.setTexto("Femenino");
+                }
+            }
+        }
+
     }
 }

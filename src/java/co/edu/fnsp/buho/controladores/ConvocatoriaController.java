@@ -9,13 +9,18 @@ import co.edu.fnsp.buho.entidades.Convocatoria;
 import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Adenda;
+import co.edu.fnsp.buho.entidades.AnyosExperiencia;
 import co.edu.fnsp.buho.entidades.CampoHojaVida;
+import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
 import co.edu.fnsp.buho.entidades.DetalleUsuario;
+import co.edu.fnsp.buho.entidades.EducacionContinuaConvocatoria;
 import co.edu.fnsp.buho.entidades.Evaluacion;
 import co.edu.fnsp.buho.entidades.HojaVida;
+import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
 import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
 import co.edu.fnsp.buho.entidades.Preseleccionado;
 import co.edu.fnsp.buho.entidades.Programa;
+import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
 import co.edu.fnsp.buho.excepciones.CriteriosHabilitacionException;
 import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
@@ -41,6 +46,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -179,44 +185,256 @@ public class ConvocatoriaController {
                 resultado.setTipoContenido(convocatoria.getResultado().getContentType());
                 convocatoriaIngresar.setResultado(resultado);
             }
-            for (co.edu.fnsp.buho.entidadesVista.Adenda adenda : convocatoria.getAdendas()) {
-                Adenda nuevaAdenda = new Adenda();
-                nuevaAdenda.setId(adenda.getId());
-                nuevaAdenda.setDescripcion(adenda.getDescripcion());
-                nuevaAdenda.setFecha(Util.obtenerFecha(adenda.getFecha()));
-                nuevaAdenda.setTipoAdenda(Util.obtenerEntero(adenda.getTipoAdenda()));
-                nuevaAdenda.setDescripcion(adenda.getDescripcion());
-                if (adenda.getDocumento() != null && adenda.getDocumento().getBytes().length > 0) {
-                    documento = new Documento();
-                    documento.setContenido(adenda.getDocumento().getBytes());
-                    documento.setNombre(adenda.getDocumento().getOriginalFilename());
-                    documento.setTipoContenido(adenda.getDocumento().getContentType());
-                    nuevaAdenda.setDocumento(documento);
-                }
-                convocatoriaIngresar.getAdendas().add(nuevaAdenda);
-            }
-            convocatoriaIngresar.setAnyosExperiencias(convocatoria.getAnyosExperiencias());
-            convocatoriaIngresar.setIdiomas(convocatoria.getIdiomas());
-            convocatoriaIngresar.setProgramas(convocatoria.getProgramas());
-            convocatoriaIngresar.setEducacionesContinuas(convocatoria.getEducacionesContinuas());
-            convocatoriaIngresar.setCriteriosHabilitantes(convocatoria.getCriteriosHabilitantes());
-            long idUsuario = obtenerIdUsuario();
+            long idPersona = obtenerIdPersona();
+            int id = convocatoriaIngresar.getId();
             if (convocatoriaIngresar.getId() == 0) {
-                servicioConvocatoria.ingresarConvocatoria(idUsuario, convocatoriaIngresar);
+                id = servicioConvocatoria.ingresarConvocatoria(idPersona, convocatoriaIngresar);
             } else {
-                servicioConvocatoria.actualizarConvocatoria(idUsuario, convocatoriaIngresar);
+                servicioConvocatoria.actualizarConvocatoria(convocatoriaIngresar);
             }
 
-            return "";
+            return "{\"id\":" + id + "}";
         } catch (IOException exc) {
             logger.error(exc);
             throw exc;
         }
     }
 
+    @RequestMapping(value = {"/adenda"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarAdenda(@ModelAttribute(value = "adenda") co.edu.fnsp.buho.entidadesVista.Adenda adenda, Model model) throws Exception {
+        String json = "";
+        try {
+            Adenda nuevaAdenda = new Adenda();
+            nuevaAdenda.setId(adenda.getId());
+            nuevaAdenda.setDescripcion(adenda.getDescripcion());
+            nuevaAdenda.setFecha(Util.obtenerFecha(adenda.getFecha()));
+            nuevaAdenda.setTipoAdenda(Util.obtenerEntero(adenda.getTipoAdenda()));
+            nuevaAdenda.setDescripcion(adenda.getDescripcion());
+            if (adenda.getDocumento() != null) {
+                MultipartFile multipartFile = (MultipartFile) adenda.getDocumento();
+                if (multipartFile.getBytes().length > 0) {
+                    Documento documento = new Documento();
+                    documento.setContenido(multipartFile.getBytes());
+                    documento.setNombre(multipartFile.getOriginalFilename());
+                    documento.setTipoContenido(multipartFile.getContentType());
+                    nuevaAdenda.setDocumento(documento);
+                }
+            }
+
+            servicioConvocatoria.guardarAdenda(adenda.getIdConvocatoria(), obtenerIdPersona(), nuevaAdenda);
+            List<Adenda> adendas = servicioConvocatoria.obtenerAdendas(adenda.getIdConvocatoria());
+            Util.establecerConsecutivoAdendas(adendas);
+            Gson gson = new Gson();
+            json = gson.toJson(adendas);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarAdenda/{idConvocatoria}/{idAdenda}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarAdenda(@PathVariable("idConvocatoria") int idConvocatoria, @PathVariable("idAdenda") int idAdenda, Model model) {
+        String json = "";
+        try {
+            servicioConvocatoria.eliminarAdenda(idAdenda);
+            List<Adenda> adendas = servicioConvocatoria.obtenerAdendas(idConvocatoria);
+            Util.establecerConsecutivoAdendas(adendas);
+            Gson gson = new Gson();
+            json = gson.toJson(adendas);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = {"/anyosExperiencia"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarAnyosExperiencia(@ModelAttribute(value = "anyosExperiencia") AnyosExperiencia anyosExperiencia, Model model) throws Exception {
+        String json = "";
+        try {
+            servicioConvocatoria.guardarAnyosExperiencia(anyosExperiencia.getIdConvocatoria(), anyosExperiencia);
+            List<AnyosExperiencia> anyosExperiencias = servicioConvocatoria.obtenerAnyosExperiencias(anyosExperiencia.getIdConvocatoria());
+            Util.establecerConsecutivoAnyosExperiencias(anyosExperiencias);
+            Gson gson = new Gson();
+            json = gson.toJson(anyosExperiencias);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarAnyosExperiencia/{idConvocatoria}/{idAnyosExperiencia}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarAnyosExperiencia(@PathVariable("idConvocatoria") int idConvocatoria, @PathVariable("idAnyosExperiencia") int idAnyosExperiencia, Model model) {
+        String json = "";
+        try {
+            servicioConvocatoria.eliminarAnyosExperiencia(idAnyosExperiencia);
+            List<AnyosExperiencia> anyosExperiencias = servicioConvocatoria.obtenerAnyosExperiencias(idConvocatoria);
+            Util.establecerConsecutivoAnyosExperiencias(anyosExperiencias);
+            Gson gson = new Gson();
+            json = gson.toJson(anyosExperiencias);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+    
+    @RequestMapping(value = {"/idioma"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarIdioma(@ModelAttribute(value = "idioma") IdiomaConvocatoria idioma, Model model) throws Exception {
+        String json = "";
+        try {
+            servicioConvocatoria.guardarIdioma(idioma.getIdConvocatoria(), obtenerIdPersona(), idioma);
+            List<IdiomaConvocatoria> idiomas = servicioConvocatoria.obtenerIdiomas(idioma.getIdConvocatoria());
+            Util.establecerConsecutivoIdiomasConvocatoria(idiomas);
+            Gson gson = new Gson();
+            json = gson.toJson(idiomas);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarIdioma/{idConvocatoria}/{idIdioma}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarIdioma(@PathVariable("idConvocatoria") int idConvocatoria, @PathVariable("idIdioma") int idIdioma, Model model) {
+        String json = "";
+        try {
+            servicioConvocatoria.eliminarIdioma(idIdioma);
+            List<IdiomaConvocatoria> idiomas = servicioConvocatoria.obtenerIdiomas(idConvocatoria);
+            Util.establecerConsecutivoIdiomasConvocatoria(idiomas);
+            Gson gson = new Gson();
+            json = gson.toJson(idiomas);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }    
+    
+    @RequestMapping(value = {"/programa"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarPrograma(@ModelAttribute(value = "programa") ProgramaConvocatoria programa, Model model) throws Exception {
+        String json = "";
+        try {
+            servicioConvocatoria.guardarPrograma(programa.getIdConvocatoria(), obtenerIdPersona(), programa);
+            List<ProgramaConvocatoria> programas = servicioConvocatoria.obtenerProgramas(programa.getIdConvocatoria());
+            Util.establecerConsecutivoProgramasConvocatoria(programas);
+            Gson gson = new Gson();
+            json = gson.toJson(programas);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarPrograma/{idConvocatoria}/{idPrograma}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarPrograma(@PathVariable("idConvocatoria") int idConvocatoria, @PathVariable("idPrograma") int idPrograma, Model model) {
+        String json = "";
+        try {
+            servicioConvocatoria.eliminarPrograma(idPrograma);
+            List<ProgramaConvocatoria> programas = servicioConvocatoria.obtenerProgramas(idConvocatoria);
+            Util.establecerConsecutivoProgramasConvocatoria(programas);
+            Gson gson = new Gson();
+            json = gson.toJson(programas);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }    
+
+    @RequestMapping(value = {"/educacionContinua"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarEducacionContinua(@ModelAttribute(value = "educacionContinua") EducacionContinuaConvocatoria educacionContinua, Model model) throws Exception {
+        String json = "";
+        try {
+            servicioConvocatoria.guardarEducacionContinua(educacionContinua.getIdConvocatoria(), obtenerIdPersona(), educacionContinua);
+            List<EducacionContinuaConvocatoria> educacionesContinuas = servicioConvocatoria.obtenerEducacionesContinuas(educacionContinua.getIdConvocatoria());
+            Util.establecerConsecutivoEducacionesContinuasConvocatoria(educacionesContinuas);
+            Gson gson = new Gson();
+            json = gson.toJson(educacionesContinuas);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarEducacionContinua/{idConvocatoria}/{idEducacionContinua}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarEducacionContinua(@PathVariable("idConvocatoria") int idConvocatoria, @PathVariable("idEducacionContinua") int idEducacionContinua, Model model) {
+        String json = "";
+        try {
+            servicioConvocatoria.eliminarEducacionContinua(idEducacionContinua);
+            List<EducacionContinuaConvocatoria> educacionesContinuas = servicioConvocatoria.obtenerEducacionesContinuas(idConvocatoria);
+            Util.establecerConsecutivoEducacionesContinuasConvocatoria(educacionesContinuas);
+            Gson gson = new Gson();
+            json = gson.toJson(educacionesContinuas);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }    
+    
+    @RequestMapping(value = {"/criterioHabilitante"}, method = RequestMethod.POST)
+    public @ResponseBody
+    String guardarCriterioHabilitante(@ModelAttribute(value = "criterioHabilitante") CriterioHabilitanteConvocatoria criterioHabilitante, Model model) throws Exception {
+        String json = "";
+        try {
+            servicioConvocatoria.guardarCriterioHabilitante(criterioHabilitante.getIdConvocatoria(), obtenerIdPersona(), criterioHabilitante);
+            List<CriterioHabilitanteConvocatoria> criteriosHabilitantes = servicioConvocatoria.obtenerCriteriosHabilitantes(criterioHabilitante.getIdConvocatoria());
+            Util.establecerConsecutivoCriteriosHabilitantesConvocatoria(criteriosHabilitantes);
+            Gson gson = new Gson();
+            json = gson.toJson(criteriosHabilitantes);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }
+
+    @RequestMapping(value = "/eliminarCriterioHabilitante/{idConvocatoria}/{idCriterioHabilitante}", method = RequestMethod.GET)
+    public @ResponseBody
+    String eliminarCriterioHabilitante(@PathVariable("idConvocatoria") int idConvocatoria, @PathVariable("idCriterioHabilitante") int idCriterioHabilitante, Model model) {
+        String json = "";
+        try {
+            servicioConvocatoria.eliminarCriterioHabilitante(idCriterioHabilitante);
+            List<CriterioHabilitanteConvocatoria> criteriosHabilitantes = servicioConvocatoria.obtenerCriteriosHabilitantes(idConvocatoria);
+            Util.establecerConsecutivoCriteriosHabilitantesConvocatoria(criteriosHabilitantes);
+            Gson gson = new Gson();
+            json = gson.toJson(criteriosHabilitantes);
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+
+        return json;
+    }    
+
     @RequestMapping(value = "/editar/{idConvocatoria}", method = RequestMethod.GET)
     public String mostrarEdicionConvocatoria(@PathVariable int idConvocatoria, Model model) {
-
         Convocatoria convocatoria = servicioConvocatoria.obtenerConvocatoria(idConvocatoria);
 
         List<Maestro> tiposConvocatoria = servicioMaestro.obtenerTiposConvocatoria();
@@ -427,7 +645,7 @@ public class ConvocatoriaController {
 
         return "convocatorias/preseleccionados";
     }
-    
+
     @RequestMapping(value = "/evaluar", method = RequestMethod.GET)
     public String evaluarPreseleccionados(Model model) {
 
@@ -436,7 +654,6 @@ public class ConvocatoriaController {
 
         return "convocatorias/evaluar";
     }
-
 
     @RequestMapping(value = "/postulados/{idConvocatoria}", method = RequestMethod.GET)
     public @ResponseBody
@@ -452,7 +669,7 @@ public class ConvocatoriaController {
     String obtenerPreseleccionados(@ModelAttribute(value = "idConvocatoria") int idConvocatoria, Model model) {
         List<Preseleccionado> preseleccionados = servicioConvocatoria.obtenerPreseleccionados(idConvocatoria);
         Gson gson = new Gson();
-            
+
         return gson.toJson(preseleccionados);
     }
 
@@ -466,7 +683,7 @@ public class ConvocatoriaController {
     }
 
     @RequestMapping(value = "/descargarPostulados/{idConvocatoria}", method = RequestMethod.GET)
-    public ModelAndView  descargarPostulados(@PathVariable("idConvocatoria") int idConvocatoria, HttpServletResponse response) throws IOException {
+    public ModelAndView descargarPostulados(@PathVariable("idConvocatoria") int idConvocatoria, HttpServletResponse response) throws IOException {
         List<HojaVida> hojasVida = servicioConvocatoria.obtenerPersonasConvocatoria(idConvocatoria);
         return new ModelAndView(new PostuladosExcelReportView(), "postulados", hojasVida);
     }
@@ -476,13 +693,13 @@ public class ConvocatoriaController {
         List<Preseleccionado> preseleccionados = servicioConvocatoria.obtenerPreseleccionados(idConvocatoria);
         return new ModelAndView(new PreseleccionadosExcelReportView(), "preseleccionados", preseleccionados);
     }
-    
+
     @RequestMapping(value = "/descargarEvaluaciones/{idConvocatoria}", method = RequestMethod.GET)
-    public ModelAndView  descargarEvaluaciones(@PathVariable("idConvocatoria") int idConvocatoria, HttpServletResponse response) throws IOException {
+    public ModelAndView descargarEvaluaciones(@PathVariable("idConvocatoria") int idConvocatoria, HttpServletResponse response) throws IOException {
         List<Evaluacion> evaluaciones = servicioConvocatoria.obtenerEvaluaciones(idConvocatoria);
         return new ModelAndView(new EvaluacionExcelReportView(), "evaluaciones", evaluaciones);
     }
-    
+
     private boolean esAdministrador() {
         boolean administrador = false;
         if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof DetalleUsuario) {
@@ -506,15 +723,6 @@ public class ConvocatoriaController {
         }
 
         return autenticado;
-    }
-
-    private long obtenerIdUsuario() {
-        long idUsuario = 0;
-        if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof DetalleUsuario) {
-            idUsuario = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdUsuario();
-        }
-
-        return idUsuario;
     }
 
     private long obtenerIdPersona() {

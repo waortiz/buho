@@ -5,14 +5,14 @@
  */
 package co.edu.fnsp.buho.entidades;
 
-import java.util.Date;
-
 /**
  *
  * @author William
  */
 public class AnyosExperiencia {
     private int id;
+    private int idConvocatoria;
+    private int consecutivo;
     private int nucleoBasicoConocimiento;
     private String nombreNucleoBasicoConocimiento;
     private int anyos;
@@ -29,6 +29,34 @@ public class AnyosExperiencia {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the consecutivo
+     */
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    /**
+     * @param consecutivo the consecutivo to set
+     */
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
+    }
+
+    /**
+     * @return the idConvocatoria
+     */
+    public int getIdConvocatoria() {
+        return idConvocatoria;
+    }
+
+    /**
+     * @param idConvocatoria the idConvocatoria to set
+     */
+    public void setIdConvocatoria(int idConvocatoria) {
+        this.idConvocatoria = idConvocatoria;
     }
 
     /**

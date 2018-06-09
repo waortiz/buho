@@ -68,7 +68,7 @@ public class ServicioSeguridad implements IServicioSeguridad {
             CorreoElectronico correoElectronico = new CorreoElectronico();
             correoElectronico.setCorreoElectronico(usuario.getCorreoElectronico());
             hojaVida.getCorreosElectronicos().add(correoElectronico);
-            long idPersona = repositorioHojaVida.ingresarHojaVida(0, hojaVida);
+            long idPersona = repositorioHojaVida.ingresarHojaVida(hojaVida);
             usuario.setIdPersona(idPersona);
             Privilegio privilegio = new Privilegio();
             privilegio.setIdPrivilegio(PrivilegioEnum.USUARIO.getIdPrivilegio());
