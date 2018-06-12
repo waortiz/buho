@@ -70,4 +70,5 @@ public interface IRepositorioMaestro {
     Maestro obtenerTipoIdentificacion(String id);
     List<Maestro> obtenerProgramasEducacionesContinuas();
     List<Maestro> obtenerCursosDocencia();
+    List<Maestro> obtenerInstitucionesDistinciones();
 }

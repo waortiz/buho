@@ -8,13 +8,14 @@ package co.edu.fnsp.buho.controladores;
 import co.edu.fnsp.buho.entidades.Articulo;
 import co.edu.fnsp.buho.entidades.Ciudad;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVida;
+import co.edu.fnsp.buho.entidades.ConsultaHojaVidaDistincion;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionBasica;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionContinua;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionSuperior;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaExperiencia;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaIdioma;
-import co.edu.fnsp.buho.entidades.ConsultaHojaVidaInvestigador;
+import co.edu.fnsp.buho.entidades.ConsultaHojaVidaInvestigacion;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaTipoExperiencia;
 import co.edu.fnsp.buho.entidades.CorreoElectronico;
 import co.edu.fnsp.buho.entidades.CuentaBancaria;
@@ -33,13 +34,14 @@ import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.HojaVidaConsulta;
+import co.edu.fnsp.buho.entidades.HojaVidaDistincion;
 import co.edu.fnsp.buho.entidades.HojaVidaEducacionBasica;
 import co.edu.fnsp.buho.entidades.HojaVidaEducacionContinua;
 import co.edu.fnsp.buho.entidades.HojaVidaEducacionSuperior;
 import co.edu.fnsp.buho.entidades.HojaVidaExperiencia;
 import co.edu.fnsp.buho.entidades.HojaVidaExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.HojaVidaIdioma;
-import co.edu.fnsp.buho.entidades.HojaVidaInvestigador;
+import co.edu.fnsp.buho.entidades.HojaVidaInvestigacion;
 import co.edu.fnsp.buho.entidades.HojaVidaTipoExperiencia;
 import co.edu.fnsp.buho.entidades.Institucion;
 import co.edu.fnsp.buho.entidades.Investigacion;
@@ -51,13 +53,14 @@ import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.Terminos;
 import co.edu.fnsp.buho.entidades.TipoDocumentoValidarEnum;
 import co.edu.fnsp.buho.entidades.ValidacionDocumento;
+import co.edu.fnsp.buho.excel.HojaVidaDistincionExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaEducacionBasicaExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaEducacionContinuaExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaEducacionSuperiorExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaExperienciaDocenciaExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaExperienciaExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaIdiomaExcelReportView;
-import co.edu.fnsp.buho.excel.HojaVidaInvestigadorExcelReportView;
+import co.edu.fnsp.buho.excel.HojaVidaInvestigacionExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaTipoExperienciaExcelReportView;
 import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
 import co.edu.fnsp.buho.servicios.IServicioHojaVida;
@@ -385,8 +388,8 @@ public class HojaVidaController {
     }
 
     @RequestMapping(value = "/consultarHojasVidaInvestigacion", method = RequestMethod.POST)
-    public @ResponseBody String obtenerHojasVidaInvestigacion(@ModelAttribute ConsultaHojaVidaInvestigador consultaHojaVidaInvestigador, Model model) {
-        List<HojaVidaInvestigador> hojasVida = servicioHojaVida.obtenerHojasVidaInvestigacion(consultaHojaVidaInvestigador);
+    public @ResponseBody String obtenerHojasVidaInvestigacion(@ModelAttribute ConsultaHojaVidaInvestigacion consultaHojaVidaInvestigacion, Model model) {
+        List<HojaVidaInvestigacion> hojasVida = servicioHojaVida.obtenerHojasVidaInvestigacion(consultaHojaVidaInvestigacion);
 
         Gson gson = new Gson();
 
@@ -394,10 +397,35 @@ public class HojaVidaController {
     }
     
     @RequestMapping(value = "/descargarHojasVidaInvestigacion", method = RequestMethod.GET)
-    public ModelAndView descargarHojasVidaInvestigador(@ModelAttribute ConsultaHojaVidaInvestigador consultaHojaVidaInvestigador, Model model) {
-        List<HojaVidaInvestigador> hojasVida = servicioHojaVida.obtenerHojasVidaInvestigacion(consultaHojaVidaInvestigador);
+    public ModelAndView descargarHojasVidaInvestigacion(@ModelAttribute ConsultaHojaVidaInvestigacion consultaHojaVidaInvestigacion, Model model) {
+        List<HojaVidaInvestigacion> hojasVida = servicioHojaVida.obtenerHojasVidaInvestigacion(consultaHojaVidaInvestigacion);
 
-       return new ModelAndView(new HojaVidaInvestigadorExcelReportView(), "hojasVida", hojasVida);
+       return new ModelAndView(new HojaVidaInvestigacionExcelReportView(), "hojasVida", hojasVida);
+    }
+
+    @RequestMapping(value = "/distincion", method = RequestMethod.GET)
+    public String obtenerHojasVidaDistincion(Model model) {
+        
+        List<Maestro> instituciones = servicioMaestro.obtenerInstitucionesDistinciones();
+        model.addAttribute("instituciones", instituciones);
+        
+        return "hojasVida/distincion";
+    }
+
+    @RequestMapping(value = "/consultarHojasVidaDistincion", method = RequestMethod.POST)
+    public @ResponseBody String obtenerHojasVidaDistincion(@ModelAttribute ConsultaHojaVidaDistincion consultaHojaVidaDistincion, Model model) {
+        List<HojaVidaDistincion> hojasVida = servicioHojaVida.obtenerHojasVidaDistincion(consultaHojaVidaDistincion);
+
+        Gson gson = new Gson();
+
+        return gson.toJson(hojasVida);
+    }
+    
+    @RequestMapping(value = "/descargarHojasVidaDistincion", method = RequestMethod.GET)
+    public ModelAndView descargarHojasVidaDistincion(@ModelAttribute ConsultaHojaVidaDistincion consultaHojaVidaDistincion, Model model) {
+        List<HojaVidaDistincion> hojasVida = servicioHojaVida.obtenerHojasVidaDistincion(consultaHojaVidaDistincion);
+
+       return new ModelAndView(new HojaVidaDistincionExcelReportView(), "hojasVida", hojasVida);
     }
 
     @RequestMapping(value = "/terminos", method = RequestMethod.POST)

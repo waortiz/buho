@@ -64,4 +64,5 @@ public interface IServicioMaestro {
     int ingresarInstitucion(Institucion institucion);
     List<Maestro> obtenerProgramasEducacionesContinuas();
     List<Maestro> obtenerCursosDocencia();
+    List<Maestro> obtenerInstitucionesDistinciones();
 }

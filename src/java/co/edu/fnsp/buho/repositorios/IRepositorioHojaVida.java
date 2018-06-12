@@ -7,13 +7,14 @@ package co.edu.fnsp.buho.repositorios;
 
 import co.edu.fnsp.buho.entidades.Articulo;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVida;
+import co.edu.fnsp.buho.entidades.ConsultaHojaVidaDistincion;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionBasica;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionContinua;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionSuperior;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaExperiencia;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaIdioma;
-import co.edu.fnsp.buho.entidades.ConsultaHojaVidaInvestigador;
+import co.edu.fnsp.buho.entidades.ConsultaHojaVidaInvestigacion;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaTipoExperiencia;
 import co.edu.fnsp.buho.entidades.CorreoElectronico;
 import co.edu.fnsp.buho.entidades.CuentaBancaria;
@@ -28,13 +29,14 @@ import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.HojaVidaConsulta;
+import co.edu.fnsp.buho.entidades.HojaVidaDistincion;
 import co.edu.fnsp.buho.entidades.HojaVidaEducacionBasica;
 import co.edu.fnsp.buho.entidades.HojaVidaEducacionContinua;
 import co.edu.fnsp.buho.entidades.HojaVidaEducacionSuperior;
 import co.edu.fnsp.buho.entidades.HojaVidaExperiencia;
 import co.edu.fnsp.buho.entidades.HojaVidaExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.HojaVidaIdioma;
-import co.edu.fnsp.buho.entidades.HojaVidaInvestigador;
+import co.edu.fnsp.buho.entidades.HojaVidaInvestigacion;
 import co.edu.fnsp.buho.entidades.HojaVidaTipoExperiencia;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.Investigacion;
@@ -203,5 +205,7 @@ public interface IRepositorioHojaVida {
     
     List<HojaVidaExperienciaDocencia> obtenerHojasVidaExperienciaDocencia(ConsultaHojaVidaExperienciaDocencia consultaHojaVidaExperienciaDocencia);
     
-    List<HojaVidaInvestigador> obtenerHojasVidaInvestigacion(ConsultaHojaVidaInvestigador consultaHojaVidaInvestigador);
+    List<HojaVidaInvestigacion> obtenerHojasVidaInvestigacion(ConsultaHojaVidaInvestigacion consultaHojaVidaInvestigacion);
+
+    List<HojaVidaDistincion> obtenerHojasVidaDistincion(ConsultaHojaVidaDistincion consultaHojaVidaDistincion);
 }

@@ -271,4 +271,9 @@ public class ServicioMaestro implements IServicioMaestro {
         return repositorioMaestro.obtenerCursosDocencia();
     }
 
+    @Override
+    public List<Maestro> obtenerInstitucionesDistinciones() {
+        return repositorioMaestro.obtenerInstitucionesDistinciones();
+    }
+
 }

@@ -78,6 +78,10 @@
         <put-attribute name="title" value="Investigación" />  
         <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/investigacion.jsp" />  
     </definition>  
+    <definition name="hojasVida/distincion" extends="base-definition">  
+        <put-attribute name="title" value="Distinción" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/distincion.jsp" />  
+    </definition>  
 
     <!-- Convocatorias Page -->
     <definition name="convocatorias/crear" extends="base-definition">  

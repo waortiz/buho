@@ -7,13 +7,14 @@ package co.edu.fnsp.buho.repositorios;
 
 import co.edu.fnsp.buho.entidades.Articulo;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVida;
+import co.edu.fnsp.buho.entidades.ConsultaHojaVidaDistincion;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionBasica;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionContinua;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionSuperior;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaExperiencia;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaIdioma;
-import co.edu.fnsp.buho.entidades.ConsultaHojaVidaInvestigador;
+import co.edu.fnsp.buho.entidades.ConsultaHojaVidaInvestigacion;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaTipoExperiencia;
 import co.edu.fnsp.buho.entidades.DocumentoSoporte;
 import co.edu.fnsp.buho.entidades.CorreoElectronico;
@@ -28,13 +29,14 @@ import co.edu.fnsp.buho.entidades.ExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.HojaVidaConsulta;
+import co.edu.fnsp.buho.entidades.HojaVidaDistincion;
 import co.edu.fnsp.buho.entidades.HojaVidaEducacionBasica;
 import co.edu.fnsp.buho.entidades.HojaVidaEducacionContinua;
 import co.edu.fnsp.buho.entidades.HojaVidaEducacionSuperior;
 import co.edu.fnsp.buho.entidades.HojaVidaExperiencia;
 import co.edu.fnsp.buho.entidades.HojaVidaExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.HojaVidaIdioma;
-import co.edu.fnsp.buho.entidades.HojaVidaInvestigador;
+import co.edu.fnsp.buho.entidades.HojaVidaInvestigacion;
 import co.edu.fnsp.buho.entidades.HojaVidaTipoExperiencia;
 import co.edu.fnsp.buho.entidades.Telefono;
 import co.edu.fnsp.buho.entidades.TipoDocumento;
@@ -77,6 +79,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     private SimpleJdbcCall obtenerHojasVidaExperiencia;
     private SimpleJdbcCall obtenerHojasVidaExperienciaDocencia;
     private SimpleJdbcCall obtenerHojasVidaInvestigacion;
+    private SimpleJdbcCall obtenerHojasVidaDistincion;
     private SimpleJdbcCall obtenerPersona;
     private SimpleJdbcCall eliminarHojaVida;
 
@@ -222,7 +225,8 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         this.obtenerHojasVidaExperiencia = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerHojasVidaExperiencia").returningResultSet("hojasVida", BeanPropertyRowMapper.newInstance(HojaVidaExperiencia.class));
         this.obtenerHojasVidaExperienciaDocencia = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerHojasVidaExperienciaDocencia").returningResultSet("hojasVida", BeanPropertyRowMapper.newInstance(HojaVidaExperienciaDocencia.class));
         this.obtenerHojasVidaTipoExperiencia = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerHojasVidaTipoExperiencia").returningResultSet("hojasVida", BeanPropertyRowMapper.newInstance(HojaVidaTipoExperiencia.class));
-        this.obtenerHojasVidaInvestigacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerHojasVidaInvestigacion").returningResultSet("hojasVida", BeanPropertyRowMapper.newInstance(HojaVidaInvestigador.class));
+        this.obtenerHojasVidaInvestigacion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerHojasVidaInvestigacion").returningResultSet("hojasVida", BeanPropertyRowMapper.newInstance(HojaVidaInvestigacion.class));
+        this.obtenerHojasVidaDistincion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerHojasVidaDistincion").returningResultSet("hojasVida", BeanPropertyRowMapper.newInstance(HojaVidaDistincion.class));
         this.eliminarHojaVida = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarHojaVida");
 
         this.ingresarDocumentoSoporte = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoSoporte");
@@ -2493,22 +2497,38 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     }
 
     @Override
-    public List<HojaVidaInvestigador> obtenerHojasVidaInvestigacion(ConsultaHojaVidaInvestigador consultaHojaVidaInvestigador) {
+    public List<HojaVidaInvestigacion> obtenerHojasVidaInvestigacion(ConsultaHojaVidaInvestigacion consultaHojaVidaInvestigacion) {
         MapSqlParameterSource parametrosConsultaHojasVida = new MapSqlParameterSource();
-        if (consultaHojaVidaInvestigador.getReconocido()!= null && consultaHojaVidaInvestigador.getReconocido().length() > 0) {
-            parametrosConsultaHojasVida.addValue("varReconocido", Util.obtenerBooleano(consultaHojaVidaInvestigador.getReconocido()));
+        if (consultaHojaVidaInvestigacion.getReconocido()!= null && consultaHojaVidaInvestigacion.getReconocido().length() > 0) {
+            parametrosConsultaHojasVida.addValue("varReconocido", Util.obtenerBooleano(consultaHojaVidaInvestigacion.getReconocido()));
         } else {
             parametrosConsultaHojasVida.addValue("varReconocido", null);
         }
-        if (consultaHojaVidaInvestigador.getTipoInvestigador()!= null && consultaHojaVidaInvestigador.getTipoInvestigador().length() > 0) {
-            parametrosConsultaHojasVida.addValue("varTipoInvestigador", Util.obtenerEntero(consultaHojaVidaInvestigador.getTipoInvestigador()));
+        if (consultaHojaVidaInvestigacion.getTipoInvestigador()!= null && consultaHojaVidaInvestigacion.getTipoInvestigador().length() > 0) {
+            parametrosConsultaHojasVida.addValue("varTipoInvestigador", Util.obtenerEntero(consultaHojaVidaInvestigacion.getTipoInvestigador()));
         } else {
             parametrosConsultaHojasVida.addValue("varTipoInvestigador", null);
         }
 
         Map resultadoHojasVida = obtenerHojasVidaInvestigacion.execute(parametrosConsultaHojasVida);
-        ArrayList<HojaVidaInvestigador> hojasVida = (ArrayList<HojaVidaInvestigador>) resultadoHojasVida.get("hojasVida");
+        ArrayList<HojaVidaInvestigacion> hojasVida = (ArrayList<HojaVidaInvestigacion>) resultadoHojasVida.get("hojasVida");
 
         return hojasVida;
     }    
+    
+        @Override
+    public List<HojaVidaDistincion> obtenerHojasVidaDistincion(ConsultaHojaVidaDistincion consultaHojaVidaDistincion) {
+        MapSqlParameterSource parametrosConsultaHojasVida = new MapSqlParameterSource();
+        if (consultaHojaVidaDistincion.getInstitucion()!= null && consultaHojaVidaDistincion.getInstitucion().length() > 0) {
+            parametrosConsultaHojasVida.addValue("varInstitucion", consultaHojaVidaDistincion.getInstitucion());
+        } else {
+            parametrosConsultaHojasVida.addValue("varReconocido", null);
+        }
+
+        Map resultadoHojasVida = obtenerHojasVidaDistincion.execute(parametrosConsultaHojasVida);
+        ArrayList<HojaVidaDistincion> hojasVida = (ArrayList<HojaVidaDistincion>) resultadoHojasVida.get("hojasVida");
+
+        return hojasVida;
+    }    
+
 }
