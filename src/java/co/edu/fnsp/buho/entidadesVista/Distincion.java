@@ -5,9 +5,6 @@
  */
 package co.edu.fnsp.buho.entidadesVista;
 
-import org.springframework.web.multipart.MultipartFile;
-
-
 /**
  *
  * @author William

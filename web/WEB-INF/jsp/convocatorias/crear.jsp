@@ -33,7 +33,6 @@
         </ul>
     </div>    
     <div class="container">
-        <div id="alert_placeholder_convocatoria"></div>
         <form:form method="POST" modelAttribute="convocatoria">
             <div class="form-group">
                 <ul class="nav nav-tabs">
@@ -56,6 +55,7 @@
             </div>
             <div id="formdatosgen">
                 <legend>Convocatoria</legend>
+                <div id="alert_placeholder_convocatoria"></div>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -224,21 +224,22 @@
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
                             <div class="form-inline">
                                 <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="documento" id="documento" >
-                                <c:if test = "${convocatoria.getId() > 0}">
-                                    <button class="btn btn-success btn-xs" type="button" onclick="verDocumentoConvocatoria()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
-                                </c:if>
+                                 <button class="btn btn-success btn-xs" type="button" id="btnVerDocumento" onclick="verDocumentoConvocatoria()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <input type="submit" class="btn btn-success" type="button" style="margin-top: 30px;float: right;" value="Guardar" />
             </div>
             <div id="formcrithab" style="display: none;" >
                 <legend>Criterios Habilitantes</legend>
                 <div class="row">  
-                    <div class="col-md-2" >
+                    <div class="col-md-6" >
                         <div class="form-group">
                             <label>Años experiencia</label>
                             <div class="table-responsive">
+                                <br />
+                                <div id="alert_anyos_minima_experiencia"></div>
                                 <table class="table tabla table-hover tableestilo">
                                     <thead>
                                         <tr>
@@ -326,7 +327,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                </div>
+                <div class="row">  
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Agregar idioma requerido</label> 
                             <button  type="button" class="btn btn-success btn-sm" id="btnNuevoIdioma" onclick="nuevoIdioma()"><span class="glyphicon glyphicon-plus"></span></button><br>
@@ -413,8 +416,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Agregar formaci&oacute;n requerida</label> 
@@ -446,6 +447,59 @@
                             </div>
                         </div>
                     </div>
+                    <div class="modal fade" role="dialog" id="md_programa">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header mhsuccess">
+                                    <button class="close" data-dismiss="modal">&times;</button>
+                                    <h4>Formaci&oacute;n requerida</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="alert_programa"></div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="nivelFormacion">Nivel de formaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el nivel formación">
+                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                                                <select name="nivelFormacionPrograma" id="nivelFormacionPrograma" style="width: 100%;" class="js-select-basic-single js-states form-control">
+                                                    <option value=""></option>
+                                                    <c:forEach var="nivelEstudio" items="${nivelesFormacion}">
+                                                        <option value="${nivelEstudio.getId()}">${nivelEstudio.getNombre()}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group form-inline">
+                                                <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de títutlo obtenido">
+                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                    <input type="text" name="nombreNucleoBasicoConocimientoPrograma" id="nombreNucleoBasicoConocimientoPrograma" class="form-control" style="width: 80%;" readonly>
+                                                    <input type="hidden" name="nucleoBasicoConocimientoPrograma" id="nucleoBasicoConocimientoPrograma" />
+                                                    <button type="button" class="btn btn-success btn-sm" onclick="mostrarNucleoBasicoConocimiento('nucleoBasicoConocimientoPrograma','nombreNucleoBasicoConocimientoPrograma')"  style="margin-left: 10px;"><span class="glyphicon glyphicon-search"></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row"> 
+                                        <div class="col-md-12">
+                                            <div class="form-group form-inline">
+                                                <label for="programaCursado">Programa</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa">
+                                                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
+                                                <select style="width: 100%;" name="programaCursado" id="programaCursado" class="js-select-basic-single js-states form-control">
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-bind="click: adicionarPrograma">Agregar</button>
+                                    <button type="button" class="btn btn-success" onclick="cerrarVentanaPrograma();">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Agregar formaci&oacute;n complementaria requerida</label> 
@@ -477,66 +531,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal fade" role="dialog" id="md_programa">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header mhsuccess">
-                                <button class="close" data-dismiss="modal">&times;</button>
-                                <h4>Formaci&oacute;n requerida</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div id="alert_programa"></div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="nivelFormacion">Nivel de formaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el nivel formación">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                            <select name="nivelFormacionPrograma" id="nivelFormacionPrograma" style="width: 100%;" class="js-select-basic-single js-states form-control">
-                                                <option value=""></option>
-                                                <c:forEach var="nivelEstudio" items="${nivelesFormacion}">
-                                                    <option value="${nivelEstudio.getId()}">${nivelEstudio.getNombre()}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="form-group form-inline">
-                                            <label for="">N&uacute;cleo b&aacute;sico del conocimiento</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre de títutlo obtenido">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                                <input type="text" name="nombreNucleoBasicoConocimientoPrograma" id="nombreNucleoBasicoConocimientoPrograma" class="form-control" style="width: 80%;" readonly>
-                                                <input type="hidden" name="nucleoBasicoConocimientoPrograma" id="nucleoBasicoConocimientoPrograma" />
-                                                <button type="button" class="btn btn-success btn-sm" onclick="mostrarNucleoBasicoConocimiento('nucleoBasicoConocimientoPrograma','nombreNucleoBasicoConocimientoPrograma')"  style="margin-left: 10px;"><span class="glyphicon glyphicon-search"></span></button>
-                                        </div>
-                                    </div>
+                    <div class="modal fade" role="dialog" id="md_educacion_continua">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header mhsuccess">
+                                    <button class="close" data-dismiss="modal">&times;</button>
+                                    <h4>Formaci&oacute;n complementaria requerida</h4>
                                 </div>
-                                <div class="row"> 
-                                    <div class="col-md-12">
-                                        <div class="form-group form-inline">
-                                            <label for="programaCursado">Programa</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre del programa">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <select style="width: 100%;" name="programaCursado" id="programaCursado" class="js-select-basic-single js-states form-control">
-                                                <option value=""></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success" data-bind="click: adicionarPrograma">Agregar</button>
-                                <button type="button" class="btn btn-success" onclick="cerrarVentanaPrograma();">Cancelar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade" role="dialog" id="md_educacion_continua">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header mhsuccess">
-                                <button class="close" data-dismiss="modal">&times;</button>
-                                <h4>Formaci&oacute;n complementaria requerida</h4>
-                            </div>
-                            <div class="modal-body">
+                                <div class="modal-body">
                                 <div id="alert_educacion_continua"></div>
                                 <div class="row">
                                     <div class="col-md-4">
@@ -573,57 +575,46 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success" data-bind="click: adicionarEducacionContinua">Agregar</button>
-                                <button type="button" class="btn btn-success" onclick="cerrarVentanaEducacionContinua();">Cancelar</button>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-bind="click: adicionarEducacionContinua">Agregar</button>
+                                    <button type="button" class="btn btn-success" onclick="cerrarVentanaEducacionContinua();">Cancelar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Agregar nuevo criterio</label>
                             <button style="margin-left: 10px;" type="button" id="btnNuevoCriterioHabilitante" class="btn btn-success btn-sm" onclick="nuevoCriterioHabilitante()" ><span class="glyphicon glyphicon-plus"></span></button>
+                            <div class="table-responsive">
+                                <br />
+                                <div id="alert_criterios_habilitantes"></div>
+                                <table class="table tabla table-hover tableestilo">
+                                    <thead>
+                                    <th>Campo</th>
+                                    <th>Valor</th>
+                                    <th>Opciones</th>
+                                    </thead>
+                                    <tbody data-bind="foreach: { data: criteriosHabilitantes }">
+                                        <tr class="table-row">
+                                            <td style="width: 45%">
+                                                <span data-bind="text: nombreCampoHojaVida" ></span>
+                                            </td>
+                                            <td style="width: 45%">
+                                                <span data-bind="text: texto" ></span>
+                                            </td>
+                                            <td style='white-space: nowrap; width: 10%' align="center">
+                                                <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCriterioHabilitante"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                                <button class='btn btn-danger btn-xs' type='button' style='margin-left:10px;' data-bind="click: $root.eliminarCriterioHabilitante"><span class='glyphicon glyphicon-remove'></span></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>                                    
+                                </table>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label>Configurar criterios nuevos</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <br />
-                            <div id="alert_criterios_habilitantes"></div>
-                            <table class="table tabla table-hover tableestilo">
-                                <thead>
-                                <th>Campo</th>
-                                <th>Valor</th>
-                                <th>Opciones</th>
-                                </thead>
-                                <tbody data-bind="foreach: { data: criteriosHabilitantes }">
-                                    <tr class="table-row">
-                                        <td style="width: 45%">
-                                            <span data-bind="text: nombreCampoHojaVida" ></span>
-                                        </td>
-                                        <td style="width: 45%">
-                                            <span data-bind="text: texto" ></span>
-                                        </td>
-                                        <td style='white-space: nowrap; width: 10%' align="center">
-                                            <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCriterioHabilitante"><i class='fa fa-pencil' aria-hidden='true'></i></button>
-                                            <button class='btn btn-danger btn-xs' type='button' style='margin-left:10px;' data-bind="click: $root.eliminarCriterioHabilitante"><span class='glyphicon glyphicon-remove'></span></button>
-                                        </td>
-                                    </tr>
-                                </tbody>                                    
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade" role="dialog" id="md_criterio_habilitante">
-                    <div class="modal-dialog ">
+                    <div class="modal fade" role="dialog" id="md_criterio_habilitante">
+                        <div class="modal-dialog ">
                         <div class="modal-content">
                             <div class="modal-header mhsuccess">
                                 <button class="close" data-dismiss="modal">&times;</button>
@@ -737,6 +728,7 @@
                             </div>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
             <div id="formadendas" style="display: none;">
@@ -828,6 +820,7 @@
                 </div>
             </div>
             <div id="formresultado" style="display: none;">
+                <div id="alert_resultado"></div>
                 <div class="row">
                     <div class="col-md-12">
                         <legend>Resultados</legend>
@@ -836,9 +829,7 @@
                                 <label>Archivo de soporte de los resultados</label>
                                 <div class="form-inline">
                                 <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="resultado" id="resultado" >
-                                <c:if test = "${convocatoria.getId() > 0}">
-                                    <button class="btn btn-success btn-xs" type="button" onclick="verDocumentoResultado()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
-                                </c:if>
+                                <button class="btn btn-success btn-xs" type="button" id="btnVerResultado" onclick="verDocumentoResultado()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
                                 </div>
                             </div>
                         </div>
@@ -908,7 +899,6 @@
                     </div>
                 </div>
             </div>
-            <input type="submit" class="btn btn-success" type="button" style="margin-top: 30px;float: right;" value="Guardar" />
             <input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <form:hidden path="id" />
         </form:form>

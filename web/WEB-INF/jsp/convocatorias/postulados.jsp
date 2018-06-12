@@ -782,7 +782,7 @@
                     clearInterval(interval);
                 }
                 if (current_progress === 100) {
-                    $('#md_evaluar').modal('hide');
+                    $('#md_postulados').modal('hide');
                 }
             }, 2000);
             $.ajax({
@@ -849,7 +849,7 @@
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-
+                    $('#md_descargar_postulados').modal('hide');
                 }
             });
         };

@@ -68,4 +68,6 @@ public interface IRepositorioMaestro {
     Maestro obtenerGrupoEtnico(int id);
     Maestro obtenerDiscapacidad(int id);
     Maestro obtenerTipoIdentificacion(String id);
+    List<Maestro> obtenerProgramasEducacionesContinuas();
+    List<Maestro> obtenerCursosDocencia();
 }

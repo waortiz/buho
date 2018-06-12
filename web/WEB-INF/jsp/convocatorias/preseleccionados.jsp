@@ -777,7 +777,7 @@
                 clearInterval(interval);
             }
             if (current_progress === 100) {
-                $('#md_evaluar').modal('hide');
+                $('#md_preseleccionados').modal('hide');
             }
         }, 2000);
         $.ajax({
@@ -843,7 +843,7 @@
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
-
+                $('#md_descargar_preseleccionados').modal('hide');
             }
         });
     }

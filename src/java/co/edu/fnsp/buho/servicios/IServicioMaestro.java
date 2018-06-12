@@ -62,4 +62,6 @@ public interface IServicioMaestro {
     List<Maestro> obtenerInstitucionesEducativasColombianas();
     List<Programa> obtenerProgramasNucleoBasicoConocimiento(int nucleoBasicoConocimiento);
     int ingresarInstitucion(Institucion institucion);
+    List<Maestro> obtenerProgramasEducacionesContinuas();
+    List<Maestro> obtenerCursosDocencia();
 }

@@ -9,12 +9,14 @@ import co.edu.fnsp.buho.entidades.Convocatoria;
 import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.Adenda;
 import co.edu.fnsp.buho.entidades.AnyosExperiencia;
+import co.edu.fnsp.buho.entidades.AnyosMinimosExperiencia;
 import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
 import co.edu.fnsp.buho.entidades.EducacionContinuaConvocatoria;
 import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
 import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
 import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
+import co.edu.fnsp.buho.entidades.ResultadoConvocatoria;
 import co.edu.fnsp.buho.utilidades.Util;
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,6 +52,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     private SimpleJdbcCall obtenerResultadoConvocatoria;
     private SimpleJdbcCall ingresarResultadoConvocatoria;
     private SimpleJdbcCall actualizarResultadoConvocatoria;
+    private SimpleJdbcCall actualizarAnyosMinimosExperienciaConvocatoria;
     private SimpleJdbcCall obtenerPersonasConvocatoria;
 
     private SimpleJdbcCall ingresarAdenda;
@@ -106,7 +109,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         this.obtenerResultadoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerResultadoConvocatoria");
         this.ingresarResultadoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarResultadoConvocatoria");
         this.actualizarResultadoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarResultadoConvocatoria");
-
+        this.actualizarAnyosMinimosExperienciaConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarAnyosMinimosExperienciaConvocatoria");
         this.ingresarAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarAdenda");
         this.eliminarAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarAdenda");
         this.actualizarAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarAdenda");
@@ -161,11 +164,6 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         } else {
             parametros.addValue("varPrograma", null);
         }
-        if (convocatoria.getAnyosMinimosExperiencia() != null && convocatoria.getAnyosMinimosExperiencia().length() > 0) {
-            parametros.addValue("varanyosminimosexperiencia", Util.obtenerEntero(convocatoria.getAnyosMinimosExperiencia()));
-        } else {
-            parametros.addValue("varanyosminimosexperiencia", null);
-        }
         parametros.addValue("varPersonaRegistra", idPersona);
         Map resultadoIngresoConvocatoria = ingresarConvocatoria.execute(parametros);
         int idConvocatoria = (int) resultadoIngresoConvocatoria.get("varIdConvocatoria");
@@ -177,16 +175,6 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             parametrosIngresoDocumentoConvocatoria.addValue("varTipoContenido", documento.getTipoContenido());
             parametrosIngresoDocumentoConvocatoria.addValue("varContenido", documento.getContenido());
             ingresarDocumentoConvocatoria.execute(parametrosIngresoDocumentoConvocatoria);
-        }
-
-        Documento resultado = convocatoria.getResultado();
-        if (resultado != null) {
-            MapSqlParameterSource parametrosIngresoResultadoConvocatoria = new MapSqlParameterSource();
-            parametrosIngresoResultadoConvocatoria.addValue("varIdConvocatoria", idConvocatoria);
-            parametrosIngresoResultadoConvocatoria.addValue("varNombre", resultado.getNombre());
-            parametrosIngresoResultadoConvocatoria.addValue("varTipoContenido", resultado.getTipoContenido());
-            parametrosIngresoResultadoConvocatoria.addValue("varContenido", resultado.getContenido());
-            ingresarResultadoConvocatoria.execute(parametrosIngresoResultadoConvocatoria);
         }
 
         return idConvocatoria;
@@ -213,11 +201,6 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         } else {
             parametros.addValue("varPrograma", null);
         }
-        if (convocatoria.getAnyosMinimosExperiencia() != null && convocatoria.getAnyosMinimosExperiencia().length() > 0) {
-            parametros.addValue("varanyosminimosexperiencia", Util.obtenerEntero(convocatoria.getAnyosMinimosExperiencia()));
-        } else {
-            parametros.addValue("varanyosminimosexperiencia", null);
-        }
 
         actualizarConvocatoria.execute(parametros);
 
@@ -230,11 +213,27 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
             parametrosActualizacionDocumentoConvocatoria.addValue("varContenido", documento.getContenido());
             actualizarDocumentoConvocatoria.execute(parametrosActualizacionDocumentoConvocatoria);
         }
+    }
 
-        Documento resultado = convocatoria.getResultado();
+    @Override
+    public void actualizarAnyosMinimosExperiencia(AnyosMinimosExperiencia anyosMinimosExperiencia) {
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdConvocatoria", anyosMinimosExperiencia.getIdConvocatoria());
+        if (anyosMinimosExperiencia.getAnyosMinimosExperiencia() != null && anyosMinimosExperiencia.getAnyosMinimosExperiencia().length() > 0) {
+            parametros.addValue("varanyosminimosexperiencia", Util.obtenerEntero(anyosMinimosExperiencia.getAnyosMinimosExperiencia()));
+        } else {
+            parametros.addValue("varanyosminimosexperiencia", null);
+        }
+
+        actualizarAnyosMinimosExperienciaConvocatoria.execute(parametros);
+    }
+
+    @Override
+    public void actualizarResultado(ResultadoConvocatoria resultadoConvocatoria) {
+        Documento resultado = resultadoConvocatoria.getResultado();
         if (resultado != null) {
             MapSqlParameterSource parametrosActualizacionResultadoConvocatoria = new MapSqlParameterSource();
-            parametrosActualizacionResultadoConvocatoria.addValue("varIdConvocatoria", convocatoria.getId());
+            parametrosActualizacionResultadoConvocatoria.addValue("varIdConvocatoria", resultadoConvocatoria.getIdConvocatoria());
             parametrosActualizacionResultadoConvocatoria.addValue("varNombre", resultado.getNombre());
             parametrosActualizacionResultadoConvocatoria.addValue("varTipoContenido", resultado.getTipoContenido());
             parametrosActualizacionResultadoConvocatoria.addValue("varContenido", resultado.getContenido());
@@ -654,5 +653,4 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
 
         return hojasVida;
     }
-
 }

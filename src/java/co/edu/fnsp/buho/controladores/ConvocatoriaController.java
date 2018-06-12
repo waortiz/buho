@@ -10,6 +10,7 @@ import co.edu.fnsp.buho.entidades.Documento;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Adenda;
 import co.edu.fnsp.buho.entidades.AnyosExperiencia;
+import co.edu.fnsp.buho.entidades.AnyosMinimosExperiencia;
 import co.edu.fnsp.buho.entidades.CampoHojaVida;
 import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
 import co.edu.fnsp.buho.entidades.DetalleUsuario;
@@ -21,6 +22,7 @@ import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
 import co.edu.fnsp.buho.entidades.Preseleccionado;
 import co.edu.fnsp.buho.entidades.Programa;
 import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
+import co.edu.fnsp.buho.entidades.ResultadoConvocatoria;
 import co.edu.fnsp.buho.excepciones.CriteriosHabilitacionException;
 import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
@@ -159,7 +161,6 @@ public class ConvocatoriaController {
         try {
             Convocatoria convocatoriaIngresar = new Convocatoria();
             convocatoriaIngresar.setId(convocatoria.getId());
-            convocatoriaIngresar.setAnyosMinimosExperiencia(convocatoria.getAnyosMinimosExperiencia());
             convocatoriaIngresar.setDescripcion(convocatoria.getDescripcion());
             convocatoriaIngresar.setFechaFin(convocatoria.getFechaFin());
             convocatoriaIngresar.setFechaInicio(convocatoria.getFechaInicio());
@@ -177,14 +178,6 @@ public class ConvocatoriaController {
                 documento.setTipoContenido(convocatoria.getDocumento().getContentType());
                 convocatoriaIngresar.setDocumento(documento);
             }
-            Documento resultado = null;
-            if (convocatoria.getResultado() != null && convocatoria.getResultado().getBytes().length > 0) {
-                resultado = new Documento();
-                resultado.setContenido(convocatoria.getResultado().getBytes());
-                resultado.setNombre(convocatoria.getResultado().getOriginalFilename());
-                resultado.setTipoContenido(convocatoria.getResultado().getContentType());
-                convocatoriaIngresar.setResultado(resultado);
-            }
             long idPersona = obtenerIdPersona();
             int id = convocatoriaIngresar.getId();
             if (convocatoriaIngresar.getId() == 0) {
@@ -194,12 +187,48 @@ public class ConvocatoriaController {
             }
 
             return "{\"id\":" + id + "}";
-        } catch (IOException exc) {
+        } catch (Exception exc) {
             logger.error(exc);
             throw exc;
         }
     }
 
+    @RequestMapping(value = "/actualizarAnyosMinimosExperiencia", method = RequestMethod.POST)
+    public @ResponseBody
+    String actualizarAnyosMinimosExperiencia(@ModelAttribute AnyosMinimosExperiencia anyosMinimosExperiencia, Model model) throws ParseException, IOException {
+        try {
+            servicioConvocatoria.actualizarAnyosMinimosExperiencia(anyosMinimosExperiencia);
+
+            return "";
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+    }
+
+    @RequestMapping(value = "/actualizarResultado", method = RequestMethod.POST)
+    public @ResponseBody
+    String actualizarResultado(@ModelAttribute co.edu.fnsp.buho.entidadesVista.ResultadoConvocatoria resultadoConvocatoria, Model model) throws ParseException, IOException {
+        try {
+            ResultadoConvocatoria resultadoConvocatoriaIngresar = new ResultadoConvocatoria();
+            resultadoConvocatoriaIngresar.setIdConvocatoria(resultadoConvocatoria.getIdConvocatoria());
+            Documento resultado = null;
+            if (resultadoConvocatoria.getResultado() != null && resultadoConvocatoria.getResultado().getBytes().length > 0) {
+                resultado = new Documento();
+                resultado.setContenido(resultadoConvocatoria.getResultado().getBytes());
+                resultado.setNombre(resultadoConvocatoria.getResultado().getOriginalFilename());
+                resultado.setTipoContenido(resultadoConvocatoria.getResultado().getContentType());
+                resultadoConvocatoriaIngresar.setResultado(resultado);
+                servicioConvocatoria.actualizarResultado(resultadoConvocatoriaIngresar);
+            }
+
+            return "";
+        } catch (Exception exc) {
+            logger.error(exc);
+            throw exc;
+        }
+    }
+    
     @RequestMapping(value = {"/adenda"}, method = RequestMethod.POST)
     public @ResponseBody
     String guardarAdenda(@ModelAttribute(value = "adenda") co.edu.fnsp.buho.entidadesVista.Adenda adenda, Model model) throws Exception {

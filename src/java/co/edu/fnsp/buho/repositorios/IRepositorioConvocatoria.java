@@ -7,6 +7,7 @@ package co.edu.fnsp.buho.repositorios;
 
 import co.edu.fnsp.buho.entidades.Adenda;
 import co.edu.fnsp.buho.entidades.AnyosExperiencia;
+import co.edu.fnsp.buho.entidades.AnyosMinimosExperiencia;
 import co.edu.fnsp.buho.entidades.Convocatoria;
 import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
 import co.edu.fnsp.buho.entidades.Documento;
@@ -15,6 +16,7 @@ import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
 import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
 import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
+import co.edu.fnsp.buho.entidades.ResultadoConvocatoria;
 import java.util.List;
 
 /**
@@ -84,4 +86,8 @@ public interface IRepositorioConvocatoria {
     List<CriterioHabilitanteConvocatoria> obtenerCriteriosHabilitantes(int idConvocatoria);
 
     void eliminarCriterioHabilitante(int idCriterioHabilitante);
+
+    void actualizarAnyosMinimosExperiencia(AnyosMinimosExperiencia anyosMinimosExperiencia);
+    
+    void actualizarResultado(ResultadoConvocatoria resultadoConvocatoria);
 }

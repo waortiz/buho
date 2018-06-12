@@ -77,7 +77,9 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     private SimpleJdbcCall obtenerTiposPatente;
     private SimpleJdbcCall obtenerCapacitaciones;
     private SimpleJdbcCall obtenerCamposHojaVida;
-
+    private SimpleJdbcCall obtenerProgramasEducacionesContinuas;
+    private SimpleJdbcCall obtenerCursosDocencia;
+    
     private SimpleJdbcCall ingresarPrograma;
     private SimpleJdbcCall ingresarInstitucion;
     private SimpleJdbcCall ingresarDepartamento;
@@ -135,7 +137,9 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         this.obtenerTiposProductosConocimiento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTiposProductosConocimiento").returningResultSet("tiposProductosConocimiento", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerClasesPatente = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerClasesPatente").returningResultSet("clasesPatente", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerCapacitaciones = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCapacitaciones").returningResultSet("capacitaciones", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerCursosDocencia = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCursosDocencia").returningResultSet("cursos", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.obtenerCamposHojaVida = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCamposHojaVida").returningResultSet("camposHojaVida", BeanPropertyRowMapper.newInstance(CampoHojaVida.class));
+        this.obtenerProgramasEducacionesContinuas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerProgramasEducacionesContinuas").returningResultSet("programas", BeanPropertyRowMapper.newInstance(CampoHojaVida.class));
         this.ingresarPrograma = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarPrograma");
         this.ingresarInstitucion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarInstitucion");
         this.ingresarDepartamento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDepartamento");
@@ -617,5 +621,21 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         maestro.setNombre((String) resultadoConsulta.get("varNombre"));
         
         return maestro;
+    }
+
+    @Override
+    public List<Maestro> obtenerProgramasEducacionesContinuas() {
+        Map resultado = obtenerProgramasEducacionesContinuas.execute(new HashMap<>());
+        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("programas");
+
+        return coleccion;
+    }
+
+    @Override
+    public List<Maestro> obtenerCursosDocencia() {
+        Map resultado = obtenerCursosDocencia.execute(new HashMap<>());
+        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("cursos");
+
+        return coleccion;
     }
 }

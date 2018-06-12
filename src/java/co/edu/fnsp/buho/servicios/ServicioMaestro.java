@@ -260,4 +260,15 @@ public class ServicioMaestro implements IServicioMaestro {
     public int ingresarInstitucion(Institucion institucion) {
         return repositorioMaestro.ingresarInstitucion(institucion);
     }
+    
+    @Override
+    public List<Maestro> obtenerProgramasEducacionesContinuas() {
+        return repositorioMaestro.obtenerProgramasEducacionesContinuas();
+    }
+
+    @Override
+    public List<Maestro> obtenerCursosDocencia() {
+        return repositorioMaestro.obtenerCursosDocencia();
+    }
+
 }

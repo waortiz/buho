@@ -157,13 +157,60 @@
         });
 
         if($('#id').val() == "0") {
-            $('#btnNuevoIdioma').hide()
-            $('#btnNuevoPrograma').hide()
-            $('#btnNuevaEducacionContinua').hide()
-            $('#btnNuevoCriterioHabilitante').hide()
-            $('#btnNuevoAnyosExperiencia').hide()
-            $('#btnNuevaAdenda').hide()            
+            $('#btnVerDocumento').hide();
+            $('#btnVerResultado').hide();
+            $('#btnNuevoIdioma').hide();
+            $('#btnNuevoPrograma').hide();
+            $('#btnNuevaEducacionContinua').hide();
+            $('#btnNuevoCriterioHabilitante').hide();
+            $('#btnNuevoAnyosExperiencia').hide();
+            $('#btnNuevaAdenda').hide();
+            $("#anyosMinimosExperiencia").prop("disabled", true);
+            $("#resultado").prop("disabled", true);
         }
+        $('#anyosMinimosExperiencia').change(function () {
+            var formData = new FormData();
+            formData.append("idConvocatoria", $("#id").val());
+            formData.append("anyosMinimosExperiencia", $("#anyosMinimosExperiencia").val());
+            $.ajax({
+                type: "POST",
+                url: contextPath + "/convocatorias/actualizarAnyosMinimosExperiencia",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_anyos_minima_experiencia.success("Años de mínima de experiencia de la convocatoria almacenados correctamente.");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_anyos_minima_experiencia.warning("Error al almacenar los años de mínima de experiencia de la convocatoria.");
+                }});
+        });
+
+        $('#resultado').change(function () {
+            var formData = new FormData();
+            formData.append("idConvocatoria", $("#id").val());
+            if ($('#resultado').val() != "") {
+                formData.append("resultado", $('#resultado')[0].files[0]);
+            }
+            $.ajax({
+                type: "POST",
+                url: contextPath + "/convocatorias/actualizarResultado",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
+                success: function (response) {
+                    bootstrap_alert_resultado.success("Resultado de la convocatoria almacenado correctamente.");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    bootstrap_alert_resultado.warning("Error al almacenar el resultado de la convocatoria.");
+                }});
+        });
 
         $('#tipoCertificacionIdioma').change(function () {
             var valor = $(this).val();
@@ -298,7 +345,6 @@
             }, 1000);
             var formData = new FormData();
             formData.append("id", $("#id").val());
-            formData.append("anyosMinimosExperiencia", $("#anyosMinimosExperiencia").val());
             formData.append("descripcion", $("#descripcion").val());
             formData.append("fechaFin", $("#fechaFin").val());
             formData.append("fechaInicio", $("#fechaInicio").val());
@@ -311,10 +357,6 @@
             if ($('#documento').val() != "") {
                 formData.append("documento", $('#documento')[0].files[0]);
             }
-            if ($('#resultado').val() != "") {
-                formData.append("resultado", $('#resultado')[0].files[0]);
-            }
-            
             $.ajax({
                 type: "POST",
                 url: contextPath + "/convocatorias/crear",
@@ -333,12 +375,16 @@
                         $('#mensaje').text('Información de convocatoria actualizada exitosamente');
                     }
                     $("#id").val(respuesta.id);
-                    $('#btnNuevoIdioma').show()
-                    $('#btnNuevoPrograma').show()
-                    $('#btnNuevaEducacionContinua').show()
-                    $('#btnNuevoCriterioHabilitante').show()
-                    $('#btnNuevoAnyosExperiencia').show()
-                    $('#btnNuevaAdenda').show()            
+                    $('#btnVerDocumento').show();
+                    $('#btnVerResultado').show();
+                    $('#btnNuevoIdioma').show();
+                    $('#btnNuevoPrograma').show();
+                    $('#btnNuevaEducacionContinua').show();
+                    $('#btnNuevoCriterioHabilitante').show();
+                    $('#btnNuevoAnyosExperiencia').show();
+                    $('#btnNuevaAdenda').show();
+                    $("#anyosMinimosExperiencia").prop("disabled", false);
+                    $("#resultado").prop("disabled", false);
                     bootstrap_alert_convocatoria.success("Convocatoria almacenada correctamente.");
                     
                     $('#md_guardado_exitoso').modal({backdrop: 'static', keyboard: false});
@@ -519,6 +565,28 @@
     };
     bootstrap_alert_adendas.removeWarning = function () {
         $('#alert_adendas').html('');
+    };
+
+    bootstrap_alert_anyos_minima_experiencia = {};
+    bootstrap_alert_anyos_minima_experiencia.warning = function (message) {
+        $('#alert_anyos_minima_experiencia').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_anyos_minima_experiencia.success = function (message) {
+        $('#alert_anyos_minima_experiencia').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_anyos_minima_experiencia.removeWarning = function () {
+        $('#alert_anyos_minima_experiencia').html('');
+    };
+
+    bootstrap_alert_resultado = {};
+    bootstrap_alert_resultado.warning = function (message) {
+        $('#alert_resultado').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_resultado.success = function (message) {
+        $('#alert_resultado').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_resultado.removeWarning = function () {
+        $('#alert_resultado').html('');
     };
 
     bootstrap_alert_anyos_experiencia = {};

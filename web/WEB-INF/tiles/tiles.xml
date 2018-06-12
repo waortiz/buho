@@ -54,6 +54,30 @@
         <put-attribute name="title" value="Educación Superior" />  
         <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/educacionSuperior.jsp" />  
     </definition>  
+    <definition name="hojasVida/educacionContinua" extends="base-definition">  
+        <put-attribute name="title" value="Educación Continua" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/educacionContinua.jsp" />  
+    </definition>  
+    <definition name="hojasVida/idioma" extends="base-definition">  
+        <put-attribute name="title" value="Idioma" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/idioma.jsp" />  
+    </definition>  
+    <definition name="hojasVida/experiencia" extends="base-definition">  
+        <put-attribute name="title" value="Experiencia" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/experiencia.jsp" />  
+    </definition>  
+    <definition name="hojasVida/tipoExperiencia" extends="base-definition">  
+        <put-attribute name="title" value="Tipo Experiencia" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/tipoExperiencia.jsp" />  
+    </definition>  
+    <definition name="hojasVida/experienciaDocencia" extends="base-definition">  
+        <put-attribute name="title" value="Experiencia Docencia" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/experienciaDocencia.jsp" />  
+    </definition>  
+    <definition name="hojasVida/investigacion" extends="base-definition">  
+        <put-attribute name="title" value="Investigación" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/investigacion.jsp" />  
+    </definition>  
 
     <!-- Convocatorias Page -->
     <definition name="convocatorias/crear" extends="base-definition">  

@@ -7,6 +7,7 @@ package co.edu.fnsp.buho.servicios;
 
 import co.edu.fnsp.buho.entidades.Adenda;
 import co.edu.fnsp.buho.entidades.AnyosExperiencia;
+import co.edu.fnsp.buho.entidades.AnyosMinimosExperiencia;
 import co.edu.fnsp.buho.entidades.CampoHojaVidaEnum;
 import co.edu.fnsp.buho.entidades.Convocatoria;
 import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
@@ -25,6 +26,7 @@ import co.edu.fnsp.buho.entidades.ListadoConvocatoria;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Preseleccionado;
 import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
+import co.edu.fnsp.buho.entidades.ResultadoConvocatoria;
 import co.edu.fnsp.buho.entidades.TipoCertificacionEnum;
 import co.edu.fnsp.buho.excepciones.CriteriosHabilitacionException;
 import co.edu.fnsp.buho.repositorios.IRepositorioConvocatoria;
@@ -608,6 +610,16 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
                 }
             }
         }
-
     }
+
+    @Override
+    public void actualizarAnyosMinimosExperiencia(AnyosMinimosExperiencia anyosMinimosExperiencia) {
+        repositorioConvocatoria.actualizarAnyosMinimosExperiencia(anyosMinimosExperiencia);
+    }
+    
+    @Override
+    public void actualizarResultado(ResultadoConvocatoria resultadoConvocatoria) {
+        repositorioConvocatoria.actualizarResultado(resultadoConvocatoria);
+    }
+
 }

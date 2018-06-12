@@ -56,6 +56,9 @@
             <mvc:exclude-mapping path="/convocatorias/educacionContinua" />
             <mvc:exclude-mapping path="/convocatorias/eliminarCriterioHabilitante/**" />
             <mvc:exclude-mapping path="/convocatorias/criterioHabilitante" />
+            <mvc:exclude-mapping path="/convocatorias/actualizarAnyosMinimosExperiencia" />
+            <mvc:exclude-mapping path="/convocatorias/actualizarResultado" />
+            
             <mvc:exclude-mapping path="/hojasVida/editar" />
             <mvc:exclude-mapping path="/hojasVida/terminos" />
             <mvc:exclude-mapping path="/hojasVida/programa" />
@@ -128,6 +131,18 @@
             <mvc:exclude-mapping path="/hojasVida/descargarHojasVidaEducacionBasica" />
             <mvc:exclude-mapping path="/hojasVida/consultarHojasVidaEducacionSuperior" />
             <mvc:exclude-mapping path="/hojasVida/descargarHojasVidaEducacionSuperior" />
+            <mvc:exclude-mapping path="/hojasVida/consultarHojasVidaEducacionContinua" />
+            <mvc:exclude-mapping path="/hojasVida/descargarHojasVidaEducacionContinua" />
+            <mvc:exclude-mapping path="/hojasVida/consultarHojasVidaIdioma" />
+            <mvc:exclude-mapping path="/hojasVida/descargarHojasVidaIdioma" />
+            <mvc:exclude-mapping path="/hojasVida/consultarHojasVidaExperiencia" />
+            <mvc:exclude-mapping path="/hojasVida/descargarHojasVidaExperiencia" />
+            <mvc:exclude-mapping path="/hojasVida/consultarHojasVidaTipoExperiencia" />
+            <mvc:exclude-mapping path="/hojasVida/descargarHojasVidaTipoExperiencia" />
+            <mvc:exclude-mapping path="/hojasVida/consultarHojasVidaExperienciaDocencia" />
+            <mvc:exclude-mapping path="/hojasVida/descargarHojasVidaExperienciaDocencia" />
+            <mvc:exclude-mapping path="/hojasVida/consultarHojasVidaInvestigacion" />
+            <mvc:exclude-mapping path="/hojasVida/descargarHojasVidaInvestigacion" />
             <ref bean="buhoInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
