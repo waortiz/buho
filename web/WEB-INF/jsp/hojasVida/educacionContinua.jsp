@@ -897,10 +897,10 @@
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    $('#md_descargar_resultados').modal('hide');
                     if (response != "") {
                         window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaEducacionContinua?curso=" + $('#cboCurso').val() + "&nucleoBasicoConocimiento=" + $('#cboNucleoBasicoConocimiento').val() + "&numeroHoras=" + $('#numeroHoras').val();
                     }
+                    $('#md_descargar_resultados').modal('hide');
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
 

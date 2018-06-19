@@ -804,10 +804,11 @@ $('.fecha').datepicker({
         self.cursosExperienciaDocencia = ko.computed(function() {
            var cursos = [];
            if(self.experienciasDocencia().length > 0 && self.experienciasDocencia().length > self.consecutivoExperienciaDocencia()) {
-             for(i = 0; i < self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length; i++) {
+             for(var i = 0; i < self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia().length; i++) {
                cursos[i] = self.experienciasDocencia()[self.consecutivoExperienciaDocencia()].cursosExperienciaDocencia()[i]; 
              }
            }
+           
            return cursos;
         });
         self.articulos = ko.observableArray(articulos);
@@ -831,7 +832,7 @@ $('.fecha').datepicker({
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
-                for (i = 0; i < self.correosElectronicos().length; i++) {
+                for (var i = 0; i < self.correosElectronicos().length; i++) {
                     if (self.correosElectronicos()[i].consecutivo() === consecutivo) {
                         indice = i;
                         break;
@@ -933,7 +934,7 @@ $('.fecha').datepicker({
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
-                for (i = 0; i < self.cuentasBancarias().length; i++) {
+                for (var i = 0; i < self.cuentasBancarias().length; i++) {
                     if (self.cuentasBancarias()[i].consecutivo() === consecutivo) {
                         indice = i;
                         break;
@@ -1042,7 +1043,7 @@ $('.fecha').datepicker({
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
-                for (i = 0; i < self.telefonos().length; i++) {
+                for (var i = 0; i < self.telefonos().length; i++) {
                     if (self.telefonos()[i].consecutivo() === consecutivo) {
                         indice = i;
                         break;
@@ -1151,7 +1152,7 @@ $('.fecha').datepicker({
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
-                for (i = 0; i < self.documentosSoporte().length; i++) {
+                for (var i = 0; i < self.documentosSoporte().length; i++) {
                     if (self.documentosSoporte()[i].consecutivo() === consecutivo) {
                         indice = i;
                         break;
@@ -1372,7 +1373,7 @@ $('.fecha').datepicker({
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
-                for (i = 0; i < self.idiomas().length; i++) {
+                for (var i = 0; i < self.idiomas().length; i++) {
                     if (self.idiomas()[i].consecutivo() === consecutivo) {
                         indice = i;
                         break;
@@ -1565,7 +1566,7 @@ $('.fecha').datepicker({
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
-                for (i = 0; i < self.educacionesBasicas().length; i++) {
+                for (var i = 0; i < self.educacionesBasicas().length; i++) {
                     if (self.educacionesBasicas()[i].consecutivo() === consecutivo) {
                         indice = i;
                         break;
@@ -1781,7 +1782,7 @@ $('.fecha').datepicker({
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
-                for (i = 0; i < self.educacionesSuperiores().length; i++) {
+                for (var i = 0; i < self.educacionesSuperiores().length; i++) {
                     if (self.educacionesSuperiores()[i].consecutivo() === consecutivo) {
                         indice = i;
                         break;
@@ -2080,7 +2081,7 @@ $('.fecha').datepicker({
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
-                for (i = 0; i < self.educacionesContinuas().length; i++) {
+                for (var i = 0; i < self.educacionesContinuas().length; i++) {
                     if (self.educacionesContinuas()[i].consecutivo() === consecutivo) {
                         indice = i;
                         break;
@@ -2267,7 +2268,7 @@ $('.fecha').datepicker({
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
-                for (i = 0; i < self.distinciones().length; i++) {
+                for (var i = 0; i < self.distinciones().length; i++) {
                     if (self.distinciones()[i].consecutivo() === consecutivo) {
                         indice = i;
                         break;
@@ -2457,7 +2458,7 @@ $('.fecha').datepicker({
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
-                for (i = 0; i < self.experienciasLaborales().length; i++) {
+                for (var i = 0; i < self.experienciasLaborales().length; i++) {
                     if (self.experienciasLaborales()[i].consecutivo() === consecutivo) {
                         indice = i;
                         break;
@@ -2665,7 +2666,7 @@ $('.fecha').datepicker({
                 formData.append("consecutivo", self.experienciasDocencia().length);
             } else {
                 var indice = 0;
-                for (i = 0; i < self.experienciasDocencia().length; i++) {
+                for (var i = 0; i < self.experienciasDocencia().length; i++) {
                     if (self.experienciasDocencia()[i].consecutivo() === self.consecutivoExperienciaDocencia()) {
                         indice = i;
                         break;
@@ -2883,7 +2884,7 @@ $('.fecha').datepicker({
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
-                for (i = 0; i < self.experienciasLaborales().length; i++) {
+                for (var i = 0; i < self.experienciasLaborales().length; i++) {
                     if (self.experienciasLaborales()[i].consecutivo() === consecutivo) {
                         indice = i;
                         break;
@@ -3082,7 +3083,7 @@ $('.fecha').datepicker({
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
-                for (i = 0; i < self.articulos().length; i++) {
+                for (var i = 0; i < self.articulos().length; i++) {
                     if (self.articulos()[i].consecutivo() === consecutivo) {
                         indice = i;
                         break;
@@ -3228,7 +3229,7 @@ $('.fecha').datepicker({
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
-                for (i = 0; i < self.patentes().length; i++) {
+                for (var i = 0; i < self.patentes().length; i++) {
                     if (self.patentes()[i].consecutivo() === consecutivo) {
                         indice = i;
                         break;
@@ -3404,7 +3405,7 @@ $('.fecha').datepicker({
             } else {
                 var consecutivo = parseInt($('#consecutivo').val(), 10);
                 var indice = 0;
-                for (i = 0; i < self.productosConocimiento().length; i++) {
+                for (var i = 0; i < self.productosConocimiento().length; i++) {
                     if (self.productosConocimiento()[i].consecutivo() === consecutivo) {
                         indice = i;
                         break;
@@ -3450,6 +3451,7 @@ $('.fecha').datepicker({
                                     tipo: ko.observable(productosConocimiento[i].tipo),
                                     nombreTipo: ko.observable(productosConocimiento[i].nombreTipo),
                                     nucleoBasicoConocimiento: ko.observable(productosConocimiento[i].nucleoBasicoConocimiento),
+                                    nombreNucleoBasicoConocimiento: ko.observable(productosConocimiento[i].nombreNucleoBasicoConocimiento),
                                     url: ko.observable(productosConocimiento[i].url),
                                     descripcion: ko.observable(productosConocimiento[i].descripcion),
                                     documentoValidado: ko.observable(productosConocimiento[i].documentoValidado),
@@ -3484,6 +3486,7 @@ $('.fecha').datepicker({
                                     tipo: ko.observable(productosConocimiento[i].tipo),
                                     nombreTipo: ko.observable(productosConocimiento[i].nombreTipo),
                                     nucleoBasicoConocimiento: ko.observable(productosConocimiento[i].nucleoBasicoConocimiento),
+                                    nombreNucleoBasicoConocimiento: ko.observable(productosConocimiento[i].nombreNucleoBasicoConocimiento),
                                     url: ko.observable(productosConocimiento[i].url),
                                     descripcion: ko.observable(productosConocimiento[i].descripcion),
                                     documentoValidado: ko.observable(productosConocimiento[i].documentoValidado),
@@ -3500,7 +3503,8 @@ $('.fecha').datepicker({
 
         self.editarProductoConocimiento = function (productoConocimiento) {
             $('#tipoProductoConocimiento').val(productoConocimiento.tipo()).trigger('change');
-            $('#nucleoBasicoProductoConocimiento').val(productoConocimiento.nucleoBasicoConocimiento()).trigger('change');
+            $('#nucleoBasicoProductoConocimiento').val(productoConocimiento.nucleoBasicoConocimiento());
+            $('#nombreNucleoBasicoProductoConocimiento').val(productoConocimiento.nombreNucleoBasicoConocimiento());
             $('#urlProductoConocimiento').val(productoConocimiento.url());
             $('#descripcionProductoConocimiento').val(productoConocimiento.descripcion());    
             $('#consecutivo').val(productoConocimiento.consecutivo());
@@ -4523,20 +4527,264 @@ $('.fecha').datepicker({
         $('#alert_productos_conocimiento').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     };
 
-    var hojaVidaModel = new HojaVidaModel(correosElectronicos, 
-        cuentasBancarias, 
-        telefonos, 
-        documentosSoporte, 
-        idiomas, 
-        educacionesBasicas, 
-        educacionesSuperiores, 
-        educacionesContinuas, 
-        distinciones,
-        experienciasLaborales,
-        experienciasDocencia,
-        articulos,
-        patentes,
-        productosConocimiento);
+    var hojaVidaModel = new HojaVidaModel([], [], [], [], [], [], [], [], [], [], [], [], [], []);
     ko.applyBindings(hojaVidaModel);
 
     establecerEgresadoUdeA();
+    
+    for (var i = 0; i < correosElectronicos.length; i++) {
+        hojaVidaModel.correosElectronicos.push(
+            {
+                id: ko.observable(correosElectronicos[i].id),
+                consecutivo: ko.observable(correosElectronicos[i].consecutivo),
+                correoElectronico: ko.observable(correosElectronicos[i].correoElectronico)
+            }
+         );
+    }
+    
+    for (var i = 0; i < telefonos.length; i++) {
+        hojaVidaModel.telefonos.push(
+            {
+                id: ko.observable(telefonos[i].id),
+                consecutivo: ko.observable(telefonos[i].consecutivo),
+                tipo: ko.observable(telefonos[i].tipo),
+                nombreTipo: ko.observable(telefonos[i].nombreTipo),
+                numero: ko.observable(telefonos[i].numero)
+            }
+         );
+    }
+    
+    for (var i = 0; i < documentosSoporte.length; i++) {
+        hojaVidaModel.documentosSoporte.push(
+            {
+                id: ko.observable(documentosSoporte[i].id),
+                consecutivo: ko.observable(documentosSoporte[i].consecutivo),
+                tipoDocumento: ko.observable(documentosSoporte[i].tipoDocumento),
+                nombreTipoDocumento: ko.observable(documentosSoporte[i].nombreTipoDocumento),
+                validado: ko.observable(documentosSoporte[i].validado),
+                nombreValidado: ko.observable(documentosSoporte[i].nombreValidado)
+            }
+         );
+    }
+
+    for (var i = 0; i < idiomas.length; i++) {
+        hojaVidaModel.idiomas.push(
+            {
+                id: ko.observable(idiomas[i].id),
+                consecutivo: ko.observable(idiomas[i].consecutivo),
+                idioma: ko.observable(idiomas[i].idioma),
+                nombreIdioma: ko.observable(idiomas[i].nombreIdioma),
+                nivelConversacion: ko.observable(idiomas[i].nivelConversacion),
+                nombreNivelConversacion: ko.observable(idiomas[i].nombreNivelConversacion),
+                nivelEscritura: ko.observable(idiomas[i].nivelEscritura),
+                nombreNivelEscritura: ko.observable(idiomas[i].nombreNivelEscritura),
+                nivelEscucha: ko.observable(idiomas[i].nivelEscucha),
+                nombreNivelEscucha: ko.observable(idiomas[i].nombreNivelEscucha),
+                nivelLectura: ko.observable(idiomas[i].nivelLectura),
+                nombreNivelLectura: ko.observable(idiomas[i].nombreNivelLectura),
+                otraCertificacion: ko.observable(idiomas[i].otraCertificacion),
+                tipoCertificacion: ko.observable(idiomas[i].tipoCertificacion),
+                nombreTipoCertificacion: ko.observable(idiomas[i].nombreTipoCertificacion),
+                puntajeCertificacion: ko.observable(idiomas[i].puntajeCertificacion),                   
+                certificadoValidado: ko.observable(idiomas[i].certificadoValidado),
+                nombreCertificadoValidado: ko.observable(idiomas[i].nombreCertificadoValidado)
+            }
+         );
+    }
+    
+    for (var i = 0; i < educacionesBasicas.length; i++) {
+        hojaVidaModel.educacionesBasicas.push(
+            {
+                id: ko.observable(educacionesBasicas[i].id),
+                consecutivo: ko.observable(educacionesBasicas[i].consecutivo),
+                institucion: ko.observable(educacionesBasicas[i].institucion),
+                nivel: ko.observable(educacionesBasicas[i].nivel),
+                nombreNivel: ko.observable(educacionesBasicas[i].nombreNivel),
+                anyoInicio: ko.observable(educacionesBasicas[i].anyoInicio),
+                anyoFinalizacion: ko.observable(educacionesBasicas[i].anyoFinalizacion),
+                titulo: ko.observable(educacionesBasicas[i].titulo),
+                graduado: ko.observable(educacionesBasicas[i].graduado),
+                certificadoValidado: ko.observable(educacionesBasicas[i].certificadoValidado),
+                nombreCertificadoValidado: ko.observable(educacionesBasicas[i].nombreCertificadoValidado)
+            }
+         );
+    }
+    
+    for (var i = 0; i < educacionesSuperiores.length; i++) {
+        hojaVidaModel.educacionesSuperiores.push(
+            {
+                id: ko.observable(educacionesSuperiores[i].id),
+                consecutivo: ko.observable(educacionesSuperiores[i].consecutivo),
+                paisTituloExterior: ko.observable(educacionesSuperiores[i].paisTituloExterior),
+                nombrePaisTituloExterior: ko.observable(educacionesSuperiores[i].nombrePaisTituloExterior),
+                institucion: ko.observable(educacionesSuperiores[i].institucion),
+                nombreInstitucion: ko.observable(educacionesSuperiores[i].nombreInstitucion),
+                tituloExterior: ko.observable(educacionesSuperiores[i].tituloExterior),
+                programa: ko.observable(educacionesSuperiores[i].programa),
+                nombrePrograma: ko.observable(educacionesSuperiores[i].nombrePrograma),
+                nucleoBasicoConocimiento: ko.observable(educacionesSuperiores[i].nucleoBasicoConocimiento),
+                nombreNucleoBasicoConocimiento: ko.observable(educacionesSuperiores[i].nombreNucleoBasicoConocimiento),
+                nivel: ko.observable(educacionesSuperiores[i].nivel),
+                nombreNivel: ko.observable(educacionesSuperiores[i].nombreNivel),
+                anyoInicio: ko.observable(educacionesSuperiores[i].anyoInicio),
+                anyoFinalizacion: ko.observable(educacionesSuperiores[i].anyoFinalizacion),
+                titulo: ko.observable(educacionesSuperiores[i].titulo),
+                graduado: ko.observable(educacionesSuperiores[i].graduado),
+                fechaTitulo: ko.observable(educacionesSuperiores[i].fechaTituloFormateada),
+                tieneCertificadoHomologado: ko.observable(educacionesSuperiores[i].tieneCertificadoHomologado),
+                certificadoValidado: ko.observable(educacionesSuperiores[i].certificadoValidado),
+                nombreCertificadoValidado: ko.observable(educacionesSuperiores[i].nombreCertificadoValidado),
+                certificadoHomologadoValidado: ko.observable(educacionesSuperiores[i].certificadoHomologadoValidado),
+                nombreCertificadoHomologadoValidado: ko.observable(educacionesSuperiores[i].nombreCertificadoHomologadoValidado)
+            }
+         );
+    }
+
+    for (var i = 0; i < educacionesContinuas.length; i++) {
+        hojaVidaModel.educacionesContinuas.push(
+            {
+                id: ko.observable(educacionesContinuas[i].id),
+                consecutivo: ko.observable(educacionesContinuas[i].consecutivo),
+                tipoCapacitacion: ko.observable(educacionesContinuas[i].tipoCapacitacion),
+                nombreTipoCapacitacion: ko.observable(educacionesContinuas[i].nombreTipoCapacitacion),
+                institucion: ko.observable(educacionesContinuas[i].institucion),
+                nombreInstitucion: ko.observable(educacionesContinuas[i].nombreInstitucion),
+                nombreCapacitacion: ko.observable(educacionesContinuas[i].nombreCapacitacion),
+                nucleoBasicoConocimiento: ko.observable(educacionesContinuas[i].nucleoBasicoConocimiento),
+                nombreNucleoBasicoConocimiento: ko.observable(educacionesContinuas[i].nombreNucleoBasicoConocimiento),
+                numeroHoras: ko.observable(educacionesContinuas[i].numeroHoras),
+                estudioExterior: ko.observable(educacionesContinuas[i].estudioExterior),
+                anyo: ko.observable(educacionesContinuas[i].anyo),
+                certificadoValidado: ko.observable(educacionesContinuas[i].certificadoValidado),
+                nombreCertificadoValidado: ko.observable(educacionesContinuas[i].nombreCertificadoValidado)
+            }
+         );
+    }
+
+    for (var i = 0; i < experienciasLaborales.length; i++) {
+        hojaVidaModel.experienciasLaborales.push(
+            {
+                id: ko.observable(experienciasLaborales[i].id),
+                consecutivo: ko.observable(experienciasLaborales[i].consecutivo),
+                tipoExperiencia: ko.observable(experienciasLaborales[i].tipoExperiencia),
+                nombreTipoExperiencia: ko.observable(experienciasLaborales[i].nombreTipoExperiencia),
+                trabajoActual: ko.observable(experienciasLaborales[i].trabajoActual),
+                fnsp: ko.observable(experienciasLaborales[i].fnsp),
+                fechaIngreso: ko.observable(experienciasLaborales[i].fechaIngresoFormateada),
+                fechaRetiro: ko.observable(experienciasLaborales[i].fechaRetiroFormateada),
+                nucleoBasicoConocimiento: ko.observable(experienciasLaborales[i].nucleoBasicoConocimiento),
+                nombreNucleoBasicoConocimiento: ko.observable(experienciasLaborales[i].nombreNucleoBasicoConocimiento),
+                tipoEmpresa: ko.observable(experienciasLaborales[i].tipoEmpresa),
+                nombreTipoEmpresa: ko.observable(experienciasLaborales[i].nombreTipoEmpresa),
+                nombreEmpresa: ko.observable(experienciasLaborales[i].nombreEmpresa),
+                actividadEconomica: ko.observable(experienciasLaborales[i].actividadEconomica),
+                nombreActividadEconomica: ko.observable(experienciasLaborales[i].nombreActividadEconomica),
+                tipoContrato: ko.observable(experienciasLaborales[i].tipoContrato),
+                nombreTipoContrato: ko.observable(experienciasLaborales[i].nombreTipoContrato),
+                cargo: ko.observable(experienciasLaborales[i].cargo),
+                naturalezaCargo: ko.observable(experienciasLaborales[i].naturalezaCargo),
+                nombreNaturalezaCargo: ko.observable(experienciasLaborales[i].nombreNaturalezaCargo),
+                certificadoValidado: ko.observable(experienciasLaborales[i].certificadoValidado),
+                nombreCertificadoValidado: ko.observable(experienciasLaborales[i].nombreCertificadoValidado)
+            }
+         );
+    }
+
+    for (var i = 0; i < experienciasDocencia.length; i++) {
+        hojaVidaModel.experienciasDocencia.push(
+            {
+                id: ko.observable(experienciasDocencia[i].id),
+                consecutivo: ko.observable(experienciasDocencia[i].consecutivo),
+                trabajoActual: ko.observable(experienciasDocencia[i].trabajoActual),
+                fnsp: ko.observable(experienciasDocencia[i].fnsp),
+                exterior: ko.observable(experienciasDocencia[i].exterior),
+                institucion: ko.observable(experienciasDocencia[i].institucion),
+                nombreInstitucion: ko.observable(experienciasDocencia[i].nombreInstitucion),
+                cursosExperienciaDocencia: ko.observableArray([])
+            }
+         );
+        for(var j = 0; j < experienciasDocencia[i].cursosExperienciaDocencia.length; j++) {
+            hojaVidaModel.experienciasDocencia()[i].cursosExperienciaDocencia.push({
+                id: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].id),
+                consecutivo: ko.observable(j),
+                nombreCurso: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCurso),
+                nucleoBasicoConocimiento: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nucleoBasicoConocimiento),
+                nombreNucleoBasicoConocimiento: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNucleoBasicoConocimiento),
+                modalidad: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].modalidad),
+                nombreModalidad: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreModalidad),
+                nivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nivelEstudio),
+                nombreNivelEstudio: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreNivelEstudio),
+                numeroHoras: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].numeroHoras),
+                anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo),
+                certificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].certificadoValidado),
+                nombreCertificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificadoValidado)
+            });
+        }
+    }
+
+    for (var i = 0; i < distinciones.length; i++) {
+        hojaVidaModel.distinciones.push(
+            {
+                id: ko.observable(distinciones[i].id),
+                consecutivo: ko.observable(distinciones[i].consecutivo),
+                fechaDistincion: ko.observable(distinciones[i].fechaDistincionFormateada),
+                institucionOtorga: ko.observable(distinciones[i].institucionOtorga),
+                descripcion: ko.observable(distinciones[i].descripcion),
+                certificadoValidado: ko.observable(distinciones[i].certificadoValidado),
+                nombreCertificadoValidado: ko.observable(distinciones[i].nombreCertificadoValidado)
+            }
+         );
+    }
+    
+    for (var i = 0; i < patentes.length; i++) {
+        hojaVidaModel.patentes.push(
+            {
+                id: ko.observable(patentes[i].id),
+                consecutivo: ko.observable(patentes[i].consecutivo),
+                fecha: ko.observable(patentes[i].fechaFormateada),
+                tipo: ko.observable(patentes[i].tipo),
+                nombreTipo: ko.observable(patentes[i].nombreTipo),
+                propiedadCompartida: ko.observable(patentes[i].propiedadCompartida),
+                nombrePropiedadCompartida: ko.observable(patentes[i].nombrePropiedadCompartida), 
+                clase: ko.observable(patentes[i].clase),
+                nombreClase: ko.observable(patentes[i].nombreClase),
+                descripcion: ko.observable(patentes[i].descripcion),
+                documentoValidado: ko.observable(patentes[i].documentoValidado),
+                nombreDocumentoValidado: ko.observable(patentes[i].nombreDocumentoValidado)
+            }
+         );
+    }
+    
+     for (var i = 0; i < productosConocimiento.length; i++) {
+        hojaVidaModel.productosConocimiento.push(
+            {
+                id: ko.observable(productosConocimiento[i].id),
+                consecutivo: ko.observable(productosConocimiento[i].consecutivo),
+                tipo: ko.observable(productosConocimiento[i].tipo),
+                nombreTipo: ko.observable(productosConocimiento[i].nombreTipo),
+                nucleoBasicoConocimiento: ko.observable(productosConocimiento[i].nucleoBasicoConocimiento),
+                nombreNucleoBasicoConocimiento: ko.observable(productosConocimiento[i].nombreNucleoBasicoConocimiento),
+                url: ko.observable(productosConocimiento[i].url),
+                descripcion: ko.observable(productosConocimiento[i].descripcion),
+                documentoValidado: ko.observable(productosConocimiento[i].documentoValidado),
+                nombreDocumentoValidado: ko.observable(productosConocimiento[i].nombreDocumentoValidado)
+            }
+         );
+    }
+
+    for (var i = 0; i < articulos.length; i++) {
+        hojaVidaModel.articulos.push(
+            {
+                id: ko.observable(articulos[i].id),
+                consecutivo: ko.observable(articulos[i].consecutivo),
+                nombre: ko.observable(articulos[i].nombre),
+                tipoAutor: ko.observable(articulos[i].tipoAutor),
+                nombreRevista: ko.observable(articulos[i].nombreRevista),
+                anyo: ko.observable(articulos[i].anyo),
+                nucleoBasicoConocimiento: ko.observable(articulos[i].nucleoBasicoConocimiento),
+                url: ko.observable(articulos[i].url),
+                validado: ko.observable(articulos[i].validado),
+                nombreValidado: ko.observable(articulos[i].nombreValidado)
+            }
+         );
+    }

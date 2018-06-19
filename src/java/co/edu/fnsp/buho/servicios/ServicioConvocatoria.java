@@ -416,7 +416,13 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
             //Experiencia Extensión
             for (ExperienciaLaboral experienciaLaboral : hojaVidaEvaluar.getExperienciasLaborales()) {
                 if (experienciaLaboral.isCertificadoValidado()) {
-                    if (experienciaLaboral.getNucleoBasicoConocimiento() == 52) {
+                    if (experienciaLaboral.getNucleoBasicoConocimiento() == 7 ||
+                        experienciaLaboral.getNucleoBasicoConocimiento() == 18 || experienciaLaboral.getNucleoBasicoConocimiento() == 28 || 
+                        experienciaLaboral.getNucleoBasicoConocimiento() == 29 || experienciaLaboral.getNucleoBasicoConocimiento() == 38 ||
+                        experienciaLaboral.getNucleoBasicoConocimiento() == 41 || experienciaLaboral.getNucleoBasicoConocimiento() == 42 || 
+                        experienciaLaboral.getNucleoBasicoConocimiento() == 44 || experienciaLaboral.getNucleoBasicoConocimiento() == 45 || 
+                        experienciaLaboral.getNucleoBasicoConocimiento() == 46 || experienciaLaboral.getNucleoBasicoConocimiento() == 49 ||
+                        experienciaLaboral.getNucleoBasicoConocimiento() == 52) {
                         Date fechaRetiro = new Date();
                         if (experienciaLaboral.getFechaRetiro() != null) {
                             fechaRetiro = experienciaLaboral.getFechaRetiro();

@@ -10,11 +10,13 @@ package co.edu.fnsp.buho.entidades;
  * @author William
  */
 public class ProductoConocimiento {
+
     private int id;
     private int consecutivo;
     private String nombreTipo;
     private int tipo;
     private int nucleoBasicoConocimiento;
+    private String nombreNucleoBasicoConocimiento;
     private String url;
     private String descripcion;
     private boolean documentoValidado;
@@ -160,5 +162,18 @@ public class ProductoConocimiento {
     public void setNombreDocumentoValidado(String nombreDocumentoValidado) {
         this.nombreDocumentoValidado = nombreDocumentoValidado;
     }
-    
+
+    /**
+     * @return the nombreNucleoBasicoConocimiento
+     */
+    public String getNombreNucleoBasicoConocimiento() {
+        return nombreNucleoBasicoConocimiento;
+    }
+
+    /**
+     * @param nombreNucleoBasicoConocimiento the nombreNucleoBasicoConocimiento to set
+     */
+    public void setNombreNucleoBasicoConocimiento(String nombreNucleoBasicoConocimiento) {
+        this.nombreNucleoBasicoConocimiento = nombreNucleoBasicoConocimiento;
+    }    
 }

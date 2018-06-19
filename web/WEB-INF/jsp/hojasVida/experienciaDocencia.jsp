@@ -900,10 +900,10 @@
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    $('#md_descargar_resultados').modal('hide');
                     if (response != "") {
                         window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaExperienciaDocencia?curso=" + $('#cboCurso').val() + "&institucion=" + $('#cboInstitucion').val() + "&numeroHoras=" + $('#numeroHoras').val();
                     }
+                    $('#md_descargar_resultados').modal('hide');
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                    $('#md_descargar_resultados').modal('hide');

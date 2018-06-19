@@ -42,6 +42,7 @@ import co.edu.fnsp.buho.entidades.HojaVidaExperiencia;
 import co.edu.fnsp.buho.entidades.HojaVidaExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.HojaVidaIdioma;
 import co.edu.fnsp.buho.entidades.HojaVidaInvestigacion;
+import co.edu.fnsp.buho.entidades.HojaVidaSoporte;
 import co.edu.fnsp.buho.entidades.HojaVidaTipoExperiencia;
 import co.edu.fnsp.buho.entidades.Institucion;
 import co.edu.fnsp.buho.entidades.Investigacion;
@@ -61,6 +62,7 @@ import co.edu.fnsp.buho.excel.HojaVidaExperienciaDocenciaExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaExperienciaExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaIdiomaExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaInvestigacionExcelReportView;
+import co.edu.fnsp.buho.excel.HojaVidaSoporteExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaTipoExperienciaExcelReportView;
 import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
 import co.edu.fnsp.buho.servicios.IServicioHojaVida;
@@ -177,9 +179,13 @@ public class HojaVidaController {
 
     @RequestMapping(value = "/consulta", method = RequestMethod.GET)
     public String obtenerHojasVida(Model model) {
-        List<HojaVidaConsulta> hojasVida = servicioHojaVida.obtenerHojasVida();
+        List<Maestro> numerosDocumento = servicioHojaVida.obtenerNumerosDocumento();
+        List<Maestro> nombres = servicioHojaVida.obtenerNombres();
+        List<Maestro> apellidos = servicioHojaVida.obtenerApellidos();
 
-        model.addAttribute("hojasVida", hojasVida);
+        model.addAttribute("numerosDocumento", numerosDocumento);
+        model.addAttribute("nombres", nombres);
+        model.addAttribute("apellidos", apellidos);
 
         return "hojasVida/consulta";
     }
@@ -209,6 +215,11 @@ public class HojaVidaController {
         Gson gson = new Gson();
 
         return gson.toJson(hojasVida);
+    }
+    
+    @RequestMapping(value = "/validarDescarga", method = RequestMethod.GET)
+    public @ResponseBody String validarDescarga(HttpServletResponse response) throws IOException {
+        return "{\"resultado\":true}";
     }
     
     @RequestMapping(value = "/descargarHojasVidaEducacionBasica", method = RequestMethod.GET)
@@ -428,6 +439,26 @@ public class HojaVidaController {
        return new ModelAndView(new HojaVidaDistincionExcelReportView(), "hojasVida", hojasVida);
     }
 
+    @RequestMapping(value = "/soporte", method = RequestMethod.GET)
+    public String obtenerHojasVidaSoporte(Model model) {
+        List<Maestro> numerosDocumento = servicioHojaVida.obtenerNumerosDocumento();
+        List<Maestro> nombres = servicioHojaVida.obtenerNombres();
+        List<Maestro> apellidos = servicioHojaVida.obtenerApellidos();
+
+        model.addAttribute("numerosDocumento", numerosDocumento);
+        model.addAttribute("nombres", nombres);
+        model.addAttribute("apellidos", apellidos);
+
+        return "hojasVida/soporte";
+    }
+   
+    @RequestMapping(value = "/descargarHojasVidaSoporte", method = RequestMethod.GET)
+    public ModelAndView descargarHojasVidaSoporte(@ModelAttribute ConsultaHojaVida consultaHojaVida, Model model) {
+        List<HojaVidaSoporte> hojasVida = servicioHojaVida.obtenerHojasVidaSoporte(consultaHojaVida);
+
+       return new ModelAndView(new HojaVidaSoporteExcelReportView(), "hojasVida", hojasVida);
+    }
+    
     @RequestMapping(value = "/terminos", method = RequestMethod.POST)
     public @ResponseBody
     String ingresarTerminos(@ModelAttribute Terminos terminos, Model model) throws ParseException, IOException {
@@ -473,7 +504,7 @@ public class HojaVidaController {
             hojaVidaIngresar.setPerfil(hojaVida.getPerfil());
             hojaVidaIngresar.setInvestigadorReconocidoColciencias(hojaVida.isInvestigadorReconocidoColciencias());
             hojaVidaIngresar.setUrlCVLAC(hojaVida.getUrlCVLAC());
-            if (hojaVida.getTipoInvestigador() != null && !"".equals(hojaVida.getTipoInvestigador())) {
+            if (hojaVida.getTipoInvestigador() != null && hojaVida.getTipoInvestigador().trim().length() > 0) {
                 hojaVidaIngresar.setTipoInvestigador(Util.obtenerEntero(hojaVida.getTipoInvestigador()));
             }
             hojaVidaIngresar.setCodigoORCID(hojaVida.getCodigoORCID());
@@ -1166,9 +1197,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarDocumentoSoporte(idPersona, nuevoDocumentoSoporte);
             List<DocumentoSoporte> documentosSoporte = servicioHojaVida.obtenerDocumentosSoporteComplementarios(idPersona);
-            Util.establecerConsecutivoDocumentosSoporte(documentosSoporte);
-            Gson gson = new Gson();
-            json = gson.toJson(documentosSoporte);
+            json = Util.obtenerDocumentosSoporteJSON(documentosSoporte);
             if (nuevoDocumentoSoporte.getDocumento() != null) {
                 this.enviarCorreoElectronicoCambioDocumento(ASUNTO_SOPORTE_CAMBIADO, CUERPO_SOPORTE_CAMBIADO);
             }
@@ -1188,9 +1217,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarDocumentoSoporte(idDocumentoSoporte);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<DocumentoSoporte> documentosSoporte = servicioHojaVida.obtenerDocumentosSoporteComplementarios(idPersona);
-            Util.establecerConsecutivoDocumentosSoporte(documentosSoporte);
-            Gson gson = new Gson();
-            json = gson.toJson(documentosSoporte);
+            json = Util.obtenerDocumentosSoporteJSON(documentosSoporte);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1228,10 +1255,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarEducacionBasica(idPersona, nuevaEducacionBasica);
             List<EducacionBasica> educacionesBasicas = servicioHojaVida.obtenerEducacionesBasicas(idPersona);
-            Util.establecerConsecutivoEducacionesBasicas(educacionesBasicas);
-            Gson gson = new Gson();
-            json = gson.toJson(educacionesBasicas);
-
+            json = Util.obtenerEducacionesBasicasJSON(educacionesBasicas);
             if (nuevaEducacionBasica.getCertificado() != null) {
                 this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO, CUERPO_CERTIFICADO_EDUCACION_BASICA_CAMBIADO);
             }
@@ -1252,9 +1276,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarEducacionBasica(idEducacionBasica);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<EducacionBasica> educacionesBasicas = servicioHojaVida.obtenerEducacionesBasicas(idPersona);
-            Util.establecerConsecutivoEducacionesBasicas(educacionesBasicas);
-            Gson gson = new Gson();
-            json = gson.toJson(educacionesBasicas);
+            json = Util.obtenerEducacionesBasicasJSON(educacionesBasicas);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1307,9 +1329,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarEducacionSuperior(idPersona, nuevaEducacionSuperior);
             List<EducacionSuperior> educacionesSuperiores = servicioHojaVida.obtenerEducacionesSuperiores(idPersona);
-            Util.establecerConsecutivoEducacionesSuperiores(educacionesSuperiores);
-            Gson gson = new Gson();
-            json = gson.toJson(educacionesSuperiores);
+            json = Util.obtenerEducacionesSuperioresJSON(educacionesSuperiores);
             if (nuevaEducacionSuperior.getCertificado() != null) {
                 this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO, CUERPO_CERTIFICADO_EDUCACION_SUPERIOR_CAMBIADO);
             }
@@ -1332,9 +1352,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarEducacionSuperior(idEducacionSuperior);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<EducacionSuperior> educacionesSuperiores = servicioHojaVida.obtenerEducacionesSuperiores(idPersona);
-            Util.establecerConsecutivoEducacionesSuperiores(educacionesSuperiores);
-            Gson gson = new Gson();
-            json = gson.toJson(educacionesSuperiores);
+            json = Util.obtenerEducacionesSuperioresJSON(educacionesSuperiores);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1351,10 +1369,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarCorreoElectronico(idPersona, correoElectronico);
             List<CorreoElectronico> correosElectronicos = servicioHojaVida.obtenerCorreosElectronicos(idPersona);
-            Util.establecerConsecutivoCorreosElectronicos(correosElectronicos);
-            Gson gson = new Gson();
-            json = gson.toJson(correosElectronicos);
-
+            json = Util.obtenerCorreosElectronicosJSON(correosElectronicos);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1371,9 +1386,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarCorreoElectronico(idCorreoElectronico);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<CorreoElectronico> correosElectronicos = servicioHojaVida.obtenerCorreosElectronicos(idPersona);
-            Util.establecerConsecutivoCorreosElectronicos(correosElectronicos);
-            Gson gson = new Gson();
-            json = gson.toJson(correosElectronicos);
+            json = Util.obtenerCorreosElectronicosJSON(correosElectronicos);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1390,10 +1403,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarTelefono(idPersona, telefono);
             List<Telefono> telefonos = servicioHojaVida.obtenerTelefonos(idPersona);
-            Util.establecerConsecutivoTelefonos(telefonos);
-            Gson gson = new Gson();
-            json = gson.toJson(telefonos);
-
+            json = Util.obtenerTelefonosJSON(telefonos);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1410,9 +1420,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarTelefono(idTelefono);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<Telefono> telefonos = servicioHojaVida.obtenerTelefonos(idPersona);
-            Util.establecerConsecutivoTelefonos(telefonos);
-            Gson gson = new Gson();
-            json = gson.toJson(telefonos);
+            json = Util.obtenerTelefonosJSON(telefonos);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1429,10 +1437,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarCuentaBancaria(idPersona, cuentaBancaria);
             List<CuentaBancaria> cuentasBancarias = servicioHojaVida.obtenerCuentasBancarias(idPersona);
-            Util.establecerConsecutivoCuentasBancarias(cuentasBancarias);
-            Gson gson = new Gson();
-            json = gson.toJson(cuentasBancarias);
-
+            json = Util.obtenerCuentasBancariasJSON(cuentasBancarias);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1449,9 +1454,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarCuentaBancaria(idCuentaBancaria);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<CuentaBancaria> cuentasBancarias = servicioHojaVida.obtenerCuentasBancarias(idPersona);
-            Util.establecerConsecutivoCuentasBancarias(cuentasBancarias);
-            Gson gson = new Gson();
-            json = gson.toJson(cuentasBancarias);
+            json = Util.obtenerCuentasBancariasJSON(cuentasBancarias);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1488,9 +1491,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarEducacionContinua(idPersona, nuevaEducacionContinua);
             List<EducacionContinua> educacionesContinuas = servicioHojaVida.obtenerEducacionesContinuas(idPersona);
-            Util.establecerConsecutivoEducacionesContinuas(educacionesContinuas);
-            Gson gson = new Gson();
-            json = gson.toJson(educacionesContinuas);
+            json = Util.obtenerEducacionesContinuasJSON(educacionesContinuas);
             if (nuevaEducacionContinua.getCertificado() != null) {
                 this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO, CUERPO_CERTIFICADO_EDUCACION_FORMAL_CAMBIADO);
             }
@@ -1510,9 +1511,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarEducacionContinua(idEducacionContinua);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<EducacionContinua> educacionesContinuas = servicioHojaVida.obtenerEducacionesContinuas(idPersona);
-            Util.establecerConsecutivoEducacionesContinuas(educacionesContinuas);
-            Gson gson = new Gson();
-            json = gson.toJson(educacionesContinuas);
+            json = Util.obtenerEducacionesContinuasJSON(educacionesContinuas);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1550,9 +1549,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarIdioma(idPersona, nuevoIdioma);
             List<Idioma> idiomas = servicioHojaVida.obtenerIdiomas(idPersona);
-            Util.establecerConsecutivoIdiomas(idiomas);
-            Gson gson = new Gson();
-            json = gson.toJson(idiomas);
+            json = Util.obtenerIdiomasJSON(idiomas);
             if (nuevoIdioma.getCertificado() != null) {
                 this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CERTIFICADO_IDIOMA_CAMBIADO, CUERPO_CERTIFICADO_IDIOMA_CAMBIADO);
             }
@@ -1572,9 +1569,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarIdioma(idIdioma);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<Idioma> idiomas = servicioHojaVida.obtenerIdiomas(idPersona);
-            Util.establecerConsecutivoIdiomas(idiomas);
-            Gson gson = new Gson();
-            json = gson.toJson(idiomas);
+            json = Util.obtenerIdiomasJSON(idiomas);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1607,9 +1602,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarDistincion(idPersona, nuevaDistincion);
             List<Distincion> distincions = servicioHojaVida.obtenerDistinciones(idPersona);
-            Util.establecerConsecutivoDistinciones(distincions);
-            Gson gson = new Gson();
-            json = gson.toJson(distincions);
+            json = Util.obtenerDistincionesJSON(distincions);
             if (nuevaDistincion.getCertificado() != null) {
                 this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CERTIFICADO_DISTINCION_CAMBIADO, CUERPO_CERTIFICADO_DISTINCION_CAMBIADO);
             }
@@ -1629,9 +1622,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarDistincion(idDistincion);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<Distincion> distincions = servicioHojaVida.obtenerDistinciones(idPersona);
-            Util.establecerConsecutivoDistinciones(distincions);
-            Gson gson = new Gson();
-            json = gson.toJson(distincions);
+            json = Util.obtenerDistincionesJSON(distincions);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1673,9 +1664,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarExperienciaLaboral(idPersona, nuevaExperienciaLaboral);
             List<ExperienciaLaboral> experienciasLaborales = servicioHojaVida.obtenerExperienciasLaborales(idPersona);
-            Util.establecerConsecutivoExperienciasLaborales(experienciasLaborales);
-            Gson gson = new Gson();
-            json = gson.toJson(experienciasLaborales);
+            json = Util.obtenerExperienciasLaboralesJSON(experienciasLaborales);
             if (nuevaExperienciaLaboral.getCertificado() != null) {
                 this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO, CUERPO_CERTIFICADO_EXPERIENCIA_LABORAL_CAMBIADO);
             }
@@ -1695,9 +1684,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarExperienciaLaboral(idExperienciaLaboral);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<ExperienciaLaboral> experienciasLaborales = servicioHojaVida.obtenerExperienciasLaborales(idPersona);
-            Util.establecerConsecutivoExperienciasLaborales(experienciasLaborales);
-            Gson gson = new Gson();
-            json = gson.toJson(experienciasLaborales);
+            json = Util.obtenerExperienciasLaboralesJSON(experienciasLaborales);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1720,9 +1707,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             int id = servicioHojaVida.guardarExperienciaDocencia(idPersona, nuevaExperienciaDocencia);
             List<ExperienciaDocencia> experienciasDocencia = servicioHojaVida.obtenerExperienciasDocencia(idPersona);
-            Util.establecerConsecutivoExperienciasDocencia(experienciasDocencia);
-            Gson gson = new Gson();
-            json = gson.toJson(experienciasDocencia);
+            json = Util.obtenerExperienciasDocenciaJSON(experienciasDocencia);
             json = "{\"id\":" + id + ",\"experienciasDocencia\":" + json + "}";
 
         } catch (Exception exc) {
@@ -1741,9 +1726,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarExperienciaDocencia(idExperienciaDocencia);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<ExperienciaDocencia> experienciasDocencia = servicioHojaVida.obtenerExperienciasDocencia(idPersona);
-            Util.establecerConsecutivoExperienciasDocencia(experienciasDocencia);
-            Gson gson = new Gson();
-            json = gson.toJson(experienciasDocencia);
+            json = Util.obtenerExperienciasDocenciaJSON(experienciasDocencia);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1780,9 +1763,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarCursoExperienciaDocencia(idPersona, nuevoCursoExperienciaDocencia);
             List<ExperienciaDocencia> experienciasDocencia = servicioHojaVida.obtenerExperienciasDocencia(idPersona);
-            Util.establecerConsecutivoExperienciasDocencia(experienciasDocencia);
-            Gson gson = new Gson();
-            json = gson.toJson(experienciasDocencia);
+            json = Util.obtenerExperienciasDocenciaJSON(experienciasDocencia);
             if (nuevoCursoExperienciaDocencia.getCertificado() != null) {
                 this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO, CUERPO_CERTIFICADO_EXPERIENCIA_DOCENCIA_CAMBIADO);
             }
@@ -1802,9 +1783,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarCursoExperienciaDocencia(idCursoExperienciaDocencia);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<ExperienciaDocencia> experienciasDocencia = servicioHojaVida.obtenerExperienciasDocencia(idPersona);
-            Util.establecerConsecutivoExperienciasDocencia(experienciasDocencia);
-            Gson gson = new Gson();
-            json = gson.toJson(experienciasDocencia);
+            json = Util.obtenerExperienciasDocenciaJSON(experienciasDocencia);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1822,9 +1801,7 @@ public class HojaVidaController {
             List<Articulo> articulosActuales = servicioHojaVida.obtenerArticulos(idPersona);
             servicioHojaVida.guardarArticulo(idPersona, articulo);
             List<Articulo> articulos = servicioHojaVida.obtenerArticulos(idPersona);
-            Util.establecerConsecutivoArticulos(articulos);
-            Gson gson = new Gson();
-            json = gson.toJson(articulos);
+            json = Util.obtenerArticulosJSON(articulos);
             for (Articulo articuloActual : articulosActuales) {
                 if (articuloActual.getId() == articulo.getId()) {
                     if (!articuloActual.getUrl().equalsIgnoreCase(articulo.getUrl())) {
@@ -1849,9 +1826,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarArticulo(idArticulo);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<Articulo> articulos = servicioHojaVida.obtenerArticulos(idPersona);
-            Util.establecerConsecutivoArticulos(articulos);
-            Gson gson = new Gson();
-            json = gson.toJson(articulos);
+            json = Util.obtenerArticulosJSON(articulos);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1887,9 +1862,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarPatente(idPersona, nuevaPatente);
             List<Patente> patentes = servicioHojaVida.obtenerPatentes(idPersona);
-            Util.establecerConsecutivoPatentes(patentes);
-            Gson gson = new Gson();
-            json = gson.toJson(patentes);
+            json = Util.obtenerPatentesJSON(patentes);
             if (nuevaPatente.getDocumento() != null) {
                 this.enviarCorreoElectronicoCambioDocumento(ASUNTO_DOCUMENTO_PATENTE_CAMBIADO, CUERPO_DOCUMENTO_PATENTE_CAMBIADO);
             }
@@ -1909,9 +1882,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarPatente(idPatente);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<Patente> patentes = servicioHojaVida.obtenerPatentes(idPersona);
-            Util.establecerConsecutivoPatentes(patentes);
-            Gson gson = new Gson();
-            json = gson.toJson(patentes);
+            json = Util.obtenerPatentesJSON(patentes);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -1946,9 +1917,7 @@ public class HojaVidaController {
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             servicioHojaVida.guardarProductoConocimiento(idPersona, nuevoProductoConocimiento);
             List<ProductoConocimiento> productoConocimientos = servicioHojaVida.obtenerProductoConocimientos(idPersona);
-            Util.establecerConsecutivoProductosConocimiento(productoConocimientos);
-            Gson gson = new Gson();
-            json = gson.toJson(productoConocimientos);
+            json = Util.obtenerProductosConocimientoJSON(productoConocimientos);
             if (nuevoProductoConocimiento.getDocumento() != null) {
                 this.enviarCorreoElectronicoCambioDocumento(ASUNTO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO, CUERPO_DOCUMENTO_PRODUCTO_CONOCIMIENTO_CAMBIADO);
             }
@@ -1968,9 +1937,7 @@ public class HojaVidaController {
             servicioHojaVida.eliminarProductoConocimiento(idProductoConocimiento);
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<ProductoConocimiento> productoConocimientos = servicioHojaVida.obtenerProductoConocimientos(idPersona);
-            Util.establecerConsecutivoProductosConocimiento(productoConocimientos);
-            Gson gson = new Gson();
-            json = gson.toJson(productoConocimientos);
+            json = Util.obtenerProductosConocimientoJSON(productoConocimientos);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;

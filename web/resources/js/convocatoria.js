@@ -1718,5 +1718,87 @@
         $('#md_nucleo_basico_conocimiento').modal('hide');
     }
     
-    var convocatoriaModel = new ConvocatoriaModel(adendas, anyosExperiencias, idiomas, programas, educacionesContinuas, criteriosHabilitantes);
+    var convocatoriaModel = new ConvocatoriaModel([], [], [], [], [], []);
     ko.applyBindings(convocatoriaModel);
+    
+    for (var i = 0; i < adendas.length; i++) {
+        convocatoriaModel.adendas.push(
+            {
+                id: ko.observable(adendas[i].id),
+                consecutivo: ko.observable(adendas[i].consecutivo),
+                fecha: ko.observable(adendas[i].fechaFormateada),
+                tipoAdenda: ko.observable(adendas[i].tipoAdenda),
+                nombreTipoAdenda: ko.observable(adendas[i].nombreTipoAdenda),
+                descripcion: ko.observable(adendas[i].descripcion)
+            }
+         );
+    }
+    
+    for (var i = 0; i < anyosExperiencias.length; i++) {
+        convocatoriaModel.anyosExperiencias.push(
+            {
+                id: ko.observable(anyosExperiencias[i].id),
+                consecutivo: ko.observable(anyosExperiencias[i].consecutivo),
+                nucleoBasicoConocimiento: ko.observable(anyosExperiencias[i].nucleoBasicoConocimiento),
+                nombreNucleoBasicoConocimiento: ko.observable(anyosExperiencias[i].nombreNucleoBasicoConocimiento),
+                anyos: ko.observable(anyosExperiencias[i].anyos)
+            }
+         );
+    }    
+    
+    for (var i = 0; i < idiomas.length; i++) {
+        convocatoriaModel.idiomas.push(
+            {
+                id: ko.observable(idiomas[i].id),
+                consecutivo: ko.observable(idiomas[i].consecutivo),
+                idioma: ko.observable(idiomas[i].idioma),
+                nombreIdioma: ko.observable(idiomas[i].nombreIdioma),
+                otraCertificacion: ko.observable(idiomas[i].otraCertificacion),
+                tipoCertificacion: ko.observable(idiomas[i].tipoCertificacion),
+                nombreTipoCertificacion: ko.observable(idiomas[i].nombreTipoCertificacion),
+                puntajeMinimoCertificacion: ko.observable(idiomas[i].puntajeMinimoCertificacion)
+            }
+         );
+    }
+    
+    for (var i = 0; i < programas.length; i++) {
+        convocatoriaModel.programas.push(
+            {
+                id: ko.observable(programas[i].id),
+                consecutivo: ko.observable(programas[i].consecutivo),
+                nivelFormacion: ko.observable(programas[i].nivelFormacion),
+                nombreNivelFormacion: ko.observable(programas[i].nombreNivelFormacion),
+                nucleoBasicoConocimiento: ko.observable(programas[i].nucleoBasicoConocimiento),
+                programa: ko.observable(programas[i].programa),
+                nombrePrograma: ko.observable(programas[i].nombrePrograma)
+            }
+         );
+    }
+    
+    
+    for (var i = 0; i < educacionesContinuas.length; i++) {
+        convocatoriaModel.educacionesContinuas.push(
+            {
+                id: ko.observable(educacionesContinuas[i].id),
+                consecutivo: ko.observable(educacionesContinuas[i].consecutivo),
+                tipoCapacitacion: ko.observable(educacionesContinuas[i].tipoCapacitacion),
+                nombreTipoCapacitacion: ko.observable(educacionesContinuas[i].nombreTipoCapacitacion),
+                nucleoBasicoConocimiento: ko.observable(educacionesContinuas[i].nucleoBasicoConocimiento),
+                nombreNucleoBasicoConocimiento: ko.observable(educacionesContinuas[i].nombreNucleoBasicoConocimiento),
+                nombreCapacitacion: ko.observable(educacionesContinuas[i].nombreCapacitacion)
+            }
+         );
+    }
+    
+    for (var i = 0; i < criteriosHabilitantes.length; i++) {
+        convocatoriaModel.criteriosHabilitantes.push(
+            {
+                id: ko.observable(criteriosHabilitantes[i].id),
+                consecutivo: ko.observable(criteriosHabilitantes[i].consecutivo),
+                campoHojaVida: ko.observable(criteriosHabilitantes[i].campoHojaVida),
+                nombreCampoHojaVida: ko.observable(criteriosHabilitantes[i].nombreCampoHojaVida),
+                valor: ko.observable(criteriosHabilitantes[i].valor),
+                texto: ko.observable(criteriosHabilitantes[i].texto)
+            }
+         );
+    }  

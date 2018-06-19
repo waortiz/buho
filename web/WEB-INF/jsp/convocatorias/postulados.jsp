@@ -843,10 +843,10 @@
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    $('#md_descargar_postulados').modal('hide');
                     if (response != "") {
                         window.location.href = "${pageContext.request.contextPath}/convocatorias/descargarPostulados/" + $('#convocatoria').val();
                     }
+                    $('#md_descargar_postulados').modal('hide');
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     $('#md_descargar_postulados').modal('hide');

@@ -253,9 +253,7 @@ public class ConvocatoriaController {
 
             servicioConvocatoria.guardarAdenda(adenda.getIdConvocatoria(), obtenerIdPersona(), nuevaAdenda);
             List<Adenda> adendas = servicioConvocatoria.obtenerAdendas(adenda.getIdConvocatoria());
-            Util.establecerConsecutivoAdendas(adendas);
-            Gson gson = new Gson();
-            json = gson.toJson(adendas);
+            json = Util.obtenerAdendasJSON(adendas);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -271,9 +269,7 @@ public class ConvocatoriaController {
         try {
             servicioConvocatoria.eliminarAdenda(idAdenda);
             List<Adenda> adendas = servicioConvocatoria.obtenerAdendas(idConvocatoria);
-            Util.establecerConsecutivoAdendas(adendas);
-            Gson gson = new Gson();
-            json = gson.toJson(adendas);
+            json = Util.obtenerAdendasJSON(adendas);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -289,9 +285,7 @@ public class ConvocatoriaController {
         try {
             servicioConvocatoria.guardarAnyosExperiencia(anyosExperiencia.getIdConvocatoria(), anyosExperiencia);
             List<AnyosExperiencia> anyosExperiencias = servicioConvocatoria.obtenerAnyosExperiencias(anyosExperiencia.getIdConvocatoria());
-            Util.establecerConsecutivoAnyosExperiencias(anyosExperiencias);
-            Gson gson = new Gson();
-            json = gson.toJson(anyosExperiencias);
+            json = Util.obtenerAnyosExperienciaJSON(anyosExperiencias);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -307,9 +301,7 @@ public class ConvocatoriaController {
         try {
             servicioConvocatoria.eliminarAnyosExperiencia(idAnyosExperiencia);
             List<AnyosExperiencia> anyosExperiencias = servicioConvocatoria.obtenerAnyosExperiencias(idConvocatoria);
-            Util.establecerConsecutivoAnyosExperiencias(anyosExperiencias);
-            Gson gson = new Gson();
-            json = gson.toJson(anyosExperiencias);
+            json = Util.obtenerAnyosExperienciaJSON(anyosExperiencias);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -325,9 +317,7 @@ public class ConvocatoriaController {
         try {
             servicioConvocatoria.guardarIdioma(idioma.getIdConvocatoria(), obtenerIdPersona(), idioma);
             List<IdiomaConvocatoria> idiomas = servicioConvocatoria.obtenerIdiomas(idioma.getIdConvocatoria());
-            Util.establecerConsecutivoIdiomasConvocatoria(idiomas);
-            Gson gson = new Gson();
-            json = gson.toJson(idiomas);
+            json = Util.obtenerIdiomasConvocatoriaJSON(idiomas);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -343,9 +333,7 @@ public class ConvocatoriaController {
         try {
             servicioConvocatoria.eliminarIdioma(idIdioma);
             List<IdiomaConvocatoria> idiomas = servicioConvocatoria.obtenerIdiomas(idConvocatoria);
-            Util.establecerConsecutivoIdiomasConvocatoria(idiomas);
-            Gson gson = new Gson();
-            json = gson.toJson(idiomas);
+            json = Util.obtenerIdiomasConvocatoriaJSON(idiomas);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -361,9 +349,7 @@ public class ConvocatoriaController {
         try {
             servicioConvocatoria.guardarPrograma(programa.getIdConvocatoria(), obtenerIdPersona(), programa);
             List<ProgramaConvocatoria> programas = servicioConvocatoria.obtenerProgramas(programa.getIdConvocatoria());
-            Util.establecerConsecutivoProgramasConvocatoria(programas);
-            Gson gson = new Gson();
-            json = gson.toJson(programas);
+            json = Util.obtenerProgramasConvocatoriaJSON(programas);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -379,9 +365,7 @@ public class ConvocatoriaController {
         try {
             servicioConvocatoria.eliminarPrograma(idPrograma);
             List<ProgramaConvocatoria> programas = servicioConvocatoria.obtenerProgramas(idConvocatoria);
-            Util.establecerConsecutivoProgramasConvocatoria(programas);
-            Gson gson = new Gson();
-            json = gson.toJson(programas);
+            json = Util.obtenerProgramasConvocatoriaJSON(programas);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -397,9 +381,7 @@ public class ConvocatoriaController {
         try {
             servicioConvocatoria.guardarEducacionContinua(educacionContinua.getIdConvocatoria(), obtenerIdPersona(), educacionContinua);
             List<EducacionContinuaConvocatoria> educacionesContinuas = servicioConvocatoria.obtenerEducacionesContinuas(educacionContinua.getIdConvocatoria());
-            Util.establecerConsecutivoEducacionesContinuasConvocatoria(educacionesContinuas);
-            Gson gson = new Gson();
-            json = gson.toJson(educacionesContinuas);
+            json = Util.obtenerEducacionesContinuasConvocatoriaJSON(educacionesContinuas);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -415,9 +397,7 @@ public class ConvocatoriaController {
         try {
             servicioConvocatoria.eliminarEducacionContinua(idEducacionContinua);
             List<EducacionContinuaConvocatoria> educacionesContinuas = servicioConvocatoria.obtenerEducacionesContinuas(idConvocatoria);
-            Util.establecerConsecutivoEducacionesContinuasConvocatoria(educacionesContinuas);
-            Gson gson = new Gson();
-            json = gson.toJson(educacionesContinuas);
+            json = Util.obtenerEducacionesContinuasConvocatoriaJSON(educacionesContinuas);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -433,9 +413,7 @@ public class ConvocatoriaController {
         try {
             servicioConvocatoria.guardarCriterioHabilitante(criterioHabilitante.getIdConvocatoria(), obtenerIdPersona(), criterioHabilitante);
             List<CriterioHabilitanteConvocatoria> criteriosHabilitantes = servicioConvocatoria.obtenerCriteriosHabilitantes(criterioHabilitante.getIdConvocatoria());
-            Util.establecerConsecutivoCriteriosHabilitantesConvocatoria(criteriosHabilitantes);
-            Gson gson = new Gson();
-            json = gson.toJson(criteriosHabilitantes);
+            json = Util.obtenerCriteriosHabilitantesJSON(criteriosHabilitantes);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -451,9 +429,7 @@ public class ConvocatoriaController {
         try {
             servicioConvocatoria.eliminarCriterioHabilitante(idCriterioHabilitante);
             List<CriterioHabilitanteConvocatoria> criteriosHabilitantes = servicioConvocatoria.obtenerCriteriosHabilitantes(idConvocatoria);
-            Util.establecerConsecutivoCriteriosHabilitantesConvocatoria(criteriosHabilitantes);
-            Gson gson = new Gson();
-            json = gson.toJson(criteriosHabilitantes);
+            json = Util.obtenerCriteriosHabilitantesJSON(criteriosHabilitantes);
         } catch (Exception exc) {
             logger.error(exc);
             throw exc;
@@ -709,6 +685,11 @@ public class ConvocatoriaController {
         Gson gson = new Gson();
 
         return gson.toJson(evaluaciones);
+    }
+
+    @RequestMapping(value = "/validarDescarga", method = RequestMethod.GET)
+    public @ResponseBody String validarDescarga(HttpServletResponse response) throws IOException {
+        return "{\"resultado\":true}";
     }
 
     @RequestMapping(value = "/descargarPostulados/{idConvocatoria}", method = RequestMethod.GET)

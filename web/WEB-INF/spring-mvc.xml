@@ -58,6 +58,7 @@
             <mvc:exclude-mapping path="/convocatorias/criterioHabilitante" />
             <mvc:exclude-mapping path="/convocatorias/actualizarAnyosMinimosExperiencia" />
             <mvc:exclude-mapping path="/convocatorias/actualizarResultado" />
+            <mvc:exclude-mapping path="/convocatorias/validarDescarga" />
             
             <mvc:exclude-mapping path="/hojasVida/editar" />
             <mvc:exclude-mapping path="/hojasVida/terminos" />
@@ -145,6 +146,9 @@
             <mvc:exclude-mapping path="/hojasVida/descargarHojasVidaInvestigacion" />
             <mvc:exclude-mapping path="/hojasVida/consultarHojasVidaDistincion" />
             <mvc:exclude-mapping path="/hojasVida/descargarHojasVidaDistincion" />
+            <mvc:exclude-mapping path="/hojasVida/descargarHojasVidaSoporte" />
+            <mvc:exclude-mapping path="/hojasVida/validarDescarga" />
+            
             <ref bean="buhoInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

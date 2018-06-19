@@ -37,9 +37,11 @@ import co.edu.fnsp.buho.entidades.HojaVidaExperiencia;
 import co.edu.fnsp.buho.entidades.HojaVidaExperienciaDocencia;
 import co.edu.fnsp.buho.entidades.HojaVidaIdioma;
 import co.edu.fnsp.buho.entidades.HojaVidaInvestigacion;
+import co.edu.fnsp.buho.entidades.HojaVidaSoporte;
 import co.edu.fnsp.buho.entidades.HojaVidaTipoExperiencia;
 import co.edu.fnsp.buho.entidades.Idioma;
 import co.edu.fnsp.buho.entidades.Investigacion;
+import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.Patente;
 import co.edu.fnsp.buho.entidades.ProductoConocimiento;
 import co.edu.fnsp.buho.entidades.Telefono;
@@ -61,8 +63,6 @@ public interface IServicioHojaVida {
     
     Documento obtenerDocumentoSoporte(long idDocumentoSoporte);
 
-    List<HojaVidaConsulta> obtenerHojasVida();
-    
     List<HojaVidaConsulta> obtenerHojasVida(ConsultaHojaVida consultaHojaVida);
     
     void eliminarHojaVida(long idPersona);
@@ -214,4 +214,13 @@ public interface IServicioHojaVida {
     List<HojaVidaInvestigacion> obtenerHojasVidaInvestigacion(ConsultaHojaVidaInvestigacion consultaHojaVidaInvestigacion);
     
     List<HojaVidaDistincion> obtenerHojasVidaDistincion(ConsultaHojaVidaDistincion consultaHojaVidaDistincion);
+    
+    List<Maestro> obtenerNumerosDocumento();
+    
+    List<Maestro> obtenerNombres();
+    
+    List<Maestro> obtenerApellidos();
+
+    List<HojaVidaSoporte> obtenerHojasVidaSoporte(ConsultaHojaVida consultaHojaVida);
+
  }

@@ -5,7 +5,7 @@
 <!-- INICIO FORMULARIO-->
 <div id="contenido">
     <div class="container">
-        <legend><h3>Validaci&oacute;n documentos de soporte</h3></legend>
+        <legend><h3>Consulta de hoja de vida por soportes</h3></legend>
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group form-inline">
@@ -803,7 +803,7 @@
                 } else if ($("#tipoDocumento").val() == PATENTE) {
                     cargarPatentes(datos);
                 } else if ($("#tipoDocumento").val() == PRODUCTO_CONOCIMIENTO) {
-                    cargarProdcutosConocimiento(datos);
+                    cargarProductosConocimiento(datos);
                 } else if ($("#tipoDocumento").val() == PROPUESTA_INVESTIGACION) {
                     cargarPropuestasInvestigacion(datos);
                 }
@@ -903,7 +903,7 @@
                         cargarInvestigaciones(hojaVida.investigaciones);
                         cargarArticulos(hojaVida.articulos);
                         cargarPatentes(hojaVida.patentes);
-                        cargarProdcutosConocimiento(hojaVida.productosConocimiento);
+                        cargarProductosConocimiento(hojaVida.productosConocimiento);
                         cargarPropuestasInvestigacion(hojaVida.documentosSoporteInvestigacion);
                     }
                 }});
@@ -1690,7 +1690,7 @@
         }
     }
 
-    function cargarProdcutosConocimiento(productosConocimiento) {
+    function cargarProductosConocimiento(productosConocimiento) {
         datosModel.productosConocimiento.removeAll();
         for (var i = 0; i < productosConocimiento.length; i++) {
             datosModel.productosConocimiento.push(

@@ -896,10 +896,10 @@
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    $('#md_descargar_resultados').modal('hide');
                     if (response != "") {
                         window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaExperiencia?tiempoExperienciaDocencia=" + $('#tiempoExperienciaDocencia').val() + "&tiempoExperienciaLaboral=" + $('#tiempoExperienciaLaboral').val() + "&tiempoExperienciaProfesional=" + $('#tiempoExperienciaProfesional').val();
                     }
+                    $('#md_descargar_resultados').modal('hide');
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                    $('#md_descargar_resultados').modal('hide');

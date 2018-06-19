@@ -837,10 +837,10 @@
             processData: false,
             contentType: false,
             success: function (response) {
-                $('#md_descargar_evaluacion').modal('hide');
                 if (response != "") {
                     window.location.href = "${pageContext.request.contextPath}/convocatorias/descargarEvaluaciones/" + $('#convocatoria').val();
                 }
+                $('#md_descargar_evaluacion').modal('hide');
             },
             error: function (xhr, ajaxOptions, thrownError) {
 

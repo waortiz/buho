@@ -11,7 +11,7 @@ package co.edu.fnsp.buho.entidades;
  */
 public class HojaVidaEducacionContinua {
 
-    private long idPersona;;
+    private long idPersona;
     private String numeroIdentificacion;
     private String nombres;
     private String apellidos;

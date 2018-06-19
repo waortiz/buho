@@ -12,8 +12,8 @@
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <select style="width: 85%;" id="cboNumeroIdentificacion" class="js-select-basic-single js-states form-control">
                         <option></option>
-                        <c:forEach var="hojaVida" items="${hojasVida}">
-                            <option value="${hojaVida.getIdPersona()}">${hojaVida.getNumeroIdentificacion()}</option>
+                        <c:forEach var="numeroDocumento" items="${numerosDocumento}">
+                            <option value="${numeroDocumento.getId()}">${numeroDocumento.getNombre()}</option>
                         </c:forEach>                                                 
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNumeroIdentificacion()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
@@ -25,8 +25,8 @@
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <select style="width: 85%;" id="cboNombres" class="js-select-basic-single js-states form-control">
                         <option></option>
-                        <c:forEach var="hojaVida" items="${hojasVida}">
-                            <option value="${hojaVida.getIdPersona()}">${hojaVida.getNombres()}</option>
+                        <c:forEach var="nombre" items="${nombres}">
+                            <option value="${nombre.getId()}">${nombre.getNombre()}</option>
                         </c:forEach>                                                 
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNombres()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
@@ -38,8 +38,8 @@
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <select style="width: 85%;" id="cboApellidos" class="js-select-basic-single js-states form-control">
                         <option></option>
-                        <c:forEach var="hojaVida" items="${hojasVida}">
-                            <option value="${hojaVida.getIdPersona()}">${hojaVida.getApellidos()}</option>
+                        <c:forEach var="apellido" items="${apellidos}">
+                            <option value="${apellido.getId()}">${apellido.getNombre()}</option>
                         </c:forEach>                                                 
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarApellidos()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
@@ -394,7 +394,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">    
                                         <label>Perfil laboral y profesional</label>
-                                        <textarea style="border: 0;width: 95%;" id="con_descripcion" >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        <textarea style="border: 0;width: 95%;" id="perfil">
                                         </textarea>   
                                     </div>
                                 </div>

@@ -833,14 +833,14 @@
         }, 3000);
         $.ajax({
             type: "GET",
-              url: "${pageContext.request.contextPath}/convocatorias/descargarPreseleccionados/" + $('#convocatoria').val(),
+            url: "${pageContext.request.contextPath}/convocatorias/descargarPreseleccionados/" + $('#convocatoria').val(),
             processData: false,
             contentType: false,
             success: function (response) {
-                $('#md_descargar_preseleccionados').modal('hide');
                 if (response != "") {
                       window.location.href = "${pageContext.request.contextPath}/convocatorias/descargarPreseleccionados/" + $('#convocatoria').val();
                 }
+                $('#md_descargar_preseleccionados').modal('hide');
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 $('#md_descargar_preseleccionados').modal('hide');
