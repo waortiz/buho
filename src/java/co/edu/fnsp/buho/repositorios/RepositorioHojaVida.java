@@ -112,6 +112,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     private SimpleJdbcCall eliminarCorreoElectronico;
     private SimpleJdbcCall actualizarCorreoElectronico;
     private SimpleJdbcCall obtenerCorreosElectronicos;
+    private SimpleJdbcCall obtenerCorreosElectronicosValidadores;
 
     private SimpleJdbcCall ingresarIdioma;
     private SimpleJdbcCall obtenerIdiomas;
@@ -262,6 +263,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         this.eliminarCorreoElectronico = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarCorreoElectronico");
         this.actualizarCorreoElectronico = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarCorreoElectronico");
         this.obtenerCorreosElectronicos = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCorreosElectronicos").returningResultSet("correosElectronicos", BeanPropertyRowMapper.newInstance(CorreoElectronico.class));
+        this.obtenerCorreosElectronicosValidadores = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCorreosElectronicosValidadores").returningResultSet("correosElectronicos", BeanPropertyRowMapper.newInstance(CorreoElectronico.class));
 
         this.ingresarIdioma = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarIdiomaHojaVida");
         this.eliminarIdioma = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarIdiomaHojaVida");
@@ -1106,6 +1108,98 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     }
 
     @Override
+    public HojaVida obtenerPersona(long idPersona) {
+        HojaVida hojaVida = new HojaVida();
+
+        MapSqlParameterSource parametros = new MapSqlParameterSource();
+        parametros.addValue("varIdPersona", idPersona);
+
+        Map resultado = obtenerPersona.execute(parametros);
+        hojaVida.setIdPersona(idPersona);
+        hojaVida.setNumeroIdentificacion((String) resultado.get("varNumeroId"));
+        hojaVida.setTipoIdentificacion((String) resultado.get("varTipoId"));
+        hojaVida.setNombreTipoIdentificacion((String) resultado.get("varNombreTipoId"));
+        hojaVida.setLugarExpedicion((String) resultado.get("varLugarExpedicion"));
+        hojaVida.setNombreLugarExpedicion((String) resultado.get("varNombreLugarExpedicion"));
+        if (resultado.get("varFechaExpedicion") != null) {
+            hojaVida.setFechaExpedicion((Date) resultado.get("varFechaExpedicion"));
+            hojaVida.setFechaExpedicionFormateada(Util.obtenerFechaFormateada((Date) resultado.get("varFechaExpedicion")));
+        }
+        hojaVida.setLibretaMilitar((String) resultado.get("varLibretaMilitar"));
+        hojaVida.setDistritoClase((String) resultado.get("varDistritoClase"));
+        hojaVida.setNombres((String) resultado.get("varNombres"));
+        hojaVida.setApellidos((String) resultado.get("varApellidos"));
+        if (resultado.get("varFechaNacimiento") != null) {
+            hojaVida.setFechaNacimiento((Date) resultado.get("varFechaNacimiento"));
+            hojaVida.setFechaNacimientoFormateada(Util.obtenerFechaFormateada((Date) resultado.get("varFechaNacimiento")));
+        }
+        hojaVida.setLugarNacimiento((String) resultado.get("varLugarNacimiento"));
+        hojaVida.setNombreLugarNacimiento((String) resultado.get("varNombreLugarNacimiento"));
+        if (resultado.get("varNacionalidad") != null) {
+            hojaVida.setNacionalidad(((Integer) resultado.get("varNacionalidad")).toString());
+        }
+        hojaVida.setNombreNacionalidad((String) resultado.get("varNombreNacionalidad"));
+        if (resultado.get("varSexo") != null) {
+            hojaVida.setSexo(((Integer) resultado.get("varSexo")).toString());
+        }
+        hojaVida.setNombreSexo(((String) resultado.get("varNombreSexo")));
+        hojaVida.setCiudadResidencia((String) resultado.get("varCiudadResidencia"));
+        hojaVida.setNombreCiudadResidencia((String) resultado.get("varNombreCiudadResidencia"));
+        hojaVida.setDireccion((String) resultado.get("varDireccion"));
+        hojaVida.setPerfil((String) resultado.get("varPerfil"));
+
+        if (resultado.get("varEmpleadoUdea") != null) {
+            hojaVida.setEmpleadoUDEA((Boolean) resultado.get("varEmpleadoUdea"));
+        }
+        if (resultado.get("varGrupoEtnico") != null) {
+            hojaVida.setGrupoEtnico(((Integer) resultado.get("varGrupoEtnico")).toString());
+            hojaVida.setNombreGrupoEtnico((String) resultado.get("varNombreGrupoEtnico"));
+        }
+        if (resultado.get("varDiscapacidad") != null) {
+            hojaVida.setDiscapacidad(((Integer) resultado.get("varDiscapacidad")).toString());
+            hojaVida.setNombreDiscapacidad((String) resultado.get("varNombreDiscapacidad"));
+        }
+        if (resultado.get("varDisponeRut") != null) {
+            hojaVida.setDisponeRUT((Boolean) resultado.get("varDisponeRut"));
+        }
+        if (resultado.get("varActividadEconomica") != null) {
+            hojaVida.setActividadEconomica(((Integer) resultado.get("varActividadEconomica")).toString());
+            hojaVida.setNombreActividadEconomica((String) resultado.get("varNombreActividadEconomica"));
+        }
+        if (resultado.get("varDisponibilidadViajar") != null) {
+            hojaVida.setDisponibilidadViajar((Boolean) resultado.get("varDisponibilidadViajar"));
+        }
+        if (resultado.get("varTipoVinculacion") != null) {
+            hojaVida.setTipoVinculacion(((Integer) resultado.get("varTipoVinculacion")).toString());
+            hojaVida.setNombreTipoVinculacion((String) resultado.get("varNombreTipoVinculacion"));
+        }
+        if (resultado.get("varTieneCopiaDocumentoIdentificacion") != null) {
+            hojaVida.setTieneCopiaDocumentoIdentificacion((Boolean) resultado.get("varTieneCopiaDocumentoIdentificacion"));
+        }
+        if (resultado.get("varTieneCopiaLibretaMilitar") != null) {
+            hojaVida.setTieneCopiaLibretaMilitar((Boolean) resultado.get("varTieneCopiaLibretaMilitar"));
+        }
+        if (resultado.get("varTieneDocumentoRUT") != null) {
+            hojaVida.setTieneDocumentoRUT((Boolean) resultado.get("varTieneDocumentoRUT"));
+        }
+        if (resultado.get("varCopiaDocumentoIdentificacionValidado") != null) {
+            hojaVida.setCopiaDocumentoIdentificacionValidado((Boolean) resultado.get("varCopiaDocumentoIdentificacionValidado"));
+        }
+        if (resultado.get("varCopiaLibretaMilitarValidado") != null) {
+            hojaVida.setCopiaLibretaMilitarValidado((Boolean) resultado.get("varCopiaLibretaMilitarValidado"));
+        }
+        if (resultado.get("varDocumentoRUTValidado") != null) {
+            hojaVida.setDocumentoRUTValidado((Boolean) resultado.get("varDocumentoRUTValidado"));
+        }
+
+        hojaVida.setNombreCopiaDocumentoIdentificacion((String) resultado.get("varnombrecopiaDocumentoIdentificacion"));
+        hojaVida.setNombreCopiaLibretaMilitar((String) resultado.get("varNombreCopiaLibretaMilitar"));
+        hojaVida.setNombreDocumentoRUT((String) resultado.get("varNombreDocumentoRUT"));
+
+        return hojaVida;
+    }
+
+    @Override
     public Documento obtenerCertificadoIdioma(int idIdioma) {
         Documento documento = null;
         MapSqlParameterSource parametros = new MapSqlParameterSource();
@@ -1607,6 +1701,15 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         return correosElectronicos;
     }
 
+    @Override
+    public List<CorreoElectronico> obtenerCorreosElectronicosValidadores() {
+        Map resultadoCorreosElectronicos = obtenerCorreosElectronicosValidadores.execute(new MapSqlParameterSource());
+        ArrayList<CorreoElectronico> correosElectronicos = (ArrayList<CorreoElectronico>) resultadoCorreosElectronicos.get("correosElectronicos");
+
+        return correosElectronicos;
+    }
+
+    
     @Override
     public void eliminarCorreoElectronico(int idCorreoElectronico) {
         MapSqlParameterSource parametrosEliminacionCorreoElectronico = new MapSqlParameterSource();

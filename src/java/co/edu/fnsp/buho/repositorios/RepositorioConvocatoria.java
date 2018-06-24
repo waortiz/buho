@@ -50,7 +50,6 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     private SimpleJdbcCall actualizarDocumentoConvocatoria;
     private SimpleJdbcCall obtenerDocumentoConvocatoria;
     private SimpleJdbcCall obtenerResultadoConvocatoria;
-    private SimpleJdbcCall ingresarResultadoConvocatoria;
     private SimpleJdbcCall actualizarResultadoConvocatoria;
     private SimpleJdbcCall actualizarAnyosMinimosExperienciaConvocatoria;
     private SimpleJdbcCall obtenerPersonasConvocatoria;
@@ -107,7 +106,6 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         this.ingresarDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoConvocatoria");
         this.actualizarDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoConvocatoria");
         this.obtenerResultadoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerResultadoConvocatoria");
-        this.ingresarResultadoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarResultadoConvocatoria");
         this.actualizarResultadoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarResultadoConvocatoria");
         this.actualizarAnyosMinimosExperienciaConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarAnyosMinimosExperienciaConvocatoria");
         this.ingresarAdenda = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarAdenda");

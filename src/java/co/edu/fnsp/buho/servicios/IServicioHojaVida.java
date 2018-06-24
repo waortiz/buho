@@ -72,6 +72,8 @@ public interface IServicioHojaVida {
     String obtenerNumeroIdentificacionPersona(long idPersona);
 
     HojaVida obtenerHojaVida(long idPersona);
+    
+    HojaVida obtenerPersona(long idPersona);
 
     Documento obtenerCertificadoIdioma(int idIdioma);
 
@@ -222,5 +224,7 @@ public interface IServicioHojaVida {
     List<Maestro> obtenerApellidos();
 
     List<HojaVidaSoporte> obtenerHojasVidaSoporte(ConsultaHojaVida consultaHojaVida);
+
+    public List<CorreoElectronico> obtenerCorreosElectronicosValidadores();
 
  }

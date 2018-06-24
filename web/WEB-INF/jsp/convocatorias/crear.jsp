@@ -264,7 +264,7 @@
                         <div class="table-responsive">
                             <br />
                             <div id="alert_anyos_experiencias"></div>
-                            <table class="table tabla table-hover tableestilo">
+                            <table class="table tabla table-hover tableestilo" id="tblAnyosExperiencias">
                                 <thead>
                                     <tr>
                                         <th style="width:300px;">Nucleo básico de conocimiento</th>
@@ -336,7 +336,7 @@
                              <div class="table-responsive">
                                 <br />
                                 <div id="alert_idiomas"></div>
-                                <table class="table tabla table-hover tableestilo">
+                                <table class="table tabla table-hover tableestilo" id="tblIdiomas">
                                     <thead>
                                     <th>Idioma</th>
                                     <th>Opción</th>
@@ -423,7 +423,7 @@
                              <div class="table-responsive">
                                 <br />
                                 <div id="alert_programas"></div>
-                                <table class="table tabla table-hover tableestilo" id="tbform">
+                                <table class="table tabla table-hover tableestilo" id="tblProgramas">
                                     <thead>
                                         <th>Programa</th>
                                         <th>Nivel de formaci&oacute;n</th>
@@ -507,7 +507,7 @@
                              <div class="table-responsive">
                                 <br />
                                 <div id="alert_educaciones_continuas"></div>
-                                <table class="table tabla table-hover tableestilo">
+                                <table class="table tabla table-hover tableestilo" id="tblEducacionesContinuas">
                                     <thead>
                                     <th>Nombre de la capacitación o certificaci&oacute;n</th>
                                     <th>Tipo</th>
@@ -589,7 +589,7 @@
                             <div class="table-responsive">
                                 <br />
                                 <div id="alert_criterios_habilitantes"></div>
-                                <table class="table tabla table-hover tableestilo">
+                                <table class="table tabla table-hover tableestilo" id="tblCriteriosHabilitantes">
                                     <thead>
                                     <th>Campo</th>
                                     <th>Valor</th>
@@ -740,7 +740,7 @@
                         <div class="table-responsive">
                             <br />
                             <div id="alert_adendas"></div>
-                            <table class="table tabla table-hover tableestilo" id="tbadendas"> 
+                            <table class="table tabla table-hover tableestilo" id="tblAdendas"> 
                                 <thead>
                                     <tr>    
                                         <th style="width: 20%">Tipo</th>
@@ -836,7 +836,7 @@
                     </div>
                 </div>
             </div> 
-            <div class="modal" tabindex="1" id="ubicacionModal">
+            <div class="modal fade" tabindex="1" id="ubicacionModal">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-header mhsuccess">

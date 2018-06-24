@@ -66,6 +66,8 @@ public interface IRepositorioHojaVida {
     String obtenerNumeroIdentificacionPersona(long idPersona);
 
     HojaVida obtenerHojaVida(long idPersona);
+    
+    HojaVida obtenerPersona(long idPersona);
 
     Documento obtenerDocumentoSoporte(long idPersona, int idTipoDocumento);
     
@@ -216,4 +218,6 @@ public interface IRepositorioHojaVida {
     List<Maestro> obtenerApellidos();
 
     List<HojaVidaSoporte> obtenerHojasVidaSoporte(ConsultaHojaVida consultaHojaVida);
+
+    public List<CorreoElectronico> obtenerCorreosElectronicosValidadores();
 }

@@ -148,6 +148,7 @@
             <mvc:exclude-mapping path="/hojasVida/descargarHojasVidaDistincion" />
             <mvc:exclude-mapping path="/hojasVida/descargarHojasVidaSoporte" />
             <mvc:exclude-mapping path="/hojasVida/validarDescarga" />
+            <mvc:exclude-mapping path="/hojasVida/descargarHojasVida" />
             
             <ref bean="buhoInterceptor" />
         </mvc:interceptor>

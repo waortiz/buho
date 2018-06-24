@@ -509,5 +509,15 @@ public class ServicioHojaVida implements IServicioHojaVida {
     public List<HojaVidaSoporte> obtenerHojasVidaSoporte(ConsultaHojaVida consultaHojaVida) {
         return repositorioHojaVida.obtenerHojasVidaSoporte(consultaHojaVida);
     }
+
+    @Override
+    public HojaVida obtenerPersona(long idPersona) {
+        return repositorioHojaVida.obtenerPersona(idPersona);
+    }
+
+    @Override
+    public List<CorreoElectronico> obtenerCorreosElectronicosValidadores() {
+        return repositorioHojaVida.obtenerCorreosElectronicosValidadores();
+    }
     
 }

@@ -843,7 +843,7 @@
                         <div class="table-responsive">
                             <br>
                             <div id="alert_documentos_soporte"></div>
-                            <table class="table tabla table-hover tableestilo" id="tbdocad">
+                            <table class="table tabla table-hover tableestilo" id="tblDocumentosSoporte">
                                 <thead>
                                     <tr>
                                         <th>Tipo de documento</th>
@@ -922,7 +922,7 @@
                         <div class="table-responsive">
                             <br>
                             <div id="alert_educaciones_basicas"></div>
-                            <table class="table tabla table-hover tableestilo">
+                            <table class="table tabla table-hover tableestilo" id="tblEducacionesBasicas">
                                 <thead>
                                     <tr>
                                         <th>Nivel de estudio</th>
@@ -1048,7 +1048,7 @@
                         <div class="table-responsive">
                             <br>
                             <div id="alert_educaciones_superiores"></div>
-                            <table class="table tabla table-hover tableestilo">
+                            <table class="table tabla table-hover tableestilo" id="tblEducacionesSuperiores">
                                 <thead>
                                     <tr>
                                         <th>Nivel de estudio</th>
@@ -1375,7 +1375,7 @@
                         <div class="table-responsive">
                             <br />
                             <div id="alert_idiomas"></div>
-                            <table class="table tabla table-hover tableestilo">
+                            <table class="table tabla table-hover tableestilo" id="tblIdiomas">
                             <thead>
                                 <tr>
                                     <th>Idioma</th>
@@ -1534,7 +1534,7 @@
                         <div class="table-responsive">
                             <br>
                             <div id="alert_educaciones_continuas"></div>
-                            <table class="table tabla table-hover tableestilo" id="tbcapaci">
+                            <table class="table tabla table-hover tableestilo" id="tblEducacionesContinuas">
                                 <thead>
                                     <tr>
                                         <th>Tipo de capacitaci&oacute;n</th>
@@ -1694,7 +1694,7 @@
                 <div class="table-responsive">
                     <br>
                     <div id="alert_experiencias_laborales"></div>
-                    <table class="table tabla table-hover tableestilo">
+                    <table class="table tabla table-hover tableestilo" id="tblExperienciasLaborales">
                         <thead>
                             <tr>
                                 <th>&Aacute;rea</th>
@@ -1894,7 +1894,7 @@
                 <div class="table-responsive">
                     <br>
                     <div id="alert_experiencias_docencia"></div>
-                    <table class="table tabla table-hover tableestilo">
+                    <table class="table tabla table-hover tableestilo" id="tblExperienciasDocencia">
                         <thead>
                             <tr>
                                 <th>Instituci&oacute;n</th>
@@ -2214,7 +2214,7 @@
                         <div class="table-responsive">
                             <br>
                             <div id="alert_articulos"></div>
-                            <table class="table tabla table-hover tableestilo" id="tbearticulo">
+                            <table class="table tabla table-hover tableestilo" id="tblArticulos">
                                 <thead>
                                     <tr>
                                         <th>T&iacute;tulo</th>
@@ -2328,7 +2328,7 @@
                     <div class="table-responsive">
                         <br>
                         <div id="alert_patentes"></div>
-                         <table class="table tabla table-hover tableestilo" id="tbpatente">
+                         <table class="table tabla table-hover tableestilo" id="tblPatentes">
                              <thead>
                                  <tr>
                                      <th>Fecha</th>
@@ -2454,7 +2454,7 @@
                          <div class="table-responsive">
                              <br>
                              <div id="alert_productos_conocimiento"></div>
-                             <table class="table tabla table-hover tableestilo" id="tbprodcono">
+                             <table class="table tabla table-hover tableestilo" id="tblProductosConocimiento">
                                  <thead>
                                      <tr>
                                          <th>Tipo</th>
@@ -2567,7 +2567,7 @@
                     <div class="table-responsive">
                         <br>
                         <div id="alert_distinciones"></div>
-                        <table class="table tabla table-hover tableestilo" id="tbdistin" style="width: 100%;">
+                        <table class="table tabla table-hover tableestilo" id="tblDistinciones" style="width: 100%;">
                             <thead>
                                 <tr>
                                     <th>Instituci&oacute;n otorga</th>

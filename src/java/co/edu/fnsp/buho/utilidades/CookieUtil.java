@@ -14,6 +14,15 @@ public class CookieUtil {
         cookie.setPath("/buho");
         cookie.setDomain(domain);
         httpServletResponse.addCookie(cookie);
+
+        Cookie cookieSpv = new Cookie(name, value);
+        cookieSpv.setSecure(secure);
+        cookieSpv.setHttpOnly(true);
+        cookieSpv.setMaxAge(maxAge);
+        cookieSpv.setPath("/spv");
+        cookieSpv.setDomain(domain);
+        httpServletResponse.addCookie(cookieSpv);
+
     }
 
     public static void clear(HttpServletResponse httpServletResponse, String name, String domain) {
@@ -23,6 +32,13 @@ public class CookieUtil {
         cookie.setMaxAge(0);
         cookie.setDomain(domain);
         httpServletResponse.addCookie(cookie);
+
+        Cookie cookieSpv = new Cookie(name, null);
+        cookieSpv.setPath("/spv");
+        cookieSpv.setHttpOnly(true);
+        cookieSpv.setMaxAge(0);
+        cookieSpv.setDomain(domain);
+        httpServletResponse.addCookie(cookieSpv);
     }
 
     public static String getValue(HttpServletRequest httpServletRequest, String name) {

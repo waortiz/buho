@@ -58,6 +58,7 @@ import co.edu.fnsp.buho.excel.HojaVidaDistincionExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaEducacionBasicaExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaEducacionContinuaExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaEducacionSuperiorExcelReportView;
+import co.edu.fnsp.buho.excel.HojaVidaExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaExperienciaDocenciaExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaExperienciaExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaIdiomaExcelReportView;
@@ -67,10 +68,12 @@ import co.edu.fnsp.buho.excel.HojaVidaTipoExperienciaExcelReportView;
 import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
 import co.edu.fnsp.buho.servicios.IServicioHojaVida;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
+import co.edu.fnsp.buho.servicios.ServicioHojaVida;
 import co.edu.fnsp.buho.utilidades.Mail;
 import co.edu.fnsp.buho.utilidades.Util;
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -197,6 +200,18 @@ public class HojaVidaController {
         Gson gson = new Gson();
 
         return gson.toJson(hojasVida);
+    }
+
+    @RequestMapping(value = "/descargarHojasVida", method = RequestMethod.GET)
+    public ModelAndView descargarHojasVida(@ModelAttribute ConsultaHojaVida consultaHojaVida, Model model) {
+       List<HojaVidaConsulta> hojasVidaConsulta = servicioHojaVida.obtenerHojasVida(consultaHojaVida);
+       List<HojaVida> hojasVida = new ArrayList<>();
+       for(HojaVidaConsulta hojaVidaConsulta: hojasVidaConsulta) {
+           HojaVida hojaVida = servicioHojaVida.obtenerHojaVida(hojaVidaConsulta.getIdPersona());
+           hojasVida.add(hojaVida);
+       }
+
+       return new ModelAndView(new HojaVidaExcelReportView(), "hojasVida", hojasVida);
     }
 
     @RequestMapping(value = "/educacionBasica", method = RequestMethod.GET)
@@ -386,7 +401,7 @@ public class HojaVidaController {
     public ModelAndView descargarHojasVidaExperienciaDocencia(@ModelAttribute ConsultaHojaVidaExperienciaDocencia consultaHojaVidaExperienciaDocencia, Model model) {
         List<HojaVidaExperienciaDocencia> hojasVida = servicioHojaVida.obtenerHojasVidaExperienciaDocencia(consultaHojaVidaExperienciaDocencia);
 
-       return new ModelAndView(new HojaVidaExperienciaDocenciaExcelReportView(), "hojasVida", hojasVida);
+        return new ModelAndView(new HojaVidaExperienciaDocenciaExcelReportView(), "hojasVida", hojasVida);
     }
 
     @RequestMapping(value = "/investigacion", method = RequestMethod.GET)
@@ -542,20 +557,19 @@ public class HojaVidaController {
                 }
             }
             Investigacion investigacion = servicioHojaVida.obtenerInvestigacion(idPersona);
-            List<CorreoElectronico> correosElectronicos = servicioHojaVida.obtenerCorreosElectronicos(idPersona);
             servicioHojaVida.actualizarHojaVida(hojaVidaIngresar);
 
             if (hojaVidaIngresar.getCopiaDocumentoIdentificacion() != null) {
-                this.enviarCorreoElectronicoCambioDocumento(correosElectronicos, ASUNTO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO, CUERPO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO);
+                this.enviarCorreoElectronicoCambioDocumento(ASUNTO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO, CUERPO_COPIA_DOCUMENTO_IDENTIFICACION_CAMBIADO);
             }
             if (hojaVidaIngresar.getDocumentoRUT() != null) {
-                this.enviarCorreoElectronicoCambioDocumento(correosElectronicos, ASUNTO_RUT_CAMBIADO, CUERPO_RUT_CAMBIADO);
+                this.enviarCorreoElectronicoCambioDocumento(ASUNTO_RUT_CAMBIADO, CUERPO_RUT_CAMBIADO);
             }
             if (hojaVidaIngresar.getCopiaLibretaMilitar() != null) {
-                this.enviarCorreoElectronicoCambioDocumento(correosElectronicos, ASUNTO_LIBRETA_MILITAR_CAMBIADO, CUERPO_LIBRETA_MILITAR_CAMBIADO);
+                this.enviarCorreoElectronicoCambioDocumento(ASUNTO_LIBRETA_MILITAR_CAMBIADO, CUERPO_LIBRETA_MILITAR_CAMBIADO);
             }
             if (!hojaVidaIngresar.getUrlCVLAC().equalsIgnoreCase(investigacion.getUrlCVLAC())) {
-                this.enviarCorreoElectronicoCambioDocumento(correosElectronicos, ASUNTO_CVLAC_CAMBIADO, CUERPO_CVLAC_CAMBIADO);
+                this.enviarCorreoElectronicoCambioDocumento(ASUNTO_CVLAC_CAMBIADO, CUERPO_CVLAC_CAMBIADO);
             }
 
             return "";
@@ -2040,11 +2054,13 @@ public class HojaVidaController {
 
     private void enviarCorreoElectronicoCambioDocumento(String asunto, String cuerpo) {
         long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
-        List<CorreoElectronico> correosElectronicos = servicioHojaVida.obtenerCorreosElectronicos(idPersona);
+        HojaVida hojaVida = servicioHojaVida.obtenerPersona(idPersona);
+        final String nuevoCuerpo = MessageFormat.format(cuerpo, hojaVida.getNombres(), hojaVida.getApellidos(), hojaVida.getNombreTipoIdentificacion(), hojaVida.getNumeroIdentificacion());
+        List<CorreoElectronico> correosElectronicos = servicioHojaVida.obtenerCorreosElectronicosValidadores();
         for (CorreoElectronico correoElectronico : correosElectronicos) {
             try {
                 new Thread(() -> {
-                    mail.sendMail(correoElectronico.getCorreoElectronico(), asunto, cuerpo);
+                    mail.sendMail(correoElectronico.getCorreoElectronico(), asunto, nuevoCuerpo);
                 }).start();
             } catch (Exception exc) {
                 logger.error(exc);
@@ -2052,18 +2068,4 @@ public class HojaVidaController {
             }
         }
     }
-
-    private void enviarCorreoElectronicoCambioDocumento(List<CorreoElectronico> correosElectronicos, String asunto, String cuerpo) {
-        for (CorreoElectronico correoElectronico : correosElectronicos) {
-            try {
-                new Thread(() -> {
-                    mail.sendMail(correoElectronico.getCorreoElectronico(), asunto, cuerpo);
-                }).start();
-            } catch (Exception exc) {
-                logger.error(exc);
-                throw exc;
-            }
-        }
-    }
-
 }

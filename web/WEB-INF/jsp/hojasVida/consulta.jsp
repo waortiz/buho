@@ -129,6 +129,10 @@
                 </div>
             </div>
         </div>
+        <br />
+        <div id="divDescargar" style="display: none;" align="center">
+            <center><label>Descargar listado</label><button class="btn btn-success " id="btnDescargar" onclick="descargar()" style="margin-left: 10px"><i class="fa fa-download"></i></button></center>
+        </div>        
     </div>
 </div>  
 <!--modal ver -->
@@ -478,7 +482,7 @@
                                                         <th>Nivel de estudio</th>
                                                         <th>Instituci&oacute;n</th>
                                                         <th>Programa cursado</th>
-                                                        <th>Fecha de titulo</th>
+                                                        <th>Fecha de título</th>
                                                         <th class="cer" align="center">Certificado homologación</th>
                                                         <th class="cer" align="center">Certificado</th>
                                                     </tr> 
@@ -1301,6 +1305,7 @@
     });
     
     function buscarHojasVida() {
+        $('#divDescargar').hide();
         if($('#cboNumeroIdentificacion').val() == "" && $('#cboNombres').val() == "" && $('#cboApellidos').val() == "") {
             tblHojasVida.clear().draw();
             return;
@@ -1339,6 +1344,9 @@
                 $('#md_resultados').modal('hide');
                 if (response !== "") {
                     var hojasVida = JSON.parse(response);
+                    if (hojasVida.length > 0) {
+                        $('#divDescargar').show();
+                    }                    
                     for (var i = 0; i < hojasVida.length; i++) {
                         tblHojasVida.row.add([
                             hojasVida[i].numeroIdentificacion,
@@ -1379,6 +1387,40 @@
                     }
                 }
             }});
+    }
+    
+    function descargar() {
+        $('#md_descargar_resultados').modal({backdrop: 'static', keyboard: false});
+        current_progress = 0;
+        var interval = setInterval(function () {
+            current_progress += 10;
+            $(".dynamic2")
+                    .css("width", current_progress + "%")
+                    .attr("aria-valuenow", current_progress)
+                    .text(current_progress + "% Completado");
+            if (current_progress >= 100) {
+                clearInterval(interval);
+            }
+            if (current_progress === 100) {
+                $('#md_descargar_resultados').modal('hide');
+            }
+        }, 3000);
+    
+        $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVida?idPersona=" + $('#cboNumeroIdentificacion').val() + "&nombres=" + $('#cboNombres option:selected').text() + "&apellidos=" + $('#cboApellidos option:selected').text(),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response != "") {
+                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVida?idPersona=" + $('#cboNumeroIdentificacion').val() + "&nombres=" + $('#cboNombres option:selected').text() + "&apellidos=" + $('#cboApellidos option:selected').text();
+                    }
+                    $('#md_descargar_resultados').modal('hide');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $('#md_descargar_resultados').modal('hide');
+                }
+            });
     }
     
     function verCopiaCedula(idPersona) {
