@@ -7,43 +7,56 @@
     <div class="container">
         <legend><h3>Consulta de hoja de vida por soportes</h3></legend>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group form-inline">
                     <label for="convocatoria">Convocatoria</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar la convocatoria">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
-                    <select style="width: 100%;" id="convocatoria" class="js-select-basic-single js-states form-control" onchange="buscarHojasVida()">
+                    <select style="width: 85%;" id="convocatoria" class="js-select-basic-single js-states form-control" onchange="buscarHojasVida()">
                         <option></option>
                         <c:forEach var="convocatoria" items="${convocatorias}">
                             <option value="${convocatoria.getId()}">${convocatoria.getNombre()}</option>
                         </c:forEach>                                                 
-                    </select>  
+                    </select>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarConvocatoria()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                <div class="form-group form-inline">
                   <label>Buscar c&eacute;dula </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la c&eacute;dula para buscar documentos">
                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                   <select id="buscarDocumentos" class="form-control js-select-basic-single2" style="width: 85%;" onchange="buscarPersonas(this.value)">
-                   <option value=""></option>
+                   <select id="cboNumeroIdentificacion" class="form-control js-select-basic-single2" style="width: 70%;" onchange="buscarPersonas(this.value)">
+                        <option value=""></option>
+                        <c:forEach var="numeroDocumento" items="${numerosDocumento}">
+                            <option value="${numeroDocumento.getId()}">${numeroDocumento.getNombre()}</option>
+                        </c:forEach>                     
                    </select>
+                   <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNumeroIdentificacion()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                </div>
            </div>
            <div class="col-md-3">
                <div class="form-group form-inline">
                   <label>Buscar nombres </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre para buscar documentos">
                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                   <select id="buscarNombres" class="form-control js-select-basic-single2" style="width: 85%;" onchange="buscarPersonas(this.value)">
-                   <option value=""></option>
+                   <select id="cboNombres" class="form-control js-select-basic-single2" style="width: 85%;" onchange="buscarPersonas(this.value)">
+                        <option value=""></option>
+                        <c:forEach var="nombre" items="${nombres}">
+                            <option value="${nombre.getId()}">${nombre.getNombre()}</option>
+                        </c:forEach>                         
                    </select>
+                  <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNombres()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                </div>
            </div>
            <div class="col-md-3">
                <div class="form-group form-inline">
                   <label>Buscar apellidos </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indica el apellido para buscar documentos">
                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                   <select id="buscarApellidos" class="form-control js-select-basic-single2" style="width: 85%;" onchange="buscarPersonas(this.value)">
-                   <option value=""></option>
+                   <select id="cboApellidos" class="form-control js-select-basic-single2" style="width: 85%;" onchange="buscarPersonas(this.value)">
+                        <option value=""></option>
+                        <c:forEach var="apellido" items="${apellidos}">
+                            <option value="${apellido.getId()}">${apellido.getNombre()}</option>
+                        </c:forEach>                             
                    </select>
+                  <button type="button" class="btn btn-danger btn-sm" onclick="limpiarApellidos()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                </div>
            </div>
         </div>
@@ -704,6 +717,22 @@
     var nombres = "";
     var apellidos = "";
 
+    function limpiarConvocatoria() {
+        $('#convocatoria').val("").trigger('change');
+    }
+
+    function limpiarNumeroIdentificacion() {
+        $('#cboNumeroIdentificacion').val("").trigger('change');
+    }
+
+    function limpiarNombres() {
+        $('#cboNombres').val("").trigger('change');
+    }
+
+    function limpiarApellidos() {
+        $('#cboApellidos').val("").trigger('change');
+    }
+    
     $(document).ready(function () {
         tblHojasVida = $('#tblHojasVida').DataTable({
             "language": {
@@ -812,29 +841,40 @@
             }});
     }
 
-    function buscarPersonas(idPersona) {
+    function buscarPersonas() {
         $('#formPersona').hide();
+        if ($('#convocatoria').val() == "" && $('#cboNumeroIdentificacion').val() == "" && $('#cboNombres').val() == "" && $('#cboApellidos').val() == "") {
+            tblHojasVida.clear().draw();
+            return;
+        }
+        
+        var formData = new FormData();
+        formData.append("idPersona", $('#cboNumeroIdentificacion').val());
+        formData.append("nombres", $('#cboNombres option:selected').text());
+        formData.append("apellidos", $('#cboApellidos option:selected').text());
         $.ajax({
-            type: "GET",
-            url: "${pageContext.request.contextPath}/hojasVida/personas/" + $('#convocatoria').val(),
+            type: "POST",
+            url: "${pageContext.request.contextPath}/hojasVida/consultarHojasVida",
+            data: formData,
             processData: false,
             contentType: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+            },
             success: function (response) {
                 tblHojasVida.clear().draw();
                 if (response !== "") {
                     var hojasVida = JSON.parse(response);
                     for (var i = 0; i < hojasVida.length; i++) {
-                        if(idPersona == hojasVida[i].idPersona) {
-                            tblHojasVida.row.add([
-                                hojasVida[i].numeroIdentificacion,
-                                hojasVida[i].nombres,
-                                hojasVida[i].apellidos,
-                                '<button class="btn btn-success btn-xs btnver" type="button" onclick=\'verHojaVida(' + hojasVida[i].idPersona + ',\"' + 
-                                        hojasVida[i].numeroIdentificacion + '\",\"' + 
-                                        hojasVida[i].nombres + '\",\"' + 
-                                        hojasVida[i].apellidos + '\")\'>Ver</button>'
-                            ]).draw(false); 
-                        }
+                        tblHojasVida.row.add([
+                            hojasVida[i].numeroIdentificacion,
+                            hojasVida[i].nombres,
+                            hojasVida[i].apellidos,
+                            '<button class="btn btn-success btn-xs btnver" type="button" onclick=\'verHojaVida(' + hojasVida[i].idPersona + ',\"' +
+                                    hojasVida[i].numeroIdentificacion + '\",\"' +
+                                    hojasVida[i].nombres + '\",\"' +
+                                    hojasVida[i].apellidos + '\")\'>Ver</button>'
+                        ]).draw(false);
                     }
                 }
             }});
@@ -842,6 +882,10 @@
 
     function buscarHojasVida() {
         $('#formPersona').hide();
+        if ($('#convocatoria').val() == "" && $('#cboNumeroIdentificacion').val() == "" && $('#cboNombres').val() == "" && $('#cboApellidos').val() == "") {
+            tblHojasVida.clear().draw();
+            return;
+        }
         $.ajax({
             type: "GET",
             url: "${pageContext.request.contextPath}/hojasVida/personas/" + $('#convocatoria').val(),
@@ -849,12 +893,6 @@
             contentType: false,
             success: function (response) {
                 tblHojasVida.clear().draw();
-                $('#buscarDocumentos').find('option').remove();
-                $('#buscarNombres').find('option').remove();
-                $('#buscarApellidos').find('option').remove();
-                $('#buscarDocumentos').append('<option></option>');
-                $('#buscarNombres').append('<option></option>');
-                $('#buscarApellidos').append('<option></option>');
                 if (response !== "") {
                     var hojasVida = JSON.parse(response);
                     for (var i = 0; i < hojasVida.length; i++) {
@@ -867,9 +905,6 @@
                                     hojasVida[i].nombres + '\",\"' + 
                                     hojasVida[i].apellidos + '\")\'>Ver</button>'
                         ]).draw(false); 
-                       $('#buscarDocumentos').append('<option value=' + hojasVida[i].idPersona + '>' + hojasVida[i].numeroIdentificacion + '</option>');
-                       $('#buscarNombres').append('<option value=' + hojasVida[i].idPersona + '>' + hojasVida[i].nombres + '</option>');
-                       $('#buscarApellidos').append('<option value=' + hojasVida[i].idPersona + '>' + hojasVida[i].apellidos + '</option>');
                     }
                 }
             }});

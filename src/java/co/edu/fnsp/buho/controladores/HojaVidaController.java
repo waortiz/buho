@@ -68,7 +68,6 @@ import co.edu.fnsp.buho.excel.HojaVidaTipoExperienciaExcelReportView;
 import co.edu.fnsp.buho.servicios.IServicioConvocatoria;
 import co.edu.fnsp.buho.servicios.IServicioHojaVida;
 import co.edu.fnsp.buho.servicios.IServicioMaestro;
-import co.edu.fnsp.buho.servicios.ServicioHojaVida;
 import co.edu.fnsp.buho.utilidades.Mail;
 import co.edu.fnsp.buho.utilidades.Util;
 import com.google.gson.Gson;
@@ -1964,6 +1963,13 @@ public class HojaVidaController {
     public String validarDocumentos(Model model) {
 
         List<ListadoConvocatoria> convocatorias = servicioConvocatoria.obtenerConvocatoriaValidar();
+        List<Maestro> numerosDocumento = servicioHojaVida.obtenerNumerosDocumento();
+        List<Maestro> nombres = servicioHojaVida.obtenerNombres();
+        List<Maestro> apellidos = servicioHojaVida.obtenerApellidos();
+
+        model.addAttribute("numerosDocumento", numerosDocumento);
+        model.addAttribute("nombres", nombres);
+        model.addAttribute("apellidos", apellidos);
         model.addAttribute("convocatorias", convocatorias);
 
         return "hojasVida/validar";
