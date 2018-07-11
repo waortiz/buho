@@ -16,6 +16,7 @@ public class ConsultaHojaVidaEducacionSuperior {
     private String anyoGraduacionFinal;
     private String nivelEstudio;
     private String tituloExterior;
+    private String titulo;
 
     /**
      * @return the nivelEstudio
@@ -99,6 +100,20 @@ public class ConsultaHojaVidaEducacionSuperior {
      */
     public void setTituloExterior(String tituloExterior) {
         this.tituloExterior = tituloExterior;
+    }
+
+    /**
+     * @return the titulo
+     */
+    public String getTitulo() {
+        return titulo;
+    }
+
+    /**
+     * @param titulo the titulo to set
+     */
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
 

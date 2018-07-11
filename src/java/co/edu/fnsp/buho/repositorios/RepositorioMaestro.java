@@ -80,6 +80,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     private SimpleJdbcCall obtenerProgramasEducacionesContinuas;
     private SimpleJdbcCall obtenerCursosDocencia;
     private SimpleJdbcCall obtenerInstitucionesDistinciones;
+    private SimpleJdbcCall obtenerTitulos;
     private SimpleJdbcCall ingresarPrograma;
     private SimpleJdbcCall ingresarInstitucion;
     private SimpleJdbcCall ingresarDepartamento;
@@ -141,6 +142,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
         this.obtenerCamposHojaVida = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerCamposHojaVida").returningResultSet("camposHojaVida", BeanPropertyRowMapper.newInstance(CampoHojaVida.class));
         this.obtenerProgramasEducacionesContinuas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerProgramasEducacionesContinuas").returningResultSet("programas", BeanPropertyRowMapper.newInstance(CampoHojaVida.class));
         this.obtenerInstitucionesDistinciones = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerInstitucionesDistinciones").returningResultSet("instituciones", BeanPropertyRowMapper.newInstance(Maestro.class));
+        this.obtenerTitulos = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerTitulos").returningResultSet("titulos", BeanPropertyRowMapper.newInstance(Maestro.class));
         this.ingresarPrograma = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarPrograma");
         this.ingresarInstitucion = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarInstitucion");
         this.ingresarDepartamento = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDepartamento");
@@ -644,6 +646,14 @@ public class RepositorioMaestro implements IRepositorioMaestro {
     public List<Maestro> obtenerInstitucionesDistinciones() {
         Map resultado = obtenerInstitucionesDistinciones.execute(new HashMap<>());
         List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("instituciones");
+
+        return coleccion;
+    }
+    
+    @Override
+    public List<Maestro> obtenerTitulos() {
+        Map resultado = obtenerTitulos.execute(new HashMap<>());
+        List<Maestro> coleccion = (ArrayList<Maestro>) resultado.get("titulos");
 
         return coleccion;
     }

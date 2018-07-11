@@ -65,4 +65,5 @@ public interface IServicioMaestro {
     List<Maestro> obtenerProgramasEducacionesContinuas();
     List<Maestro> obtenerCursosDocencia();
     List<Maestro> obtenerInstitucionesDistinciones();
+    List<Maestro> obtenerTitulos();
 }

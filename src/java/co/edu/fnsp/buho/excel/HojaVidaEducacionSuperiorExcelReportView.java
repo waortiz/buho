@@ -60,15 +60,18 @@ public class HojaVidaEducacionSuperiorExcelReportView extends AbstractExcelView 
         header.createCell(5).setCellValue("Año graduación");
         header.getCell(5).setCellStyle(style);
         sheet.setColumnWidth(5, 25*256);
-        header.createCell(6).setCellValue("Nivel estudio");
+        header.createCell(6).setCellValue("Nivel de estudio");
         header.getCell(6).setCellStyle(style);
         sheet.setColumnWidth(6, 25*256);
-        header.createCell(7).setCellValue("Título Extranjero");
+        header.createCell(7).setCellValue("Título extranjero");
         header.getCell(7).setCellStyle(style);
         sheet.setColumnWidth(7, 25*256);
-        header.createCell(8).setCellValue("Validado");
+        header.createCell(8).setCellValue("Título obtenido");
         header.getCell(8).setCellStyle(style);
-        sheet.setColumnWidth(8, 15*256);
+        sheet.setColumnWidth(8, 25*256);
+        header.createCell(9).setCellValue("Validado");
+        header.getCell(9).setCellStyle(style);
+        sheet.setColumnWidth(9, 15*256);
 
         int rowNum = 1;
         for (HojaVidaEducacionSuperior hojaVida : hojasVida) {
@@ -85,7 +88,8 @@ public class HojaVidaEducacionSuperiorExcelReportView extends AbstractExcelView 
             }
             row.createCell(6).setCellValue(hojaVida.getNivelEstudio());
             row.createCell(7).setCellValue(hojaVida.getTituloExterior());
-            row.createCell(8).setCellValue(hojaVida.getValidado());
+            row.createCell(8).setCellValue(hojaVida.getTituloObtenido());
+            row.createCell(9).setCellValue(hojaVida.getValidado());
         }
     }
 

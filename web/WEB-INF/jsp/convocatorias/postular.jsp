@@ -109,7 +109,7 @@
                                                 <td>${convocatoria.getNombre()}</td>
                                                 <td>${convocatoria.getDescripcion()}</td>               
                                                     <td style="text-align: center">
-                                                        <a href="#" onclick="verDocumentoResultado(${convocatoria.getId()})" target="_black" title="Ver documento" style="margin-left: 30px;" class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"> </i></a>
+                                                        <a href="#" onclick="verDocumentoResultado(${convocatoria.getId()})" title="Ver documento" style="margin-left: 30px;" class="btn btn-success btn-sm" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"> </i></a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>

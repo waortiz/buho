@@ -178,7 +178,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="">Documento de soporte RUT</label><br>
-                                    <a href='#' onclick="verCopiaRUT()" target='_black' title='Ver documento' class='btn btn-success btn-xs' type='button' style="margin-left: 70px;"><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>
+                                    <a href='#' onclick="verCopiaRUT()" title='Ver documento' class='btn btn-success btn-xs' type='button' style="margin-left: 70px;"><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>
                                 </div>
                             </div>
                         </div>

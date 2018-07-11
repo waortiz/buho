@@ -6,7 +6,7 @@
     <div class="container">
         <legend>Consulta de hoja de vida por experiencia en docencia</legend>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group form-inline">
                     <label>Institución</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la institución">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
@@ -19,7 +19,7 @@
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarInstitucion()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group form-inline">
                     <label>Curso</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
@@ -32,12 +32,22 @@
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarCurso()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>
-            <div class="col-md-4">
+         </div>
+         <div class="row">
+            <div class="col-md-3">
                 <div class="form-group form-inline">
-                    <label>Total horas</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la duración">
+                    <label>Valor inicial horas de experiencia</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el valor inicial de horas de experiencia">
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <input type='text' class="form-control input-sm" name="numeroHoras" id="numeroHoras" maxlength="5">
-                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNumeroHoras()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <input type='text' class="form-control input-sm" name="numeroHorasInicial" id="numeroHorasInicial" maxlength="5">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNumeroHorasInicial()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                </div>
+            </div>            
+            <div class="col-md-3">
+                <div class="form-group form-inline">
+                    <label>Valor final horas de experiencia</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el valor final de horas de experiencia">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                    <input type='text' class="form-control input-sm" name="numeroHorasFinal" id="numeroHorasFinal" maxlength="5">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNumeroHorasFinal()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>            
         </div>
@@ -48,10 +58,10 @@
                         <thead>
                             <tr>
                                 <th>C&eacute;dula</th>
-                                <th>Nombres</th>
-                                <th>Apellidos</th>
-                                <th>Curso</th>
-                                <th>Institución</th>
+                                <th style="width:20%">Nombres</th>
+                                <th style="width:20%">Apellidos</th>
+                                <th style="width:20%">Curso</th>
+                                <th style="width:20%">Institución</th>
                                 <th>Total horas</th>
                                 <th>Núcleo básico de conocimiento</th>
                                 <th>Validado</th>
@@ -190,7 +200,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="">Documento de soporte RUT</label><br>
-                                    <a href='#' onclick="verCopiaRUT()" target='_black' title='Ver documento' class='btn btn-success btn-xs' type='button' style="margin-left: 70px;"><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>
+                                    <a href='#' onclick="verCopiaRUT()" title='Ver documento' class='btn btn-success btn-xs' type='button' style="margin-left: 70px;"><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>
                                 </div>
                             </div>
                         </div>
@@ -768,11 +778,16 @@
         $('#cboInstitucion').val("").trigger('change');
     }
 
-    function limpiarNumeroHoras() {
-       $('#numeroHoras').val("");
+    function limpiarNumeroHorasInicial() {
+       $('#numeroHorasInicial').val("");
        buscarHojasVida(); 
     }
     
+    function limpiarNumeroHorasFinal() {
+       $('#numeroHorasFinal').val("");
+       buscarHojasVida(); 
+    }
+
     $(document).ready(function () {
         tblHojasVida = $('#tblHojasVida').DataTable({
             "language": {
@@ -808,11 +823,19 @@
            buscarHojasVida(); 
         });
         
-        $('#numeroHoras').on('change', function () {
+        $('#numeroHorasInicial').on('change', function () {
            buscarHojasVida(); 
         });
         
-        $('#numeroHoras').keyup(function () {
+        $('#numeroHorasInicial').keyup(function () {
+            this.value = (this.value + '').replace(/[^0-9]/g, '');
+        });
+
+        $('#numeroHorasFinal').on('change', function () {
+           buscarHojasVida(); 
+        });
+        
+        $('#numeroHorasFinal').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
     });
@@ -820,10 +843,18 @@
     function buscarHojasVida() {
         $('#formHV').hide();
         $('#divDescargar').hide();
-        if($('#cboCurso').val() == "" && $('#cboInstitucion').val() == "" && $('#numeroHoras').val() == "") {
+        if($('#cboCurso').val() == "" && $('#cboInstitucion').val() == "" && $('#numeroHorasInicial').val() == "" && $('#numeroHorasFinal').val() == "") {
             tblHojasVida.clear().draw();
             return;
         }
+        bootstrap_alert_consulta.removeWarning();
+        if($('#numeroHorasInicial').val() != "" && $('#numeroHorasFinal').val() != "") {
+          if(parseInt($('#numeroHorasInicial').val(), 10) > parseInt($('#numeroHorasFinal').val(), 10)){
+             bootstrap_alert_consulta.warning("El valor final de horas de experiencia debe ser mayor o igual al valor inicial de horas de experiencia"); 
+             tblHojasVida.clear().draw();
+             return;
+          }
+        }         
         $('#md_resultados').modal({backdrop: 'static', keyboard: false});
         current_progress = 0;
         var interval = setInterval(function () {
@@ -842,7 +873,8 @@
         var formData = new FormData();
         formData.append("curso", $('#cboCurso').val());
         formData.append("institucion", $('#cboInstitucion').val());
-        formData.append("numeroHoras", $('#numeroHoras').val());
+        formData.append("numeroHorasInicial", $('#numeroHorasInicial').val());
+        formData.append("numeroHorasFinal", $('#numeroHorasFinal').val());
         $.ajax({
             type: "POST",
             url: "${pageContext.request.contextPath}/hojasVida/consultarHojasVidaExperienciaDocencia",
@@ -896,12 +928,12 @@
     
         $.ajax({
                 type: "GET",
-                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaExperienciaDocencia?curso=" + $('#cboCurso').val() + "&institucion=" + $('#cboInstitucion').val() + "&numeroHoras=" + $('#numeroHoras').val(),
+                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaExperienciaDocencia?curso=" + $('#cboCurso').val() + "&institucion=" + $('#cboInstitucion').val() + "&numeroHorasInicial=" + $('#numeroHorasInicial').val() + "&numeroHorasFinal=" + $('#numeroHorasFinal').val(),
                 processData: false,
                 contentType: false,
                 success: function (response) {
                     if (response != "") {
-                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaExperienciaDocencia?curso=" + $('#cboCurso').val() + "&institucion=" + $('#cboInstitucion').val() + "&numeroHoras=" + $('#numeroHoras').val();
+                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaExperienciaDocencia?curso=" + $('#cboCurso').val() + "&institucion=" + $('#cboInstitucion').val() + "&numeroHorasInicial=" + $('#numeroHorasInicial').val() + "&numeroHorasFinal=" + $('#numeroHorasFinal').val();
                     }
                     $('#md_descargar_resultados').modal('hide');
                 },
@@ -1524,6 +1556,17 @@
         });
     }
 
+    bootstrap_alert_consulta = {};
+    bootstrap_alert_consulta.warning = function (message) {
+        $('#alert_consulta').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_consulta.success = function (message) {
+        $('#alert_consulta').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_consulta.removeWarning = function () {
+        $('#alert_consulta').html('');
+    };
+    
     var correosElectronicos = [];
     var cuentasBancarias = [];
     var telefonos = [];

@@ -5,6 +5,7 @@
 <div id="contenido">         
     <div class="container">
         <legend>Consulta de hoja de vida por estudios educaci&oacute;n b&aacute;sica</legend>
+        <div id="alert_consulta"></div>
         <div class="row">
              <div class="col-md-4">
                 <div class="form-group form-inline">
@@ -189,7 +190,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="">Documento de soporte RUT</label><br>
-                                    <a href='#' onclick="verCopiaRUT()" target='_black' title='Ver documento' class='btn btn-success btn-xs' type='button' style="margin-left: 70px;"><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>
+                                    <a href='#' onclick="verCopiaRUT()" title='Ver documento' class='btn btn-success btn-xs' type='button' style="margin-left: 70px;"><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>
                                 </div>
                             </div>
                         </div>
@@ -823,6 +824,16 @@
             tblHojasVida.clear().draw();
             return;
         }
+        
+        bootstrap_alert_consulta.removeWarning();
+        if($('#cboAnyoGraduacionInicial').val() != "" && $('#cboAnyoGraduacionFinal').val() != "") {
+          if(parseInt($('#cboAnyoGraduacionInicial').val(), 10) > parseInt($('#cboAnyoGraduacionFinal').val(), 10)){
+             bootstrap_alert_consulta.warning("El año de graduación final debe ser mayor o igual al año de graduación inicial"); 
+             tblHojasVida.clear().draw();
+             return;
+          }
+        }
+        
         $('#md_resultados').modal({backdrop: 'static', keyboard: false});
         current_progress = 0;
         var interval = setInterval(function () {
@@ -1520,6 +1531,17 @@
             }
         });
     }
+
+    bootstrap_alert_consulta = {};
+    bootstrap_alert_consulta.warning = function (message) {
+        $('#alert_consulta').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_consulta.success = function (message) {
+        $('#alert_consulta').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_consulta.removeWarning = function () {
+        $('#alert_consulta').html('');
+    };
 
     var correosElectronicos = [];
     var cuentasBancarias = [];

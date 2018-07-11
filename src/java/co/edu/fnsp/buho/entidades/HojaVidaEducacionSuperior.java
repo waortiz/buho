@@ -10,7 +10,7 @@ package co.edu.fnsp.buho.entidades;
  * @author William
  */
 public class HojaVidaEducacionSuperior {
-    private long idPersona;;
+    private long idPersona;
     private String numeroIdentificacion;
     private String nombres;
     private String apellidos;
@@ -19,6 +19,7 @@ public class HojaVidaEducacionSuperior {
     private Integer anyoGraduacion;
     private String nivelEstudio;
     private String tituloExterior;
+    private String tituloObtenido;
     private String validado;
 
     /**
@@ -159,5 +160,19 @@ public class HojaVidaEducacionSuperior {
      */
     public void setTituloExterior(String tituloExterior) {
         this.tituloExterior = tituloExterior;
+    }
+
+    /**
+     * @return the tituloObtenido
+     */
+    public String getTituloObtenido() {
+        return tituloObtenido;
+    }
+
+    /**
+     * @param tituloObtenido the tituloObtenido to set
+     */
+    public void setTituloObtenido(String tituloObtenido) {
+        this.tituloObtenido = tituloObtenido;
     }
 }

@@ -5,8 +5,9 @@
 <div id="contenido">         
     <div class="container">
         <legend>Consulta de hoja de vida por estudios educaci&oacute;n no formal</legend>
+        <div id="alert_consulta"></div>
         <div class="row">
-             <div class="col-md-4">
+             <div class="col-md-6">
                 <div class="form-group form-inline">
                     <label>Curso</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nivel de estudio">
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
@@ -19,7 +20,7 @@
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarCurso()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group form-inline">
                     <label>N&uacute;cleo b&aacute;sico de conocimiento </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
@@ -32,12 +33,22 @@
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNucleoBasicoConocimiento()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="row">
+            <div class="col-md-3">
                 <div class="form-group form-inline">
-                    <label>Duración</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la duración">
+                    <label>Duración inicial en horas</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la duración inicial">
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <input type='text' class="form-control input-sm" name="numeroHoras" id="numeroHoras" maxlength="5">
-                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNumeroHoras()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <input type='text' class="form-control input-sm" name="numeroHorasInicial" id="numeroHorasInicial" maxlength="5">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNumeroHorasInicial()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                </div>
+            </div>            
+            <div class="col-md-3">
+                <div class="form-group form-inline">
+                    <label>Duración final en horas</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la duración final">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                    <input type='text' class="form-control input-sm" name="numeroHorasFinal" id="numeroHorasFinal" maxlength="5">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNumeroHorasFinal()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>            
         </div>
@@ -188,7 +199,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="">Documento de soporte RUT</label><br>
-                                    <a href='#' onclick="verCopiaRUT()" target='_black' title='Ver documento' class='btn btn-success btn-xs' type='button' style="margin-left: 70px;"><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>
+                                    <a href='#' onclick="verCopiaRUT()" title='Ver documento' class='btn btn-success btn-xs' type='button' style="margin-left: 70px;"><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>
                                 </div>
                             </div>
                         </div>
@@ -766,8 +777,13 @@
         $('#cboNucleoBasicoConocimiento').val("").trigger('change');
     }
 
-    function limpiarNumeroHoras() {
-       $('#numeroHoras').val("");
+    function limpiarNumeroHorasInicial() {
+       $('#numeroHorasInicial').val("");
+       buscarHojasVida(); 
+    }
+
+    function limpiarNumeroHorasFinal() {
+       $('#numeroHorasFinal').val("");
        buscarHojasVida(); 
     }
 
@@ -806,23 +822,40 @@
            buscarHojasVida(); 
         });
         
-        $('#numeroHoras').on('change', function () {
+        $('#numeroHorasInicial').on('change', function () {
            buscarHojasVida(); 
         });
         
-        $('#numeroHoras').keyup(function () {
+        $('#numeroHorasFinal').on('change', function () {
+           buscarHojasVida(); 
+        });
+
+        $('#numeroHorasInicial').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
         
+        $('#numeroHorasFinal').keyup(function () {
+            this.value = (this.value + '').replace(/[^0-9]/g, '');
+        });
     });
 
     function buscarHojasVida() {
         $('#formHV').hide();
         $('#divDescargar').hide();
-        if($('#cboCurso').val() == "" && $('#cboNucleoBasicoConocimiento').val() == "" && $('#numeroHoras').val() == "") {
+        if($('#cboCurso').val() == "" && $('#cboNucleoBasicoConocimiento').val() == "" && $('#numeroHorasInicial').val() == "" && $('#numeroHorasFinal').val() == "") {
             tblHojasVida.clear().draw();
             return;
         }
+        
+        bootstrap_alert_consulta.removeWarning();
+        if($('#numeroHorasInicial').val() != "" && $('#numeroHorasFinal').val() != "") {
+          if(parseInt($('#numeroHorasInicial').val(), 10) > parseInt($('#numeroHorasFinal').val(), 10)){
+             bootstrap_alert_consulta.warning("El número de horas final debe ser mayor o igual al número de horas inicial"); 
+             tblHojasVida.clear().draw();
+             return;
+          }
+        }  
+        
         $('#md_resultados').modal({backdrop: 'static', keyboard: false});
         current_progress = 0;
         var interval = setInterval(function () {
@@ -841,7 +874,8 @@
         var formData = new FormData();
         formData.append("curso", $('#cboCurso').val());
         formData.append("nucleoBasicoConocimiento", $('#cboNucleoBasicoConocimiento').val());
-        formData.append("numeroHoras", $('#numeroHoras').val());
+        formData.append("numeroHorasInicial", $('#numeroHorasInicial').val());
+        formData.append("numeroHorasFinal", $('#numeroHorasFinal').val());
         $.ajax({
             type: "POST",
             url: "${pageContext.request.contextPath}/hojasVida/consultarHojasVidaEducacionContinua",
@@ -893,12 +927,12 @@
     
         $.ajax({
                 type: "GET",
-                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaEducacionContinua?curso=" + $('#cboCurso').val() + "&nucleoBasicoConocimiento=" + $('#cboNucleoBasicoConocimiento').val() + "&numeroHoras=" + $('#numeroHoras').val(),
+                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaEducacionContinua?curso=" + $('#cboCurso').val() + "&nucleoBasicoConocimiento=" + $('#cboNucleoBasicoConocimiento').val() + "&numeroHorasInicial=" + $('#numeroHorasInicial').val() + "&numeroHorasFinal=" + $('#numeroHorasFinal').val(),
                 processData: false,
                 contentType: false,
                 success: function (response) {
                     if (response != "") {
-                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaEducacionContinua?curso=" + $('#cboCurso').val() + "&nucleoBasicoConocimiento=" + $('#cboNucleoBasicoConocimiento').val() + "&numeroHoras=" + $('#numeroHoras').val();
+                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaEducacionContinua?curso=" + $('#cboCurso').val() + "&nucleoBasicoConocimiento=" + $('#cboNucleoBasicoConocimiento').val() + "&numeroHorasInicial=" + $('#numeroHorasInicial').val() + "&numeroHorasFinal=" + $('#numeroHorasFinal').val();
                     }
                     $('#md_descargar_resultados').modal('hide');
                 },
@@ -1521,6 +1555,17 @@
         });
     }
 
+    bootstrap_alert_consulta = {};
+    bootstrap_alert_consulta.warning = function (message) {
+        $('#alert_consulta').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_consulta.success = function (message) {
+        $('#alert_consulta').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_consulta.removeWarning = function () {
+        $('#alert_consulta').html('');
+    };
+    
     var correosElectronicos = [];
     var cuentasBancarias = [];
     var telefonos = [];

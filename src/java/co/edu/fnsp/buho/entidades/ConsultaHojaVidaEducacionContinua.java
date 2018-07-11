@@ -12,7 +12,8 @@ package co.edu.fnsp.buho.entidades;
 public class ConsultaHojaVidaEducacionContinua {
     private String curso;
     private String nucleoBasicoConocimiento;
-    private String numeroHoras;
+    private String numeroHorasInicial;
+    private String numeroHorasFinal;
 
     /**
      * @return the curso
@@ -43,17 +44,31 @@ public class ConsultaHojaVidaEducacionContinua {
     }
 
     /**
-     * @return the numeroHoras
+     * @return the numeroHorasInicial
      */
-    public String getNumeroHoras() {
-        return numeroHoras;
+    public String getNumeroHorasInicial() {
+        return numeroHorasInicial;
     }
 
     /**
-     * @param numeroHoras the numeroHoras to set
+     * @param numeroHorasInicial the numeroHorasInicial to set
      */
-    public void setNumeroHoras(String numeroHoras) {
-        this.numeroHoras = numeroHoras;
+    public void setNumeroHorasInicial(String numeroHorasInicial) {
+        this.numeroHorasInicial = numeroHorasInicial;
+    }
+
+    /**
+     * @return the numeroHorasFinal
+     */
+    public String getNumeroHorasFinal() {
+        return numeroHorasFinal;
+    }
+
+    /**
+     * @param numeroHorasFinal the numeroHorasFinal to set
+     */
+    public void setNumeroHorasFinal(String numeroHorasFinal) {
+        this.numeroHorasFinal = numeroHorasFinal;
     }
     
 }

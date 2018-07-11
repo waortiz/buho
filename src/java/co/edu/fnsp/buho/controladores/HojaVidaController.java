@@ -248,10 +248,12 @@ public class HojaVidaController {
         List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
         List<Maestro> instituciones = servicioMaestro.obtenerInstitucionesEducativas();
         List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
+        List<Maestro> titulos = servicioMaestro.obtenerTitulos();
 
         model.addAttribute("nivelesEstudio", nivelesFormacion);
         model.addAttribute("instituciones", instituciones);
         model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
+        model.addAttribute("titulos", titulos);
 
         return "hojasVida/educacionSuperior";
     }

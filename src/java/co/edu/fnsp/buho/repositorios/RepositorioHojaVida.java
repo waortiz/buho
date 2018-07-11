@@ -2489,6 +2489,11 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         } else {
             parametrosConsultaHojasVida.addValue("varTituloExterior", null);
         }
+        if (consultaHojaVidaEducacionSuperior.getTitulo() != null && consultaHojaVidaEducacionSuperior.getTitulo().length() > 0) {
+            parametrosConsultaHojasVida.addValue("varTitulo", consultaHojaVidaEducacionSuperior.getTitulo());
+        } else {
+            parametrosConsultaHojasVida.addValue("varTitulo", null);
+        }
 
         Map resultadoHojasVida = obtenerHojasVidaEducacionSuperior.execute(parametrosConsultaHojasVida);
         ArrayList<HojaVidaEducacionSuperior> hojasVida = (ArrayList<HojaVidaEducacionSuperior>) resultadoHojasVida.get("hojasVida");
@@ -2509,10 +2514,15 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         } else {
             parametrosConsultaHojasVida.addValue("varNucleoBasicoConocimiento", null);
         }
-        if (consultaHojaVidaEducacionContinua.getNumeroHoras() != null && consultaHojaVidaEducacionContinua.getNumeroHoras().length() > 0) {
-            parametrosConsultaHojasVida.addValue("varNumeroHoras", Util.obtenerEntero(consultaHojaVidaEducacionContinua.getNumeroHoras()));
+        if (consultaHojaVidaEducacionContinua.getNumeroHorasInicial()!= null && consultaHojaVidaEducacionContinua.getNumeroHorasInicial().length() > 0) {
+            parametrosConsultaHojasVida.addValue("varNumeroHorasInicial", Util.obtenerEntero(consultaHojaVidaEducacionContinua.getNumeroHorasInicial()));
         } else {
-            parametrosConsultaHojasVida.addValue("varNumeroHoras", null);
+            parametrosConsultaHojasVida.addValue("varNumeroHorasInicial", null);
+        }
+        if (consultaHojaVidaEducacionContinua.getNumeroHorasFinal()!= null && consultaHojaVidaEducacionContinua.getNumeroHorasFinal().length() > 0) {
+            parametrosConsultaHojasVida.addValue("varNumeroHorasFinal", Util.obtenerEntero(consultaHojaVidaEducacionContinua.getNumeroHorasFinal()));
+        } else {
+            parametrosConsultaHojasVida.addValue("varNumeroHorasFinal", null);
         }
 
         Map resultadoHojasVida = obtenerHojasVidaEducacionContinua.execute(parametrosConsultaHojasVida);
@@ -2609,10 +2619,15 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         } else {
             parametrosConsultaHojasVida.addValue("varInstitucion", null);
         }
-        if (consultaHojaVidaExperienciaDocencia.getNumeroHoras() != null && consultaHojaVidaExperienciaDocencia.getNumeroHoras().length() > 0) {
-            parametrosConsultaHojasVida.addValue("varNumeroHoras", Util.obtenerEntero(consultaHojaVidaExperienciaDocencia.getNumeroHoras()));
+        if (consultaHojaVidaExperienciaDocencia.getNumeroHorasInicial() != null && consultaHojaVidaExperienciaDocencia.getNumeroHorasInicial().length() > 0) {
+            parametrosConsultaHojasVida.addValue("varNumeroHorasInicial", Util.obtenerEntero(consultaHojaVidaExperienciaDocencia.getNumeroHorasInicial()));
         } else {
-            parametrosConsultaHojasVida.addValue("varNumeroHoras", null);
+            parametrosConsultaHojasVida.addValue("varNumeroHorasInicial", null);
+        }
+        if (consultaHojaVidaExperienciaDocencia.getNumeroHorasFinal()!= null && consultaHojaVidaExperienciaDocencia.getNumeroHorasFinal().length() > 0) {
+            parametrosConsultaHojasVida.addValue("varNumeroHorasFinal", Util.obtenerEntero(consultaHojaVidaExperienciaDocencia.getNumeroHorasFinal()));
+        } else {
+            parametrosConsultaHojasVida.addValue("varNumeroHorasFinal", null);
         }
 
         Map resultadoHojasVida = obtenerHojasVidaExperienciaDocencia.execute(parametrosConsultaHojasVida);

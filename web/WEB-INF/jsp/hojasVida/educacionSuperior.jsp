@@ -5,8 +5,9 @@
 <div id="contenido">         
     <div class="container">
         <legend>Consulta de hoja de vida por estudios educaci&oacute;n superior</legend>
+        <div id="alert_consulta"></div>
         <div class="row">
-            <div class="col-md-3 ">
+            <div class="col-md-6">
                 <div class="form-group form-inline">
                     <label>Institución</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la institución">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
@@ -19,7 +20,7 @@
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarInstitucion()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="form-group form-inline">
                     <label>N&uacute;cleo b&aacute;sico de conocimiento </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
@@ -32,6 +33,8 @@
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNucleoBasicoConocimiento()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-md-3">
                 <div class="form-group form-inline">
                     <label>A&ntilde;o de graduaci&oacute;n inicial </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el año inicial">
@@ -52,8 +55,6 @@
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarAnyoGraduacionFinal()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-md-3">
                 <div class="form-group form-inline">
                     <label>Nivel de estudio</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nivel de estudio">
@@ -79,6 +80,21 @@
                     </div>
                     <input type="hidden" name="tituloExterior" id="tituloExterior">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTituloExterior()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group form-inline">
+                    <label>Título obtenido</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el título obtenido">
+                        <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                    <select style="width: 85%;" id="cboTituloObtenido" class="js-select-basic-single js-states form-control">
+                        <option value=""></option>
+                        <c:forEach var="titulo" items="${titulos}">
+                            <option value="${titulo.getId()}">${titulo.getNombre()}</option>
+                        </c:forEach>                                                 
+                    </select>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTitulo()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>
         </div>
@@ -213,7 +229,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="">Documento de soporte RUT</label><br>
-                                    <a href='#' onclick="verCopiaRUT()" target='_black' title='Ver documento' class='btn btn-success btn-xs' type='button' style="margin-left: 70px;"><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>
+                                    <a href='#' onclick="verCopiaRUT()" title='Ver documento' class='btn btn-success btn-xs' type='button' style="margin-left: 70px;"><i class='fa fa-file-pdf-o' aria-hidden='true'> </i></a>
                                 </div>
                             </div>
                         </div>
@@ -810,6 +826,10 @@
         buscarHojasVida();
     }
     
+    function limpiarTitulo() {
+        $('#cboTituloObtenido').val("").trigger('change');
+    }
+    
     $(document).ready(function () {
         $('#cboInstitucion').on('change', function () {
             buscarHojasVida();
@@ -828,6 +848,10 @@
         });
 
         $('#cboAnyoGraduacionFinal').on('change', function () {
+            buscarHojasVida();
+        });
+
+        $('#cboTituloObtenido').on('change', function () {
             buscarHojasVida();
         });
 
@@ -851,14 +875,24 @@
         $('#divDescargar').hide();
         $('#divHojasVida').empty();
         if ($('#cboNivelEstudio').val() == "" && 
-            $('#cboAnyoGraduacionInicial').val() == "" && 
             $('#cboNucleoBasicoConocimiento').val() == "" && 
             $('#tituloExterior').val() == "" && 
             $('#cboInstitucion').val() == "" && 
             $('#cboAnyoGraduacionInicial').val() == "" && 
+            $('#cboTituloObtenido').val() == "" && 
             $('#cboAnyoGraduacionFinal').val() == "") {
             return;
         }
+        
+        bootstrap_alert_consulta.removeWarning();
+        if($('#cboAnyoGraduacionInicial').val() != "" && $('#cboAnyoGraduacionFinal').val() != "") {
+          if(parseInt($('#cboAnyoGraduacionInicial').val(), 10) > parseInt($('#cboAnyoGraduacionFinal').val(), 10)){
+             bootstrap_alert_consulta.warning("El año de graduación final debe ser mayor o igual al año de graduación inicial"); 
+             tblHojasVida.clear().draw();
+             return;
+          }
+        }        
+        
         $('#md_resultados').modal({backdrop: 'static', keyboard: false});
         current_progress = 0;
         var interval = setInterval(function () {
@@ -882,6 +916,8 @@
         formData.append("nucleoBasicoConocimiento", $('#cboNucleoBasicoConocimiento').val());
         formData.append("tituloExterior", $('#tituloExterior').val());
         formData.append("institucion", $('#cboInstitucion').val());
+        formData.append("titulo", $('#cboTituloObtenido').val());
+        
         $.ajax({
             type: "POST",
             url: "${pageContext.request.contextPath}/hojasVida/consultarHojasVidaEducacionSuperior",
@@ -910,8 +946,8 @@
                               + "<table class='table table-hover tableestilo'>"
                               + "<thead>" 
                               + "<tr>" 
-                              + "<th>Institución</th><th>Núcleo básico de conocimiento</th><th>Año de graduación</th><th>Nivel de educación</th><th>Título extranjero</th><th>Validado</th><th class='opc'>Opciones</th></tr></thead><tbody>";
-                        divBody = divBody + "<tr><td>" + hojasVida[0].institucion + "</td><td>" + hojasVida[0].nucleoBasicoConocimiento + "</td><td>" + getValue(hojasVida[0].anyoGraduacion) + "</td><td>" + hojasVida[0].nivelEstudio + "</td><td>" + hojasVida[0].tituloExterior + "</td><td>" + hojasVida[0].validado + "</td><td><button class='btn btn-success btn-xs btnver' type='button' onclick='verHojaVida(" + hojasVida[0].idPersona + ")'>Ver</button></td></tr>";
+                              + "<th>Institución</th><th>Núcleo básico de conocimiento</th><th>Año de graduación</th><th>Nivel de estudio</th><th>Título extranjero</th><th>Título obtenido</th><th>Validado</th><th class='opc'>Opciones</th></tr></thead><tbody>";
+                        divBody = divBody + "<tr><td>" + hojasVida[0].institucion + "</td><td>" + hojasVida[0].nucleoBasicoConocimiento + "</td><td>" + getValue(hojasVida[0].anyoGraduacion) + "</td><td>" + hojasVida[0].nivelEstudio + "</td><td>" + hojasVida[0].tituloExterior + "</td><td>" + hojasVida[0].tituloObtenido + "</td><td>" + hojasVida[0].validado + "</td><td><button class='btn btn-success btn-xs btnver' type='button' onclick='verHojaVida(" + hojasVida[0].idPersona + ")'>Ver</button></td></tr>";
                         for (var i = 1; i < hojasVida.length; i++) {
                             if(numeroIdentificacionAnterior != hojasVida[i].numeroIdentificacion) {
                                 divBody = divBody + "</tbody></table></div></div></div>"; 
@@ -926,10 +962,10 @@
                                       + "<table class='table table-hover tableestilo'>"
                                       + "<thead>" 
                                       + "<tr>" 
-                                      + "<th>Institución</th><th>Núcleo básico de conocimiento</th><th>Año de graduación</th><th>Nivel de educación</th><th>Título extranjero</th><th>Validado</th><th class='opc'>Opciones</th></tr></thead><tbody>";
+                                      + "<th>Institución</th><th>Núcleo básico de conocimiento</th><th>Año de graduación</th><th>Nivel de estudio</th><th>Título extranjero</th><th>Título obtenido</th><th>Validado</th><th class='opc'>Opciones</th></tr></thead><tbody>";
                                 divBody = "";
                             }
-                            divBody = divBody + "<tr><td>" + hojasVida[i].institucion + "</td><td>" + hojasVida[i].nucleoBasicoConocimiento + "</td><td>" + getValue(hojasVida[i].anyoGraduacion) + "</td><td>" + hojasVida[i].nivelEstudio + "</td><td>" + hojasVida[i].tituloExterior + "</td><td>" + hojasVida[i].validado + "</td><td><button class='btn btn-success btn-xs btnver' type='button' onclick='verHojaVida(" + hojasVida[i].idPersona + ")'>Ver</button></td></tr>";
+                            divBody = divBody + "<tr><td>" + hojasVida[i].institucion + "</td><td>" + hojasVida[i].nucleoBasicoConocimiento + "</td><td>" + getValue(hojasVida[i].anyoGraduacion) + "</td><td>" + hojasVida[i].nivelEstudio + "</td><td>" + hojasVida[i].tituloExterior + "</td><td>" + hojasVida[i].tituloObtenido + "</td><td>" + hojasVida[i].validado + "</td><td><button class='btn btn-success btn-xs btnver' type='button' onclick='verHojaVida(" + hojasVida[i].idPersona + ")'>Ver</button></td></tr>";
                             numeroIdentificacionAnterior = hojasVida[i].numeroIdentificacion;
                         }
 
@@ -963,6 +999,7 @@
                     "&anyoGraduacionFinal=" + $('#cboAnyoGraduacionFinal').val() + 
                     "&institucion=" + $('#cboInstitucion').val() + 
                     "&nucleoBasicoConocimiento=" + $('#cboNucleoBasicoConocimiento').val() + 
+                    "&titulo=" + $('#cboTituloObtenido').val() + 
                     "&tituloExterior=" + $('#tituloExterior').val(),
             processData: false,
             contentType: false,
@@ -973,6 +1010,7 @@
                     "&anyoGraduacionFinal=" + $('#cboAnyoGraduacionFinal').val() + 
                     "&institucion=" + $('#cboInstitucion').val() + 
                     "&nucleoBasicoConocimiento=" + $('#cboNucleoBasicoConocimiento').val() + 
+                    "&titulo=" + $('#cboTituloObtenido').val() + 
                     "&tituloExterior=" + $('#tituloExterior').val();
                 }
                 $('#md_descargar_resultados').modal('hide');
@@ -1596,6 +1634,17 @@
         });
     }
 
+    bootstrap_alert_consulta = {};
+    bootstrap_alert_consulta.warning = function (message) {
+        $('#alert_consulta').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_consulta.success = function (message) {
+        $('#alert_consulta').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_consulta.removeWarning = function () {
+        $('#alert_consulta').html('');
+    };
+    
     var correosElectronicos = [];
     var cuentasBancarias = [];
     var telefonos = [];
