@@ -90,4 +90,8 @@ public interface IRepositorioConvocatoria {
     void actualizarAnyosMinimosExperiencia(AnyosMinimosExperiencia anyosMinimosExperiencia);
     
     void actualizarResultado(ResultadoConvocatoria resultadoConvocatoria);
+
+    List<ListadoConvocatoria> obtenerConvocatoriasVigentesExternas(long idPersona);
+
+    List<ListadoConvocatoria> obtenerConvocatoriasCerradasExternas();
 }

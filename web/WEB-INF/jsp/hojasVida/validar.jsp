@@ -7,19 +7,6 @@
     <div class="container">
         <legend><h3>Consulta de hoja de vida por soportes</h3></legend>
         <div class="row">
-            <div class="col-md-4">
-                <div class="form-group form-inline">
-                    <label for="convocatoria">Convocatoria</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar la convocatoria">
-                        <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
-                    <select style="width: 85%;" id="convocatoria" class="js-select-basic-single js-states form-control" onchange="buscarHojasVida()">
-                        <option></option>
-                        <c:forEach var="convocatoria" items="${convocatorias}">
-                            <option value="${convocatoria.getId()}">${convocatoria.getNombre()}</option>
-                        </c:forEach>                                                 
-                    </select>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarConvocatoria()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
-                </div>
-            </div>
             <div class="col-md-2">
                <div class="form-group form-inline">
                   <label>Buscar c&eacute;dula </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la c&eacute;dula para buscar documentos">
@@ -33,7 +20,7 @@
                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNumeroIdentificacion()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                </div>
            </div>
-           <div class="col-md-3">
+           <div class="col-md-5">
                <div class="form-group form-inline">
                   <label>Buscar nombres </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre para buscar documentos">
                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>
@@ -46,7 +33,7 @@
                   <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNombres()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                </div>
            </div>
-           <div class="col-md-3">
+           <div class="col-md-5">
                <div class="form-group form-inline">
                   <label>Buscar apellidos </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indica el apellido para buscar documentos">
                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>
@@ -717,10 +704,6 @@
     var nombres = "";
     var apellidos = "";
 
-    function limpiarConvocatoria() {
-        $('#convocatoria').val("").trigger('change');
-    }
-
     function limpiarNumeroIdentificacion() {
         $('#cboNumeroIdentificacion').val("").trigger('change');
     }
@@ -843,7 +826,7 @@
 
     function buscarPersonas() {
         $('#formPersona').hide();
-        if ($('#convocatoria').val() == "" && $('#cboNumeroIdentificacion').val() == "" && $('#cboNombres').val() == "" && $('#cboApellidos').val() == "") {
+        if ($('#cboNumeroIdentificacion').val() == "" && $('#cboNombres').val() == "" && $('#cboApellidos').val() == "") {
             tblHojasVida.clear().draw();
             return;
         }
@@ -880,36 +863,6 @@
             }});
     }
 
-    function buscarHojasVida() {
-        $('#formPersona').hide();
-        if ($('#convocatoria').val() == "" && $('#cboNumeroIdentificacion').val() == "" && $('#cboNombres').val() == "" && $('#cboApellidos').val() == "") {
-            tblHojasVida.clear().draw();
-            return;
-        }
-        $.ajax({
-            type: "GET",
-            url: "${pageContext.request.contextPath}/hojasVida/personas/" + $('#convocatoria').val(),
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                tblHojasVida.clear().draw();
-                if (response !== "") {
-                    var hojasVida = JSON.parse(response);
-                    for (var i = 0; i < hojasVida.length; i++) {
-                        tblHojasVida.row.add([
-                            hojasVida[i].numeroIdentificacion,
-                            hojasVida[i].nombres,
-                            hojasVida[i].apellidos,
-                            '<button class="btn btn-success btn-xs btnver" type="button" onclick=\'verHojaVida(' + hojasVida[i].idPersona + ',\"' + 
-                                    hojasVida[i].numeroIdentificacion + '\",\"' + 
-                                    hojasVida[i].nombres + '\",\"' + 
-                                    hojasVida[i].apellidos + '\")\'>Ver</button>'
-                        ]).draw(false); 
-                    }
-                }
-            }});
-    }
-    
     function verHojaVida(pIdPersona, pNumeroIdentificacion, pNombres, pApellidos) {
             numeroIdentificacion = pNumeroIdentificacion;
             nombres = pNombres;

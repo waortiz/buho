@@ -7,7 +7,6 @@ package co.edu.fnsp.buho.repositorios;
 
 import co.edu.fnsp.buho.entidades.Articulo;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVida;
-import co.edu.fnsp.buho.entidades.ConsultaHojaVidaDistincion;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionBasica;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionContinua;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionSuperior;
@@ -2656,15 +2655,9 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
         return hojasVida;
     }    
     
-        @Override
-    public List<HojaVidaDistincion> obtenerHojasVidaDistincion(ConsultaHojaVidaDistincion consultaHojaVidaDistincion) {
+    @Override
+    public List<HojaVidaDistincion> obtenerHojasVidaDistincion() {
         MapSqlParameterSource parametrosConsultaHojasVida = new MapSqlParameterSource();
-        if (consultaHojaVidaDistincion.getInstitucion()!= null && consultaHojaVidaDistincion.getInstitucion().length() > 0) {
-            parametrosConsultaHojasVida.addValue("varInstitucion", consultaHojaVidaDistincion.getInstitucion());
-        } else {
-            parametrosConsultaHojasVida.addValue("varReconocido", null);
-        }
-
         Map resultadoHojasVida = obtenerHojasVidaDistincion.execute(parametrosConsultaHojasVida);
         ArrayList<HojaVidaDistincion> hojasVida = (ArrayList<HojaVidaDistincion>) resultadoHojasVida.get("hojasVida");
 

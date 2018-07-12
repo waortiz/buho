@@ -7,7 +7,6 @@ package co.edu.fnsp.buho.entidadesVista;
 
 import co.edu.fnsp.buho.entidades.AnyosExperiencia;
 import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
-import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
 import co.edu.fnsp.buho.entidades.EducacionContinuaConvocatoria;
 import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
 import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
@@ -42,6 +41,7 @@ public class Convocatoria {
     private String nombreCurso;
     private String totalHorasSemestreCurso;
     private String anyosMinimosExperiencia;
+    private boolean interna;
     private List<Adenda> adendas = new ArrayList<>();
     private List<AnyosExperiencia> anyosExperiencias = new ArrayList<>();
     private List<IdiomaConvocatoria> idiomas = new ArrayList<>();
@@ -355,5 +355,19 @@ public class Convocatoria {
      */
     public void setResultado(MultipartFile resultado) {
         this.resultado = resultado;
+    }
+
+    /**
+     * @return the interna
+     */
+    public boolean isInterna() {
+        return interna;
+    }
+
+    /**
+     * @param interna the interna to set
+     */
+    public void setInterna(boolean interna) {
+        this.interna = interna;
     }
 }

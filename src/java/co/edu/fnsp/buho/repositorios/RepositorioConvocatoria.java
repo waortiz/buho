@@ -45,6 +45,8 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
     private SimpleJdbcCall obtenerConvocatoria;
     private SimpleJdbcCall obtenerConvocatoriasCerradas;
     private SimpleJdbcCall obtenerConvocatoriasVigentes;
+    private SimpleJdbcCall obtenerConvocatoriasCerradasExternas;
+    private SimpleJdbcCall obtenerConvocatoriasVigentesExternas;
     private SimpleJdbcCall obtenerConvocatoriasValidar;
     private SimpleJdbcCall ingresarDocumentoConvocatoria;
     private SimpleJdbcCall actualizarDocumentoConvocatoria;
@@ -99,8 +101,10 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         this.actualizarConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarConvocatoria");
         this.obtenerConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoria");
         this.obtenerConvocatoriasCerradas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasCerradas").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(ListadoConvocatoria.class));
-        this.obtenerConvocatoriasValidar = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasValidar").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(ListadoConvocatoria.class));
+        this.obtenerConvocatoriasCerradasExternas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasCerradasExternas").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(ListadoConvocatoria.class));
         this.obtenerConvocatoriasVigentes = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasVigentes").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(ListadoConvocatoria.class));
+        this.obtenerConvocatoriasVigentesExternas = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasVigentesExternas").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(ListadoConvocatoria.class));
+        this.obtenerConvocatoriasValidar = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerConvocatoriasValidar").returningResultSet("convocatorias", BeanPropertyRowMapper.newInstance(ListadoConvocatoria.class));
         this.obtenerPersonasConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerPersonasConvocatoria").returningResultSet("personas", BeanPropertyRowMapper.newInstance(HojaVida.class));
         this.obtenerDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoConvocatoria");
         this.ingresarDocumentoConvocatoria = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoConvocatoria");
@@ -151,6 +155,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         parametros.addValue("varFechaFin", convocatoria.getFechaFin());
         parametros.addValue("varFechaInicio", convocatoria.getFechaInicio());
         parametros.addValue("varFechaResultados", convocatoria.getFechaPublicacionResultados());
+        parametros.addValue("varInterna", convocatoria.isInterna());
         parametros.addValue("varCurso", convocatoria.getNombreCurso());
         if (convocatoria.getTotalHorasSemestreCurso() != null && convocatoria.getTotalHorasSemestreCurso().length() > 0) {
             parametros.addValue("varNumeroHoras", Util.obtenerEntero(convocatoria.getTotalHorasSemestreCurso()));
@@ -189,6 +194,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         parametros.addValue("varFechaInicio", convocatoria.getFechaInicio());
         parametros.addValue("varFechaResultados", convocatoria.getFechaPublicacionResultados());
         parametros.addValue("varCurso", convocatoria.getNombreCurso());
+        parametros.addValue("varInterna", convocatoria.isInterna());
         if (convocatoria.getTotalHorasSemestreCurso() != null && convocatoria.getTotalHorasSemestreCurso().length() > 0) {
             parametros.addValue("varNumeroHoras", Util.obtenerEntero(convocatoria.getTotalHorasSemestreCurso()));
         } else {
@@ -258,6 +264,7 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         convocatoria.setTipoConvocatoria(((Integer) resultado.get("varTipoConvocatoria")).toString());
         convocatoria.setNombreTipoConvocatoria((String) resultado.get("varNombreTipoConvocatoria"));
         convocatoria.setTieneDocumento(((Boolean) resultado.get("varTieneDocumento")));
+        convocatoria.setInterna(((Boolean) resultado.get("varInterna")));
         if (convocatoria.getTipoConvocatoria().equalsIgnoreCase("3")
                 || convocatoria.getTipoConvocatoria().equalsIgnoreCase("4")) {
             convocatoria.setIdSedeCurso(((Integer) resultado.get("varIdSede")).toString());
@@ -361,6 +368,32 @@ public class RepositorioConvocatoria implements IRepositorioConvocatoria {
         return convocatorias;
     }
 
+    @Override
+    public List<ListadoConvocatoria> obtenerConvocatoriasCerradasExternas() {
+        Map resultado = obtenerConvocatoriasCerradasExternas.execute(new MapSqlParameterSource());
+        List<ListadoConvocatoria> convocatorias = (List<ListadoConvocatoria>) resultado.get("convocatorias");
+        for (ListadoConvocatoria convocatoria : convocatorias) {
+            convocatoria.setFechaFinFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaFin()));
+            convocatoria.setFechaPostulacionFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaPostulacion()));
+        }
+
+        return convocatorias;
+    }
+
+    @Override
+    public List<ListadoConvocatoria> obtenerConvocatoriasVigentesExternas(long idPersona) {
+        MapSqlParameterSource parametrosConsultaConvocatorias = new MapSqlParameterSource();
+        parametrosConsultaConvocatorias.addValue("varIdPersona", idPersona);
+        Map resultado = obtenerConvocatoriasVigentesExternas.execute(parametrosConsultaConvocatorias);
+        List<ListadoConvocatoria> convocatorias = (List<ListadoConvocatoria>) resultado.get("convocatorias");
+        for (ListadoConvocatoria convocatoria : convocatorias) {
+            convocatoria.setFechaFinFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaFin()));
+            convocatoria.setFechaPostulacionFormateada(Util.obtenerFechaFormateada(convocatoria.getFechaPostulacion()));
+        }
+
+        return convocatorias;
+    }
+    
     @Override
     public void guardarAdenda(int idConvocatoria, long idPersona, Adenda adenda) {
         if (adenda.getId() == 0) {

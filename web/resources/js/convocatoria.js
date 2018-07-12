@@ -354,6 +354,7 @@
             formData.append("idProgramaCurso", $("#idProgramaCurso").val());
             formData.append("nombreCurso", $("#nombreCurso").val());
             formData.append("totalHorasSemestreCurso", $("#totalHorasSemestreCurso").val());
+            formData.append("interna", $("#interna").val());
             if ($('#documento').val() != "") {
                 formData.append("documento", $('#documento')[0].files[0]);
             }

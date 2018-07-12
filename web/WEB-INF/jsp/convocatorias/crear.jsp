@@ -218,7 +218,7 @@
                     </div>
                 </div>                        
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label for="documento">Documento de soporte</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe adjuntar un documento de la convocatoria">
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
@@ -226,6 +226,23 @@
                                 <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="documento" id="documento" >
                                  <button class="btn btn-success btn-xs" type="button" id="btnVerDocumento" onclick="verDocumentoConvocatoria()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group form-inline">
+                            <label for="interna">Interna</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar si es interna">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
+                            <div id="radioBtn" class="btn-group" style="margin-left: 40px;">
+                                <c:if test = "${hojaVida.isInterna()}">
+                                    <a class="btn btn-primary btn-sm active" data-toggle="interna"  data-title="true"  id="btnInternaSi">Si</a>
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="interna"  data-title="false" id="btnInternaNo">No</a>
+                                </c:if>    
+                                <c:if test = "${!hojaVida.isInterna()}">
+                                    <a class="btn btn-primary btn-sm notActive" data-toggle="interna"  data-title="true"  id="btnInternaSi">Si</a>
+                                    <a class="btn btn-primary btn-sm active" data-toggle="interna"  data-title="false" id="btnInternaNo">No</a>
+                                </c:if>    
+                            </div>
+                            <form:hidden path="interna" />
                         </div>
                     </div>
                 </div>

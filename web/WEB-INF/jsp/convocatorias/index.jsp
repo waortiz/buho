@@ -39,7 +39,7 @@
                                         <thead>
                                             <tr>
                                                 <td><input type="text" id="nombreConvocatoriaVigente" class="form-control input-sm" placeholder="Buscar nombre de convocatoria"></td>
-                                                <td><input type="text" id="fechaFinConvocatoriaVigente" class="form-control input-sm fecha" placeholder="Buscar fecha de finalización"></td>
+                                                <td><input type="text" id="fechaFinConvocatoriaVigente" class="form-control input-sm" placeholder="Buscar fecha de finalización"></td>
                                                 <td><input type="text" id="fechaPostulacionConvocatoriaVigente" class="form-control input-sm" placeholder="Buscar fecha de postulación"></td>
                                                 <td></td>
                                                 <td></td>

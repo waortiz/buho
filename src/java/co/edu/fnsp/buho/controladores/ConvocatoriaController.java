@@ -69,35 +69,47 @@ public class ConvocatoriaController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(Model model) {
-        List<ListadoConvocatoria> convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdPersona());
-        model.addAttribute("convocatoriasVigentes", convocatoriasVigentes);
-
-        List<ListadoConvocatoria> convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradas();
-        model.addAttribute("convocatoriasCerradas", convocatoriasCerradas);
-
+        List<ListadoConvocatoria> convocatoriasVigentes = null;
+        List<ListadoConvocatoria> convocatoriasCerradas = null;
         if (esAdministrador()) {
+            convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdPersona());
+            model.addAttribute("convocatoriasVigentes", convocatoriasVigentes);
+
+            convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradas();
+            model.addAttribute("convocatoriasCerradas", convocatoriasCerradas);
 
             return "convocatorias/index";
         } else {
-
             model.addAttribute("autenticado", esAutenticado());
+            convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentesExternas(obtenerIdPersona());
+            model.addAttribute("convocatoriasVigentes", convocatoriasVigentes);
+
+            convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradasExternas();
+            model.addAttribute("convocatoriasCerradas", convocatoriasCerradas);
+
             return "convocatorias/postular";
         }
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String obtenerConvocatorias(Model model) {
-        List<ListadoConvocatoria> convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdPersona());
-        model.addAttribute("convocatoriasVigentes", convocatoriasVigentes);
-
-        List<ListadoConvocatoria> convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradas();
-        model.addAttribute("convocatoriasCerradas", convocatoriasCerradas);
-
+        List<ListadoConvocatoria> convocatoriasVigentes = null;
+        List<ListadoConvocatoria> convocatoriasCerradas = null;
         if (esAdministrador()) {
+            convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdPersona());
+            model.addAttribute("convocatoriasVigentes", convocatoriasVigentes);
+
+            convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradas();
+            model.addAttribute("convocatoriasCerradas", convocatoriasCerradas);
 
             return "convocatorias/index";
         } else {
             model.addAttribute("autenticado", esAutenticado());
+            convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentesExternas(obtenerIdPersona());
+            model.addAttribute("convocatoriasVigentes", convocatoriasVigentes);
+
+            convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradasExternas();
+            model.addAttribute("convocatoriasCerradas", convocatoriasCerradas);
 
             return "convocatorias/postular";
         }
@@ -105,10 +117,10 @@ public class ConvocatoriaController {
 
     @RequestMapping(value = "/postular", method = RequestMethod.GET)
     public String postular(Model model) {
-        List<ListadoConvocatoria> convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentes(obtenerIdPersona());
+        List<ListadoConvocatoria> convocatoriasVigentes = servicioConvocatoria.obtenerConvocatoriasVigentesExternas(obtenerIdPersona());
         model.addAttribute("convocatoriasVigentes", convocatoriasVigentes);
 
-        List<ListadoConvocatoria> convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradas();
+        List<ListadoConvocatoria> convocatoriasCerradas = servicioConvocatoria.obtenerConvocatoriasCerradasExternas();
         model.addAttribute("convocatoriasCerradas", convocatoriasCerradas);
 
         model.addAttribute("autenticado", esAutenticado());
@@ -169,6 +181,7 @@ public class ConvocatoriaController {
             convocatoriaIngresar.setTipoConvocatoria(convocatoria.getTipoConvocatoria());
             convocatoriaIngresar.setIdProgramaCurso(convocatoria.getIdProgramaCurso());
             convocatoriaIngresar.setNombreCurso(convocatoria.getNombreCurso());
+            convocatoriaIngresar.setInterna(convocatoria.isInterna());
             convocatoriaIngresar.setTotalHorasSemestreCurso(convocatoria.getTotalHorasSemestreCurso());
             Documento documento = null;
             if (convocatoria.getDocumento() != null && convocatoria.getDocumento().getBytes().length > 0) {

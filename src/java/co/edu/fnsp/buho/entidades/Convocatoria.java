@@ -41,7 +41,7 @@ public class Convocatoria {
     private String nombreCurso;
     private String totalHorasSemestreCurso;
     private String anyosMinimosExperiencia;
-    
+    private boolean interna;
     private List<AnyosExperiencia> anyosExperiencias = new ArrayList<>();
     private List<Adenda> adendas = new ArrayList<>();
     private List<IdiomaConvocatoria> idiomas = new ArrayList<>();
@@ -439,5 +439,19 @@ public class Convocatoria {
      */
     public void setResultado(Documento resultado) {
         this.resultado = resultado;
+    }
+
+    /**
+     * @return the interna
+     */
+    public boolean isInterna() {
+        return interna;
+    }
+
+    /**
+     * @param interna the interna to set
+     */
+    public void setInterna(boolean interna) {
+        this.interna = interna;
     }
 }

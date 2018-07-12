@@ -7,7 +7,6 @@ package co.edu.fnsp.buho.servicios;
 
 import co.edu.fnsp.buho.entidades.Articulo;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVida;
-import co.edu.fnsp.buho.entidades.ConsultaHojaVidaDistincion;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionBasica;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionContinua;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionSuperior;
@@ -486,8 +485,8 @@ public class ServicioHojaVida implements IServicioHojaVida {
     }
     
     @Override
-    public List<HojaVidaDistincion> obtenerHojasVidaDistincion(ConsultaHojaVidaDistincion consultaHojaVidaDistincion) {
-        return repositorioHojaVida.obtenerHojasVidaDistincion(consultaHojaVidaDistincion);
+    public List<HojaVidaDistincion> obtenerHojasVidaDistincion() {
+        return repositorioHojaVida.obtenerHojasVidaDistincion();
     }
 
     @Override

@@ -628,4 +628,14 @@ public class ServicioConvocatoria implements IServicioConvocatoria {
         repositorioConvocatoria.actualizarResultado(resultadoConvocatoria);
     }
 
+    @Override
+    public List<ListadoConvocatoria> obtenerConvocatoriasVigentesExternas(long idPersona) {
+         return repositorioConvocatoria.obtenerConvocatoriasVigentesExternas(idPersona);
+    }
+
+    @Override
+    public List<ListadoConvocatoria> obtenerConvocatoriasCerradasExternas() {
+        return repositorioConvocatoria.obtenerConvocatoriasCerradasExternas();
+    }
+
 }

@@ -58,6 +58,15 @@
                     <table class="table table-hover tableestilo" id="tblHojasVida">
                         <thead>
                             <tr>
+                                <td><input type="text" id="cedula" class="form-control input-sm" placeholder="Buscar cédulas"></td>
+                                <td><input type="text" id="nombres" class="form-control input-sm" placeholder="Buscar nombres"></td>
+                                <td><input type="text" id="apellidos" class="form-control input-sm" placeholder="Buscar apellidos"></td>
+                                <td><input type="text" id="curso" class="form-control input-sm" placeholder="Buscar cursos"></td>
+                                <td><input type="text" id="nucleoBasicoConocimiento" class="form-control input-sm" placeholder="Buscar núcleos básicos de conocimiento"></td>
+                                <td><input type="text" id="duracion" class="form-control input-sm" placeholder="Buscar duraciones"></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
                                 <th>C&eacute;dula</th>
                                 <th>Nombres</th>
                                 <th>Apellidos</th>
@@ -812,6 +821,43 @@
                 "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
+        });
+        
+        $('#cedula').on('keyup', function () {
+            tblHojasVida
+                    .columns(0)
+                    .search(this.value)
+                    .draw();
+        });
+        $('#nombres').on('keyup', function () {
+            tblHojasVida
+                    .columns(1)
+                    .search(this.value)
+                    .draw();
+        });
+        $('#apellidos').on('keyup', function () {
+            tblHojasVida
+                    .columns(2)
+                    .search(this.value)
+                    .draw();
+        });
+        $('#curso').on('keyup', function () {
+            tblHojasVida
+                    .columns(3)
+                    .search(this.value)
+                    .draw();
+        });
+        $('#nucleoBasicoConocimiento').on('keyup', function () {
+            tblHojasVida
+                    .columns(4)
+                    .search(this.value)
+                    .draw();
+        });
+        $('#duracion').on('keyup', function () {
+            tblHojasVida
+                    .columns(5)
+                    .search(this.value)
+                    .draw();
         });
         
         $('#cboCurso').on('change', function () {

@@ -7,7 +7,6 @@ package co.edu.fnsp.buho.repositorios;
 
 import co.edu.fnsp.buho.entidades.Articulo;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVida;
-import co.edu.fnsp.buho.entidades.ConsultaHojaVidaDistincion;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionBasica;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionContinua;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionSuperior;
@@ -209,7 +208,7 @@ public interface IRepositorioHojaVida {
     
     List<HojaVidaInvestigacion> obtenerHojasVidaInvestigacion(ConsultaHojaVidaInvestigacion consultaHojaVidaInvestigacion);
 
-    List<HojaVidaDistincion> obtenerHojasVidaDistincion(ConsultaHojaVidaDistincion consultaHojaVidaDistincion);
+    List<HojaVidaDistincion> obtenerHojasVidaDistincion();
     
     List<Maestro> obtenerNumerosDocumento();
     

@@ -431,17 +431,14 @@ public class HojaVidaController {
     }
 
     @RequestMapping(value = "/distincion", method = RequestMethod.GET)
-    public String obtenerHojasVidaDistincion(Model model) {
-        
-        List<Maestro> instituciones = servicioMaestro.obtenerInstitucionesDistinciones();
-        model.addAttribute("instituciones", instituciones);
+    public String mostrarHojasVidaDistincion(Model model) {
         
         return "hojasVida/distincion";
     }
 
     @RequestMapping(value = "/consultarHojasVidaDistincion", method = RequestMethod.POST)
-    public @ResponseBody String obtenerHojasVidaDistincion(@ModelAttribute ConsultaHojaVidaDistincion consultaHojaVidaDistincion, Model model) {
-        List<HojaVidaDistincion> hojasVida = servicioHojaVida.obtenerHojasVidaDistincion(consultaHojaVidaDistincion);
+    public @ResponseBody String obtenerHojasVidaDistincion(Model model) {
+        List<HojaVidaDistincion> hojasVida = servicioHojaVida.obtenerHojasVidaDistincion();
 
         Gson gson = new Gson();
 
@@ -449,8 +446,8 @@ public class HojaVidaController {
     }
     
     @RequestMapping(value = "/descargarHojasVidaDistincion", method = RequestMethod.GET)
-    public ModelAndView descargarHojasVidaDistincion(@ModelAttribute ConsultaHojaVidaDistincion consultaHojaVidaDistincion, Model model) {
-        List<HojaVidaDistincion> hojasVida = servicioHojaVida.obtenerHojasVidaDistincion(consultaHojaVidaDistincion);
+    public ModelAndView descargarHojasVidaDistincion(Model model) {
+        List<HojaVidaDistincion> hojasVida = servicioHojaVida.obtenerHojasVidaDistincion();
 
        return new ModelAndView(new HojaVidaDistincionExcelReportView(), "hojasVida", hojasVida);
     }
@@ -1964,7 +1961,6 @@ public class HojaVidaController {
     @RequestMapping(value = "/validar", method = RequestMethod.GET)
     public String validarDocumentos(Model model) {
 
-        List<ListadoConvocatoria> convocatorias = servicioConvocatoria.obtenerConvocatoriaValidar();
         List<Maestro> numerosDocumento = servicioHojaVida.obtenerNumerosDocumento();
         List<Maestro> nombres = servicioHojaVida.obtenerNombres();
         List<Maestro> apellidos = servicioHojaVida.obtenerApellidos();
@@ -1972,11 +1968,19 @@ public class HojaVidaController {
         model.addAttribute("numerosDocumento", numerosDocumento);
         model.addAttribute("nombres", nombres);
         model.addAttribute("apellidos", apellidos);
-        model.addAttribute("convocatorias", convocatorias);
 
         return "hojasVida/validar";
     }
 
+    @RequestMapping(value = "/validarPorConvocatoria", method = RequestMethod.GET)
+    public String validarDocumentosPorConvocatoria(Model model) {
+
+        List<ListadoConvocatoria> convocatorias = servicioConvocatoria.obtenerConvocatoriaValidar();
+        model.addAttribute("convocatorias", convocatorias);
+
+        return "hojasVida/validarPorConvocatoria";
+    }
+    
     @RequestMapping(value = "/personas/{idConvocatoria}", method = RequestMethod.GET)
     public @ResponseBody
     String obtenerPersonasConvocatoria(@ModelAttribute(value = "idConvocatoria") int idConvocatoria, Model model) {

@@ -215,7 +215,7 @@ public interface IServicioHojaVida {
     
     List<HojaVidaInvestigacion> obtenerHojasVidaInvestigacion(ConsultaHojaVidaInvestigacion consultaHojaVidaInvestigacion);
     
-    List<HojaVidaDistincion> obtenerHojasVidaDistincion(ConsultaHojaVidaDistincion consultaHojaVidaDistincion);
+    List<HojaVidaDistincion> obtenerHojasVidaDistincion();
     
     List<Maestro> obtenerNumerosDocumento();
     

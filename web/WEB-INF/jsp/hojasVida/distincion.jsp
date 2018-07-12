@@ -7,24 +7,19 @@
         <legend>Consulta de hoja de vida por distinciones</legend>
         <div class="row">
             <div class="col-md-12">
-                <div class="form-group form-inline">
-                    <label>Institución</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
-                        <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 85%;" id="cboInstitucion" class="js-select-basic-single js-states form-control">
-                        <option ></option>
-                        <c:forEach var="institucion" items="${instituciones}">
-                            <option value="${institucion.getId()}">${institucion.getNombre()}</option>
-                        </c:forEach>                                                 
-                    </select>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarInstitucion()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
                 <div class="table-responsive">
                     <table class="table table-hover tableestilo" id="tblHojasVida">
                         <thead>
+                            <tr>
+                                <td><input type="text" id="cedula" class="form-control input-sm" placeholder="Buscar cédulas"></td>
+                                <td><input type="text" id="nombres" class="form-control input-sm" placeholder="Buscar nombres"></td>
+                                <td><input type="text" id="apellidos" class="form-control input-sm" placeholder="Buscar apellidos"></td>
+                                <td><input type="text" id="institucion" class="form-control input-sm" placeholder="Buscar instituciones"></td>
+                                <td><input type="text" id="fecha" class="form-control input-sm" placeholder="Buscar fechas"></td>
+                                <td><input type="text" id="descripcion" class="form-control input-sm" placeholder="Buscar disticiones"></td>
+                                <td><input type="text" id="validado" class="form-control input-sm" placeholder="Buscar disticiones validadas"></td>
+                                <td>&nbsp;</td>
+                            </tr>
                             <tr>
                                 <th>C&eacute;dula</th>
                                 <th>Nombres</th>
@@ -738,10 +733,6 @@
     </div>
   </div> 
   <script>
-    function limpiarInstitucion() {
-        $('#cboInstitucion').val("").trigger('change');
-    }
-
     $(document).ready(function () {
         tblHojasVida = $('#tblHojasVida').DataTable({
             "language": {
@@ -769,18 +760,55 @@
             }
         });
         
-        $('#cboInstitucion').on('change', function () {
-           buscarHojasVida(); 
+        $('#cedula').on('keyup', function () {
+            tblHojasVida
+                    .columns(0)
+                    .search(this.value)
+                    .draw();
         });
+        $('#nombres').on('keyup', function () {
+            tblHojasVida
+                    .columns(1)
+                    .search(this.value)
+                    .draw();
+        });
+        $('#apellidos').on('keyup', function () {
+            tblHojasVida
+                    .columns(2)
+                    .search(this.value)
+                    .draw();
+        });
+        $('#institucion').on('keyup', function () {
+            tblHojasVida
+                    .columns(3)
+                    .search(this.value)
+                    .draw();
+        });
+        $('#fecha').on('keyup', function () {
+            tblHojasVida
+                    .columns(4)
+                    .search(this.value)
+                    .draw();
+        });
+        $('#descripcion').on('keyup', function () {
+            tblHojasVida
+                    .columns(5)
+                    .search(this.value)
+                    .draw();
+        });
+        $('#validado').on('keyup', function () {
+            tblHojasVida
+                    .columns(6)
+                    .search(this.value)
+                    .draw();
+        });
+        
+       buscarHojasVida(); 
     });
 
     function buscarHojasVida() {
         $('#formHV').hide();
         $('#divDescargar').hide();
-        if($('#cboInstitucion').val() == "") {
-            tblHojasVida.clear().draw();
-            return;
-        }
         $('#md_resultados').modal({backdrop: 'static', keyboard: false});
         current_progress = 0;
         var interval = setInterval(function () {
@@ -797,7 +825,6 @@
             }
         }, 2000);
         var formData = new FormData();
-        formData.append("institucion", $('#cboInstitucion').val());
         $.ajax({
             type: "POST",
             url: "${pageContext.request.contextPath}/hojasVida/consultarHojasVidaDistincion",
@@ -850,12 +877,12 @@
     
         $.ajax({
                 type: "GET",
-                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaDistincion?" + "&institucion=" + $('#cboInstitucion').val(),
+                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaDistincion",
                 processData: false,
                 contentType: false,
                 success: function (response) {
                     if (response != "") {
-                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaDistincion?" + "&institucion=" + $('#cboInstitucion').val();
+                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaDistincion";
                     }
                     $('#md_descargar_resultados').modal('hide');
                 },

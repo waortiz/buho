@@ -42,6 +42,10 @@
         <put-attribute name="title" value="Validar" />  
         <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/validar.jsp" />  
     </definition>  
+    <definition name="hojasVida/validarPorConvocatoria" extends="base-definition">  
+        <put-attribute name="title" value="Validar" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/validarPorConvocatoria.jsp" />  
+    </definition>  
     <definition name="hojasVida/consulta" extends="base-definition">  
         <put-attribute name="title" value="Consulta" />  
         <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/consulta.jsp" />  
