@@ -901,7 +901,7 @@
         }           
         if($('#tiempoExperienciaLaboralInicial').val() != "" && $('#tiempoExperienciaLaboralFinal').val() != "") {
           if(parseInt($('#tiempoExperienciaLaboralInicial').val(), 10) > parseInt($('#tiempoExperienciaLaboralFinal').val(), 10)){
-             bootstrap_alert_consulta.warning("El valor final tiempo de experiencia labora debe ser mayor o igual al valor inicial"); 
+             bootstrap_alert_consulta.warning("El valor final tiempo de experiencia laboral debe ser mayor o igual al valor inicial"); 
              tblHojasVida.clear().draw();
              return;
           }

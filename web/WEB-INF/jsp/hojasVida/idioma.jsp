@@ -5,6 +5,7 @@
 <div id="contenido">         
     <div class="container">
         <legend>Consulta de hoja de vida por idiomas</legend>
+        <div id="alert_consulta"></div>
         <div class="row">
              <div class="col-md-3">
                 <div class="form-group form-inline">
@@ -850,6 +851,14 @@
             tblHojasVida.clear().draw();
             return;
         }
+        bootstrap_alert_consulta.removeWarning();
+        if($('#puntajeInicial').val() != "" && $('#puntajeFinal').val() != "") {
+          if(parseInt($('#puntajeInicial').val(), 10) > parseInt($('#puntajeFinal').val(), 10)){
+             bootstrap_alert_consulta.warning("El puntaje final debe ser mayor o igual al puntaje inicial"); 
+             tblHojasVida.clear().draw();
+             return;
+          }
+        }          
         $('#md_resultados').modal({backdrop: 'static', keyboard: false});
         current_progress = 0;
         var interval = setInterval(function () {
@@ -1550,6 +1559,17 @@
         });
     }
 
+    bootstrap_alert_consulta = {};
+    bootstrap_alert_consulta.warning = function (message) {
+        $('#alert_consulta').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_consulta.success = function (message) {
+        $('#alert_consulta').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_consulta.removeWarning = function () {
+        $('#alert_consulta').html('');
+    };
+    
     var correosElectronicos = [];
     var cuentasBancarias = [];
     var telefonos = [];
