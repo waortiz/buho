@@ -10,50 +10,96 @@ package co.edu.fnsp.buho.entidades;
  * @author William
  */
 public class ConsultaHojaVidaExperiencia {
-    private String tiempoExperienciaDocencia;
-    private String tiempoExperienciaLaboral;
-    private String tiempoExperienciaProfesional;
+    private String tiempoExperienciaDocenciaInicial;
+    private String tiempoExperienciaLaboralInicial;
+    private String tiempoExperienciaProfesionalInicial;
+    private String tiempoExperienciaDocenciaFinal;
+    private String tiempoExperienciaLaboralFinal;
+    private String tiempoExperienciaProfesionalFinal;
 
     /**
-     * @return the tiempoExperienciaDocencia
+     * @return the tiempoExperienciaDocenciaInicial
      */
-    public String getTiempoExperienciaDocencia() {
-        return tiempoExperienciaDocencia;
+    public String getTiempoExperienciaDocenciaInicial() {
+        return tiempoExperienciaDocenciaInicial;
     }
 
     /**
-     * @param tiempoExperienciaDocencia the tiempoExperienciaDocencia to set
+     * @param tiempoExperienciaDocenciaInicial the tiempoExperienciaDocenciaInicial to set
      */
-    public void setTiempoExperienciaDocencia(String tiempoExperienciaDocencia) {
-        this.tiempoExperienciaDocencia = tiempoExperienciaDocencia;
+    public void setTiempoExperienciaDocenciaInicial(String tiempoExperienciaDocenciaInicial) {
+        this.tiempoExperienciaDocenciaInicial = tiempoExperienciaDocenciaInicial;
     }
 
     /**
-     * @return the tiempoExperienciaLaboral
+     * @return the tiempoExperienciaLaboralInicial
      */
-    public String getTiempoExperienciaLaboral() {
-        return tiempoExperienciaLaboral;
+    public String getTiempoExperienciaLaboralInicial() {
+        return tiempoExperienciaLaboralInicial;
     }
 
     /**
-     * @param tiempoExperienciaLaboral the tiempoExperienciaLaboral to set
+     * @param tiempoExperienciaLaboralInicial the tiempoExperienciaLaboralInicial to set
      */
-    public void setTiempoExperienciaLaboral(String tiempoExperienciaLaboral) {
-        this.tiempoExperienciaLaboral = tiempoExperienciaLaboral;
+    public void setTiempoExperienciaLaboralInicial(String tiempoExperienciaLaboralInicial) {
+        this.tiempoExperienciaLaboralInicial = tiempoExperienciaLaboralInicial;
     }
 
     /**
-     * @return the tiempoExperienciaProfesional
+     * @return the tiempoExperienciaProfesionalInicial
      */
-    public String getTiempoExperienciaProfesional() {
-        return tiempoExperienciaProfesional;
+    public String getTiempoExperienciaProfesionalInicial() {
+        return tiempoExperienciaProfesionalInicial;
     }
 
     /**
-     * @param tiempoExperienciaProfesional the tiempoExperienciaProfesional to set
+     * @param tiempoExperienciaProfesionalInicial the tiempoExperienciaProfesionalInicial to set
      */
-    public void setTiempoExperienciaProfesional(String tiempoExperienciaProfesional) {
-        this.tiempoExperienciaProfesional = tiempoExperienciaProfesional;
+    public void setTiempoExperienciaProfesionalInicial(String tiempoExperienciaProfesionalInicial) {
+        this.tiempoExperienciaProfesionalInicial = tiempoExperienciaProfesionalInicial;
     }
+
+    /**
+     * @return the tiempoExperienciaDocenciaFinal
+     */
+    public String getTiempoExperienciaDocenciaFinal() {
+        return tiempoExperienciaDocenciaFinal;
+    }
+
+    /**
+     * @param tiempoExperienciaDocenciaFinal the tiempoExperienciaDocenciaFinal to set
+     */
+    public void setTiempoExperienciaDocenciaFinal(String tiempoExperienciaDocenciaFinal) {
+        this.tiempoExperienciaDocenciaFinal = tiempoExperienciaDocenciaFinal;
+    }
+
+    /**
+     * @return the tiempoExperienciaLaboralFinal
+     */
+    public String getTiempoExperienciaLaboralFinal() {
+        return tiempoExperienciaLaboralFinal;
+    }
+
+    /**
+     * @param tiempoExperienciaLaboralFinal the tiempoExperienciaLaboralFinal to set
+     */
+    public void setTiempoExperienciaLaboralFinal(String tiempoExperienciaLaboralFinal) {
+        this.tiempoExperienciaLaboralFinal = tiempoExperienciaLaboralFinal;
+    }
+
+    /**
+     * @return the tiempoExperienciaProfesionalFinal
+     */
+    public String getTiempoExperienciaProfesionalFinal() {
+        return tiempoExperienciaProfesionalFinal;
+    }
+
+    /**
+     * @param tiempoExperienciaProfesionalFinal the tiempoExperienciaProfesionalFinal to set
+     */
+    public void setTiempoExperienciaProfesionalFinal(String tiempoExperienciaProfesionalFinal) {
+        this.tiempoExperienciaProfesionalFinal = tiempoExperienciaProfesionalFinal;
+    }
+    
     
 }

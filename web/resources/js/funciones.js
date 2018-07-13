@@ -89,6 +89,14 @@ function getValue(value) {
     return value;
 }
 
+function getNumberValue(value) {
+    if( value === null || value === undefined) {
+        return 0;
+    }
+    
+    return parseInt(value);
+}
+
 function ordenarOpciones(options) {
     var arr = options.map(function (_, o) {
         return {

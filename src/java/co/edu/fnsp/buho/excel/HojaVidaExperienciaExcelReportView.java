@@ -6,6 +6,7 @@
 package co.edu.fnsp.buho.excel;
 
 import co.edu.fnsp.buho.entidades.HojaVidaExperiencia;
+import co.edu.fnsp.buho.utilidades.Util;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -60,6 +61,9 @@ public class HojaVidaExperienciaExcelReportView extends AbstractExcelView {
         header.createCell(5).setCellValue("Tiempo de experiencia profesional");
         header.getCell(5).setCellStyle(style);
         sheet.setColumnWidth(5, 40*256);
+        header.createCell(6).setCellValue("Total");
+        header.getCell(6).setCellStyle(style);
+        sheet.setColumnWidth(6, 40*256);
 
         int rowNum = 1;
         for (HojaVidaExperiencia hojaVida : hojasVida) {
@@ -70,6 +74,10 @@ public class HojaVidaExperienciaExcelReportView extends AbstractExcelView {
             row.createCell(3).setCellValue(hojaVida.getTiempoExperienciaDocencia());
             row.createCell(4).setCellValue(hojaVida.getTiempoExperienciaLaboral());
             row.createCell(5).setCellValue(hojaVida.getTiempoExperienciaProfesional());
+            int total = (int)(Util.obtenerEntero(hojaVida.getTiempoExperienciaDocencia())/1800) + 
+                    Util.obtenerEntero(hojaVida.getTiempoExperienciaLaboral()) +
+                    Util.obtenerEntero(hojaVida.getTiempoExperienciaProfesional());
+            row.createCell(6).setCellValue(total);
         }
     }
 

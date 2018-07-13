@@ -5,29 +5,56 @@
 <div id="contenido">         
     <div class="container">
         <legend>Consulta de hoja de vida por tiempo de experiencia</legend>
+        <div id="alert_consulta"></div>
         <div class="row">
-             <div class="col-md-4">
+             <div class="col-md-3">
                 <div class="form-group form-inline">
-                    <label>Tiempo de experiencia en docencia</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nivel de estudio">
+                    <label>Valor inicial experiencia en docencia</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Valor inicial tiempo de experiencia en docencia">
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <input type='text' class="form-control input-sm" id="tiempoExperienciaDocencia" maxlength="5">
-                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTiempoExperienciaDocencia()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <input type='text' class="form-control input-sm" id="tiempoExperienciaDocenciaInicial" maxlength="5">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTiempoExperienciaDocenciaInicial()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>
-            <div class="col-md-4">
+             <div class="col-md-3">
                 <div class="form-group form-inline">
-                    <label>Tiempo de experiencia laboral</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
+                    <label>Valor final experiencia en docencia</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Valor final tiempo de experiencia en docencia">
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <input type='text' class="form-control input-sm" id="tiempoExperienciaLaboral" maxlength="5">
-                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTiempoExperienciaLaboral()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <input type='text' class="form-control input-sm" id="tiempoExperienciaDocenciaFinal" maxlength="5">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTiempoExperienciaDocenciaFinal()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group form-inline">
-                    <label>Tiempo de experiencia profesional</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la duración">
+                    <label>Valor inicial experiencia laboral</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Valor inicial tiempo de experiencia laboral">
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <input type='text' class="form-control input-sm" id="tiempoExperienciaProfesional" maxlength="5">
-                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTiempoExperienciaProfesional()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <input type='text' class="form-control input-sm" id="tiempoExperienciaLaboralInicial" maxlength="5">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTiempoExperienciaLaboralInicial()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group form-inline">
+                    <label>Valor final experiencia laboral</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Valor final tiempo de experiencia laboral">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                    <input type='text' class="form-control input-sm" id="tiempoExperienciaLaboralFinal" maxlength="5">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTiempoExperienciaLaboralFinal()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group form-inline">
+                    <label>Valor inicial experiencia profesional</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Valor inicial tiempo de experiencia profesional">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                    <input type='text' class="form-control input-sm" id="tiempoExperienciaProfesionalInicial" maxlength="5">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTiempoExperienciaProfesionalInicial()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                </div>
+            </div>            
+            <div class="col-md-3">
+                <div class="form-group form-inline">
+                    <label>Valor final experiencia profesional</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Valor final tiempo de experiencia profesional">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                    <input type='text' class="form-control input-sm" id="tiempoExperienciaProfesionalFinal" maxlength="5">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTiempoExperienciaProfesionalFinal()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>            
         </div>
@@ -43,6 +70,7 @@
                                 <th>Tiempo de experiencia en docencia</th>
                                 <th>Tiempo de experiencia laboral</th>
                                 <th>Tiempo de experiencia profesional</th>
+                                <th>Total</th>
                                 <th class='opc'>Opciones</th>
                             </tr>
                         </thead>
@@ -748,18 +776,33 @@
     </div>
   </div> 
   <script>
-    function limpiarTiempoExperienciaDocencia() {
-       $('#tiempoExperienciaDocencia').val("");
+    function limpiarTiempoExperienciaDocenciaInicial() {
+       $('#tiempoExperienciaDocenciaInicial').val("");
        buscarHojasVida(); 
     }
 
-    function limpiarTiempoExperienciaLaboral() {
-       $('#tiempoExperienciaLaboral').val("");
+    function limpiarTiempoExperienciaLaboralInicial() {
+       $('#tiempoExperienciaLaboralInicial').val("");
        buscarHojasVida(); 
     }
 
-    function limpiarTiempoExperienciaProfesional() {
-        $('#tiempoExperienciaProfesional').val("");
+    function limpiarTiempoExperienciaProfesionalInicial() {
+        $('#tiempoExperienciaProfesionalInicial').val("");
+        buscarHojasVida(); 
+    }
+
+    function limpiarTiempoExperienciaDocenciaFinal() {
+       $('#tiempoExperienciaDocenciaFinal').val("");
+       buscarHojasVida(); 
+    }
+
+    function limpiarTiempoExperienciaLaboralFinal() {
+       $('#tiempoExperienciaLaboralFinal').val("");
+       buscarHojasVida(); 
+    }
+
+    function limpiarTiempoExperienciaProfesionalFinal() {
+        $('#tiempoExperienciaProfesionalFinal').val("");
         buscarHojasVida(); 
     }
 
@@ -790,27 +833,51 @@
             }
         });
         
-        $('#tiempoExperienciaDocencia').on('change', function () {
+        $('#tiempoExperienciaDocenciaInicial').on('change', function () {
            buscarHojasVida(); 
         });
         
-        $('#tiempoExperienciaLaboral').on('change', function () {
+        $('#tiempoExperienciaLaboralInicial').on('change', function () {
            buscarHojasVida(); 
         });
         
-        $('#tiempoExperienciaProfesional').on('change', function () {
+        $('#tiempoExperienciaProfesionalInicial').on('change', function () {
            buscarHojasVida(); 
         });
         
-        $('#tiempoExperienciaDocencia').keyup(function () {
+        $('#tiempoExperienciaDocenciaInicial').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
         
-        $('#tiempoExperienciaLaboral').keyup(function () {
+        $('#tiempoExperienciaLaboralInicial').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
 
-        $('#tiempoExperienciaProfesional').keyup(function () {
+        $('#tiempoExperienciaProfesionalInicial').keyup(function () {
+            this.value = (this.value + '').replace(/[^0-9]/g, '');
+        });
+
+        $('#tiempoExperienciaDocenciaFinal').on('change', function () {
+           buscarHojasVida(); 
+        });
+        
+        $('#tiempoExperienciaLaboralFinal').on('change', function () {
+           buscarHojasVida(); 
+        });
+        
+        $('#tiempoExperienciaProfesionalFinal').on('change', function () {
+           buscarHojasVida(); 
+        });
+        
+        $('#tiempoExperienciaDocenciaFinal').keyup(function () {
+            this.value = (this.value + '').replace(/[^0-9]/g, '');
+        });
+        
+        $('#tiempoExperienciaLaboralFinal').keyup(function () {
+            this.value = (this.value + '').replace(/[^0-9]/g, '');
+        });
+
+        $('#tiempoExperienciaProfesionalFinal').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
     });
@@ -818,10 +885,35 @@
     function buscarHojasVida() {
         $('#formHV').hide();
         $('#divDescargar').hide();
-        if($('#tiempoExperienciaDocencia').val() == "" && $('#tiempoExperienciaLaboral').val() == "" && $('#tiempoExperienciaProfesional').val() == "") {
+        if($('#tiempoExperienciaDocenciaInicial').val() == "" && $('#tiempoExperienciaLaboralInicial').val() == "" && $('#tiempoExperienciaProfesionalInicial').val() == "" &&
+           $('#tiempoExperienciaDocenciaFinal').val() == "" && $('#tiempoExperienciaLaboralFinal').val() == "" && $('#tiempoExperienciaProfesionalFinal').val() == "") {
             tblHojasVida.clear().draw();
             return;
         }
+        
+        bootstrap_alert_consulta.removeWarning();
+        if($('#tiempoExperienciaDocenciaInicial').val() != "" && $('#tiempoExperienciaDocenciaFinal').val() != "") {
+          if(parseInt($('#tiempoExperienciaDocenciaInicial').val(), 10) > parseInt($('#tiempoExperienciaDocenciaFinal').val(), 10)){
+             bootstrap_alert_consulta.warning("El valor final de tiempo de experiencia en docencia debe ser mayor o igual al valor inicial"); 
+             tblHojasVida.clear().draw();
+             return;
+          }
+        }           
+        if($('#tiempoExperienciaLaboralInicial').val() != "" && $('#tiempoExperienciaLaboralFinal').val() != "") {
+          if(parseInt($('#tiempoExperienciaLaboralInicial').val(), 10) > parseInt($('#tiempoExperienciaLaboralFinal').val(), 10)){
+             bootstrap_alert_consulta.warning("El valor final tiempo de experiencia labora debe ser mayor o igual al valor inicial"); 
+             tblHojasVida.clear().draw();
+             return;
+          }
+        }           
+        if($('#tiempoExperienciaProfesionalInicial').val() != "" && $('#tiempoExperienciaProfesionalFinal').val() != "") {
+          if(parseInt($('#tiempoExperienciaProfesionalInicial').val(), 10) > parseInt($('#tiempoExperienciaProfesionalFinal').val(), 10)){
+             bootstrap_alert_consulta.warning("El valor final tiempo de experiencia profesional debe ser mayor o igual al valor inicial"); 
+             tblHojasVida.clear().draw();
+             return;
+          }
+        }           
+        
         $('#md_resultados').modal({backdrop: 'static', keyboard: false});
         current_progress = 0;
         var interval = setInterval(function () {
@@ -838,9 +930,12 @@
             }
         }, 2000);
         var formData = new FormData();
-        formData.append("tiempoExperienciaDocencia", $('#tiempoExperienciaDocencia').val());
-        formData.append("tiempoExperienciaLaboral", $('#tiempoExperienciaLaboral').val());
-        formData.append("tiempoExperienciaProfesional", $('#tiempoExperienciaProfesional').val());
+        formData.append("tiempoExperienciaDocenciaInicial", $('#tiempoExperienciaDocenciaInicial').val());
+        formData.append("tiempoExperienciaLaboralInicial", $('#tiempoExperienciaLaboralInicial').val());
+        formData.append("tiempoExperienciaProfesionalInicial", $('#tiempoExperienciaProfesionalInicial').val());
+        formData.append("tiempoExperienciaDocenciaFinal", $('#tiempoExperienciaDocenciaFinal').val());
+        formData.append("tiempoExperienciaLaboralFinal", $('#tiempoExperienciaLaboralFinal').val());
+        formData.append("tiempoExperienciaProfesionalFinal", $('#tiempoExperienciaProfesionalFinal').val());
         $.ajax({
             type: "POST",
             url: "${pageContext.request.contextPath}/hojasVida/consultarHojasVidaExperiencia",
@@ -866,6 +961,7 @@
                             getValue(hojasVida[i].tiempoExperienciaDocencia),
                             getValue(hojasVida[i].tiempoExperienciaLaboral),
                             getValue(hojasVida[i].tiempoExperienciaProfesional),
+                            Math.floor(getNumberValue(hojasVida[i].tiempoExperienciaDocencia)/1800) + getNumberValue(hojasVida[i].tiempoExperienciaLaboral) + getNumberValue(hojasVida[i].tiempoExperienciaProfesional),
                             "<button class='btn btn-success btn-xs btnver' type='button' onclick='verHojaVida(" + hojasVida[i].idPersona + ")'>Ver</button>"
                         ]).draw(false);
                     }
@@ -892,12 +988,14 @@
     
         $.ajax({
                 type: "GET",
-                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaExperiencia?tiempoExperienciaDocencia=" + $('#tiempoExperienciaDocencia').val() + "&tiempoExperienciaLaboral=" + $('#tiempoExperienciaLaboral').val() + "&tiempoExperienciaProfesional=" + $('#tiempoExperienciaProfesional').val(),
+                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaExperiencia?tiempoExperienciaDocenciaInicial=" + $('#tiempoExperienciaDocenciaInicial').val() + "&tiempoExperienciaLaboralInicial=" + $('#tiempoExperienciaLaboralInicial').val() + "&tiempoExperienciaProfesionalInicial=" + $('#tiempoExperienciaProfesionalInicial').val() +
+                        "&tiempoExperienciaDocenciaFinal=" + $('#tiempoExperienciaDocenciaFinal').val() + "&tiempoExperienciaLaboralFinal=" + $('#tiempoExperienciaLaboralFinal').val() + "&tiempoExperienciaProfesionalFinal=" + $('#tiempoExperienciaProfesionalFinal').val(),
                 processData: false,
                 contentType: false,
                 success: function (response) {
                     if (response != "") {
-                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaExperiencia?tiempoExperienciaDocencia=" + $('#tiempoExperienciaDocencia').val() + "&tiempoExperienciaLaboral=" + $('#tiempoExperienciaLaboral').val() + "&tiempoExperienciaProfesional=" + $('#tiempoExperienciaProfesional').val();
+                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaExperiencia?tiempoExperienciaDocenciaInicial=" + $('#tiempoExperienciaDocenciaInicial').val() + "&tiempoExperienciaLaboralInicial=" + $('#tiempoExperienciaLaboralInicial').val() + "&tiempoExperienciaProfesionalInicial=" + $('#tiempoExperienciaProfesionalInicial').val() +
+                        "&tiempoExperienciaDocenciaFinal=" + $('#tiempoExperienciaDocenciaFinal').val() + "&tiempoExperienciaLaboralFinal=" + $('#tiempoExperienciaLaboralFinal').val() + "&tiempoExperienciaProfesionalFinal=" + $('#tiempoExperienciaProfesionalFinal').val();
                     }
                     $('#md_descargar_resultados').modal('hide');
                 },
@@ -1520,6 +1618,17 @@
         });
     }
 
+    bootstrap_alert_consulta = {};
+    bootstrap_alert_consulta.warning = function (message) {
+        $('#alert_consulta').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_consulta.success = function (message) {
+        $('#alert_consulta').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_consulta.removeWarning = function () {
+        $('#alert_consulta').html('');
+    };
+    
     var correosElectronicos = [];
     var cuentasBancarias = [];
     var telefonos = [];

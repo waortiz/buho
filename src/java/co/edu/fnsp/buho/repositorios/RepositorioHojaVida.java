@@ -2563,20 +2563,35 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     @Override
     public List<HojaVidaExperiencia> obtenerHojasVidaExperiencia(ConsultaHojaVidaExperiencia consultaHojaVidaExperiencia) {
         MapSqlParameterSource parametrosConsultaHojasVida = new MapSqlParameterSource();
-        if (consultaHojaVidaExperiencia.getTiempoExperienciaDocencia() != null && consultaHojaVidaExperiencia.getTiempoExperienciaDocencia().length() > 0) {
-            parametrosConsultaHojasVida.addValue("varTiempoExperienciaDocencia", Util.obtenerEntero(consultaHojaVidaExperiencia.getTiempoExperienciaDocencia()));
+        if (consultaHojaVidaExperiencia.getTiempoExperienciaDocenciaInicial()!= null && consultaHojaVidaExperiencia.getTiempoExperienciaDocenciaInicial().length() > 0) {
+            parametrosConsultaHojasVida.addValue("varTiempoExperienciaDocenciaInicial", Util.obtenerEntero(consultaHojaVidaExperiencia.getTiempoExperienciaDocenciaInicial()));
         } else {
-            parametrosConsultaHojasVida.addValue("varTiempoExperienciaDocencia", null);
+            parametrosConsultaHojasVida.addValue("varTiempoExperienciaDocenciaInicial", null);
         }
-        if (consultaHojaVidaExperiencia.getTiempoExperienciaLaboral() != null && consultaHojaVidaExperiencia.getTiempoExperienciaLaboral().length() > 0) {
-            parametrosConsultaHojasVida.addValue("varTiempoExperienciaLaboral", Util.obtenerEntero(consultaHojaVidaExperiencia.getTiempoExperienciaLaboral()));
+        if (consultaHojaVidaExperiencia.getTiempoExperienciaLaboralInicial() != null && consultaHojaVidaExperiencia.getTiempoExperienciaLaboralInicial().length() > 0) {
+            parametrosConsultaHojasVida.addValue("varTiempoExperienciaLaboralInicial", Util.obtenerEntero(consultaHojaVidaExperiencia.getTiempoExperienciaLaboralInicial()));
         } else {
-            parametrosConsultaHojasVida.addValue("varTiempoExperienciaLaboral", null);
+            parametrosConsultaHojasVida.addValue("varTiempoExperienciaLaboralInicial", null);
         }
-        if (consultaHojaVidaExperiencia.getTiempoExperienciaProfesional() != null && consultaHojaVidaExperiencia.getTiempoExperienciaProfesional().length() > 0) {
-            parametrosConsultaHojasVida.addValue("varTiempoExperienciaProfesional", Util.obtenerEntero(consultaHojaVidaExperiencia.getTiempoExperienciaProfesional()));
+        if (consultaHojaVidaExperiencia.getTiempoExperienciaProfesionalInicial() != null && consultaHojaVidaExperiencia.getTiempoExperienciaProfesionalInicial().length() > 0) {
+            parametrosConsultaHojasVida.addValue("varTiempoExperienciaProfesionalInicial", Util.obtenerEntero(consultaHojaVidaExperiencia.getTiempoExperienciaProfesionalInicial()));
         } else {
-            parametrosConsultaHojasVida.addValue("varTiempoExperienciaProfesional", null);
+            parametrosConsultaHojasVida.addValue("varTiempoExperienciaProfesionalInicial", null);
+        }
+        if (consultaHojaVidaExperiencia.getTiempoExperienciaDocenciaFinal()!= null && consultaHojaVidaExperiencia.getTiempoExperienciaDocenciaFinal().length() > 0) {
+            parametrosConsultaHojasVida.addValue("varTiempoExperienciaDocenciaFinal", Util.obtenerEntero(consultaHojaVidaExperiencia.getTiempoExperienciaDocenciaFinal()));
+        } else {
+            parametrosConsultaHojasVida.addValue("varTiempoExperienciaDocenciaFinal", null);
+        }
+        if (consultaHojaVidaExperiencia.getTiempoExperienciaLaboralFinal() != null && consultaHojaVidaExperiencia.getTiempoExperienciaLaboralFinal().length() > 0) {
+            parametrosConsultaHojasVida.addValue("varTiempoExperienciaLaboralFinal", Util.obtenerEntero(consultaHojaVidaExperiencia.getTiempoExperienciaLaboralFinal()));
+        } else {
+            parametrosConsultaHojasVida.addValue("varTiempoExperienciaLaboralFinal", null);
+        }
+        if (consultaHojaVidaExperiencia.getTiempoExperienciaProfesionalFinal() != null && consultaHojaVidaExperiencia.getTiempoExperienciaProfesionalFinal().length() > 0) {
+            parametrosConsultaHojasVida.addValue("varTiempoExperienciaProfesionalFinal", Util.obtenerEntero(consultaHojaVidaExperiencia.getTiempoExperienciaProfesionalFinal()));
+        } else {
+            parametrosConsultaHojasVida.addValue("varTiempoExperienciaProfesionalFinal", null);
         }
 
         Map resultadoHojasVida = obtenerHojasVidaExperiencia.execute(parametrosConsultaHojasVida);
