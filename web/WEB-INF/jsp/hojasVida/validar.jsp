@@ -7,43 +7,46 @@
     <div class="container">
         <legend><h3>Consulta de hoja de vida por soportes</h3></legend>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                <div class="form-group form-inline">
                   <label>Buscar c&eacute;dula </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la c&eacute;dula para buscar documentos">
                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                   <select id="cboNumeroIdentificacion" class="form-control js-select-basic-single2" style="width: 70%;" onchange="buscarPersonas(this.value)">
+                   <select id="cboNumeroIdentificacion" class="form-control js-select-basic-single2" style="width: 60%;">
                         <option value=""></option>
                         <c:forEach var="numeroDocumento" items="${numerosDocumento}">
                             <option value="${numeroDocumento.getId()}">${numeroDocumento.getNombre()}</option>
                         </c:forEach>                     
                    </select>
                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNumeroIdentificacion()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                   <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                </div>
            </div>
            <div class="col-md-5">
                <div class="form-group form-inline">
                   <label>Buscar nombres </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre para buscar documentos">
                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                   <select id="cboNombres" class="form-control js-select-basic-single2" style="width: 85%;" onchange="buscarPersonas(this.value)">
+                   <select id="cboNombres" class="form-control js-select-basic-single2" style="width: 75%;">
                         <option value=""></option>
                         <c:forEach var="nombre" items="${nombres}">
                             <option value="${nombre.getId()}">${nombre.getNombre()}</option>
                         </c:forEach>                         
                    </select>
                   <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNombres()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                  <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                </div>
            </div>
-           <div class="col-md-5">
+           <div class="col-md-4">
                <div class="form-group form-inline">
                   <label>Buscar apellidos </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indica el apellido para buscar documentos">
                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                   <select id="cboApellidos" class="form-control js-select-basic-single2" style="width: 85%;" onchange="buscarPersonas(this.value)">
+                   <select id="cboApellidos" class="form-control js-select-basic-single2" style="width: 75%;">
                         <option value=""></option>
                         <c:forEach var="apellido" items="${apellidos}">
                             <option value="${apellido.getId()}">${apellido.getNombre()}</option>
                         </c:forEach>                             
                    </select>
                   <button type="button" class="btn btn-danger btn-sm" onclick="limpiarApellidos()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                  <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                </div>
            </div>
         </div>
@@ -824,7 +827,7 @@
             }});
     }
 
-    function buscarPersonas() {
+    function buscarHojasVida() {
         $('#formPersona').hide();
         if ($('#cboNumeroIdentificacion').val() == "" && $('#cboNombres').val() == "" && $('#cboApellidos').val() == "") {
             tblHojasVida.clear().draw();
@@ -1144,8 +1147,8 @@
             $('.row5').css('display',"block");
             $('.lbltit5').html("Fecha Retiro/Fin");
             $('.inplbl5').val(experienciaLaboral.fechaRetiro());
-            $('.lbltit6').html("");
-            $('.inplbl6').val("");
+            $('.lbltit6').html("Fecha título profesional");
+            $('.inplbl6').val(experienciaLaboral.fechaTituloProfesional());
             verDocumentoValidar(EXPERIENCIA_LABORAL,
                     experienciaLaboral.id(),
                     experienciaLaboral.certificadoValidado(),
@@ -1456,6 +1459,7 @@
                         fnsp: ko.observable(experienciasLaborales[i].fnsp),
                         fechaIngreso: ko.observable(experienciasLaborales[i].fechaIngresoFormateada),
                         fechaRetiro: ko.observable(experienciasLaborales[i].fechaRetiroFormateada),
+                        fechaTituloProfesional: ko.observable(experienciasLaborales[i].fechaTituloProfesionalFormateada),
                         nucleoBasicoConocimiento: ko.observable(experienciasLaborales[i].nucleoBasicoConocimiento),
                         nombreNucleoBasicoConocimiento: ko.observable(experienciasLaborales[i].nombreNucleoBasicoConocimiento),
                         tipoEmpresa: ko.observable(experienciasLaborales[i].tipoEmpresa),

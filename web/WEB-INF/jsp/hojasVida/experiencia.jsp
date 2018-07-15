@@ -13,6 +13,7 @@
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <input type='text' class="form-control input-sm" id="tiempoExperienciaDocenciaInicial" maxlength="5">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTiempoExperienciaDocenciaInicial()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
              <div class="col-md-3">
@@ -21,6 +22,7 @@
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <input type='text' class="form-control input-sm" id="tiempoExperienciaDocenciaFinal" maxlength="5">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTiempoExperienciaDocenciaFinal()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
             <div class="col-md-3">
@@ -29,6 +31,7 @@
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <input type='text' class="form-control input-sm" id="tiempoExperienciaLaboralInicial" maxlength="5">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTiempoExperienciaLaboralInicial()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
             <div class="col-md-3">
@@ -37,6 +40,7 @@
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <input type='text' class="form-control input-sm" id="tiempoExperienciaLaboralFinal" maxlength="5">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTiempoExperienciaLaboralFinal()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
         </div>
@@ -47,6 +51,7 @@
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <input type='text' class="form-control input-sm" id="tiempoExperienciaProfesionalInicial" maxlength="5">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTiempoExperienciaProfesionalInicial()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>            
             <div class="col-md-3">
@@ -55,6 +60,7 @@
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <input type='text' class="form-control input-sm" id="tiempoExperienciaProfesionalFinal" maxlength="5">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTiempoExperienciaProfesionalFinal()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>            
         </div>
@@ -778,32 +784,26 @@
   <script>
     function limpiarTiempoExperienciaDocenciaInicial() {
        $('#tiempoExperienciaDocenciaInicial').val("");
-       buscarHojasVida(); 
     }
 
     function limpiarTiempoExperienciaLaboralInicial() {
        $('#tiempoExperienciaLaboralInicial').val("");
-       buscarHojasVida(); 
     }
 
     function limpiarTiempoExperienciaProfesionalInicial() {
         $('#tiempoExperienciaProfesionalInicial').val("");
-        buscarHojasVida(); 
     }
 
     function limpiarTiempoExperienciaDocenciaFinal() {
        $('#tiempoExperienciaDocenciaFinal').val("");
-       buscarHojasVida(); 
     }
 
     function limpiarTiempoExperienciaLaboralFinal() {
        $('#tiempoExperienciaLaboralFinal').val("");
-       buscarHojasVida(); 
     }
 
     function limpiarTiempoExperienciaProfesionalFinal() {
         $('#tiempoExperienciaProfesionalFinal').val("");
-        buscarHojasVida(); 
     }
 
     $(document).ready(function () {
@@ -833,18 +833,6 @@
             }
         });
         
-        $('#tiempoExperienciaDocenciaInicial').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
-        $('#tiempoExperienciaLaboralInicial').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
-        $('#tiempoExperienciaProfesionalInicial').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
         $('#tiempoExperienciaDocenciaInicial').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
@@ -857,18 +845,6 @@
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
 
-        $('#tiempoExperienciaDocenciaFinal').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
-        $('#tiempoExperienciaLaboralFinal').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
-        $('#tiempoExperienciaProfesionalFinal').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
         $('#tiempoExperienciaDocenciaFinal').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
         });
@@ -895,21 +871,18 @@
         if($('#tiempoExperienciaDocenciaInicial').val() != "" && $('#tiempoExperienciaDocenciaFinal').val() != "") {
           if(parseInt($('#tiempoExperienciaDocenciaInicial').val(), 10) > parseInt($('#tiempoExperienciaDocenciaFinal').val(), 10)){
              bootstrap_alert_consulta.warning("El valor final de tiempo de experiencia en docencia debe ser mayor o igual al valor inicial"); 
-             tblHojasVida.clear().draw();
              return;
           }
         }           
         if($('#tiempoExperienciaLaboralInicial').val() != "" && $('#tiempoExperienciaLaboralFinal').val() != "") {
           if(parseInt($('#tiempoExperienciaLaboralInicial').val(), 10) > parseInt($('#tiempoExperienciaLaboralFinal').val(), 10)){
              bootstrap_alert_consulta.warning("El valor final tiempo de experiencia laboral debe ser mayor o igual al valor inicial"); 
-             tblHojasVida.clear().draw();
              return;
           }
         }           
         if($('#tiempoExperienciaProfesionalInicial').val() != "" && $('#tiempoExperienciaProfesionalFinal').val() != "") {
           if(parseInt($('#tiempoExperienciaProfesionalInicial').val(), 10) > parseInt($('#tiempoExperienciaProfesionalFinal').val(), 10)){
              bootstrap_alert_consulta.warning("El valor final tiempo de experiencia profesional debe ser mayor o igual al valor inicial"); 
-             tblHojasVida.clear().draw();
              return;
           }
         }           

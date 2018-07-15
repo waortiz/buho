@@ -11,7 +11,7 @@
                 <div class="form-group form-inline">
                     <label>Nivel de estudio</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nivel de estudio">
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 85%;" id="cboNivelEstudio" class="js-select-basic-single js-states form-control">
+                    <select style="width: 75%;" id="cboNivelEstudio" class="js-select-basic-single js-states form-control">
                         <option></option>
                         <c:forEach var="nivelEstudio" items="${nivelesEstudio}">
                             <c:if test = "${nivelEstudio.getId() == 1 || nivelEstudio.getId() == 2}">
@@ -20,26 +20,29 @@
                         </c:forEach>
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNivelEstudio()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group form-inline">
                     <label>A&ntilde;o de graduaci&oacute;n inicial </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el año inicial">
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 85%;" id="cboAnyoGraduacionInicial" class="js-select-basic-single js-states form-control">
+                    <select style="width: 75%;" id="cboAnyoGraduacionInicial" class="js-select-basic-single js-states form-control">
                         <option></option>
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarAnyoGraduacionInicial()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group form-inline">
                     <label>A&ntilde;o de graduaci&oacute;n final </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el año final">
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 85%;" id="cboAnyoGraduacionFinal" class="js-select-basic-single js-states form-control">
+                    <select style="width: 75%;" id="cboAnyoGraduacionFinal" class="js-select-basic-single js-states form-control">
                         <option></option>
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarAnyoGraduacionFinal()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>            
         </div>
@@ -798,19 +801,7 @@
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
         });
-        
-        $('#cboNivelEstudio').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
-        $('#cboAnyoGraduacionInicial').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
-        $('#cboAnyoGraduacionFinal').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
+       
         for(i = new Date().getFullYear(); i > 1930; i--) {
             $('#cboAnyoGraduacionInicial').append($('<option/>').val(i).html(i));
             $('#cboAnyoGraduacionFinal').append($('<option/>').val(i).html(i));
@@ -829,7 +820,6 @@
         if($('#cboAnyoGraduacionInicial').val() != "" && $('#cboAnyoGraduacionFinal').val() != "") {
           if(parseInt($('#cboAnyoGraduacionInicial').val(), 10) > parseInt($('#cboAnyoGraduacionFinal').val(), 10)){
              bootstrap_alert_consulta.warning("El año de graduación final debe ser mayor o igual al año de graduación inicial"); 
-             tblHojasVida.clear().draw();
              return;
           }
         }

@@ -11,26 +11,28 @@
                 <div class="form-group form-inline">
                     <label>Idioma</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nivel de estudio">
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 85%;" id="cboIdioma" class="js-select-basic-single js-states form-control">
+                    <select style="width: 65%;" id="cboIdioma" class="js-select-basic-single js-states form-control">
                         <option></option>
                         <c:forEach var="idioma" items="${idiomas}">
                            <option value="${idioma.getId()}">${idioma.getNombre()}</option>
                         </c:forEach>
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarIdioma()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group form-inline">
                     <label>Tipo de prueba</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 85%;" id="cboTipoCertificacion" class="js-select-basic-single js-states form-control">
+                    <select style="width: 65%;" id="cboTipoCertificacion" class="js-select-basic-single js-states form-control">
                         <option ></option>
                         <c:forEach var="tipoCertificacion" items="${tiposCertificacion}">
                             <option value="${tipoCertificacion.getId()}">${tipoCertificacion.getNombre()}</option>
                         </c:forEach> 
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTipoCertificacion()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
             <div class="col-md-3">
@@ -39,6 +41,7 @@
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <input type='text' class="form-control input-sm" name="puntajeInicial" id="puntajeInicial" maxlength="5">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarPuntajeInicial()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>            
             <div class="col-md-3">
@@ -47,6 +50,7 @@
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <input type='text' class="form-control input-sm" name="puntajeFinal" id="puntajeFinal" maxlength="5">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarPuntajeFinal()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>            
         </div>
@@ -778,12 +782,10 @@
 
     function limpiarPuntajeInicial() {
        $('#puntajeInicial').val("");
-       buscarHojasVida(); 
     }
 
     function limpiarPuntajeFinal() {
        $('#puntajeFinal').val("");
-       buscarHojasVida(); 
     }
 
     $(document).ready(function () {
@@ -813,22 +815,6 @@
             }
         });
         
-        $('#cboIdioma').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
-        $('#cboTipoCertificacion').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
-        $('#puntajeInicial').on('change', function () {
-           buscarHojasVida(); 
-        });
-
-        $('#puntajeFinal').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
         $('#puntajeInicial').keyup(function () {
             var decimalOnly = /^\s*[0-9]\d*(\.\d+)?\s*$/;
             if(!decimalOnly.test(this.value)) {
@@ -855,7 +841,6 @@
         if($('#puntajeInicial').val() != "" && $('#puntajeFinal').val() != "") {
           if(parseInt($('#puntajeInicial').val(), 10) > parseInt($('#puntajeFinal').val(), 10)){
              bootstrap_alert_consulta.warning("El puntaje final debe ser mayor o igual al puntaje inicial"); 
-             tblHojasVida.clear().draw();
              return;
           }
         }          

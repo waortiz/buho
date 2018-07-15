@@ -131,17 +131,30 @@
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
                             <div class="form-inline">
                                 <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" name="copiaDocumentoIdentificacion" id="copiaDocumentoIdentificacion" class="form-control" style="width: 80%"></span><label class="lblnombre" id="nombreCopiaDocumentoIdentificacion">${hojaVida.getNombreCopiaDocumentoIdentificacion()}</label>
-                                <c:if test = "${!hojaVida.isCopiaDocumentoIdentificacionValidado()}">
+                                <c:if test = "${hojaVida.isTieneCopiaDocumentoIdentificacion() && hojaVida.isTieneCopiaDocumentoIdentificacion() && !hojaVida.isCopiaDocumentoIdentificacionValidado()}">
                                     <button id="btnCopiaDocumentoIdentificacionNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
                                     <button id="btnCopiaDocumentoIdentificacionValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado" style="display: none;"><span class="glyphicon glyphicon-ok"></span></button>
                                 </c:if>    
-                                <c:if test = "${hojaVida.isCopiaDocumentoIdentificacionValidado()}">
+                                <c:if test = "${hojaVida.isTieneCopiaDocumentoIdentificacion() && hojaVida.isTieneCopiaDocumentoIdentificacion() && hojaVida.isCopiaDocumentoIdentificacionValidado()}">
                                     <button id="btnCopiaDocumentoIdentificacionValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
                                     <button id="btnCopiaDocumentoIdentificacionNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado" style="display: none;"><span class='fa fa-question-circle-o'></span></button>
                                 </c:if>                              
-                                <c:if test = "${hojaVida.isTieneCopiaDocumentoIdentificacion()}">
-                                <button class="btn btn-success btn-xs" type="button" onclick="verCopiaCedula()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
+                                <c:if test = "${!hojaVida.isTieneCopiaDocumentoIdentificacion()}">
+                                    <button id="btnCopiaDocumentoIdentificacionValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado" style="display: none;"><span class="glyphicon glyphicon-ok"></span></button>
+                                    <button id="btnCopiaDocumentoIdentificacionNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado" style="display: none;"><span class='fa fa-question-circle-o'></span></button>
                                 </c:if>                              
+                                <c:if test = "${!hojaVida.isTieneCopiaDocumentoIdentificacion()}">
+                                    <button id="btnCopiaDocumentoIdentificacionValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado" style="display: none;"><span class="glyphicon glyphicon-ok"></span></button>
+                                    <button id="btnCopiaDocumentoIdentificacionNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado" style="display: none;"><span class='fa fa-question-circle-o'></span></button>
+                                </c:if>                              
+                                <c:if test = "${hojaVida.isTieneCopiaDocumentoIdentificacion()}">
+                                <button id="btnVerCopiaDocumentoIdentificacion" class="btn btn-success btn-xs" type="button" onclick="verCopiaDocumentoIdentificacion()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
+                                <button id="btnEliminarCopiaDocumentoIdentificacion" class="btn btn-danger btn-xs" type="button" onclick="eliminarCopiaDocumentoIdentificacion()" data-toggle="tooltip" data-placement="top" title="Eliminar"><span class="glyphicon glyphicon-remove"></span></button>
+                                </c:if>
+                                <c:if test = "${!hojaVida.isTieneCopiaDocumentoIdentificacion()}">
+                                <button id="btnVerCopiaDocumentoIdentificacion" class="btn btn-success btn-xs" type="button" onclick="verCopiaDocumentoIdentificacion()" data-toggle="tooltip" data-placement="top" title="Descargar" style="display: none;"><span class="glyphicon glyphicon-download"></span></button>
+                                <button id="btnEliminarCopiaDocumentoIdentificacion" class="btn btn-danger btn-xs" type="button" onclick="eliminarCopiaDocumentoIdentificacion()" data-toggle="tooltip" data-placement="top" title="Eliminar" style="display: none;"><span class="glyphicon glyphicon-remove"></span></button>
+                                </c:if>
                             </div>
                         </div>
                     </div>
@@ -279,17 +292,26 @@
                             <label>Copia libreta militar</label>
                             <div class="form-inline">
                             <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" name="copiaLibretaMilitar" id="copiaLibretaMilitar" class="form-control" style="width: 80%"></span><label class="lblnombre" id="nombreCopiaLibretaMilitar">${hojaVida.getNombreCopiaLibretaMilitar()}</label>
-                            <c:if test = "${!hojaVida.isCopiaLibretaMilitarValidado()}">
+                            <c:if test = "${hojaVida.isTieneCopiaLibretaMilitar() && !hojaVida.isCopiaLibretaMilitarValidado()}">
                                 <button id="btnCopiaLibretaMilitarNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
                                 <button id="btnCopiaLibretaMilitarValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado" style="display: none;"><span class="glyphicon glyphicon-ok"></span></button>
                             </c:if>    
-                            <c:if test = "${hojaVida.isCopiaLibretaMilitarValidado()}">
+                            <c:if test = "${hojaVida.isTieneCopiaLibretaMilitar() && hojaVida.isCopiaLibretaMilitarValidado()}">
                                 <button id="btnCopiaLibretaMilitarValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado"><span class="glyphicon glyphicon-ok"></span></button>
                                 <button id="btnCopiaLibretaMilitarNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado" style="display: none;"><span class='fa fa-question-circle-o'></span></button>
                             </c:if>                            
-                                <c:if test = "${hojaVida.isTieneCopiaLibretaMilitar()}">
-                                <button class="btn btn-success btn-xs" type="button" onclick="verCopiaLibretaMilitar()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
-                            </c:if>                              
+                            <c:if test = "${!hojaVida.isTieneCopiaLibretaMilitar()}">
+                                <button id="btnCopiaLibretaMilitarValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado" style="display: none;"><span class="glyphicon glyphicon-ok"></span></button>
+                                <button id="btnCopiaLibretaMilitarNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado" style="display: none;"><span class='fa fa-question-circle-o'></span></button>
+                            </c:if>                            
+                            <c:if test = "${hojaVida.isTieneCopiaLibretaMilitar()}">
+                                <button id="btnVerCopiaLibretaMilitar" class="btn btn-success btn-xs" type="button" onclick="verCopiaLibretaMilitar()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
+                                <button id="btnEliminarCopiaLibretaMilitar" class="btn btn-danger btn-xs" type="button" onclick="eliminarCopiaLibretaMilitar()" data-toggle="tooltip" data-placement="top" title="Eliminar"><span class="glyphicon glyphicon-remove"></span></button>
+                            </c:if> 
+                            <c:if test = "${!hojaVida.isTieneCopiaLibretaMilitar()}">
+                                <button id="btnVerCopiaLibretaMilitar" class="btn btn-success btn-xs" type="button" onclick="verCopiaLibretaMilitar()" data-toggle="tooltip" data-placement="top" title="Descargar" style="display: none;"><span class="glyphicon glyphicon-download"></span></button>
+                                <button id="btnEliminarCopiaLibretaMilitar" class="btn btn-danger btn-xs" type="button" onclick="eliminarCopiaLibretaMilitar()" data-toggle="tooltip" data-placement="top" title="Eliminar" style="display: none;"><span class="glyphicon glyphicon-remove"></span></button>
+                            </c:if>
                             </div>            
                         </div>
                     </div>
@@ -521,17 +543,26 @@
                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a>
                             <div class="form-inline">
                             <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" name="documentoRUT" id="documentoRUT" class="form-control" style="width: 80%"></span><label class="lblnombre" id="nombreDocumentoRUT">${hojaVida.getNombreDocumentoRUT()}</label>
-                            <c:if test = "${!hojaVida.isDocumentoRUTValidado()}">
+                            <c:if test = "${hojaVida.isTieneDocumentoRUT() && !hojaVida.isDocumentoRUTValidado()}">
                                 <button id="btnDocumentoRUTNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado"><span class='fa fa-question-circle-o'></span></button>
                                 <button id="btnDocumentoRUTValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado" style="display: none;"><span class="glyphicon glyphicon-ok"></span></button>
                             </c:if>    
-                            <c:if test = "${hojaVida.isDocumentoRUTValidado()}">
+                            <c:if test = "${hojaVida.isTieneDocumentoRUT() && hojaVida.isDocumentoRUTValidado()}">
                                 <button id="btnDocumentoRUTNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado" style="display: none;"><span class='fa fa-question-circle-o'></span></button>
                                 <button id="btnDocumentoRUTValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado" ><span class="glyphicon glyphicon-ok"></span></button>
                             </c:if>
+                            <c:if test = "${!hojaVida.isTieneDocumentoRUT()}">
+                                <button id="btnDocumentoRUTNoValidado" class='btn btn-danger btn-xs' type='button' data-toggle="tooltip" data-placement="top" title="No validado" style="display: none;"><span class='fa fa-question-circle-o'></span></button>
+                                <button id="btnDocumentoRUTValidado" class="btn btn-success btn-xs" type="button" data-toggle="tooltip" data-placement="top" title="Validado" style="display: none;"><span class="glyphicon glyphicon-ok"></span></button>
+                            </c:if>
                             <c:if test = "${hojaVida.isTieneDocumentoRUT()}">
-                                <button class="btn btn-success btn-xs" type="button" onclick="verCopiaRUT()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
-                                </c:if>                              
+                                <button id="btnVerDocumentoRUT" class="btn btn-success btn-xs" type="button" onclick="verCopiaRUT()" data-toggle="tooltip" data-placement="top" title="Descargar"><span class="glyphicon glyphicon-download"></span></button>
+                                <button id="btnEliminarDocumentoRUT" class="btn btn-danger btn-xs" type="button" onclick="eliminarDocumentoRUT()" data-toggle="tooltip" data-placement="top" title="Eliminar"><span class="glyphicon glyphicon-remove"></span></button>
+                            </c:if>                              
+                            <c:if test = "${!hojaVida.isTieneDocumentoRUT()}">
+                                <button id="btnVerDocumentoRUT" class="btn btn-success btn-xs" type="button" onclick="verDocumentoRUT()" data-toggle="tooltip" data-placement="top" title="Descargar" style="display: none;"><span class="glyphicon glyphicon-download"></span></button>
+                                <button id="btnEliminarDocumentoRUT" class="btn btn-danger btn-xs" type="button" onclick="eliminarDocumentoRUT()" data-toggle="tooltip" data-placement="top" title="Eliminar" style="display: none;"><span class="glyphicon glyphicon-remove"></span></button>
+                            </c:if>
                             </div>
                         </div>
                     </div>

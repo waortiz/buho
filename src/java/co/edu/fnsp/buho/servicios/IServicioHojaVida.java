@@ -62,6 +62,8 @@ public interface IServicioHojaVida {
     Documento obtenerDocumentoSoporte(long idPersona, int idTipoDocumento);
     
     Documento obtenerDocumentoSoporte(long idDocumentoSoporte);
+    
+    void eliminarDocumentoSoporte(long idPersona, int idTipoDocumento);
 
     List<HojaVidaConsulta> obtenerHojasVida(ConsultaHojaVida consultaHojaVida);
     

@@ -10,39 +10,42 @@
                 <div class="form-group form-inline">
                     <label>Buscar Numero de identificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre para buscar las hojas de vida">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 85%;" id="cboNumeroIdentificacion" class="js-select-basic-single js-states form-control">
+                    <select style="width: 75%;" id="cboNumeroIdentificacion" class="js-select-basic-single js-states form-control">
                         <option></option>
                         <c:forEach var="numeroDocumento" items="${numerosDocumento}">
                             <option value="${numeroDocumento.getId()}">${numeroDocumento.getNombre()}</option>
                         </c:forEach>                                                 
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNumeroIdentificacion()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group form-inline">
                     <label>Buscar nombres</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre para buscar las hojas de vida">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 85%;" id="cboNombres" class="js-select-basic-single js-states form-control">
+                    <select style="width: 75%;" id="cboNombres" class="js-select-basic-single js-states form-control">
                         <option></option>
                         <c:forEach var="nombre" items="${nombres}">
                             <option value="${nombre.getId()}">${nombre.getNombre()}</option>
                         </c:forEach>                                                 
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNombres()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group form-inline">
                     <label>Buscar apellidos</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre para buscar las hojas de vida">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 85%;" id="cboApellidos" class="js-select-basic-single js-states form-control">
+                    <select style="width: 75%;" id="cboApellidos" class="js-select-basic-single js-states form-control">
                         <option></option>
                         <c:forEach var="apellido" items="${apellidos}">
                             <option value="${apellido.getId()}">${apellido.getNombre()}</option>
                         </c:forEach>                                                 
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarApellidos()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
         </div>
@@ -950,9 +953,6 @@
             });
 
         });
-        $('#cboNumeroIdentificacion').on('change', function () {
-           buscarHojasVida(); 
-        });
         $('#tipidinput').on('keyup', function () {
             tblHojasVida
                     .columns(1)
@@ -970,12 +970,6 @@
                     .columns(3)
                     .search(this.value)
                     .draw();
-        });
-        $('#cboNombres').on('change', function () {
-           buscarHojasVida(); 
-        });
-        $('#cboApellidos').on('change', function () {
-           buscarHojasVida(); 
         });
         $('#nomapeinput').on('keyup', function () {
             tblHojasVida

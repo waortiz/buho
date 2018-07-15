@@ -10,12 +10,13 @@
                 <div class="form-group form-inline">
                     <label>Reconocido</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la institución">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 85%;" id="cboReconocido" class="js-select-basic-single js-states form-control">
+                    <select style="width: 75%;" id="cboReconocido" class="js-select-basic-single js-states form-control">
                         <option value=""></option>
                         <option value="true">Si</option>
                         <option value="false">No</option>
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarReconocido()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
             <div class="col-md-8">
@@ -29,6 +30,7 @@
                         </c:forEach>                                                 
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTipoInvestigador()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
         </div>
@@ -781,14 +783,6 @@
                 "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
-        });
-        
-        $('#cboReconocido').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
-        $('#cboTipoInvestigador').on('change', function () {
-           buscarHojasVida(); 
         });
     });
 

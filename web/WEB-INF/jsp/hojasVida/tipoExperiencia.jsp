@@ -5,20 +5,8 @@
 <div id="contenido">         
     <div class="container">
         <legend>Consulta de hoja de vida por tipo de experiencia</legend>
+        <div id="alert_consulta"></div>
         <div class="row">
-            <div class="col-md-3">
-                <div class="form-group form-inline">
-                    <label>Tipo de experiencia</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la institución">
-                        <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 85%;" id="cboTipoExperiencia" class="js-select-basic-single js-states form-control">
-                        <option value=""></option>
-                        <c:forEach var="tipoExperiencia" items="${tiposExperiencia}">
-                            <option value="${tipoExperiencia.getId()}">${tipoExperiencia.getNombre()}</option>
-                        </c:forEach>                                                 
-                    </select>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTipoExperiencia()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
-                </div>
-            </div>
             <div class="col-md-9">
                 <div class="form-group form-inline">
                     <label>N&uacute;cleo b&aacute;sico de conocimiento </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
@@ -30,6 +18,21 @@
                         </c:forEach>                                                 
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNucleoBasicoConocimiento()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group form-inline">
+                    <label>Tipo de experiencia</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la institución">
+                        <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
+                    <select style="width: 65%;" id="cboTipoExperiencia" class="js-select-basic-single js-states form-control">
+                        <option value=""></option>
+                        <c:forEach var="tipoExperiencia" items="${tiposExperiencia}">
+                            <option value="${tipoExperiencia.getId()}">${tipoExperiencia.getNombre()}</option>
+                        </c:forEach>                                                 
+                    </select>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTipoExperiencia()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
         </div>
@@ -785,21 +788,14 @@
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
         });
-        
-        $('#cboTipoExperiencia').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
-        $('#cboNucleoBasicoConocimiento').on('change', function () {
-           buscarHojasVida(); 
-        });
     });
 
     function buscarHojasVida() {
         $('#formHV').hide();
         $('#divDescargar').hide();
-        if($('#cboTipoExperiencia').val() == "" && $('#cboNucleoBasicoConocimiento').val() == "") {
-            tblHojasVida.clear().draw();
+        bootstrap_alert_consulta.removeWarning();
+        if($('#cboNucleoBasicoConocimiento').val() == "") {
+            bootstrap_alert_consulta.warning("Seleccione el núcleo básico de conocimiento"); 
             return;
         }
         $('#md_resultados').modal({backdrop: 'static', keyboard: false});
@@ -1500,6 +1496,17 @@
         });
     }
 
+    bootstrap_alert_consulta = {};
+    bootstrap_alert_consulta.warning = function (message) {
+        $('#alert_consulta').html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_consulta.success = function (message) {
+        $('#alert_consulta').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
+    };
+    bootstrap_alert_consulta.removeWarning = function () {
+        $('#alert_consulta').html('');
+    };
+    
     var correosElectronicos = [];
     var cuentasBancarias = [];
     var telefonos = [];

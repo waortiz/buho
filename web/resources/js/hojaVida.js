@@ -4342,15 +4342,21 @@ $('.fecha').datepicker({
                 } else {
                     if(copiaDocumentoIdentificacionCambiado) {
                       $('#btnCopiaDocumentoIdentificacionValidado').hide();  
-                      $('#btnCopiaDocumentoIdentificacionNoValidado').show();  
+                      $('#btnCopiaDocumentoIdentificacionNoValidado').show();
+                      $('#btnVerCopiaDocumentoIdentificacion').show();
+                      $('#btnEliminarCopiaDocumentoIdentificacion').show();
                     }
                     if(copiaLibretaMilitarCambiado) {
                       $('#btnCopiaLibretaMilitarValidado').hide();  
                       $('#btnCopiaLibretaMilitarNoValidado').show();  
+                      $('#btnVerCopiaLibretaMilitar').show();
+                      $('#btnEliminarCopiaLibretaMilitar').show();
                     }
                     if(documentoRUTCambiado) {
                       $('#btnDocumentoRUTValidado').hide();  
                       $('#btnDocumentoRUTNoValidado').show();  
+                      $('#btnVerDocumentoRUT').show();
+                      $('#btnEliminarDocumentoRUT').show();
                     }
                     if(urlCVLACCambiada) {
                       $('#btnUrlCVLACValidada').hide();  
@@ -4390,7 +4396,7 @@ $('.fecha').datepicker({
         }
     }
 
-    function verCopiaCedula() {
+    function verCopiaDocumentoIdentificacion() {
         $.ajax({
             type: "GET",
             url: contextPath + "/hojasVida/copiaCedula/" + $('#idPersona').val(),
@@ -4434,6 +4440,66 @@ $('.fecha').datepicker({
                if(response != "") {
                  window.location.href = contextPath + "/hojasVida/copiaLibretaMilitar/" + $('#idPersona').val();
                }
+            },
+            error:function (xhr, ajaxOptions, thrownError) {
+
+            } 
+        });  
+    }
+
+    function eliminarCopiaDocumentoIdentificacion() {
+        $.ajax({
+            type: "GET",
+            url: contextPath + "/hojasVida/eliminarCopiaCedula",
+            processData: false,
+            contentType: false,
+            success: function (response) {
+               bootstrap_alert_hoja_vida.success("Copia de la cédula eliminada exitosamente");
+               $('#nombreCopiaDocumentoIdentificacion').text("");
+               $('#btnCopiaDocumentoIdentificacionValidado').hide();
+               $('#btnCopiaDocumentoIdentificacionNoValidado').hide();
+               $('#btnVerCopiaDocumentoIdentificacion').hide();
+               $('#btnEliminarCopiaDocumentoIdentificacion').hide();
+            },
+            error:function (xhr, ajaxOptions, thrownError) {
+
+            } 
+        });  
+    }
+
+    function eliminarDocumentoRUT() {
+        $.ajax({
+            type: "GET",
+            url: contextPath + "/hojasVida/eliminarCopiaRUT",
+            processData: false,
+            contentType: false,
+            success: function (response) {
+               bootstrap_alert_hoja_vida.success("Documento de soporte RUT eliminado exitosamente");
+               $('#nombreDocumentoRUT').text("");
+               $('#btnDocumentoRUTValidado').hide();  
+               $('#btnDocumentoRUTNoValidado').hide();  
+               $('#btnVerDocumentoRUT').hide();
+               $('#btnEliminarDocumentoRUT').hide();
+            },
+            error:function (xhr, ajaxOptions, thrownError) {
+
+            } 
+        });  
+    }
+
+    function eliminarCopiaLibretaMilitar() {
+        $.ajax({
+            type: "GET",
+            url: contextPath + "/hojasVida/eliminarCopiaLibretaMilitar",
+            processData: false,
+            contentType: false,
+            success: function (response) {
+               bootstrap_alert_hoja_vida.success("Copia de la libreta militar eliminada exitosamente");
+               $('#nombreCopiaLibretaMilitar').text(""); 
+               $('#btnCopiaLibretaMilitarValidado').hide();  
+               $('#btnCopiaLibretaMilitarNoValidado').hide();  
+               $('#btnVerCopiaLibretaMilitar').hide();
+               $('#btnEliminarCopiaLibretaMilitar').hide();
             },
             error:function (xhr, ajaxOptions, thrownError) {
 

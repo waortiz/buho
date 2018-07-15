@@ -518,5 +518,10 @@ public class ServicioHojaVida implements IServicioHojaVida {
     public List<CorreoElectronico> obtenerCorreosElectronicosValidadores() {
         return repositorioHojaVida.obtenerCorreosElectronicosValidadores();
     }
+
+    @Override
+    public void eliminarDocumentoSoporte(long idPersona, int idTipoDocumento) {
+        repositorioHojaVida.eliminarDocumentoSoporte(idPersona, idTipoDocumento);
+    }
     
 }

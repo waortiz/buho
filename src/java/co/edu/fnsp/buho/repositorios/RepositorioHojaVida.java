@@ -94,6 +94,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     private SimpleJdbcCall actualizarDocumentoSoporte;
     private SimpleJdbcCall actualizarDocumentoSoportePorTipo;
     private SimpleJdbcCall eliminarDocumentoSoporte;
+    private SimpleJdbcCall eliminarDocumentoSoportePersona;
     private SimpleJdbcCall obtenerDocumentosSoporte;
     private SimpleJdbcCall validarDocumento;
 
@@ -241,6 +242,7 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
 
         this.ingresarDocumentoSoporte = new SimpleJdbcCall(jdbcTemplate).withProcedureName("ingresarDocumentoSoporte");
         this.eliminarDocumentoSoporte = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarDocumentoSoporte");
+        this.eliminarDocumentoSoportePersona = new SimpleJdbcCall(jdbcTemplate).withProcedureName("eliminarDocumentoSoportePersona");
         this.obtenerDocumentoSoporte = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoSoporte");
         this.obtenerDocumentoSoportePorTipo = new SimpleJdbcCall(jdbcTemplate).withProcedureName("obtenerDocumentoSoportePorTipo");
         this.actualizarDocumentoSoporte = new SimpleJdbcCall(jdbcTemplate).withProcedureName("actualizarDocumentoSoporte");
@@ -1502,6 +1504,14 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
     }
 
     @Override
+    public void eliminarDocumentoSoporte(long idPersona, int idTipoDocumento) {
+        MapSqlParameterSource parametrosEliminacionDocumentoSoporte = new MapSqlParameterSource();
+        parametrosEliminacionDocumentoSoporte.addValue("varIdPersona", idPersona);
+        parametrosEliminacionDocumentoSoporte.addValue("varIdTipoDocumento", idTipoDocumento);
+        eliminarDocumentoSoportePersona.execute(parametrosEliminacionDocumentoSoporte);    
+    }    
+    
+    @Override
     public void guardarEducacionBasica(long idPersona, EducacionBasica educacionBasica) {
         if (educacionBasica.getId() == 0) {
             MapSqlParameterSource parametrosIngresoEducacionBasica = new MapSqlParameterSource();
@@ -2001,6 +2011,9 @@ public class RepositorioHojaVida implements IRepositorioHojaVida {
             experienciaLaboral.setFechaIngresoFormateada(Util.obtenerFechaFormateada(experienciaLaboral.getFechaIngreso()));
             if (experienciaLaboral.getFechaRetiro() != null) {
                 experienciaLaboral.setFechaRetiroFormateada(Util.obtenerFechaFormateada(experienciaLaboral.getFechaRetiro()));
+            }
+            if (experienciaLaboral.getFechaTituloProfesional()!= null) {
+                experienciaLaboral.setFechaTituloProfesionalFormateada(Util.obtenerFechaFormateada(experienciaLaboral.getFechaTituloProfesional()));
             }
             if (experienciaLaboral.isCertificadoValidado()) {
                 experienciaLaboral.setNombreCertificadoValidado("Si");

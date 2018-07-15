@@ -8,7 +8,6 @@ package co.edu.fnsp.buho.controladores;
 import co.edu.fnsp.buho.entidades.Articulo;
 import co.edu.fnsp.buho.entidades.Ciudad;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVida;
-import co.edu.fnsp.buho.entidades.ConsultaHojaVidaDistincion;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionBasica;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionContinua;
 import co.edu.fnsp.buho.entidades.ConsultaHojaVidaEducacionSuperior;
@@ -668,6 +667,24 @@ public class HojaVidaController {
             response.setHeader("Content-Disposition", "attachment; filename=\"" + documento.getNombre() + "\"");
             FileCopyUtils.copy(documento.getContenido(), response.getOutputStream());
         }
+    }
+
+    @RequestMapping(value = "/eliminarCopiaCedula", method = RequestMethod.GET)
+    public void eliminarCopiaCedula(HttpServletResponse response) throws IOException {
+        long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+        servicioHojaVida.eliminarDocumentoSoporte(idPersona, TipoDocumento.COPIA_CEDULA.getId());
+    }
+
+    @RequestMapping(value = "/eliminarCopiaRUT", method = RequestMethod.GET)
+    public void eliminarCopiaRut(HttpServletResponse response) throws IOException {
+        long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+        servicioHojaVida.eliminarDocumentoSoporte(idPersona, TipoDocumento.RUT.getId());
+    }
+
+    @RequestMapping(value = "/eliminarCopiaLibretaMilitar", method = RequestMethod.GET)
+    public void eliminarCopiaLibretaMilitar(HttpServletResponse response) throws IOException {
+        long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
+        servicioHojaVida.eliminarDocumentoSoporte(idPersona,  TipoDocumento.LIBRETA_MILITAR.getId());
     }
 
     @RequestMapping(value = "/documentoSoporte/{idDocumentoSoporte}", method = RequestMethod.GET)

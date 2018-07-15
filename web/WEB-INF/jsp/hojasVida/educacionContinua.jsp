@@ -18,6 +18,7 @@
                         </c:forEach>
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarCurso()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
             <div class="col-md-6">
@@ -31,6 +32,7 @@
                         </c:forEach>                                                 
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNucleoBasicoConocimiento()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
         </div>
@@ -41,6 +43,7 @@
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <input type='text' class="form-control input-sm" name="numeroHorasInicial" id="numeroHorasInicial" maxlength="5">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNumeroHorasInicial()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>            
             <div class="col-md-3">
@@ -49,6 +52,7 @@
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <input type='text' class="form-control input-sm" name="numeroHorasFinal" id="numeroHorasFinal" maxlength="5">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNumeroHorasFinal()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
+                    <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>            
         </div>
@@ -788,12 +792,10 @@
 
     function limpiarNumeroHorasInicial() {
        $('#numeroHorasInicial').val("");
-       buscarHojasVida(); 
     }
 
     function limpiarNumeroHorasFinal() {
        $('#numeroHorasFinal').val("");
-       buscarHojasVida(); 
     }
 
     $(document).ready(function () {
@@ -859,22 +861,6 @@
                     .search(this.value)
                     .draw();
         });
-        
-        $('#cboCurso').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
-        $('#cboNucleoBasicoConocimiento').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
-        $('#numeroHorasInicial').on('change', function () {
-           buscarHojasVida(); 
-        });
-        
-        $('#numeroHorasFinal').on('change', function () {
-           buscarHojasVida(); 
-        });
 
         $('#numeroHorasInicial').keyup(function () {
             this.value = (this.value + '').replace(/[^0-9]/g, '');
@@ -897,7 +883,6 @@
         if($('#numeroHorasInicial').val() != "" && $('#numeroHorasFinal').val() != "") {
           if(parseInt($('#numeroHorasInicial').val(), 10) > parseInt($('#numeroHorasFinal').val(), 10)){
              bootstrap_alert_consulta.warning("El número de horas final debe ser mayor o igual al número de horas inicial"); 
-             tblHojasVida.clear().draw();
              return;
           }
         }  

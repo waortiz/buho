@@ -20,7 +20,9 @@ public class ExperienciaLaboral {
     private boolean fnsp;
     private Date fechaIngreso;
     private Date fechaRetiro;
+    private Date fechaTituloProfesional;
     private String fechaIngresoFormateada;
+    private String fechaTituloProfesionalFormateada;
     private String fechaRetiroFormateada;
     private int nucleoBasicoConocimiento;
     private String nombreNucleoBasicoConocimiento;
@@ -402,5 +404,33 @@ public class ExperienciaLaboral {
      */
     public void setNombreCertificadoValidado(String nombreCertificadoValidado) {
         this.nombreCertificadoValidado = nombreCertificadoValidado;
+    }
+
+    /**
+     * @return the fechaTituloProfesional
+     */
+    public Date getFechaTituloProfesional() {
+        return fechaTituloProfesional;
+    }
+
+    /**
+     * @param fechaTituloProfesional the fechaTituloProfesional to set
+     */
+    public void setFechaTituloProfesional(Date fechaTituloProfesional) {
+        this.fechaTituloProfesional = fechaTituloProfesional;
+    }
+
+    /**
+     * @return the fechaTituloProfesionalFormateada
+     */
+    public String getFechaTituloProfesionalFormateada() {
+        return fechaTituloProfesionalFormateada;
+    }
+
+    /**
+     * @param fechaTituloProfesionalFormateada the fechaTituloProfesionalFormateada to set
+     */
+    public void setFechaTituloProfesionalFormateada(String fechaTituloProfesionalFormateada) {
+        this.fechaTituloProfesionalFormateada = fechaTituloProfesionalFormateada;
     }
 }

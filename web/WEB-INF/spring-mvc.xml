@@ -68,6 +68,9 @@
             <mvc:exclude-mapping path="/hojasVida/copiaLibretaMilitar/**" />
             <mvc:exclude-mapping path="/hojasVida/copiaRUT/**" />
             <mvc:exclude-mapping path="/hojasVida/copiaCedula/**" />
+            <mvc:exclude-mapping path="/hojasVida/eliminarCopiaLibretaMilitar" />
+            <mvc:exclude-mapping path="/hojasVida/eliminarCopiaRUT" />
+            <mvc:exclude-mapping path="/hojasVida/eliminarCopiaCedula" />
             <mvc:exclude-mapping path="/hojasVida/programasInstitucion/**" />
             <mvc:exclude-mapping path="/hojasVida/documentoProductoConocimiento/**" />
             <mvc:exclude-mapping path="/hojasVida/documentoProductoConocimientoValidar/**" />

@@ -218,5 +218,7 @@ public interface IRepositorioHojaVida {
 
     List<HojaVidaSoporte> obtenerHojasVidaSoporte(ConsultaHojaVida consultaHojaVida);
 
-    public List<CorreoElectronico> obtenerCorreosElectronicosValidadores();
+    List<CorreoElectronico> obtenerCorreosElectronicosValidadores();
+
+    void eliminarDocumentoSoporte(long idPersona, int idTipoDocumento);
 }
