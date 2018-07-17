@@ -26,6 +26,7 @@ import co.edu.fnsp.buho.entidades.DocumentoSoporte;
 import co.edu.fnsp.buho.entidades.EducacionBasica;
 import co.edu.fnsp.buho.entidades.EducacionContinua;
 import co.edu.fnsp.buho.entidades.EducacionSuperior;
+import co.edu.fnsp.buho.entidades.EliminacionRegistroHojaVida;
 import co.edu.fnsp.buho.entidades.ExperienciaLaboral;
 import co.edu.fnsp.buho.entidades.Maestro;
 import co.edu.fnsp.buho.entidades.TipoDocumento;
@@ -669,19 +670,19 @@ public class HojaVidaController {
         }
     }
 
-    @RequestMapping(value = "/eliminarCopiaCedula", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarCopiaCedula", method = RequestMethod.POST)
     public void eliminarCopiaCedula(HttpServletResponse response) throws IOException {
         long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
         servicioHojaVida.eliminarDocumentoSoporte(idPersona, TipoDocumento.COPIA_CEDULA.getId());
     }
 
-    @RequestMapping(value = "/eliminarCopiaRUT", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarCopiaRUT", method = RequestMethod.POST)
     public void eliminarCopiaRut(HttpServletResponse response) throws IOException {
         long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
         servicioHojaVida.eliminarDocumentoSoporte(idPersona, TipoDocumento.RUT.getId());
     }
 
-    @RequestMapping(value = "/eliminarCopiaLibretaMilitar", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarCopiaLibretaMilitar", method = RequestMethod.POST)
     public void eliminarCopiaLibretaMilitar(HttpServletResponse response) throws IOException {
         long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
         servicioHojaVida.eliminarDocumentoSoporte(idPersona,  TipoDocumento.LIBRETA_MILITAR.getId());
@@ -1238,12 +1239,12 @@ public class HojaVidaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarDocumentoSoporte/{idDocumentoSoporte}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarDocumentoSoporte", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarDocumentoSoporte(@PathVariable("idDocumentoSoporte") int idDocumentoSoporte, Model model) {
+    String eliminarDocumentoSoporte(EliminacionRegistroHojaVida eliminacionRegistroHojaVida, Model model) {
         String json = "";
         try {
-            servicioHojaVida.eliminarDocumentoSoporte(idDocumentoSoporte);
+            servicioHojaVida.eliminarDocumentoSoporte(eliminacionRegistroHojaVida.getId());
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<DocumentoSoporte> documentosSoporte = servicioHojaVida.obtenerDocumentosSoporteComplementarios(idPersona);
             json = Util.obtenerDocumentosSoporteJSON(documentosSoporte);
@@ -1297,12 +1298,12 @@ public class HojaVidaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarEducacionBasica/{idEducacionBasica}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarEducacionBasica", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarEducacionBasica(@PathVariable("idEducacionBasica") int idEducacionBasica, Model model) {
+    String eliminarEducacionBasica(EliminacionRegistroHojaVida eliminacionRegistroHojaVida, Model model) {
         String json = "";
         try {
-            servicioHojaVida.eliminarEducacionBasica(idEducacionBasica);
+            servicioHojaVida.eliminarEducacionBasica(eliminacionRegistroHojaVida.getId());
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<EducacionBasica> educacionesBasicas = servicioHojaVida.obtenerEducacionesBasicas(idPersona);
             json = Util.obtenerEducacionesBasicasJSON(educacionesBasicas);
@@ -1373,12 +1374,12 @@ public class HojaVidaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarEducacionSuperior/{idEducacionSuperior}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarEducacionSuperior", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarEducacionSuperior(@PathVariable("idEducacionSuperior") int idEducacionSuperior, Model model) {
+    String eliminarEducacionSuperior(EliminacionRegistroHojaVida eliminacionRegistroHojaVida, Model model) {
         String json = "";
         try {
-            servicioHojaVida.eliminarEducacionSuperior(idEducacionSuperior);
+            servicioHojaVida.eliminarEducacionSuperior(eliminacionRegistroHojaVida.getId());
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<EducacionSuperior> educacionesSuperiores = servicioHojaVida.obtenerEducacionesSuperiores(idPersona);
             json = Util.obtenerEducacionesSuperioresJSON(educacionesSuperiores);
@@ -1407,12 +1408,12 @@ public class HojaVidaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarCorreoElectronico/{idCorreoElectronico}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarCorreoElectronico", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarCorreoElectronico(@PathVariable("idCorreoElectronico") int idCorreoElectronico, Model model) {
+    String eliminarCorreoElectronico(EliminacionRegistroHojaVida eliminacionRegistroHojaVida, Model model) {
         String json = "";
         try {
-            servicioHojaVida.eliminarCorreoElectronico(idCorreoElectronico);
+            servicioHojaVida.eliminarCorreoElectronico(eliminacionRegistroHojaVida.getId());
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<CorreoElectronico> correosElectronicos = servicioHojaVida.obtenerCorreosElectronicos(idPersona);
             json = Util.obtenerCorreosElectronicosJSON(correosElectronicos);
@@ -1441,12 +1442,12 @@ public class HojaVidaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarTelefono/{idTelefono}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarTelefono", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarTelefono(@PathVariable("idTelefono") int idTelefono, Model model) {
+    String eliminarTelefono(EliminacionRegistroHojaVida eliminacionRegistroHojaVida, Model model) {
         String json = "";
         try {
-            servicioHojaVida.eliminarTelefono(idTelefono);
+            servicioHojaVida.eliminarTelefono(eliminacionRegistroHojaVida.getId());
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<Telefono> telefonos = servicioHojaVida.obtenerTelefonos(idPersona);
             json = Util.obtenerTelefonosJSON(telefonos);
@@ -1475,12 +1476,12 @@ public class HojaVidaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarCuentaBancaria/{idCuentaBancaria}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarCuentaBancaria", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarCuentaBancaria(@PathVariable("idCuentaBancaria") int idCuentaBancaria, Model model) {
+    String eliminarCuentaBancaria(EliminacionRegistroHojaVida eliminacionRegistroHojaVida, Model model) {
         String json = "";
         try {
-            servicioHojaVida.eliminarCuentaBancaria(idCuentaBancaria);
+            servicioHojaVida.eliminarCuentaBancaria(eliminacionRegistroHojaVida.getId());
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<CuentaBancaria> cuentasBancarias = servicioHojaVida.obtenerCuentasBancarias(idPersona);
             json = Util.obtenerCuentasBancariasJSON(cuentasBancarias);
@@ -1532,12 +1533,12 @@ public class HojaVidaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarEducacionContinua/{idEducacionContinua}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarEducacionContinua", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarEducacionContinua(@PathVariable("idEducacionContinua") int idEducacionContinua, Model model) {
+    String eliminarEducacionContinua(EliminacionRegistroHojaVida eliminacionRegistroHojaVida, Model model) {
         String json = "";
         try {
-            servicioHojaVida.eliminarEducacionContinua(idEducacionContinua);
+            servicioHojaVida.eliminarEducacionContinua(eliminacionRegistroHojaVida.getId());
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<EducacionContinua> educacionesContinuas = servicioHojaVida.obtenerEducacionesContinuas(idPersona);
             json = Util.obtenerEducacionesContinuasJSON(educacionesContinuas);
@@ -1590,12 +1591,12 @@ public class HojaVidaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarIdioma/{idIdioma}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarIdioma", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarIdioma(@PathVariable("idIdioma") int idIdioma, Model model) {
+    String eliminarIdioma(EliminacionRegistroHojaVida eliminacionRegistroHojaVida, Model model) {
         String json = "";
         try {
-            servicioHojaVida.eliminarIdioma(idIdioma);
+            servicioHojaVida.eliminarIdioma(eliminacionRegistroHojaVida.getId());
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<Idioma> idiomas = servicioHojaVida.obtenerIdiomas(idPersona);
             json = Util.obtenerIdiomasJSON(idiomas);
@@ -1643,12 +1644,12 @@ public class HojaVidaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarDistincion/{idDistincion}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarDistincion", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarDistincion(@PathVariable("idDistincion") int idDistincion, Model model) {
+    String eliminarDistincion(EliminacionRegistroHojaVida eliminacionRegistroHojaVida, Model model) {
         String json = "";
         try {
-            servicioHojaVida.eliminarDistincion(idDistincion);
+            servicioHojaVida.eliminarDistincion(eliminacionRegistroHojaVida.getId());
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<Distincion> distincions = servicioHojaVida.obtenerDistinciones(idPersona);
             json = Util.obtenerDistincionesJSON(distincions);
@@ -1705,12 +1706,12 @@ public class HojaVidaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarExperienciaLaboral/{idExperienciaLaboral}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarExperienciaLaboral", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarExperienciaLaboral(@PathVariable("idExperienciaLaboral") int idExperienciaLaboral, Model model) {
+    String eliminarExperienciaLaboral(EliminacionRegistroHojaVida eliminacionRegistroHojaVida, Model model) {
         String json = "";
         try {
-            servicioHojaVida.eliminarExperienciaLaboral(idExperienciaLaboral);
+            servicioHojaVida.eliminarExperienciaLaboral(eliminacionRegistroHojaVida.getId());
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<ExperienciaLaboral> experienciasLaborales = servicioHojaVida.obtenerExperienciasLaborales(idPersona);
             json = Util.obtenerExperienciasLaboralesJSON(experienciasLaborales);
@@ -1747,12 +1748,12 @@ public class HojaVidaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarExperienciaDocencia/{idExperienciaDocencia}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarExperienciaDocencia", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarExperienciaDocencia(@PathVariable("idExperienciaDocencia") int idExperienciaDocencia, Model model) {
+    String eliminarExperienciaDocencia(EliminacionRegistroHojaVida eliminacionRegistroHojaVida, Model model) {
         String json = "";
         try {
-            servicioHojaVida.eliminarExperienciaDocencia(idExperienciaDocencia);
+            servicioHojaVida.eliminarExperienciaDocencia(eliminacionRegistroHojaVida.getId());
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<ExperienciaDocencia> experienciasDocencia = servicioHojaVida.obtenerExperienciasDocencia(idPersona);
             json = Util.obtenerExperienciasDocenciaJSON(experienciasDocencia);
@@ -1804,12 +1805,12 @@ public class HojaVidaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarCursoExperienciaDocencia/{idCursoExperienciaDocencia}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarCursoExperienciaDocencia", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarCursoExperienciaDocencia(@PathVariable("idCursoExperienciaDocencia") int idCursoExperienciaDocencia, Model model) {
+    String eliminarCursoExperienciaDocencia(EliminacionRegistroHojaVida eliminacionRegistroHojaVida, Model model) {
         String json = "";
         try {
-            servicioHojaVida.eliminarCursoExperienciaDocencia(idCursoExperienciaDocencia);
+            servicioHojaVida.eliminarCursoExperienciaDocencia(eliminacionRegistroHojaVida.getId());
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<ExperienciaDocencia> experienciasDocencia = servicioHojaVida.obtenerExperienciasDocencia(idPersona);
             json = Util.obtenerExperienciasDocenciaJSON(experienciasDocencia);
@@ -1847,12 +1848,12 @@ public class HojaVidaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarArticulo/{idArticulo}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarArticulo", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarArticulo(@PathVariable("idArticulo") int idArticulo, Model model) {
+    String eliminarArticulo(EliminacionRegistroHojaVida eliminacionRegistroHojaVida, Model model) {
         String json = "";
         try {
-            servicioHojaVida.eliminarArticulo(idArticulo);
+            servicioHojaVida.eliminarArticulo(eliminacionRegistroHojaVida.getId());
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<Articulo> articulos = servicioHojaVida.obtenerArticulos(idPersona);
             json = Util.obtenerArticulosJSON(articulos);
@@ -1903,12 +1904,12 @@ public class HojaVidaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarPatente/{idPatente}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarPatente", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarPatente(@PathVariable("idPatente") int idPatente, Model model) {
+    String eliminarPatente(EliminacionRegistroHojaVida eliminacionRegistroHojaVida, Model model) {
         String json = "";
         try {
-            servicioHojaVida.eliminarPatente(idPatente);
+            servicioHojaVida.eliminarPatente(eliminacionRegistroHojaVida.getId());
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<Patente> patentes = servicioHojaVida.obtenerPatentes(idPersona);
             json = Util.obtenerPatentesJSON(patentes);
@@ -1958,12 +1959,12 @@ public class HojaVidaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarProductoConocimiento/{idProductoConocimiento}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarProductoConocimiento", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarProductoConocimiento(@PathVariable("idProductoConocimiento") int idProductoConocimiento, Model model) {
+    String eliminarProductoConocimiento(EliminacionRegistroHojaVida eliminacionRegistroHojaVida, Model model) {
         String json = "";
         try {
-            servicioHojaVida.eliminarProductoConocimiento(idProductoConocimiento);
+            servicioHojaVida.eliminarProductoConocimiento(eliminacionRegistroHojaVida.getId());
             long idPersona = ((DetalleUsuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getIdPersona();
             List<ProductoConocimiento> productoConocimientos = servicioHojaVida.obtenerProductoConocimientos(idPersona);
             json = Util.obtenerProductosConocimientoJSON(productoConocimientos);

@@ -15,6 +15,7 @@ import co.edu.fnsp.buho.entidades.CampoHojaVida;
 import co.edu.fnsp.buho.entidades.CriterioHabilitanteConvocatoria;
 import co.edu.fnsp.buho.entidades.DetalleUsuario;
 import co.edu.fnsp.buho.entidades.EducacionContinuaConvocatoria;
+import co.edu.fnsp.buho.entidades.EliminacionRegistroConvocatoria;
 import co.edu.fnsp.buho.entidades.Evaluacion;
 import co.edu.fnsp.buho.entidades.HojaVida;
 import co.edu.fnsp.buho.entidades.IdiomaConvocatoria;
@@ -275,13 +276,13 @@ public class ConvocatoriaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarAdenda/{idConvocatoria}/{idAdenda}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarAdenda", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarAdenda(@PathVariable("idConvocatoria") int idConvocatoria, @PathVariable("idAdenda") int idAdenda, Model model) {
+    String eliminarAdenda(EliminacionRegistroConvocatoria eliminacionRegistroConvocatoria, Model model) {
         String json = "";
         try {
-            servicioConvocatoria.eliminarAdenda(idAdenda);
-            List<Adenda> adendas = servicioConvocatoria.obtenerAdendas(idConvocatoria);
+            servicioConvocatoria.eliminarAdenda(eliminacionRegistroConvocatoria.getId());
+            List<Adenda> adendas = servicioConvocatoria.obtenerAdendas(eliminacionRegistroConvocatoria.getIdConvocatoria());
             json = Util.obtenerAdendasJSON(adendas);
         } catch (Exception exc) {
             logger.error(exc);
@@ -307,13 +308,13 @@ public class ConvocatoriaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarAnyosExperiencia/{idConvocatoria}/{idAnyosExperiencia}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarAnyosExperiencia", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarAnyosExperiencia(@PathVariable("idConvocatoria") int idConvocatoria, @PathVariable("idAnyosExperiencia") int idAnyosExperiencia, Model model) {
+    String eliminarAnyosExperiencia(EliminacionRegistroConvocatoria eliminacionRegistroConvocatoria, Model model) {
         String json = "";
         try {
-            servicioConvocatoria.eliminarAnyosExperiencia(idAnyosExperiencia);
-            List<AnyosExperiencia> anyosExperiencias = servicioConvocatoria.obtenerAnyosExperiencias(idConvocatoria);
+            servicioConvocatoria.eliminarAnyosExperiencia(eliminacionRegistroConvocatoria.getId());
+            List<AnyosExperiencia> anyosExperiencias = servicioConvocatoria.obtenerAnyosExperiencias(eliminacionRegistroConvocatoria.getIdConvocatoria());
             json = Util.obtenerAnyosExperienciaJSON(anyosExperiencias);
         } catch (Exception exc) {
             logger.error(exc);
@@ -339,13 +340,13 @@ public class ConvocatoriaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarIdioma/{idConvocatoria}/{idIdioma}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarIdioma", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarIdioma(@PathVariable("idConvocatoria") int idConvocatoria, @PathVariable("idIdioma") int idIdioma, Model model) {
+    String eliminarIdioma(EliminacionRegistroConvocatoria eliminacionRegistroConvocatoria, Model model) {
         String json = "";
         try {
-            servicioConvocatoria.eliminarIdioma(idIdioma);
-            List<IdiomaConvocatoria> idiomas = servicioConvocatoria.obtenerIdiomas(idConvocatoria);
+            servicioConvocatoria.eliminarIdioma(eliminacionRegistroConvocatoria.getId());
+            List<IdiomaConvocatoria> idiomas = servicioConvocatoria.obtenerIdiomas(eliminacionRegistroConvocatoria.getIdConvocatoria());
             json = Util.obtenerIdiomasConvocatoriaJSON(idiomas);
         } catch (Exception exc) {
             logger.error(exc);
@@ -371,13 +372,13 @@ public class ConvocatoriaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarPrograma/{idConvocatoria}/{idPrograma}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarPrograma", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarPrograma(@PathVariable("idConvocatoria") int idConvocatoria, @PathVariable("idPrograma") int idPrograma, Model model) {
+    String eliminarPrograma(EliminacionRegistroConvocatoria eliminacionRegistroConvocatoria, Model model) {
         String json = "";
         try {
-            servicioConvocatoria.eliminarPrograma(idPrograma);
-            List<ProgramaConvocatoria> programas = servicioConvocatoria.obtenerProgramas(idConvocatoria);
+            servicioConvocatoria.eliminarPrograma(eliminacionRegistroConvocatoria.getId());
+            List<ProgramaConvocatoria> programas = servicioConvocatoria.obtenerProgramas(eliminacionRegistroConvocatoria.getIdConvocatoria());
             json = Util.obtenerProgramasConvocatoriaJSON(programas);
         } catch (Exception exc) {
             logger.error(exc);
@@ -403,13 +404,13 @@ public class ConvocatoriaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarEducacionContinua/{idConvocatoria}/{idEducacionContinua}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarEducacionContinua", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarEducacionContinua(@PathVariable("idConvocatoria") int idConvocatoria, @PathVariable("idEducacionContinua") int idEducacionContinua, Model model) {
+    String eliminarEducacionContinua(EliminacionRegistroConvocatoria eliminacionRegistroConvocatoria, Model model) {
         String json = "";
         try {
-            servicioConvocatoria.eliminarEducacionContinua(idEducacionContinua);
-            List<EducacionContinuaConvocatoria> educacionesContinuas = servicioConvocatoria.obtenerEducacionesContinuas(idConvocatoria);
+            servicioConvocatoria.eliminarEducacionContinua(eliminacionRegistroConvocatoria.getId());
+            List<EducacionContinuaConvocatoria> educacionesContinuas = servicioConvocatoria.obtenerEducacionesContinuas(eliminacionRegistroConvocatoria.getIdConvocatoria());
             json = Util.obtenerEducacionesContinuasConvocatoriaJSON(educacionesContinuas);
         } catch (Exception exc) {
             logger.error(exc);
@@ -435,13 +436,13 @@ public class ConvocatoriaController {
         return json;
     }
 
-    @RequestMapping(value = "/eliminarCriterioHabilitante/{idConvocatoria}/{idCriterioHabilitante}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminarCriterioHabilitante", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarCriterioHabilitante(@PathVariable("idConvocatoria") int idConvocatoria, @PathVariable("idCriterioHabilitante") int idCriterioHabilitante, Model model) {
+    String eliminarCriterioHabilitante(EliminacionRegistroConvocatoria eliminacionRegistroConvocatoria, Model model) {
         String json = "";
         try {
-            servicioConvocatoria.eliminarCriterioHabilitante(idCriterioHabilitante);
-            List<CriterioHabilitanteConvocatoria> criteriosHabilitantes = servicioConvocatoria.obtenerCriteriosHabilitantes(idConvocatoria);
+            servicioConvocatoria.eliminarCriterioHabilitante(eliminacionRegistroConvocatoria.getId());
+            List<CriterioHabilitanteConvocatoria> criteriosHabilitantes = servicioConvocatoria.obtenerCriteriosHabilitantes(eliminacionRegistroConvocatoria.getIdConvocatoria());
             json = Util.obtenerCriteriosHabilitantesJSON(criteriosHabilitantes);
         } catch (Exception exc) {
             logger.error(exc);

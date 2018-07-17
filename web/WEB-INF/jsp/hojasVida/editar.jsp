@@ -643,29 +643,31 @@
                         <div class="table-responsive">
                             <br>
                             <div id="alert_telefonos"></div>
-                            <table class="table tabla table-hover tableestilo" id="tbtel">
-                                <thead>
-                                    <tr>
-                                        <th>Tipo</th>
-                                        <th>N&uacute;mero</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody data-bind="foreach: { data: telefonos }">
-                                    <tr class="table-row">
-                                        <td style="width: 30%">
-                                            <span data-bind="text: nombreTipo" ></span>
-                                        </td>
-                                        <td style="width: 20%">
-                                            <span data-bind="text: numero" ></span>
-                                        </td>
-                                        <td style='white-space: nowrap' align="center">
-                                            <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarTelefono"><span class='glyphicon glyphicon-edit'></span></button>
-                                            <button class='btn btn-danger btn-xs' type='button' data-bind="click: $root.eliminarTelefono"><span class='glyphicon glyphicon-remove'></span></button>
-                                        </td>
-                                    </tr>
-                                </tbody>                                                                             
-                            </table>
+                            <div style="overflow-y: auto; max-height:200px;">
+                                <table class="table tabla table-hover tableestilo" id="tbtel">
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo</th>
+                                            <th>N&uacute;mero</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: { data: telefonos }">
+                                        <tr class="table-row">
+                                            <td style="width: 30%">
+                                                <span data-bind="text: nombreTipo" ></span>
+                                            </td>
+                                            <td style="width: 20%">
+                                                <span data-bind="text: numero" ></span>
+                                            </td>
+                                            <td style='white-space: nowrap' align="center">
+                                                <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarTelefono"><span class='glyphicon glyphicon-edit'></span></button>
+                                                <button class='btn btn-danger btn-xs' type='button' data-bind="click: $root.eliminarTelefono"><span class='glyphicon glyphicon-remove'></span></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>                                                                             
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -676,25 +678,27 @@
                         <div class="table-responsive">
                             <br>
                             <div id="alert_correos_electronicos"></div>
-                            <table class="table tabla table-hover tableestilo" id="tbemail">
-                                <thead>
-                                    <tr>
-                                        <th>Email</th>
-                                        <th></th>                                         
-                                    </tr>        
-                                </thead>
-                                <tbody data-bind="foreach: { data: correosElectronicos }">
-                                    <tr class="table-row">
-                                        <td style="width: 80%">
-                                            <span data-bind="text: correoElectronico" ></span>
-                                        </td>
-                                        <td style='white-space: nowrap' align="center">
-                                            <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCorreoElectronico"><span class='glyphicon glyphicon-edit'></span></button>
-                                            <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarCorreoElectronico"><span class='glyphicon glyphicon-remove'></span></button>
-                                        </td>
-                                    </tr>
-                                </tbody>                                      
-                            </table>
+                            <div style="overflow-y: auto; max-height:200px;">
+                                <table class="table tabla table-hover tableestilo" id="tbemail">
+                                    <thead>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th></th>                                         
+                                        </tr>        
+                                    </thead>
+                                    <tbody data-bind="foreach: { data: correosElectronicos }">
+                                        <tr class="table-row">
+                                            <td style="width: 80%">
+                                                <span data-bind="text: correoElectronico" ></span>
+                                            </td>
+                                            <td style='white-space: nowrap' align="center">
+                                                <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCorreoElectronico"><span class='glyphicon glyphicon-edit'></span></button>
+                                                <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarCorreoElectronico"><span class='glyphicon glyphicon-remove'></span></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>                                      
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -705,33 +709,35 @@
                         <div class="table-responsive">
                             <br>
                             <div id="alert_cuentas_bancarias"></div>
-                            <table class="table tabla table-hover tableestilo" id="tbcuentabanca">
-                                <thead>
-                                    <tr>
-                                        <th>Tipo</th>
-                                        <th>N&uacute;mero</th>
-                                        <th>Entidad</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody data-bind="foreach: { data: cuentasBancarias }">
-                                    <tr class="table-row">
-                                        <td style="width: 30%">
-                                            <span data-bind="text: nombreTipo" ></span>
-                                        </td>
-                                        <td style="width: 20%">
-                                            <span data-bind="text: numero" ></span>
-                                        </td>
-                                        <td style="width: 20%">
-                                            <span data-bind="text: entidad" ></span>
-                                        </td>
-                                        <td style='white-space: nowrap' align="center">
-                                            <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCuentaBancaria"><span class='glyphicon glyphicon-edit'></span></button>
-                                            <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarCuentaBancaria"><span class='glyphicon glyphicon-remove'></span></button>
-                                        </td>
-                                    </tr>
-                                </tbody>                                              
-                            </table>
+                            <div style="overflow-y: auto; max-height:200px;">
+                                <table class="table tabla table-hover tableestilo" id="tbcuentabanca">
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo</th>
+                                            <th>N&uacute;mero</th>
+                                            <th>Entidad</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: { data: cuentasBancarias }">
+                                        <tr class="table-row">
+                                            <td style="width: 30%">
+                                                <span data-bind="text: nombreTipo" ></span>
+                                            </td>
+                                            <td style="width: 20%">
+                                                <span data-bind="text: numero" ></span>
+                                            </td>
+                                            <td style="width: 20%">
+                                                <span data-bind="text: entidad" ></span>
+                                            </td>
+                                            <td style='white-space: nowrap' align="center">
+                                                <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCuentaBancaria"><span class='glyphicon glyphicon-edit'></span></button>
+                                                <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarCuentaBancaria"><span class='glyphicon glyphicon-remove'></span></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>                                              
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -953,42 +959,44 @@
                         <div class="table-responsive">
                             <br>
                             <div id="alert_educaciones_basicas"></div>
-                            <table class="table tabla table-hover tableestilo" id="tblEducacionesBasicas">
-                                <thead>
-                                    <tr>
-                                        <th>Nivel de estudio</th>
-                                        <th>Instituci&oacute;n</th>
-                                        <th>T&iacute;tulo</th>
-                                        <th>A&ntilde;o de t&iacute;tulo</th>
-                                        <th class="cer" align="center">Certificado</th>
-                                        <th class="opc" align="center">Opciones</th>
-                                    </tr> 
-                                </thead>
-                                <tbody data-bind="foreach: { data: educacionesBasicas }">
-                                    <tr class="table-row">
-                                        <td style="width: 20%">
-                                            <span data-bind="text: nombreNivel" ></span>
-                                        </td>
-                                        <td style="width: 20%">
-                                            <span data-bind="text: institucion" ></span>
-                                        </td>
-                                        <td style="width: 20%">
-                                            <span data-bind="text: titulo" ></span>
-                                        </td>
-                                        <td style="width: 20%">
-                                            <span data-bind="text: anyoFinalizacion" ></span>
-                                        </td>
-                                        <td style="width: 10%" align="center">
-                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionBasica" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                            <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoValidado"><i class="glyphicon glyphicon-ok"></i></a>                                            
-                                        </td>
-                                        <td style='white-space: nowrap; width: 10%' align="center">
-                                            <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarEducacionBasica"><i class='fa fa-pencil' aria-hidden='true'></i></button>
-                                            <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarEducacionBasica"><span class='glyphicon glyphicon-remove'></span></button>
-                                        </td>
-                                    </tr>
-                                </tbody>                           
-                            </table>
+                            <div style="overflow-y: auto; max-height:200px;">
+                                <table class="table tabla table-hover tableestilo" id="tblEducacionesBasicas">
+                                    <thead>
+                                        <tr>
+                                            <th>Nivel de estudio</th>
+                                            <th>Instituci&oacute;n</th>
+                                            <th>T&iacute;tulo</th>
+                                            <th>A&ntilde;o de t&iacute;tulo</th>
+                                            <th class="cer" align="center">Certificado</th>
+                                            <th class="opc" align="center">Opciones</th>
+                                        </tr> 
+                                    </thead>
+                                    <tbody data-bind="foreach: { data: educacionesBasicas }">
+                                        <tr class="table-row">
+                                            <td style="width: 20%">
+                                                <span data-bind="text: nombreNivel" ></span>
+                                            </td>
+                                            <td style="width: 20%">
+                                                <span data-bind="text: institucion" ></span>
+                                            </td>
+                                            <td style="width: 20%">
+                                                <span data-bind="text: titulo" ></span>
+                                            </td>
+                                            <td style="width: 20%">
+                                                <span data-bind="text: anyoFinalizacion" ></span>
+                                            </td>
+                                            <td style="width: 10%" align="center">
+                                                <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionBasica" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                                <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoValidado"><i class="glyphicon glyphicon-ok"></i></a>                                            
+                                            </td>
+                                            <td style='white-space: nowrap; width: 10%' align="center">
+                                                <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarEducacionBasica"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                                <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarEducacionBasica"><span class='glyphicon glyphicon-remove'></span></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>                           
+                                </table>
+                            </div>    
                         </div>
                     </div>
                     <!--MODAL ASPECTOS academicos modal estudio educacion basica-->
@@ -1079,43 +1087,45 @@
                         <div class="table-responsive">
                             <br>
                             <div id="alert_educaciones_superiores"></div>
-                            <table class="table tabla table-hover tableestilo" id="tblEducacionesSuperiores">
-                                <thead>
-                                    <tr>
-                                        <th>Nivel de estudio</th>
-                                        <th>Instituci&oacute;n</th>
-                                        <th>Programa cursado</th>
-                                        <th class="cer" align="center">Certificado homologación</th>
-                                        <th class="cer" align="center">Certificado</th>
-                                        <th class="opc" align="center">Opciones</th>
-                                    </tr> 
-                                </thead>
-                                <tbody data-bind="foreach: { data: educacionesSuperiores }">
-                                    <tr class="table-row">
-                                        <td style="width: 20%">
-                                            <span data-bind="text: nombreNivel" ></span>
-                                        </td>
-                                        <td style="width: 25%">
-                                            <span data-bind="text: nombreInstitucion" ></span>
-                                        </td>
-                                        <td style="width: 25%">
-                                            <span data-bind="text: nombrePrograma" ></span>
-                                        </td>
-                                        <td style="width: 10%" align="center">
-                                            <a href='#' title='Ver certificado homologado' data-bind="click: $root.verCertificadoHomologadoEducacionSuperior" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                            <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoHomologadoValidado"><i class="glyphicon glyphicon-ok"></i></a>
-                                        </td>
-                                        <td style="width: 10%" align="center">
-                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionSuperior" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                            <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoValidado"><i class="glyphicon glyphicon-ok"></i></a>
-                                        </td>
-                                        <td style='white-space: nowrap; width: 10%' align="center">
-                                            <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarEducacionSuperior"><i class='fa fa-pencil' aria-hidden='true'></i></button>
-                                            <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarEducacionSuperior"><span class='glyphicon glyphicon-remove'></span></button>
-                                        </td>
-                                    </tr>
-                                </tbody>                           
-                            </table>
+                            <div style="overflow-y: auto; max-height:200px;">
+                                <table class="table tabla table-hover tableestilo" id="tblEducacionesSuperiores">
+                                    <thead>
+                                        <tr>
+                                            <th>Nivel de estudio</th>
+                                            <th>Instituci&oacute;n</th>
+                                            <th>Programa cursado</th>
+                                            <th class="cer" align="center">Certificado homologación</th>
+                                            <th class="cer" align="center">Certificado</th>
+                                            <th class="opc" align="center">Opciones</th>
+                                        </tr> 
+                                    </thead>
+                                    <tbody data-bind="foreach: { data: educacionesSuperiores }">
+                                        <tr class="table-row">
+                                            <td style="width: 20%">
+                                                <span data-bind="text: nombreNivel" ></span>
+                                            </td>
+                                            <td style="width: 25%">
+                                                <span data-bind="text: nombreInstitucion" ></span>
+                                            </td>
+                                            <td style="width: 25%">
+                                                <span data-bind="text: nombrePrograma" ></span>
+                                            </td>
+                                            <td style="width: 10%" align="center">
+                                                <a href='#' title='Ver certificado homologado' data-bind="click: $root.verCertificadoHomologadoEducacionSuperior" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                                <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoHomologadoValidado"><i class="glyphicon glyphicon-ok"></i></a>
+                                            </td>
+                                            <td style="width: 10%" align="center">
+                                                <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoEducacionSuperior" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                                <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoValidado"><i class="glyphicon glyphicon-ok"></i></a>
+                                            </td>
+                                            <td style='white-space: nowrap; width: 10%' align="center">
+                                                <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarEducacionSuperior"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                                <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarEducacionSuperior"><span class='glyphicon glyphicon-remove'></span></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>                           
+                                </table>
+                           </div>     
                         </div>
                     </div>
                     <!--MODAL ASPECTOS academicos modal estudio tspectos academicos-->
@@ -1406,46 +1416,48 @@
                         <div class="table-responsive">
                             <br />
                             <div id="alert_idiomas"></div>
-                            <table class="table tabla table-hover tableestilo" id="tblIdiomas">
-                            <thead>
-                                <tr>
-                                    <th>Idioma</th>
-                                    <th>Escucha</th>
-                                    <th>Conversación</th>
-                                    <th>Lectura</th>
-                                    <th>Escritura</th>
-                                    <th class="cer" align="center">Certificado</th>
-                                    <th class="opc" align="center">Opciones</th>
-                                </tr>        
-                            </thead>
-                            <tbody data-bind="foreach: { data: idiomas }">
-                                <tr class="table-row">
-                                    <td style="width: 15%">
-                                        <span data-bind="text: nombreIdioma" ></span>
-                                    </td>
-                                    <td style="width: 15%">
-                                        <span data-bind="text: nombreNivelEscucha" ></span>
-                                    </td>
-                                    <td style="width: 15%">
-                                        <span data-bind="text: nombreNivelConversacion" ></span>
-                                    </td>
-                                    <td style="width: 15%">
-                                        <span data-bind="text: nombreNivelLectura" ></span>
-                                    </td>
-                                    <td style="width: 15%">
-                                        <span data-bind="text: nombreNivelEscritura" ></span>
-                                    </td>
-                                    <td style="width: 15%" align="center">
-                                        <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoIdioma" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                        <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoValidado"><i class="glyphicon glyphicon-ok"></i></a>
-                                    </td>
-                                    <td style='white-space: nowrap' align="center">
-                                        <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarIdioma"><i class='fa fa-pencil' aria-hidden='true'></i></button>
-                                        <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarIdioma"><span class='glyphicon glyphicon-remove'></span></button>
-                                    </td>
-                                </tr>
-                            </tbody>                                   
-                        </table>
+                            <div style="overflow-y: auto; max-height:200px;">
+                                <table class="table tabla table-hover tableestilo" id="tblIdiomas">
+                                <thead>
+                                    <tr>
+                                        <th>Idioma</th>
+                                        <th>Escucha</th>
+                                        <th>Conversación</th>
+                                        <th>Lectura</th>
+                                        <th>Escritura</th>
+                                        <th class="cer" align="center">Certificado</th>
+                                        <th class="opc" align="center">Opciones</th>
+                                    </tr>        
+                                </thead>
+                                <tbody data-bind="foreach: { data: idiomas }">
+                                    <tr class="table-row">
+                                        <td style="width: 15%">
+                                            <span data-bind="text: nombreIdioma" ></span>
+                                        </td>
+                                        <td style="width: 15%">
+                                            <span data-bind="text: nombreNivelEscucha" ></span>
+                                        </td>
+                                        <td style="width: 15%">
+                                            <span data-bind="text: nombreNivelConversacion" ></span>
+                                        </td>
+                                        <td style="width: 15%">
+                                            <span data-bind="text: nombreNivelLectura" ></span>
+                                        </td>
+                                        <td style="width: 15%">
+                                            <span data-bind="text: nombreNivelEscritura" ></span>
+                                        </td>
+                                        <td style="width: 15%" align="center">
+                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoIdioma" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                            <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoValidado"><i class="glyphicon glyphicon-ok"></i></a>
+                                        </td>
+                                        <td style='white-space: nowrap' align="center">
+                                            <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarIdioma"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                            <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarIdioma"><span class='glyphicon glyphicon-remove'></span></button>
+                                        </td>
+                                    </tr>
+                                </tbody>                                   
+                            </table>
+                          </div>
                         </div>
                     </div>
                     <!--  MODAL IDIOMA -->
@@ -1565,6 +1577,7 @@
                         <div class="table-responsive">
                             <br>
                             <div id="alert_educaciones_continuas"></div>
+                            <div style="overflow-y: auto; max-height:600px;">
                             <table class="table tabla table-hover tableestilo" id="tblEducacionesContinuas">
                                 <thead>
                                     <tr>
@@ -1601,6 +1614,7 @@
                                     </tr>
                                 </tbody>                           
                             </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1725,7 +1739,8 @@
                 <div class="table-responsive">
                     <br>
                     <div id="alert_experiencias_laborales"></div>
-                    <table class="table tabla table-hover tableestilo" id="tblExperienciasLaborales">
+		    <div style="overflow-y: auto; max-height:300px;">
+                        <table class="table tabla table-hover tableestilo" id="tblExperienciasLaborales">
                         <thead>
                             <tr>
                                 <th>&Aacute;rea</th>
@@ -1757,6 +1772,7 @@
                             </tr>
                         </tbody>                          
                     </table>
+		    </div>
                 </div>
                 <!--MODAL Experiencia laboral-->
                 <div class="modal fade" id="md_experiencia_laboral" role="dialog">
@@ -1925,6 +1941,7 @@
                 <div class="table-responsive">
                     <br>
                     <div id="alert_experiencias_docencia"></div>
+		    <div style="overflow-y: auto; max-height:300px;">
                     <table class="table tabla table-hover tableestilo" id="tblExperienciasDocencia">
                         <thead>
                             <tr>
@@ -1944,6 +1961,7 @@
                             </tr>
                         </tbody>                          
                     </table>
+		    </div>
                 </div>
                 <div class="modal fade" id="md_experiencia_docencia" role="dialog">
                     <div class="modal-dialog modal-lg">
@@ -2029,6 +2047,7 @@
                                         <div class="table-responsive">
                                             <br>
                                             <div id="alert_cursos_experiencia_docencia"></div>
+					    <div style="overflow-y: auto; max-height:200px;">
                                             <table class="table tabla table-hover tableestilo">
                                                 <thead>
                                                     <tr>
@@ -2069,6 +2088,7 @@
                                                     </tr>
                                                 </tbody>                                                        
                                             </table>
+											</div>
                                         </div>
                                     </div>
                                 </div>
@@ -2245,6 +2265,7 @@
                         <div class="table-responsive">
                             <br>
                             <div id="alert_articulos"></div>
+			    <div style="overflow-y: auto; max-height:200px;">
                             <table class="table tabla table-hover tableestilo" id="tblArticulos">
                                 <thead>
                                     <tr>
@@ -2273,6 +2294,7 @@
                                     </tr>
                                 </tbody>                                     
                             </table>
+			  </div>
                         </div>
                     </div>
                     <!-- modal articulo-->
@@ -2359,6 +2381,7 @@
                     <div class="table-responsive">
                         <br>
                         <div id="alert_patentes"></div>
+			<div style="overflow-y: auto; max-height:200px;">
                          <table class="table tabla table-hover tableestilo" id="tblPatentes">
                              <thead>
                                  <tr>
@@ -2395,6 +2418,7 @@
                                 </tr>
                             </tbody>                                     
                          </table>
+			</div>
                      </div>
                     </div>
                 </div>
@@ -2485,6 +2509,7 @@
                          <div class="table-responsive">
                              <br>
                              <div id="alert_productos_conocimiento"></div>
+			     <div style="overflow-y: auto; max-height:200px;">
                              <table class="table tabla table-hover tableestilo" id="tblProductosConocimiento">
                                  <thead>
                                      <tr>
@@ -2517,6 +2542,7 @@
                                      </tr>
                                  </tbody>                                     
                              </table>
+			    </div>
                          </div>
                     </div>
                 </div>
@@ -2598,6 +2624,7 @@
                     <div class="table-responsive">
                         <br>
                         <div id="alert_distinciones"></div>
+			<div style="overflow-y: auto; max-height:600px;">
                         <table class="table tabla table-hover tableestilo" id="tblDistinciones" style="width: 100%;">
                             <thead>
                                 <tr>
@@ -2630,6 +2657,7 @@
                                 </tr>
                             </tbody>                               
                         </table>
+		       </div>
                     </div>
                 </div>
                 <br>                

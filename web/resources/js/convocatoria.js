@@ -41,32 +41,6 @@
     });
 
     $(document).ready(function () {
-        $('#tblAdendas').DataTable({
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"}
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        });
-
         var output = moment().format('DD/MM/YYYY');
         if($('#fechaInicio').val() == '') {
             $('#fechaInicio').val(output);
@@ -782,11 +756,18 @@
         };
 
         self.eliminarAdenda = function (adenda) {
+            var formData = new FormData();
+            formData.append("idConvocatoria", $("#id").val());
+            formData.append("id", adenda.id());
             $.ajax({
-                type: "GET",
-                url: contextPath + "/convocatorias/eliminarAdenda/" + $("#id").val() + "/" + adenda.id(),
+                type: "POST",
+                url: contextPath + "/convocatorias/eliminarAdenda",
+                data: formData,
                 processData: false,
                 contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
                 success: function (response) {
                     bootstrap_alert_adendas.success('Adenda eliminada correctamente.');
                     if (response !== "") {
@@ -903,11 +884,18 @@
         };
 
         self.eliminarAnyosExperiencia = function (anyosExperiencia) {
+            var formData = new FormData();
+            formData.append("idConvocatoria", $("#id").val());
+            formData.append("id", anyosExperiencia.id());            
             $.ajax({
-                type: "GET",
-                url: contextPath + "/convocatorias/eliminarAnyosExperiencia/" + $("#id").val() + "/" + anyosExperiencia.id(),
+                type: "POST",
+                url: contextPath + "/convocatorias/eliminarAnyosExperiencia",
+                data: formData,
                 processData: false,
                 contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
                 success: function (response) {
                     $('#md_anyos_experiencia').modal('hide');
                     bootstrap_alert_anyos_experiencias.success('Años de experiencia eliminado correctamente.');
@@ -1024,11 +1012,18 @@
         };
 
         self.eliminarIdioma = function (idioma) {
+            var formData = new FormData();
+            formData.append("idConvocatoria", $("#id").val());
+            formData.append("id", idioma.id());               
             $.ajax({
-                type: "GET",
-                url: contextPath + "/convocatorias/eliminarIdioma/" + $("#id").val() + "/" + idioma.id(),
+                type: "POST",
+                url: contextPath + "/convocatorias/eliminarIdioma",
+                data: formData,
                 processData: false,
                 contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
                 success: function (response) {
                     bootstrap_alert_idiomas.success('Idioma eliminado correctamente.');
                     if (response !== "") {
@@ -1142,11 +1137,18 @@
         };
 
         self.eliminarPrograma = function (programa) {
+            var formData = new FormData();
+            formData.append("idConvocatoria", $("#id").val());
+            formData.append("id", programa.id());              
             $.ajax({
-                type: "GET",
-                url: contextPath + "/convocatorias/eliminarPrograma/" + $("#id").val() + "/" + programa.id(),
+                type: "POST",
+                url: contextPath + "/convocatorias/eliminarPrograma",
+                data: formData,
                 processData: false,
                 contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
                 success: function (response) {
                     bootstrap_alert_programas.success('Programa eliminado correctamente.');
                     if (response !== "") {
@@ -1266,11 +1268,18 @@
         };
 
         self.eliminarEducacionContinua = function (educacionContinua) {
+            var formData = new FormData();
+            formData.append("idConvocatoria", $("#id").val());
+            formData.append("id", educacionContinua.id());              
             $.ajax({
-                type: "GET",
-                url: contextPath + "/convocatorias/eliminarEducacionContinua/" + $("#id").val() + "/" + educacionContinua.id(),
+                type: "POST",
+                url: contextPath + "/convocatorias/eliminarEducacionContinua",
+                data: formData,
                 processData: false,
                 contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
                 success: function (response) {
                     $('#md_educacion_continua').modal('hide');
                     bootstrap_alert_educaciones_continuas.success('Educación no formal eliminada correctamente.');
@@ -1427,11 +1436,18 @@
         };
 
         self.eliminarCriterioHabilitante = function (criterio) {
+            var formData = new FormData();
+            formData.append("idConvocatoria", $("#id").val());
+            formData.append("id", criterio.id());              
             $.ajax({
-                type: "GET",
-                url: contextPath + "/convocatorias/eliminarCriterioHabilitante/" + $("#id").val() + "/" + criterio.id(),
+                type: "POST",
+                url: contextPath + "/convocatorias/eliminarCriterioHabilitante",
+                data: formData,
                 processData: false,
                 contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },
                 success: function (response) {
                     $('#md_criterio_habilitante').modal('hide');
                     bootstrap_alert_criterios_habilitantes.success('Criterio habilitante eliminado correctamente.');

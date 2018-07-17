@@ -35,281 +35,6 @@ $('.fecha').datepicker({
     });
     
     $(document).ready(function () {
-        $('#tblDocumentosSoporte').DataTable({
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"}
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        });        
-        $('#tblEducacionesBasicas').DataTable({
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"}
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        });        
-        $('#tblEducacionesSuperiores').DataTable({
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"}
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        });        
-        $('#tblIdiomas').DataTable({
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"}
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        });        
-        $('#tblEducacionesContinuas').DataTable({
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"}
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        });        
-        $('#tblExperienciasLaborales').DataTable({
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"}
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        });        
-        $('#tblExperienciasDocencia').DataTable({
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"}
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        });        
-        $('#tblArticulos').DataTable({
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"}
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        });        
-        $('#tblPatentes').DataTable({
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"}
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        });        
-        $('#tblProductosConocimiento').DataTable({
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"}
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        });        
-        $('#tblDistinciones').DataTable({
-            "language": {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"}
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        });        
         $('#personal').click(function () {
             $('#formpersonal').css("display", "block");
             $('#formperfilsopor').css("display", "none");
@@ -1151,9 +876,14 @@ $('.fecha').datepicker({
         };
 
         self.eliminarCorreoElectronico = function (correoElectronico) {
+            var formData = new FormData();
+            formData.append("id", correoElectronico.id());
             $.ajax({
-                type: "GET",
-                url: contextPath + "/hojasVida/eliminarCorreoElectronico/" + correoElectronico.id(),
+                type: "POST",
+                url: contextPath + "/hojasVida/eliminarCorreoElectronico",
+                data: formData,
+                processData: false,
+                contentType: false,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
                 },
@@ -1257,9 +987,14 @@ $('.fecha').datepicker({
         };
 
         self.eliminarCuentaBancaria = function (cuentaBancaria) {
+            var formData = new FormData();
+            formData.append("id", cuentaBancaria.id());            
             $.ajax({
-                type: "GET",
-                url: contextPath + "/hojasVida/eliminarCuentaBancaria/" + cuentaBancaria.id(),
+                type: "POST",
+                url: contextPath + "/hojasVida/eliminarCuentaBancaria",
+                data: formData,
+                processData: false,
+                contentType: false,                
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
                 },
@@ -1364,9 +1099,17 @@ $('.fecha').datepicker({
         };
 
         self.eliminarTelefono = function (telefono) {
+            var formData = new FormData();
+            formData.append("id", telefono.id());              
             $.ajax({
-                type: "GET",
-                url: contextPath + "/hojasVida/eliminarTelefono/" + telefono.id(),
+                type: "POST",
+                url: contextPath + "/hojasVida/eliminarTelefono",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+                },                
                 success: function (response) {
                     bootstrap_alert_telefonos.success('Teléfono eliminado correctamente.');
                     if (response !== "") {
@@ -1478,9 +1221,14 @@ $('.fecha').datepicker({
         };
 
         self.eliminarDocumentoSoporte = function (documentoSoporte) {
+            var formData = new FormData();
+            formData.append("id", documentoSoporte.id());              
             $.ajax({
-                type: "GET",
-                url: contextPath + "/hojasVida/eliminarDocumentoSoporte/" + documentoSoporte.id(),
+                type: "POST",
+                url: contextPath + "/hojasVida/eliminarDocumentoSoporte",
+                data: formData,
+                processData: false,
+                contentType: false,                
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
                 },
@@ -1717,9 +1465,14 @@ $('.fecha').datepicker({
         };
 
         self.eliminarIdioma = function (idioma) {
+            var formData = new FormData();
+            formData.append("id", idioma.id());              
             $.ajax({
-                type: "GET",
-                url: contextPath + "/hojasVida/eliminarIdioma/" + idioma.id(),
+                type: "POST",
+                url: contextPath + "/hojasVida/eliminarIdioma",
+                data: formData,
+                processData: false,
+                contentType: false,                
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
                 },
@@ -1903,9 +1656,14 @@ $('.fecha').datepicker({
         };
 
         self.eliminarEducacionBasica = function (educacionBasica) {
+            var formData = new FormData();
+            formData.append("id", educacionBasica.id());              
             $.ajax({
-                type: "GET",
-                url: contextPath + "/hojasVida/eliminarEducacionBasica/" + educacionBasica.id(),
+                type: "POST",
+                url: contextPath + "/hojasVida/eliminarEducacionBasica",
+                data: formData,
+                processData: false,
+                contentType: false,                
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
                 },
@@ -2149,9 +1907,14 @@ $('.fecha').datepicker({
         };
 
         self.eliminarEducacionSuperior = function (educacionSuperior) {
+            var formData = new FormData();
+            formData.append("id", educacionSuperior.id());              
             $.ajax({
-                type: "GET",
-                url: contextPath + "/hojasVida/eliminarEducacionSuperior/" + educacionSuperior.id(),
+                type: "POST",
+                url: contextPath + "/hojasVida/eliminarEducacionSuperior",
+                data: formData,
+                processData: false,
+                contentType: false,                
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
                 },
@@ -2422,9 +2185,14 @@ $('.fecha').datepicker({
         };
 
         self.eliminarEducacionContinua = function (educacionContinua) {
+            var formData = new FormData();
+            formData.append("id", educacionContinua.id());              
             $.ajax({
-                type: "GET",
-                url: contextPath + "/hojasVida/eliminarEducacionContinua/" + educacionContinua.id(),
+                type: "POST",
+                url: contextPath + "/hojasVida/eliminarEducacionContinua",
+                data: formData,
+                processData: false,
+                contentType: false,                
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
                 },
@@ -2597,9 +2365,14 @@ $('.fecha').datepicker({
         };
 
         self.eliminarDistincion = function (distincion) {
+            var formData = new FormData();
+            formData.append("id", distincion.id());              
             $.ajax({
-                type: "GET",
-                url: contextPath + "/hojasVida/eliminarDistincion/" + distincion.id(),
+                type: "POST",
+                url: contextPath + "/hojasVida/eliminarDistincion",
+                data: formData,
+                processData: false,
+                contentType: false,                
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
                 },
@@ -2811,9 +2584,14 @@ $('.fecha').datepicker({
         };
 
         self.eliminarExperienciaLaboral = function (experienciaLaboral) {
+            var formData = new FormData();
+            formData.append("id", experienciaLaboral.id());              
             $.ajax({
-                type: "GET",
-                url: contextPath + "/hojasVida/eliminarExperienciaLaboral/" + experienciaLaboral.id(),
+                type: "POST",
+                url: contextPath + "/hojasVida/eliminarExperienciaLaboral",
+                data: formData,
+                processData: false,
+                contentType: false,                
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
                 },
@@ -3012,9 +2790,14 @@ $('.fecha').datepicker({
         };
 
         self.eliminarExperienciaDocencia = function (experienciaDocencia) {
+            var formData = new FormData();
+            formData.append("id", experienciaDocencia.id());              
             $.ajax({
-                type: "GET",
-                url: contextPath + "/hojasVida/eliminarExperienciaDocencia/" + experienciaDocencia.id(),
+                type: "POST",
+                url: contextPath + "/hojasVida/eliminarExperienciaDocencia",
+                data: formData,
+                processData: false,
+                contentType: false,                
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
                 },
@@ -3235,9 +3018,14 @@ $('.fecha').datepicker({
         };
 
         self.eliminarCursoExperienciaDocencia = function (cursoExperienciaDocencia) {
+            var formData = new FormData();
+            formData.append("id", cursoExperienciaDocencia.id());                
             $.ajax({
-                type: "GET",
-                url: contextPath + "/hojasVida/eliminarCursoExperienciaDocencia/" + cursoExperienciaDocencia.id(),
+                type: "POST",
+                url: contextPath + "/hojasVida/eliminarCursoExperienciaDocencia",
+                data: formData,
+                processData: false,
+                contentType: false,                
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
                 },
@@ -3411,9 +3199,14 @@ $('.fecha').datepicker({
         };
 
         self.eliminarArticulo = function (articulo) {
+            var formData = new FormData();
+            formData.append("id", articulo.id());              
             $.ajax({
-                type: "GET",
-                url: contextPath + "/hojasVida/eliminarArticulo/" + articulo.id(),
+                type: "POST",
+                url: contextPath + "/hojasVida/eliminarArticulo",
+                data: formData,
+                processData: false,
+                contentType: false,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
                 },
@@ -3566,9 +3359,14 @@ $('.fecha').datepicker({
         };
 
         self.eliminarPatente = function (patente) {
+            var formData = new FormData();
+            formData.append("id", patente.id());              
             $.ajax({
-                type: "GET",
-                url: contextPath + "/hojasVida/eliminarPatente/" + patente.id(),
+                type: "POST",
+                url: contextPath + "/hojasVida/eliminarPatente",
+                data: formData,
+                processData: false,
+                contentType: false,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
                 },
@@ -3739,9 +3537,14 @@ $('.fecha').datepicker({
         };
 
         self.eliminarProductoConocimiento = function (productoConocimiento) {
+            var formData = new FormData();
+            formData.append("id", productoConocimiento.id());             
             $.ajax({
-                type: "GET",
-                url: contextPath + "/hojasVida/eliminarProductoConocimiento/" + productoConocimiento.id(),
+                type: "POST",
+                url: contextPath + "/hojasVida/eliminarProductoConocimiento",
+                data: formData,
+                processData: false,
+                contentType: false,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
                 },
@@ -4449,10 +4252,13 @@ $('.fecha').datepicker({
 
     function eliminarCopiaDocumentoIdentificacion() {
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: contextPath + "/hojasVida/eliminarCopiaCedula",
             processData: false,
             contentType: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+            },            
             success: function (response) {
                bootstrap_alert_hoja_vida.success("Copia de la cédula eliminada exitosamente");
                $('#nombreCopiaDocumentoIdentificacion').text("");
@@ -4469,10 +4275,13 @@ $('.fecha').datepicker({
 
     function eliminarDocumentoRUT() {
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: contextPath + "/hojasVida/eliminarCopiaRUT",
             processData: false,
             contentType: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+            },            
             success: function (response) {
                bootstrap_alert_hoja_vida.success("Documento de soporte RUT eliminado exitosamente");
                $('#nombreDocumentoRUT').text("");
@@ -4489,10 +4298,13 @@ $('.fecha').datepicker({
 
     function eliminarCopiaLibretaMilitar() {
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: contextPath + "/hojasVida/eliminarCopiaLibretaMilitar",
             processData: false,
             contentType: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-CSRF-Token", $('#_csrf').val());
+            },            
             success: function (response) {
                bootstrap_alert_hoja_vida.success("Copia de la libreta militar eliminada exitosamente");
                $('#nombreCopiaLibretaMilitar').text(""); 
