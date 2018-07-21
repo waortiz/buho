@@ -36,12 +36,19 @@ public class HojaVidaConsulta {
     private String telefono;
     private String correoElectronico;
     private String nivelEducativo;
-    private String experiencia;
+    private String empresa;
+    private String cargo;
+    private String tipoCargo;
     private String tipoInvestigador;
     private String articulo;
     private String patente;
     private String productoConocimiento;
     private String distincion;
+    private String titulo;
+    private String nombreCurso;
+    private String duracionCurso;
+    private String institucionExperienciaDocencia;
+    private String nombreCursoExperienciaDocencia;
 
     /**
      * @return the idPersona
@@ -380,20 +387,6 @@ public class HojaVidaConsulta {
     }
 
     /**
-     * @return the experiencia
-     */
-    public String getExperiencia() {
-        return experiencia;
-    }
-
-    /**
-     * @param experiencia the experiencia to set
-     */
-    public void setExperiencia(String experiencia) {
-        this.experiencia = experiencia;
-    }
-
-    /**
      * @return the tipoInvestigador
      */
     public String getTipoInvestigador() {
@@ -489,6 +482,118 @@ public class HojaVidaConsulta {
      */
     public void setDisponeRUT(String disponeRUT) {
         this.disponeRUT = disponeRUT;
+    }
+
+    /**
+     * @return the titulo
+     */
+    public String getTitulo() {
+        return titulo;
+    }
+
+    /**
+     * @param titulo the titulo to set
+     */
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    /**
+     * @return the nombreCurso
+     */
+    public String getNombreCurso() {
+        return nombreCurso;
+    }
+
+    /**
+     * @param nombreCurso the nombreCurso to set
+     */
+    public void setNombreCurso(String nombreCurso) {
+        this.nombreCurso = nombreCurso;
+    }
+
+    /**
+     * @return the duracionCurso
+     */
+    public String getDuracionCurso() {
+        return duracionCurso;
+    }
+
+    /**
+     * @param duracionCurso the duracionCurso to set
+     */
+    public void setDuracionCurso(String duracionCurso) {
+        this.duracionCurso = duracionCurso;
+    }
+
+    /**
+     * @return the nombreCursoExperienciaDocencia
+     */
+    public String getNombreCursoExperienciaDocencia() {
+        return nombreCursoExperienciaDocencia;
+    }
+
+    /**
+     * @param nombreCursoExperienciaDocencia the nombreCursoExperienciaDocencia to set
+     */
+    public void setNombreCursoExperienciaDocencia(String nombreCursoExperienciaDocencia) {
+        this.nombreCursoExperienciaDocencia = nombreCursoExperienciaDocencia;
+    }
+
+    /**
+     * @return the institucionExperienciaDocencia
+     */
+    public String getInstitucionExperienciaDocencia() {
+        return institucionExperienciaDocencia;
+    }
+
+    /**
+     * @param institucionExperienciaDocencia the institucionExperienciaDocencia to set
+     */
+    public void setInstitucionExperienciaDocencia(String institucionExperienciaDocencia) {
+        this.institucionExperienciaDocencia = institucionExperienciaDocencia;
+    }
+
+    /**
+     * @return the empresa
+     */
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    /**
+     * @param empresa the empresa to set
+     */
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+
+    /**
+     * @return the cargo
+     */
+    public String getCargo() {
+        return cargo;
+    }
+
+    /**
+     * @param cargo the cargo to set
+     */
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    /**
+     * @return the tipoCargo
+     */
+    public String getTipoCargo() {
+        return tipoCargo;
+    }
+
+    /**
+     * @param tipoCargo the tipoCargo to set
+     */
+    public void setTipoCargo(String tipoCargo) {
+        this.tipoCargo = tipoCargo;
     }
     
     

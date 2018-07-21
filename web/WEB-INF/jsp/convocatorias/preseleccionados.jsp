@@ -10,12 +10,13 @@
                 <div class="form-group">
                     <label for="convocatoria">Convocatoria</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar la convocatoria">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
-                    <select style="width: 100%;" id="convocatoria" class="js-select-basic-single js-states form-control" onchange="buscarPreseleccionados()">
+                    <select style="width: 95%;" id="convocatoria" class="js-select-basic-single js-states form-control" onchange="buscarPreseleccionados()">
                         <option></option>
                         <c:forEach var="convocatoria" items="${convocatorias}">
                             <option value="${convocatoria.getId()}">${convocatoria.getNombre()}</option>
                         </c:forEach>                                                 
-                    </select>  
+                    </select>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarConvocatoria()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>
         </div>
@@ -762,9 +763,19 @@
         });
     });
 
+    function limpiarConvocatoria() {
+        $('#convocatoria').val("").trigger('change');
+        buscarPreseleccionados();
+    }
+    
     function buscarPreseleccionados() {
         $('#formHV').hide();
         $('#divDescargar').hide();
+        if($('#convocatoria').val() == "") {
+            tblPreseleccionados.clear().draw();
+            return;
+        }   
+        
         $('#md_preseleccionados').modal({backdrop: 'static', keyboard: false});
         current_progress = 0;
         var interval = setInterval(function () {

@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group form-inline">
-                    <label>Buscar Número de identificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre para buscar las hojas de vida">
+                    <label>Buscar número de identificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el número de identificación para buscar las hojas de vida">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <select style="width: 75%;" id="cboNumeroIdentificacion" class="js-select-basic-single js-states form-control">
                         <option></option>
@@ -23,28 +23,18 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group form-inline">
-                    <label>Buscar nombres</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre para buscar las hojas de vida">
+                    <label>Buscar nombres</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar los nombres para buscar las hojas de vida">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 75%;" id="cboNombres" class="js-select-basic-single js-states form-control">
-                        <option></option>
-                        <c:forEach var="nombre" items="${nombres}">
-                            <option value="${nombre.getId()}">${nombre.getNombre()}</option>
-                        </c:forEach>                                                 
-                    </select>
+                    <input type='text' class="form-control input-sm" name="nombres" id="nombres" maxlength="100" style="width: 75%;">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNombres()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                     <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group form-inline">
-                    <label>Buscar apellidos</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre para buscar las hojas de vida">
+                    <label>Buscar apellidos</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar los apellidos para buscar las hojas de vida">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 75%;" id="cboApellidos" class="js-select-basic-single js-states form-control">
-                        <option></option>
-                        <c:forEach var="apellido" items="${apellidos}">
-                            <option value="${apellido.getId()}">${apellido.getNombre()}</option>
-                        </c:forEach>                                                 
-                    </select>
+                    <input type='text' class="form-control input-sm" name="apellidos" id="apellidos" maxlength="100" style="width: 75%;">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarApellidos()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                     <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
@@ -707,11 +697,11 @@
     }
 
     function limpiarNombres() {
-        $('#cboNombres').val("").trigger('change');
+        $('#nombres').val("");
     }
 
     function limpiarApellidos() {
-        $('#cboApellidos').val("").trigger('change');
+        $('#apellidos').val("");
     }
 
     var numeroIdentificacion = "";
@@ -758,7 +748,7 @@
     function buscarHojasVida() {
         $('#formPersona').hide();
         $('#divDescargar').hide();
-        if ($('#cboNumeroIdentificacion').val() == "" && $('#cboNombres').val() == "" && $('#cboApellidos').val() == "") {
+        if ($('#cboNumeroIdentificacion').val() == "" && $('#nombres').val() == "" && $('#apellidos').val() == "") {
             tblHojasVida.clear().draw();
             return;
         }
@@ -780,8 +770,8 @@
 
         var formData = new FormData();
         formData.append("idPersona", $('#cboNumeroIdentificacion').val());
-        formData.append("nombres", $('#cboNombres option:selected').text());
-        formData.append("apellidos", $('#cboApellidos option:selected').text());
+        formData.append("nombres", $('#nombres').val());
+        formData.append("apellidos", $('#apellidos').val());
         $.ajax({
             type: "POST",
             url: "${pageContext.request.contextPath}/hojasVida/consultarHojasVida",
@@ -833,12 +823,12 @@
     
         $.ajax({
                 type: "GET",
-                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaSoporte?idPersona=" + $('#cboNumeroIdentificacion').val() + "&nombres=" + $('#cboNombres').val() + "&apellidos=" + $('#cboApellidos').val(),
+                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaSoporte?idPersona=" + $('#cboNumeroIdentificacion').val() + "&nombres=" + $('#nombres').val() + "&apellidos=" + $('#apellidos').val(),
                 processData: false,
                 contentType: false,
                 success: function (response) {
                     if (response != "") {
-                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaSoporte?idPersona=" + $('#cboNumeroIdentificacion').val() + "&nombres=" + $('#cboNombres').val() + "&apellidos=" + $('#cboApellidos').val();
+                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaSoporte?idPersona=" + $('#cboNumeroIdentificacion').val() + "&nombres=" + $('#nombres').val() + "&apellidos=" + $('#apellidos').val();
                     }
                     $('#md_descargar_resultados').modal('hide');
                 },

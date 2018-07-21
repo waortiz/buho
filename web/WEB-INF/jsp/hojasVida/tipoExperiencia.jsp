@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group form-inline">
-                    <label>Tipo de experiencia</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la institución">
+                    <label>Tipo de experiencia</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar tipo de experiencia">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <select style="width: 65%;" id="cboTipoExperiencia" class="js-select-basic-single js-states form-control">
                         <option value=""></option>

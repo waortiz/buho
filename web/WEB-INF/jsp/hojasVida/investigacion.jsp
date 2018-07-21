@@ -8,20 +8,20 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group form-inline">
-                    <label>Reconocido</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar la institución">
+                    <label>Reconocido</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar si es reconocido">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 75%;" id="cboReconocido" class="js-select-basic-single js-states form-control">
-                        <option value=""></option>
-                        <option value="true">Si</option>
-                        <option value="false">No</option>
-                    </select>
+                    <div id="radioBtn" class="btn-group" style="margin-left: 40px;">
+                        <a class="btn btn-primary btn-sm notActive" data-toggle="reconocido"  data-title="true"  id="btnReconocidoSi">Si</a>
+                        <a class="btn btn-primary btn-sm notActive" data-toggle="reconocido"  data-title="false" id="btnReconocidoNo">No</a>
+                    </div>
+                    <input type="hidden" name="reconocido" id="reconocido">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarReconocido()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                     <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="form-group form-inline">
-                    <label>Tipo investigador</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
+                    <label>Tipo investigador</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el tipo de investigador">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <select style="width: 85%;" id="cboTipoInvestigador" class="js-select-basic-single js-states form-control">
                         <option ></option>
@@ -751,7 +751,9 @@
   </div> 
   <script>
     function limpiarReconocido() {
-        $('#cboReconocido').val("").trigger('change');
+        $('#btnReconocidoSi').removeClass('active').addClass('notActive');
+        $('#btnReconocidoNo').removeClass('active').addClass('notActive');
+        $('#reconocido').val('');
     }
 
     function limpiarTipoInvestigador() {
@@ -789,7 +791,7 @@
     function buscarHojasVida() {
         $('#formHV').hide();
         $('#divDescargar').hide();
-        if($('#cboReconocido').val() == "" && $('#cboTipoInvestigador').val() == "") {
+        if($('#reconocido').val() == "" && $('#cboTipoInvestigador').val() == "") {
             tblHojasVida.clear().draw();
             return;
         }
@@ -809,7 +811,7 @@
             }
         }, 2000);
         var formData = new FormData();
-        formData.append("reconocido", $('#cboReconocido').val());
+        formData.append("reconocido", $('#reconocido').val());
         formData.append("tipoInvestigador", $('#cboTipoInvestigador').val());
         $.ajax({
             type: "POST",
@@ -861,12 +863,12 @@
     
         $.ajax({
                 type: "GET",
-                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaInvestigacion?reconocido=" + $('#cboReconocido').val() + "&tipoInvestigador=" + $('#cboTipoInvestigador').val(),
+                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaInvestigacion?reconocido=" + $('#reconocido').val() + "&tipoInvestigador=" + $('#cboTipoInvestigador').val(),
                 processData: false,
                 contentType: false,
                 success: function (response) {
                     if (response != "") {
-                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaInvestigacion?reconocido=" + $('#cboReconocido').val() + "&tipoInvestigador=" + $('#cboTipoInvestigador').val();
+                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaInvestigacion?reconocido=" + $('#reconocido').val() + "&tipoInvestigador=" + $('#cboTipoInvestigador').val();
                     }
                     $('#md_descargar_resultados').modal('hide');
                 },

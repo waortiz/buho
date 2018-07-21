@@ -9,14 +9,9 @@
         <div class="row">
              <div class="col-md-6">
                 <div class="form-group form-inline">
-                    <label>Curso</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nivel de estudio">
+                    <label>Curso</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el curso">
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 85%;" id="cboCurso" class="js-select-basic-single js-states form-control">
-                        <option></option>
-                        <c:forEach var="curso" items="${cursos}">
-                           <option value="${curso.getId()}">${curso.getNombre()}</option>
-                        </c:forEach>
-                    </select>
+                    <input type='text' class="form-control input-sm" name="curso" id="curso" maxlength="150" style="width: 85%;">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarCurso()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                     <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
@@ -63,9 +58,9 @@
                         <thead>
                             <tr>
                                 <td><input type="text" id="cedula" class="form-control input-sm" placeholder="Buscar cédulas"></td>
-                                <td><input type="text" id="nombres" class="form-control input-sm" placeholder="Buscar nombres"></td>
-                                <td><input type="text" id="apellidos" class="form-control input-sm" placeholder="Buscar apellidos"></td>
-                                <td><input type="text" id="curso" class="form-control input-sm" placeholder="Buscar cursos"></td>
+                                <td><input type="text" id="buscarNombres" class="form-control input-sm" placeholder="Buscar nombres"></td>
+                                <td><input type="text" id="buscarApellidos" class="form-control input-sm" placeholder="Buscar apellidos"></td>
+                                <td><input type="text" id="nombreCurso" class="form-control input-sm" placeholder="Buscar cursos"></td>
                                 <td><input type="text" id="nucleoBasicoConocimiento" class="form-control input-sm" placeholder="Buscar núcleos básicos de conocimiento"></td>
                                 <td><input type="text" id="duracion" class="form-control input-sm" placeholder="Buscar duraciones"></td>
                                 <td>&nbsp;</td>
@@ -783,7 +778,7 @@
   </div> 
   <script>
     function limpiarCurso() {
-       $('#cboCurso').val("").trigger('change');
+       $('#curso').val("");
     }
 
     function limpiarNucleoBasicoConocimiento() {
@@ -831,19 +826,19 @@
                     .search(this.value)
                     .draw();
         });
-        $('#nombres').on('keyup', function () {
+        $('#buscarNombres').on('keyup', function () {
             tblHojasVida
                     .columns(1)
                     .search(this.value)
                     .draw();
         });
-        $('#apellidos').on('keyup', function () {
+        $('#buscarApellidos').on('keyup', function () {
             tblHojasVida
                     .columns(2)
                     .search(this.value)
                     .draw();
         });
-        $('#curso').on('keyup', function () {
+        $('#nombreCurso').on('keyup', function () {
             tblHojasVida
                     .columns(3)
                     .search(this.value)
@@ -874,7 +869,7 @@
     function buscarHojasVida() {
         $('#formHV').hide();
         $('#divDescargar').hide();
-        if($('#cboCurso').val() == "" && $('#cboNucleoBasicoConocimiento').val() == "" && $('#numeroHorasInicial').val() == "" && $('#numeroHorasFinal').val() == "") {
+        if($('#curso').val() == "" && $('#cboNucleoBasicoConocimiento').val() == "" && $('#numeroHorasInicial').val() == "" && $('#numeroHorasFinal').val() == "") {
             tblHojasVida.clear().draw();
             return;
         }
@@ -903,7 +898,7 @@
             }
         }, 2000);
         var formData = new FormData();
-        formData.append("curso", $('#cboCurso').val());
+        formData.append("curso", $('#curso').val());
         formData.append("nucleoBasicoConocimiento", $('#cboNucleoBasicoConocimiento').val());
         formData.append("numeroHorasInicial", $('#numeroHorasInicial').val());
         formData.append("numeroHorasFinal", $('#numeroHorasFinal').val());
@@ -958,12 +953,12 @@
     
         $.ajax({
                 type: "GET",
-                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaEducacionContinua?curso=" + $('#cboCurso').val() + "&nucleoBasicoConocimiento=" + $('#cboNucleoBasicoConocimiento').val() + "&numeroHorasInicial=" + $('#numeroHorasInicial').val() + "&numeroHorasFinal=" + $('#numeroHorasFinal').val(),
+                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaEducacionContinua?curso=" + $('#curso').val() + "&nucleoBasicoConocimiento=" + $('#cboNucleoBasicoConocimiento').val() + "&numeroHorasInicial=" + $('#numeroHorasInicial').val() + "&numeroHorasFinal=" + $('#numeroHorasFinal').val(),
                 processData: false,
                 contentType: false,
                 success: function (response) {
                     if (response != "") {
-                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaEducacionContinua?curso=" + $('#cboCurso').val() + "&nucleoBasicoConocimiento=" + $('#cboNucleoBasicoConocimiento').val() + "&numeroHorasInicial=" + $('#numeroHorasInicial').val() + "&numeroHorasFinal=" + $('#numeroHorasFinal').val();
+                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVidaEducacionContinua?curso=" + $('#curso').val() + "&nucleoBasicoConocimiento=" + $('#cboNucleoBasicoConocimiento').val() + "&numeroHorasInicial=" + $('#numeroHorasInicial').val() + "&numeroHorasFinal=" + $('#numeroHorasFinal').val();
                     }
                     $('#md_descargar_resultados').modal('hide');
                 },

@@ -182,12 +182,7 @@ public class HojaVidaController {
     @RequestMapping(value = "/consulta", method = RequestMethod.GET)
     public String obtenerHojasVida(Model model) {
         List<Maestro> numerosDocumento = servicioHojaVida.obtenerNumerosDocumento();
-        List<Maestro> nombres = servicioHojaVida.obtenerNombres();
-        List<Maestro> apellidos = servicioHojaVida.obtenerApellidos();
-
         model.addAttribute("numerosDocumento", numerosDocumento);
-        model.addAttribute("nombres", nombres);
-        model.addAttribute("apellidos", apellidos);
 
         return "hojasVida/consulta";
     }
@@ -248,12 +243,10 @@ public class HojaVidaController {
         List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
         List<Maestro> instituciones = servicioMaestro.obtenerInstitucionesEducativas();
         List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
-        List<Maestro> titulos = servicioMaestro.obtenerTitulos();
 
         model.addAttribute("nivelesEstudio", nivelesFormacion);
         model.addAttribute("instituciones", instituciones);
         model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
-        model.addAttribute("titulos", titulos);
 
         return "hojasVida/educacionSuperior";
     }
@@ -276,10 +269,7 @@ public class HojaVidaController {
 
     @RequestMapping(value = "/educacionContinua", method = RequestMethod.GET)
     public String obtenerHojasVidaEducacionContinua(Model model) {
-        List<Maestro> cursos = servicioMaestro.obtenerProgramasEducacionesContinuas();
         List<Maestro> nucleosBasicosConocimiento = servicioMaestro.obtenerNucleosBasicosConocimiento();
-
-        model.addAttribute("cursos", cursos);
         model.addAttribute("nucleosBasicosConocimiento", nucleosBasicosConocimiento);
 
         return "hojasVida/educacionContinua";
@@ -379,11 +369,7 @@ public class HojaVidaController {
 
     @RequestMapping(value = "/experienciaDocencia", method = RequestMethod.GET)
     public String obtenerHojasVidaExperienciaDocencia(Model model) {
-        
-        List<Maestro> cursos = servicioMaestro.obtenerCursosDocencia();
         List<Maestro> instituciones = servicioMaestro.obtenerInstitucionesEducativas();
-        
-        model.addAttribute("cursos", cursos);
         model.addAttribute("instituciones", instituciones);
         
         return "hojasVida/experienciaDocencia";
@@ -455,12 +441,7 @@ public class HojaVidaController {
     @RequestMapping(value = "/soporte", method = RequestMethod.GET)
     public String obtenerHojasVidaSoporte(Model model) {
         List<Maestro> numerosDocumento = servicioHojaVida.obtenerNumerosDocumento();
-        List<Maestro> nombres = servicioHojaVida.obtenerNombres();
-        List<Maestro> apellidos = servicioHojaVida.obtenerApellidos();
-
         model.addAttribute("numerosDocumento", numerosDocumento);
-        model.addAttribute("nombres", nombres);
-        model.addAttribute("apellidos", apellidos);
 
         return "hojasVida/soporte";
     }
@@ -1978,14 +1959,8 @@ public class HojaVidaController {
 
     @RequestMapping(value = "/validar", method = RequestMethod.GET)
     public String validarDocumentos(Model model) {
-
         List<Maestro> numerosDocumento = servicioHojaVida.obtenerNumerosDocumento();
-        List<Maestro> nombres = servicioHojaVida.obtenerNombres();
-        List<Maestro> apellidos = servicioHojaVida.obtenerApellidos();
-
         model.addAttribute("numerosDocumento", numerosDocumento);
-        model.addAttribute("nombres", nombres);
-        model.addAttribute("apellidos", apellidos);
 
         return "hojasVida/validar";
     }

@@ -12,8 +12,8 @@
                         <thead>
                             <tr>
                                 <td><input type="text" id="cedula" class="form-control input-sm" placeholder="Buscar cédulas"></td>
-                                <td><input type="text" id="nombres" class="form-control input-sm" placeholder="Buscar nombres"></td>
-                                <td><input type="text" id="apellidos" class="form-control input-sm" placeholder="Buscar apellidos"></td>
+                                <td><input type="text" id="buscarNombres" class="form-control input-sm" placeholder="Buscar nombres"></td>
+                                <td><input type="text" id="buscarApellidos" class="form-control input-sm" placeholder="Buscar apellidos"></td>
                                 <td><input type="text" id="institucion" class="form-control input-sm" placeholder="Buscar instituciones"></td>
                                 <td><input type="text" id="fecha" class="form-control input-sm" placeholder="Buscar fechas"></td>
                                 <td><input type="text" id="descripcion" class="form-control input-sm" placeholder="Buscar disticiones"></td>
@@ -766,13 +766,13 @@
                     .search(this.value)
                     .draw();
         });
-        $('#nombres').on('keyup', function () {
+        $('#buscarNombres').on('keyup', function () {
             tblHojasVida
                     .columns(1)
                     .search(this.value)
                     .draw();
         });
-        $('#apellidos').on('keyup', function () {
+        $('#buscarApellidos').on('keyup', function () {
             tblHojasVida
                     .columns(2)
                     .search(this.value)

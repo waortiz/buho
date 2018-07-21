@@ -3,14 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Desarrollo/Java/buho/web/WEB-INF/jsp/hojasVida/editar.jsp</file>
-            <file>file:/D:/Desarrollo/Java/buho/web/WEB-INF/jsp/hojasVida/validar.jsp</file>
-            <file>file:/D:/Desarrollo/Java/buho/web/WEB-INF/jsp/convocatorias/crear.jsp</file>
-            <file>file:/D:/Desarrollo/Java/buho/web/resources/js/convocatoria.js</file>
-            <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/controladores/HojaVidaController.java</file>
-            <file>file:/D:/Desarrollo/Java/buho/web/resources/js/hojaVida.js</file>
-            <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/controladores/ConvocatoriaController.java</file>
-            <file>file:/D:/Desarrollo/Java/buho/web/WEB-INF/jsp/hojasVida/educacionBasica.jsp</file>
+            <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/excel/HojaVidaExcelReportView.java</file>
+            <file>file:/D:/Desarrollo/Java/buho/src/java/co/edu/fnsp/buho/entidades/HojaVidaConsulta.java</file>
+            <file>file:/D:/Desarrollo/Java/buho/web/WEB-INF/jsp/hojasVida/consulta.jsp</file>
         </group>
     </open-files>
 </project-private>

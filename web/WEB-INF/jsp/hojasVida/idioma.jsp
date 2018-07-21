@@ -9,7 +9,7 @@
         <div class="row">
              <div class="col-md-3">
                 <div class="form-group form-inline">
-                    <label>Idioma</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nivel de estudio">
+                    <label>Idioma</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el idioma">
                     <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <select style="width: 65%;" id="cboIdioma" class="js-select-basic-single js-states form-control">
                         <option></option>
@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group form-inline">
-                    <label>Tipo de prueba</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el núcleo básico de conocimiento">
+                    <label>Tipo de certificación</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el tipo de certificación">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <select style="width: 65%;" id="cboTipoCertificacion" class="js-select-basic-single js-states form-control">
                         <option ></option>

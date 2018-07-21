@@ -23,28 +23,18 @@
            </div>
            <div class="col-md-5">
                <div class="form-group form-inline">
-                  <label>Buscar nombres </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre para buscar documentos">
+                  <label>Buscar nombres </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar los nombres">
                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                   <select id="cboNombres" class="form-control js-select-basic-single2" style="width: 75%;">
-                        <option value=""></option>
-                        <c:forEach var="nombre" items="${nombres}">
-                            <option value="${nombre.getId()}">${nombre.getNombre()}</option>
-                        </c:forEach>                         
-                   </select>
+                  <input type='text' class="form-control input-sm" name="nombres" id="nombres" maxlength="100" style="width: 75%;">
                   <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNombres()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                   <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                </div>
            </div>
            <div class="col-md-4">
                <div class="form-group form-inline">
-                  <label>Buscar apellidos </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indica el apellido para buscar documentos">
+                  <label>Buscar apellidos </label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar los apellidos">
                    <i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                   <select id="cboApellidos" class="form-control js-select-basic-single2" style="width: 75%;">
-                        <option value=""></option>
-                        <c:forEach var="apellido" items="${apellidos}">
-                            <option value="${apellido.getId()}">${apellido.getNombre()}</option>
-                        </c:forEach>                             
-                   </select>
+                   <input type='text' class="form-control input-sm" name="apellidos" id="apellidos" maxlength="100" style="width: 75%;">
                   <button type="button" class="btn btn-danger btn-sm" onclick="limpiarApellidos()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                   <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                </div>
@@ -712,11 +702,11 @@
     }
 
     function limpiarNombres() {
-        $('#cboNombres').val("").trigger('change');
+        $('#nombres').val("");
     }
 
     function limpiarApellidos() {
-        $('#cboApellidos').val("").trigger('change');
+        $('#apellidos').val("");
     }
     
     $(document).ready(function () {
@@ -829,15 +819,15 @@
 
     function buscarHojasVida() {
         $('#formPersona').hide();
-        if ($('#cboNumeroIdentificacion').val() == "" && $('#cboNombres').val() == "" && $('#cboApellidos').val() == "") {
+        if ($('#cboNumeroIdentificacion').val() == "" && $('#nombres').val() == "" && $('#apellidos').val() == "") {
             tblHojasVida.clear().draw();
             return;
         }
         
         var formData = new FormData();
         formData.append("idPersona", $('#cboNumeroIdentificacion').val());
-        formData.append("nombres", $('#cboNombres option:selected').text());
-        formData.append("apellidos", $('#cboApellidos option:selected').text());
+        formData.append("nombres", $('#nombres').val());
+        formData.append("apellidos", $('#apellidos').val());
         $.ajax({
             type: "POST",
             url: "${pageContext.request.contextPath}/hojasVida/consultarHojasVida",

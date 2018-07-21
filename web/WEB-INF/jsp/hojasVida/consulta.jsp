@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group form-inline">
-                    <label>Buscar Numero de identificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre para buscar las hojas de vida">
+                    <label>Buscar número de identificaci&oacute;n</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el número de identificación">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
                     <select style="width: 75%;" id="cboNumeroIdentificacion" class="js-select-basic-single js-states form-control">
                         <option></option>
@@ -22,28 +22,18 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group form-inline">
-                    <label>Buscar nombres</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre para buscar las hojas de vida">
+                    <label>Buscar nombres</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar los nombres">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 75%;" id="cboNombres" class="js-select-basic-single js-states form-control">
-                        <option></option>
-                        <c:forEach var="nombre" items="${nombres}">
-                            <option value="${nombre.getId()}">${nombre.getNombre()}</option>
-                        </c:forEach>                                                 
-                    </select>
+                    <input type='text' class="form-control input-sm" name="buscarNombres" id="buscarNombres" maxlength="100" style="width: 75%;">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarNombres()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                     <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group form-inline">
-                    <label>Buscar apellidos</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el nombre para buscar las hojas de vida">
+                    <label>Buscar apellidos</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar los apellidos">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 75%;" id="cboApellidos" class="js-select-basic-single js-states form-control">
-                        <option></option>
-                        <c:forEach var="apellido" items="${apellidos}">
-                            <option value="${apellido.getId()}">${apellido.getNombre()}</option>
-                        </c:forEach>                                                 
-                    </select>
+                    <input type='text' class="form-control input-sm" name="buscarApellidos" id="buscarApellidos" maxlength="100" style="width: 75%;">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarApellidos()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                     <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
@@ -84,11 +74,19 @@
                                     <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="correocinput"></td>
                                     <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="niedinput"></td>
                                     <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="expinput"></td>
+                                    <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="buscarCargo"></td>
+                                    <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="buscarTipoCargo"></td>
                                     <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="invcinput"></td>
                                     <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="artinput"></td>
                                     <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="patcinput"></td>
                                     <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="prodcinput"></td>
                                     <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="disinput"></td>
+                                    <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="buscarTitulo"></td>
+                                    <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="buscarCurso"></td>
+                                    <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="buscarDuracionCurso"></td>
+                                    <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="buscarInstitucionExperienciaDocencia"></td>
+                                    <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="buscarCursoExperienciaDocencia"></td>
+                                    <td>&nbsp;</td>
                                 </tr>
                                 <tr>
                                     <th>N&deg; de identificaci&oacute;n</th>
@@ -118,12 +116,19 @@
                                     <th>Telef&oacute;no</th>
                                     <th>Correo electr&oacute;nico</th>
                                     <th>Nivel educativo</th>
-                                    <th>Experiencia</th>
+                                    <th>Experiencia profesional</th>
+                                    <th>Cargo</th>
+                                    <th>Tipo de cargo</th>
                                     <th>Tipo de investigador</th>
                                     <th>Articulos</th>
                                     <th>Patente</th>
                                     <th>Producto de conocimiento</th>
-                                    <th>Distincion</th>
+                                    <th>Distinción</th>
+                                    <th>Título</th>
+                                    <th>Curso</th>
+                                    <th>Duración</th>
+                                    <th>Institución experiencia docencia</th>
+                                    <th>Curso experiencia docencia</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
@@ -905,11 +910,11 @@
     }
 
     function limpiarNombres() {
-       $('#cboNombres').val("").trigger('change');
+       $('#buscarNombres').val("");
     }
 
     function limpiarApellidos() {
-       $('#cboApellidos').val("").trigger('change');
+       $('#buscarApellidos').val("");
     }
 
     $(document).ready(function () {
@@ -1104,36 +1109,79 @@
                     .search(this.value)
                     .draw();
         });
-        $('#invcinput').on('keyup', function () {
+        $('#buscarCargo').on('keyup', function () {
             tblHojasVida
                     .columns(28)
                     .search(this.value)
                     .draw();
         });
-        $('#artinput').on('keyup', function () {
+        $('#buscarTipoCargo').on('keyup', function () {
             tblHojasVida
                     .columns(29)
                     .search(this.value)
                     .draw();
         });
-        $('#patcinput').on('keyup', function () {
+        $('#invcinput').on('keyup', function () {
             tblHojasVida
                     .columns(30)
                     .search(this.value)
                     .draw();
         });
-        $('#prodcinput').on('keyup', function () {
+        $('#artinput').on('keyup', function () {
             tblHojasVida
                     .columns(31)
                     .search(this.value)
                     .draw();
         });
-        $('#disinput').on('keyup', function () {
+        $('#patcinput').on('keyup', function () {
             tblHojasVida
                     .columns(32)
                     .search(this.value)
                     .draw();
         });
+        $('#prodcinput').on('keyup', function () {
+            tblHojasVida
+                    .columns(33)
+                    .search(this.value)
+                    .draw();
+        });
+        $('#disinput').on('keyup', function () {
+            tblHojasVida
+                    .columns(34)
+                    .search(this.value)
+                    .draw();
+        });
+        $('#buscarTitulo').on('keyup', function () {
+            tblHojasVida
+                    .columns(35)
+                    .search(this.value)
+                    .draw();
+        });        
+        $('#buscarCurso').on('keyup', function () {
+            tblHojasVida
+                    .columns(36)
+                    .search(this.value)
+                    .draw();
+        });         
+        $('#buscarDuracionCurso').on('keyup', function () {
+            tblHojasVida
+                    .columns(37)
+                    .search(this.value)
+                    .draw();
+        });         
+        $('#buscarInstitucionExperienciaDocencia').on('keyup', function () {
+            tblHojasVida
+                    .columns(38)
+                    .search(this.value)
+                    .draw();
+        });         
+        $('#buscarCursoExperienciaDocencia').on('keyup', function () {
+            tblHojasVida
+                    .columns(39)
+                    .search(this.value)
+                    .draw();
+        });         
+        
         $('#btnpersonal').click(function () {
             $('#formpersonal').css("display", "block");
             $('#formperfilsopor').css("display", "none");
@@ -1300,7 +1348,7 @@
     
     function buscarHojasVida() {
         $('#divDescargar').hide();
-        if($('#cboNumeroIdentificacion').val() == "" && $('#cboNombres').val() == "" && $('#cboApellidos').val() == "") {
+        if($('#cboNumeroIdentificacion').val() == "" && $('#buscarNombres').val() == "" && $('#buscarApellidos').val() == "") {
             tblHojasVida.clear().draw();
             return;
         }
@@ -1322,8 +1370,8 @@
         
         var formData = new FormData();
         formData.append("idPersona", $('#cboNumeroIdentificacion').val());
-        formData.append("nombres", $('#cboNombres option:selected').text());
-        formData.append("apellidos", $('#cboApellidos option:selected').text());
+        formData.append("nombres", $('#buscarNombres').val());
+        formData.append("apellidos", $('#buscarApellidos').val());
         $.ajax({
             type: "POST",
             url: "${pageContext.request.contextPath}/hojasVida/consultarHojasVida",
@@ -1370,12 +1418,19 @@
                             getValue(hojasVida[i].telefono),
                             getValue(hojasVida[i].correoElectronico),
                             getValue(hojasVida[i].nivelEducativo),
-                            getValue(hojasVida[i].experiencia),
+                            getValue(hojasVida[i].empresa),
+                            getValue(hojasVida[i].cargo),
+                            getValue(hojasVida[i].tipoCargo),
                             getValue(hojasVida[i].tipoInvestigador),
                             getValue(hojasVida[i].articulo),
                             getValue(hojasVida[i].patente),
                             getValue(hojasVida[i].productoConocimiento),
                             getValue(hojasVida[i].distincion),
+                            getValue(hojasVida[i].titulo),
+                            getValue(hojasVida[i].nombreCurso),
+                            getValue(hojasVida[i].duracionCurso),
+                            getValue(hojasVida[i].institucionExperienciaDocencia),
+                            getValue(hojasVida[i].nombreCursoExperienciaDocencia),
                             '<td style="white-space: nowrap"><button type="button" class="btn btn-success btn-sm" style="margin-right: 10px;" onclick="verHojaVida( ' + hojasVida[i].idPersona + ')">Ver</button></td>'
                         ]).draw(false); 
                     }
@@ -1402,12 +1457,12 @@
     
         $.ajax({
                 type: "GET",
-                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVida?idPersona=" + $('#cboNumeroIdentificacion').val() + "&nombres=" + $('#cboNombres option:selected').text() + "&apellidos=" + $('#cboApellidos option:selected').text(),
+                url: "${pageContext.request.contextPath}/hojasVida/descargarHojasVida?idPersona=" + $('#cboNumeroIdentificacion').val() + "&nombres=" + $('#buscarNombres').val() + "&apellidos=" + $('#buscarApellidos').val(),
                 processData: false,
                 contentType: false,
                 success: function (response) {
                     if (response != "") {
-                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVida?idPersona=" + $('#cboNumeroIdentificacion').val() + "&nombres=" + $('#cboNombres option:selected').text() + "&apellidos=" + $('#cboApellidos option:selected').text();
+                        window.location.href = "${pageContext.request.contextPath}/hojasVida/descargarHojasVida?idPersona=" + $('#cboNumeroIdentificacion').val() + "&nombres=" + $('#buscarNombres').val() + "&apellidos=" + $('#buscarApellidos').val();
                     }
                     $('#md_descargar_resultados').modal('hide');
                 },

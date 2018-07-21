@@ -90,16 +90,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group form-inline">
                     <label>Título obtenido</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe indicar el título obtenido">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                    <select style="width: 85%;" id="cboTituloObtenido" class="js-select-basic-single js-states form-control">
-                        <option value=""></option>
-                        <c:forEach var="titulo" items="${titulos}">
-                            <option value="${titulo.getId()}">${titulo.getNombre()}</option>
-                        </c:forEach>                                                 
-                    </select>
+                    <input style="width: 85%;" type='text' class="form-control input-sm" name="titulo" id="titulo" maxlength="260">
                     <button type="button" class="btn btn-danger btn-sm" onclick="limpiarTitulo()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                     <button type="button" class="btn btn-success btn-sm" onclick="buscarHojasVida()"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
@@ -833,7 +828,7 @@
     }
     
     function limpiarTitulo() {
-        $('#cboTituloObtenido').val("").trigger('change');
+        $('#titulo').val("");
     }
     
     $(document).ready(function () {
@@ -852,7 +847,7 @@
             $('#tituloExterior').val() == "" && 
             $('#cboInstitucion').val() == "" && 
             $('#cboAnyoGraduacionInicial').val() == "" && 
-            $('#cboTituloObtenido').val() == "" && 
+            $('#titulo').val() == "" && 
             $('#cboAnyoGraduacionFinal').val() == "") {
             return;
         }
@@ -888,7 +883,7 @@
         formData.append("nucleoBasicoConocimiento", $('#cboNucleoBasicoConocimiento').val());
         formData.append("tituloExterior", $('#tituloExterior').val());
         formData.append("institucion", $('#cboInstitucion').val());
-        formData.append("titulo", $('#cboTituloObtenido').val());
+        formData.append("titulo", $('#titulo').val());
         
         $.ajax({
             type: "POST",
@@ -971,7 +966,7 @@
                     "&anyoGraduacionFinal=" + $('#cboAnyoGraduacionFinal').val() + 
                     "&institucion=" + $('#cboInstitucion').val() + 
                     "&nucleoBasicoConocimiento=" + $('#cboNucleoBasicoConocimiento').val() + 
-                    "&titulo=" + $('#cboTituloObtenido').val() + 
+                    "&titulo=" + $('#titulo').val() + 
                     "&tituloExterior=" + $('#tituloExterior').val(),
             processData: false,
             contentType: false,
@@ -982,7 +977,7 @@
                     "&anyoGraduacionFinal=" + $('#cboAnyoGraduacionFinal').val() + 
                     "&institucion=" + $('#cboInstitucion').val() + 
                     "&nucleoBasicoConocimiento=" + $('#cboNucleoBasicoConocimiento').val() + 
-                    "&titulo=" + $('#cboTituloObtenido').val() + 
+                    "&titulo=" + $('#titulo').val() + 
                     "&tituloExterior=" + $('#tituloExterior').val();
                 }
                 $('#md_descargar_resultados').modal('hide');

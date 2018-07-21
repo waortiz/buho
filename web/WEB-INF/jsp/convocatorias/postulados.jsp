@@ -10,12 +10,13 @@
                 <div class="form-group">
                     <label for="convocatoria">Convocatoria</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar la convocatoria">
                         <i class="fa fa-question-circle" aria-hidden="true"></i></a><br> 
-                    <select style="width: 100%;" id="convocatoria" class="js-select-basic-single js-states form-control" onchange="buscarHojasVida()">
+                    <select style="width: 95%;" id="convocatoria" class="js-select-basic-single js-states form-control" onchange="buscarHojasVida()">
                         <option></option>
                         <c:forEach var="convocatoria" items="${convocatorias}">
                             <option value="${convocatoria.getId()}">${convocatoria.getNombre()}</option>
                         </c:forEach>                                                 
-                    </select>  
+                    </select>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="limpiarConvocatoria()"><span class="glyphicon glyphicon-remove-sign"></span></button> 
                 </div>
             </div>
             <div class="col-md-3">
@@ -767,9 +768,21 @@
                 }
             });
         });
+        
+        function limpiarConvocatoria() {
+            $('#convocatoria').val("").trigger('change');
+            buscarHojasVida();
+        }
+    
         function buscarHojasVida() {
             $('#formHV').hide();
             $('#divDescargar').hide();
+            if($('#convocatoria').val() == "") {
+                tblHojasVida.clear().draw();
+                $('#totalPostulados').val('');
+                return;
+            }               
+
             $('#md_postulados').modal({backdrop: 'static', keyboard: false});
             current_progress = 0;
             var interval = setInterval(function () {
@@ -800,20 +813,12 @@
                         }
                         $('#totalPostulados').val(hojasVida.length);
                         for (var i = 0; i < hojasVida.length; i++) {
-                            sexo = hojasVida[i].nombreSexo;
-                            perfil = hojasVida[i].perfil;
-                            if (hojasVida[i].perfil == null) {
-                                perfil = '';
-                            }
-                            if (hojasVida[i].nombreSexo == null) {
-                                sexo = '';
-                            }
                             tblHojasVida.row.add([
                                 hojasVida[i].numeroIdentificacion,
                                 hojasVida[i].nombres,
                                 hojasVida[i].apellidos,
-                                sexo,
-                                perfil,
+                                getValue(hojasVida[i].nombreSexo),
+                                getValue(hojasVida[i].perfil),
                                 '<button class="btn btn-success btn-xs btnver" type="button" onclick=\'verHojaVida(' + hojasVida[i].idPersona + ')\'>Ver</button>'
                             ]).draw(false);
                         }
