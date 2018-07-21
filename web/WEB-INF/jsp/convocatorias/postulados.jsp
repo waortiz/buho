@@ -28,20 +28,18 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table table-hover tableestilo" id="tblHojasVida">
-                        <thead>
-                            <tr>
-                                <th>C&eacute;dula</th>
-                                <th>Nombres</th>
-                                <th>Apellidos</th>
-                                <th>Sexo</th>
-                                <th style="width:40%">Perfil</th>
-                                <th class='opc'>Opciones</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
+                <table class="table table-hover tableestilo" id="tblHojasVida">
+                    <thead>
+                        <tr>
+                            <th>C&eacute;dula</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Sexo</th>
+                            <th style="width:40%">Perfil</th>
+                            <th class='opc'>Opciones</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
         <div id="divDescargar" style="display: none;" align="center">
@@ -818,10 +816,13 @@
                                 hojasVida[i].nombres,
                                 hojasVida[i].apellidos,
                                 getValue(hojasVida[i].nombreSexo),
-                                getValue(hojasVida[i].perfil),
+                                "<center><textarea class='form-control md_prev' style='width:100%;height:40px!important;'>" + getValue(hojasVida[i].perfil) + "</textarea></center>",
                                 '<button class="btn btn-success btn-xs btnver" type="button" onclick=\'verHojaVida(' + hojasVida[i].idPersona + ')\'>Ver</button>'
                             ]).draw(false);
                         }
+                        $('table tr td .md_prev').mouseover(function(){
+                            $(this).popover({title: "Perfil", content: $(this).val(), trigger:"hover"});  
+                        });
                     }
                 }});
         }

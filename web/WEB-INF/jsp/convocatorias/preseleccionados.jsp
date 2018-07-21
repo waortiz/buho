@@ -22,20 +22,18 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table table-hover tableestilo" id="tblPreseleccionados">
-                        <thead>
-                            <tr>
-                                <th>N&deg;</th>
-                                <th>Sexo</th>
-                                <th style="width: 40%">Perfil</th>
-                                <th>Tiempo experiencia docente</th>
-                                <th>Tiempo de experiencia laboral</th>
-                                <th class='opc'>Opciones</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
+                <table class="table table-hover tableestilo" id="tblPreseleccionados">
+                    <thead>
+                        <tr>
+                            <th>N&deg;</th>
+                            <th>Sexo</th>
+                            <th style="width: 40%">Perfil</th>
+                            <th>Tiempo experiencia docente</th>
+                            <th>Tiempo de experiencia laboral</th>
+                            <th class='opc'>Opciones</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
         <div id="divDescargar" style="display: none;" align="center">
@@ -806,22 +804,17 @@
                     }   
                     $('#totalPostulados').val(preseleccionados.length);
                     for (var i = 0; i < preseleccionados.length; i++) {
-                        sexo = preseleccionados[i].nombreSexo;
-                        perfil = preseleccionados[i].perfil;
-                        if (preseleccionados[i].perfil == null) {
-                            perfil = '';
-                        }
-                        if (preseleccionados[i].nombreSexo == null) {
-                            sexo = '';
-                        }
                         tblPreseleccionados.row.add([i + 1,
-                            sexo,
-                            perfil,
+                            getValue(preseleccionados[i].nombreSexo),
+                            "<center><textarea class='form-control md_prev' style='width:100%;height:40px!important;'>" + getValue(preseleccionados[i].perfil) + "</textarea></center>",
                             preseleccionados[i].tiempoExperienciaDocente,
                             preseleccionados[i].tiempoExperienciaLaboral,
                             "<button class='btn btn-success btn-xs btnver' type='button' onclick='verHojaVida(" + preseleccionados[i].idPersona + ")'>Ver</button>"
                         ]).draw(false);
                     }
+                    $('table tr td .md_prev').mouseover(function(){
+                        $(this).popover({title: "Perfil", content: $(this).val(), trigger:"hover"});  
+                    });        
                 }
             }});
     }
