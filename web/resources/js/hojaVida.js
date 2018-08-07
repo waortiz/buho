@@ -664,6 +664,50 @@ $('.fecha').datepicker({
            $('#nombreDocumentoRUT').text($("#documentoRUT")[0].files[0].name); 
         });
 
+        $('#documentoSoporte').change(function () {
+           $('#nombreDocumentoSoporte').text($("#documentoSoporte")[0].files[0].name); 
+        });
+
+        $('#certificadoEducacionBasica').change(function () {
+           $('#nombreCertificadoEducacionBasica').text($("#certificadoEducacionBasica")[0].files[0].name); 
+        });
+
+        $('#certificadoHomologadoEducacionSuperior').change(function () {
+           $('#nombreCertificadoHomologadoEducacionSuperior').text($("#certificadoHomologadoEducacionSuperior")[0].files[0].name); 
+        });
+
+        $('#certificadoEducacionSuperior').change(function () {
+           $('#nombreCertificadoEducacionSuperior').text($("#certificadoEducacionSuperior")[0].files[0].name); 
+        });
+
+        $('#certificadoIdioma').change(function () {
+           $('#nombreCertificadoIdioma').text($("#certificadoIdioma")[0].files[0].name); 
+        });
+
+        $('#certificadoEducacionContinua').change(function () {
+           $('#nombreCertificadoEducacionContinua').text($("#certificadoEducacionContinua")[0].files[0].name); 
+        });
+
+        $('#certificadoExperienciaLaboral').change(function () {
+           $('#nombreCertificadoExperienciaLaboral').text($("#certificadoExperienciaLaboral")[0].files[0].name); 
+        });
+
+        $('#certificadoCursoExperienciaDocencia').change(function () {
+           $('#nombreCertificadoCursoExperienciaDocencia').text($("#certificadoCursoExperienciaDocencia")[0].files[0].name); 
+        });
+
+        $('#documentoPatente').change(function () {
+           $('#nombreDocumentoPatente').text($("#documentoPatente")[0].files[0].name); 
+        });
+
+        $('#documentoProductoConocimiento').change(function () {
+           $('#nombreDocumentoProductoConocimiento').text($("#documentoProductoConocimiento")[0].files[0].name); 
+        });
+
+        $('#certificadoDistincion').change(function () {
+           $('#nombreCertificadoDistincion').text($("#certificadoDistincion")[0].files[0].name); 
+        });
+
         $('#urlCVLAC').change(function () {
            urlCVLACCambiada = true;
         });
@@ -1150,6 +1194,7 @@ $('.fecha').datepicker({
                 bootstrap_alert_documento_soporte.warning('Debe ingresar el tipo de documento');
                 return false;
             }
+            
             var formData = new FormData();
             if ($('#consecutivo').val() === "") {
                 if ($('#documentoSoporte').val() === "") {
@@ -1159,6 +1204,13 @@ $('.fecha').datepicker({
                 if ($('#documentoSoporte')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_documento_soporte.warning('El documento no debe ser mayor a 2MB');
                     return false;
+                }
+
+                for (var i = 0; i < self.documentosSoporte().length; i++) {
+                    if (self.documentosSoporte()[i].tipoDocumento() == tipoDocumento) {
+                        bootstrap_alert_documento_soporte.warning('El tipo de documento ya existe. Por favor seleccione otro');
+                        return false;
+                    }
                 }
                 
                 formData.append("id", 0);
@@ -1173,6 +1225,12 @@ $('.fecha').datepicker({
                         break;
                     }
                 }
+                for (var i = 0; i < self.documentosSoporte().length; i++) {
+                    if (indice != i && self.documentosSoporte()[i].tipoDocumento() == tipoDocumento) {
+                        bootstrap_alert_documento_soporte.warning('El tipo de documento ya existe. Por favor seleccione otro');
+                        return false;
+                    }
+                }                
                 if ($('#documentoSoporte').val() !== "" &&
                     $('#documentoSoporte')[0].files[0].size > MAXIMO_TAMANYO_ARCHIVO) {
                     bootstrap_alert_documento_soporte.warning('El documento no debe ser mayor a 2MB');
@@ -1209,7 +1267,8 @@ $('.fecha').datepicker({
                                     tipoDocumento: ko.observable(documentosSoporte[i].tipoDocumento),
                                     nombreTipoDocumento: ko.observable(documentosSoporte[i].nombreTipoDocumento),
                                     validado: ko.observable(documentosSoporte[i].validado),
-                                    nombreValidado: ko.observable(documentosSoporte[i].nombreValidado)
+                                    nombreValidado: ko.observable(documentosSoporte[i].nombreValidado),
+                                    nombreDocumento: ko.observable(documentosSoporte[i].nombreDocumento)
                                 }
                              );
                         }
@@ -1245,7 +1304,8 @@ $('.fecha').datepicker({
                                     tipoDocumento: ko.observable(documentosSoporte[i].tipoDocumento),
                                     nombreTipoDocumento: ko.observable(documentosSoporte[i].nombreTipoDocumento),
                                     validado: ko.observable(documentosSoporte[i].validado),
-                                    nombreValidado: ko.observable(documentosSoporte[i].nombreValidado)
+                                    nombreValidado: ko.observable(documentosSoporte[i].nombreValidado),
+                                    nombreDocumento: ko.observable(documentosSoporte[i].nombreDocumento)
                                 }
                              );
                         }
@@ -1260,6 +1320,7 @@ $('.fecha').datepicker({
             $('#tipoDocumento').val(documentoSoporte.tipoDocumento()).trigger('change');
             $('#consecutivo').val(documentoSoporte.consecutivo());
             $('#documentoSoporte').val('');
+            $('#nombreDocumentoSoporte').text(documentoSoporte.nombreDocumento());
             bootstrap_alert_documentos_soporte.removeWarning();
             bootstrap_alert_documento_soporte.removeWarning();
             $('#md_documento_soporte').modal({backdrop: 'static', keyboard: false})  ;
@@ -1453,7 +1514,8 @@ $('.fecha').datepicker({
                                     nombreTipoCertificacion: ko.observable(idiomas[i].nombreTipoCertificacion),
                                     puntajeCertificacion: ko.observable(idiomas[i].puntajeCertificacion),
                                     certificadoValidado: ko.observable(idiomas[i].certificadoValidado),
-                                    nombreCertificadoValidado: ko.observable(idiomas[i].nombreCertificadoValidado)
+                                    nombreCertificadoValidado: ko.observable(idiomas[i].nombreCertificadoValidado),
+                                    nombreCertificado: ko.observable(idiomas[i].nombreCertificado)
                                 }
                              );
                         }
@@ -1501,7 +1563,8 @@ $('.fecha').datepicker({
                                     nombreTipoCertificacion: ko.observable(idiomas[i].nombreTipoCertificacion),
                                     puntajeCertificacion: ko.observable(idiomas[i].puntajeCertificacion),                   
                                     certificadoValidado: ko.observable(idiomas[i].certificadoValidado),
-                                    nombreCertificadoValidado: ko.observable(idiomas[i].nombreCertificadoValidado)
+                                    nombreCertificadoValidado: ko.observable(idiomas[i].nombreCertificadoValidado),
+                                    nombreCertificado: ko.observable(idiomas[i].nombreCertificado)
                                 }
                              );
                         }
@@ -1527,7 +1590,8 @@ $('.fecha').datepicker({
             }            
             $('#puntajeCertificacionIdioma').val(idioma.puntajeCertificacion());
             $('#consecutivo').val(idioma.consecutivo());
-            $('#certificadoIdioma').show();
+            $('#certificadoIdioma').val('');
+            $('#nombreCertificadoIdioma').text(idioma.nombreCertificado());
             bootstrap_alert_idioma.removeWarning();
             bootstrap_alert_idiomas.removeWarning();
             $('#md_idioma').modal({backdrop: 'static', keyboard: false})  ;
@@ -1644,7 +1708,8 @@ $('.fecha').datepicker({
                                     titulo: ko.observable(educacionesBasicas[i].titulo),
                                     graduado: ko.observable(educacionesBasicas[i].graduado),
                                     certificadoValidado: ko.observable(educacionesBasicas[i].certificadoValidado),
-                                    nombreCertificadoValidado: ko.observable(educacionesBasicas[i].nombreCertificadoValidado)
+                                    nombreCertificadoValidado: ko.observable(educacionesBasicas[i].nombreCertificadoValidado),
+                                    nombreCertificado: ko.observable(educacionesBasicas[i].nombreCertificado)
                                 }
                              );
                         }
@@ -1685,7 +1750,8 @@ $('.fecha').datepicker({
                                     titulo: ko.observable(educacionesBasicas[i].titulo),
                                     graduado: ko.observable(educacionesBasicas[i].graduado),
                                     certificadoValidado: ko.observable(educacionesBasicas[i].certificadoValidado),
-                                    nombreCertificadoValidado: ko.observable(educacionesBasicas[i].nombreCertificadoValidado)
+                                    nombreCertificadoValidado: ko.observable(educacionesBasicas[i].nombreCertificadoValidado),
+                                    nombreCertificado: ko.observable(educacionesBasicas[i].nombreCertificado)
                                 }
                              );
                         }
@@ -1719,6 +1785,7 @@ $('.fecha').datepicker({
             }            
             $('#consecutivo').val(educacionBasica.consecutivo());
             $('#certificadoEducacionBasica').val('');
+            $('#nombreCertificadoEducacionBasica').text(educacionBasica.nombreCertificado());
             bootstrap_alert_educacion_basica.removeWarning();
             bootstrap_alert_educaciones_basicas.removeWarning();
             $('#md_educacion_basica').modal({backdrop: 'static', keyboard: false})  ;
@@ -1894,7 +1961,9 @@ $('.fecha').datepicker({
                                     certificadoValidado: ko.observable(educacionesSuperiores[i].certificadoValidado),
                                     nombreCertificadoValidado: ko.observable(educacionesSuperiores[i].nombreCertificadoValidado),
                                     certificadoHomologadoValidado: ko.observable(educacionesSuperiores[i].certificadoHomologadoValidado),
-                                    nombreCertificadoHomologadoValidado: ko.observable(educacionesSuperiores[i].nombreCertificadoHomologadoValidado)
+                                    nombreCertificadoHomologadoValidado: ko.observable(educacionesSuperiores[i].nombreCertificadoHomologadoValidado),
+                                    nombreCertificado: ko.observable(educacionesSuperiores[i].nombreCertificado),
+                                    nombreCertificadoHomologado: ko.observable(educacionesSuperiores[i].nombreCertificadoHomologado)
                                 }
                              );
                         }
@@ -1948,7 +2017,9 @@ $('.fecha').datepicker({
                                     certificadoValidado: ko.observable(educacionesSuperiores[i].certificadoValidado),
                                     nombreCertificadoValidado: ko.observable(educacionesSuperiores[i].nombreCertificadoValidado),
                                     certificadoHomologadoValidado: ko.observable(educacionesSuperiores[i].certificadoHomologadoValidado),
-                                    nombreCertificadoHomologadoValidado: ko.observable(educacionesSuperiores[i].nombreCertificadoHomologadoValidado)
+                                    nombreCertificadoHomologadoValidado: ko.observable(educacionesSuperiores[i].nombreCertificadoHomologadoValidado),
+                                    nombreCertificado: ko.observable(educacionesSuperiores[i].nombreCertificado),
+                                    nombreCertificadoHomologado: ko.observable(educacionesSuperiores[i].nombreCertificadoHomologado)
                                 }
                              );
                         }
@@ -2016,6 +2087,8 @@ $('.fecha').datepicker({
             $('#consecutivo').val(educacionSuperior.consecutivo());
             $('#certificadoEducacionSuperior').val("");
             $('#certificadoHomologadoEducacionSuperior').val("");
+            $('#nombreCertificadoEducacionSuperior').text(educacionSuperior.nombreCertificado());
+            $('#nombreCertificadoHomologadoEducacionSuperior').text(educacionSuperior.nombreCertificadoHomologado());
             bootstrap_alert_educacion_superior.removeWarning();
             bootstrap_alert_educaciones_superiores.removeWarning();
             $('#md_educacion_superior').modal({backdrop: 'static', keyboard: false})  ;
@@ -2173,7 +2246,8 @@ $('.fecha').datepicker({
                                     estudioExterior: ko.observable(educacionesContinuas[i].estudioExterior),
                                     anyo: ko.observable(educacionesContinuas[i].anyo),
                                     certificadoValidado: ko.observable(educacionesContinuas[i].certificadoValidado),
-                                    nombreCertificadoValidado: ko.observable(educacionesContinuas[i].nombreCertificadoValidado)
+                                    nombreCertificadoValidado: ko.observable(educacionesContinuas[i].nombreCertificadoValidado),
+                                    nombreCertificado: ko.observable(educacionesContinuas[i].nombreCertificado)
                                 }
                              );
                         }
@@ -2217,7 +2291,8 @@ $('.fecha').datepicker({
                                     estudioExterior: ko.observable(educacionesContinuas[i].estudioExterior),
                                     anyo: ko.observable(educacionesContinuas[i].anyo),
                                     certificadoValidado: ko.observable(educacionesContinuas[i].certificadoValidado),
-                                    nombreCertificadoValidado: ko.observable(educacionesContinuas[i].nombreCertificadoValidado)
+                                    nombreCertificadoValidado: ko.observable(educacionesContinuas[i].nombreCertificadoValidado),
+                                    nombreCertificado: ko.observable(educacionesContinuas[i].nombreCertificado)
                                 }
                              );
                         }
@@ -2236,7 +2311,8 @@ $('.fecha').datepicker({
             $('#nombreNucleoBasicoConocimientoEducacionContinua').val(educacionContinua.nombreNucleoBasicoConocimiento());
             $('#anyoEducacionContinua').val(educacionContinua.anyo()).trigger('change');
             $('#consecutivo').val(educacionContinua.consecutivo());
-            $('#certificadoEducacionContinua').show();
+            $('#certificadoEducacionContinua').val('');
+            $('#nombreCertificadoEducacionContinua').text(educacionContinua.nombreCertificado());
             if(educacionContinua.estudioExterior()) {
               $('#institucionEducacionContinuaExterior').val(educacionContinua.institucion()).trigger('change');
               $('#btnEstudioExteriorSiEducacionContinua').removeClass('notActive').addClass('active');  
@@ -2353,7 +2429,8 @@ $('.fecha').datepicker({
                                     institucionOtorga: ko.observable(distinciones[i].institucionOtorga),
                                     descripcion: ko.observable(distinciones[i].descripcion),
                                     certificadoValidado: ko.observable(distinciones[i].certificadoValidado),
-                                    nombreCertificadoValidado: ko.observable(distinciones[i].nombreCertificadoValidado)
+                                    nombreCertificadoValidado: ko.observable(distinciones[i].nombreCertificadoValidado),
+                                    nombreCertificado: ko.observable(distinciones[i].nombreCertificado)
                                 }
                              );
                         }
@@ -2390,7 +2467,8 @@ $('.fecha').datepicker({
                                     institucionOtorga: ko.observable(distinciones[i].institucionOtorga),
                                     descripcion: ko.observable(distinciones[i].descripcion),
                                     certificadoValidado: ko.observable(distinciones[i].certificadoValidado),
-                                    nombreCertificadoValidado: ko.observable(distinciones[i].nombreCertificadoValidado)
+                                    nombreCertificadoValidado: ko.observable(distinciones[i].nombreCertificadoValidado),
+                                    nombreCertificado: ko.observable(distinciones[i].nombreCertificado)
                                 }
                              );
                         }
@@ -2407,6 +2485,7 @@ $('.fecha').datepicker({
             $('#descripcionDistincion').val(distincion.descripcion());
             $('#consecutivo').val(distincion.consecutivo());
             $('#certificadoDistincion').val('');
+            $('#nombreCertificadoDistincion').text(distincion.nombreCertificado());
             bootstrap_alert_distincion.removeWarning();
             bootstrap_alert_distinciones.removeWarning();
             $('#md_distincion').modal({backdrop: 'static', keyboard: false})  ;
@@ -2572,7 +2651,8 @@ $('.fecha').datepicker({
                                     naturalezaCargo: ko.observable(experienciasLaborales[i].naturalezaCargo),
                                     nombreNaturalezaCargo: ko.observable(experienciasLaborales[i].nombreNaturalezaCargo),
                                     certificadoValidado: ko.observable(experienciasLaborales[i].certificadoValidado),
-                                    nombreCertificadoValidado: ko.observable(experienciasLaborales[i].nombreCertificadoValidado)
+                                    nombreCertificadoValidado: ko.observable(experienciasLaborales[i].nombreCertificadoValidado),
+                                    nombreCertificado: ko.observable(experienciasLaborales[i].nombreCertificado)
                                 }
                              );
                         }
@@ -2624,7 +2704,8 @@ $('.fecha').datepicker({
                                     naturalezaCargo: ko.observable(experienciasLaborales[i].naturalezaCargo),
                                     nombreNaturalezaCargo: ko.observable(experienciasLaborales[i].nombreNaturalezaCargo),
                                     certificadoValidado: ko.observable(experienciasLaborales[i].certificadoValidado),
-                                    nombreCertificadoValidado: ko.observable(experienciasLaborales[i].nombreCertificadoValidado)
+                                    nombreCertificadoValidado: ko.observable(experienciasLaborales[i].nombreCertificadoValidado),
+                                    nombreCertificado: ko.observable(experienciasLaborales[i].nombreCertificado)
                                 }
                              );
                         }
@@ -2674,6 +2755,7 @@ $('.fecha').datepicker({
             $('#naturalezaCargoExperienciaLaboral').val(experienciaLaboral.naturalezaCargo()).trigger('change');
             $('#consecutivo').val(experienciaLaboral.consecutivo());
             $('#certificadoExperienciaLaboral').val('');
+            $('#nombreCertificadoExperienciaLaboral').text(experienciaLaboral.nombreCertificado());
             bootstrap_alert_experiencia_laboral.removeWarning();
             bootstrap_alert_experiencias_laborales.removeWarning();
             $('#md_experiencia_laboral').modal({backdrop: 'static', keyboard: false})  ;
@@ -2778,7 +2860,8 @@ $('.fecha').datepicker({
                                     numeroHoras: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].numeroHoras),
                                     anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo),
                                     certificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].certificadoValidado),
-                                    nombreCertificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificadoValidado)
+                                    nombreCertificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificadoValidado),
+                                    nombreCertificado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificado)
                                 });
                             }
                         }
@@ -2833,7 +2916,8 @@ $('.fecha').datepicker({
                                     numeroHoras: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].numeroHoras),
                                     anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo),
                                     certificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].certificadoValidado),
-                                    nombreCertificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificadoValidado)
+                                    nombreCertificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificadoValidado),
+                                    nombreCertificado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificado)
                                 });
                             }
                         }
@@ -3006,7 +3090,8 @@ $('.fecha').datepicker({
                                     numeroHoras: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].numeroHoras),
                                     anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo),
                                     certificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].certificadoValidado),
-                                    nombreCertificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificadoValidado)
+                                    nombreCertificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificadoValidado),
+                                    nombreCertificado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificado)
                                 });
                             }
                         }
@@ -3061,7 +3146,8 @@ $('.fecha').datepicker({
                                     numeroHoras: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].numeroHoras),
                                     anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo),
                                     certificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].certificadoValidado),
-                                    nombreCertificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificadoValidado)
+                                    nombreCertificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificadoValidado),
+                                    nombreCertificado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificado)
                                 });
                             }
                         }
@@ -3082,6 +3168,7 @@ $('.fecha').datepicker({
             $('#anyoCursoExperienciaDocencia').val(cursoExperienciaDocencia.anyo());
             $('#consecutivo').val(cursoExperienciaDocencia.consecutivo());
             $('#certificadoCursoExperienciaDocencia').val('');
+            $('#nombreCertificadoCursoExperienciaDocencia').text(cursoExperienciaDocencia.nombreCertificado());
             bootstrap_alert_curso_experiencia_docencia.removeWarning();
             bootstrap_alert_cursos_experiencia_docencia.removeWarning();
             $('#md_curso_experiencia_docencia').modal({backdrop: 'static', keyboard: false})  ;
@@ -3346,7 +3433,8 @@ $('.fecha').datepicker({
                                     nombreClase: ko.observable(patentes[i].nombreClase),
                                     descripcion: ko.observable(patentes[i].descripcion),
                                     documentoValidado: ko.observable(patentes[i].documentoValidado),
-                                    nombreDocumentoValidado: ko.observable(patentes[i].nombreDocumentoValidado)
+                                    nombreDocumentoValidado: ko.observable(patentes[i].nombreDocumentoValidado),
+                                    nombreDocumento: ko.observable(patentes[i].nombreDocumento)
                                 }
                              );
                         }
@@ -3389,7 +3477,8 @@ $('.fecha').datepicker({
                                     nombreClase: ko.observable(patentes[i].nombreClase),
                                     descripcion: ko.observable(patentes[i].descripcion),
                                     documentoValidado: ko.observable(patentes[i].documentoValidado),
-                                    nombreDocumentoValidado: ko.observable(patentes[i].nombreDocumentoValidado)
+                                    nombreDocumentoValidado: ko.observable(patentes[i].nombreDocumentoValidado),
+                                    nombreDocumento: ko.observable(patentes[i].nombreDocumento)
                                 }
                              );
                         }
@@ -3415,6 +3504,7 @@ $('.fecha').datepicker({
             }
             $('#consecutivo').val(patente.consecutivo());
             $('#documentoPatente').val('');
+            $('#nombreDocumentoPatente').text(patente.nombreDocumento());
             bootstrap_alert_patente.removeWarning();
             bootstrap_alert_patentes.removeWarning();
             $('#md_patente').modal({backdrop: 'static', keyboard: false})  ;
@@ -3525,7 +3615,8 @@ $('.fecha').datepicker({
                                     url: ko.observable(productosConocimiento[i].url),
                                     descripcion: ko.observable(productosConocimiento[i].descripcion),
                                     documentoValidado: ko.observable(productosConocimiento[i].documentoValidado),
-                                    nombreDocumentoValidado: ko.observable(productosConocimiento[i].nombreDocumentoValidado)
+                                    nombreDocumentoValidado: ko.observable(productosConocimiento[i].nombreDocumentoValidado),
+                                    nombreDocumento: ko.observable(productosConocimiento[i].nombreDocumento)
                                 }
                              );
                         }
@@ -3565,7 +3656,8 @@ $('.fecha').datepicker({
                                     url: ko.observable(productosConocimiento[i].url),
                                     descripcion: ko.observable(productosConocimiento[i].descripcion),
                                     documentoValidado: ko.observable(productosConocimiento[i].documentoValidado),
-                                    nombreDocumentoValidado: ko.observable(productosConocimiento[i].nombreDocumentoValidado)
+                                    nombreDocumentoValidado: ko.observable(productosConocimiento[i].nombreDocumentoValidado),
+                                    nombreDocumento: ko.observable(productosConocimiento[i].nombreDocumento)
                                 }
                              );
                         }
@@ -3584,6 +3676,7 @@ $('.fecha').datepicker({
             $('#descripcionProductoConocimiento').val(productoConocimiento.descripcion());    
             $('#consecutivo').val(productoConocimiento.consecutivo());
             $('#documentoProductoConocimiento').val('');
+            $('#nombreDocumentoProductoConocimiento').text(productoConocimiento.nombreDocumento());
             bootstrap_alert_producto_conocimiento.removeWarning();
             bootstrap_alert_productos_conocimiento.removeWarning();
             $('#md_producto_conocimiento').modal({backdrop: 'static', keyboard: false})  ;
@@ -3646,6 +3739,7 @@ $('.fecha').datepicker({
         $('#tipoDocumento').val("").trigger('change');
         $('#consecutivo').val("");
         $('#documentoSoporte').val("");
+        $('#nombreDocumentoSoporte').text("");
         bootstrap_alert_documento_soporte.removeWarning();
         bootstrap_alert_documentos_soporte.removeWarning();
         $('#md_documento_soporte').modal({backdrop: 'static', keyboard: false})  ;
@@ -3670,6 +3764,7 @@ $('.fecha').datepicker({
         $('#puntajeCertificacionIdioma').val("");
         $('#consecutivo').val("");
         $('#certificadoIdioma').val('');
+        $('#nombreCertificadoIdioma').text('');
         bootstrap_alert_idioma.removeWarning();
         bootstrap_alert_idiomas.removeWarning();
         $('#md_idioma').modal({backdrop: 'static', keyboard: false})  ;
@@ -3686,6 +3781,7 @@ $('.fecha').datepicker({
         $('#btnGraduadoNoEducacionBasica').removeClass('active').addClass('notActive');  
         $('#consecutivo').val("");
         $('#certificadoEducacionBasica').val('');
+        $('#nombreCertificadoEducacionBasica').text('');
         bootstrap_alert_educacion_basica.removeWarning();
         bootstrap_alert_educaciones_basicas.removeWarning();
         $('#md_educacion_basica').modal({backdrop: 'static', keyboard: false})  ;
@@ -3694,7 +3790,7 @@ $('.fecha').datepicker({
     function nuevaEducacionSuperior() {
         $('#nivelEstudioEducacionSuperior').val("").trigger('change');
         $('#tituloExteriorEducacionSuperior').val('false');
-        $('#paisEducacionSuperior').val("").trigger('change');
+        $('#paisTituloExteriorEducacionSuperior').val("").trigger('change');
         $('#nombreInstitucionEducacionSuperior').val("");
         $('#programaCursadoEducacionSuperior').val('');
         $('#nombreProgramaCursadoEducacionSuperior').val('');
@@ -3728,6 +3824,8 @@ $('.fecha').datepicker({
         $('#consecutivo').val("");
         $('#certificadoEducacionSuperior').val("");
         $('#certificadosHomologadoEducacionSuperior').val("");
+        $('#nombreCertificadoEducacionSuperior').text("");
+        $('#nombreCertificadoHomologadoEducacionSuperior').text("");
         bootstrap_alert_educacion_superior.removeWarning();
         bootstrap_alert_educaciones_superiores.removeWarning();
         $('#md_educacion_superior').modal({backdrop: 'static', keyboard: false})  ;
@@ -3780,6 +3878,7 @@ $('.fecha').datepicker({
         $('#anyoEducacionContinua').val("");
         $('#consecutivo').val("");
         $('#certificadoEducacionContinua').val('');
+        $('#nombreCertificadoEducacionContinua').text('');
         $('#btnEstudioExteriorSiEducacionContinua').removeClass('active').addClass('notActive');  
         $('#btnEstudioExteriorNoEducacionContinua').removeClass('active').addClass('notActive');
         $('#btnNuevaInstitucionExteriorEducacionContinua').hide();
@@ -3796,6 +3895,7 @@ $('.fecha').datepicker({
         $('#fechaDistincion').val("");
         $('#consecutivo').val("");
         $('#certificadoDistincion').val('');
+        $('#nombreCertificadoDistincion').text('');
         bootstrap_alert_distincion.removeWarning();
         bootstrap_alert_distinciones.removeWarning();
         $('#md_distincion').modal({backdrop: 'static', keyboard: false})  ;
@@ -3822,6 +3922,7 @@ $('.fecha').datepicker({
         $('#naturalezaCargoExperienciaLaboral').val("").trigger('change');
         $('#consecutivo').val("");
         $('#certificadoExperienciaLaboral').val('');
+        $('#nombreCertificadoExperienciaLaboral').text('');
         bootstrap_alert_experiencia_laboral.removeWarning();
         bootstrap_alert_experiencias_laborales.removeWarning();
         $('#md_experiencia_laboral').modal({backdrop: 'static', keyboard: false})  ;
@@ -3861,6 +3962,7 @@ $('.fecha').datepicker({
         $('#numeroHorasCursoExperienciaDocencia').val("");
         $('#anyoCursoExperienciaDocencia').val("");
         $('#certificadoCursoExperienciaDocencia').val('');
+        $('#nombreCertificadoCursoExperienciaDocencia').text('');
         $('#consecutivo').val("");
         bootstrap_alert_curso_experiencia_docencia.removeWarning();
         bootstrap_alert_cursos_experiencia_docencia.removeWarning();
@@ -3967,6 +4069,7 @@ $('.fecha').datepicker({
         $('#btnPropiedadCompartidaPatenteNo').removeClass('active').addClass('notActive');
         $('#consecutivo').val("");
         $('#documentoPatente').val('');
+        $('#nombreDocumentoPatente').text('');
         bootstrap_alert_patente.removeWarning();
         bootstrap_alert_patentes.removeWarning();
         $('#md_patente').modal({backdrop: 'static', keyboard: false})  ;
@@ -3979,7 +4082,8 @@ $('.fecha').datepicker({
         $('#urlProductoConocimiento').val("");
         $('#descripcionProductoConocimiento').val("");            
         $('#consecutivo').val("");
-        $('#documentoProductosConocimiento').val('');
+        $('#documentoProductoConocimiento').val('');
+        $('#nombreDocumentoProductoConocimiento').text('');
         bootstrap_alert_producto_conocimiento.removeWarning();
         bootstrap_alert_productos_conocimiento.removeWarning();
         $('#md_producto_conocimiento').modal({backdrop: 'static', keyboard: false})  ;
@@ -4712,7 +4816,8 @@ $('.fecha').datepicker({
                 tipoDocumento: ko.observable(documentosSoporte[i].tipoDocumento),
                 nombreTipoDocumento: ko.observable(documentosSoporte[i].nombreTipoDocumento),
                 validado: ko.observable(documentosSoporte[i].validado),
-                nombreValidado: ko.observable(documentosSoporte[i].nombreValidado)
+                nombreValidado: ko.observable(documentosSoporte[i].nombreValidado),
+                nombreDocumento: ko.observable(documentosSoporte[i].nombreDocumento)
             }
          );
     }
@@ -4737,7 +4842,8 @@ $('.fecha').datepicker({
                 nombreTipoCertificacion: ko.observable(idiomas[i].nombreTipoCertificacion),
                 puntajeCertificacion: ko.observable(idiomas[i].puntajeCertificacion),                   
                 certificadoValidado: ko.observable(idiomas[i].certificadoValidado),
-                nombreCertificadoValidado: ko.observable(idiomas[i].nombreCertificadoValidado)
+                nombreCertificadoValidado: ko.observable(idiomas[i].nombreCertificadoValidado),
+                nombreCertificado: ko.observable(idiomas[i].nombreCertificado)
             }
          );
     }
@@ -4755,7 +4861,8 @@ $('.fecha').datepicker({
                 titulo: ko.observable(educacionesBasicas[i].titulo),
                 graduado: ko.observable(educacionesBasicas[i].graduado),
                 certificadoValidado: ko.observable(educacionesBasicas[i].certificadoValidado),
-                nombreCertificadoValidado: ko.observable(educacionesBasicas[i].nombreCertificadoValidado)
+                nombreCertificadoValidado: ko.observable(educacionesBasicas[i].nombreCertificadoValidado),
+                nombreCertificado: ko.observable(educacionesBasicas[i].nombreCertificado)
             }
          );
     }
@@ -4784,8 +4891,10 @@ $('.fecha').datepicker({
                 tieneCertificadoHomologado: ko.observable(educacionesSuperiores[i].tieneCertificadoHomologado),
                 certificadoValidado: ko.observable(educacionesSuperiores[i].certificadoValidado),
                 nombreCertificadoValidado: ko.observable(educacionesSuperiores[i].nombreCertificadoValidado),
+                nombreCertificado: ko.observable(educacionesSuperiores[i].nombreCertificado),
                 certificadoHomologadoValidado: ko.observable(educacionesSuperiores[i].certificadoHomologadoValidado),
-                nombreCertificadoHomologadoValidado: ko.observable(educacionesSuperiores[i].nombreCertificadoHomologadoValidado)
+                nombreCertificadoHomologadoValidado: ko.observable(educacionesSuperiores[i].nombreCertificadoHomologadoValidado),
+                nombreCertificadoHomologado: ko.observable(educacionesSuperiores[i].nombreCertificadoHomologado)
             }
          );
     }
@@ -4806,7 +4915,8 @@ $('.fecha').datepicker({
                 estudioExterior: ko.observable(educacionesContinuas[i].estudioExterior),
                 anyo: ko.observable(educacionesContinuas[i].anyo),
                 certificadoValidado: ko.observable(educacionesContinuas[i].certificadoValidado),
-                nombreCertificadoValidado: ko.observable(educacionesContinuas[i].nombreCertificadoValidado)
+                nombreCertificadoValidado: ko.observable(educacionesContinuas[i].nombreCertificadoValidado),
+                nombreCertificado: ko.observable(educacionesContinuas[i].nombreCertificado)
             }
          );
     }
@@ -4835,7 +4945,8 @@ $('.fecha').datepicker({
                 naturalezaCargo: ko.observable(experienciasLaborales[i].naturalezaCargo),
                 nombreNaturalezaCargo: ko.observable(experienciasLaborales[i].nombreNaturalezaCargo),
                 certificadoValidado: ko.observable(experienciasLaborales[i].certificadoValidado),
-                nombreCertificadoValidado: ko.observable(experienciasLaborales[i].nombreCertificadoValidado)
+                nombreCertificadoValidado: ko.observable(experienciasLaborales[i].nombreCertificadoValidado),
+                nombreCertificado: ko.observable(experienciasLaborales[i].nombreCertificado)
             }
          );
     }
@@ -4867,7 +4978,8 @@ $('.fecha').datepicker({
                 numeroHoras: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].numeroHoras),
                 anyo: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].anyo),
                 certificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].certificadoValidado),
-                nombreCertificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificadoValidado)
+                nombreCertificadoValidado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificadoValidado),
+                nombreCertificado: ko.observable(experienciasDocencia[i].cursosExperienciaDocencia[j].nombreCertificado)
             });
         }
     }
@@ -4881,7 +4993,8 @@ $('.fecha').datepicker({
                 institucionOtorga: ko.observable(distinciones[i].institucionOtorga),
                 descripcion: ko.observable(distinciones[i].descripcion),
                 certificadoValidado: ko.observable(distinciones[i].certificadoValidado),
-                nombreCertificadoValidado: ko.observable(distinciones[i].nombreCertificadoValidado)
+                nombreCertificadoValidado: ko.observable(distinciones[i].nombreCertificadoValidado),
+                nombreCertificado: ko.observable(distinciones[i].nombreCertificado)
             }
          );
     }
@@ -4900,7 +5013,8 @@ $('.fecha').datepicker({
                 nombreClase: ko.observable(patentes[i].nombreClase),
                 descripcion: ko.observable(patentes[i].descripcion),
                 documentoValidado: ko.observable(patentes[i].documentoValidado),
-                nombreDocumentoValidado: ko.observable(patentes[i].nombreDocumentoValidado)
+                nombreDocumentoValidado: ko.observable(patentes[i].nombreDocumentoValidado),
+                nombreDocumento: ko.observable(patentes[i].nombreDocumento)
             }
          );
     }
@@ -4917,7 +5031,8 @@ $('.fecha').datepicker({
                 url: ko.observable(productosConocimiento[i].url),
                 descripcion: ko.observable(productosConocimiento[i].descripcion),
                 documentoValidado: ko.observable(productosConocimiento[i].documentoValidado),
-                nombreDocumentoValidado: ko.observable(productosConocimiento[i].nombreDocumentoValidado)
+                nombreDocumentoValidado: ko.observable(productosConocimiento[i].nombreDocumentoValidado),
+                nombreDocumento: ko.observable(productosConocimiento[i].nombreDocumento)
             }
          );
     }

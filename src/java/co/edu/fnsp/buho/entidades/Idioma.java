@@ -28,6 +28,7 @@ public class Idioma {
     private double puntajeCertificacion;
     private boolean certificadoValidado;
     private String nombreCertificadoValidado;
+    private String nombreCertificado;
     private Documento certificado;
     
     /**
@@ -294,5 +295,19 @@ public class Idioma {
      */
     public void setNombreCertificadoValidado(String nombreCertificadoValidado) {
         this.nombreCertificadoValidado = nombreCertificadoValidado;
+    }
+
+    /**
+     * @return the nombreCertificado
+     */
+    public String getNombreCertificado() {
+        return nombreCertificado;
+    }
+
+    /**
+     * @param nombreCertificado the nombreCertificado to set
+     */
+    public void setNombreCertificado(String nombreCertificado) {
+        this.nombreCertificado = nombreCertificado;
     }
 }

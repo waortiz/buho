@@ -37,6 +37,8 @@ public class EducacionSuperior {
     private boolean certificadoValidado;
     private String nombreCertificadoHomologadoValidado;
     private String nombreCertificadoValidado;
+    private String nombreCertificadoHomologado;
+    private String nombreCertificado;
     
     /**
      * @return the id
@@ -386,6 +388,34 @@ public class EducacionSuperior {
      */
     public void setNombreCertificadoValidado(String nombreCertificadoValidado) {
         this.nombreCertificadoValidado = nombreCertificadoValidado;
+    }
+
+    /**
+     * @return the nombreCertificadoHomologado
+     */
+    public String getNombreCertificadoHomologado() {
+        return nombreCertificadoHomologado;
+    }
+
+    /**
+     * @param nombreCertificadoHomologado the nombreCertificadoHomologado to set
+     */
+    public void setNombreCertificadoHomologado(String nombreCertificadoHomologado) {
+        this.nombreCertificadoHomologado = nombreCertificadoHomologado;
+    }
+
+    /**
+     * @return the nombreCertificado
+     */
+    public String getNombreCertificado() {
+        return nombreCertificado;
+    }
+
+    /**
+     * @param nombreCertificado the nombreCertificado to set
+     */
+    public void setNombreCertificado(String nombreCertificado) {
+        this.nombreCertificado = nombreCertificado;
     }
 
 }

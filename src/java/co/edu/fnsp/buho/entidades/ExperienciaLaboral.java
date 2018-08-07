@@ -39,6 +39,7 @@ public class ExperienciaLaboral {
     private boolean certificadoValidado;
     private boolean extension;
     private String nombreCertificadoValidado;
+    private String nombreCertificado;
     private Documento certificado;
 
     /**
@@ -432,5 +433,19 @@ public class ExperienciaLaboral {
      */
     public void setFechaTituloProfesionalFormateada(String fechaTituloProfesionalFormateada) {
         this.fechaTituloProfesionalFormateada = fechaTituloProfesionalFormateada;
+    }
+
+    /**
+     * @return the nombreCertificado
+     */
+    public String getNombreCertificado() {
+        return nombreCertificado;
+    }
+
+    /**
+     * @param nombreCertificado the nombreCertificado to set
+     */
+    public void setNombreCertificado(String nombreCertificado) {
+        this.nombreCertificado = nombreCertificado;
     }
 }

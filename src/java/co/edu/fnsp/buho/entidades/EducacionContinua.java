@@ -27,6 +27,7 @@ public class EducacionContinua {
     private boolean certificadoValidado;
     private Documento certificado;
     private String nombreCertificadoValidado;
+    private String nombreCertificado;
 
     /**
      * @return the id
@@ -236,6 +237,20 @@ public class EducacionContinua {
      */
     public void setNombreCertificadoValidado(String nombreCertificadoValidado) {
         this.nombreCertificadoValidado = nombreCertificadoValidado;
+    }
+
+    /**
+     * @return the nombreCertificado
+     */
+    public String getNombreCertificado() {
+        return nombreCertificado;
+    }
+
+    /**
+     * @param nombreCertificado the nombreCertificado to set
+     */
+    public void setNombreCertificado(String nombreCertificado) {
+        this.nombreCertificado = nombreCertificado;
     }
 
 }

@@ -935,7 +935,9 @@
                                         <div class="form-group">
                                             <label for="">Documento de soporte</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar un archivo de soporte ">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="documentoSoporte" id="documentoSoporte" />
+                                            <div class="form-inline">
+                                                <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="documentoSoporte" id="documentoSoporte" /></span><label class="lblnombre" id="nombreDocumentoSoporte"></label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1062,10 +1064,12 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group form-inline">
+                                            <div class="form-group">
                                                 <label for="certificadoEducacionBasica">Certificado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado del estudio">
                                                     <i class="fa fa-question-circle" aria-hidden="true"></i></a> <br>
-                                                <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoEducacionBasica" id="certificadoEducacionBasica" />
+                                                <div class="form-inline">
+                                                    <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoEducacionBasica" id="certificadoEducacionBasica" /></span><label class="lblnombre" id="nombreCertificadoEducacionBasica"></label>
+                                                </div>    
                                             </div>
                                         </div>
                                     </div>
@@ -1165,10 +1169,12 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group form-inline" id="certhomo" style="display: none;">
+                                            <div class="form-group" id="certhomo" style="display: none;">
                                                 <label>Certificado de homologaci&oacute;n del t&iacute;tulo</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado de homologaci&oacute;n">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                                <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoHomologadoEducacionSuperior" id="certificadoHomologadoEducacionSuperior" />
+                                                <div class="form-inline">
+                                                    <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoHomologadoEducacionSuperior" id="certificadoHomologadoEducacionSuperior" /></span><label class="lblnombre" id="nombreCertificadoHomologadoEducacionSuperior"></label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1391,10 +1397,12 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <div class="form-group form-inline">
+                                            <div class="form-group">
                                                 <label for="certificado">Certificado de acta de grado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado del estudio">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>  
-                                                <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoEducacionSuperior" id="certificadoEducacionSuperior" />
+                                                <div class="form-inline">
+                                                    <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoEducacionSuperior" id="certificadoEducacionSuperior" /></span><label class="lblnombre" id="nombreCertificadoEducacionSuperior"></label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1550,10 +1558,12 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <div class="form-group form-inline">
+                                            <div class="form-group">
                                                 <label for="certificadoIdioma">Certificado</label> <a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado que pertenece">
                                                 <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                                <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoIdioma" id="certificadoIdioma" />
+                                                <div class="form-inline">
+                                                    <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoIdioma" id="certificadoIdioma" /></span><label class="lblnombre" id="nombreCertificadoIdioma"></label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1719,7 +1729,9 @@
                                         <div class="form-group">
                                             <label for="certificadoEducacionContinua">Certificado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado del estudio">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a>  
-                                            <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoEducacionContinua" id="certificadoEducacionContinua" />
+                                            <div class="form-inline">
+                                                <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoEducacionContinua" id="certificadoEducacionContinua" /></span><label class="lblnombre" id="nombreCertificadoEducacionContinua"></label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1920,8 +1932,10 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="certificadoExperienciaLaboral">Certificado de soporte</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoExperienciaLaboral" id="certificadoExperienciaLaboral" />
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
+                                            <div class="form-inline">
+                                               <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoExperienciaLaboral" id="certificadoExperienciaLaboral" /></span><label class="lblnombre" id="nombreCertificadoExperienciaLaboral"></label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1946,13 +1960,34 @@
                         <thead>
                             <tr>
                                 <th>Instituci&oacute;n</th>
+                                <th>&nbsp;</th>
                                 <th>Opciones</th>
                             </tr>
                         </thead>
                         <tbody data-bind="foreach: { data: experienciasDocencia }">
                             <tr class="table-row">
-                                <td style="width: 90%">
+                                <td style="width: 20%">
                                     <span data-bind="text: nombreInstitucion" ></span>
+                                </td>
+                                <td style="width: 70%">
+                                    <table class="table tabla table-hover tableestilo">
+                                        <thead>
+                                            <tr>
+                                                <th>Curso</th>
+                                                <th>N° de horas</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: { data: experienciasDocencia[$index()].cursosExperienciaDocencia }">
+                                            <tr class="table-row">
+                                                <td style="width: 80%">
+                                                    <span data-bind="text: nombreCurso" ></span>
+                                                </td>
+                                                <td style="width: 20%">
+                                                    <span data-bind="text: numeroHoras" ></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>                                                        
+                                    </table>
                                 </td>
                                 <td style='white-space: nowrap; width: 10%' align="center">
                                     <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarExperienciaDocencia"><i class='fa fa-pencil' aria-hidden='true'></i></button>
@@ -2048,47 +2083,47 @@
                                             <br>
                                             <div id="alert_cursos_experiencia_docencia"></div>
 					    <div style="overflow-y: auto; max-height:200px;">
-                                            <table class="table tabla table-hover tableestilo">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Curso</th>
-                                                        <th>N&uacute;cleo b&aacute;sico del conocimiento</th>
-                                                        <th>Nivel</th>
-                                                        <th>Modalidad</th>
-                                                        <th>N° de horas</th>
-                                                        <th>Certificado</th>
-                                                        <th style="width: 180px;">Opciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody data-bind="foreach: { data: cursosExperienciaDocencia }">
-                                                    <tr class="table-row">
-                                                        <td style="width: 20%">
-                                                            <span data-bind="text: nombreCurso" ></span>
-                                                        </td>
-                                                        <td style="width: 20%">
-                                                            <span data-bind="text: nombreNucleoBasicoConocimiento" ></span>
-                                                        </td>
-                                                        <td style="width: 20%">
-                                                            <span data-bind="text: nombreNivelEstudio"></span>
-                                                        </td>
-                                                        <td style="width: 10%">
-                                                            <span data-bind="text: nombreModalidad" ></span>
-                                                        </td>
-                                                        <td style="width: 10%">
-                                                            <span data-bind="text: numeroHoras" ></span>
-                                                        </td>
-                                                        <td style="width: 10%" align="center">
-                                                            <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoCursoExperienciaDocencia" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
-                                                            <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoValidado"><i class="glyphicon glyphicon-ok"></i></a>
-                                                        </td>
-                                                        <td style='white-space: nowrap; width: 10%' align="center">
-                                                            <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCursoExperienciaDocencia"><i class='fa fa-pencil' aria-hidden='true'></i></button>
-                                                            <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarCursoExperienciaDocencia"><span class='glyphicon glyphicon-remove'></span></button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>                                                        
-                                            </table>
-											</div>
+                                                <table class="table tabla table-hover tableestilo">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Curso</th>
+                                                            <th>N&uacute;cleo b&aacute;sico del conocimiento</th>
+                                                            <th>Nivel</th>
+                                                            <th>Modalidad</th>
+                                                            <th>N° de horas</th>
+                                                            <th>Certificado</th>
+                                                            <th style="width: 180px;">Opciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody data-bind="foreach: { data: cursosExperienciaDocencia }">
+                                                        <tr class="table-row">
+                                                            <td style="width: 20%">
+                                                                <span data-bind="text: nombreCurso" ></span>
+                                                            </td>
+                                                            <td style="width: 20%">
+                                                                <span data-bind="text: nombreNucleoBasicoConocimiento" ></span>
+                                                            </td>
+                                                            <td style="width: 20%">
+                                                                <span data-bind="text: nombreNivelEstudio"></span>
+                                                            </td>
+                                                            <td style="width: 10%">
+                                                                <span data-bind="text: nombreModalidad" ></span>
+                                                            </td>
+                                                            <td style="width: 10%">
+                                                                <span data-bind="text: numeroHoras" ></span>
+                                                            </td>
+                                                            <td style="width: 10%" align="center">
+                                                                <a href='#' title='Ver certificado' data-bind="click: $root.verCertificadoCursoExperienciaDocencia" class='btn btn-success btn-sm' type='button'><i class='fa fa-file-pdf-o' aria-hidden='true'></i></a>
+                                                                <a href='#' class="btn btn-success btn-xs" data-toggle="tooltip" title="Validado" data-bind="visible: certificadoValidado"><i class="glyphicon glyphicon-ok"></i></a>
+                                                            </td>
+                                                            <td style='white-space: nowrap; width: 10%' align="center">
+                                                                <button class='btn btn-success btn-xs' type='button' data-bind="click: $root.editarCursoExperienciaDocencia"><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                                                                <button class='btn btn-danger btn-xs' type='button' id='btnborrar' style='margin-left:10px;' data-bind="click: $root.eliminarCursoExperienciaDocencia"><span class='glyphicon glyphicon-remove'></span></button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>                                                        
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -2167,10 +2202,12 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <div class="form-group form-inline">
+                                        <div class="form-group">
                                             <label>Documento de soporte/Certificado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el certificado del curso">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                            <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoCursoExperienciaDocencia" id="certificadoCursoExperienciaDocencia" />
+                                            <div class="form-inline">
+                                            <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoCursoExperienciaDocencia" id="certificadoCursoExperienciaDocencia" /></span><label class="lblnombre" id="nombreCertificadoCursoExperienciaDocencia"></label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -2486,9 +2523,11 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group form-inline">
+                                            <div class="form-group">
                                                 <label>Documento del soporte</label>
-                                                <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="documentoPatente" id="documentoPatente" />
+                                                <div class="form-inline">
+                                                <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="documentoPatente" id="documentoPatente" /></span><label class="lblnombre" id="nombreDocumentoPatente"></label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -2598,10 +2637,12 @@
                                  </div>
                                  <div class="row">
                                      <div class="col-md-8">
-                                         <div class="form-group form-inline">
+                                         <div class="form-group">
                                              <label>Documento del soporte</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe subir el documento de soporte del producto del conocimiento">
                                              <i class="fa fa-question-circle" aria-hidden="true"></i></a><br>
-                                             <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="documentoProductoConocimiento" id="documentoProductoConocimiento" />
+                                             <div class="form-inline">
+                                                <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="documentoProductoConocimiento" id="documentoProductoConocimiento" /></span><label class="lblnombre" id="nombreDocumentoProductoConocimiento"></label>
+                                             </div>
                                          </div>
                                      </div>
                                  </div>
@@ -2704,8 +2745,9 @@
                                         <div class="form-group">
                                             <label for="certificadoDistincion">Certificado</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe seleccionar el certificado">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i></a> 
-                                            <div id="certificadosDistinciones"></div>
-                                            <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoDistincion" id="certificadoDistincion" />
+                                            <div class="form-inline">
+                                                <span class="btn btn-success btn-file">Seleccionar archivo<input type="file" accept=".pdf,.png,.jpg,.jpeg" class="form-control" name="certificadoDistincion" id="certificadoDistincion" /></span><label class="lblnombre" id="nombreCertificadoDistincion"></label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

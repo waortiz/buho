@@ -61,7 +61,9 @@ import co.edu.fnsp.buho.excel.HojaVidaEducacionSuperiorExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaExperienciaDocenciaExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaExperienciaExcelReportView;
+import co.edu.fnsp.buho.excel.HojaVidaGeneralExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaIdiomaExcelReportView;
+import co.edu.fnsp.buho.excel.HojaVidaIndividualExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaInvestigacionExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaSoporteExcelReportView;
 import co.edu.fnsp.buho.excel.HojaVidaTipoExperienciaExcelReportView;
@@ -187,6 +189,20 @@ public class HojaVidaController {
         return "hojasVida/consulta";
     }
 
+    @RequestMapping(value = "/consultaIndividual", method = RequestMethod.GET)
+    public String obtenerHojasVidaIndividual(Model model) {
+        List<Maestro> numerosDocumento = servicioHojaVida.obtenerNumerosDocumento();
+        model.addAttribute("numerosDocumento", numerosDocumento);
+
+        return "hojasVida/consultaIndividual";
+    }
+
+    @RequestMapping(value = "/consultaGeneral", method = RequestMethod.GET)
+    public String obtenerHojasVidaGeneral(Model model) {
+
+        return "hojasVida/consultaGeneral";
+    }
+
     @RequestMapping(value = "/consultarHojasVida", method = RequestMethod.POST)
     public @ResponseBody String obtenerHojasVida(@ModelAttribute ConsultaHojaVida consultaHojaVida, Model model) {
         List<HojaVidaConsulta> hojasVida = servicioHojaVida.obtenerHojasVida(consultaHojaVida);
@@ -208,6 +224,20 @@ public class HojaVidaController {
        return new ModelAndView(new HojaVidaExcelReportView(), "hojasVida", hojasVida);
     }
 
+    @RequestMapping(value = "/descargarHojasVidaIndividual", method = RequestMethod.GET)
+    public ModelAndView descargarHojasVidaIndividual(@ModelAttribute ConsultaHojaVida consultaHojaVida, Model model) {
+       List<HojaVidaConsulta> hojasVidaConsulta = servicioHojaVida.obtenerHojasVida(consultaHojaVida);
+
+       return new ModelAndView(new HojaVidaIndividualExcelReportView(), "hojasVida", hojasVidaConsulta);
+    }
+    
+    @RequestMapping(value = "/descargarHojasVidaGeneral", method = RequestMethod.GET)
+    public ModelAndView descargarHojasVidaGeneral(Model model) {
+       List<HojaVidaConsulta> hojasVidaConsulta = servicioHojaVida.obtenerHojasVida(new ConsultaHojaVida());
+       
+       return new ModelAndView(new HojaVidaGeneralExcelReportView(), "hojasVida", hojasVidaConsulta);
+    }
+    
     @RequestMapping(value = "/educacionBasica", method = RequestMethod.GET)
     public String obtenerHojasVidaEducacionBasica(Model model) {
         List<Maestro> nivelesFormacion = servicioMaestro.obtenerNivelesFormacion();
@@ -1137,7 +1167,6 @@ public class HojaVidaController {
             model.addAttribute("clasesPatente", clasesPatente);
 
             co.edu.fnsp.buho.entidades.HojaVida hojaVida = servicioHojaVida.obtenerHojaVida(idPersona);
-
             if (hojaVida.getTelefonos().size() > 0) {
                 model.addAttribute("telefonosJSON", Util.obtenerTelefonosJSON(hojaVida.getTelefonos()));
             }
@@ -1307,7 +1336,7 @@ public class HojaVidaController {
             if (educacionSuperior.isTituloExterior()) {
                 nuevaEducacionSuperior.setPaisTituloExterior(Util.obtenerEntero(educacionSuperior.getPaisTituloExterior()));
                 if (educacionSuperior.getCertificadoHomologado() != null) {
-                    MultipartFile multipartFile = (MultipartFile) educacionSuperior.getCertificado();
+                    MultipartFile multipartFile = (MultipartFile) educacionSuperior.getCertificadoHomologado();
                     if (multipartFile.getBytes().length > 0) {
                         Documento documento = new Documento();
                         documento.setContenido(multipartFile.getBytes());

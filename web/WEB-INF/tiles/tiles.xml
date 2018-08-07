@@ -46,6 +46,18 @@
         <put-attribute name="title" value="Validar" />  
         <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/validarPorConvocatoria.jsp" />  
     </definition>  
+    <definition name="hojasVida/consultaIndividual" extends="base-definition">  
+        <put-attribute name="title" value="Consulta" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/consultaIndividual.jsp" />  
+    </definition>  
+    <definition name="hojasVida/consultaGeneral" extends="base-definition">  
+        <put-attribute name="title" value="Consulta" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/consultaGeneral.jsp" />  
+    </definition>  
+    <definition name="hojasVida/consulta" extends="base-definition">  
+        <put-attribute name="title" value="Consulta" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/consulta.jsp" />  
+    </definition>  
     <definition name="hojasVida/consulta" extends="base-definition">  
         <put-attribute name="title" value="Consulta" />  
         <put-attribute name="body" value="/WEB-INF/jsp/hojasVida/consulta.jsp" />  

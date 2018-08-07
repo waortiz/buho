@@ -24,7 +24,8 @@ public class CursoExperienciaDocencia {
     private int numeroHoras;
     private int anyo;
     private boolean certificadoValidado;
-     private String nombreCertificadoValidado;
+    private String nombreCertificadoValidado;
+    private String nombreCertificado;
     private Documento certificado;
 
     /**
@@ -249,6 +250,20 @@ public class CursoExperienciaDocencia {
      */
     public void setNombreInstitucion(String nombreInstitucion) {
         this.nombreInstitucion = nombreInstitucion;
+    }
+
+    /**
+     * @return the nombreCertificado
+     */
+    public String getNombreCertificado() {
+        return nombreCertificado;
+    }
+
+    /**
+     * @param nombreCertificado the nombreCertificado to set
+     */
+    public void setNombreCertificado(String nombreCertificado) {
+        this.nombreCertificado = nombreCertificado;
     }
     
 }

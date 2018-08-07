@@ -12,6 +12,7 @@ package co.edu.fnsp.buho.entidades;
 public class DocumentoSoporte {
 
     private int id;
+    private String nombreDocumento;
     private int tipoDocumento;
     private int consecutivo;
     private boolean validado;
@@ -117,4 +118,17 @@ public class DocumentoSoporte {
         this.nombreValidado = nombreValidado;
     }
 
+    /**
+     * @return the nombreDocumento
+     */
+    public String getNombreDocumento() {
+        return nombreDocumento;
+    }
+
+    /**
+     * @param nombreDocumento the nombreDocumento to set
+     */
+    public void setNombreDocumento(String nombreDocumento) {
+        this.nombreDocumento = nombreDocumento;
+    }
 }

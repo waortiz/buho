@@ -21,6 +21,7 @@ public class ProductoConocimiento {
     private String descripcion;
     private boolean documentoValidado;
     private String nombreDocumentoValidado;
+    private String nombreDocumento;
     private Documento documento;
 
     /**
@@ -176,4 +177,18 @@ public class ProductoConocimiento {
     public void setNombreNucleoBasicoConocimiento(String nombreNucleoBasicoConocimiento) {
         this.nombreNucleoBasicoConocimiento = nombreNucleoBasicoConocimiento;
     }    
+
+    /**
+     * @return the nombreDocumento
+     */
+    public String getNombreDocumento() {
+        return nombreDocumento;
+    }
+
+    /**
+     * @param nombreDocumento the nombreDocumento to set
+     */
+    public void setNombreDocumento(String nombreDocumento) {
+        this.nombreDocumento = nombreDocumento;
+    }
 }

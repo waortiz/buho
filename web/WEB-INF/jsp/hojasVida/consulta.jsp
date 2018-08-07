@@ -70,8 +70,6 @@
                                     <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="egreinput"></td>
                                     <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="vinculadoudeainput"></td>
                                     <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="tipvininput"></td>
-                                    <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="telinput"></td>
-                                    <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="correocinput"></td>
                                     <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="niedinput"></td>
                                     <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="expinput"></td>
                                     <td><input type="text" class="form-control input-sm" placeholder="Buscar" id="buscarCargo"></td>
@@ -112,15 +110,13 @@
                                     <th>Tiene disponibilidad para trabajar por fuera de Medellín</th>
                                     <th>Egresado de la Universidad de Antioquia</th>
                                     <th>Empleado de la Universidad de Antioquia</th>
-                                    <th>Tipo de vinculacion</th>
-                                    <th>Telef&oacute;no</th>
-                                    <th>Correo electr&oacute;nico</th>
+                                    <th>Tipo de vinculación</th>
                                     <th>Nivel educativo</th>
                                     <th>Experiencia profesional</th>
                                     <th>Cargo</th>
                                     <th>Tipo de cargo</th>
                                     <th>Tipo de investigador</th>
-                                    <th>Articulos</th>
+                                    <th>Artículos</th>
                                     <th>Patente</th>
                                     <th>Producto de conocimiento</th>
                                     <th>Distinción</th>
@@ -1085,99 +1081,87 @@
                     .search(this.value)
                     .draw();
         });
-        $('#telinput').on('keyup', function () {
+        $('#niedinput').on('keyup', function () {
             tblHojasVida
                     .columns(24)
                     .search(this.value)
                     .draw();
         });
-        $('#correocinput').on('keyup', function () {
+        $('#expinput').on('keyup', function () {
             tblHojasVida
                     .columns(25)
                     .search(this.value)
                     .draw();
         });
-        $('#niedinput').on('keyup', function () {
+        $('#buscarCargo').on('keyup', function () {
             tblHojasVida
                     .columns(26)
                     .search(this.value)
                     .draw();
         });
-        $('#expinput').on('keyup', function () {
+        $('#buscarTipoCargo').on('keyup', function () {
             tblHojasVida
                     .columns(27)
                     .search(this.value)
                     .draw();
         });
-        $('#buscarCargo').on('keyup', function () {
+        $('#invcinput').on('keyup', function () {
             tblHojasVida
                     .columns(28)
                     .search(this.value)
                     .draw();
         });
-        $('#buscarTipoCargo').on('keyup', function () {
+        $('#artinput').on('keyup', function () {
             tblHojasVida
                     .columns(29)
                     .search(this.value)
                     .draw();
         });
-        $('#invcinput').on('keyup', function () {
+        $('#patcinput').on('keyup', function () {
             tblHojasVida
                     .columns(30)
                     .search(this.value)
                     .draw();
         });
-        $('#artinput').on('keyup', function () {
+        $('#prodcinput').on('keyup', function () {
             tblHojasVida
                     .columns(31)
                     .search(this.value)
                     .draw();
         });
-        $('#patcinput').on('keyup', function () {
+        $('#disinput').on('keyup', function () {
             tblHojasVida
                     .columns(32)
                     .search(this.value)
                     .draw();
         });
-        $('#prodcinput').on('keyup', function () {
-            tblHojasVida
-                    .columns(33)
-                    .search(this.value)
-                    .draw();
-        });
-        $('#disinput').on('keyup', function () {
-            tblHojasVida
-                    .columns(34)
-                    .search(this.value)
-                    .draw();
-        });
         $('#buscarTitulo').on('keyup', function () {
             tblHojasVida
-                    .columns(35)
+                    .columns(33)
                     .search(this.value)
                     .draw();
         });        
         $('#buscarCurso').on('keyup', function () {
             tblHojasVida
-                    .columns(36)
+                    .columns(34)
                     .search(this.value)
                     .draw();
         });         
         $('#buscarDuracionCurso').on('keyup', function () {
             tblHojasVida
-                    .columns(37)
+                    .columns(35)
                     .search(this.value)
                     .draw();
         });         
         $('#buscarInstitucionExperienciaDocencia').on('keyup', function () {
             tblHojasVida
-                    .columns(38)
+                    .columns(36)
                     .search(this.value)
                     .draw();
         });         
         $('#buscarCursoExperienciaDocencia').on('keyup', function () {
             tblHojasVida
-                    .columns(39)
+                    .columns(37)
                     .search(this.value)
                     .draw();
         });         
@@ -1415,8 +1399,6 @@
                             getValue(hojasVida[i].egresadoUDEA),
                             getValue(hojasVida[i].empleadoUDEA),
                             getValue(hojasVida[i].tipoVinculacion),
-                            getValue(hojasVida[i].telefono),
-                            getValue(hojasVida[i].correoElectronico),
                             getValue(hojasVida[i].nivelEducativo),
                             getValue(hojasVida[i].empresa),
                             getValue(hojasVida[i].cargo),
