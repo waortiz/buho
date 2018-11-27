@@ -752,21 +752,6 @@
             tblHojasVida.clear().draw();
             return;
         }
-        $('#md_resultados').modal({backdrop: 'static', keyboard: false});
-        current_progress = 0;
-        var interval = setInterval(function () {
-            current_progress += 10;
-            $(".dynamic")
-                    .css("width", current_progress + "%")
-                    .attr("aria-valuenow", current_progress)
-                    .text(current_progress + "% Completado");
-            if (current_progress >= 100) {
-                clearInterval(interval);
-            }
-            if (current_progress === 100) {
-                $('#md_resultados').modal('hide');
-            }
-        }, 2000);
 
         var formData = new FormData();
         formData.append("idPersona", $('#cboNumeroIdentificacion').val());
@@ -774,7 +759,7 @@
         formData.append("apellidos", $('#apellidos').val());
         $.ajax({
             type: "POST",
-            url: "${pageContext.request.contextPath}/hojasVida/consultarHojasVida",
+            url: "${pageContext.request.contextPath}/hojasVida/consultarHojasVidaValidarSoportes",
             data: formData,
             processData: false,
             contentType: false,

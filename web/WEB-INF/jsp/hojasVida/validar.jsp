@@ -830,7 +830,7 @@
         formData.append("apellidos", $('#apellidos').val());
         $.ajax({
             type: "POST",
-            url: "${pageContext.request.contextPath}/hojasVida/consultarHojasVida",
+            url: "${pageContext.request.contextPath}/hojasVida/consultarHojasVidaValidarSoportes",
             data: formData,
             processData: false,
             contentType: false,
