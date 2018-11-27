@@ -212,6 +212,15 @@ public class HojaVidaController {
         return gson.toJson(hojasVida);
     }
 
+    @RequestMapping(value = "/consultarHojasVidaValidarSoportes", method = RequestMethod.POST)
+    public @ResponseBody String obtenerHojasVidaValidarSoportes(@ModelAttribute ConsultaHojaVida consultaHojaVida, Model model) {
+        List<HojaVidaConsulta> hojasVida = servicioHojaVida.obtenerHojasVidaValidarSoportes(consultaHojaVida);
+
+        Gson gson = new Gson();
+
+        return gson.toJson(hojasVida);
+    }
+
     @RequestMapping(value = "/descargarHojasVida", method = RequestMethod.GET)
     public ModelAndView descargarHojasVida(@ModelAttribute ConsultaHojaVida consultaHojaVida, Model model) {
        List<HojaVidaConsulta> hojasVidaConsulta = servicioHojaVida.obtenerHojasVida(consultaHojaVida);

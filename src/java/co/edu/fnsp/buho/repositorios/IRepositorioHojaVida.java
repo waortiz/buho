@@ -191,6 +191,8 @@ public interface IRepositorioHojaVida {
     List<CursoExperienciaDocencia> obtenerCursosExperienciaDocencia(long idPersona);
 
     List<HojaVidaConsulta> obtenerHojasVida(ConsultaHojaVida consultaHojaVida);
+    
+    List<HojaVidaConsulta> obtenerHojasVidaValidarSoportes(ConsultaHojaVida consultaHojaVida);
 
     List<HojaVidaEducacionBasica> obtenerHojasVidaEducacionBasica(ConsultaHojaVidaEducacionBasica consultaHojaVidaEducacionBasica);
 

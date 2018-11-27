@@ -130,6 +130,11 @@ public class ServicioHojaVida implements IServicioHojaVida {
     }
 
     @Override
+    public List<HojaVidaConsulta> obtenerHojasVidaValidarSoportes(ConsultaHojaVida consultaHojaVida) {
+        return repositorioHojaVida.obtenerHojasVidaValidarSoportes(consultaHojaVida);
+    }
+
+    @Override
     public void eliminarHojaVida(long idPersona) {
         repositorioHojaVida.eliminarHojaVida(idPersona);
     }

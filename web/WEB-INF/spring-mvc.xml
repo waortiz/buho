@@ -130,6 +130,7 @@
             <mvc:exclude-mapping path="/hojasVida/personas/**" />
             <mvc:exclude-mapping path="/hojasVida/datos/**" />
             <mvc:exclude-mapping path="/hojasVida/consultarHojasVida" />
+            <mvc:exclude-mapping path="/hojasVida/consultarHojasVidaValidarSoportes" />
             <mvc:exclude-mapping path="/hojasVida/validarDocumento" />
             <mvc:exclude-mapping path="/hojasVida/consultarHojasVidaEducacionBasica" />
             <mvc:exclude-mapping path="/hojasVida/descargarHojasVidaEducacionBasica" />

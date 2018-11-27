@@ -67,6 +67,8 @@ public interface IServicioHojaVida {
 
     List<HojaVidaConsulta> obtenerHojasVida(ConsultaHojaVida consultaHojaVida);
     
+    List<HojaVidaConsulta> obtenerHojasVidaValidarSoportes(ConsultaHojaVida consultaHojaVida);
+    
     void eliminarHojaVida(long idPersona);
     
     boolean existePersona(String numeroIdentificacion);
