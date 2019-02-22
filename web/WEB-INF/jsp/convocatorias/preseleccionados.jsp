@@ -777,7 +777,7 @@
         $('#md_preseleccionados').modal({backdrop: 'static', keyboard: false});
         current_progress = 0;
         var interval = setInterval(function () {
-            current_progress += 10;
+            current_progress += 1;
             $(".dynamic")
                     .css("width", current_progress + "%")
                     .attr("aria-valuenow", current_progress)
@@ -788,14 +788,13 @@
             if (current_progress === 100) {
                 $('#md_preseleccionados').modal('hide');
             }
-        }, 2000);
+        }, 3000);
         $.ajax({
             type: "GET",
               url: "${pageContext.request.contextPath}/convocatorias/preseleccionados/" + $('#convocatoria').val(),
             processData: false,
             contentType: false,
             success: function (response) {
-                $('#md_preseleccionados').modal('hide');
                 tblPreseleccionados.clear().draw();
                 if (response !== "") {
                     var preseleccionados = JSON.parse(response);
@@ -816,6 +815,7 @@
                         $(this).popover({title: "Perfil", content: $(this).val(), trigger:"hover"});  
                     });        
                 }
+                $('#md_preseleccionados').modal('hide');
             }});
     }
 
@@ -823,7 +823,7 @@
         $('#md_descargar_preseleccionados').modal({backdrop: 'static', keyboard: false});
         current_progress = 0;
         var interval = setInterval(function () {
-            current_progress += 10;
+            current_progress += 1;
             $(".dynamic2")
                     .css("width", current_progress + "%")
                     .attr("aria-valuenow", current_progress)

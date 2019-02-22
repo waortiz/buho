@@ -782,7 +782,7 @@
         $('#md_evaluar').modal({backdrop: 'static', keyboard: false});
         current_progress = 0;
         var interval = setInterval(function () {
-            current_progress += 10;
+            current_progress += 1;
             $(".dynamic")
                     .css("width", current_progress + "%")
                     .attr("aria-valuenow", current_progress)
@@ -793,14 +793,13 @@
             if (current_progress === 100) {
                 $('#md_evaluar').modal('hide');
             }
-        }, 2000);
+        }, 3000);
         $.ajax({
             type: "GET",
             url: "${pageContext.request.contextPath}/convocatorias/evaluaciones/" + $('#convocatoria').val(),
             processData: false,
             contentType: false,
             success: function (response) {
-                $('#md_evaluar').modal('hide');
                 tblEvaluaciones.clear().draw();
                 if (response !== "") {
                     var evaluaciones = JSON.parse(response);
@@ -820,6 +819,7 @@
                         ]).draw(false);
                     }
                 }
+               $('#md_evaluar').modal('hide');
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 $('#md_evaluar').modal('hide');
@@ -830,7 +830,7 @@
         $('#md_descargar_evaluacion').modal({backdrop: 'static', keyboard: false});
         current_progress = 0;
         var interval = setInterval(function () {
-            current_progress += 10;
+            current_progress += 1;
             $(".dynamic2")
                     .css("width", current_progress + "%")
                     .attr("aria-valuenow", current_progress)
