@@ -159,41 +159,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="md_ciudad_extranjera" role="dialog">
-                    <div class="modal-dialog">
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header mhsuccess">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Ciudad</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div id="alert_ciudad_extranjera"></div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="ciudadExtranjera">País</label>
-                                            <input name="paisCiudad" id="paisCiudad" readonly type="text" class="form-control">
-                                        </div>
-                                    </div>                  
-                                </div> 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="ciudadExtranjera">Ciudad</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe ingresar la ciudad">
-                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
-                                            <input name="ciudadExtranjera" id="ciudadExtranjera" type="text" class="form-control" maxlength="100">
-                                        </div>
-                                    </div>                  
-                                </div> 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success" id="btnAdicionarCiudadExtranjera">Agregar</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- FIN FILA 1 FORMULARIO-->
                 <!-- FILA 2 FORMULARIO-->
                 <div class="row">
@@ -2848,6 +2813,41 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" onclick="seleccionarUbicacion()">Aceptar</button>
                             <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="md_ciudad_extranjera" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header mhsuccess">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Ciudad</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="alert_ciudad_extranjera"></div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="ciudadExtranjera">País</label>
+                                            <input name="paisCiudad" id="paisCiudad" readonly type="text" class="form-control">
+                                        </div>
+                                    </div>                  
+                                </div> 
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="ciudadExtranjera">Ciudad</label><a href="#" data-toggle="tooltip" data-placement="right" title = "Debe ingresar la ciudad">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i></a>  <br>
+                                            <input name="ciudadExtranjera" id="ciudadExtranjera" type="text" class="form-control" maxlength="100">
+                                        </div>
+                                    </div>                  
+                                </div> 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" id="btnAdicionarCiudadExtranjera">Agregar</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                            </div>
                         </div>
                     </div>
                 </div>

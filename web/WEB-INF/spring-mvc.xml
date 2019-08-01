@@ -127,6 +127,7 @@
             <mvc:exclude-mapping path="/hojasVida/productoConocimiento" />
             <mvc:exclude-mapping path="/hojasVida/eliminarIdioma" />
             <mvc:exclude-mapping path="/hojasVida/idioma" />
+            <mvc:exclude-mapping path="/hojasVida/ciudad" />
             <mvc:exclude-mapping path="/hojasVida/personas/**" />
             <mvc:exclude-mapping path="/hojasVida/datos/**" />
             <mvc:exclude-mapping path="/hojasVida/consultarHojasVida" />

@@ -503,7 +503,7 @@ public class RepositorioMaestro implements IRepositorioMaestro {
 
         MapSqlParameterSource parametrosIngresoMunicipio = new MapSqlParameterSource();
         parametrosIngresoMunicipio.addValue("varDepartamento", codigoDepartamento);
-        parametrosIngresoMunicipio.addValue("varnombre", ciudad.getNombre());
+        parametrosIngresoMunicipio.addValue("varNombre", ciudad.getNombre());
 
         Map resultadoIngresoMunicipio = ingresarMunicipio.execute(parametrosIngresoMunicipio);
         String codigoCiudad = (String) resultadoIngresoMunicipio.get("varCodigo");
