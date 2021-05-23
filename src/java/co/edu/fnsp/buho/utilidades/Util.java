@@ -27,7 +27,6 @@ import co.edu.fnsp.buho.entidades.Patente;
 import co.edu.fnsp.buho.entidades.ProductoConocimiento;
 import co.edu.fnsp.buho.entidades.ProgramaConvocatoria;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
